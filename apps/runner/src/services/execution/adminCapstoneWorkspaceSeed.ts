@@ -54,6 +54,14 @@ const SCRIPT = [
     `test "$(stat -c '%a:%u:%g' '${item}')" = '${expected}'`),
 ].join("\n");
 
+/** Lease for the exact verified tmpfs mount. Do not release this hold until the
+ * interactive administrator container has successfully started and mounted it.
+ */
+export type AdminCapstoneWorkspaceHold = Readonly<{
+  assertMounted: () => Promise<void>;
+  release: () => Promise<void>;
+}>;
+
 export type SeedCapstoneArgs = Readonly<{
   sessionId: string;
   volumeName: string;
@@ -110,42 +118,127 @@ export function capstoneSeedContainerOptions(args: SeedCapstoneArgs) {
   };
 }
 
+/** Passive mount holder: no shell initialization, network, host filesystem,
+ * or additional capabilities. Rootless Docker's named tmpfs volume is
+ * unmounted and emptied when its last running container exits. This holder
+ * keeps it mounted while the seeder exits and the actual learner starts.
+ * An explicit 10-minute bound also protects against stuck startup paths.
+ */
+export function capstoneHoldContainerOptions(args: SeedCapstoneArgs) {
+  // Validate exactly the same immutable session, volume, and image identity.
+  capstoneSeedContainerOptions(args);
+  return {
+    Image: args.image,
+    name: `zoeskoul_capstone_hold_${args.sessionId}`,
+    User: "1000:1000",
+    WorkingDir: "/workspace",
+    Tty: false,
+    OpenStdin: false,
+    AttachStdin: false,
+    AttachStdout: false,
+    AttachStderr: false,
+    Labels: {
+      "com.zoeskoul.runner": "true",
+      "com.zoeskoul.runner.session": args.sessionId,
+      "com.zoeskoul.runner.purpose": "learn",
+      "com.zoeskoul.runner.profile": "learning-admin-capstone-hold-v1",
+    },
+    Entrypoint: ["/bin/sh"],
+    Cmd: ["-c", "exec sleep 600"],
+    HostConfig: {
+      ...adminHostConfig,
+      ReadonlyRootfs: true,
+      AutoRemove: false,
+      CapDrop: ["ALL"],
+      CapAdd: [],
+      SecurityOpt: ["no-new-privileges"],
+      Mounts: [{
+        Type: "volume" as const,
+        Source: args.volumeName,
+        Target: "/workspace",
+        ReadOnly: false,
+        VolumeOptions: {NoCopy: true} as import("dockerode").MountSettings["VolumeOptions"],
+      }],
+    },
+  };
+}
+
 /** Called exclusively by the admitted capstone branch before createSession().
  * A failed or timed-out bootstrap prevents starting the learner terminal; the
  * caller already owns removal of the newly created tmpfs volume on failure.
+ * On success the caller owns and MUST release the temporary mount holder only
+ * after container.start() successfully mounts the volume for the learner.
  */
 export async function seedAdminCapstoneWorkspace(
   args: SeedCapstoneArgs,
   client: Docker = docker,
-): Promise<void> {
+): Promise<AdminCapstoneWorkspaceHold> {
   const options = capstoneSeedContainerOptions(args);
+  const holdOptions = capstoneHoldContainerOptions(args);
   assertAdminLabSwitch(args.generation);
   await verifyAdminWorkspaceVolume(args.volumeName, args.sessionId);
   assertAdminLabSwitch(args.generation);
 
-  const container = await client.createContainer(options);
-  let timer: ReturnType<typeof setTimeout> | undefined;
-  let cleanupFailed = false;
+  // Start the holder FIRST; the volume must never have zero active mounts
+  // between completion of the seeder and startup of the learner container.
+  const holder = await client.createContainer(holdOptions);
+  let released = false;
+  const release = async () => {
+    if (released) return;
+    try {
+      await holder.remove({force: true});
+    } catch (error) {
+      if ((error as {statusCode?: number})?.statusCode !== 404) {
+        throw new Error("Capstone mount holder cleanup could not be verified.");
+      }
+    }
+    released = true;
+  };
+  const assertMounted = async () => {
+    assertAdminLabSwitch(args.generation);
+    await verifyAdminWorkspaceVolume(args.volumeName, args.sessionId);
+    const inspection = await holder.inspect();
+    if (inspection.State?.Running !== true) {
+      throw new Error("Capstone tmpfs mount holder stopped before learner startup.");
+    }
+    assertAdminLabSwitch(args.generation);
+  };
+
   try {
     assertAdminLabSwitch(args.generation);
-    await container.start();
-    const result = await Promise.race([
-      container.wait(),
-      new Promise<never>((_, reject) => {
-        timer = setTimeout(() => reject(new Error("Capstone setup exceeded time limit.")), 15000);
-      }),
-    ]);
-    if (result.StatusCode !== 0) throw new Error("Capstone sample workspace setup failed.");
-    assertAdminLabSwitch(args.generation);
-  } finally {
-    if (timer !== undefined) clearTimeout(timer);
+    await holder.start();
+    await assertMounted();
+
+    const container = await client.createContainer(options);
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let cleanupFailed = false;
     try {
-      await container.remove({force: true});
-    } catch (error) {
-      if ((error as {statusCode?: number})?.statusCode !== 404) cleanupFailed = true;
+      assertAdminLabSwitch(args.generation);
+      await container.start();
+      const result = await Promise.race([
+        container.wait(),
+        new Promise<never>((_, reject) => {
+          timer = setTimeout(() => reject(new Error("Capstone setup exceeded time limit.")), 15000);
+        }),
+      ]);
+      if (result.StatusCode !== 0) throw new Error("Capstone sample workspace setup failed.");
+      assertAdminLabSwitch(args.generation);
+    } finally {
+      if (timer !== undefined) clearTimeout(timer);
+      try {
+        await container.remove({force: true});
+      } catch (error) {
+        if ((error as {statusCode?: number})?.statusCode !== 404) cleanupFailed = true;
+      }
+      if (cleanupFailed) throw new Error("Capstone setup container cleanup could not be verified.");
     }
-    if (cleanupFailed) throw new Error("Capstone setup container cleanup could not be verified.");
+    // The seeder is now gone, but the holder still has the volume mounted.
+    await assertMounted();
+    return {assertMounted, release};
+  } catch (error) {
+    // No learner container has been started; never leak a mount holder on
+    // denial, timeout, failed seeding, or rootless Docker error.
+    await release();
+    throw error;
   }
-  await verifyAdminWorkspaceVolume(args.volumeName, args.sessionId);
-  assertAdminLabSwitch(args.generation);
 }

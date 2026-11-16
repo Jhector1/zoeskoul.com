@@ -13,7 +13,8 @@ vi.mock("./adminWorkspaceVolume.js", () => ({
 vi.mock("../docker/dockerClient.js", () => ({docker: {}}));
 
 import {
-  CAPSTONE_INITIAL_MODES, capstoneSeedContainerOptions, seedAdminCapstoneWorkspace,
+  CAPSTONE_INITIAL_MODES, capstoneSeedContainerOptions,
+  capstoneHoldContainerOptions, seedAdminCapstoneWorkspace,
 } from "./adminCapstoneWorkspaceSeed.js";
 
 const sessionId = "sess_11111111-1111-4111-8111-111111111111";
@@ -22,13 +23,23 @@ const image = `sha256:${"a".repeat(64)}`;
 const args = {sessionId, volumeName, image, generation: 1};
 
 function fixture(exitCode = 0) {
-  const container = {
-    start: vi.fn(async () => undefined),
-    wait: vi.fn(async () => ({StatusCode: exitCode})),
-    remove: vi.fn(async () => undefined),
+  const steps: string[] = [];
+  const holder = {
+    start: vi.fn(async () => {steps.push("holder.start");}),
+    inspect: vi.fn(async () => ({State: {Running: true}})),
+    remove: vi.fn(async () => {steps.push("holder.remove");}),
   };
-  const client = {createContainer: vi.fn(async () => container)} as unknown as Docker;
-  return {client, container};
+  const container = {
+    start: vi.fn(async () => {steps.push("seeder.start");}),
+    wait: vi.fn(async () => {steps.push("seeder.wait"); return {StatusCode: exitCode};}),
+    remove: vi.fn(async () => {steps.push("seeder.remove");}),
+  };
+  const client = {createContainer: vi.fn(async (options: {name: string}) => {
+    if (options.name.includes("_hold_")) return holder;
+    if (options.name.includes("_seed_")) return container;
+    throw new Error("Unexpected container profile");
+  })} as unknown as Docker;
+  return {client, container, holder, steps};
 }
 
 beforeEach(() => {vi.clearAllMocks(); checks.switch.mockReturnValue(1);});
@@ -71,6 +82,30 @@ describe("author-only Course 2 capstone automatic fixture", () => {
     expect(settings.HostConfig.CapAdd).toEqual(["CHOWN"]);
   });
 
+  it("creates a passive, restricted holder with the SAME pinned volume", () => {
+    const settings = capstoneHoldContainerOptions(args);
+    expect(settings.Image).toBe(image);
+    expect(settings.Entrypoint).toEqual(["/bin/sh"]);
+    expect(settings.Cmd).toEqual(["-c", "exec sleep 600"]);
+    expect(settings.User).toBe("1000:1000");
+    expect(settings.HostConfig.NetworkMode).toBe("none");
+    expect(settings.HostConfig.ReadonlyRootfs).toBe(true);
+    expect(settings.HostConfig.CapDrop).toEqual(["ALL"]);
+    expect(settings.HostConfig.CapAdd).toEqual([]);
+    expect(settings.HostConfig.SecurityOpt).toEqual(["no-new-privileges"]);
+    expect(settings.HostConfig.Mounts).toEqual([{
+      Type:"volume", Source:volumeName, Target:"/workspace",
+      ReadOnly:false, VolumeOptions:{NoCopy:true},
+    }]);
+    expect("Binds" in settings.HostConfig).toBe(false);
+    expect(settings.Labels["com.zoeskoul.runner.profile"]).toBe("learning-admin-capstone-hold-v1");
+  });
+
+  it("rejects unverified hold identities before any Docker operation", () => {
+    expect(() => capstoneHoldContainerOptions({...args, volumeName:"other"})).toThrow();
+    expect(() => capstoneHoldContainerOptions({...args, image:"ubuntu:latest"})).toThrow();
+  });
+
   it("sets exact modes before changing ownership with CAP_FOWNER absent", () => {
     const settings = capstoneSeedContainerOptions(args);
     const script = settings.Cmd[2];
@@ -90,22 +125,54 @@ describe("author-only Course 2 capstone automatic fixture", () => {
     expect(() => capstoneSeedContainerOptions({...args, image:"ubuntu:latest"})).toThrow();
   });
 
-  it("checks runtime gate and exact volume both before and after setup", async () => {
-    const {client, container} = fixture();
-    await seedAdminCapstoneWorkspace(args, client);
-    expect(checks.volume).toHaveBeenCalledTimes(2);
+  it("keeps the verified tmpfs mounted from seeding until learner takeover", async () => {
+    const {client, container, holder, steps} = fixture();
+    const hold = await seedAdminCapstoneWorkspace(args, client);
+    expect(checks.volume).toHaveBeenCalledTimes(3);
     expect(checks.volume).toHaveBeenCalledWith(volumeName, sessionId);
     expect(checks.switch).toHaveBeenCalled();
     expect(container.start).toHaveBeenCalledOnce();
     expect(container.wait).toHaveBeenCalledOnce();
     expect(container.remove).toHaveBeenCalledWith({force:true});
+    expect(holder.remove).not.toHaveBeenCalled();
+    expect(steps).toEqual(["holder.start", "seeder.start", "seeder.wait", "seeder.remove"]);
+    await hold.assertMounted();
+    await hold.release(); // Caller only does this after learner.start() resolves.
+    expect(holder.remove).toHaveBeenCalledWith({force:true});
+    expect(steps[steps.length - 1]).toBe("holder.remove");
+    await hold.release(); // Idempotent successful cleanup.
+    expect(holder.remove).toHaveBeenCalledOnce();
   });
 
-  it("fails closed on a nonzero initializer exit and cleans the seeder", async () => {
-    const {client, container} = fixture(1);
+  it("refuses a learner handoff when the holder is no longer running", async () => {
+    const {client, holder} = fixture();
+    const hold = await seedAdminCapstoneWorkspace(args, client);
+    holder.inspect.mockResolvedValueOnce({State:{Running:false}});
+    await expect(hold.assertMounted()).rejects.toThrow(/holder stopped/);
+    await hold.release();
+  });
+
+  it("cleans an unstarted holder when rootless Docker refuses its start", async () => {
+    const {client, holder} = fixture();
+    holder.start.mockRejectedValueOnce(new Error("rootless start failed"));
+    await expect(seedAdminCapstoneWorkspace(args, client)).rejects.toThrow(/rootless start failed/);
+    expect(holder.remove).toHaveBeenCalledWith({force:true});
+  });
+
+  it("fails closed when a mounted hold cannot be released", async () => {
+    const {client, holder} = fixture();
+    const hold = await seedAdminCapstoneWorkspace(args, client);
+    holder.remove.mockRejectedValueOnce(new Error("Docker unavailable"));
+    await expect(hold.release()).rejects.toThrow(/holder cleanup/);
+    await hold.release();
+  });
+
+  it("fails closed on a nonzero initializer exit and cleans both containers", async () => {
+    const {client, container, holder} = fixture(1);
     await expect(seedAdminCapstoneWorkspace(args, client)).rejects.toThrow(/setup failed/);
     expect(container.remove).toHaveBeenCalledWith({force:true});
-    expect(checks.volume).toHaveBeenCalledTimes(1);
+    expect(holder.remove).toHaveBeenCalledWith({force:true});
+    expect(checks.volume).toHaveBeenCalledTimes(2);
   });
 
   it("does not create a seeder when the operator switch is OFF", async () => {
@@ -115,17 +182,18 @@ describe("author-only Course 2 capstone automatic fixture", () => {
     expect(client.createContainer).not.toHaveBeenCalled();
   });
 
-  it("fails closed on unsuccessful cleanup rather than returning a ready session", async () => {
-    const {client,container} = fixture();
+  it("fails closed on unsuccessful seeder cleanup and removes the holder", async () => {
+    const {client, container, holder} = fixture();
     container.remove.mockRejectedValueOnce(new Error("remove failed"));
     await expect(seedAdminCapstoneWorkspace(args, client)).rejects.toThrow(/cleanup/);
+    expect(holder.remove).toHaveBeenCalledWith({force:true});
   });
 
-  it("stops if the switch turns OFF while the initializer runs", async () => {
-    const {client,container} = fixture();
+  it("stops and releases the holder if the switch turns OFF during seeding", async () => {
+    const {client, holder} = fixture();
     checks.switch.mockImplementationOnce(()=>1).mockImplementationOnce(()=>1)
       .mockImplementationOnce(()=>1).mockImplementationOnce(()=>{throw new Error("OFF");});
     await expect(seedAdminCapstoneWorkspace(args, client)).rejects.toThrow("OFF");
-    expect(container.remove).toHaveBeenCalledWith({force:true});
+    expect(holder.remove).toHaveBeenCalledWith({force:true});
   });
 });

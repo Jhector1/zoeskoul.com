@@ -43,7 +43,10 @@ import { adminLabConfiguration, assertVerifiedAdminGrant, type VerifiedAdminGran
 import { ADMIN_COURSE_SLUG, isEligibleAdminLabLesson } from "../execution/learningAdminLessonPolicy.js";
 import { adminHostConfig, verifyAdminSandboxImage } from "../execution/learningAdminSandbox.js";
 import { createAdminWorkspaceVolume, removeAdminWorkspaceVolume } from "../execution/adminWorkspaceVolume.js";
-import { seedAdminCapstoneWorkspace } from "../execution/adminCapstoneWorkspaceSeed.js";
+import {
+  seedAdminCapstoneWorkspace,
+  type AdminCapstoneWorkspaceHold,
+} from "../execution/adminCapstoneWorkspaceSeed.js";
 import { assertAdminLabSwitch } from "../execution/learningAdminSwitch.js";
 import { docker } from "./dockerClient.js";
 import { waitForAttachOutputDrain } from "./attachOutputDrain.js";
@@ -289,6 +292,7 @@ async function startDockerSessionUncoordinated(
   let sessionRegistered = false;
   let sessionId = "";
   let adminVolumeName: string | null = null;
+  let adminCapstoneHold: AdminCapstoneWorkspaceHold | null = null;
 
   try {
     const normalized = normalizeRequest(req);
@@ -370,10 +374,10 @@ async function startDockerSessionUncoordinated(
     if (adminImage) {
       adminVolumeName = await createAdminWorkspaceVolume(sessionId);
       assertAdminLabSwitch(adminGeneration);
-      // Only the signed, pre-approved capstone gets a training fixture. It is
-      // prepared inside this new, attested tmpfs volume BEFORE learner startup.
+      // Only the signed, pre-approved capstone gets a training fixture. The
+      // verified holder preserves this tmpfs mount until the learner starts.
       if (adminTopicSlug === "final-capstone-secure-project") {
-        await seedAdminCapstoneWorkspace({
+        adminCapstoneHold = await seedAdminCapstoneWorkspace({
           sessionId, volumeName: adminVolumeName, image: adminImage,
           generation: adminGeneration!,
         });
@@ -556,8 +560,15 @@ async function startDockerSessionUncoordinated(
       const attachDrainPromise = waitForAttachOutputDrain(attach);
 
       if (labMode === "admin") assertAdminLabSwitch(adminGeneration);
+      if (adminCapstoneHold) await adminCapstoneHold.assertMounted();
       await container.start();
       if (labMode === "admin") assertAdminLabSwitch(adminGeneration);
+      // From here the learner container has the same named tmpfs volume
+      // mounted. Only now may the passive holder be removed.
+      if (adminCapstoneHold) {
+        await adminCapstoneHold.release();
+        adminCapstoneHold = null;
+      }
 
       pushEvent(sessionId, {
         type: "status",
@@ -635,6 +646,12 @@ async function startDockerSessionUncoordinated(
       // A container that was created but failed before start may never trigger
       // AutoRemove. Force-remove it now so failed starts cannot accumulate.
       await container.remove({ force: true }).catch(() => {});
+      if (adminCapstoneHold) {
+        await adminCapstoneHold.release().catch(() => {
+          console.error("RUNNER capstone tmpfs hold cleanup deferred to startup reaper");
+        });
+        adminCapstoneHold = null;
+      }
       if (workspaceDir !== null) {
         scheduleWorkspaceCleanup(sessionId, workspaceDir);
       }
@@ -645,6 +662,13 @@ async function startDockerSessionUncoordinated(
     }
   } catch (e: any) {
     releaseReservedSlot();
+
+    if (adminCapstoneHold) {
+      await adminCapstoneHold.release().catch(() => {
+        console.error("RUNNER capstone tmpfs hold cleanup deferred to startup reaper");
+      });
+      adminCapstoneHold = null;
+    }
 
     if (sharedWorkspaceReservation) {
       await releaseSharedShellWorkspaceReservation({
