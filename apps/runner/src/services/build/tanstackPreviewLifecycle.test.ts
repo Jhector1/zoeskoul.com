@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { startIsolatedTanstackPreview, stopIsolatedTanstackPreview, TanstackPreviewCleanupError, TanstackPreviewReadinessError, type TanstackPreviewDriver } from "./tanstackPreviewLifecycle.js";
 import { PreviewObservability } from "./previewObservability.js";
 import { TanstackPreviewTransportError } from "./tanstackPreviewDockerTransport.js";
@@ -161,5 +161,53 @@ describe("P3B5D sanitized TanStack readiness telemetry", () => {
     expect(telemetry.snapshot().stages.vite_readiness).toEqual({outcome:"error",durationMs:800});
     expect(telemetry.snapshot().stages.first_ssr).toEqual({outcome:"error",durationMs:800});
     expect(telemetry.snapshot().stages.operation_total.outcome).toBe("error");
+  });
+});
+
+
+describe("ZoeBuild preview automatic cold-start forensics", () => {
+  it("captures sanitized startup evidence before destroying a timed-out preview", async () => {
+    const steps: string[] = [];
+    const log = vi.spyOn(console, "warn").mockImplementation(() => {});
+    try {
+      const driver: TanstackPreviewDriver = {
+        ...fakeDriver(steps, "never"),
+        diagnose: async () => {
+          steps.push("diagnose");
+          return {containerState:"running",exitCode:null,oomKilled:false,
+            memoryLimitMiB:384,cpuLimitMillicores:800,nodeProcessCount:0,
+            logProbe:"available",logCategory:"module-resolution"};
+        },
+      };
+      await expect(startIsolatedTanstackPreview(driver,{timeoutMs:800})).rejects.toBeInstanceOf(TanstackPreviewReadinessError);
+      expect(steps.indexOf("diagnose")).toBeLessThan(steps.indexOf("destroy"));
+      expect(steps.slice(-2)).toEqual(["destroy","cleanup"]);
+      expect(log).toHaveBeenCalledTimes(1);
+      expect(log.mock.calls[0]?.[1]).toMatchObject({
+        result:"http_status",startup:{containerState:"running",logCategory:"module-resolution"},
+      });
+    } finally { log.mockRestore(); }
+  });
+
+  it("does not block mandatory cleanup or leak Docker errors when inspection fails", async () => {
+    const steps: string[] = [];
+    const log = vi.spyOn(console, "warn").mockImplementation(() => {});
+    try {
+      const driver: TanstackPreviewDriver = {
+        ...fakeDriver(steps, "never"),
+        diagnose: async () => {steps.push("diagnose");throw Error("PRIVATE_PASSWORD_ABC");},
+      };
+      await expect(startIsolatedTanstackPreview(driver,{timeoutMs:800})).rejects.toBeInstanceOf(TanstackPreviewReadinessError);
+      expect(steps.slice(-2)).toEqual(["destroy","cleanup"]);
+      expect(log.mock.calls[0]?.[1]).toMatchObject({startup:null});
+      expect(JSON.stringify(log.mock.calls)).not.toContain("PRIVATE_PASSWORD_ABC");
+    } finally { log.mockRestore(); }
+  });
+
+  it("never collects failure evidence for an already-ready preview", async () => {
+    const steps:string[]=[];
+    const driver:TanstackPreviewDriver={...fakeDriver(steps),diagnose:async()=>{throw Error("unexpected diagnosis");}};
+    await expect(startIsolatedTanstackPreview(driver)).resolves.toMatchObject({containerId:"docker123"});
+    expect(steps).toEqual(["prepare","launch","probe"]);
   });
 });

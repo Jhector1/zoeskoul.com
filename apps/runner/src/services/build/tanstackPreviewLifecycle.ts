@@ -1,5 +1,6 @@
 import { isTanstackSsrReady, TANSTACK_PREVIEW_READY_TIMEOUT_MS, TANSTACK_PREVIEW_PROBE_INTERVAL_MS } from "./tanstackPreviewRuntimePolicy.js";
 import { previewObservability, type PreviewOperationTelemetry } from "./previewObservability.js";
+import type { TanstackStartupEvidence } from "./tanstackPreviewStartupDiagnostics.js";
 import {
   TanstackPreviewTransportError,
   type TanstackPreviewTransportFailureStage,
@@ -47,6 +48,8 @@ export type TanstackPreviewDriver = Readonly<{
   prepare(): Promise<string>;
   launch(workspaceDir: string): Promise<string>;
   probe(containerId: string): Promise<Readonly<{status: number; headers: Readonly<Record<string,string>>; bodyBase64: string}>>;
+  /** Failure-path only: sanitized Docker state before cleanup removes the container. */
+  diagnose?(containerId: string): Promise<TanstackStartupEvidence>;
   destroy(containerId: string): Promise<void>;
   cleanup(workspaceDir: string): Promise<void>;
   now(): number;
@@ -114,8 +117,13 @@ export async function startIsolatedTanstackPreview(driver: TanstackPreviewDriver
       transportStage,
       elapsedMs: Math.max(0, Math.floor(driver.now() - startedAt)),
     };
+    // Capture before mandatory container removal. Failures are diagnostic-only.
+    // Never log raw Docker exception strings, command arguments or Vite output.
+    const startup = driver.diagnose && containerId
+      ? await driver.diagnose(containerId).catch(() => null) : null;
     console.warn("RUNNER isolated TanStack readiness timed out", {
       ...diagnostic,
+      startup,
       ...(opts.diagnosticCorrelation ? {
         operationCorrelation: opts.diagnosticCorrelation.operation,
         previewCorrelation: opts.diagnosticCorrelation.preview,
