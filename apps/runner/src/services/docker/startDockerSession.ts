@@ -41,7 +41,7 @@ import { resolveSandboxProfile } from "../execution/sandboxProfile.js";
 import { inspectLearningLabRequest, type LearningLabMode } from "../execution/learningLabMode.js";
 import { adminLabConfiguration, assertVerifiedAdminGrant, type VerifiedAdminGrant } from "../execution/learningAdminGrant.js";
 import { ADMIN_COURSE_SLUG, isEligibleAdminLabLesson } from "../execution/learningAdminLessonPolicy.js";
-import { adminHostConfig, verifyAdminSandboxImage } from "../execution/learningAdminSandbox.js";
+import { adminHostConfigForLab, verifyAdminSandboxImage } from "../execution/learningAdminSandbox.js";
 import { createAdminWorkspaceVolume, removeAdminWorkspaceVolume } from "../execution/adminWorkspaceVolume.js";
 import {
   seedAdminCapstoneWorkspace,
@@ -447,7 +447,7 @@ async function startDockerSessionUncoordinated(
       ],
       Cmd: ["python3", "/opt/runner/pty-runner.py"],
       HostConfig: adminImage ? {
-        ...adminHostConfig,
+        ...adminHostConfigForLab(),
         Mounts: [{
           Type: "volume" as const,
           Source: adminVolumeName!,

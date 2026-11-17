@@ -20,6 +20,15 @@ export const adminHostConfig = {
   },
 };
 
+/** Optional external package access on the *rootless* lab daemon only.
+ * This opt-in allows network egress; operators must restrict destination
+ * networks at the VM/firewall level. It never enables host networking. */
+export function adminHostConfigForLab() {
+  const network = process.env.ZOESKOUL_LEARNING_ADMIN_LAB_OUTBOUND_NETWORK === "true"
+    ? "bridge" : "none";
+  return { ...adminHostConfig, NetworkMode: network };
+}
+
 export async function verifyAdminSandboxImage(client: Docker, image: string) {
   const info = await client.info();
   const opts = (info.SecurityOptions ?? []).map(String);

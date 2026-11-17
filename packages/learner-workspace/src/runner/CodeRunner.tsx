@@ -35,6 +35,7 @@ import { runViaApi } from "@zoeskoul/learner-workspace/lib/code/runClient";
 import { useCodeRunnerController } from "@zoeskoul/learner-workspace/runner/hooks/controller/useCodeRunnerController";
 import { resolveRuntime } from "@zoeskoul/learner-workspace/runner/hooks/controller/useResolvedRuntime";
 import XtermTerminal from "@zoeskoul/learner-workspace/runner/components/XtermTerminal";
+import FullPrivilegesTerminal from "./components/FullPrivilegesTerminal";
 import {
     normalizeRecoverableTerminalError,
     useWorkspaceTerminalController,
@@ -1309,6 +1310,9 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     ]);
 
     const terminalOnlyMode = !showEditor && showTerminal && workspaceTerminalEnabled;
+    // Explicitly opt into a different disposable lab; never elevate the
+    // persistent standard workspace, nor copy files between privilege modes.
+    const [fullPrivileges, setFullPrivileges] = useState(false);
     const [outputTab, setOutputTab] = useState<OutputTab>(() =>
         resolveRunnerPaneDefaultTab({
             policy: runnerPaneOptions,
@@ -2789,6 +2793,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
     const renderOutputBody = () => {
         if (outputTab === "terminal" && showWorkspaceTerminalTab) {
+            if (fullPrivileges) return <FullPrivilegesTerminal />;
             const activationPending = pendingTerminalStartId === activeTerminalId;
             const presentation = resolveWorkspaceTerminalPresentation({
                 activationPending,
@@ -3009,6 +3014,21 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                 }
                             >
                                 +
+                            </button>
+
+                            <button
+                                type="button"
+                                aria-pressed={fullPrivileges}
+                                aria-label="Toggle full privileges for a disposable Linux lab"
+                                onClick={() => {
+                                    setFullPrivileges(value => !value);
+                                    setOutputTab("terminal");
+                                }}
+                                disabled={disabled || readOnly}
+                                className="shrink-0 rounded-lg border border-neutral-300 px-2 py-1.5 text-xs font-semibold disabled:opacity-40 dark:border-white/15"
+                                title="Root access inside a separate disposable lab only"
+                            >
+                                Full privileges: {fullPrivileges ? "ON" : "OFF"}
                             </button>
 
                             <span className="shrink-0 text-[10px] font-semibold text-neutral-500 dark:text-white/45">

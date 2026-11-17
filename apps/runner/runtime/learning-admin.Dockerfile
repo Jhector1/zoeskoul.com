@@ -6,7 +6,8 @@ ENV DEBIAN_FRONTEND=noninteractive LANG=C.UTF-8 LC_ALL=C.UTF-8 TERM=xterm-256col
 RUN set -eux; \
     apt-get -o Acquire::Retries=5 update; \
     apt-get -o Acquire::Retries=5 install -y --no-install-recommends \
-      bash coreutils findutils python3 login passwd sudo tini util-linux procps; \
+      bash coreutils findutils python3 login passwd sudo tini util-linux procps \
+      curl wget ca-certificates git nano grep sed iproute2; \
     rm -rf /var/lib/apt/lists/*; \
     mkdir -p /opt/runner /workspace; \
     if ! getent group 1000 >/dev/null; then groupadd --gid 1000 sandbox; fi; \

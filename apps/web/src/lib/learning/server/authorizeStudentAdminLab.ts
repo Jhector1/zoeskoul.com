@@ -8,6 +8,7 @@ import { resolveTopicBundleManifest } from "@/lib/curriculum/resolveTopicBundleM
 import {
   matchesPublishedAdminTopic,
   STUDENT_ADMIN_COURSE_SLUG,
+  STUDENT_FULL_PRIVILEGES_TARGET,
   type StudentAdminLabTarget,
 } from "./learningAdminStudentPolicy";
 
@@ -25,6 +26,13 @@ export async function authorizeStudentAdminLab(args: {
   target: StudentAdminLabTarget;
 }): Promise<boolean> {
   if (!args.actor.userId) return false;
+  // Global full-privileges mode is a separate user-owned disposable lab,
+  // not an unpublished Course 2 exercise. The Web feature gate, same-origin
+  // check, actor binding, and Runner operator switch all still apply.
+  if (args.target.topicSlug === STUDENT_FULL_PRIVILEGES_TARGET.topicSlug) {
+    return args.target.moduleSlug === STUDENT_FULL_PRIVILEGES_TARGET.moduleSlug &&
+      process.env.ZOESKOUL_LEARNING_STUDENT_ADMIN_LABS_ENABLED === "true";
+  }
   const actorKey = actorKeyOf(args.actor);
 
   const [enrollment, module] = await Promise.all([
