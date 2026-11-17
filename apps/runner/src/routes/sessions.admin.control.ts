@@ -7,6 +7,7 @@ import { killSession } from "../services/docker/killSession.js";
 import { docker } from "../services/docker/dockerClient.js";
 import { adminWorkspaceVolumeName, removeAdminWorkspaceVolume } from "../services/execution/adminWorkspaceVolume.js";
 import { adminSessionNetworkName, removeAdminSessionNetwork } from "../services/execution/adminSessionNetwork.js";
+import { adminEgressProxyName, removeAdminEgressProxy } from "../services/execution/adminEgressProxy.js";
 import { confirmDockerResourceAbsent } from "../services/execution/adminRevocationVerification.js";
 
 export function validOperatorSecret(submitted: string): boolean {
@@ -29,6 +30,7 @@ export async function revokeAdminSessionsAndVerify() {
     const containerId = session.containerId;
     const volumeName = session.adminVolumeName;
     const networkName = session.adminNetworkName;
+    const proxyName = session.adminEgressProxyName;
     if (!containerId || !volumeName ||
         volumeName !== adminWorkspaceVolumeName(session.id)) {
       throw new Error("Invalid administrator session resource identity.");
@@ -50,6 +52,16 @@ export async function revokeAdminSessionsAndVerify() {
       () => docker.getVolume(volumeName).inspect(),
     );
     if (!volumeGone) throw new Error("Administrator volume remains after revocation.");
+    if (proxyName) {
+      if (proxyName !== adminEgressProxyName(session.id)) {
+        throw new Error("Invalid administrator proxy identity.");
+      }
+      await removeAdminEgressProxy(proxyName, session.id);
+      const proxyGone = await confirmDockerResourceAbsent(
+        () => docker.getContainer(proxyName).inspect(),
+      );
+      if (!proxyGone) throw new Error("Administrator proxy remains after revocation.");
+    }
     if (networkName) {
       if (networkName !== adminSessionNetworkName(session.id)) {
         throw new Error("Invalid administrator network identity.");

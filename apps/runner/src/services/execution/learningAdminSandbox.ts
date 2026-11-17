@@ -1,6 +1,7 @@
 /** Dedicated rootless, disposable administrative sandbox — never a host bind. */
 import type Docker from "dockerode";
 import { AdminGrantError } from "./learningAdminGrant.js";
+import { adminEgressConfig } from "./adminEgressProxy.js";
 
 export const adminHostConfig = {
   NetworkMode: "none",
@@ -51,9 +52,12 @@ export function adminLabSessionIsolationEnabled(
 ): boolean {
   const policy = configuration.ZOESKOUL_LEARNING_ADMIN_LAB_NETWORK_POLICY;
   if (policy === undefined || policy === "none") return false;
-  if (policy !== "per-session-internal") {
+  if (policy !== "per-session-internal" && policy !== "per-session-controlled-egress") {
     throw new AdminGrantError(503, "Unknown administrator lab network policy.");
   }
+  // The proxy lifecycle cannot be enabled without a pinned, labeled gateway
+  // and an explicit development-only acknowledgement. Production fails closed.
+  if (policy === "per-session-controlled-egress") adminEgressConfig(configuration);
   if (configuration.ZOESKOUL_LEARNING_ADMIN_LAB_OUTBOUND_NETWORK === "true") {
     throw new AdminGrantError(503, "Isolated administrator labs cannot use unfiltered bridge egress.");
   }

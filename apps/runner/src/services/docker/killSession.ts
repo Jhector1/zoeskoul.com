@@ -5,6 +5,7 @@ import { scheduleWorkspaceCleanup } from "../workspace/cleanupWorkspace.js";
 import { docker } from "./dockerClient.js";
 import { closeSessionSockets } from "../../ws/sessionWsServer.js";
 import { removeAdminSessionNetwork } from "../execution/adminSessionNetwork.js";
+import { removeAdminEgressProxy } from "../execution/adminEgressProxy.js";
 
 type KillFinalState = Extract<
     RunSessionState,
@@ -81,6 +82,9 @@ export function killSession(
             await container.remove({ force: true });
         } catch {
             // AutoRemove may already have removed it after kill.
+        }
+        if (session.labMode === "admin" && session.adminEgressProxyName) {
+            await removeAdminEgressProxy(session.adminEgressProxyName, session.id);
         }
         if (session.labMode === "admin" && session.adminNetworkName) {
             // A leaked network must remain visible to the retryable cleanup

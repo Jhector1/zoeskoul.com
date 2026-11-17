@@ -20,6 +20,7 @@ export type SessionRecord = {
   /** Runner-created private tmpfs volume; only admin sessions own one. */
   adminVolumeName?: string | null;
   adminNetworkName?: string | null;
+  adminEgressProxyName?: string | null;
   workspaceKey?: string | null;
   clientHostKey?: string | null;
   clientOwnerKey?: string | null;
@@ -154,6 +155,7 @@ export function createSession(args: {
   /** Runner-created private tmpfs volume; only admin sessions own one. */
   adminVolumeName?: string | null;
   adminNetworkName?: string | null;
+  adminEgressProxyName?: string | null;
   workspaceKey?: string | null;
   clientHostKey?: string | null;
   clientOwnerKey?: string | null;
@@ -172,6 +174,7 @@ export function createSession(args: {
     adminTopicSlug: args.labMode === "admin" ? args.adminTopicSlug ?? null : null,
     adminVolumeName: args.labMode === "admin" ? args.adminVolumeName ?? null : null,
     adminNetworkName: args.labMode === "admin" ? args.adminNetworkName ?? null : null,
+    adminEgressProxyName: args.labMode === "admin" ? args.adminEgressProxyName ?? null : null,
     workspaceKey: args.workspaceKey ?? null,
     clientHostKey: args.clientHostKey ?? null,
     clientOwnerKey: args.clientOwnerKey ?? null,

@@ -6,6 +6,7 @@ const mocks = vi.hoisted(() => ({
   inspectVolume: vi.fn(),
   inspectNetwork: vi.fn(),
   removeAdminSessionNetwork: vi.fn(),
+  removeAdminEgressProxy: vi.fn(),
   removeAdminWorkspaceVolume: vi.fn(),
   setAdminLabSwitch: vi.fn(),
   status: vi.fn(),
@@ -34,6 +35,10 @@ vi.mock("../services/docker/dockerClient.js", () => ({
 vi.mock("../services/execution/adminWorkspaceVolume.js", () => ({
   adminWorkspaceVolumeName: (sessionId: string) => `zoeskoul-admin-ws-${sessionId}`,
   removeAdminWorkspaceVolume: mocks.removeAdminWorkspaceVolume,
+}));
+vi.mock("../services/execution/adminEgressProxy.js", () => ({
+  adminEgressProxyName: (sid: string) => `zoeskoul-admin-egress-${sid}`,
+  removeAdminEgressProxy: mocks.removeAdminEgressProxy,
 }));
 vi.mock("../services/execution/adminSessionNetwork.js", () => ({
   adminSessionNetworkName: (sessionId: string) => `zoeskoul-admin-net-${sessionId}`,
@@ -74,6 +79,7 @@ beforeEach(() => {
   mocks.inspectVolume.mockReset().mockImplementation(missing);
   mocks.inspectNetwork.mockReset().mockImplementation(missing);
   mocks.removeAdminSessionNetwork.mockReset().mockResolvedValue(undefined);
+  mocks.removeAdminEgressProxy.mockReset().mockResolvedValue(undefined);
   mocks.removeAdminWorkspaceVolume.mockReset().mockResolvedValue(undefined);
   mocks.setAdminLabSwitch.mockReset().mockReturnValue({ enabled: false, generation: 3 });
   mocks.status.mockReset().mockReturnValue({ enabled: false, generation: 3 });
@@ -124,6 +130,28 @@ describe("administrator revocation admission and cleanup", () => {
     expect(response.code).toBe(200);
     expect(response.data).toMatchObject({ ok: true, enabled: false, revoked: 1 });
     expect(mocks.inspectNetwork).toHaveBeenCalledTimes(2); // then Docker 404
+  });
+
+  it("verifies the session-owned proxy is removed before revocation reports success", async () => {
+    mocks.getAllSessions.mockReturnValue([{...makeSession(),
+      adminEgressProxyName:`zoeskoul-admin-egress-${sessionId}`,
+      adminNetworkName:`zoeskoul-admin-net-${sessionId}`,
+    }]);
+    const response = await revoke(process.env.ZOESKOUL_LEARNING_ADMIN_CONTROL_SECRET!);
+    expect(response.code).toBe(200);
+    expect(mocks.removeAdminEgressProxy).toHaveBeenCalledWith(
+      `zoeskoul-admin-egress-${sessionId}`, sessionId);
+    expect(mocks.removeAdminSessionNetwork).toHaveBeenCalledTimes(1);
+  });
+
+  it("fails closed when the owned proxy cannot be removed", async () => {
+    mocks.getAllSessions.mockReturnValue([{...makeSession(),
+      adminEgressProxyName:`zoeskoul-admin-egress-${sessionId}`,
+    }]);
+    mocks.removeAdminEgressProxy.mockRejectedValueOnce(new Error("proxy busy"));
+    const response = await revoke(process.env.ZOESKOUL_LEARNING_ADMIN_CONTROL_SECRET!);
+    expect(response.code).toBe(503);
+    expect(response.data).toMatchObject({ok:false,revoked:0});
   });
 
   it("retries already-terminal sessions after an earlier teardown failure", async () => {

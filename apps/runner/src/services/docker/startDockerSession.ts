@@ -43,6 +43,7 @@ import { adminLabConfiguration, assertVerifiedAdminGrant, type VerifiedAdminGran
 import { ADMIN_COURSE_SLUG, isEligibleAdminLabLesson } from "../execution/learningAdminLessonPolicy.js";
 import { adminHostConfigForLab, adminLabSessionIsolationEnabled, adminLabFileWriteLimitBytes, verifyAdminSandboxImage } from "../execution/learningAdminSandbox.js";
 import { adminSessionNetworkName, createAdminSessionNetwork, removeAdminSessionNetwork } from "../execution/adminSessionNetwork.js";
+import { adminEgressConfig, adminEgressProxyName as adminEgressProxyNameForStartup, createAdminEgressProxy, removeAdminEgressProxy, adminEgressShellCommand, PROXY_ALIAS, PROXY_PORT } from "../execution/adminEgressProxy.js";
 import { createAdminWorkspaceVolume, removeAdminWorkspaceVolume } from "../execution/adminWorkspaceVolume.js";
 import {
   seedAdminCapstoneWorkspace,
@@ -294,6 +295,7 @@ async function startDockerSessionUncoordinated(
   let sessionId = "";
   let adminVolumeName: string | null = null;
   let adminNetworkName: string | null = null;
+  let adminEgressProxyName: string | null = null;
   let adminCapstoneHold: AdminCapstoneWorkspaceHold | null = null;
 
   try {
@@ -382,6 +384,12 @@ async function startDockerSessionUncoordinated(
         adminNetworkName = adminSessionNetworkName(sessionId);
         await createAdminSessionNetwork(sessionId);
         assertAdminLabSwitch(adminGeneration);
+        const egress = adminEgressConfig();
+        if (egress) {
+          adminEgressProxyName = adminEgressProxyNameForStartup(sessionId);
+          await createAdminEgressProxy(sessionId, adminNetworkName, egress.image);
+          assertAdminLabSwitch(adminGeneration);
+        }
       }
       adminVolumeName = await createAdminWorkspaceVolume(sessionId);
       assertAdminLabSwitch(adminGeneration);
@@ -431,7 +439,7 @@ async function startDockerSessionUncoordinated(
       Env: [
         `PREPARE_DIRS_JSON=${JSON.stringify(adminImage ? [] : plan.prepareDirs ?? [])}`,
         `COMPILE_CMD_JSON=${JSON.stringify(adminImage ? null : plan.compileCmd ?? null)}`,
-        `RUN_CMD_JSON=${JSON.stringify(adminImage ? ["su", "-", "sandbox"] : plan.runCmd)}`,
+        `RUN_CMD_JSON=${JSON.stringify(adminImage ? (adminEgressProxyName ? adminEgressShellCommand() : ["su", "-", "sandbox"]) : plan.runCmd)}`,
         "TERM=xterm-256color",
         "COLUMNS=120",
         "LINES=30",
@@ -455,6 +463,14 @@ async function startDockerSessionUncoordinated(
         ...(sharedGroupWorkspaceEnabled() ? workspaceRuntimeEnvironment() : ["UMASK=000"]),
         `START_CWD=${sessionCwd}`,
         `RUNNER_MAX_FILE_WRITE_BYTES=${adminLabFileWriteLimitBytes(labMode, env.maxWorkspaceBytes)}`,
+        ...(adminEgressProxyName ? [
+          `HTTP_PROXY=http://${PROXY_ALIAS}:${PROXY_PORT}`,
+          `HTTPS_PROXY=http://${PROXY_ALIAS}:${PROXY_PORT}`,
+          `http_proxy=http://${PROXY_ALIAS}:${PROXY_PORT}`,
+          `https_proxy=http://${PROXY_ALIAS}:${PROXY_PORT}`,
+          "NO_PROXY=localhost,127.0.0.1",
+          "no_proxy=localhost,127.0.0.1",
+        ] : []),
       ],
       Cmd: ["python3", "/opt/runner/pty-runner.py"],
       HostConfig: adminImage ? {
@@ -499,6 +515,7 @@ async function startDockerSessionUncoordinated(
       adminTopicSlug: labMode === "admin" ? adminTopicSlug : null,
       adminVolumeName: labMode === "admin" ? adminVolumeName : null,
       adminNetworkName: labMode === "admin" ? adminNetworkName : null,
+      adminEgressProxyName: labMode === "admin" ? adminEgressProxyName : null,
       workspaceKey:
         normalized.kind === "shell" ? normalized.workspaceKey ?? null : null,
       clientHostKey:
@@ -691,6 +708,11 @@ async function startDockerSessionUncoordinated(
       sharedWorkspaceReservation = null;
     } else if (workspaceDir && !sessionRegistered) {
       await cleanupWorkspaceNow(workspaceDir);
+    }
+    if (!sessionRegistered && adminEgressProxyName) {
+      await removeAdminEgressProxy(adminEgressProxyName, sessionId).catch(() => {
+        console.error("RUNNER admin egress startup cleanup deferred to startup reaper");
+      });
     }
     if (!sessionRegistered && adminNetworkName) {
       // The failed start never registered a tombstone. Only remove our own
