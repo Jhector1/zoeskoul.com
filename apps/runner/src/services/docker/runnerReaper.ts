@@ -5,6 +5,7 @@ import { docker } from "./dockerClient.js";
 import { clearReconciledTanstackJournals } from "../build/tanstackPreviewDurableRecovery.js";
 import { removeRunnerWorkspaceWithRecovery } from "./runnerWorkspaceReclamation.js";
 import { cleanupOrphanedAdminWorkspaceVolumes } from "../execution/adminWorkspaceVolume.js";
+import { cleanupOrphanedAdminSessionNetworks } from "../execution/adminSessionNetwork.js";
 
 type ListRunnerContainersOptions = {
   all: boolean;
@@ -123,6 +124,7 @@ export async function cleanupRunnerOrphansOnStartup() {
   // Complete ALL resource removal before releasing the startup gate. Never
   // ignore Docker failures or discard the durable journal before teardown.
   await cleanupOrphanedRunnerContainers();
+  await cleanupOrphanedAdminSessionNetworks();
   await cleanupOrphanedAdminWorkspaceVolumes();
   await cleanupAllRunnerWorkspaceDirs();
   await clearReconciledTanstackJournals(env.workspaceRoot);

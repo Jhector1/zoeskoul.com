@@ -1,5 +1,6 @@
 import { env } from "../../lib/env.js";
 import { removeAdminWorkspaceVolume } from "../execution/adminWorkspaceVolume.js";
+import { removeAdminSessionNetwork } from "../execution/adminSessionNetwork.js";
 import {
     deleteSession,
     getSession,
@@ -65,9 +66,12 @@ export async function runScheduledWorkspaceCleanupNow(
         try {
             if (!initial.adminVolumeName) throw new Error("Admin workspace identity missing.");
             await removeAdminWorkspaceVolume(initial.adminVolumeName, initial.id);
+            if (initial.adminNetworkName) {
+                await removeAdminSessionNetwork(initial.adminNetworkName, initial.id);
+            }
         } catch {
             deferCleanup(initial, now);
-            throw new Error("RUNNER admin volume cleanup deferred for retry.");
+            throw new Error("RUNNER admin resource cleanup deferred for retry.");
         }
         deleteSession(sessionId);
         return;

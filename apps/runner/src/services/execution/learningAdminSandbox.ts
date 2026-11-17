@@ -43,7 +43,26 @@ export function adminLabNetworkMode(
   return "bridge";
 }
 
+/** Opt-in per-session internal network. No Docker default-bridge escape hatch,
+ * no outbound routing, and no implicit internet permissions. This is an
+ * offline isolation foundation, NOT an approved production egress gateway. */
+export function adminLabSessionIsolationEnabled(
+  configuration: NodeJS.ProcessEnv = process.env,
+): boolean {
+  const policy = configuration.ZOESKOUL_LEARNING_ADMIN_LAB_NETWORK_POLICY;
+  if (policy === undefined || policy === "none") return false;
+  if (policy !== "per-session-internal") {
+    throw new AdminGrantError(503, "Unknown administrator lab network policy.");
+  }
+  if (configuration.ZOESKOUL_LEARNING_ADMIN_LAB_OUTBOUND_NETWORK === "true") {
+    throw new AdminGrantError(503, "Isolated administrator labs cannot use unfiltered bridge egress.");
+  }
+  adminLabNetworkMode(configuration); // Validate deployment and outbound flags.
+  return true;
+}
+
 export function adminHostConfigForLab() {
+  adminLabSessionIsolationEnabled();
   return { ...adminHostConfig, NetworkMode: adminLabNetworkMode() };
 }
 

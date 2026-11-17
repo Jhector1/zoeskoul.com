@@ -41,7 +41,8 @@ import { resolveSandboxProfile } from "../execution/sandboxProfile.js";
 import { inspectLearningLabRequest, type LearningLabMode } from "../execution/learningLabMode.js";
 import { adminLabConfiguration, assertVerifiedAdminGrant, type VerifiedAdminGrant } from "../execution/learningAdminGrant.js";
 import { ADMIN_COURSE_SLUG, isEligibleAdminLabLesson } from "../execution/learningAdminLessonPolicy.js";
-import { adminHostConfigForLab, adminLabFileWriteLimitBytes, verifyAdminSandboxImage } from "../execution/learningAdminSandbox.js";
+import { adminHostConfigForLab, adminLabSessionIsolationEnabled, adminLabFileWriteLimitBytes, verifyAdminSandboxImage } from "../execution/learningAdminSandbox.js";
+import { adminSessionNetworkName, createAdminSessionNetwork, removeAdminSessionNetwork } from "../execution/adminSessionNetwork.js";
 import { createAdminWorkspaceVolume, removeAdminWorkspaceVolume } from "../execution/adminWorkspaceVolume.js";
 import {
   seedAdminCapstoneWorkspace,
@@ -292,6 +293,7 @@ async function startDockerSessionUncoordinated(
   let sessionRegistered = false;
   let sessionId = "";
   let adminVolumeName: string | null = null;
+  let adminNetworkName: string | null = null;
   let adminCapstoneHold: AdminCapstoneWorkspaceHold | null = null;
 
   try {
@@ -307,7 +309,7 @@ async function startDockerSessionUncoordinated(
     if (labMode === "admin") {
       assertAdminLabSwitch(adminGeneration);
       // Refuse unsafe egress BEFORE reserving a slot or allocating a volume.
-      adminHostConfigForLab();
+      adminHostConfigForLab(); // Fail closed on malformed network policy before allocating resources.
     }
     const adminImage = labMode === "admin" ? adminLabConfiguration().image : null;
     if (adminImage) {
@@ -376,6 +378,11 @@ async function startDockerSessionUncoordinated(
     sessionId = `sess_${crypto.randomUUID()}`;
     const containerName = `zoeskoul_${sessionId}`;
     if (adminImage) {
+      if (adminLabSessionIsolationEnabled()) {
+        adminNetworkName = adminSessionNetworkName(sessionId);
+        await createAdminSessionNetwork(sessionId);
+        assertAdminLabSwitch(adminGeneration);
+      }
       adminVolumeName = await createAdminWorkspaceVolume(sessionId);
       assertAdminLabSwitch(adminGeneration);
       // Only the signed, pre-approved capstone gets a training fixture. The
@@ -452,6 +459,7 @@ async function startDockerSessionUncoordinated(
       Cmd: ["python3", "/opt/runner/pty-runner.py"],
       HostConfig: adminImage ? {
         ...adminHostConfigForLab(),
+        ...(adminNetworkName ? { NetworkMode: adminNetworkName } : {}),
         Mounts: [{
           Type: "volume" as const,
           Source: adminVolumeName!,
@@ -490,6 +498,7 @@ async function startDockerSessionUncoordinated(
       labMode,
       adminTopicSlug: labMode === "admin" ? adminTopicSlug : null,
       adminVolumeName: labMode === "admin" ? adminVolumeName : null,
+      adminNetworkName: labMode === "admin" ? adminNetworkName : null,
       workspaceKey:
         normalized.kind === "shell" ? normalized.workspaceKey ?? null : null,
       clientHostKey:
@@ -682,6 +691,13 @@ async function startDockerSessionUncoordinated(
       sharedWorkspaceReservation = null;
     } else if (workspaceDir && !sessionRegistered) {
       await cleanupWorkspaceNow(workspaceDir);
+    }
+    if (!sessionRegistered && adminNetworkName) {
+      // The failed start never registered a tombstone. Only remove our own
+      // strict owner-labeled network; startup reaper catches Docker errors.
+      await removeAdminSessionNetwork(adminNetworkName, sessionId).catch(() => {
+        console.error("RUNNER admin network startup cleanup deferred to startup reaper");
+      });
     }
     if (!sessionRegistered && adminVolumeName) {
       // This may have failed before a container was created. On a daemon

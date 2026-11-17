@@ -1,11 +1,12 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { adminHostConfig, adminHostConfigForLab, adminLabNetworkMode } from "./learningAdminSandbox.js";
+import { adminHostConfig, adminHostConfigForLab, adminLabNetworkMode, adminLabSessionIsolationEnabled } from "./learningAdminSandbox.js";
 import { isEligibleAdminLabLesson } from "./learningAdminLessonPolicy.js";
 import { adminLabSwitchStatus, setAdminLabSwitch, assertAdminLabSwitch } from "./learningAdminSwitch.js";
 const previous = process.env.ZOESKOUL_LEARNING_ADMIN_LAB_OUTBOUND_NETWORK;
 const flag = process.env.ZOESKOUL_LEARNING_ADMIN_LABS_ENABLED;
 const previousMode = process.env.ZOESKOUL_LEARNING_ADMIN_LAB_DEPLOYMENT_MODE;
 const previousAck = process.env.ZOESKOUL_LEARNING_ADMIN_LAB_DEV_BRIDGE_ACK;
+const previousNetworkPolicy = process.env.ZOESKOUL_LEARNING_ADMIN_LAB_NETWORK_POLICY;
 afterEach(() => {
   setAdminLabSwitch(false);
   if (previous === undefined) delete process.env.ZOESKOUL_LEARNING_ADMIN_LAB_OUTBOUND_NETWORK;
@@ -16,6 +17,8 @@ afterEach(() => {
   else process.env.ZOESKOUL_LEARNING_ADMIN_LAB_DEPLOYMENT_MODE = previousMode;
   if (previousAck === undefined) delete process.env.ZOESKOUL_LEARNING_ADMIN_LAB_DEV_BRIDGE_ACK;
   else process.env.ZOESKOUL_LEARNING_ADMIN_LAB_DEV_BRIDGE_ACK = previousAck;
+  if (previousNetworkPolicy === undefined) delete process.env.ZOESKOUL_LEARNING_ADMIN_LAB_NETWORK_POLICY;
+  else process.env.ZOESKOUL_LEARNING_ADMIN_LAB_NETWORK_POLICY = previousNetworkPolicy;
 });
 describe("full privileges stays inside a disposable rootless lab", () => {
   it("preserves no-network and no-host-bind defaults", () => {
@@ -56,6 +59,19 @@ describe("full privileges stays inside a disposable rootless lab", () => {
     expect(hostConfig).not.toHaveProperty("Binds");
     expect(hostConfig).not.toHaveProperty("Privileged");
     expect(hostConfig.CapDrop).toContain("ALL");
+  });
+  it("defaults to existing offline or supervised development behavior", () => {
+    expect(adminLabSessionIsolationEnabled({})).toBe(false);
+    expect(adminLabSessionIsolationEnabled({ ZOESKOUL_LEARNING_ADMIN_LAB_NETWORK_POLICY: "none" })).toBe(false);
+    expect(() => adminLabSessionIsolationEnabled({ ZOESKOUL_LEARNING_ADMIN_LAB_NETWORK_POLICY: "unfiltered" })).toThrow(/Unknown/);
+  });
+  it("requires offline-only mode for per-session isolation", () => {
+    const isolated = { ZOESKOUL_LEARNING_ADMIN_LAB_NETWORK_POLICY: "per-session-internal", ZOESKOUL_LEARNING_ADMIN_LAB_OUTBOUND_NETWORK: "false" };
+    expect(adminLabSessionIsolationEnabled(isolated)).toBe(true);
+    expect(() => adminLabSessionIsolationEnabled({ ...isolated, ZOESKOUL_LEARNING_ADMIN_LAB_OUTBOUND_NETWORK: "true" })).toThrow(/cannot/);
+    process.env.ZOESKOUL_LEARNING_ADMIN_LAB_NETWORK_POLICY = "per-session-internal";
+    process.env.ZOESKOUL_LEARNING_ADMIN_LAB_OUTBOUND_NETWORK = "false";
+    expect(adminHostConfigForLab().NetworkMode).toBe("none"); // Overridden only with verified per-session identity at Docker create.
   });
   it("only enables the special scope with the existing signed grant and operator switch", () => {
     expect(isEligibleAdminLabLesson("linux-files-permissions-users", "full-privileges")).toBe(true);
