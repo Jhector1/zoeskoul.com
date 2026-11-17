@@ -1,4 +1,7 @@
 import { createHash, randomBytes, randomUUID } from "node:crypto";
+import { env } from "../../lib/env.js";
+import { trustedTanstackDevelopmentWorkspaces } from "./tanstackDevelopmentWorkspaceStore.js";
+import { trustedTanstackDevelopmentSources } from "./tanstackDevelopmentSourceStore.js";
 import type { ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contracts";
 import { makeTanstackPreviewDockerDriver } from "./tanstackPreviewDockerDriver.js";
 import { startIsolatedTanstackPreview, stopIsolatedTanstackPreview, TanstackPreviewCleanupError, type TanstackPreviewDriver } from "./tanstackPreviewLifecycle.js";
@@ -15,7 +18,7 @@ import type { TanstackPreviewIdentity } from "./tanstackPreviewIdentity.js";
  * owner + source version + canonical registered manifest and signed dependency
  * approval BEFORE the driver is allowed to execute customer-controlled code.
  * Authority is mandatory and may not be replaced with prompt/model claims. */
-export async function startAdmittedTanstackPreview(input: Readonly<{
+type AdmittedPreviewStartInput = Readonly<{
   ownerKey: string;
   request: ProductionBuildJobRequestV1;
   identity: TanstackPreviewIdentity;
@@ -25,7 +28,11 @@ export async function startAdmittedTanstackPreview(input: Readonly<{
   telemetry?: PreviewOperationTelemetry;
   operationCorrelation?: string;
   driverFactory?: (request: ProductionBuildJobRequestV1, basePath: string) => TanstackPreviewDriver;
-}>) {
+}>;
+
+async function startAdmittedPreviewWithMode(
+  input: AdmittedPreviewStartInput, mode: "immutable" | "development",
+) {
   if (!input.ownerKey || input.request.stackId !== "tanstack-start-v1" ||
       input.request.templateId !== "tanstack-start-v1" || input.request.operation !== "production-build")
     throw new Error("Invalid TanStack preview identity.");
@@ -49,14 +56,24 @@ export async function startAdmittedTanstackPreview(input: Readonly<{
       }
       if (input.signal?.aborted) throw new Error("Preview cancelled.");
       input.onPhase?.("workspace");
-      // Do not silently switch back to an older saved source or run two live
-      // revisions of the same project. Reuse is a later explicit, verified sync.
-      for (const prior of sharedFullStackPreviews.list()) {
-        if (prior.ownerKey !== ownerKey || prior.buildProjectId !== request.buildProjectId) continue;
-        if (prior.sourceVersion > request.sourceVersion) throw new Error("Preview source is stale.");
-        await sharedFullStackPreviews.close(prior.id);
+      // The development-start experiment may never close or reclaim an
+      // immutable user preview. It gets a spare slot or fails closed. Also
+      // refuse replacing an existing development lease until its owner closes
+      // it explicitly; a failed startup must not destroy the previous lease.
+      if (mode === "development") {
+        if (sharedFullStackPreviews.list().some(prior =>
+          prior.ownerKey === ownerKey && prior.buildProjectId === request.buildProjectId &&
+          prior.mode === "development"))
+          throw new Error("Development preview already exists.");
+      } else {
+        // Existing immutable startup behavior is preserved verbatim.
+        for (const prior of sharedFullStackPreviews.list()) {
+          if (prior.ownerKey !== ownerKey || prior.buildProjectId !== request.buildProjectId) continue;
+          if (prior.sourceVersion > request.sourceVersion) throw new Error("Preview source is stale.");
+          await sharedFullStackPreviews.close(prior.id);
+        }
+        await reclaimTanstackPreviewCapacity(ownerKey,request.buildProjectId);
       }
-      await reclaimTanstackPreviewCapacity(ownerKey,request.buildProjectId);
       const releasePending = reserveTanstackPreviewCapacity(ownerKey);
       let handle: Awaited<ReturnType<typeof startIsolatedTanstackPreview>> | null = null;
       let driver: TanstackPreviewDriver | null = null;
@@ -74,6 +91,13 @@ export async function startAdmittedTanstackPreview(input: Readonly<{
           : makeTanstackPreviewDockerDriver(
               ownerKey, request, basePath, input.identity, input.telemetry,
               undefined, diagnosticCorrelation,
+              // The public gateway is separately authenticated and the
+              // iframe transport must be explicitly approved at deployment.
+              // No feature flag changes immutable preview behavior.
+              {mode,websocketGatewayReady:mode==="development" &&
+                process.env.RUNNER_EXECUTION_POOL==="zoebuild" &&
+                process.env.ZOEBUILD_DEVELOPMENT_HMR_GATEWAY_ENABLED==="true" &&
+                process.env.ZOEBUILD_NATIVE_IFRAME_HMR_VERIFIED==="true"},
             );
         driver = createdDriver;
         handle = await startIsolatedTanstackPreview(createdDriver,{
@@ -81,14 +105,48 @@ export async function startAdmittedTanstackPreview(input: Readonly<{
           diagnosticCorrelation,
         });
         if (input.signal?.aborted) throw new Error("Preview cancelled.");
+        // A long Vite readiness cycle can outlive a saved revision. Before
+        // publishing any mutable lease, re-read the authoritative DB source.
+        // Failure tears the new sandbox down rather than registering stale code.
+        if (mode === "development") {
+          await input.authorize(ownerKey, request);
+          if (input.signal?.aborted) throw new Error("Preview cancelled.");
+        }
         const createdAt = Date.now();
         const owned = handle;
-        sharedFullStackPreviews.register({
-          id:previewId, ownerKey, buildProjectId:request.buildProjectId,
-          sourceVersion:request.sourceVersion, identity:input.identity,
-          containerId:owned.containerId, basePath, createdAt, lastActivityAt:createdAt,
-          close: () => stopIsolatedTanstackPreview(createdDriver,owned),
+        // Mint the trusted handle only from the ready Docker driver's result.
+        // Existing preview operations always select `immutable` and cannot
+        // register an update-capable workspace through HTTP request claims.
+        if (mode === "development") trustedTanstackDevelopmentWorkspaces.registerFromDriver({
+          previewId, ownerKey, buildProjectId:request.buildProjectId,
+          containerId:owned.containerId, workspaceRoot:env.workspaceRoot,
+          workspaceDir:owned.workspaceDir,
         });
+        try {
+          if (mode === "development") trustedTanstackDevelopmentSources.registerFromAdmittedStart({
+            previewId, ownerKey, buildProjectId:request.buildProjectId,
+            containerId:owned.containerId, source:request,
+          });
+          sharedFullStackPreviews.register({
+            id:previewId, mode, ownerKey, buildProjectId:request.buildProjectId,
+            sourceVersion:request.sourceVersion, identity:input.identity,
+            containerId:owned.containerId, basePath, createdAt, lastActivityAt:createdAt,
+            close: async () => {
+              // A failed stop leaves the handle and registry capacity reserved.
+              await stopIsolatedTanstackPreview(createdDriver,owned);
+              if (mode === "development") {
+                trustedTanstackDevelopmentWorkspaces.revoke(previewId,owned.containerId);
+                trustedTanstackDevelopmentSources.revoke(previewId,owned.containerId);
+              }
+            },
+          });
+        } catch (error) {
+          if (mode === "development") {
+            trustedTanstackDevelopmentWorkspaces.revoke(previewId,owned.containerId);
+            trustedTanstackDevelopmentSources.revoke(previewId,owned.containerId);
+          }
+          throw error;
+        }
         return {previewId,buildProjectId:request.buildProjectId,sourceVersion:request.sourceVersion,
           port:5173 as const,basePath};
       } catch (error) {
@@ -135,6 +193,20 @@ export async function startAdmittedTanstackPreview(input: Readonly<{
     endQueue?.(input.signal?.aborted ? "cancelled" : "error");
     throw error;
   }
+}
+
+/** Existing public operation path. Always creates an immutable preview. */
+export function startAdmittedTanstackPreview(input: AdmittedPreviewStartInput) {
+  return startAdmittedPreviewWithMode(input, "immutable");
+}
+
+/** Private service startup (Phase 4D), disabled by default in the Runner.
+ * The caller must provide DB source attestation and signed-dependency checks.
+ * Trusted workspace data comes solely from the Docker driver; these leases
+ * remain excluded from the immutable capability and browser proxy routes.
+ */
+export function startAdmittedTanstackDevelopmentPreview(input: AdmittedPreviewStartInput) {
+  return startAdmittedPreviewWithMode(input, "development");
 }
 
 /** Fast path for an already-ready exact lease. It runs before the cold-start
@@ -197,7 +269,7 @@ export async function verifyAdmittedTanstackPreviewReady(input: Readonly<{
   preview:{previewId:string;buildProjectId:string;sourceVersion:number;basePath:string};
 }>) {
   const lease = sharedFullStackPreviews.get(input.preview.previewId);
-  if (!lease || lease.ownerKey !== input.ownerKey ||
+  if (!lease || lease.mode === "development" || lease.ownerKey !== input.ownerKey ||
       lease.buildProjectId !== input.preview.buildProjectId ||
       lease.sourceVersion !== input.preview.sourceVersion ||
       lease.basePath !== input.preview.basePath) return false;
@@ -211,7 +283,8 @@ export async function fetchAdmittedTanstackPreview(input: Readonly<{
   headers?: unknown; bodyBase64?:unknown;
 }>) {
   const lease=sharedFullStackPreviews.get(input.previewId);
-  if (!lease || lease.basePath.startsWith("/quarantined/")) throw new Error("Preview not found.");
+  if (!lease || lease.mode === "development" ||
+      lease.basePath.startsWith("/quarantined/")) throw new Error("Preview not found.");
   if (input.method === "POST") throw new Error("Mutation preview requests require owner-bound authentication, not a bearer preview URL.");
   const safe = normalizeTanstackPreviewHttpRequest({basePath:lease.basePath,
     path:input.path,method:input.method,headers:input.headers,bodyBase64:input.bodyBase64});
@@ -234,7 +307,8 @@ export function resolveAdmittedTanstackPreviewCapability(input: Readonly<{
   previewId: string; path: string;
 }>) {
   const lease = sharedFullStackPreviews.get(input.previewId);
-  if (!lease || lease.basePath.startsWith("/quarantined/")) throw new Error("Preview not found.");
+  if (!lease || lease.mode === "development" ||
+      lease.basePath.startsWith("/quarantined/")) throw new Error("Preview not found.");
   normalizeTanstackPreviewHttpRequest({
     basePath: lease.basePath, path: input.path, method: "GET",
   });
@@ -252,7 +326,8 @@ export async function fetchOwnedTanstackPreview(input: Readonly<{
   headers?: unknown; bodyBase64?: unknown;
 }>) {
   const lease = sharedFullStackPreviews.get(input.previewId);
-  if (!lease || lease.basePath.startsWith("/quarantined/")) throw new Error("Preview not found.");
+  if (!lease || lease.mode === "development" ||
+      lease.basePath.startsWith("/quarantined/")) throw new Error("Preview not found.");
   if (!input.ownerKey || lease.ownerKey !== input.ownerKey) throw new Error("Forbidden.");
   if (lease.buildProjectId !== input.buildProjectId ||
       !Number.isSafeInteger(input.sourceVersion) || input.sourceVersion < 1 ||

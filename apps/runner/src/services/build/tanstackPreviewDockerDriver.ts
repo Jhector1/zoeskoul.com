@@ -10,7 +10,8 @@ import { buildProductionBuildContainerOptions, executeBuildStep } from "./execut
 import { assertTanstackWorkerBuildRequest } from "./tanstackWorkerBuildPolicy.js";
 import {
   TANSTACK_PREVIEW_INSTALL_COMMAND, tanstackPreviewDevCommand,
-  TANSTACK_PREVIEW_OFFLINE_ENV, assertTanstackSandboxOptions,
+  TANSTACK_PREVIEW_OFFLINE_ENV, TANSTACK_PREVIEW_HMR_SANDBOX_ENV,
+  shouldActivateTanstackPreviewHmr, assertTanstackSandboxOptions,
 } from "./tanstackPreviewRuntimePolicy.js";
 import { TanstackPreviewCleanupError, type TanstackPreviewDriver } from "./tanstackPreviewLifecycle.js";
 import { fetchTanstackHttpInsideSandbox } from "./tanstackPreviewDockerTransport.js";
@@ -102,6 +103,10 @@ export function makeTanstackPreviewDockerDriver(
   telemetry?: PreviewOperationTelemetry,
   dependencyStore: PreviewDependencyLayerStore = previewDependencyLayerStore,
   diagnosticCorrelation?: Readonly<{operation:string;preview:string}>,
+  hmrOptions: Readonly<{
+    mode: "immutable" | "development";
+    websocketGatewayReady: boolean;
+  }> = {mode:"immutable",websocketGatewayReady:false},
 ): TanstackPreviewDriver {
   if (!ownerKey) throw new Error("TanStack preview owner identity required.");
   if (diagnosticCorrelation &&
@@ -110,6 +115,18 @@ export function makeTanstackPreviewDockerDriver(
     throw new Error("Invalid preview diagnostic correlation.");
   }
   assertTanstackWorkerBuildRequest(request);
+  const hmrEnabled = shouldActivateTanstackPreviewHmr({
+    mode:hmrOptions.mode,
+    featureEnabled:process.env.ZOEBUILD_DEVELOPMENT_PREVIEW_HMR_ENABLED === "true",
+    websocketGatewayReady:hmrOptions.websocketGatewayReady,
+  });
+  if (hmrEnabled) {
+    // Current saved projects still contain `hmr: false`. Do not silently
+    // claim HMR support for such projects or mutate approved saved source.
+    const viteConfig=request.files.find(file => file.path === "vite.config.ts")?.content;
+    if (!viteConfig?.includes('hmr: process.env.ZOEBUILD_PREVIEW_HMR_ENABLED === "true"'))
+      throw new Error("This saved TanStack project does not support development HMR.");
+  }
   // Validate before preparing a workspace or invoking Docker.
   const command = tanstackPreviewDevCommand(basePath);
   // Journal identity exists BEFORE a workspace is created. Docker labels make
@@ -247,6 +264,7 @@ export function makeTanstackPreviewDockerDriver(
             ...base.Env,
             `ZOEBUILD_PREVIEW_BASE_PATH=${basePath}`,
             TANSTACK_PREVIEW_OFFLINE_ENV,
+            ...(hmrEnabled ? [TANSTACK_PREVIEW_HMR_SANDBOX_ENV] : []),
           ],
           Labels: { ...base.Labels, "com.zoeskoul.runner.purpose": "tanstack-start-preview",
             "com.zoeskoul.runner.tanstack-run": journal.runId,
@@ -270,7 +288,7 @@ export function makeTanstackPreviewDockerDriver(
             } : { ...base.HostConfig.Tmpfs },
           },
         };
-        assertTanstackSandboxOptions(options);
+        assertTanstackSandboxOptions(options,hmrEnabled);
         const container = await docker.createContainer(options);
         mountedContainerId = dependencyBind ? container.id : null;
         try {

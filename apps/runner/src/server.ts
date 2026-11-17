@@ -2,6 +2,7 @@ import { createServer } from "node:http";
 import { app } from "./app.js";
 import { env } from "./lib/env.js";
 import { attachSessionWsServer } from "./ws/sessionWsServer.js";
+import { attachTanstackDevelopmentHmrWsServer } from "./ws/tanstackDevelopmentHmrWsServer.js";
 import { cleanupRunnerOrphansOnStartup } from "./services/docker/runnerReaper.js";
 import { pruneBuildPreviewOperationJournals } from "./routes/build.previews.operations.js";
 import { pruneStartRateLimitBuckets } from "./services/sessions/startRateLimit.js";
@@ -10,10 +11,12 @@ import { startSessionCleanupLoop } from "./services/sessions/timeoutManager.js";
 async function main() {
   const server = createServer(app);
   const handleSessionUpgrade = attachSessionWsServer();
+  const handleDevelopmentHmrUpgrade = attachTanstackDevelopmentHmrWsServer();
 
   server.on("upgrade", (req, socket, head) => {
     const handled = handleSessionUpgrade(req, socket, head);
     if (handled) return;
+    if (handleDevelopmentHmrUpgrade(req, socket, head)) return;
 
     socket.destroy();
   });

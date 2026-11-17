@@ -22,6 +22,10 @@ import { executeBuildDependencyLockBootstrapRoute } from "./routes/build.jobs.de
 import { executeBuildProductionRoute } from "./routes/build.jobs.productionBuild.js";
 import { startBuildPreviewOperationRoute, statusBuildPreviewOperationRoute, cancelBuildPreviewOperationRoute } from "./routes/build.previews.operations.js";
 import { syncBuildPreviewRoute } from "./routes/build.previews.sync.js";
+import { updateTanstackDevelopmentPreviewRoute } from "./routes/build.previews.developmentUpdate.js";
+import { startTanstackDevelopmentPreviewRoute } from "./routes/build.previews.developmentStart.js";
+import { fetchTanstackDevelopmentPreviewRoute } from "./routes/build.previews.developmentFetch.js";
+import { issueTanstackDevelopmentHmrTicketRoute } from "./routes/build.previews.developmentHmrTicket.js";
 import { fetchBuildPreviewRoute } from "./routes/build.previews.fetch.js";
 import { proxyFetchBuildPreviewRoute } from "./routes/build.previews.proxyFetch.js";
 import { resolveBuildPreviewCapabilityRoute } from "./routes/build.previews.resolveCapability.js";
@@ -128,7 +132,17 @@ app.post("/build/jobs/production-build", executeBuildProductionRoute);
 app.post("/build/previews/operations/start", startBuildPreviewOperationRoute);
 app.post("/build/previews/operations/:operationId/status", statusBuildPreviewOperationRoute);
 app.post("/build/previews/operations/:operationId/cancel", cancelBuildPreviewOperationRoute);
+// Phase 4D: private authenticated startup, disabled by default and never
+// served by immutable capability proxy routes.
+app.post("/build/previews/development/start", startTanstackDevelopmentPreviewRoute);
 app.post("/build/previews/:previewId/sync", syncBuildPreviewRoute);
+// Phase 4C: disabled-by-default, service-authenticated development update gate.
+// Immutable preview synchronization is unchanged; this endpoint cannot start leases.
+app.post("/build/previews/:previewId/development-update", updateTanstackDevelopmentPreviewRoute);
+// Phase 4E2: owner-only, read-only development fetch. Never a bearer capability.
+app.post("/build/previews/:previewId/development-fetch", fetchTanstackDevelopmentPreviewRoute);
+// Service-only, one-use HMR ticket issuance. The browser has no Runner secret.
+app.post("/build/previews/:previewId/development-hmr-ticket", issueTanstackDevelopmentHmrTicketRoute);
 app.post("/build/previews/:previewId/fetch", fetchBuildPreviewRoute);
 app.post("/build/previews/:previewId/proxy-fetch", proxyFetchBuildPreviewRoute);
 app.post("/build/previews/:previewId/resolve-capability", resolveBuildPreviewCapabilityRoute);

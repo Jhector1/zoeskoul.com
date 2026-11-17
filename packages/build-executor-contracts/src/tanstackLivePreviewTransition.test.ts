@@ -1,0 +1,66 @@
+import { describe, expect, it } from "vitest";
+import { classifyTanstackPreviewTransition } from "./tanstackLivePreviewTransition";
+import type { ProductionBuildJobRequestV1 } from "./index";
+
+const previous: ProductionBuildJobRequestV1 = {
+  protocolVersion: 1, operation: "production-build", buildProjectId: "project-a",
+  sourceVersion: 5, stackId: "tanstack-start-v1", templateId: "tanstack-start-v1",
+  files: [
+    {path:"package.json", content:"{}"},
+    {path:"pnpm-lock.yaml", content:"lock"},
+    {path:"zoebuild-dependency-approval.json", content:"signed"},
+    {path:"src/routes/index.tsx", content:"old"},
+  ],
+};
+function next(files: ProductionBuildJobRequestV1["files"], sourceVersion=6): ProductionBuildJobRequestV1 {
+  return {...previous, files, sourceVersion};
+}
+const edit = (path:string, value:string) => next(previous.files.map(file =>
+  file.path === path ? {...file,content:value}:file));
+const classify = (mode:"development"|"immutable", request:ProductionBuildJobRequestV1) =>
+  classifyTanstackPreviewTransition({mode, previous, next:request});
+
+describe("V1 isolated TanStack live-preview admission policy", () => {
+  it("never modifies immutable versioned preview on a source change", () => {
+    expect(classify("immutable",edit("src/routes/index.tsx","new"))).toMatchObject({
+      action:"restart",reason:"immutable_lease",
+    });
+  });
+  it("only proposes bounded source edits on an explicit development lease", () => {
+    expect(classify("development",edit("src/routes/index.tsx","new"))).toMatchObject({
+      action:"live_candidate",reason:"eligible_source_change",changedPaths:["src/routes/index.tsx"],
+    });
+  });
+  it("never live-updates dependencies, signed approvals or configuration", () => {
+    for (const filename of ["package.json","pnpm-lock.yaml","zoebuild-dependency-approval.json"]) {
+      expect(classify("development", edit(filename,"changed"))).toMatchObject({
+        action:"restart",reason:"dependencies_changed",
+      });
+    }
+    const withConfig=next([...previous.files,{path:"vite.config.ts",content:"changed"}]);
+    expect(classify("development",withConfig)).toMatchObject({action:"restart",reason:"protected_files_changed"});
+  });
+  it("blocks older source revisions, cross-project requests and unsaved drafts", () => {
+    expect(classify("development",next(previous.files,4))).toMatchObject({action:"reject",reason:"invalid_revision"});
+    expect(classify("development",{...edit("src/routes/index.tsx","new"),buildProjectId:"project-b"}))
+      .toMatchObject({action:"reject",reason:"wrong_project"});
+    expect(classifyTanstackPreviewTransition({mode:"development",previous,
+      next:edit("src/routes/index.tsx","new"),hasUnsavedChanges:true}))
+      .toMatchObject({action:"hold",reason:"unsaved_source"});
+  });
+  it("refuses same-version changed bytes and unsafe or duplicate file paths", () => {
+    expect(classify("development",next(edit("src/routes/index.tsx","new").files,5)))
+      .toMatchObject({action:"reject",reason:"invalid_revision"});
+    for (const pathname of ["../escape.tsx","/absolute.tsx","src/routes/../../escape.tsx","src\\routes\\index.tsx"]) {
+      expect(classify("development",next([...previous.files,{path:pathname,content:"x"}])))
+        .toMatchObject({action:"reject",reason:"invalid_files"});
+    }
+    expect(classify("development",next([...previous.files,{path:"SRC/routes/INDEX.tsx",content:"x"}])))
+      .toMatchObject({action:"reject",reason:"invalid_files"});
+  });
+  it("does not rebind an immutable version even when bytes happen to match", () => {
+    expect(classify("immutable",next(previous.files))).toMatchObject({action:"restart",reason:"immutable_lease"});
+    expect(classify("development",next(previous.files))).toMatchObject({action:"restart",reason:"immutable_lease"});
+    expect(classify("development",next(previous.files,5))).toMatchObject({action:"unchanged",reason:"unchanged"});
+  });
+});

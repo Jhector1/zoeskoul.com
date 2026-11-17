@@ -1,0 +1,98 @@
+import type { Request, RequestHandler } from "express";
+import {
+  parseTrustedBuildJobRequest,
+  type ProductionBuildJobRequestV1,
+} from "@zoeskoul/build-executor-contracts";
+import { getRequiredActorKey } from "../middleware/serviceAuth.js";
+import { authorizeTanstackPreviewSource, assertTanstackPreviewStartupEnabled } from
+  "../services/build/tanstackPreviewSourceAuthorization.js";
+import { assertCurrentTanstackSavedSourceAtZoeBuild } from
+  "../services/build/tanstackSavedSourceAuthorityClient.js";
+import { resolveTanstackPreviewIdentity } from
+  "../services/build/tanstackPreviewIdentity.js";
+import { startAdmittedTanstackDevelopmentPreview } from
+  "../services/build/tanstackPreviewSharedLifecycle.js";
+
+const ACTOR_KEY = /^u:[0-9a-f]{64}$/;
+type Preview = Awaited<ReturnType<typeof startAdmittedTanstackDevelopmentPreview>>;
+type Dependencies = Readonly<{
+  enabled: () => boolean;
+  startupEnabled: () => void;
+  actorKey: (req: Request) => string;
+  parse: (body: unknown) => ProductionBuildJobRequestV1;
+  verifySignedLock: (request: ProductionBuildJobRequestV1) => void;
+  assertSavedSource: (actorKey: string, request: ProductionBuildJobRequestV1) => Promise<void>;
+  resolveIdentity: (request: ProductionBuildJobRequestV1) =>
+    Promise<Parameters<typeof startAdmittedTanstackDevelopmentPreview>[0]["identity"]>;
+  start: (input: Parameters<typeof startAdmittedTanstackDevelopmentPreview>[0]) => Promise<Preview>;
+}>;
+
+const productionDeps: Dependencies = {
+  enabled: () => process.env.ZOEBUILD_DEVELOPMENT_PREVIEW_START_ENABLED === "true",
+  startupEnabled: assertTanstackPreviewStartupEnabled,
+  actorKey: getRequiredActorKey,
+  parse: (body) => {
+    const candidate = parseTrustedBuildJobRequest(body);
+    // The trusted parser also accepts dependency-lock-bootstrap requests.
+    // Startup is restricted to authorized production-build source only.
+    if (candidate.operation !== "production-build") {
+      throw new Error("Development startup requires production-build source.");
+    }
+    return candidate;
+  },
+  verifySignedLock: authorizeTanstackPreviewSource,
+  assertSavedSource: assertCurrentTanstackSavedSourceAtZoeBuild,
+  resolveIdentity: resolveTanstackPreviewIdentity,
+  start: startAdmittedTanstackDevelopmentPreview,
+};
+
+/** Phase 4D private startup. Normal requireServiceAuth middleware precedes
+ * this route. No browser/Next.js route calls it until the Phase 4E transport
+ * and acceptance work has been validated. ALL submitted bytes are verified
+ * against the DB; the signed dependency lock is checked independently.
+ */
+export function makeTanstackDevelopmentStartRoute(
+  deps: Dependencies = productionDeps,
+): RequestHandler {
+  return async (req, res) => {
+    if (!deps.enabled()) return res.status(404).json({ok:false,code:"NOT_FOUND"});
+    try { deps.startupEnabled(); }
+    catch { return res.status(404).json({ok:false,code:"NOT_FOUND"}); }
+    let actorKey: string;
+    let request: ProductionBuildJobRequestV1;
+    try {
+      actorKey = deps.actorKey(req);
+      if (!ACTOR_KEY.test(actorKey)) throw new Error("Invalid actor identity.");
+      request = deps.parse(req.body);
+      if (request.operation !== "production-build" ||
+          request.stackId !== "tanstack-start-v1" ||
+          request.templateId !== "tanstack-start-v1" ||
+          !Number.isSafeInteger(request.sourceVersion) || request.sourceVersion < 1)
+        throw new Error("Invalid development source.");
+    } catch {
+      return res.status(400).json({ok:false,code:"INVALID_REQUEST"});
+    }
+    try {
+      // Never allocate a Docker sandbox without current DB authority.
+      deps.verifySignedLock(request);
+      await deps.assertSavedSource(actorKey, request);
+      const identity = await deps.resolveIdentity(request);
+      // The lifecycle rechecks the DB before launch AND after readiness.
+      const preview = await deps.start({
+        ownerKey:actorKey, request, identity,
+        authorize:async (ownerKey, candidate) => {
+          deps.verifySignedLock(candidate);
+          await deps.assertSavedSource(ownerKey,candidate);
+        },
+      });
+      // This remains private to the service-to-service client. The legacy
+      // browser capability routes explicitly exclude development leases.
+      return res.status(200).json({ok:true,preview});
+    } catch {
+      // No source bytes, dependency approvals or Docker internals in errors.
+      return res.status(503).json({ok:false,code:"DEVELOPMENT_START_UNAVAILABLE"});
+    }
+  };
+}
+
+export const startTanstackDevelopmentPreviewRoute = makeTanstackDevelopmentStartRoute();

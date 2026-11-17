@@ -1,4 +1,5 @@
 import { previewObservability } from "./previewObservability.js";
+import type { TanstackPreviewLeaseMode } from "@zoeskoul/build-executor-contracts";
 import type { TanstackPreviewIdentity } from "./tanstackPreviewIdentity.js";
 
 /** Canonical live TanStack full-stack preview leases. All preview admission,
@@ -7,6 +8,8 @@ import type { TanstackPreviewIdentity } from "./tanstackPreviewIdentity.js";
  */
 export type FullStackPreviewLease = Readonly<{
   id: string;
+  /** Legacy callers remain immutable. No development lease is created by existing routes. */
+  mode?: TanstackPreviewLeaseMode;
   ownerKey: string;
   buildProjectId: string;
   sourceVersion: number;
@@ -22,6 +25,9 @@ export class SharedFullStackPreviewRegistry {
   private readonly live = new Map<string, FullStackPreviewLease>();
   private readonly closing = new Map<string, Promise<void>>();
   private readonly healthChecks = new Map<string, Promise<boolean>>();
+  /** Exclusive per-lease updates; always account for pending updates on close. */
+  private readonly updates = new Map<string, Promise<void>>();
+  private readonly activeUpdates = new Set<string>();
 
   get(id: string) { return this.live.get(id) ?? null; }
   list() { return [...this.live.values()]; }
@@ -42,7 +48,12 @@ export class SharedFullStackPreviewRegistry {
     if (!lease.id || !lease.ownerKey || !lease.buildProjectId ||
         !lease.identity?.fingerprint || this.live.has(lease.id))
       throw new Error("Invalid full-stack preview lease.");
-    this.live.set(lease.id, lease);
+    const mode = lease.mode ?? "immutable";
+    if (mode !== "immutable" && mode !== "development")
+      throw new Error("Invalid full-stack preview lease mode.");
+    // Normalize legacy callers explicitly to immutable; all capacity and close
+    // accounting remains shared across both modes.
+    this.live.set(lease.id, { ...lease, mode });
   }
   touch(id: string, at: number) {
     const lease = this.live.get(id);
@@ -63,6 +74,10 @@ export class SharedFullStackPreviewRegistry {
     this.closing.set(id, marker);
     const endCleanup = previewObservability.beginCleanup();
     const task = (async () => {
+      // Closing intent is published before waiting; an in-progress update may
+      // finish its write but can never commit a new revision after close begins.
+      const update = this.updates.get(id);
+      if (update) await update;
       const healthCheck = this.healthChecks.get(id);
       if (healthCheck) await healthCheck.catch(() => false);
       await lease.close();
@@ -72,6 +87,102 @@ export class SharedFullStackPreviewRegistry {
     void task.then(settle, fail);
     try { await marker; return true; }
     finally { if (this.closing.get(id) === marker) this.closing.delete(id); }
+  }
+
+  /** The legacy immutable-preview transport must never serve a development
+   * lease while writes are pending. The future development transport must use
+   * an owner-authenticated route with its own update-aware read boundary. */
+  developmentUpdatePending(id: string) { return this.updates.has(id); }
+
+  /** Phase 4E2: a read-only, owner-bound development request is permitted only
+   * outside every update/close slot. This is NOT bearer-capability admission.
+   * The caller rechecks this fence after the sandbox HTTP read returns so a
+   * concurrent revision commit cannot release stale or partially written data.
+   */
+  assertDevelopmentReadOpen(input: Readonly<{
+    previewId: string; ownerKey: string; buildProjectId: string;
+    sourceVersion: number;
+  }>): FullStackPreviewLease {
+    const lease = this.live.get(input.previewId);
+    if (!lease || lease.mode !== "development" ||
+        !lease.ownerKey || lease.ownerKey !== input.ownerKey ||
+        lease.buildProjectId !== input.buildProjectId ||
+        !Number.isSafeInteger(input.sourceVersion) || input.sourceVersion < 1 ||
+        lease.sourceVersion !== input.sourceVersion ||
+        lease.basePath.startsWith("/quarantined/") ||
+        this.closing.has(input.previewId) || this.updates.has(input.previewId))
+      throw new Error("Preview not found.");
+    return lease;
+  }
+
+  /** Checks a development lease after each awaited admission/liveness step.
+   * A close intent always wins over a pending or in-flight update. */
+  assertDevelopmentUpdateOpen(id: string, expectedVersion: number,
+    expectedFingerprint: string): FullStackPreviewLease {
+    const lease = this.live.get(id);
+    if (!lease || lease.mode !== "development" ||
+        lease.basePath.startsWith("/quarantined/") ||
+        this.closing.has(id) || !this.activeUpdates.has(id))
+      throw new Error("Preview not found.");
+    if (lease.sourceVersion !== expectedVersion ||
+        lease.identity.fingerprint !== expectedFingerprint)
+      throw new Error("Preview source is stale.");
+    return lease;
+  }
+
+  /** Serialized per-lease transaction. New callers queue before their first
+   * await; updates on unrelated projects may proceed independently. */
+  async withDevelopmentUpdate<T>(id: string,
+    operation: (lease: FullStackPreviewLease) => Promise<T>): Promise<T> {
+    const predecessor = this.updates.get(id) ?? Promise.resolve();
+    let release!: () => void;
+    const slot = new Promise<void>(resolve => { release = resolve; });
+    this.updates.set(id, slot);
+    try {
+      await predecessor;
+      const lease = this.live.get(id);
+      if (!lease || lease.mode !== "development" ||
+          lease.basePath.startsWith("/quarantined/") || this.closing.has(id))
+        throw new Error("Preview not found.");
+      this.activeUpdates.add(id);
+      return await operation(lease);
+    } finally {
+      this.activeUpdates.delete(id);
+      release();
+      if (this.updates.get(id) === slot) this.updates.delete(id);
+    }
+  }
+
+  /** Commit only after the authorized workspace write has succeeded. */
+  commitDevelopmentUpdate(id: string, input: Readonly<{
+    expectedVersion: number;
+    expectedFingerprint: string;
+    nextVersion: number;
+    nextIdentity: TanstackPreviewIdentity;
+  }>): FullStackPreviewLease {
+    const lease = this.assertDevelopmentUpdateOpen(id,
+      input.expectedVersion, input.expectedFingerprint);
+    if (!Number.isSafeInteger(input.nextVersion) ||
+        input.nextVersion !== input.expectedVersion + 1 ||
+        !input.nextIdentity?.fingerprint || !input.nextIdentity.sourceFingerprint ||
+        input.nextIdentity.runtimeImageId !== lease.identity.runtimeImageId ||
+        input.nextIdentity.dependencyFingerprint !== lease.identity.dependencyFingerprint ||
+        input.nextIdentity.fingerprint === lease.identity.fingerprint)
+      throw new Error("Invalid development preview identity.");
+    const updated: FullStackPreviewLease = {...lease,
+      sourceVersion: input.nextVersion, identity: input.nextIdentity,
+      lastActivityAt: Date.now()};
+    this.live.set(id, updated);
+    return updated;
+  }
+
+  /** A failed or interrupted workspace write must never remain publicly
+   * routable. Keep capacity reserved until Docker cleanup is confirmed. */
+  quarantineDevelopmentUpdate(id: string): void {
+    const lease = this.live.get(id);
+    if (!lease || lease.mode !== "development" || !this.activeUpdates.has(id))
+      throw new Error("Preview not found.");
+    this.live.set(id, {...lease, basePath:`/quarantined/${id}/`});
   }
 
   /** Returns only an exact, live, freshly checked lease. Concurrent identical
@@ -86,7 +197,10 @@ export class SharedFullStackPreviewRegistry {
     maxLifetimeMs: number;
     healthCheck: (lease: FullStackPreviewLease) => Promise<boolean>;
   }>): Promise<FullStackPreviewLease | null> {
+    // Existing versioned-preview reuse MUST NOT claim a future mutable
+    // development lease even if every source/dependency hash matches.
     const lease = this.list().find(candidate =>
+      candidate.mode === "immutable" &&
       candidate.ownerKey === input.ownerKey &&
       candidate.buildProjectId === input.buildProjectId &&
       candidate.sourceVersion === input.sourceVersion &&
@@ -140,7 +254,8 @@ export class SharedFullStackPreviewRegistry {
   }
   /** Only safe when all preview operations are already settled (test teardown). */
   resetForTests() {
-    if (this.closing.size || this.healthChecks.size) throw new Error("Cannot reset active preview cleanup.");
+    if (this.closing.size || this.healthChecks.size || this.updates.size)
+      throw new Error("Cannot reset active preview cleanup.");
     this.live.clear();
   }
 }

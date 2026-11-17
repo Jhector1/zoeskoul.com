@@ -39,4 +39,10 @@ describe("TanStack isolated preview sync handoff", () => {
     expect(() => requireTanstackPreviewRestart({ lease: { ...lease, basePath: "/quarantined/id/" },
       ownerKey: "actor-1", request })).toThrow("Preview not found.");
   });
+
+  it("refuses development leases on legacy immutable sync", () => {
+    expect(() => requireTanstackPreviewRestart({
+      lease: {...lease, mode:"development"}, ownerKey:"actor-1", request,
+    })).toThrow("Preview not found.");
+  });
 });

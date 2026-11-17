@@ -1,5 +1,5 @@
 import { createHash, randomUUID } from "node:crypto";
-import { constants } from "node:fs";
+import { constants, type Stats } from "node:fs";
 import fs from "node:fs/promises";
 import { createReadStream } from "node:fs";
 import path from "node:path";
@@ -18,8 +18,12 @@ import {
  * read-only mount, never this directory's writable parent or the runner root.
  */
 const MAX_ENTRIES = 24;
-const MAX_ITEM_BYTES = 256 * 1024 * 1024;
-const MAX_TOTAL_BYTES = 1024 * 1024 * 1024;
+// TanStack Start + Cloudflare installs can exceed 256 MiB. Keep publication
+// bounded, still subject to workspace headroom, symlink safety, and full
+// content attestation on every cache acquire. A 2 GiB total retains several
+// ~478 MiB project layers without exhausting the shared 10 GiB workspace cap.
+const MAX_ITEM_BYTES = 640 * 1024 * 1024;
+const MAX_TOTAL_BYTES = 2 * 1024 * 1024 * 1024;
 const MAX_FILES = 60_000;
 const TTL_MS = 24 * 60 * 60_000; // exceeds the preview hard lifetime
 const MIN_EVICTION_AGE_MS = 75 * 60_000; // survives active previews after service restart
@@ -112,12 +116,29 @@ async function attestTree(root: string, options: Readonly<{
         active++;
       }
     };
+    // Overlap independent metadata lookups without changing the canonical
+    // depth-first digest order. This accelerates wide pnpm trees while keeping
+    // strict byte hashing, link checks and the total file budget unchanged.
+    // Each promise absorbs errors, including when an earlier sibling rejects,
+    // so abandoned lookahead never creates an unhandled rejection.
+    const METADATA_LOOKAHEAD = 8;
+    const metadata = new Map<number, Promise<Stats | null>>();
+    let nextMetadata = 0;
+    const fillMetadata = () => {
+      while (nextMetadata < children.length && metadata.size < METADATA_LOOKAHEAD) {
+        const i = nextMetadata++;
+        metadata.set(i, fs.lstat(path.join(dir, children[i]!.name)).catch(() => null));
+      }
+    };
     for (const [i, child] of children.entries()) {
+      fillMetadata();
       fillPrefetch(i);
       if (++files > MAX_FILES) return reject("file-limit");
       const filename = path.join(dir, child.name);
       const relative = prefix ? `${prefix}/${child.name}` : child.name;
-      const info = await fs.lstat(filename);
+      const info = await metadata.get(i);
+      metadata.delete(i);
+      if (!info) return reject("read-failure");
       if (info.isSymbolicLink()) {
         const target = await fs.readlink(filename);
         if (path.isAbsolute(target)) return reject("unsafe-link");

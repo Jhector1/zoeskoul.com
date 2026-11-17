@@ -365,3 +365,6 @@ export type TanstackWorkerBuildExecutionResponseV1 = Readonly<{
     artifact: TanstackWorkerArtifactV1;
   }>;
 }>;
+
+export { classifyTanstackPreviewTransition } from "./tanstackLivePreviewTransition";
+export type { TanstackPreviewTransition, TanstackPreviewLeaseMode, TanstackPreviewTransitionReason } from "./tanstackLivePreviewTransition";
