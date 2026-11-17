@@ -304,7 +304,11 @@ async function startDockerSessionUncoordinated(
     if (labMode === "admin" && !isEligibleAdminLabLesson(ADMIN_COURSE_SLUG, adminTopicSlug)) {
       throw new Error("Verified administrative lesson identity required.");
     }
-    if (labMode === "admin") assertAdminLabSwitch(adminGeneration);
+    if (labMode === "admin") {
+      assertAdminLabSwitch(adminGeneration);
+      // Refuse unsafe egress BEFORE reserving a slot or allocating a volume.
+      adminHostConfigForLab();
+    }
     const adminImage = labMode === "admin" ? adminLabConfiguration().image : null;
     if (adminImage) {
       await verifyAdminSandboxImage(docker, adminImage);

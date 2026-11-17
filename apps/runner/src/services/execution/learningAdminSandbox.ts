@@ -20,13 +20,31 @@ export const adminHostConfig = {
   },
 };
 
-/** Optional external package access on the *rootless* lab daemon only.
- * This opt-in allows network egress; operators must restrict destination
- * networks at the VM/firewall level. It never enables host networking. */
+/** Production root labs have NO network until a separately enforced egress
+ * boundary exists. The default Docker bridge is NOT a tenant firewall.
+ * A deliberately acknowledged development-only override preserves supervised
+ * apt/curl testing on a dedicated rootless VM, never production readiness. */
+export function adminLabNetworkMode(
+  configuration: NodeJS.ProcessEnv = process.env,
+): "none" | "bridge" {
+  const tier = configuration.ZOESKOUL_LEARNING_ADMIN_LAB_DEPLOYMENT_MODE ?? "production";
+  if (tier !== "production" && tier !== "development") {
+    throw new AdminGrantError(503, "Invalid administrator lab deployment mode.");
+  }
+  const outbound = configuration.ZOESKOUL_LEARNING_ADMIN_LAB_OUTBOUND_NETWORK;
+  if (outbound === undefined || outbound === "false") return "none";
+  if (outbound !== "true") {
+    throw new AdminGrantError(503, "Invalid administrator lab network setting.");
+  }
+  if (tier !== "development" ||
+      configuration.ZOESKOUL_LEARNING_ADMIN_LAB_DEV_BRIDGE_ACK !== "UNFILTERED_DEV_BRIDGE_ONLY") {
+    throw new AdminGrantError(503, "Unfiltered bridge networking is forbidden for production administrator labs.");
+  }
+  return "bridge";
+}
+
 export function adminHostConfigForLab() {
-  const network = process.env.ZOESKOUL_LEARNING_ADMIN_LAB_OUTBOUND_NETWORK === "true"
-    ? "bridge" : "none";
-  return { ...adminHostConfig, NetworkMode: network };
+  return { ...adminHostConfig, NetworkMode: adminLabNetworkMode() };
 }
 
 /** A bounded per-file limit for apt package indexes in the disposable admin lab.

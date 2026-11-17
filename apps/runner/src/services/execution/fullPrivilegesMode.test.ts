@@ -1,15 +1,21 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { adminHostConfig, adminHostConfigForLab } from "./learningAdminSandbox.js";
+import { adminHostConfig, adminHostConfigForLab, adminLabNetworkMode } from "./learningAdminSandbox.js";
 import { isEligibleAdminLabLesson } from "./learningAdminLessonPolicy.js";
 import { adminLabSwitchStatus, setAdminLabSwitch, assertAdminLabSwitch } from "./learningAdminSwitch.js";
 const previous = process.env.ZOESKOUL_LEARNING_ADMIN_LAB_OUTBOUND_NETWORK;
 const flag = process.env.ZOESKOUL_LEARNING_ADMIN_LABS_ENABLED;
+const previousMode = process.env.ZOESKOUL_LEARNING_ADMIN_LAB_DEPLOYMENT_MODE;
+const previousAck = process.env.ZOESKOUL_LEARNING_ADMIN_LAB_DEV_BRIDGE_ACK;
 afterEach(() => {
   setAdminLabSwitch(false);
   if (previous === undefined) delete process.env.ZOESKOUL_LEARNING_ADMIN_LAB_OUTBOUND_NETWORK;
   else process.env.ZOESKOUL_LEARNING_ADMIN_LAB_OUTBOUND_NETWORK = previous;
   if (flag === undefined) delete process.env.ZOESKOUL_LEARNING_ADMIN_LABS_ENABLED;
   else process.env.ZOESKOUL_LEARNING_ADMIN_LABS_ENABLED = flag;
+  if (previousMode === undefined) delete process.env.ZOESKOUL_LEARNING_ADMIN_LAB_DEPLOYMENT_MODE;
+  else process.env.ZOESKOUL_LEARNING_ADMIN_LAB_DEPLOYMENT_MODE = previousMode;
+  if (previousAck === undefined) delete process.env.ZOESKOUL_LEARNING_ADMIN_LAB_DEV_BRIDGE_ACK;
+  else process.env.ZOESKOUL_LEARNING_ADMIN_LAB_DEV_BRIDGE_ACK = previousAck;
 });
 describe("full privileges stays inside a disposable rootless lab", () => {
   it("preserves no-network and no-host-bind defaults", () => {
@@ -20,10 +26,36 @@ describe("full privileges stays inside a disposable rootless lab", () => {
     expect(adminHostConfigForLab()).not.toHaveProperty("Privileged");
     expect(adminHostConfigForLab().CapDrop).toContain("ALL");
   });
-  it("requires explicit network opt-in, never host networking", () => {
+  it("defaults to no network, including a production mode", () => {
+    delete process.env.ZOESKOUL_LEARNING_ADMIN_LAB_OUTBOUND_NETWORK;
+    delete process.env.ZOESKOUL_LEARNING_ADMIN_LAB_DEPLOYMENT_MODE;
+    expect(adminHostConfigForLab().NetworkMode).toBe("none");
+    expect(adminLabNetworkMode({ ZOESKOUL_LEARNING_ADMIN_LAB_DEPLOYMENT_MODE: "production" })).toBe("none");
+  });
+  it("fails closed when bridge is requested without a dedicated development acknowledgement", () => {
+    const flags = { ZOESKOUL_LEARNING_ADMIN_LAB_OUTBOUND_NETWORK: "true" };
+    expect(() => adminLabNetworkMode(flags)).toThrow(/forbidden/);
+    expect(() => adminLabNetworkMode({ ...flags, ZOESKOUL_LEARNING_ADMIN_LAB_DEPLOYMENT_MODE: "production", ZOESKOUL_LEARNING_ADMIN_LAB_DEV_BRIDGE_ACK: "UNFILTERED_DEV_BRIDGE_ONLY" })).toThrow(/forbidden/);
+    expect(() => adminLabNetworkMode({ ...flags, ZOESKOUL_LEARNING_ADMIN_LAB_DEPLOYMENT_MODE: "development" })).toThrow(/forbidden/);
+  });
+  it("allows supervised development egress only with both explicit flags", () => {
+    const allowed = {
+      ZOESKOUL_LEARNING_ADMIN_LAB_OUTBOUND_NETWORK: "true",
+      ZOESKOUL_LEARNING_ADMIN_LAB_DEPLOYMENT_MODE: "development",
+      ZOESKOUL_LEARNING_ADMIN_LAB_DEV_BRIDGE_ACK: "UNFILTERED_DEV_BRIDGE_ONLY",
+    };
+    expect(adminLabNetworkMode(allowed)).toBe("bridge");
+    expect(adminLabNetworkMode({ ...allowed, ZOESKOUL_LEARNING_ADMIN_LAB_OUTBOUND_NETWORK: "false" })).toBe("none");
+    expect(() => adminLabNetworkMode({ ...allowed, ZOESKOUL_LEARNING_ADMIN_LAB_OUTBOUND_NETWORK: "TRUE" })).toThrow(/Invalid/);
+    expect(() => adminLabNetworkMode({ ...allowed, ZOESKOUL_LEARNING_ADMIN_LAB_DEPLOYMENT_MODE: "prod" })).toThrow(/Invalid/);
     process.env.ZOESKOUL_LEARNING_ADMIN_LAB_OUTBOUND_NETWORK = "true";
-    expect(adminHostConfigForLab().NetworkMode).toBe("bridge");
-    expect(adminHostConfigForLab().NetworkMode).not.toBe("host");
+    process.env.ZOESKOUL_LEARNING_ADMIN_LAB_DEPLOYMENT_MODE = "development";
+    process.env.ZOESKOUL_LEARNING_ADMIN_LAB_DEV_BRIDGE_ACK = "UNFILTERED_DEV_BRIDGE_ONLY";
+    const hostConfig = adminHostConfigForLab();
+    expect(hostConfig.NetworkMode).toBe("bridge");
+    expect(hostConfig).not.toHaveProperty("Binds");
+    expect(hostConfig).not.toHaveProperty("Privileged");
+    expect(hostConfig.CapDrop).toContain("ALL");
   });
   it("only enables the special scope with the existing signed grant and operator switch", () => {
     expect(isEligibleAdminLabLesson("linux-files-permissions-users", "full-privileges")).toBe(true);
