@@ -1,13 +1,16 @@
-name: ZoeBuild HMR candidate images (Runner and app only)
+name: ZoeBuild HMR Runner candidate image
 
-# Deliberately no workflow_dispatch and no main trigger. This one-time push
-# trigger works even though the workflow is not on the default branch.
+# This workflow is source-locked and Runner-only. Merely updating it does
+# not publish an image. Explicit requests on the isolated branch must change
+# the dedicated runner-build request file. Manual dispatch becomes available
+# when GitHub registers this workflow on the repository default branch.
 on:
   push:
     branches:
       - feat/zoebuild-hmr-phase4f1-rc1
     paths:
-      - .github/workflows/zoebuild-hmr-candidate-images.yml
+      - .github/workflows/zoebuild-hmr-runner-build.request
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -29,9 +32,6 @@ jobs:
           - component: runner
             dockerfile: apps/runner/Dockerfile
             repository: zoeskoul-runner
-          - component: zoebuild
-            dockerfile: apps/zoebuild/Dockerfile
-            repository: zoeskoul-zoebuild
     env:
       RELEASE_SHA: 72fb49125a56b3efb0f62a9013e0c8a68152cb93
     steps:
