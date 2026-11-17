@@ -11,7 +11,8 @@ RUN corepack enable \
     && apt-get install -y --no-install-recommends ca-certificates openssl \
     && rm -rf /var/lib/apt/lists/*
 COPY . .
-RUN NODE_ENV=development pnpm install --frozen-lockfile --prod=false \
+RUN export DATABASE_URL="postgresql://placeholder:placeholder@127.0.0.1:5432/placeholder?schema=public" \
+    && NODE_ENV=development pnpm install --frozen-lockfile --prod=false \
     && pnpm --filter @zoeskoul/db exec prisma generate \
     && NODE_ENV=production pnpm --filter @zoeskoul/zoebuild build \
     && mkdir -p /app/apps/zoebuild/.next/cache \
