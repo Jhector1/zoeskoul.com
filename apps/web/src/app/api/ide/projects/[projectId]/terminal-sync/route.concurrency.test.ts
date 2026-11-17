@@ -109,12 +109,52 @@ describe("terminal-sync atomic project version and ownership", () => {
         }));
     });
 
-    it("prevents an intervening cloud save from being overwritten after Runner snapshot", async () => {
+    it("returns a complete actor-scoped version conflict after an intervening cloud save", async () => {
+        const latest = {
+            ...project,
+            currentVersion: 8,
+            updatedAt: new Date("2026-11-16T19:02:00.000Z"),
+            workspace: { version: 2, language: "python", nodes: [{ id: "newer" }] },
+        };
+        mocks.findFirst.mockResolvedValueOnce(project).mockResolvedValueOnce(latest);
         mocks.update.mockRejectedValueOnce(Object.assign(new Error("Record not found"), { code: "P2025" }));
         const response = await call(7);
         expect(response.status).toBe(409);
-        expect(await response.json()).toEqual(expect.objectContaining({ok: false, code: "PROJECT_CONFLICT"}));
+        expect(await response.json()).toEqual(expect.objectContaining({
+            ok: false,
+            code: "PROJECT_CONFLICT",
+            conflict: {
+                projectId: "project-one",
+                clientBaseVersion: 7,
+                serverVersion: 8,
+                serverUpdatedAt: "2026-11-16T19:02:00.000Z",
+                title: "Course 2 workspace",
+            },
+            project: expect.objectContaining({
+                id: "project-one",
+                currentVersion: 8,
+                workspace: latest.workspace,
+                role: "owner",
+            }),
+        }));
+        expect(mocks.findFirst).toHaveBeenCalledTimes(2);
+        expect(mocks.findFirst).toHaveBeenNthCalledWith(2, expect.objectContaining({
+            where: { id: "project-one", ownerId: "learner-one", archivedAt: null },
+        }));
         expect(mocks.runnerPost).toHaveBeenCalledTimes(1);
+        expect(mocks.update).toHaveBeenCalledTimes(1);
+    });
+
+    it("fails closed if a project becomes inaccessible during a snapshot", async () => {
+        mocks.findFirst.mockResolvedValueOnce(project).mockResolvedValueOnce(null);
+        mocks.update.mockRejectedValueOnce(Object.assign(new Error("Record not found"), { code: "P2025" }));
+        const response = await call(7);
+        expect(response.status).toBe(404);
+        expect(await response.json()).toEqual({ ok: false, error: "Project not found." });
+        expect(mocks.findFirst).toHaveBeenCalledTimes(2);
+        expect(mocks.findFirst).toHaveBeenNthCalledWith(2, expect.objectContaining({
+            where: { id: "project-one", ownerId: "learner-one", archivedAt: null },
+        }));
         expect(mocks.update).toHaveBeenCalledTimes(1);
     });
 
