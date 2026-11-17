@@ -33,12 +33,12 @@ jobs:
             dockerfile: apps/zoebuild/Dockerfile
             repository: zoeskoul-zoebuild
     env:
-      RELEASE_SHA: 7b061535a1093c863c137929a7734bb0a0939490
+      RELEASE_SHA: 72fb49125a56b3efb0f62a9013e0c8a68152cb93
     steps:
       - name: Check out exact validated release commit
         uses: actions/checkout@v4
         with:
-          ref: 7b061535a1093c863c137929a7734bb0a0939490
+          ref: 72fb49125a56b3efb0f62a9013e0c8a68152cb93
           persist-credentials: false
 
       - name: Verify Git provenance and Dockerfile
