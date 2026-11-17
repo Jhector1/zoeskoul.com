@@ -41,7 +41,7 @@ import { resolveSandboxProfile } from "../execution/sandboxProfile.js";
 import { inspectLearningLabRequest, type LearningLabMode } from "../execution/learningLabMode.js";
 import { adminLabConfiguration, assertVerifiedAdminGrant, type VerifiedAdminGrant } from "../execution/learningAdminGrant.js";
 import { ADMIN_COURSE_SLUG, isEligibleAdminLabLesson } from "../execution/learningAdminLessonPolicy.js";
-import { adminHostConfigForLab, verifyAdminSandboxImage } from "../execution/learningAdminSandbox.js";
+import { adminHostConfigForLab, adminLabFileWriteLimitBytes, verifyAdminSandboxImage } from "../execution/learningAdminSandbox.js";
 import { createAdminWorkspaceVolume, removeAdminWorkspaceVolume } from "../execution/adminWorkspaceVolume.js";
 import {
   seedAdminCapstoneWorkspace,
@@ -443,7 +443,7 @@ async function startDockerSessionUncoordinated(
         "PROMPT_COMMAND=history -a; history -n",
         ...(sharedGroupWorkspaceEnabled() ? workspaceRuntimeEnvironment() : ["UMASK=000"]),
         `START_CWD=${sessionCwd}`,
-        `RUNNER_MAX_FILE_WRITE_BYTES=${env.maxWorkspaceBytes}`,
+        `RUNNER_MAX_FILE_WRITE_BYTES=${adminLabFileWriteLimitBytes(labMode, env.maxWorkspaceBytes)}`,
       ],
       Cmd: ["python3", "/opt/runner/pty-runner.py"],
       HostConfig: adminImage ? {

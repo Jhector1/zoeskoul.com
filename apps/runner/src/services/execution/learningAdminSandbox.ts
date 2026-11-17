@@ -29,6 +29,16 @@ export function adminHostConfigForLab() {
   return { ...adminHostConfig, NetworkMode: network };
 }
 
+/** A bounded per-file limit for apt package indexes in the disposable admin lab.
+ * Ordinary learner sessions keep their existing workspace-derived hard limit.
+ * This does not increase workspace tmpfs, cgroup memory, or host access. */
+export function adminLabFileWriteLimitBytes(
+  labMode: "standard" | "admin",
+  standardWorkspaceLimitBytes: number,
+): number {
+  return labMode === "admin" ? 64 * 1024 * 1024 : standardWorkspaceLimitBytes;
+}
+
 export async function verifyAdminSandboxImage(client: Docker, image: string) {
   const info = await client.info();
   const opts = (info.SecurityOptions ?? []).map(String);

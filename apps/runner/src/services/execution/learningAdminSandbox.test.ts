@@ -1,5 +1,5 @@
 import { describe,expect,it } from "vitest";
-import { adminHostConfig, verifyAdminSandboxImage } from "./learningAdminSandbox.js";
+import { adminHostConfig, adminLabFileWriteLimitBytes, verifyAdminSandboxImage } from "./learningAdminSandbox.js";
 describe("rootless admin sandbox boundary",()=>{
   it("never shares host directories or networking",()=>{
     expect(adminHostConfig.NetworkMode).toBe("none");
@@ -18,5 +18,18 @@ describe("rootless admin sandbox boundary",()=>{
     const id="sha256:"+"a".repeat(64);
     const client={info:async()=>({SecurityOptions:["name=rootless"],DockerRootDir:"/home/test/.local/share/docker"}),getImage:()=>({inspect:async()=>({Id:id,Config:{Labels:{}}})})};
     await expect(verifyAdminSandboxImage(client as any,id)).rejects.toThrow(/Untrusted/);
+  });
+});
+
+
+describe("root lab apt file-size limit without ordinary learner quota changes", () => {
+  const standardLimit = 262144 + 8 * 1024 * 1024;
+  it("retains the current per-file cap for regular learner shells", () => {
+    expect(adminLabFileWriteLimitBytes("standard", standardLimit)).toBe(standardLimit);
+  });
+  it("allows the Ubuntu universe package index in disposable admin labs only", () => {
+    const adminLimit = adminLabFileWriteLimitBytes("admin", standardLimit);
+    expect(adminLimit).toBe(64 * 1024 * 1024);
+    expect(adminLimit).toBeGreaterThan(20 * 1024 * 1024);
   });
 });
