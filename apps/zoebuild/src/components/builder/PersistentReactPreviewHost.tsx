@@ -5,6 +5,8 @@ import {
   useMemo, useRef, useState, type ReactNode,
 } from "react";
 import RemoteWebPreview from "@zoeskoul/learner-workspace/runner/components/RemoteWebPreview";
+import DevelopmentRemoteWebPreview from "./DevelopmentRemoteWebPreview";
+import {isDevelopmentPreviewCandidate} from "@/lib/build/reactDevelopmentPreviewDocumentRoot";
 import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
 import { previewViewerIdentity } from "@/lib/build/reactPreviewSessionRecovery";
 
@@ -156,9 +158,9 @@ export function PersistentReactPreviewProvider(props:Readonly<{children:ReactNod
         overflow:"hidden"}}
     >
        <div inert={Boolean(previousPreview)} style={{height:"100%",pointerEvents:previousPreview?"none":"auto"}}>
-         {renderedPreview ? <RemoteWebPreview
+         {renderedPreview ? (isDevelopmentPreviewCandidate(renderedPreview.src) ? <DevelopmentRemoteWebPreview key={previewViewerIdentity(entry.buildProjectId, renderedPreview.src)} preview={renderedPreview}/> : <RemoteWebPreview
            key={previewViewerIdentity(entry.buildProjectId, renderedPreview.src)}
-           preview={renderedPreview}/> : null}
+           preview={renderedPreview}/>) : null}
        </div>
        {previousPreview ? <div data-preview-previous-version role="status" aria-live="polite"
          style={{position:"absolute",inset:0,zIndex:30,display:"grid",placeItems:"center",
