@@ -33,12 +33,12 @@ jobs:
             dockerfile: apps/runner/Dockerfile
             repository: zoeskoul-runner
     env:
-      RELEASE_SHA: a8a231be763701509fbcf76e3096ab724502f867
+      RELEASE_SHA: 4063c3097ca2761cb0c2e5430adcf0d3d0ea0309
     steps:
       - name: Check out exact validated release commit
         uses: actions/checkout@v4
         with:
-          ref: a8a231be763701509fbcf76e3096ab724502f867
+          ref: 4063c3097ca2761cb0c2e5430adcf0d3d0ea0309
           persist-credentials: false
 
       - name: Verify Git provenance and Dockerfile
