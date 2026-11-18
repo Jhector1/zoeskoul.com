@@ -17,6 +17,7 @@ type ListRunnerContainersOptions = {
 type RunnerContainerInfo = {
   Id: string;
   State?: string;
+  Labels?: Record<string,string>;
 };
 
 function listRunnerContainers(): Promise<RunnerContainerInfo[]> {
@@ -56,7 +57,8 @@ function listRunnerContainers(): Promise<RunnerContainerInfo[]> {
 export async function cleanupOrphanedRunnerContainers() {
   const containers = await listRunnerContainers();
   const failures: unknown[] = [];
-  for (const info of containers) {
+  const isHolder = (info: RunnerContainerInfo) => info.Labels?.["com.zoeskoul.runner.lab-mode"] === "admin-egress-holder";
+  async function remove(info: RunnerContainerInfo) {
     try {
       await docker.getContainer(info.Id).remove({ force: true });
     } catch (error) {
@@ -66,6 +68,17 @@ export async function cleanupOrphanedRunnerContainers() {
         console.error("RUNNER startup Docker resource still present", {id: info.Id.slice(0, 12)});
       }
     }
+  }
+  const holders = containers.filter(isHolder);
+  for (const info of containers.filter(info => !isHolder(info))) await remove(info);
+  // Keep namespace holders (and their firewall) alive until an independent
+  // enumeration verifies every dependent is absent, not just a 204 response.
+  if (holders.length && !failures.length) {
+    const beforeHolders = await listRunnerContainers();
+    if (beforeHolders.some(info => !isHolder(info))) {
+      throw new Error("RUNNER startup Docker cleanup incomplete (dependent remains before holder cleanup).");
+    }
+    for (const info of holders) await remove(info);
   }
   // A failed daemon list is already fatal. Verify the pool-wide label filter
   // is empty even if remove() returned success: 204 is not proof of absence.

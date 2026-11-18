@@ -6,6 +6,8 @@ import {afterEach,beforeEach,describe,expect,it,vi} from "vitest";
 const fixture = vi.hoisted(() => ({
   root: "/tmp/zoeskoul-reaper-durable-fixture",
   containers: [] as string[],
+  holder: "",
+  removed: [] as string[],
   failDelete: false,
   failList: false,
   noEffect: false,
@@ -66,9 +68,10 @@ vi.mock("./dockerClient.js", () => ({ docker: {
   }}),
   listContainers: (_opts:unknown, cb:(error:Error|null,list?:unknown[])=>void) => {
     if (fixture.failList) cb(new Error("daemon unavailable"));
-    else cb(null,fixture.containers.map(Id=>({Id,State:"running"})));
+    else cb(null,fixture.containers.map(Id=>({Id,State:"running",Labels:Id===fixture.holder?{"com.zoeskoul.runner.lab-mode":"admin-egress-holder"}:{}})));
   },
   getContainer: (id:string) => ({remove: async () => {
+    fixture.removed.push(id);
     if (fixture.failDelete) throw new Error("daemon unavailable");
     if (!fixture.noEffect) fixture.containers = fixture.containers.filter(item=>item!==id);
   }}),
@@ -81,6 +84,8 @@ beforeEach(async () => {
   root = await fs.mkdtemp(path.join(os.tmpdir(),"runner-reaper-gate-"));
   fixture.root = root;
   fixture.containers = [];
+  fixture.holder = "";
+  fixture.removed = [];
   fixture.failDelete = false;
   fixture.failList = false;
   fixture.noEffect = false;
@@ -120,6 +125,23 @@ describe("Runner startup cleanup admission gate",()=>{
     fixture.containers = ["d".repeat(64)];
     fixture.noEffect = true;
     await expect(cleanupRunnerOrphansOnStartup()).rejects.toThrow("remaining");
+  });
+
+  it("reaps shared namespace dependents before their holder",async()=>{
+    fixture.holder="a".repeat(64);
+    const gateway="e".repeat(64);
+    fixture.containers=[fixture.holder,gateway];
+    await cleanupRunnerOrphansOnStartup();
+    expect(fixture.removed).toEqual([gateway,fixture.holder]);
+  });
+  it("preserves the firewall holder when dependent removal is unverified",async()=>{
+    fixture.holder="a".repeat(64);
+    const gateway="e".repeat(64);
+    fixture.containers=[fixture.holder,gateway];
+    fixture.noEffect=true;
+    await expect(cleanupRunnerOrphansOnStartup()).rejects.toThrow("dependent remains");
+    expect(fixture.removed).toEqual([gateway]);
+    expect(fixture.containers).toContain(fixture.holder);
   });
 
   it("reclaims private admin tmpfs volumes before releasing startup gate", async()=>{

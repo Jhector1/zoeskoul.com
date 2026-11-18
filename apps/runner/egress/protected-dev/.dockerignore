@@ -1,0 +1,7 @@
+*
+!Dockerfile
+!Dockerfile.firewall
+!go.mod
+!gateway.go
+!gateway_test.go
+!firewall-init.sh

@@ -1,0 +1,8 @@
+ARG ADMIN_IMAGE=ghcr.io/jhector1/zoeskoul-learning-admin@sha256:fda07294363c1d9b4cfeaf5bf974c7041311c6d157a631d1a81d1c012086f54f
+FROM ${ADMIN_IMAGE}
+USER 0:0
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nftables=1.0.9-1ubuntu0.1 && dpkg-query -W nftables && rm -rf /var/lib/apt/lists/*
+LABEL com.zoeskoul.learning.firewall-initializer="protected-lifecycle-dev-v1"
+HEALTHCHECK NONE
+COPY --chmod=0555 firewall-init.sh /usr/local/bin/zoe-firewall-init
+ENTRYPOINT ["/usr/local/bin/zoe-firewall-init"]
