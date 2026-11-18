@@ -4,13 +4,14 @@
 import type Docker from "dockerode";
 import { docker } from "../docker/dockerClient.js";
 import { AdminGrantError } from "./learningAdminGrant.js";
-import { adminSessionNetworkName } from "./adminSessionNetwork.js";
+import { adminSessionNetworkName, verifyAdminSessionNetworkInspect } from "./adminSessionNetwork.js";
 
 const PREFIX = "zoeskoul-admin-egress-";
 const UUID = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
 const NAME = new RegExp(`^${PREFIX}sess_${UUID}$`);
 const LABEL = "com.zoeskoul.learning.admin-egress";
 const LABEL_VALUE = "v1";
+const GATEWAY_PHASE = "2c3-development-audit-only";
 export const PROXY_ALIAS = "zoe-egress-proxy";
 export const PROXY_PORT = 3128;
 
@@ -69,7 +70,7 @@ export function adminEgressConfig(configuration: NodeJS.ProcessEnv = process.env
 type ProxyInspect = {
   Name?: string;
   Image?: string;
-  Config?: {Labels?: Record<string,string> | null; User?: string};
+  Config?: {Labels?: Record<string,string> | null; User?: string; Env?: string[] | null};
   HostConfig?: {NetworkMode?: string; Privileged?: boolean; ReadonlyRootfs?: boolean;
     CapDrop?: string[]; SecurityOpt?: string[]; Memory?: number; MemorySwap?: number; PidsLimit?: number};
   State?: {Running?: boolean; Health?: {Status?: string}};
@@ -103,9 +104,55 @@ export async function verifyAdminEgressImage(image: string, client: Docker = doc
   const metadata = await client.getImage(image).inspect();
   if (metadata.Id !== image ||
       metadata.Config?.Labels?.["com.zoeskoul.learning.egress-proxy"] !== "v1" ||
+      metadata.Config?.Labels?.["com.zoeskoul.learning.egress-gateway-phase"] !== GATEWAY_PHASE ||
       metadata.Config?.User !== "1000:1000") {
     throw new Error("Untrusted or incompatible administrator egress proxy image.");
   }
+}
+
+/** Only accept one canonical IPv4 IPAM subnet; never infer it from a name,
+ * a default allocation, a client request or a container environment. */
+type NetworkIPAM = { IPAM?: { Config?: Array<{ Subnet?: string }> | null } | null };
+function ipv4Subnet(info: NetworkIPAM): { cidr: string; first: number; last: number; prefix: number } {
+  const configs = info.IPAM?.Config;
+  const cidr = configs?.[0]?.Subnet;
+  if (!Array.isArray(configs) || configs.length !== 1 || typeof cidr !== "string") {
+    throw new Error("Expected exactly one IPv4 IPAM subnet.");
+  }
+  const match = /^(0|[1-9]\d{0,2})\.(0|[1-9]\d{0,2})\.(0|[1-9]\d{0,2})\.(0|[1-9]\d{0,2})\/(0|[1-9]\d?)$/.exec(cidr);
+  if (!match || match[0] !== cidr) throw new Error("Invalid canonical IPv4 subnet.");
+  const octets = match.slice(1,5).map(Number);
+  const prefix = Number(match[5]);
+  if (octets.some(n => n > 255) || prefix > 32) throw new Error("Invalid IPv4 subnet.");
+  const first = octets.reduce((n, octet) => n * 256 + octet, 0);
+  const size = 2 ** (32-prefix);
+  if (first % size !== 0) throw new Error("Noncanonical IPv4 subnet.");
+  return {cidr, first, last:first+size-1, prefix};
+}
+
+export async function verifiedAdminGatewayCIDR(
+  sessionId: string, networkName: string, client: Docker = docker,
+): Promise<string> {
+  if (networkName !== adminSessionNetworkName(sessionId)) throw new Error("Wrong proxy network owner.");
+  const lab = await client.getNetwork(networkName).inspect();
+  verifyAdminSessionNetworkInspect(lab, sessionId);
+  if (Object.keys(lab.Containers ?? {}).length !== 0) throw new Error("Gateway requires an empty session network.");
+  const subnet = ipv4Subnet(lab);
+  // Match the Go gateway's RFC1918, /16 through /28 contract exactly.
+  const privateRanges = [[167772160,184549375],[2886729728,2887778303],[3232235520,3232301055]];
+  if (subnet.prefix < 16 || subnet.prefix > 28 ||
+      !privateRanges.some(([start,end]) => subnet.first >= start && subnet.last <= end)) {
+    throw new Error("Gateway requires a private IPv4 /16 through /28 subnet.");
+  }
+  const bridge = await client.getNetwork("bridge").inspect();
+  if (bridge.Name !== "bridge" || bridge.Driver !== "bridge" || bridge.Internal !== false || bridge.EnableIPv6 !== false) {
+    throw new Error("Unverified development outbound bridge.");
+  }
+  const outbound = ipv4Subnet(bridge);
+  if (subnet.first <= outbound.last && outbound.first <= subnet.last) {
+    throw new Error("Session subnet overlaps outbound bridge.");
+  }
+  return subnet.cidr;
 }
 
 /** Start a dedicated, nonprivileged sidecar, then connect it to exactly one
@@ -116,6 +163,7 @@ export async function createAdminEgressProxy(
   if (networkName !== adminSessionNetworkName(sessionId)) throw new Error("Wrong proxy network owner.");
   if (!/^sha256:[a-f0-9]{64}$/.test(image)) throw new Error("Unpinned proxy image.");
   await verifyAdminEgressImage(image, client);
+  const cidr = await verifiedAdminGatewayCIDR(sessionId, networkName, client);
   const name = adminEgressProxyName(sessionId);
   const container = await client.createContainer({
     name,
@@ -123,7 +171,7 @@ export async function createAdminEgressProxy(
     User: "1000:1000",
     Labels: adminEgressProxyLabels(sessionId),
     WorkingDir: "/",
-    Env: ["HOME=/tmp", "TMPDIR=/tmp"],
+    Env: ["HOME=/tmp", "TMPDIR=/tmp", `LAB_CLIENT_CIDR=${cidr}`],
     HostConfig: {
       NetworkMode: "bridge",
       Privileged: false,
@@ -148,9 +196,13 @@ export async function createAdminEgressProxy(
     // Require a built-in HEALTHCHECK from the pinned gateway image.
     // A running process alone is not proof of a ready proxy.
     let ready = false;
-    for (let attempt = 0; attempt < 12; attempt++) {
+    for (let attempt = 0; attempt < 30; attempt++) {
       const inspected = await container.inspect() as ProxyInspect;
       verifyAdminEgressProxyInspect(inspected, sessionId, image);
+      const cidrEnv = (inspected.Config?.Env ?? []).filter(v => v.startsWith("LAB_CLIENT_CIDR="));
+      if (cidrEnv.length !== 1 || cidrEnv[0] !== `LAB_CLIENT_CIDR=${cidr}`) {
+        throw new Error("Gateway CIDR environment mismatch.");
+      }
       const networks = Object.keys(inspected.NetworkSettings?.Networks ?? {});
       if (networks.length !== 2 || !networks.includes("bridge") ||
           !networks.includes(networkName)) {
