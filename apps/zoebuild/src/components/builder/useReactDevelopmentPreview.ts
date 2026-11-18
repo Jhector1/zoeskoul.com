@@ -276,6 +276,7 @@ export function useReactDevelopmentPreview(input: Readonly<{
         fetchClient:(path,init)=>fetch(path,init),
         openWebSocket:(url,protocol)=>new WebSocket(url,protocol) as unknown as ReturnType<Parameters<typeof createDevelopmentHmrBrowserSocket>[0]["openWebSocket"]>,
         onSignal:signal=>{
+          diagnostic(`vite_signal_${signal.replace("-","_")}`);
           if(signal==="connected"){
             viteConnectedAttempt=attempt;
             markMeaningfulRecovery();

@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import fs from "node:fs/promises";
+import { watch, type FSWatcher } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
@@ -39,6 +40,7 @@ beforeEach(async () => {
 });
 afterEach(async () => {
   await fs.rm(parent,{recursive:true,force:true});
+  vi.restoreAllMocks();
   vi.clearAllMocks();
 });
 
@@ -48,14 +50,175 @@ const update = (options: Partial<Parameters<typeof applySuspendedTanstackDevelop
 
 describe("suspended TanStack development workspace writer (not routed)", () => {
   it("replaces an authorized file atomically only while Docker is paused",async()=>{
-    await update();
+    let mtimeAtResume:number|null=null;
+    const watcher:{current:FSWatcher|null}={current:null};
+    let observed!:()=>void;
+    const notification=new Promise<void>(resolve=>{observed=resolve;});
+    container.unpause.mockImplementationOnce(async()=>{
+      mtimeAtResume=(await fs.stat(path.join(workspaceDir,"src/routes/index.tsx"))).mtimeMs;
+      paused=false;
+      // Begin observing only after the atomic replacement has completed. This
+      // proves the explicit post-resume event, not the original rename.
+      watcher.current=watch(path.join(workspaceDir,"src/routes/index.tsx"),()=>observed());
+    });
+    try {
+      await update();
+      await expect(Promise.race([
+        notification,
+        new Promise((_,reject)=>setTimeout(()=>reject(new Error("watcher timeout")),1_000)),
+      ])).resolves.toBeUndefined();
+    } finally { watcher.current?.close(); }
     expect(await fs.readFile(path.join(workspaceDir,"src/routes/index.tsx"),"utf8"))
       .toBe("new content");
     expect(container.pause).toHaveBeenCalledOnce();
     expect(container.unpause).toHaveBeenCalledOnce();
     expect(paused).toBe(false);
+    expect((await fs.stat(path.join(workspaceDir,"src/routes/index.tsx"))).mtimeMs)
+      .toBeGreaterThan(mtimeAtResume!);
     expect((await fs.readdir(path.join(workspaceDir,"src/routes"))).sort())
       .toEqual(["index.tsx"]);
+  });
+
+  it("fails closed if a resumed sandbox swaps the watcher target",async()=>{
+    const outside=path.join(parent,"outside.tsx");
+    const target=path.join(workspaceDir,"src/routes/index.tsx");
+    await fs.writeFile(outside,"unrelated");
+    container.unpause.mockImplementationOnce(async()=>{
+      paused=false;
+      await fs.unlink(target);
+      await fs.symlink(outside,target);
+    });
+    await expect(update()).rejects.toThrow("workspace update failed");
+    expect(await fs.readFile(outside,"utf8")).toBe("unrelated");
+    expect(paused).toBe(false);
+  });
+
+  it.each([false,true])("rejects a resumed parent symlink substitution (deletion=%s)",async(deletion)=>{
+    const outside=path.join(parent,"outside");
+    const routes=path.join(workspaceDir,"src/routes");
+    await fs.mkdir(outside);
+    if (!deletion) await fs.writeFile(path.join(outside,"index.tsx"),"unrelated");
+    const sentinel=deletion ? outside : path.join(outside,"index.tsx");
+    const before=await fs.stat(sentinel);
+    container.unpause.mockImplementationOnce(async()=>{
+      paused=false;
+      await fs.rename(routes,routes+"-original");
+      await fs.symlink(outside,routes);
+    });
+    await expect(update(deletion ? {next:{files:[]}} : {})).rejects.toThrow("workspace update failed");
+    const after=await fs.stat(sentinel);
+    expect(after.mtimeMs).toBe(before.mtimeMs);
+    expect(after.ctimeMs).toBe(before.ctimeMs);
+    if (!deletion) expect(await fs.readFile(sentinel,"utf8")).toBe("unrelated");
+  });
+
+  it("rejects a pre-existing hard-linked source before mutation",async()=>{
+    const target=path.join(workspaceDir,"src/routes/index.tsx");
+    const outside=path.join(parent,"outside.tsx");
+    await fs.link(target,outside);
+    const before=await fs.stat(outside);
+    await expect(update()).rejects.toThrow("workspace update failed");
+    expect(await fs.readFile(outside,"utf8")).toBe("old content");
+    const after=await fs.stat(outside);
+    expect(after.mtimeMs).toBe(before.mtimeMs);
+    expect(after.nlink).toBe(2);
+    expect(paused).toBe(false);
+  });
+
+  it.each(["replacement","hard-link","alias"] as const)("rejects resumed inode changes: %s",async(mode)=>{
+    const target=path.join(workspaceDir,"src/routes/index.tsx");
+    const outside=path.join(parent,"outside.tsx");
+    await fs.writeFile(outside,"unrelated");
+    container.unpause.mockImplementationOnce(async()=>{
+      paused=false;
+      if (mode==="alias") await fs.link(target,path.join(workspaceDir,"alias.tsx"));
+      else {
+        await fs.unlink(target);
+        if (mode==="hard-link") await fs.link(outside,target);
+        else await fs.writeFile(target,"replacement");
+      }
+    });
+    const before=await fs.stat(outside);
+    await expect(update()).rejects.toThrow("workspace update failed");
+    expect((await fs.stat(outside)).mtimeMs).toBe(before.mtimeMs);
+    expect(await fs.readFile(outside,"utf8")).toBe("unrelated");
+  });
+
+  it("cannot redirect pinned utimes during the last check-to-use window",async()=>{
+    const outside=path.join(parent,"outside");
+    const routes=path.join(workspaceDir,"src/routes");
+    const sentinel=path.join(outside,"index.tsx");
+    await fs.mkdir(outside);
+    await fs.writeFile(sentinel,"unrelated");
+    const before=await fs.stat(sentinel);
+    const originalOpen=fs.open.bind(fs);
+    let raced=false;
+    const open=vi.spyOn(fs,"open").mockImplementation(async(...args:Parameters<typeof fs.open>)=>{
+      const handle=await originalOpen(...args);
+      if (args[0]===path.join(routes,"index.tsx")) {
+        const originalUtimes=handle.utimes.bind(handle);
+        vi.spyOn(handle,"utimes").mockImplementationOnce(async(atime,mtime)=>{
+          expect(paused).toBe(false);
+          await fs.rename(routes,routes+"-original");
+          await fs.symlink(outside,routes);
+          raced=true;
+          await originalUtimes(atime,mtime);
+        });
+      }
+      return handle;
+    });
+    try { await expect(update()).rejects.toThrow("workspace update failed"); }
+    finally { open.mockRestore(); }
+    expect(raced).toBe(true);
+    const after=await fs.stat(sentinel);
+    expect(after.mtimeMs).toBe(before.mtimeMs);
+    expect(after.ctimeMs).toBe(before.ctimeMs);
+    expect(await fs.readFile(sentinel,"utf8")).toBe("unrelated");
+  });
+
+  it.each(["success","resume-failure","notify-failure","partial-pin-failure"] as const)(
+    "closes all handles without reopening paths after resume: %s",async(mode)=>{
+      const originalOpen=fs.open.bind(fs);
+      const opened:Awaited<ReturnType<typeof fs.open>>[]=[];
+      const open=vi.spyOn(fs,"open").mockImplementation(async(...args:Parameters<typeof fs.open>)=>{
+        expect(paused).toBe(true);
+        if (mode==="partial-pin-failure" && args[0]===path.join(workspaceDir,"src/routes/second.tsx"))
+          throw new Error("injected pin failure");
+        const handle=await originalOpen(...args);
+        opened.push(handle);
+        if (mode==="notify-failure" && args[0]===path.join(workspaceDir,"src/routes/index.tsx"))
+          vi.spyOn(handle,"utimes").mockRejectedValueOnce(new Error("injected notification failure"));
+        return handle;
+      });
+      try {
+        if (mode==="resume-failure") container.unpause.mockRejectedValueOnce(new Error("resume failed"));
+        const result=mode==="partial-pin-failure" ? update({
+          changedPaths:[...changed,"src/routes/second.tsx"],
+          next:{files:[...next.files,file("src/routes/second.tsx","export const second = 2;")]},
+        }) : update();
+        if (mode==="success") await result;
+        else await expect(result).rejects.toThrow(mode==="resume-failure" ? "sandbox resume failed" : "workspace update failed");
+        expect(opened.length).toBeGreaterThan(0);
+        expect(opened.every(handle=>handle.fd===-1)).toBe(true);
+      } finally {
+        open.mockRestore();
+        await Promise.allSettled(opened.filter(handle=>handle.fd!==-1).map(handle=>handle.close()));
+      }
+    });
+
+  it("notifies a new file and a deleted file's pinned parent after resume",async()=>{
+    const newFile=path.join(workspaceDir,"src/components/New.tsx");
+    const routes=path.join(workspaceDir,"src/routes");
+    let atResume:number[]=[];
+    container.unpause.mockImplementationOnce(async()=>{
+      atResume=await Promise.all([newFile,routes].map(async p=>(await fs.stat(p)).mtimeMs));
+      paused=false;
+    });
+    await update({changedPaths:[...changed,"src/components/New.tsx"],
+      next:{files:[file("src/components/New.tsx","export const New = 1;")]}});
+    expect((await fs.stat(newFile)).mtimeMs).toBeGreaterThan(atResume[0]);
+    expect((await fs.stat(routes)).mtimeMs).toBeGreaterThan(atResume[1]);
+    await expect(fs.lstat(path.join(routes,"index.tsx"))).rejects.toMatchObject({code:"ENOENT"});
   });
 
   it("supports newly added source directories and source removal",async()=>{

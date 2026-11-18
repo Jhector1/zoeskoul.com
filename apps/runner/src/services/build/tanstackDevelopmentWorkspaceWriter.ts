@@ -1,5 +1,5 @@
-import { constants } from "node:fs";
-import fs from "node:fs/promises";
+import { constants, type BigIntStats } from "node:fs";
+import fs, { type FileHandle } from "node:fs/promises";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
 import type { ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contracts";
@@ -47,36 +47,63 @@ export async function applySuspendedTanstackDevelopmentSource(input: Readonly<{
   const before = await inspect();
   if (before.State?.Paused) throw new Error("Development preview sandbox already paused.");
   await container.pause();
-  let failure: unknown;
+  const notifications: WatcherNotification[] = [];
   try {
-    const paused = await inspect();
-    if (!paused.State?.Paused) throw new Error("Development preview did not pause.");
-    // Recheck the entire root after Docker has suspended untrusted code.
-    await validateWorkspaceRoot(input.workspaceRoot, input.workspaceDir);
-    // Preflight every candidate before the first mutation. A failure after the
-    // first write is treated as partial by Phase 3A and quarantines the lease.
-    for (const change of changes) await inspectTarget(root, change.path, false);
-    for (const change of changes) {
-      const destination = await inspectTarget(root, change.path, true);
-      if (change.content === null) {
-        if (!destination.exists) throw new Error("Development source deletion target missing.");
-        await fs.unlink(destination.path);
-      } else {
-        await replaceAtomically(destination.path, change.content);
+    let failed = false;
+    try {
+      const paused = await inspect();
+      if (!paused.State?.Paused) throw new Error("Development preview did not pause.");
+      // Recheck the entire root after Docker has suspended untrusted code.
+      await validateWorkspaceRoot(input.workspaceRoot, input.workspaceDir);
+      // Preflight every candidate before the first mutation. A failure after the
+      // first write is treated as partial by Phase 3A and quarantines the lease.
+      for (const change of changes) await inspectTarget(root, change.path, false);
+      for (const change of changes) {
+        const destination = await inspectTarget(root, change.path, true);
+        if (change.content === null) {
+          if (!destination.exists) throw new Error("Development source deletion target missing.");
+          await fs.unlink(destination.path);
+        } else {
+          await replaceAtomically(destination.path, change.content);
+        }
+        await syncDirectory(path.dirname(destination.path));
       }
-      await syncDirectory(path.dirname(destination.path));
+      // Acquire every notification handle while untrusted code is suspended.
+      // The existing bounded change list also bounds the number of open handles.
+      for (const change of changes)
+        await pinWatcherNotification(root, change, notifications);
+    } catch {
+      failed = true;
     }
-  } catch (error) {
-    failure = error;
+    try {
+      await container.unpause();
+    } catch {
+      // This may leave the sandbox paused; the coordinator must quarantine it.
+      throw new Error("Development preview sandbox resume failed.");
+    }
+    if (failed) throw new Error("Development preview workspace update failed.");
+    try {
+      // After resume only the pinned handles may mutate metadata. Path checks
+      // are read-only race detection, not the basis for mutation authority.
+      // The outer update lock still queues HMR frames until the revision CAS.
+      for (const notification of notifications) {
+        await checkWatcherNotification(root, notification);
+        const state = await notification.handle.stat({bigint:true});
+        assertWatcherIdentity(notification, state);
+        const modified = new Date(Math.max(Date.now(), Number(state.mtimeMs) + 1));
+        await notification.handle.utimes(state.atime, modified);
+        await checkWatcherNotification(root, notification);
+      }
+    } catch {
+      throw new Error("Development preview workspace update failed.");
+    }
+  } finally {
+    // Never leak a handle on partial acquisition, failed resume, or notification
+    // failure. A close failure also fails the transaction rather than hiding it.
+    const closed = await Promise.allSettled(notifications.map(item => item.handle.close()));
+    if (closed.some(result => result.status === "rejected"))
+      throw new Error("Development preview workspace update failed.");
   }
-  try {
-    await container.unpause();
-  } catch {
-    // This may leave the sandbox paused; the Phase 3A caller must quarantine
-    // and attempt Docker teardown rather than exposing an inconsistent lease.
-    throw new Error("Development preview sandbox resume failed.");
-  }
-  if (failure) throw new Error("Development preview workspace update failed.");
 }
 
 const ALLOWED_SOURCE = /^src\/(?:routes|components|hooks|styles|lib)\/(?:[A-Za-z0-9_.-]+\/)*[A-Za-z0-9_.-]+\.(?:tsx?|jsx?|css|scss)$/;
@@ -168,7 +195,7 @@ async function inspectTarget(root: string, rel: string, createParents: boolean):
   }
   const target = path.join(dir,pieces.at(-1)!);
   const stat = await lstatOptional(target);
-  if (stat && (stat.isSymbolicLink() || !stat.isFile()))
+  if (stat && (stat.isSymbolicLink() || !stat.isFile() || stat.nlink !== 1))
     throw new Error("Unsafe development preview source target.");
   return {path:target,exists:Boolean(stat)};
 }
@@ -205,4 +232,56 @@ async function syncDirectory(directory:string) {
   const handle = await fs.open(directory,constants.O_RDONLY | constants.O_DIRECTORY | constants.O_NOFOLLOW);
   try { await handle.sync(); }
   finally { await handle.close(); }
+}
+
+type WatcherNotification = Readonly<{
+  change: SourceChange;
+  handle: FileHandle;
+  dev: bigint;
+  ino: bigint;
+}>;
+
+function assertWatcherIdentity(notification: WatcherNotification, state: BigIntStats) {
+  const directory = notification.change.content === null;
+  if (state.dev !== notification.dev || state.ino !== notification.ino ||
+      (directory ? !state.isDirectory() || state.nlink < 1n : !state.isFile() || state.nlink !== 1n))
+    throw new Error("Development preview watcher target changed.");
+}
+
+async function watcherTarget(root: string, change: SourceChange) {
+  const destination = await inspectTarget(root, change.path, false);
+  if (destination.exists !== (change.content !== null))
+    throw new Error("Development preview watcher target changed.");
+  return change.content === null ? path.dirname(destination.path) : destination.path;
+}
+
+async function pinWatcherNotification(
+  root: string, change: SourceChange, notifications: WatcherNotification[],
+) {
+  const target = await watcherTarget(root, change);
+  const handle = await fs.open(target, constants.O_RDONLY | constants.O_NOFOLLOW |
+    (change.content === null ? constants.O_DIRECTORY : 0));
+  let retained = false;
+  try {
+    const state = await handle.stat({bigint:true});
+    const notification = {change, handle, dev: state.dev, ino: state.ino};
+    assertWatcherIdentity(notification, state);
+    assertWatcherIdentity(notification, await fs.lstat(target,{bigint:true}));
+    notifications.push(notification);
+    retained = true;
+  } finally {
+    if (!retained) await handle.close();
+  }
+}
+
+async function checkWatcherNotification(root: string, notification: WatcherNotification) {
+  // The sandbox is running. Never reopen this path for a privileged mutation.
+  // Check root and parents to detect substitutions, then compare the pathname
+  // with the pinned descriptor. Even if this check races, utimes targets the
+  // original inode only, not a new symlink or hard-link destination.
+  await validateWorkspaceRoot(path.dirname(root), root);
+  const target = await watcherTarget(root, notification.change);
+  const named = await fs.lstat(target,{bigint:true});
+  assertWatcherIdentity(notification, named);
+  assertWatcherIdentity(notification, await notification.handle.stat({bigint:true}));
 }
