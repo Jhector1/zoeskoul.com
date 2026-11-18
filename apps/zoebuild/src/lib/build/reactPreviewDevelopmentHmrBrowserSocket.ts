@@ -41,7 +41,7 @@ export class DevelopmentHmrBrowserSocketError extends Error {
 /** Deployment-owned destination, never a value from the ticket response.
  * Public/prod ingress always requires HTTPS. A separate, explicitly opted-in
  * local development path accepts ONLY the canonical loopback-resolving Caddy
- * name runner.localhost, with no alternate ports, paths, or credentials.
+ * name runner.localhost on port 80 or 8080 only, with no arbitrary ports, paths, or credentials.
  * The browser Origin and one-use ticket are still checked by the Runner.
  */
 export function requirePublicDevelopmentHmrIngress(
@@ -50,7 +50,7 @@ export function requirePublicDevelopmentHmrIngress(
   if (typeof origin !== "string" || origin.length > 256 || typeof allowLocalHttp !== "boolean")
     throw new DevelopmentHmrBrowserSocketError();
   if (allowLocalHttp && process.env.NODE_ENV === "development" &&
-      origin === "http://runner.localhost") return origin;
+      (origin === "http://runner.localhost" || origin === "http://runner.localhost:8080")) return origin;
   let value: URL;
   try { value = new URL(origin); } catch { throw new DevelopmentHmrBrowserSocketError(); }
   const hostname = value.hostname.toLowerCase();
@@ -74,7 +74,7 @@ export function developmentHmrBrowserWebSocketUrl(input: Readonly<{
   if (!PREVIEW.test(input.previewId) || !TICKET.test(input.ticket))
     throw new DevelopmentHmrBrowserSocketError();
   const url = new URL(origin);
-  url.protocol = origin === "http://runner.localhost" ? "ws:" : "wss:";
+  url.protocol = (origin === "http://runner.localhost" || origin === "http://runner.localhost:8080") ? "ws:" : "wss:";
   url.pathname = `/build/previews/${input.previewId}/development-hmr/ws`;
   url.searchParams.set("ticket", input.ticket);
   return url.toString();

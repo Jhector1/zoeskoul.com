@@ -9,9 +9,12 @@ describe("Phase 4E2B2 strict browser URL parse",()=>{
   expect(check("/")).toBe("");
   expect(check("/@vite/client?x=1")).toBe("@vite/client?x=1");
   expect(check("/src/App.tsx?import")).toBe("src/App.tsx?import");
+  expect(check("/@id/virtual:tanstack-start-dev-client-entry"))
+    .toBe("@id/virtual:tanstack-start-dev-client-entry");
+  expect(check("/src/styles.css?url")).toBe("src/styles.css?url");
  });
  it("rejects encoded traversal, separators, double decoding and other projects",()=>{
-  for(const path of ["/%2e%2e/private","/a/%252e%252e", "/a/%2f/b","/a/%5c/b", "/x//y", "/x//y/", "/@fs/etc/passwd", "/http:%2f%2fother"])
+  for(const path of ["/%2e%2e/private","/a/%252e%252e", "/a/%2f/b","/a/%5c/b", "/x//y", "/x//y/", "/@fs/etc/passwd", "/http:%2f%2fother", "/src/http:evil", "/@id/virtual:bad%20id", "/@id/virtual:unrelated-plugin", "/other/virtual:module"])
    expect(()=>check(path)).toThrow();
   expect(()=>normalizeDevelopmentPreviewBrowserPath(new URL(base+"/file.js"),"project_other",preview,token)).toThrow();
  });

@@ -4,7 +4,8 @@ import { trustedTanstackDevelopmentWorkspaces } from "./tanstackDevelopmentWorks
 import { trustedTanstackDevelopmentSources } from "./tanstackDevelopmentSourceStore.js";
 import type { ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contracts";
 import { makeTanstackPreviewDockerDriver } from "./tanstackPreviewDockerDriver.js";
-import { startIsolatedTanstackPreview, stopIsolatedTanstackPreview, TanstackPreviewCleanupError, type TanstackPreviewDriver } from "./tanstackPreviewLifecycle.js";
+import { startIsolatedTanstackPreview, stopIsolatedTanstackPreview, TanstackPreviewCleanupError,
+  type TanstackPreviewDriver, type TanstackPreviewStartPhase } from "./tanstackPreviewLifecycle.js";
 import { normalizeTanstackPreviewHttpRequest } from "./tanstackPreviewHttpBoundary.js";
 import { tanstackInternalPreviewPath } from "./tanstackPreviewRuntimePolicy.js";
 import { sharedFullStackPreviews } from "./sharedPreviewRegistry.js";
@@ -24,7 +25,7 @@ type AdmittedPreviewStartInput = Readonly<{
   identity: TanstackPreviewIdentity;
   authorize: (ownerKey: string, request: ProductionBuildJobRequestV1) => Promise<void>;
   signal?: AbortSignal;
-  onPhase?: (phase: "queued" | "workspace" | "dependencies" | "container" | "readiness") => void;
+  onPhase?: (phase: TanstackPreviewStartPhase) => void;
   telemetry?: PreviewOperationTelemetry;
   operationCorrelation?: string;
   driverFactory?: (request: ProductionBuildJobRequestV1, basePath: string) => TanstackPreviewDriver;
@@ -44,7 +45,10 @@ async function startAdmittedPreviewWithMode(
   try { return await sharedPreviewStartCoordinator.run(async () => {
     endQueue?.("ok");
     const endStart = sharedPreviewProjectDrains.beginStart(ownerKey,request.buildProjectId);
+    let endLifecycleStart:()=>void=()=>{};
     try {
+      endLifecycleStart=sharedFullStackPreviews.beginProjectStart(
+        ownerKey,request.buildProjectId);
       if (input.signal?.aborted) throw new Error("Preview cancelled.");
       const endAuthorization = input.telemetry?.begin("runner_authorization");
       try {
@@ -55,61 +59,109 @@ async function startAdmittedPreviewWithMode(
         throw error;
       }
       if (input.signal?.aborted) throw new Error("Preview cancelled.");
-      // Browser refresh and Code/Preview remount may attach to an existing
-      // healthy lease, but ONLY for the exact currently saved source and actor.
-      // This runs under the same startup coordinator as cold launch, and
-      // cannot reserve a second slot or destroy a mismatched existing lease.
+      // Browser refresh and Code/Preview remount attach to an existing healthy
+      // lease only for the exact saved source and actor. A non-reusable lease
+      // is replaced below under the same serialized, reauthorized transition;
+      // single-slot runners never require two concurrent containers.
       if (mode === "development") {
-        const prior = sharedFullStackPreviews.list().find(candidate =>
+        let prior = sharedFullStackPreviews.list().find(candidate =>
           candidate.mode === "development" && candidate.ownerKey === ownerKey &&
           candidate.buildProjectId === request.buildProjectId);
         if (prior) {
+          if(sharedFullStackPreviews.developmentUpdatePending(prior.id)) {
+            await sharedFullStackPreviews.waitForDevelopmentSettled(prior.id);
+            await input.authorize(ownerKey,request);
+            prior=sharedFullStackPreviews.get(prior.id)??undefined;
+          }
+          if(prior && prior.sourceVersion>request.sourceVersion)
+            throw new Error("Preview source is stale.");
           const reusable = await sharedFullStackPreviews.claimDevelopmentReusable({
             ownerKey, buildProjectId:request.buildProjectId,
             sourceVersion:request.sourceVersion, identity:input.identity,
             maxLifetimeMs:TANSTACK_PREVIEW_HARD_LIFETIME_MS,
             healthCheck:checkLeaseHealth,
           });
-          if (!reusable || !trustedTanstackDevelopmentSources.resolve(reusable) ||
-              !trustedTanstackDevelopmentWorkspaces.resolve(reusable))
-            throw new Error("Existing development preview cannot be reattached.");
-          // An awaited health check can outlive a DB version/ownership change.
-          // Reaffirm authority, then take the registry's close/update fence.
+          if (reusable && trustedTanstackDevelopmentSources.resolve(reusable) &&
+              trustedTanstackDevelopmentWorkspaces.resolve(reusable)) {
+            // An awaited health check can outlive a DB version/ownership change.
+            // Reaffirm authority, then take the registry's close/update fence.
+            await input.authorize(ownerKey,request);
+            const current = sharedFullStackPreviews.assertDevelopmentReadOpen({
+              previewId:reusable.id, ownerKey, buildProjectId:request.buildProjectId,
+              sourceVersion:request.sourceVersion,
+            });
+            if (current.identity.fingerprint !== input.identity.fingerprint ||
+                current.identity.sourceFingerprint !== input.identity.sourceFingerprint ||
+                current.identity.dependencyFingerprint !== input.identity.dependencyFingerprint ||
+                current.identity.runtimeImageId !== input.identity.runtimeImageId ||
+                !trustedTanstackDevelopmentSources.resolve(current) ||
+                !trustedTanstackDevelopmentWorkspaces.resolve(current))
+              throw new Error("Development reattachment identity changed.");
+            return {previewId:current.id,buildProjectId:request.buildProjectId,
+              sourceVersion:current.sourceVersion,port:5173 as const,basePath:current.basePath};
+          }
+        }
+      }
+      input.onPhase?.("lease_admission");
+      const projectLeases = sharedFullStackPreviews.list().filter(prior =>
+        prior.ownerKey === ownerKey && prior.buildProjectId === request.buildProjectId);
+      if(projectLeases.some(prior=>prior.sourceVersion>request.sourceVersion))
+        throw new Error("Preview source is stale.");
+      const closeAfterFreshAuthority=async (leaseId:string) => {
+        // An update may begin while authority is being re-read. Loop until the
+        // update fence is clear, then publish close intent synchronously before
+        // another update can enter. A newer committed revision always wins.
+        for(;;) {
+          const before=sharedFullStackPreviews.get(leaseId);
+          if(!before)return;
+          if(before.ownerKey!==ownerKey || before.buildProjectId!==request.buildProjectId)
+            throw new Error("Preview ownership changed.");
+          if(before.mode==="development" &&
+              sharedFullStackPreviews.developmentUpdatePending(leaseId)) {
+            await sharedFullStackPreviews.waitForDevelopmentSettled(leaseId);
+            continue;
+          }
           await input.authorize(ownerKey,request);
-          const current = sharedFullStackPreviews.assertDevelopmentReadOpen({
-            previewId:reusable.id, ownerKey, buildProjectId:request.buildProjectId,
-            sourceVersion:request.sourceVersion,
-          });
-          if (current.identity.fingerprint !== input.identity.fingerprint ||
-              current.identity.sourceFingerprint !== input.identity.sourceFingerprint ||
-              current.identity.dependencyFingerprint !== input.identity.dependencyFingerprint ||
-              current.identity.runtimeImageId !== input.identity.runtimeImageId ||
-              !trustedTanstackDevelopmentSources.resolve(current) ||
-              !trustedTanstackDevelopmentWorkspaces.resolve(current))
-            throw new Error("Development reattachment identity changed.");
-          return {previewId:current.id,buildProjectId:request.buildProjectId,
-            sourceVersion:current.sourceVersion,port:5173 as const,basePath:current.basePath};
+          const current=sharedFullStackPreviews.get(leaseId);
+          if(!current)return;
+          if(current.ownerKey!==ownerKey || current.buildProjectId!==request.buildProjectId)
+            throw new Error("Preview ownership changed.");
+          if(current.sourceVersion>request.sourceVersion)
+            throw new Error("Preview source is stale.");
+          if(current.mode==="development" &&
+              sharedFullStackPreviews.developmentUpdatePending(leaseId))continue;
+          await sharedFullStackPreviews.close(leaseId);
+          return;
         }
-      }
-      input.onPhase?.("workspace");
-      // The development-start experiment may never close or reclaim an
-      // immutable user preview. It gets a spare slot or fails closed. Also
-      // refuse replacing an existing development lease until its owner closes
-      // it explicitly; a failed startup must not destroy the previous lease.
+      };
       if (mode === "development") {
-        if (sharedFullStackPreviews.list().some(prior =>
-          prior.ownerKey === ownerKey && prior.buildProjectId === request.buildProjectId &&
-          prior.mode === "development"))
-          throw new Error("Development preview already exists.");
+        // Source/runtime/dependency changes and revision gaps recover from the
+        // newly re-attested saved request. Close the one owner/project lease
+        // first so a one-slot runner can replace it without overcommit.
+        for (const prior of projectLeases) await closeAfterFreshAuthority(prior.id);
       } else {
-        // Existing immutable startup behavior is preserved verbatim.
-        for (const prior of sharedFullStackPreviews.list()) {
-          if (prior.ownerKey !== ownerKey || prior.buildProjectId !== request.buildProjectId) continue;
+        for (const prior of projectLeases) {
           if (prior.sourceVersion > request.sourceVersion) throw new Error("Preview source is stale.");
-          await sharedFullStackPreviews.close(prior.id);
+          // Immutable fallback is recovery-only. It must never tear down a
+          // healthy development session because a browser socket was briefly
+          // unavailable. An active incremental update is not a health failure:
+          // settle it, reaffirm authority, then probe the committed revision.
+          if (prior.mode === "development") {
+            if(sharedFullStackPreviews.developmentUpdatePending(prior.id)) {
+              await sharedFullStackPreviews.waitForDevelopmentSettled(prior.id);
+              await input.authorize(ownerKey,request);
+            }
+            const current=sharedFullStackPreviews.get(prior.id);
+            if(current?.sourceVersion && current.sourceVersion>request.sourceVersion)
+              throw new Error("Preview source is stale.");
+            if(current && await sharedFullStackPreviews.checkLive(current.id,checkLeaseHealth))
+              throw new Error("Healthy development preview owns this project lifecycle.");
+          }
+          await closeAfterFreshAuthority(prior.id);
         }
-        await reclaimTanstackPreviewCapacity(ownerKey,request.buildProjectId);
       }
+      await reclaimTanstackPreviewCapacity(ownerKey,request.buildProjectId);
+      input.onPhase?.("capacity");
       const releasePending = reserveTanstackPreviewCapacity(ownerKey);
       let handle: Awaited<ReturnType<typeof startIsolatedTanstackPreview>> | null = null;
       let driver: TanstackPreviewDriver | null = null;
@@ -122,6 +174,7 @@ async function startAdmittedPreviewWithMode(
           ? { operation: input.operationCorrelation, preview: previewCorrelation } : undefined;
         const publicAccessKey = randomBytes(24).toString("base64url");
         const basePath = `/api/build/projects/${encodeURIComponent(request.buildProjectId)}/preview/${previewId}/content/${publicAccessKey}/`;
+        input.onPhase?.("driver_validation");
         const createdDriver = input.driverFactory
           ? input.driverFactory(request, basePath)
           : makeTanstackPreviewDockerDriver(
@@ -223,7 +276,7 @@ async function startAdmittedPreviewWithMode(
         }
         throw error;
       } finally { releasePending(); }
-    } finally { endStart(); }
+    } finally { endLifecycleStart(); endStart(); }
   }); }
   catch (error) {
     endQueue?.(input.signal?.aborted ? "cancelled" : "error");

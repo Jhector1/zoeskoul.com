@@ -11,6 +11,7 @@ import { fetchTanstackHttpInsideSandbox } from "./tanstackPreviewDockerTransport
 
 vi.mock("./tanstackPreviewDockerTransport.js", () => ({
   fetchTanstackHttpInsideSandbox: vi.fn(),
+  retireTanstackHttpWorker:vi.fn(async()=>undefined),
 }));
 
 const previewId = "preview_test";

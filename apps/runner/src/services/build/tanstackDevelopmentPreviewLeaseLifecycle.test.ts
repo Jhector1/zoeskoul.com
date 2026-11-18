@@ -5,11 +5,13 @@ vi.mock("./tanstackPreviewDockerTransport.js", () => ({
   fetchTanstackHttpInsideSandbox: vi.fn(async () => ({
     status:200,headers:{"content-type":"text/html"},bodyBase64:"",
   })),
+  retireTanstackHttpWorker:vi.fn(async()=>undefined),
 }));
 import { randomUUID } from "node:crypto";
 import { env } from "../../lib/env.js";
 import { PROJECT_DEPENDENCY_APPROVAL_PATH } from "@zoeskoul/build-preparation";
 import { createTanstackPreviewIdentity } from "./tanstackPreviewIdentity.js";
+import { fetchTanstackHttpInsideSandbox } from "./tanstackPreviewDockerTransport.js";
 import { sharedFullStackPreviews } from "./sharedPreviewRegistry.js";
 import { trustedTanstackDevelopmentWorkspaces } from "./tanstackDevelopmentWorkspaceStore.js";
 import { startAdmittedTanstackPreview, startAdmittedTanstackDevelopmentPreview,
@@ -91,32 +93,74 @@ describe("Phase 4D readiness and non-destructive development startup", () => {
     expect(d.cleanup).toHaveBeenCalledOnce();
     expect(sharedFullStackPreviews.count()).toBe(0);
   });
-  it("refuses a second development lease without stopping the existing lease",async()=>{
+  it("replaces a development lease whose trusted identity cannot be reattached",async()=>{
     const firstDriver=makeDriver();
     const first=await startAdmittedTanstackDevelopmentPreview({ownerKey:"actor",request,identity,
       authorize:async()=>undefined,driverFactory:()=>firstDriver.driver});
     const secondDriver=makeDriver();
-    await expect(startAdmittedTanstackDevelopmentPreview({ownerKey:"actor",request,identity,
-      authorize:async()=>undefined,driverFactory:()=>secondDriver.driver})).rejects.toThrow("Existing development preview cannot be reattached.");
-    expect(sharedFullStackPreviews.get(first.previewId)?.mode).toBe("development");
-    expect(firstDriver.destroy).not.toHaveBeenCalled();
-    expect(secondDriver.destroy).not.toHaveBeenCalled();
+    const second=await startAdmittedTanstackDevelopmentPreview({ownerKey:"actor",request,identity,
+      authorize:async()=>undefined,driverFactory:()=>secondDriver.driver});
+    expect(second.previewId).not.toBe(first.previewId);
+    expect(sharedFullStackPreviews.get(first.previewId)).toBeNull();
+    expect(sharedFullStackPreviews.get(second.previewId)?.mode).toBe("development");
+    expect(firstDriver.destroy).toHaveBeenCalledOnce();
   });
-  it("development startup cannot close an existing immutable preview",async()=>{
+  it("development startup transitions an owned immutable preview in one slot",async()=>{
     const firstDriver=makeDriver();
     const first=await startAdmittedTanstackPreview({ownerKey:"actor",request,identity,
       authorize:async()=>undefined,driverFactory:()=>firstDriver.driver});
     const secondDriver=makeDriver();
-    try {
-      await startAdmittedTanstackDevelopmentPreview({ownerKey:"actor",request,identity,
-        authorize:async()=>undefined,driverFactory:()=>secondDriver.driver});
-    } catch (error) {
-      // In a single-slot test environment, admission must reject without
-      // evicting an existing immutable preview to make room.
-      expect(String(error)).toMatch(/limit|capacity|busy|active/i);
-    }
-    expect(sharedFullStackPreviews.get(first.previewId)?.mode).toBe("immutable");
-    expect(firstDriver.destroy).not.toHaveBeenCalled();
+    const second=await startAdmittedTanstackDevelopmentPreview({ownerKey:"actor",request,identity,
+      authorize:async()=>undefined,driverFactory:()=>secondDriver.driver});
+    expect(sharedFullStackPreviews.get(first.previewId)).toBeNull();
+    expect(sharedFullStackPreviews.get(second.previewId)?.mode).toBe("development");
+    expect(firstDriver.destroy).toHaveBeenCalledOnce();
+  });
+  it("reauthorizes immediately before an owned mode transition",async()=>{
+    const firstDriver=makeDriver();
+    await startAdmittedTanstackPreview({ownerKey:"actor",request,identity,
+      authorize:async()=>undefined,driverFactory:()=>firstDriver.driver});
+    const authorize=vi.fn(async()=>undefined);
+    firstDriver.destroy.mockImplementationOnce(async()=>{
+      expect(authorize).toHaveBeenCalledTimes(2);
+    });
+    const secondDriver=makeDriver();
+    await startAdmittedTanstackDevelopmentPreview({ownerKey:"actor",request,identity,
+      authorize,driverFactory:()=>secondDriver.driver});
+    // Initial admission, destructive transition, and post-readiness publish.
+    expect(authorize).toHaveBeenCalledTimes(3);
+  });
+  it("immutable fallback cannot destroy a healthy development lease",async()=>{
+    const developmentDriver=makeDriver();
+    const development=await startAdmittedTanstackDevelopmentPreview({ownerKey:"actor",request,identity,
+      authorize:async()=>undefined,driverFactory:()=>developmentDriver.driver});
+    const fallbackDriver=makeDriver();
+    await expect(startAdmittedTanstackPreview({ownerKey:"actor",request,identity,
+      authorize:async()=>undefined,driverFactory:()=>fallbackDriver.driver}))
+      .rejects.toThrow("Healthy development preview owns");
+    expect(sharedFullStackPreviews.get(development.previewId)?.mode).toBe("development");
+    expect(developmentDriver.destroy).not.toHaveBeenCalled();
+    expect(fallbackDriver.destroy).not.toHaveBeenCalled();
+  });
+  it("settles an incremental update before judging development health",async()=>{
+    const developmentDriver=makeDriver();
+    const development=await startAdmittedTanstackDevelopmentPreview({ownerKey:"actor",request,identity,
+      authorize:async()=>undefined,driverFactory:()=>developmentDriver.driver});
+    let release!:()=>void;
+    const update=sharedFullStackPreviews.withDevelopmentUpdate(development.previewId,async()=>
+      new Promise<void>(resolve=>{release=resolve;}));
+    await vi.waitFor(()=>expect(release).toBeTypeOf("function"));
+    vi.mocked(fetchTanstackHttpInsideSandbox).mockClear();
+    const fallback=startAdmittedTanstackPreview({ownerKey:"actor",request,identity,
+      authorize:async()=>undefined,driverFactory:()=>makeDriver().driver});
+    await Promise.resolve();
+    const healthChecksBeforeSettle=vi.mocked(fetchTanstackHttpInsideSandbox).mock.calls.length;
+    const destroysBeforeSettle=developmentDriver.destroy.mock.calls.length;
+    release();await update;
+    await expect(fallback).rejects.toThrow("Healthy development preview owns");
+    expect(healthChecksBeforeSettle).toBe(0);
+    expect(destroysBeforeSettle).toBe(0);
+    expect(developmentDriver.destroy).not.toHaveBeenCalled();
   });
 });
 
@@ -144,19 +188,20 @@ describe("Phase 4F5H3 authorized development lease reattachment",()=>{
     expect(firstDriver.destroy).not.toHaveBeenCalled();
     expect(unusedDriver.destroy).not.toHaveBeenCalled();
   });
-  it("fails closed rather than replacing a healthy mismatched source",async()=>{
+  it("replaces a mismatched saved revision only after authoritative admission",async()=>{
     const d=makeDriver();
     const input={ownerKey:"actor",request:source,identity:exactIdentity,
       authorize:async()=>undefined,driverFactory:()=>d.driver};
     const first=await startAdmittedTanstackDevelopmentPreview(input);
     const wrong={...source,sourceVersion:source.sourceVersion+1};
     const unused=makeDriver();
-    await expect(startAdmittedTanstackDevelopmentPreview({...input,
+    const replaced=await startAdmittedTanstackDevelopmentPreview({...input,
       request:wrong,identity:createTanstackPreviewIdentity(wrong,exactIdentity.runtimeImageId),
       driverFactory:()=>unused.driver,
-    })).rejects.toThrow(/reattached|exists/i);
-    expect(sharedFullStackPreviews.get(first.previewId)?.mode).toBe("development");
-    expect(d.destroy).not.toHaveBeenCalled();
+    });
+    expect(replaced.sourceVersion).toBe(wrong.sourceVersion);
+    expect(sharedFullStackPreviews.get(first.previewId)).toBeNull();
+    expect(d.destroy).toHaveBeenCalledOnce();
     expect(unused.destroy).not.toHaveBeenCalled();
   });
   it("reauthorizes after health and rejects a changed authoritative source",async()=>{
@@ -168,5 +213,33 @@ describe("Phase 4F5H3 authorized development lease reattachment",()=>{
     await expect(startAdmittedTanstackDevelopmentPreview({...input,authorize}))
       .rejects.toThrow("source superseded");
     expect(sharedFullStackPreviews.get(first.previewId)?.mode).toBe("development");
+  });
+  it("waits for an active update instead of destroying a healthy lease",async()=>{
+    const d=makeDriver();
+    const input={ownerKey:"actor",request:source,identity:exactIdentity,
+      authorize:vi.fn(async()=>undefined),driverFactory:()=>d.driver};
+    const first=await startAdmittedTanstackDevelopmentPreview(input);
+    let release!:()=>void;
+    const update=sharedFullStackPreviews.withDevelopmentUpdate(first.previewId,async()=>
+      new Promise<void>(resolve=>{release=resolve;}));
+    await vi.waitFor(()=>expect(release).toBeTypeOf("function"));
+    const reattach=startAdmittedTanstackDevelopmentPreview(input);
+    await Promise.resolve();
+    expect(d.destroy).not.toHaveBeenCalled();
+    release();await update;
+    expect((await reattach).previewId).toBe(first.previewId);
+    expect(d.destroy).not.toHaveBeenCalled();
+  });
+  it("never replaces a newer development revision with a stale request",async()=>{
+    const d=makeDriver();
+    const newer={...source,sourceVersion:source.sourceVersion+1};
+    const newerIdentity=createTanstackPreviewIdentity(newer,exactIdentity.runtimeImageId);
+    const first=await startAdmittedTanstackDevelopmentPreview({ownerKey:"actor",request:newer,
+      identity:newerIdentity,authorize:async()=>undefined,driverFactory:()=>d.driver});
+    await expect(startAdmittedTanstackDevelopmentPreview({ownerKey:"actor",request:source,
+      identity:exactIdentity,authorize:async()=>undefined,driverFactory:()=>makeDriver().driver}))
+      .rejects.toThrow("stale");
+    expect(sharedFullStackPreviews.get(first.previewId)?.sourceVersion).toBe(newer.sourceVersion);
+    expect(d.destroy).not.toHaveBeenCalled();
   });
 });

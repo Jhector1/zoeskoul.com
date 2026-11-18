@@ -31,7 +31,7 @@ describe("trusted build runtime image command contract", () => {
     const policy = source("./tanstackPreviewRuntimePolicy.ts");
     expect(preview).toContain("buildProductionBuildContainerOptions({");
     expect(preview).toContain('NetworkMode: "none"');
-    expect(preview).toContain("assertTanstackSandboxOptions(options)");
+    expect(preview).toContain("assertTanstackSandboxOptions(options,hmrEnabled)");
     expect(preview).toContain("tanstackPreviewDevCommand(basePath)");
     expect(preview).toContain("path: basePath");
     expect(preview).not.toContain("RUN_CMD_JSON=");

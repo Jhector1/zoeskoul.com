@@ -34,7 +34,8 @@ describe("TanStack-only preview capacity ownership", () => {
     expect(capacity).toContain("countActiveSessionsForActor(ownerKey)");
     expect(capacity).toContain("countActiveSessionsGlobal()");
     expect(lifecycle).toContain("if (prior.sourceVersion > request.sourceVersion)");
-    expect(lifecycle).toContain("await sharedFullStackPreviews.close(prior.id)");
+    expect(lifecycle).toContain("await closeAfterFreshAuthority(prior.id)");
+    expect(lifecycle).toContain("await input.authorize(ownerKey,request)");
   });
   it("keeps the 429 capacity response behind Runner service authentication", () => {
     const route = read("src/routes/build.previews.operations.ts");

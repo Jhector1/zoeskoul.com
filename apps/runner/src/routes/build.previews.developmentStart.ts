@@ -16,14 +16,21 @@ import { startAdmittedTanstackDevelopmentPreview } from
 const ACTOR_KEY = /^u:[0-9a-f]{64}$/;
 const REQUEST_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 type FailureStage = "dependency_authorization" | "saved_source_authority" |
-  "runtime_identity" | "lease_admission" | "workspace" | "dependencies" |
-  "container" | "readiness" | "saved_source_recheck";
+  "runtime_identity" | "lease_admission" | "capacity" | "driver_validation" |
+  "recovery_journal" | "workspace" | "dependencies" | "container" |
+  "readiness" | "saved_source_recheck";
 
 function failureCategory(stage: FailureStage) {
   if (stage === "saved_source_authority" || stage === "saved_source_recheck")
     return "source_authority_rejected";
   if (stage === "runtime_identity") return "runtime_identity_failed";
   if (stage === "lease_admission") return "lease_or_reattachment";
+  if (stage === "capacity") return "capacity_rejected";
+  if (stage === "driver_validation") return "driver_validation_failed";
+  if (stage === "recovery_journal") return "recovery_journal_failed";
+  if (stage === "workspace") return "workspace_failed";
+  if (stage === "dependencies") return "dependencies_failed";
+  if (stage === "container") return "container_failed";
   if (stage === "readiness") return "readiness_failed";
   return "startup_failed";
 }

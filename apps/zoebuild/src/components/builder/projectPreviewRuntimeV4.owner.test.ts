@@ -33,6 +33,7 @@ describe("ZoeBuild canonical full-stack preview ownership", () => {
     expect(runner).toContain('request.stackId !== "tanstack-start-v1"');
     expect(runner).toContain('request.templateId !== "tanstack-start-v1"');
     expect(runner).toContain("if (prior.sourceVersion > request.sourceVersion)");
-    expect(runner).toContain("await sharedFullStackPreviews.close(prior.id)");
+    expect(runner).toContain("await closeAfterFreshAuthority(prior.id)");
+    expect(runner).toContain("await input.authorize(ownerKey,request)");
   });
 });

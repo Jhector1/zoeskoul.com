@@ -3,7 +3,9 @@ import { sharedFullStackPreviews } from "./sharedPreviewRegistry.js";
 import { reuseAdmittedTanstackPreview, startAdmittedTanstackPreview, stopAdmittedTanstackPreview } from "./tanstackPreviewSharedLifecycle.js";
 import { fetchTanstackHttpInsideSandbox } from "./tanstackPreviewDockerTransport.js";
 
-vi.mock("./tanstackPreviewDockerTransport.js",()=>({fetchTanstackHttpInsideSandbox:vi.fn()}));
+vi.mock("./tanstackPreviewDockerTransport.js",()=>({
+  fetchTanstackHttpInsideSandbox:vi.fn(),retireTanstackHttpWorker:vi.fn(async()=>undefined),
+}));
 
 const request={operation:"production-build" as const,protocolVersion:1 as const,
   buildProjectId:"project123",sourceVersion:4,stackId:"tanstack-start-v1",templateId:"tanstack-start-v1",

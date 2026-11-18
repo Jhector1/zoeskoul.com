@@ -28,6 +28,20 @@ export type TanstackSandboxHandle = Readonly<{
   workspaceDir: string;
 }>;
 
+/** Bounded startup taxonomy shared by the route, admission owner and driver.
+ * These values describe operations only; they never include source, paths,
+ * container identities, dependency names or raw Docker failures. */
+export type TanstackPreviewStartPhase =
+  | "queued"
+  | "lease_admission"
+  | "capacity"
+  | "driver_validation"
+  | "recovery_journal"
+  | "workspace"
+  | "dependencies"
+  | "container"
+  | "readiness";
+
 /** Bounded diagnostic metadata only; never log user source, paths or errors. */
 export type TanstackReadinessDiagnostic = Readonly<{
   result: "transport_error" | "http_status" | "invalid_html" | "no_probe";
@@ -45,7 +59,7 @@ export class TanstackPreviewReadinessError extends Error {
 }
 
 export type TanstackPreviewDriver = Readonly<{
-  prepare(): Promise<string>;
+  prepare(onPhase?: (phase: TanstackPreviewStartPhase) => void): Promise<string>;
   launch(workspaceDir: string): Promise<string>;
   probe(containerId: string): Promise<Readonly<{status: number; headers: Readonly<Record<string,string>>; bodyBase64: string}>>;
   /** Failure-path only: sanitized Docker state before cleanup removes the container. */
@@ -58,7 +72,7 @@ export type TanstackPreviewDriver = Readonly<{
 
 export async function startIsolatedTanstackPreview(driver: TanstackPreviewDriver,
   opts: Readonly<{ signal?: AbortSignal; timeoutMs?: number;
-    onPhase?: (phase: "queued" | "workspace" | "dependencies" | "container" | "readiness") => void;
+    onPhase?: (phase: TanstackPreviewStartPhase) => void;
     telemetry?: PreviewOperationTelemetry;
     diagnosticCorrelation?: Readonly<{operation:string;preview:string}> }> = {}): Promise<TanstackSandboxHandle> {
   const timeoutMs = opts.timeoutMs ?? TANSTACK_PREVIEW_READY_TIMEOUT_MS;
@@ -70,8 +84,7 @@ export async function startIsolatedTanstackPreview(driver: TanstackPreviewDriver
   let endFirstSsr: ReturnType<PreviewOperationTelemetry["begin"]> | null = null;
   try {
     if (opts.signal?.aborted) throw new Error("Preview cancelled.");
-    opts.onPhase?.("dependencies");
-    workspaceDir = await driver.prepare();
+    workspaceDir = await driver.prepare(opts.onPhase);
     if (opts.signal?.aborted) throw new Error("Preview cancelled.");
     opts.onPhase?.("container");
     containerId = await driver.launch(workspaceDir);

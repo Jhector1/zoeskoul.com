@@ -66,6 +66,25 @@ describe("Phase 4E2 private development-read fence",()=>{
   expect(answer.sourceVersion).toBe(7);
   expect((f.transport.mock.calls[0][1] as {path:string}).path).toBe(basePath);
  });
+ it("preserves Vite virtual module ids and CSS URL queries without allowing general colon paths",async()=>{
+  const f=fixture();
+  await readOwnedTanstackDevelopmentPreview({...f.args,
+    path:"@id/virtual:tanstack-start-dev-client-entry"},{registry:f.registry,
+    transport:f.transport as unknown as typeof fetchTanstackHttpInsideSandbox});
+  expect((f.transport.mock.calls[0][1] as {path:string}).path)
+    .toBe(basePath+"@id/virtual:tanstack-start-dev-client-entry");
+  await readOwnedTanstackDevelopmentPreview({...f.args,path:"src/styles.css?url"},{
+    registry:f.registry,transport:f.transport as unknown as typeof fetchTanstackHttpInsideSandbox});
+  expect((f.transport.mock.calls[1][1] as {path:string}).path)
+    .toBe(basePath+"src/styles.css?url");
+  await expect(readOwnedTanstackDevelopmentPreview({...f.args,path:"src/http:evil"},{
+    registry:f.registry,transport:f.transport as unknown as typeof fetchTanstackHttpInsideSandbox}))
+    .rejects.toThrow("Invalid development preview relative path.");
+  await expect(readOwnedTanstackDevelopmentPreview({...f.args,
+    path:"@id/virtual:unrelated-plugin"},{registry:f.registry,
+    transport:f.transport as unknown as typeof fetchTanstackHttpInsideSandbox}))
+    .rejects.toThrow("Invalid development preview relative path.");
+ });
  it("never returns a response if a revision is committed during the read",async()=>{
   const f=fixture();
   let checks=0;

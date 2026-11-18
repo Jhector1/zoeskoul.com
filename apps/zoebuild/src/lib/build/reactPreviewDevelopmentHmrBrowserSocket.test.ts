@@ -56,7 +56,7 @@ describe("Phase 4E3C4A browser WebSocket admission (no iframe wiring)", () => {
         "http://localhost", "http://127.0.0.1", "http://runner.localhost:80",
         "http://runner.localhost/", "http://runner.localhost.evil.test",
         "http://evil.test", "http://user@runner.localhost", "http://runner.localhost/a",
-        "http://runner.localhost?ticket=abc", "http://runner.localhost:8080",
+        "http://runner.localhost?ticket=abc", "http://runner.localhost:8081",
       ]) expect(() => requirePublicDevelopmentHmrIngress(rejected, true)).toThrow();
       expect(() => developmentHmrBrowserWebSocketUrl({
         publicIngressOrigin: local, previewId, ticket,
@@ -66,6 +66,80 @@ describe("Phase 4E3C4A browser WebSocket admission (no iframe wiring)", () => {
     try { expect(() => requirePublicDevelopmentHmrIngress(local, true)).toThrow(); }
     finally { vi.unstubAllEnvs(); }
   });
+  it("allows port 8080 only with explicit local development opt-in", async () => {
+    const local = "http://runner.localhost:8080";
+
+    vi.stubEnv("NODE_ENV", "development");
+
+    try {
+      expect(() =>
+        requirePublicDevelopmentHmrIngress(local)
+      ).toThrow();
+
+      expect(
+        requirePublicDevelopmentHmrIngress(local, true)
+      ).toBe(local);
+
+      expect(
+        developmentHmrBrowserWebSocketUrl({
+          publicIngressOrigin: local,
+          previewId,
+          ticket,
+          allowLocalHttp: true,
+        })
+      ).toBe(
+        `ws://runner.localhost:8080/build/previews/${previewId}/development-hmr/ws?ticket=${ticket}`
+      );
+
+      for (const rejected of [
+        "http://runner.localhost:8081",
+        "http://runner.localhost:3004",
+        "http://runner.localhost:8080/",
+        "http://runner.localhost:8080/path",
+        "http://runner.localhost:8080?x=1",
+        "http://runner.localhost.evil.test:8080",
+        "http://user@runner.localhost:8080",
+      ]) {
+        expect(() =>
+          requirePublicDevelopmentHmrIngress(rejected, true)
+        ).toThrow();
+      }
+
+      const f = make({
+        publicIngressOrigin: local,
+        allowLocalHttp: true,
+      });
+
+      const pending = f.client.connect();
+
+      await vi.waitFor(() =>
+        expect(f.openWebSocket).toHaveBeenCalledTimes(1)
+      );
+
+      expect(f.openWebSocket).toHaveBeenCalledWith(
+        `ws://runner.localhost:8080/build/previews/${previewId}/development-hmr/ws?ticket=${ticket}`,
+        "vite-hmr",
+      );
+
+      f.socket.onopen?.();
+      await pending;
+      f.client.close();
+
+    } finally {
+      vi.unstubAllEnvs();
+    }
+
+    vi.stubEnv("NODE_ENV", "production");
+
+    try {
+      expect(() =>
+        requirePublicDevelopmentHmrIngress(local, true)
+      ).toThrow();
+    } finally {
+      vi.unstubAllEnvs();
+    }
+  });
+
   it("opens dev-only ws:// with the same one-use ticket and Vite subprotocol", async () => {
     vi.stubEnv("NODE_ENV", "development");
     try {

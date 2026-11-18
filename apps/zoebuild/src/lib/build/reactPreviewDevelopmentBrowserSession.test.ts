@@ -85,6 +85,25 @@ describe("Phase 4E3A saved revision browser control plane", () => {
     expect(fetchClient).toHaveBeenCalledTimes(2);
     expect(session.snapshot()).toBe(null);
   });
+  it("restarts a skipped revision through saved-source admission without browser source",async()=>{
+    const secondPreview="preview_22222222-2222-4222-8222-222222222222";
+    const secondRead=`${ROOT}/${secondPreview}/development/content/${TOKEN}/`;
+    const fetchClient=vi.fn(async(path:string,init:RequestInit)=>{
+      const version=JSON.parse(String(init.body)).sourceVersion;
+      if(path.endsWith("/development/start"))
+        return json({ok:true,previewId:version===7?previewId:secondPreview,sourceVersion:version});
+      return json({ok:true,documentUrl:version===7?READ:secondRead,
+        basePath:version===7?READ:secondRead,sourceVersion:version});
+    });
+    const session=createDevelopmentPreviewBrowserSession({buildProjectId:project,fetchClient});
+    await session.start(7);
+    const recovered=await session.restart(9);
+    expect(recovered).toMatchObject({previewId:secondPreview,sourceVersion:9,
+      documentUrl:secondRead});
+    expect(fetchClient.mock.calls.filter(([path])=>path.endsWith("/development/start")))
+      .toHaveLength(2);
+    expect(JSON.stringify(fetchClient.mock.calls)).not.toContain("files");
+  });
   it("rejects invalid versions before any HTTP request", async () => {
     const {session,fetchClient} = driver();
     await expect(session.start(1.2)).rejects.toBeInstanceOf(DevelopmentBrowserSessionError);

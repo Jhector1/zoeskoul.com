@@ -55,15 +55,31 @@ function publicReadPath(project: string, preview: string, url: unknown): url is 
 }
 async function postRevision(fetchClient: FetchClient, path: string, sourceVersion: number,
   extra: Readonly<Record<string,string>> = {}): Promise<ResponseObject> {
-  const response = await fetchClient(path, {
+  const started = Date.now();
+  const suffix = path.split("/").pop();
+  const operation = suffix && ["start", "read-access", "update", "renew-access"].includes(suffix)
+    ? suffix : "unknown";
+  const diagnostic = (event: string, status: number | null = null, accepted: boolean | null = null) => {
+    if (process.env.NODE_ENV === "development")
+      console.info("[ZOE-HMR]", JSON.stringify({event, operation, sourceVersion, status, accepted, elapsedMs: Date.now()-started}));
+  };
+  diagnostic("control_request");
+  let response: Response;
+  try {
+    response = await fetchClient(path, {
     method: "POST", credentials: "same-origin", cache: "no-store",
     headers: { "Content-Type": "application/json", "Accept": "application/json" },
     body: JSON.stringify({ sourceVersion, ...extra }),
-  });
+    });
+  } catch (error) {
+    diagnostic("control_transport_failure");
+    throw error;
+  }
   let body: unknown = null;
   if ((response.headers.get("content-type") ?? "").startsWith("application/json")) {
     body = await response.json().catch(() => null);
   }
+  diagnostic("control_response", response.status, response.ok && exactKeys(body, ["ok"]) && body.ok === true);
   if (!response.ok || !exactKeys(body, ["ok"]) || body.ok !== true)
     throw new DevelopmentBrowserSessionError(
       response.status === 409 ? "RESTART_REQUIRED" : "UNAVAILABLE",
@@ -117,6 +133,15 @@ export function createDevelopmentPreviewBrowserSession(input: Readonly<{
       throw new DevelopmentBrowserSessionError("UNAVAILABLE", "Untrusted preview document location.");
     return { previewId, sourceVersion, documentUrl: data.documentUrl, grantIssuedAt: now() };
   }
+  async function admit(sourceVersion:number,snapshot:number):Promise<DevelopmentBrowserSession> {
+    const data = await postRevision(input.fetchClient, `${root}/development/start`, sourceVersion);
+    assertActive(snapshot);
+    if (data.sourceVersion !== sourceVersion || typeof data.previewId !== "string" ||
+        !PREVIEW_ID.test(data.previewId))
+      throw new DevelopmentBrowserSessionError("UNAVAILABLE", "Invalid Runner preview identity.");
+    current = await readGrant(data.previewId, sourceVersion, snapshot);
+    return current;
+  }
   function durableToken(lease:DevelopmentBrowserSession):string|null {
     const prefix=`${root}/${encodeURIComponent(lease.previewId)}/development/content/`;
     const token=lease.documentUrl.startsWith(prefix) && lease.documentUrl.endsWith("/")
@@ -139,17 +164,19 @@ export function createDevelopmentPreviewBrowserSession(input: Readonly<{
     if (current) throw new DevelopmentBrowserSessionError("RESTART_REQUIRED", "Active lease already exists.");
     const stamp = begin();
     try {
-      const data = await postRevision(input.fetchClient, `${root}/development/start`, sourceVersion);
-      assertActive(stamp);
-      if (data.sourceVersion !== sourceVersion || typeof data.previewId !== "string" ||
-          !PREVIEW_ID.test(data.previewId))
-        throw new DevelopmentBrowserSessionError("UNAVAILABLE", "Invalid Runner preview identity.");
-      current = await readGrant(data.previewId, sourceVersion, stamp);
-      return current;
+      return await admit(sourceVersion,stamp);
     } catch (error) {
       current = null;
       throw error;
     } finally { end(); }
+  }
+  async function restart(sourceVersion:number):Promise<DevelopmentBrowserSession> {
+    revision(sourceVersion);
+    const stamp=begin();
+    current=null;
+    try { return await admit(sourceVersion,stamp); }
+    catch(error) { current=null;throw error; }
+    finally { end(); }
   }
   async function update(sourceVersion: number): Promise<DevelopmentBrowserSession> {
     revision(sourceVersion);
@@ -204,7 +231,7 @@ export function createDevelopmentPreviewBrowserSession(input: Readonly<{
     } finally { end(); }
   }
   return {
-    start, update, renew,
+    start, restart, update, renew,
     snapshot: (): DevelopmentBrowserSession | null => current ? { ...current } : null,
     renewalDue: (): boolean => current !== null && now() - current.grantIssuedAt >= READ_TOKEN_REFRESH_MS,
     close: () => { closed = true; generation++; current = null; },

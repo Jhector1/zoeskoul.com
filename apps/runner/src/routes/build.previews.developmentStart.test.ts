@@ -96,4 +96,27 @@ describe("Phase 4D private development lease startup gate",()=>{
       expect(JSON.stringify(warning.mock.calls)).not.toContain("/var/private/secrets");
     } finally { warning.mockRestore(); }
   });
+  it.each([
+    ["capacity","capacity_rejected"],
+    ["driver_validation","driver_validation_failed"],
+    ["recovery_journal","recovery_journal_failed"],
+    ["workspace","workspace_failed"],
+    ["dependencies","dependencies_failed"],
+    ["container","container_failed"],
+    ["readiness","readiness_failed"],
+  ] as const)("classifies sanitized %s failures precisely",async(stage,category)=>{
+    const warning=vi.spyOn(console,"warn").mockImplementation(()=>undefined);
+    try {
+      const h=setup({start:async(input:DevelopmentStartInput)=>{
+        input.onPhase?.(stage);
+        throw Error("private failure detail");
+      }});
+      expect((await h.call("6a1e63d6-a7ce-44e7-bb69-4fcb3f7a681f")).status).toBe(503);
+      expect(warning).toHaveBeenCalledWith("RUNNER development preview start failed",{
+        requestCorrelation:"6a1e63d6-a7ce-44e7-bb69-4fcb3f7a681f",
+        stage,category,status:503,
+      });
+      expect(JSON.stringify(warning.mock.calls)).not.toContain("private failure detail");
+    } finally { warning.mockRestore(); }
+  });
 });

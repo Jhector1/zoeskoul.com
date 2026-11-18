@@ -21,8 +21,10 @@ export function normalizeDevelopmentPreviewRelativePath(value: unknown): string 
     let decoded: string;
     try { decoded = decodeURIComponent(part); }
     catch { throw new Error("Invalid development preview relative path."); }
+    const viteVirtual = index === 1 && parts[0] === "@id" &&
+      decoded === "virtual:tanstack-start-dev-client-entry";
     if (!decoded || decoded === "." || decoded === ".." ||
-        decoded.includes("%") || decoded.includes(":") ||
+        decoded.includes("%") || decoded.includes(":") && !viteVirtual ||
         /[\/\\\u0000-\u001f\u007f]/.test(decoded) ||
         decoded.toLowerCase() === "@fs")
       throw new Error("Invalid development preview relative path.");

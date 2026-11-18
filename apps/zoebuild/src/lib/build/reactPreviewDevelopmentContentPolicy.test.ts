@@ -29,4 +29,13 @@ describe("Phase 4E2B2 browser content boundary",()=>{
   expect(()=>prepareDevelopmentPreviewBrowserResponse(upstream("x","application/x-secret"),base,"GET")).toThrow();
   expect(()=>prepareDevelopmentPreviewBrowserResponse(upstream("x","text/html"),"/bad/","GET")).not.toThrow();
  });
+ it("preserves JavaScript CSS URL modules as JavaScript with opaque-origin CORS",async()=>{
+  const module=`export default ${JSON.stringify(DEVELOPMENT_PREVIEW_PUBLIC_BASE_MARKER+"src/styles.css")}`;
+  const response=prepareDevelopmentPreviewBrowserResponse(
+    upstream(module,"application/javascript"),base,"GET");
+  expect(response.headers.get("content-type")).toBe("application/javascript");
+  expect(response.headers.get("access-control-allow-origin")).toBe("*");
+  expect(response.headers.get("cross-origin-resource-policy")).toBe("cross-origin");
+  expect(await response.text()).toBe(`export default ${JSON.stringify(base+"src/styles.css")}`);
+ });
 });

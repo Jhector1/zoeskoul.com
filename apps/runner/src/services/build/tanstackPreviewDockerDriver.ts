@@ -14,7 +14,7 @@ import {
   shouldActivateTanstackPreviewHmr, assertTanstackSandboxOptions,
 } from "./tanstackPreviewRuntimePolicy.js";
 import { TanstackPreviewCleanupError, type TanstackPreviewDriver } from "./tanstackPreviewLifecycle.js";
-import { fetchTanstackHttpInsideSandbox } from "./tanstackPreviewDockerTransport.js";
+import { fetchTanstackHttpInsideSandbox, retireTanstackHttpWorker } from "./tanstackPreviewDockerTransport.js";
 import { previewObservability, type PreviewOperationTelemetry } from "./previewObservability.js";
 import type { TanstackPreviewIdentity } from "./tanstackPreviewIdentity.js";
 import {
@@ -155,6 +155,7 @@ export function makeTanstackPreviewDockerDriver(
     }
   }
   async function removeContainer(id: string) {
+    await retireTanstackHttpWorker(id);
     try { await docker.getContainer(id).remove({ force: true }); }
     catch (error) {
       if (!(typeof error === "object" && error !== null &&
@@ -174,11 +175,13 @@ export function makeTanstackPreviewDockerDriver(
     releaseDependencyLease();
   }
   return {
-    async prepare() {
+    async prepare(onPhase) {
+      onPhase?.("recovery_journal");
       await journal.write();
       let workspaceDir: string | null = null;
       const endWorkspace = telemetry?.begin("workspace_create");
       try {
+        onPhase?.("workspace");
         workspaceDir = await createWorkspace([...request.files], {
           onWorkspaceAllocated: async (allocated) => {
             // Durable identity precedes creation; even an in-flight write or
@@ -207,6 +210,7 @@ export function makeTanstackPreviewDockerDriver(
       const preparedWorkspaceDir = workspaceDir;
       if (!preparedWorkspaceDir) throw new Error("TanStack workspace allocation was not recorded.");
       try {
+        onPhase?.("dependencies");
         const dependencies = await prepareTanstackPreviewDependencies({
           store: dependencyStore,
           key: dependencyKey,

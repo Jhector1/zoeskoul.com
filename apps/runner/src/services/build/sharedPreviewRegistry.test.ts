@@ -10,6 +10,30 @@ function lease(id:string, ownerKey:string, buildProjectId:string, close:()=>Prom
     createdAt:at,lastActivityAt:at,close};
 }
 describe("shared ZoeBuild preview leases",()=>{
+  it("reports one explicit owner/project lifecycle state",async()=>{
+    const registry=new SharedFullStackPreviewRegistry();
+    expect(registry.stateForProject("owner","project")).toBe("idle");
+    const finish=registry.beginProjectStart("owner","project");
+    expect(registry.stateForProject("owner","project")).toBe("starting");
+    expect(()=>registry.beginProjectStart("owner","project")).toThrow("transition");
+    finish();
+    registry.register({...lease("dev","owner","project",async()=>{},Date.now()),mode:"development"});
+    expect(registry.stateForProject("owner","project")).toBe("ready");
+    let release!:()=>void;
+    const update=registry.withDevelopmentUpdate("dev",async()=>{
+      await new Promise<void>(resolve=>{release=resolve;});
+    });
+    for(let i=0;i<10 && !release;i++)await Promise.resolve();
+    expect(registry.stateForProject("owner","project")).toBe("updating");
+    release();await update;
+    await registry.close("dev");
+    registry.register({...lease("fallback","owner","project",async()=>{},Date.now()),mode:"immutable"});
+    expect(registry.stateForProject("owner","project")).toBe("controlled_fallback");
+    await registry.close("fallback");
+    registry.register({...lease("orphan","owner","project",async()=>{},Date.now()),
+      mode:"development",basePath:"/quarantined/orphan/"});
+    expect(registry.stateForProject("owner","project")).toBe("recovering");
+  });
   it("counts all runtimes' live resources and owner scope",()=>{
     const registry=new SharedFullStackPreviewRegistry();
     registry.register(lease("one","owner-a","project-a",async()=>{}));
@@ -36,6 +60,20 @@ describe("shared ZoeBuild preview leases",()=>{
     complete();
     await Promise.all([first,second]);
     expect(registry.count()).toBe(0);
+  });
+  it("waits for an active development update without treating it as unhealthy",async()=>{
+    const registry=new SharedFullStackPreviewRegistry();
+    registry.register({...lease("dev","owner","project",async()=>{},Date.now()),mode:"development"});
+    let release!:()=>void;
+    const update=registry.withDevelopmentUpdate("dev",async()=>
+      new Promise<void>(resolve=>{release=resolve;}));
+    for(let i=0;i<10 && !release;i++)await Promise.resolve();
+    const settled=registry.waitForDevelopmentSettled("dev");
+    let finished=false;void settled.then(()=>{finished=true;});
+    await Promise.resolve();expect(finished).toBe(false);
+    release();await update;
+    expect((await settled)?.id).toBe("dev");
+    expect(registry.stateForProject("owner","project")).toBe("ready");
   });
   it("fails closed on teardown failure and retries rather than losing reservation",async()=>{
     const registry=new SharedFullStackPreviewRegistry();

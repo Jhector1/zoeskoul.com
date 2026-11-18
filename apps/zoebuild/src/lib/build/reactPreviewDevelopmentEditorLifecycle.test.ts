@@ -12,6 +12,7 @@ function make() {
   let due=false;
   const controller={
     start:vi.fn(async (v:number)=>{snapshot=document(v);return snapshot;}),
+    restart:vi.fn(async (v:number)=>{snapshot=document(v);return snapshot;}),
     update:vi.fn(async (v:number)=>{snapshot=document(v);return snapshot;}),
     renew:vi.fn(async ()=>{if(!snapshot)throw Error("missing");return snapshot;}),
     snapshot:vi.fn(()=>snapshot),
@@ -19,7 +20,8 @@ function make() {
     close:vi.fn(()=>{snapshot=null;}),
   } satisfies Session;
   const onDocument=vi.fn(),onFailure=vi.fn(),onWaiting=vi.fn();
-  const lifecycle=createDevelopmentPreviewEditorLifecycle({controller,onDocument,onFailure,onWaiting});
+  const lifecycle=createDevelopmentPreviewEditorLifecycle({controller,onDocument,onFailure,onWaiting,
+    recoveryDelay:async()=>undefined});
   return {controller,lifecycle,onDocument,onFailure,onWaiting,setDue:(v:boolean)=>{due=v;},setSnapshot:(v:ReturnType<typeof document>)=>{snapshot=v;}};
 }
 const flush=async()=>{await Promise.resolve();await Promise.resolve();await Promise.resolve();};
@@ -37,11 +39,12 @@ describe("Phase 4E3B saved-revision editor integration",()=>{
     f.lifecycle.dispose();await flush();
     expect(f.controller.close).toHaveBeenCalledOnce();
   });
-  it("does not mutate an existing lease when versions skip",async()=>{
+  it("recovers a skipped revision from authoritative startup",async()=>{
     const f=make();f.lifecycle.savedRevision(7,true);await flush();
     f.lifecycle.savedRevision(9,true);await flush();
     expect(f.controller.update).not.toHaveBeenCalled();
-    expect(f.onFailure).toHaveBeenCalledTimes(1);
+    expect(f.controller.restart).toHaveBeenCalledWith(9);
+    expect(f.onFailure).not.toHaveBeenCalled();
     f.lifecycle.dispose();
   });
   it("silences an outdated document response while a newer saved revision waits",async()=>{
@@ -66,13 +69,25 @@ describe("Phase 4E3B saved-revision editor integration",()=>{
     expect(f.onWaiting).toHaveBeenCalled();
     f.lifecycle.dispose();
   });
-  it("fails closed on update failure, and never retries the mutation implicitly",async()=>{
+  it("uses bounded authoritative recovery after a transient update failure",async()=>{
     const f=make();f.lifecycle.savedRevision(7,true);await flush();
     f.controller.update.mockRejectedValueOnce(new Error("authority unavailable"));
     f.lifecycle.savedRevision(8,true);await flush();
-    expect(f.onFailure).toHaveBeenCalledTimes(1);
-    f.lifecycle.savedRevision(8,true);await flush();
+    await flush();await flush();
+    expect(f.onFailure).not.toHaveBeenCalled();
     expect(f.controller.update).toHaveBeenCalledTimes(1);
+    expect(f.controller.restart).toHaveBeenCalledWith(8);
+    f.lifecycle.dispose();
+  });
+  it("fails closed after the bounded recovery budget",async()=>{
+    const f=make();
+    f.controller.start.mockRejectedValue(new Error("transport unavailable"));
+    f.controller.restart.mockRejectedValue(new Error("transport unavailable"));
+    f.lifecycle.savedRevision(7,true);
+    for(let i=0;i<20;i++)await flush();
+    expect(f.controller.start).toHaveBeenCalledOnce();
+    expect(f.controller.restart).toHaveBeenCalledTimes(3);
+    expect(f.onFailure).toHaveBeenCalledOnce();
     f.lifecycle.dispose();
   });
   it("ignores a late response after disposal without destroying the Runner lease",async()=>{

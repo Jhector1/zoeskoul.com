@@ -9,6 +9,7 @@ import { authorizeTanstackPreviewSource, assertTanstackPreviewStartupEnabled } f
 import { FilePreviewOperationJournal, PreviewOperationRegistry } from "../services/build/previewOperationJournal.js";
 import { resolveTanstackPreviewIdentity, type TanstackPreviewIdentity } from "../services/build/tanstackPreviewIdentity.js";
 import { createHash } from "node:crypto";
+import type { TanstackPreviewStartPhase } from "../services/build/tanstackPreviewLifecycle.js";
 
 const journal = new FilePreviewOperationJournal(path.join(env.workspaceRoot, ".zoebuild-preview-operations"));
 type OperationRequest = Readonly<{
@@ -22,8 +23,13 @@ const operations = new PreviewOperationRegistry<OperationRequest>(journal,
     // after the authenticated HTTP admission gate has returned 202.
     assertTanstackPreviewStartupEnabled();
     authorizeTanstackPreviewSource(admitted.request);
+    const operationPhase=(phase:TanstackPreviewStartPhase)=>onPhase(
+      phase==="dependencies" ? "dependencies" :
+      phase==="container" ? "container" :
+      phase==="readiness" ? "readiness" :
+      phase==="queued" ? "queued" : "workspace");
     return startAdmittedTanstackPreview({ ownerKey: actorKey, request:admitted.request,
-      identity:admitted.identity,signal,onPhase,telemetry,
+      identity:admitted.identity,signal,onPhase:operationPhase,telemetry,
       operationCorrelation:createHash("sha256").update(operationId).digest("hex").slice(0,16),
       authorize: async (_ownerKey, source) => authorizeTanstackPreviewSource(source) });
   },

@@ -7,6 +7,7 @@ import type {
   DevelopmentBrowserSession,
   createDevelopmentPreviewBrowserSession,
 } from "./reactPreviewDevelopmentBrowserSession";
+import { DevelopmentBrowserSessionError } from "./reactPreviewDevelopmentBrowserSession";
 
 type SessionController = ReturnType<typeof createDevelopmentPreviewBrowserSession>;
 
@@ -21,6 +22,8 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
   onDocument: (session: DevelopmentEditorDocument) => void;
   onWaiting: () => void;
   onFailure: () => void;
+  maxRecoveryAttempts?: number;
+  recoveryDelay?: (attempt:number) => Promise<void>;
 }>) {
   let disposed = false;
   let failed = false;
@@ -28,6 +31,13 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
   let pending: number | null = null;
   let selectedVersion: number | null = null;
   let selectedReady = false;
+  let recoveryAttempts=0;
+  let recovering=false;
+  const maxRecoveryAttempts=input.maxRecoveryAttempts ?? 3;
+  const recoveryDelay=input.recoveryDelay ??
+    ((attempt:number)=>new Promise<void>(resolve=>setTimeout(resolve,Math.min(1500,250*attempt))));
+  if(!Number.isSafeInteger(maxRecoveryAttempts) || maxRecoveryAttempts<0 || maxRecoveryAttempts>5)
+    throw new Error("Invalid preview recovery policy.");
 
   const valid = (v: number): boolean => Number.isSafeInteger(v) && v >= 1;
   function fail() {
@@ -58,23 +68,33 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
         pending = null;
         const current = input.controller.snapshot();
         let session: DevelopmentBrowserSession;
-        if (!current) {
+        if(recovering) {
+          session=await input.controller.restart(version);
+        } else if (!current) {
           session = await input.controller.start(version);
         } else if (version === current.sourceVersion) {
           session = current;
         } else if (version === current.sourceVersion + 1) {
           session = await input.controller.update(version);
-        } else {
-          fail();
-          break;
-        }
+        } else session = await input.controller.restart(version);
+        recovering=false;
+        recoveryAttempts=0;
         if (disposed || failed) break;
         // A newer saved revision can arrive while a request is in flight.
         // Never publish the previous iframe URL as if it were current.
         if (pending === null) publish(session);
       }
-    } catch {
-      fail();
+    } catch(error) {
+      const version=selectedVersion;
+      if(!disposed && !failed && selectedReady && version!==null &&
+          recoveryAttempts<maxRecoveryAttempts) {
+        recoveryAttempts++;
+        recovering=true;
+        input.onWaiting();
+        await recoveryDelay(recoveryAttempts);
+        if(!disposed && !failed && selectedReady && selectedVersion===version)
+          pending=version;
+      } else fail();
     } finally {
       running = false;
       // Renewals may have been skipped while an update was in flight.
@@ -93,6 +113,7 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
       return;
     }
     pending = sourceVersion;
+    if(input.controller.snapshot()?.sourceVersion===sourceVersion) recoveryAttempts=0;
     void pump();
   }
   async function renewIfDue(): Promise<void> {
@@ -104,8 +125,16 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
     try {
       const renewed = await input.controller.renew();
       if (!disposed && !failed) publish(renewed);
-    } catch {
-      fail();
+    } catch(error) {
+      if(error instanceof DevelopmentBrowserSessionError &&
+          error.code==="RESTART_REQUIRED" && selectedVersion!==null) {
+        recovering=true;
+        pending=selectedVersion;
+      } else if(recoveryAttempts<maxRecoveryAttempts && selectedVersion!==null) {
+        recoveryAttempts++;
+        recovering=true;
+        pending=selectedVersion;
+      } else fail();
     } finally {
       running = false;
       if (!disposed && !failed && pending !== null) void pump();

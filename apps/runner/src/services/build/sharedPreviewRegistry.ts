@@ -21,6 +21,9 @@ export type FullStackPreviewLease = Readonly<{
   close(): Promise<void>;
 }>;
 
+export type PreviewLifecycleState = "idle" | "starting" | "ready" |
+  "updating" | "recovering" | "closing" | "controlled_fallback";
+
 export class SharedFullStackPreviewRegistry {
   private readonly live = new Map<string, FullStackPreviewLease>();
   private readonly closing = new Map<string, Promise<void>>();
@@ -28,6 +31,35 @@ export class SharedFullStackPreviewRegistry {
   /** Exclusive per-lease updates; always account for pending updates on close. */
   private readonly updates = new Map<string, Promise<void>>();
   private readonly activeUpdates = new Set<string>();
+  private readonly startingProjects = new Set<string>();
+
+  private projectKey(ownerKey: string, buildProjectId: string) {
+    if (!ownerKey || !buildProjectId) throw new Error("Preview identity required.");
+    return `${ownerKey}\0${buildProjectId}`;
+  }
+  beginProjectStart(ownerKey: string, buildProjectId: string): () => void {
+    const key = this.projectKey(ownerKey,buildProjectId);
+    if (this.startingProjects.has(key)) throw new Error("Preview project transition already active.");
+    this.startingProjects.add(key);
+    let finished=false;
+    return () => {
+      if (finished) return;
+      finished=true;
+      this.startingProjects.delete(key);
+    };
+  }
+  stateForProject(ownerKey: string, buildProjectId: string): PreviewLifecycleState {
+    const key=this.projectKey(ownerKey,buildProjectId);
+    if(this.startingProjects.has(key)) return "starting";
+    const leases=this.list().filter(lease=>lease.ownerKey===ownerKey &&
+      lease.buildProjectId===buildProjectId);
+    if(leases.some(lease=>this.closing.has(lease.id))) return "closing";
+    if(leases.some(lease=>lease.basePath.startsWith("/quarantined/"))) return "recovering";
+    if(leases.some(lease=>this.updates.has(lease.id))) return "updating";
+    if(leases.some(lease=>lease.mode==="development")) return "ready";
+    if(leases.some(lease=>lease.mode==="immutable")) return "controlled_fallback";
+    return "idle";
+  }
 
   get(id: string) { return this.live.get(id) ?? null; }
   list() { return [...this.live.values()]; }
@@ -93,6 +125,16 @@ export class SharedFullStackPreviewRegistry {
    * lease while writes are pending. The future development transport must use
    * an owner-authenticated route with its own update-aware read boundary. */
   developmentUpdatePending(id: string) { return this.updates.has(id); }
+  /** Wait for the already-published update fence without authorizing reuse.
+   * Callers must re-read authority and lease identity after this resolves. */
+  async waitForDevelopmentSettled(id:string):Promise<FullStackPreviewLease|null> {
+    const pending=this.updates.get(id);
+    if(pending)await pending;
+    const lease=this.live.get(id)??null;
+    if(!lease || lease.mode!=="development" || this.closing.has(id) ||
+        lease.basePath.startsWith("/quarantined/"))return null;
+    return lease;
+  }
 
   /** Phase 4E2: a read-only, owner-bound development request is permitted only
    * outside every update/close slot. This is NOT bearer-capability admission.
@@ -292,7 +334,7 @@ export class SharedFullStackPreviewRegistry {
   }
   /** Only safe when all preview operations are already settled (test teardown). */
   resetForTests() {
-    if (this.closing.size || this.healthChecks.size || this.updates.size)
+    if (this.closing.size || this.healthChecks.size || this.updates.size || this.startingProjects.size)
       throw new Error("Cannot reset active preview cleanup.");
     this.live.clear();
   }
