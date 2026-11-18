@@ -38,12 +38,19 @@ export class DevelopmentHmrBrowserSocketError extends Error {
   }
 }
 
-/** The value comes from deployment configuration, never from a request body.
- * HTTPS only; reject internal DNS names, IP literals, credentials and paths.
- * The browser's actual Origin header is independently checked by the Runner.
+/** Deployment-owned destination, never a value from the ticket response.
+ * Public/prod ingress always requires HTTPS. A separate, explicitly opted-in
+ * local development path accepts ONLY the canonical loopback-resolving Caddy
+ * name runner.localhost, with no alternate ports, paths, or credentials.
+ * The browser Origin and one-use ticket are still checked by the Runner.
  */
-export function requirePublicDevelopmentHmrIngress(origin: string): string {
-  if (typeof origin !== "string" || origin.length > 256) throw new DevelopmentHmrBrowserSocketError();
+export function requirePublicDevelopmentHmrIngress(
+  origin: string, allowLocalHttp = false,
+): string {
+  if (typeof origin !== "string" || origin.length > 256 || typeof allowLocalHttp !== "boolean")
+    throw new DevelopmentHmrBrowserSocketError();
+  if (allowLocalHttp && process.env.NODE_ENV === "development" &&
+      origin === "http://runner.localhost") return origin;
   let value: URL;
   try { value = new URL(origin); } catch { throw new DevelopmentHmrBrowserSocketError(); }
   const hostname = value.hostname.toLowerCase();
@@ -61,12 +68,13 @@ export function developmentHmrBrowserWebSocketUrl(input: Readonly<{
   publicIngressOrigin: string;
   previewId: string;
   ticket: string;
+  allowLocalHttp?: boolean;
 }>): string {
-  const origin = requirePublicDevelopmentHmrIngress(input.publicIngressOrigin);
+  const origin = requirePublicDevelopmentHmrIngress(input.publicIngressOrigin, input.allowLocalHttp);
   if (!PREVIEW.test(input.previewId) || !TICKET.test(input.ticket))
     throw new DevelopmentHmrBrowserSocketError();
   const url = new URL(origin);
-  url.protocol = "wss:";
+  url.protocol = origin === "http://runner.localhost" ? "ws:" : "wss:";
   url.pathname = `/build/previews/${input.previewId}/development-hmr/ws`;
   url.searchParams.set("ticket", input.ticket);
   return url.toString();
@@ -108,6 +116,7 @@ export function createDevelopmentHmrBrowserSocket(input: Readonly<{
   previewId: string;
   sourceVersion: number;
   publicIngressOrigin: string;
+  allowLocalHttp?: boolean;
   fetchClient: (path: string, init: RequestInit) => Promise<Response>;
   openWebSocket: (url: string, protocol: "vite-hmr") => DevelopmentHmrWebSocket;
   onStatus?: (status: DevelopmentHmrConnectionStatus) => void;
@@ -120,7 +129,7 @@ export function createDevelopmentHmrBrowserSocket(input: Readonly<{
       !Number.isSafeInteger(input.sourceVersion) || input.sourceVersion < 1 ||
       typeof input.fetchClient !== "function" || typeof input.openWebSocket !== "function")
     throw new DevelopmentHmrBrowserSocketError();
-  requirePublicDevelopmentHmrIngress(input.publicIngressOrigin);
+  requirePublicDevelopmentHmrIngress(input.publicIngressOrigin, input.allowLocalHttp);
   const timeoutMs = input.connectTimeoutMs ?? SOCKET_CONNECT_MS;
   if (!Number.isSafeInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > SOCKET_CONNECT_MS)
     throw new DevelopmentHmrBrowserSocketError();
@@ -153,6 +162,7 @@ export function createDevelopmentHmrBrowserSocket(input: Readonly<{
       const url = developmentHmrBrowserWebSocketUrl({
         publicIngressOrigin: input.publicIngressOrigin,
         previewId: input.previewId, ticket,
+        allowLocalHttp: input.allowLocalHttp,
       });
       if (closed || stamp !== generation) throw new DevelopmentHmrBrowserSocketError();
       const socket = input.openWebSocket(url, "vite-hmr");

@@ -195,6 +195,11 @@ export function useReactDevelopmentPreview(input: Readonly<{
         previewId:currentPreviewId,
         sourceVersion:version,
         publicIngressOrigin:origin,
+        // Never allow a ws:// destination from a production build or a
+        // non-canonical editor origin. Production still requires WSS.
+        allowLocalHttp:process.env.NODE_ENV === "development" &&
+          process.env.NEXT_PUBLIC_ZOEBUILD_DEVELOPMENT_HMR_LOCAL_HTTP_ENABLED === "true" &&
+          window.location.origin === "http://localhost:3004",
         fetchClient:(path,init)=>fetch(path,init),
         openWebSocket:(url,protocol)=>new WebSocket(url,protocol) as unknown as ReturnType<Parameters<typeof createDevelopmentHmrBrowserSocket>[0]["openWebSocket"]>,
         onViteFrame:frame=>bridge.push(frame),

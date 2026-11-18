@@ -43,6 +43,44 @@ describe("Phase 4E3C4A browser WebSocket admission (no iframe wiring)", () => {
       .toBe(`wss://runner.example.org/build/previews/${previewId}/development-hmr/ws?ticket=${ticket}`);
     expect(() => developmentHmrBrowserWebSocketUrl({publicIngressOrigin:ingress,previewId,ticket:"bad"})).toThrow();
   });
+  it("permits ONLY exact loopback HTTP ingress with explicit development opt-in", () => {
+    const local = "http://runner.localhost";
+    expect(() => requirePublicDevelopmentHmrIngress(local)).toThrow();
+    vi.stubEnv("NODE_ENV", "development");
+    try {
+      expect(requirePublicDevelopmentHmrIngress(local, true)).toBe(local);
+      expect(developmentHmrBrowserWebSocketUrl({
+        publicIngressOrigin: local, previewId, ticket, allowLocalHttp: true,
+      })).toBe(`ws://runner.localhost/build/previews/${previewId}/development-hmr/ws?ticket=${ticket}`);
+      for (const rejected of [
+        "http://localhost", "http://127.0.0.1", "http://runner.localhost:80",
+        "http://runner.localhost/", "http://runner.localhost.evil.test",
+        "http://evil.test", "http://user@runner.localhost", "http://runner.localhost/a",
+        "http://runner.localhost?ticket=abc", "http://runner.localhost:8080",
+      ]) expect(() => requirePublicDevelopmentHmrIngress(rejected, true)).toThrow();
+      expect(() => developmentHmrBrowserWebSocketUrl({
+        publicIngressOrigin: local, previewId, ticket,
+      })).toThrow();
+    } finally { vi.unstubAllEnvs(); }
+    vi.stubEnv("NODE_ENV", "production");
+    try { expect(() => requirePublicDevelopmentHmrIngress(local, true)).toThrow(); }
+    finally { vi.unstubAllEnvs(); }
+  });
+  it("opens dev-only ws:// with the same one-use ticket and Vite subprotocol", async () => {
+    vi.stubEnv("NODE_ENV", "development");
+    try {
+      const f = make({publicIngressOrigin:"http://runner.localhost",allowLocalHttp:true});
+      const pending = f.client.connect();
+      await vi.waitFor(() => expect(f.openWebSocket).toHaveBeenCalledTimes(1));
+      expect(f.openWebSocket).toHaveBeenCalledWith(
+        `ws://runner.localhost/build/previews/${previewId}/development-hmr/ws?ticket=${ticket}`,
+        "vite-hmr",
+      );
+      f.socket.onopen?.();
+      await pending;
+      f.client.close();
+    } finally { vi.unstubAllEnvs(); }
+  });
   it("mints exactly one server-authorized revision-bound ticket then uses Vite subprotocol", async () => {
     const f = make();
     const connected = f.client.connect();
