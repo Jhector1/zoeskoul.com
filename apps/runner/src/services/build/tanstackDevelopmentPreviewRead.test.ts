@@ -135,3 +135,32 @@ describe("Phase 4E2 private development-read fence",()=>{
   release();await update;
  });
 });
+
+describe("Phase 4F5H10K capability stem redaction",()=>{
+ const stem=basePath.slice(0,-1);
+ const marker=DEVELOPMENT_PREVIEW_PUBLIC_BASE_MARKER.slice(0,-1);
+ it("redacts a slashless router base alongside module imports",()=>{
+  const original=`import "${basePath}src/routes/index.tsx"; const router = {basepath: ${JSON.stringify(stem)}};`;
+  const response={status:200,headers:{"content-type":"text/javascript"},bodyBase64:Buffer.from(original).toString("base64")};
+  const actual=Buffer.from(redactDevelopmentPreviewBasePath(response,basePath).bodyBase64,"base64").toString();
+  expect(actual).toBe(`import "${marker}/src/routes/index.tsx"; const router = {basepath: ${JSON.stringify(marker)}};`);
+  expect(actual).not.toContain(stem);
+  expect(actual).not.toContain("C".repeat(32));
+ });
+ it("preserves slashes, query, fragment and punctuation in HTML, CSS and JSON",()=>{
+  const suffixes=["", "/", "/about", "?x=1", "#section", "/src/styles.css?url"];
+  for(const type of ["text/html", "text/css", "application/json"]){
+   const original=JSON.stringify(suffixes.map(s=>stem+s));
+   const response={status:200,headers:{"content-type":type},bodyBase64:Buffer.from(original).toString("base64")};
+   const actual=Buffer.from(redactDevelopmentPreviewBasePath(response,basePath).bodyBase64,"base64").toString();
+   expect(actual).toBe(JSON.stringify(suffixes.map(s=>marker+s)));
+  }
+ });
+ it("does not alter unrelated paths or binary responses",()=>{
+  const text=JSON.stringify([stem.replace("C".repeat(32),"D".repeat(32)),"/about"]);
+  const response={status:200,headers:{"content-type":"text/javascript"},bodyBase64:Buffer.from(text).toString("base64")};
+  expect(redactDevelopmentPreviewBasePath(response,basePath)).toBe(response);
+  const binary={...response,headers:{"content-type":"image/png"},bodyBase64:Buffer.from(stem).toString("base64")};
+  expect(redactDevelopmentPreviewBasePath(binary,basePath)).toBe(binary);
+ });
+});

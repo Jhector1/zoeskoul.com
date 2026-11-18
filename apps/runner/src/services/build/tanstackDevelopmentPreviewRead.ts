@@ -52,8 +52,14 @@ export function redactDevelopmentPreviewBasePath(
     return response;
   const body=Buffer.from(response.bodyBase64,"base64");
   const original=body.toString("utf8");
-  if (!original.includes(internalBasePath)) return response;
-  const rewritten=original.split(internalBasePath).join(DEVELOPMENT_PREVIEW_PUBLIC_BASE_MARKER);
+  // Redact the exact capability stem, not only its slash-terminated form.
+  // TanStack embeds a slashless basepath in transformed router modules.
+  // Keep the original suffix (including a slash, query or fragment) verbatim.
+  if (!internalBasePath.endsWith("/") || internalBasePath.length <= 1)
+    throw new Error("Invalid development preview base.");
+  const privateStem=internalBasePath.slice(0,-1);
+  if (!original.includes(privateStem)) return response;
+  const rewritten=original.split(privateStem).join(DEVELOPMENT_PREVIEW_PUBLIC_BASE_MARKER.slice(0,-1));
   return {...response,bodyBase64:Buffer.from(rewritten,"utf8").toString("base64")};
 }
 

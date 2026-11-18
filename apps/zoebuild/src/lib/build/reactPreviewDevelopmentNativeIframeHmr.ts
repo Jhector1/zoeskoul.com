@@ -17,6 +17,7 @@ export const ZOEBUILD_IFRAME_HMR_SCRIPT = String.raw`(function () {
   const sockets = new Set();
   let channel = null;
   let channelOpen = false;
+  let channelGeneration = 0;
   const MAX = 65536;
   class VirtualViteSocket extends EventTarget {
     constructor(url) {
@@ -27,20 +28,30 @@ export const ZOEBUILD_IFRAME_HMR_SCRIPT = String.raw`(function () {
       this.bufferedAmount = 0;
       this.extensions = "";
       this.readyState = 0;
+      this.openScheduled = false;
+      this.connectedSeen = false;
       this.onopen = null; this.onmessage = null;
       this.onclose = null; this.onerror = null;
       sockets.add(this);
-      if (channelOpen) this.open();
+      if (channelOpen) this.scheduleOpen();
     }
     emit(type, event) {
       this.dispatchEvent(event);
       const listener = this["on" + type];
       if (typeof listener === "function") listener.call(this,event);
     }
-    open() {
-      if (this.readyState !== 0) return;
-      this.readyState = 1;
-      this.emit("open",new Event("open"));
+    scheduleOpen() {
+      if (this.readyState !== 0 || this.openScheduled) return;
+      this.openScheduled = true;
+      const generation = channelGeneration;
+      // WebSocket open is asynchronous. Vite must first install listeners.
+      setTimeout(() => {
+        this.openScheduled = false;
+        if (this.readyState !== 0 || !channelOpen || !channel || generation !== channelGeneration) return;
+        this.readyState = 1;
+        this.emit("open",new Event("open"));
+        if (this.readyState === 1) channel.postMessage({kind:"client-ready",generation});
+      },0);
     }
     send(data) {
       if (this.readyState !== 1 || !channel) throw new DOMException("Not connected", "InvalidStateError");
@@ -49,6 +60,14 @@ export const ZOEBUILD_IFRAME_HMR_SCRIPT = String.raw`(function () {
     }
     receive(data) {
       if (this.readyState !== 1 || typeof data !== "string" || data.length > MAX) return;
+      // Socket rotation or another virtual client can replay the actual
+      // handshake. Deliver it only once to each open virtual socket.
+      let type;
+      try {type=JSON.parse(data).type;} catch {return;}
+      if (type === "connected") {
+        if (this.connectedSeen) return;
+        this.connectedSeen = true;
+      }
       this.emit("message",new MessageEvent("message",{data}));
     }
     close() {
@@ -75,13 +94,15 @@ export const ZOEBUILD_IFRAME_HMR_SCRIPT = String.raw`(function () {
     channel.onmessage = function(message) {
       const value=message.data;
       if (!value || typeof value!=="object") return;
-      if (value.kind==="open") {
+      if (value.kind==="open" && Number.isSafeInteger(value.generation) && value.generation > 0) {
+        channelGeneration=value.generation;
         channelOpen=true;
-        for (const socket of sockets) socket.open();
+        for (const socket of sockets) socket.scheduleOpen();
       } else if (value.kind==="frame" && channelOpen && typeof value.text==="string" && value.text.length <= MAX) {
         for (const socket of sockets) socket.receive(value.text);
       } else if (value.kind==="disconnect") {
         channelOpen=false;
+        channelGeneration=0;
         for (const socket of sockets) socket.close();
       }
     };

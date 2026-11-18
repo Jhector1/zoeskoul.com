@@ -2,7 +2,9 @@ import { injectNativeIframeHmrBootstrap } from "./reactPreviewDevelopmentNativeI
 /** Phase 4E2B2 public read boundary. No source files, private Vite base paths,
  * Runner credentials or editor cookies may cross this boundary. */
 export const DEVELOPMENT_PREVIEW_PUBLIC_BASE_MARKER = "/__zoebuild_dev_preview_public_base__/";
-const PRIVATE_VITE_BASE = /\/api\/build\/projects\/[A-Za-z0-9_-]+\/preview\/preview_[a-f0-9-]+\/content\/[A-Za-z0-9_-]{32}\//i;
+// Fail closed for either representation, including a capability prefix with
+// an unexpected suffix. Public development grants use a different namespace.
+const PRIVATE_VITE_BASE = /\/api\/build\/projects\/[A-Za-z0-9_-]+\/preview\/preview_[a-f0-9-]+\/content\/[A-Za-z0-9_-]{32}/i;
 const TEXT_MEDIA = /^(?:text\/(?:html|css|javascript|plain)|application\/(?:javascript|x-javascript|json)|text\/x-typescript)(?:\s*;|$)/i;
 const HTML = /^text\/html(?:\s*;|$)/i;
 const MIME = /^(?:text\/(?:html|css|javascript|plain)|application\/(?:javascript|x-javascript|json|wasm|octet-stream)|image\/(?:png|jpe?g|gif|svg\+xml|webp|avif)|font\/(?:woff2?|ttf|otf)|audio\/(?:mpeg|ogg|wav)|video\/(?:mp4|webm))(?:\s*;|$)/i;
@@ -34,7 +36,10 @@ export function prepareDevelopmentPreviewBrowserResponse(input:Readonly<{
     const original=bytes.toString("utf8");
     // Reject an unredacted private base rather than leaking a Runner capability.
     if (PRIVATE_VITE_BASE.test(original)) throw new Error("Private preview base leaked.");
-    const changed=original.split(DEVELOPMENT_PREVIEW_PUBLIC_BASE_MARKER).join(publicBase);
+    // Replace the stem so the router base remains slashless, while imports
+    // and document links retain the slash already present in the response.
+    const changed=original.split(DEVELOPMENT_PREVIEW_PUBLIC_BASE_MARKER.slice(0,-1))
+      .join(publicBase.replace(/\/$/, ""));
     const document=HTML.test(type) && nativeIframeHmr ? injectNativeIframeHmrBootstrap(changed) : changed;
     bytes=Buffer.from(document,"utf8");
     if(bytes.length>6*1024*1024)throw new Error("Preview content too large.");

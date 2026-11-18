@@ -39,3 +39,32 @@ describe("Phase 4E2B2 browser content boundary",()=>{
   expect(await response.text()).toBe(`export default ${JSON.stringify(base+"src/styles.css")}`);
  });
 });
+
+describe("Phase 4F5H10K public capability stem policy",()=>{
+ const marker=DEVELOPMENT_PREVIEW_PUBLIC_BASE_MARKER.slice(0,-1);
+ const publicStem=base.slice(0,-1);
+ const privateStem=`/api/build/projects/project_1/preview/${preview}/content/${"z".repeat(32)}`;
+ it("substitutes both slashless router base and slashful imports",async()=>{
+  const body=`import "${marker}/src/routes/index.tsx"; const router={basepath:${JSON.stringify(marker)}};`;
+  const result=prepareDevelopmentPreviewBrowserResponse(upstream(body,"text/javascript"),base,"GET");
+  expect(await result.text()).toBe(`import "${base}src/routes/index.tsx"; const router={basepath:${JSON.stringify(publicStem)}};`);
+ });
+ it("preserves existing slash, query and fragment suffixes",async()=>{
+  const suffixes=["", "/", "/about", "?x=1", "#section", "/src/styles.css?url"];
+  const result=prepareDevelopmentPreviewBrowserResponse(upstream(JSON.stringify(suffixes.map(s=>marker+s)),"application/json"),base,"GET");
+  expect(await result.text()).toBe(JSON.stringify(suffixes.map(s=>publicStem+s)));
+ });
+ it("rejects literal private capability paths even without a trailing slash",()=>{
+  for(const suffix of ["", "/", "/about", "?x=1", "#section", "unexpected"]){
+   for(const type of ["text/html", "text/css", "application/javascript", "application/json"]){
+    expect(()=>prepareDevelopmentPreviewBrowserResponse(upstream(JSON.stringify(privateStem+suffix),type),base,"GET")).toThrow("Private preview base leaked.");
+   }
+  }
+ });
+ it("keeps public grant URLs valid without adding slashes",async()=>{
+  const durableBase=publicDevelopmentPreviewBasePath("project_1",preview,"dpg1."+"q".repeat(43));
+  const body=JSON.stringify([marker,marker+"/about",durableBase.slice(0,-1)]);
+  const result=prepareDevelopmentPreviewBrowserResponse(upstream(body,"application/json"),durableBase,"GET");
+  expect(await result.text()).toBe(JSON.stringify([durableBase.slice(0,-1),durableBase+"about",durableBase.slice(0,-1)]));
+ });
+});
