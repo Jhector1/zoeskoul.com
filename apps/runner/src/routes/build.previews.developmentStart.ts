@@ -14,6 +14,19 @@ import { startAdmittedTanstackDevelopmentPreview } from
   "../services/build/tanstackPreviewSharedLifecycle.js";
 
 const ACTOR_KEY = /^u:[0-9a-f]{64}$/;
+const REQUEST_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+type FailureStage = "dependency_authorization" | "saved_source_authority" |
+  "runtime_identity" | "lease_admission" | "workspace" | "dependencies" |
+  "container" | "readiness" | "saved_source_recheck";
+
+function failureCategory(stage: FailureStage) {
+  if (stage === "saved_source_authority" || stage === "saved_source_recheck")
+    return "source_authority_rejected";
+  if (stage === "runtime_identity") return "runtime_identity_failed";
+  if (stage === "lease_admission") return "lease_or_reattachment";
+  if (stage === "readiness") return "readiness_failed";
+  return "startup_failed";
+}
 type Preview = Awaited<ReturnType<typeof startAdmittedTanstackDevelopmentPreview>>;
 type Dependencies = Readonly<{
   enabled: () => boolean;
@@ -60,6 +73,7 @@ export function makeTanstackDevelopmentStartRoute(
     catch { return res.status(404).json({ok:false,code:"NOT_FOUND"}); }
     let actorKey: string;
     let request: ProductionBuildJobRequestV1;
+    const requestId = req.header("x-request-id")?.trim();
     try {
       actorKey = deps.actorKey(req);
       if (!ACTOR_KEY.test(actorKey)) throw new Error("Invalid actor identity.");
@@ -72,23 +86,38 @@ export function makeTanstackDevelopmentStartRoute(
     } catch {
       return res.status(400).json({ok:false,code:"INVALID_REQUEST"});
     }
+    if (requestId !== undefined && !REQUEST_ID.test(requestId))
+      return res.status(400).json({ok:false,code:"INVALID_REQUEST"});
+    let stage: FailureStage = "dependency_authorization";
     try {
       // Never allocate a Docker sandbox without current DB authority.
       deps.verifySignedLock(request);
+      stage = "saved_source_authority";
       await deps.assertSavedSource(actorKey, request);
+      stage = "runtime_identity";
       const identity = await deps.resolveIdentity(request);
       // The lifecycle rechecks the DB before launch AND after readiness.
+      stage = "lease_admission";
       const preview = await deps.start({
         ownerKey:actorKey, request, identity,
         authorize:async (ownerKey, candidate) => {
+          stage = "saved_source_recheck";
           deps.verifySignedLock(candidate);
           await deps.assertSavedSource(ownerKey,candidate);
+          stage = "lease_admission";
         },
+        onPhase:(phase) => { stage = phase === "queued" ? "lease_admission" : phase; },
       });
       // This remains private to the service-to-service client. The legacy
       // browser capability routes explicitly exclude development leases.
       return res.status(200).json({ok:true,preview});
     } catch {
+      console.warn("RUNNER development preview start failed", {
+        requestCorrelation: requestId ?? "unavailable",
+        stage,
+        category: failureCategory(stage),
+        status: 503,
+      });
       // No source bytes, dependency approvals or Docker internals in errors.
       return res.status(503).json({ok:false,code:"DEVELOPMENT_START_UNAVAILABLE"});
     }

@@ -28,8 +28,9 @@ function setup(overrides: Record<string, unknown> = {}) {
     parse:()=>request,verifySignedLock:check,assertSavedSource:authority,
     resolveIdentity:resolve,start,...overrides};
   const handler = makeTanstackDevelopmentStartRoute(deps);
-  async function call() {
-    const req = {body:request} as unknown as Request;
+  async function call(requestId?:string) {
+    const req = {body:request,header:(name:string)=>
+      name.toLowerCase()==="x-request-id" ? requestId : undefined} as unknown as Request;
     let status = 200; let payload:unknown;
     const res = {status:(s:number)=>{status=s;return res;},
       json:(v:unknown)=>{payload=v;return res;}} as unknown as Response;
@@ -61,6 +62,12 @@ describe("Phase 4D private development lease startup gate",()=>{
       expect(h.start).not.toHaveBeenCalled();
     }
   });
+  it("rejects malformed request correlation before authorization",async()=>{
+    const h=setup();
+    expect((await h.call("not-a-request-id")).status).toBe(400);
+    expect(h.authority).not.toHaveBeenCalled();
+    expect(h.start).not.toHaveBeenCalled();
+  });
   it("checks saved DB source before Docker and after readiness",async()=>{
     const h=setup();
     expect(await h.call()).toEqual({status:200,payload:{ok:true,preview}});
@@ -77,8 +84,16 @@ describe("Phase 4D private development lease startup gate",()=>{
     expect(h.resolve).not.toHaveBeenCalled();
   });
   it("does not reveal source, dependency or Docker errors",async()=>{
-    const h=setup({start:async()=>{throw Error("/var/private/secrets");}});
-    const result=await h.call();
-    expect(result).toEqual({status:503,payload:{ok:false,code:"DEVELOPMENT_START_UNAVAILABLE"}});
+    const warning=vi.spyOn(console,"warn").mockImplementation(()=>undefined);
+    try {
+      const h=setup({start:async()=>{throw Error("/var/private/secrets");}});
+      const result=await h.call("6a1e63d6-a7ce-44e7-bb69-4fcb3f7a681f");
+      expect(result).toEqual({status:503,payload:{ok:false,code:"DEVELOPMENT_START_UNAVAILABLE"}});
+      expect(warning).toHaveBeenCalledWith("RUNNER development preview start failed",{
+        requestCorrelation:"6a1e63d6-a7ce-44e7-bb69-4fcb3f7a681f",
+        stage:"lease_admission",category:"lease_or_reattachment",status:503,
+      });
+      expect(JSON.stringify(warning.mock.calls)).not.toContain("/var/private/secrets");
+    } finally { warning.mockRestore(); }
   });
 });

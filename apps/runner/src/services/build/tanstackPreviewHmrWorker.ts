@@ -3,11 +3,13 @@
  * Docker streams newline-delimited, bounded, base64-encoded application
  * messages. This is not an HTTP proxy and does not accept arbitrary URLs. */
 export const TANSTACK_PREVIEW_HMR_WORKER = String.raw`
-import base64, hashlib, json, os, re, socket, struct, sys, threading, time
+import base64, hashlib, http.client, json, os, re, socket, struct, sys, threading, time, urllib.parse
 
 LIMIT=65536
+CLIENT_LIMIT=524288
 LIFETIME=110
 PATH=re.compile(r'^/api/build/projects/[A-Za-z0-9_-]+/preview/preview_[a-f0-9-]+/content/[A-Za-z0-9_-]{32}/$')
+TOKEN=re.compile(r'(?m)^const wsToken = "([A-Za-z0-9_-]{12})";$')
 WRITE_LOCK=threading.Lock()
 STOP=threading.Event()
 
@@ -34,6 +36,22 @@ def write_frame(sock, opcode, content):
     head=bytes([0x80 | opcode, 0x80 | size]) if size<126 else bytes([0x80 | opcode, 0x80 | 126])+struct.pack('!H',size)
     masked=bytes(c ^ key[i%4] for i,c in enumerate(content))
     sock.sendall(head+key+masked)
+
+def vite_ws_token(path):
+    connection=http.client.HTTPConnection('127.0.0.1',5173,timeout=5)
+    try:
+        connection.request('GET',path+'@vite/client',headers={
+            'Host':'127.0.0.1:5173',
+            'Accept':'text/javascript',
+        })
+        response=connection.getresponse()
+        body=response.read(CLIENT_LIMIT+1)
+        if response.status!=200 or len(body)>CLIENT_LIMIT: raise ValueError()
+        matches=TOKEN.findall(body.decode('utf8','strict'))
+        if len(matches)!=1: raise ValueError()
+        return matches[0]
+    finally:
+        connection.close()
 
 def from_browser(sock):
     try:
@@ -62,10 +80,12 @@ def main():
     if not isinstance(item,dict) or set(item)!=set(('path',)) or not isinstance(item['path'],str) or not PATH.fullmatch(item['path']):
         raise ValueError()
     path=item['path']
+    token=vite_ws_token(path)
     sock=socket.create_connection(('127.0.0.1',5173),timeout=5)
     try:
         key=base64.b64encode(os.urandom(16)).decode('ascii')
-        request=('GET '+path+' HTTP/1.1\r\nHost: 127.0.0.1:5173\r\n'
+        request_path=path+'?token='+urllib.parse.quote(token,safe='')
+        request=('GET '+request_path+' HTTP/1.1\r\nHost: 127.0.0.1:5173\r\n'
                  'Connection: Upgrade\r\nUpgrade: websocket\r\n'
                  'Sec-WebSocket-Version: 13\r\nSec-WebSocket-Key: '+key+'\r\n'
                  'Sec-WebSocket-Protocol: vite-hmr\r\nOrigin: http://127.0.0.1:5173\r\n\r\n')
