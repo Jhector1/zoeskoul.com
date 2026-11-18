@@ -21,7 +21,6 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
   onDocument: (session: DevelopmentEditorDocument) => void;
   onWaiting: () => void;
   onFailure: () => void;
-  cancelLease: (previewId: string) => Promise<unknown>;
 }>) {
   let disposed = false;
   let failed = false;
@@ -29,7 +28,6 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
   let pending: number | null = null;
   let selectedVersion: number | null = null;
   let selectedReady = false;
-  let knownPreviewId: string | null = null;
 
   const valid = (v: number): boolean => Number.isSafeInteger(v) && v >= 1;
   function fail() {
@@ -40,7 +38,6 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
     input.onFailure();
   }
   function publish(session: DevelopmentBrowserSession) {
-    knownPreviewId = session.previewId;
     if (disposed || failed) return;
     if (!selectedReady || selectedVersion !== session.sourceVersion) {
       input.onWaiting();
@@ -71,7 +68,6 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
           fail();
           break;
         }
-        knownPreviewId = session.previewId;
         if (disposed || failed) break;
         // A newer saved revision can arrive while a request is in flight.
         // Never publish the previous iframe URL as if it were current.
@@ -107,7 +103,6 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
     running = true;
     try {
       const renewed = await input.controller.renew();
-      knownPreviewId = renewed.previewId;
       if (!disposed && !failed) publish(renewed);
     } catch {
       fail();
@@ -120,11 +115,11 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
     if (disposed) return;
     disposed = true;
     pending = null;
-    const previewId = knownPreviewId ?? input.controller.snapshot()?.previewId;
+    // Dispose this tab's browser controller, not the Runner's owned lease.
+    // The Runner's bounded idle/hard-lifetime sweeper and explicit cancel /
+    // project deletion remain the resource-lifetime authorities. Browser
+    // read grants expire without renewal after this tab closes.
     input.controller.close();
-    // Cancellation is authenticated and best effort; never let an unmounted
-    // editor leak rejection errors or send an untrusted preview identity.
-    if (previewId) void input.cancelLease(previewId).catch(() => undefined);
   }
   return {savedRevision, renewIfDue, dispose};
 }

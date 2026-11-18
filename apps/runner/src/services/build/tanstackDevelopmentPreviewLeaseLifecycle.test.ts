@@ -1,6 +1,15 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
+// Avoid connecting to Docker in reattachment tests: readiness probes are
+// separately covered by the preview transport tests.
+vi.mock("./tanstackPreviewDockerTransport.js", () => ({
+  fetchTanstackHttpInsideSandbox: vi.fn(async () => ({
+    status:200,headers:{"content-type":"text/html"},bodyBase64:"",
+  })),
+}));
 import { randomUUID } from "node:crypto";
 import { env } from "../../lib/env.js";
+import { PROJECT_DEPENDENCY_APPROVAL_PATH } from "@zoeskoul/build-preparation";
+import { createTanstackPreviewIdentity } from "./tanstackPreviewIdentity.js";
 import { sharedFullStackPreviews } from "./sharedPreviewRegistry.js";
 import { trustedTanstackDevelopmentWorkspaces } from "./tanstackDevelopmentWorkspaceStore.js";
 import { startAdmittedTanstackPreview, startAdmittedTanstackDevelopmentPreview,
@@ -88,7 +97,7 @@ describe("Phase 4D readiness and non-destructive development startup", () => {
       authorize:async()=>undefined,driverFactory:()=>firstDriver.driver});
     const secondDriver=makeDriver();
     await expect(startAdmittedTanstackDevelopmentPreview({ownerKey:"actor",request,identity,
-      authorize:async()=>undefined,driverFactory:()=>secondDriver.driver})).rejects.toThrow("already exists");
+      authorize:async()=>undefined,driverFactory:()=>secondDriver.driver})).rejects.toThrow("Existing development preview cannot be reattached.");
     expect(sharedFullStackPreviews.get(first.previewId)?.mode).toBe("development");
     expect(firstDriver.destroy).not.toHaveBeenCalled();
     expect(secondDriver.destroy).not.toHaveBeenCalled();
@@ -108,5 +117,56 @@ describe("Phase 4D readiness and non-destructive development startup", () => {
     }
     expect(sharedFullStackPreviews.get(first.previewId)?.mode).toBe("immutable");
     expect(firstDriver.destroy).not.toHaveBeenCalled();
+  });
+});
+
+
+describe("Phase 4F5H3 authorized development lease reattachment",()=>{
+  const source={...request,files:[
+    {path:"package.json",content:"{}"},
+    {path:"pnpm-lock.yaml",content:"lockfileVersion: 9.0"},
+    {path:PROJECT_DEPENDENCY_APPROVAL_PATH,content:"approved"},
+  ]};
+  const exactIdentity=createTanstackPreviewIdentity(source,`sha256:${"c".repeat(64)}`);
+  it("reuses an exact authorized live lease without launching a second container",async()=>{
+    const firstDriver=makeDriver();
+    const authorize=vi.fn(async()=>undefined);
+    const input={ownerKey:"actor",request:source,identity:exactIdentity,
+      authorize,driverFactory:()=>firstDriver.driver};
+    const first=await startAdmittedTanstackDevelopmentPreview(input);
+    const unusedDriver=makeDriver();
+    const second=await startAdmittedTanstackDevelopmentPreview({
+      ...input,driverFactory:()=>unusedDriver.driver,
+    });
+    expect(second).toEqual(first);
+    expect(authorize).toHaveBeenCalledTimes(4);
+    expect(sharedFullStackPreviews.snapshot().totalReserved).toBe(1);
+    expect(firstDriver.destroy).not.toHaveBeenCalled();
+    expect(unusedDriver.destroy).not.toHaveBeenCalled();
+  });
+  it("fails closed rather than replacing a healthy mismatched source",async()=>{
+    const d=makeDriver();
+    const input={ownerKey:"actor",request:source,identity:exactIdentity,
+      authorize:async()=>undefined,driverFactory:()=>d.driver};
+    const first=await startAdmittedTanstackDevelopmentPreview(input);
+    const wrong={...source,sourceVersion:source.sourceVersion+1};
+    const unused=makeDriver();
+    await expect(startAdmittedTanstackDevelopmentPreview({...input,
+      request:wrong,identity:createTanstackPreviewIdentity(wrong,exactIdentity.runtimeImageId),
+      driverFactory:()=>unused.driver,
+    })).rejects.toThrow(/reattached|exists/i);
+    expect(sharedFullStackPreviews.get(first.previewId)?.mode).toBe("development");
+    expect(d.destroy).not.toHaveBeenCalled();
+    expect(unused.destroy).not.toHaveBeenCalled();
+  });
+  it("reauthorizes after health and rejects a changed authoritative source",async()=>{
+    const d=makeDriver();
+    const input={ownerKey:"actor",request:source,identity:exactIdentity,
+      authorize:async()=>undefined,driverFactory:()=>d.driver};
+    const first=await startAdmittedTanstackDevelopmentPreview(input);
+    const authorize=vi.fn(async()=>{if(authorize.mock.calls.length===2)throw Error("source superseded")});
+    await expect(startAdmittedTanstackDevelopmentPreview({...input,authorize}))
+      .rejects.toThrow("source superseded");
+    expect(sharedFullStackPreviews.get(first.previewId)?.mode).toBe("development");
   });
 });

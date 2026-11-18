@@ -130,3 +130,67 @@ describe("development lease isolation (not enabled by preview routes)",()=>{
     expect(registry.count()).toBe(2);
   });
 });
+
+
+describe("development preview reattachment identity and liveness",()=>{
+  const maxLifetimeMs=60_000;
+  function setup() {
+    const registry=new SharedFullStackPreviewRegistry();
+    const now=Date.now();
+    registry.register({...lease("reattach","owner","project",async()=>{},now),
+      mode:"development"});
+    const input={ownerKey:"owner",buildProjectId:"project",sourceVersion:1,
+      identity,maxLifetimeMs,healthCheck:async()=>true};
+    return {registry,input};
+  }
+  it("reattaches the same live development lease without reserving a second slot",async()=>{
+    const {registry,input}=setup();
+    const first=await registry.claimDevelopmentReusable(input);
+    const second=await registry.claimDevelopmentReusable(input);
+    expect(first?.id).toBe("reattach");
+    expect(second?.id).toBe("reattach");
+    expect(registry.snapshot().totalReserved).toBe(1);
+  });
+  it("rejects cross-owner, project, revision, fingerprint and expired leases before health",async()=>{
+    const {registry,input}=setup();
+    let checks=0;
+    const healthCheck=async()=>{checks++;return true};
+    for(const override of [
+      {ownerKey:"other"},{buildProjectId:"different"},
+      {sourceVersion:2},{identity:{...identity,fingerprint:"not-current"}},
+      {identity:{...identity,dependencyFingerprint:"not-current"}},
+      {maxLifetimeMs:0},
+    ]) {
+      expect(await registry.claimDevelopmentReusable({...input,...override,
+        healthCheck})).toBeNull();
+    }
+    expect(checks).toBe(0);
+  });
+  it("rejects a pending update or quarantined lease",async()=>{
+    const {registry,input}=setup();
+    let release!:()=>void;
+    const pending=registry.withDevelopmentUpdate("reattach",async()=>{
+      await new Promise<void>(resolve=>{release=resolve;});
+    });
+    for(let i=0;i<10 && !release;i++)await Promise.resolve();
+    expect(release).toBeTypeOf("function");
+    expect(await registry.claimDevelopmentReusable(input)).toBeNull();
+    release();await pending;
+    const active=registry.get("reattach")!;
+    registry.register({...lease("quarantine","owner","project",async()=>{},Date.now()),
+      mode:"development",basePath:"/quarantined/quarantine/"});
+    expect(await registry.claimDevelopmentReusable({...input,
+      sourceVersion:active.sourceVersion+1})).toBeNull();
+  });
+  it("never reattaches while cleanup wins a concurrent health check",async()=>{
+    const {registry,input}=setup();
+    let finishHealth!:()=>void;
+    const claim=registry.claimDevelopmentReusable({...input,
+      healthCheck:async()=>new Promise<boolean>(resolve=>{finishHealth=()=>resolve(true)})});
+    await Promise.resolve();
+    const closing=registry.close("reattach");
+    finishHealth();
+    expect(await claim).toBeNull();
+    await closing;
+  });
+});

@@ -116,20 +116,6 @@ export function useReactDevelopmentPreview(input: Readonly<{
           fallback: true,
         });
       },
-      cancelLease: async (previewId) => {
-        if (!/^preview_[0-9a-f-]{36}$/i.test(previewId)) return;
-        // Both operations are independent. A failed/slow revoke cannot stop
-        // Runner cancellation, and a failed cancel cannot prolong grant life.
-        const scope=`/api/build/projects/${encodeURIComponent(buildProjectId)}/preview/${encodeURIComponent(previewId)}`;
-        await Promise.allSettled([
-          fetch(`${scope}/development/revoke-access`, {
-            method: "POST", credentials: "same-origin", cache: "no-store", keepalive: true,
-          }),
-          fetch(`${scope}/cancel`, {
-            method: "POST", credentials: "same-origin", cache: "no-store",
-          }),
-        ]);
-      },
     });
     activeRef.current = { projectId: buildProjectId, lifecycle };
     setResult(current => ({

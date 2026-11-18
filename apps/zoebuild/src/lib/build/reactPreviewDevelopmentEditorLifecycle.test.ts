@@ -18,9 +18,9 @@ function make() {
     renewalDue:vi.fn(()=>due),
     close:vi.fn(()=>{snapshot=null;}),
   } satisfies Session;
-  const onDocument=vi.fn(),onFailure=vi.fn(),onWaiting=vi.fn(),cancelLease=vi.fn(async()=>{});
-  const lifecycle=createDevelopmentPreviewEditorLifecycle({controller,onDocument,onFailure,onWaiting,cancelLease});
-  return {controller,lifecycle,onDocument,onFailure,onWaiting,cancelLease,setDue:(v:boolean)=>{due=v;},setSnapshot:(v:ReturnType<typeof document>)=>{snapshot=v;}};
+  const onDocument=vi.fn(),onFailure=vi.fn(),onWaiting=vi.fn();
+  const lifecycle=createDevelopmentPreviewEditorLifecycle({controller,onDocument,onFailure,onWaiting});
+  return {controller,lifecycle,onDocument,onFailure,onWaiting,setDue:(v:boolean)=>{due=v;},setSnapshot:(v:ReturnType<typeof document>)=>{snapshot=v;}};
 }
 const flush=async()=>{await Promise.resolve();await Promise.resolve();await Promise.resolve();};
 
@@ -35,7 +35,7 @@ describe("Phase 4E3B saved-revision editor integration",()=>{
     expect(f.controller.update).toHaveBeenCalledWith(8);
     expect(f.onDocument).toHaveBeenLastCalledWith(expect.objectContaining({sourceVersion:8,previewId:id}));
     f.lifecycle.dispose();await flush();
-    expect(f.cancelLease).toHaveBeenCalledWith(id);
+    expect(f.controller.close).toHaveBeenCalledOnce();
   });
   it("does not mutate an existing lease when versions skip",async()=>{
     const f=make();f.lifecycle.savedRevision(7,true);await flush();
@@ -75,13 +75,13 @@ describe("Phase 4E3B saved-revision editor integration",()=>{
     expect(f.controller.update).toHaveBeenCalledTimes(1);
     f.lifecycle.dispose();
   });
-  it("ignores a late response after disposal and cancels the known lease",async()=>{
+  it("ignores a late response after disposal without destroying the Runner lease",async()=>{
     const f=make();f.lifecycle.savedRevision(7,true);await flush();
     let complete!:(v:ReturnType<typeof document>)=>void;
     f.controller.update.mockImplementationOnce(()=>new Promise(resolve=>{complete=resolve;}));
     f.lifecycle.savedRevision(8,true);
     f.lifecycle.dispose();complete(document(8));await flush();
     expect(f.onDocument).toHaveBeenCalledTimes(1);
-    expect(f.cancelLease).toHaveBeenCalledWith(id);
+    expect(f.controller.close).toHaveBeenCalledOnce();
   });
 });

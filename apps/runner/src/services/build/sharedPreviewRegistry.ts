@@ -185,6 +185,44 @@ export class SharedFullStackPreviewRegistry {
     this.live.set(id, {...lease, basePath:`/quarantined/${id}/`});
   }
 
+  /** Reattach only an exact, live, previously authorized mutable lease.
+   * This never promotes an immutable preview or changes the source revision.
+   * Caller MUST check current DB source authority before AND after this gate,
+   * plus the private source/workspace records before releasing its identity.
+   * No Docker allocation, capacity reservation, or source write happens here.
+   */
+  async claimDevelopmentReusable(input: Readonly<{
+    ownerKey: string;
+    buildProjectId: string;
+    sourceVersion: number;
+    identity: TanstackPreviewIdentity;
+    maxLifetimeMs: number;
+    healthCheck: (lease: FullStackPreviewLease) => Promise<boolean>;
+  }>): Promise<FullStackPreviewLease | null> {
+    const eligible = (candidate: FullStackPreviewLease): boolean =>
+      candidate.mode === "development" &&
+      candidate.ownerKey === input.ownerKey &&
+      candidate.buildProjectId === input.buildProjectId &&
+      candidate.sourceVersion === input.sourceVersion &&
+      candidate.identity.fingerprint === input.identity.fingerprint &&
+      candidate.identity.sourceFingerprint === input.identity.sourceFingerprint &&
+      candidate.identity.dependencyFingerprint === input.identity.dependencyFingerprint &&
+      candidate.identity.runtimeImageId === input.identity.runtimeImageId &&
+      Number.isFinite(input.maxLifetimeMs) && input.maxLifetimeMs > 0 &&
+      Date.now() >= candidate.createdAt &&
+      Date.now() - candidate.createdAt < input.maxLifetimeMs &&
+      !candidate.basePath.startsWith("/quarantined/") &&
+      !this.closing.has(candidate.id) && !this.updates.has(candidate.id);
+    const lease = this.list().find(eligible) ?? null;
+    if (!lease) return null;
+    const healthy = await this.checkLive(lease.id, input.healthCheck);
+    if (!healthy) return null;
+    const current = this.live.get(lease.id);
+    if (!current || !eligible(current)) return null;
+    previewObservability.recordLeaseReuse();
+    return current;
+  }
+
   /** Returns only an exact, live, freshly checked lease. Concurrent identical
    * claims share one bounded health check. A close intent always wins so a
    * stopped preview cannot be resurrected by a late health response.

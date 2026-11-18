@@ -55,6 +55,42 @@ async function startAdmittedPreviewWithMode(
         throw error;
       }
       if (input.signal?.aborted) throw new Error("Preview cancelled.");
+      // Browser refresh and Code/Preview remount may attach to an existing
+      // healthy lease, but ONLY for the exact currently saved source and actor.
+      // This runs under the same startup coordinator as cold launch, and
+      // cannot reserve a second slot or destroy a mismatched existing lease.
+      if (mode === "development") {
+        const prior = sharedFullStackPreviews.list().find(candidate =>
+          candidate.mode === "development" && candidate.ownerKey === ownerKey &&
+          candidate.buildProjectId === request.buildProjectId);
+        if (prior) {
+          const reusable = await sharedFullStackPreviews.claimDevelopmentReusable({
+            ownerKey, buildProjectId:request.buildProjectId,
+            sourceVersion:request.sourceVersion, identity:input.identity,
+            maxLifetimeMs:TANSTACK_PREVIEW_HARD_LIFETIME_MS,
+            healthCheck:checkLeaseHealth,
+          });
+          if (!reusable || !trustedTanstackDevelopmentSources.resolve(reusable) ||
+              !trustedTanstackDevelopmentWorkspaces.resolve(reusable))
+            throw new Error("Existing development preview cannot be reattached.");
+          // An awaited health check can outlive a DB version/ownership change.
+          // Reaffirm authority, then take the registry's close/update fence.
+          await input.authorize(ownerKey,request);
+          const current = sharedFullStackPreviews.assertDevelopmentReadOpen({
+            previewId:reusable.id, ownerKey, buildProjectId:request.buildProjectId,
+            sourceVersion:request.sourceVersion,
+          });
+          if (current.identity.fingerprint !== input.identity.fingerprint ||
+              current.identity.sourceFingerprint !== input.identity.sourceFingerprint ||
+              current.identity.dependencyFingerprint !== input.identity.dependencyFingerprint ||
+              current.identity.runtimeImageId !== input.identity.runtimeImageId ||
+              !trustedTanstackDevelopmentSources.resolve(current) ||
+              !trustedTanstackDevelopmentWorkspaces.resolve(current))
+            throw new Error("Development reattachment identity changed.");
+          return {previewId:current.id,buildProjectId:request.buildProjectId,
+            sourceVersion:current.sourceVersion,port:5173 as const,basePath:current.basePath};
+        }
+      }
       input.onPhase?.("workspace");
       // The development-start experiment may never close or reclaim an
       // immutable user preview. It gets a spare slot or fails closed. Also
@@ -200,12 +236,25 @@ export function startAdmittedTanstackPreview(input: AdmittedPreviewStartInput) {
   return startAdmittedPreviewWithMode(input, "immutable");
 }
 
+const DEVELOPMENT_PREVIEW_IDLE_MS = 10 * 60_000;
+let developmentSweepTimer: ReturnType<typeof setInterval> | null = null;
+function ensureZoebuildDevelopmentLeaseSweeper() {
+  if (developmentSweepTimer || process.env.RUNNER_EXECUTION_POOL !== "zoebuild" ||
+      process.env.ZOEBUILD_DEVELOPMENT_PREVIEW_START_ENABLED !== "true") return;
+  developmentSweepTimer = setInterval(() => {
+    void sharedFullStackPreviews.sweep(Date.now(),
+      DEVELOPMENT_PREVIEW_IDLE_MS,TANSTACK_PREVIEW_HARD_LIFETIME_MS).catch(() => undefined);
+  },60_000);
+  developmentSweepTimer.unref?.();
+}
+
 /** Private service startup (Phase 4D), disabled by default in the Runner.
  * The caller must provide DB source attestation and signed-dependency checks.
  * Trusted workspace data comes solely from the Docker driver; these leases
  * remain excluded from the immutable capability and browser proxy routes.
  */
 export function startAdmittedTanstackDevelopmentPreview(input: AdmittedPreviewStartInput) {
+  ensureZoebuildDevelopmentLeaseSweeper();
   return startAdmittedPreviewWithMode(input, "development");
 }
 
