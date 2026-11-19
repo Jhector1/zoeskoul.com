@@ -1,6 +1,8 @@
 import {describe,expect,it,vi} from "vitest";
+import {createSession,deleteSession} from "../sessions/sessionStore.js";
+import {setAdminLabSwitch} from "./learningAdminSwitch.js";
 import {Readable} from "node:stream";
-import {adminEgressConfig,adminEgressProxyName,adminEgressProxyLabels,parseAdminEgressPins,verifiedAdminGatewayCIDR,createAdminEgressProxy,removeAdminEgressProxy,verifyAdminEgressProxyInspect} from "./adminEgressProxy.js";
+import {adminEgressConfig,adminEgressProxyName,adminEgressProxyLabels,parseAdminEgressPins,verifiedAdminGatewayCIDR,createAdminEgressProxy,removeAdminEgressProxy,verifyAdminEgressProxyInspect,rotateExistingSession} from "./adminEgressProxy.js";
 import {adminSessionNetworkName,adminSessionNetworkLabels} from "./adminSessionNetwork.js";
 const sid="sess_11111111-1111-4111-8111-111111111111";
 const name=adminEgressProxyName(sid), network=adminSessionNetworkName(sid), cidr="172.25.0.0/16";
@@ -12,20 +14,24 @@ const config=()=>({ZOESKOUL_LEARNING_ADMIN_LAB_NETWORK_POLICY:"per-session-contr
 const lab=()=>({Name:network,Driver:"bridge",Internal:true,EnableIPv6:false,Attachable:false,Labels:adminSessionNetworkLabels(sid),Containers:{},IPAM:{Config:[{Subnet:cidr}]}});
 const bridge=()=>({Name:"bridge",Driver:"bridge",Internal:false,EnableIPv6:false,IPAM:{Config:[{Subnet:"172.17.0.0/16"}]}});
 const absent=()=>Object.assign(new Error("not found"),{statusCode:404});
-function fixture(opts:{badExit?:boolean;badHolder?:boolean;badGateway?:boolean;extraHelperCaps?:boolean;sticky?:string;gatewayImageEntrypoint?:string|string[]}={}){
+function fixture(opts:{badExit?:boolean;badHolder?:boolean;badGateway?:boolean;extraHelperCaps?:boolean;sticky?:string;gatewayImageEntrypoint?:string|string[];duplicatePins?:boolean;badFingerprint?:boolean;renewalFails?:boolean;revokeDuringRenewal?:()=>void;wrongRenewalEvidence?:boolean;foreignEndpoint?:boolean}={}){
  const events:string[]=[];const containers=new Map<string,any>();
+ let gatewayCount=0;let guestId:string|undefined;
  const createContainer=vi.fn(async (spec:any)=>{
   const role=spec.name.endsWith("-holder")?"holder":spec.name.endsWith("-firewall")?"firewall":"gateway";
-  const id=role==="holder"?holder:role==="firewall"?helper:gateway;
-  const i:any={Id:id,Name:`/${spec.name}`,Image:spec.Image,Config:{User:spec.User,Labels:spec.Labels,Env:spec.Env,Cmd:spec.Cmd,Entrypoint:spec.Entrypoint??[role==="gateway"?"/gateway":"/usr/local/bin/zoe-firewall-init"]},HostConfig:{...spec.HostConfig},Mounts:[],State:{Running:false,Health:{Status:"healthy"}},NetworkSettings:{Networks:role==="holder"?{bridge:{},[network]:{IPAddress:"172.25.0.2",Aliases:["zoe-egress-proxy"]}}:{}}};
+  const id=role==="holder"?holder:role==="firewall"?helper:(gatewayCount++===0?gateway:"f".repeat(64));
+  const renewing=role==="firewall"&&spec.Entrypoint?.[0]==="/usr/bin/python3";
+  const i:any={Id:id,Name:`/${spec.name}`,Image:spec.Image,Config:{User:spec.User,Tty:spec.Tty,Labels:spec.Labels,Env:spec.Env,Cmd:spec.Cmd,Entrypoint:spec.Entrypoint??[role==="gateway"?"/gateway":"/usr/local/bin/zoe-firewall-init"]},HostConfig:{...spec.HostConfig},Mounts:[],State:{Running:false,Health:{Status:"healthy"}},NetworkSettings:{Networks:role==="holder"?{bridge:{},[network]:{IPAddress:"172.25.0.2",Aliases:["zoe-egress-proxy"]}}:{}}};
   if(role==="holder"&&opts.badHolder)i.Config.Labels={};
   if(role==="firewall"&&opts.extraHelperCaps)i.HostConfig.CapAdd=["NET_ADMIN","SYS_ADMIN"];
   if(role==="gateway"&&opts.badGateway)i.Config.Env=[];
-  const c={id,inspect:async()=>{if(!containers.has(id))throw absent();return i;},start:async()=>{events.push(`start:${role}`);i.State.Running=true;},wait:async()=>{events.push("wait:firewall");return {StatusCode:opts.badExit?1:0};},exec:async()=>({start:async()=>Readable.from(["net:[12345]\n"]),inspect:async()=>({ExitCode:0})}),remove:async()=>{events.push(`remove:${role}`);if(opts.sticky!==role){containers.delete(id);containers.delete(spec.name);}}};
+  if(role==="gateway"&&opts.duplicatePins)i.Config.Env=[...i.Config.Env,i.Config.Env.find((v:string)=>v.startsWith("LAB_EGRESS_PINS_JSON="))];
+  const c={id,inspect:async()=>{if(!containers.has(id))throw absent();return i;},start:async()=>{events.push(`start:${role}`);i.State.Running=true;},wait:async()=>{events.push("wait:firewall");if(renewing)opts.revokeDuringRenewal?.();return {StatusCode:opts.badExit||(renewing&&opts.renewalFails)?1:0};},logs:async()=>Buffer.from(renewing?`ZOE_FIREWALL_RENEWED_AND_VERIFIED expiresAt=${opts.wrongRenewalEvidence?1:Math.min(JSON.parse(spec.Cmd[7]).next.expiresAt,Number(spec.Cmd[8]))}`:opts.badFingerprint?"bad fingerprint":`ZOE_FIREWALL_STRUCTURE_SHA256=${"f".repeat(64)}\nZOE_FIREWALL_INSTALLED_AND_VERIFIED\n`),exec:async()=>({start:async()=>Readable.from(["net:[12345]\n"]),inspect:async()=>({ExitCode:0})}),remove:async()=>{events.push(`remove:${role}`);if(opts.sticky!==role){containers.delete(id);containers.delete(spec.name);}}};
   containers.set(id,c);containers.set(spec.name,c);events.push(`create:${role}`);return c;
  });
- const client={info:async()=>({SecurityOptions:["name=rootless"]}),createContainer,getContainer:(n:string)=>containers.get(n)??{inspect:async()=>{throw absent();}},getImage:(id:string)=>({inspect:async()=>id===image?{Id:id,Config:{User:"1000:1000",Entrypoint:opts.gatewayImageEntrypoint??["/gateway"],Labels:{"com.zoeskoul.learning.egress-proxy":"v1","com.zoeskoul.learning.egress-gateway-phase":"2c3-development-audit-only"}}}:{Id:id,Config:{User:"0:0",Entrypoint:["/usr/local/bin/zoe-firewall-init"],Labels:{"com.zoeskoul.learning.firewall-initializer":"protected-lifecycle-dev-v1"}}}}),getNetwork:(n:string)=>({inspect:async()=>n===network?lab():bridge(),connect:async()=>{events.push("connect:holder");}})};
- return {events,containers,client,createContainer};
+ const client={info:async()=>({SecurityOptions:["name=rootless"]}),createContainer,getContainer:(n:string)=>containers.get(n)??{inspect:async()=>{throw absent();}},getImage:(id:string)=>({inspect:async()=>id===image?{Id:id,Config:{User:"1000:1000",Entrypoint:opts.gatewayImageEntrypoint??["/gateway"],Labels:{"com.zoeskoul.learning.egress-proxy":"v1","com.zoeskoul.learning.egress-gateway-phase":"2c8b2a-pinned-policy-dev-v1"}}}:{Id:id,Config:{User:"0:0",Entrypoint:["/usr/local/bin/zoe-firewall-init"],Labels:{"com.zoeskoul.learning.firewall-initializer":"2c8b2c-renewal-helper-dev-v2"}}}}),getNetwork:(n:string)=>({inspect:async()=>n===network?{...lab(),Containers:guestId?{[holder]:{},[guestId]:{},...(opts.foreignEndpoint?{foreign:{}}:{})}:{}}:bridge(),connect:async()=>{events.push("connect:holder");}})};
+ const addGuest=(id:string,owner:string)=>{guestId=id;containers.set(id,{inspect:async()=>({Id:id,Name:`/zoeskoul_${sid}`,Config:{Labels:{"com.zoeskoul.runner.session":sid,"com.zoeskoul.runner.purpose":"learn","com.zoeskoul.runner.lab-mode":"admin","com.zoeskoul.runner.owner":owner}},State:{Running:true},HostConfig:{NetworkMode:network,Privileged:false},NetworkSettings:{Networks:{[network]:{}}}})});};
+ return {events,containers,client,createContainer,addGuest};
 }
 const start=(f:ReturnType<typeof fixture>)=>createAdminEgressProxy(sid,network,image,f.client as any,config());
 describe("protected administrator egress lifecycle",()=>{
@@ -67,6 +73,12 @@ describe("protected administrator egress lifecycle",()=>{
   expect(specs[1].HostConfig).toMatchObject({NetworkMode:`container:${holder}`,CapDrop:["ALL"],CapAdd:["NET_ADMIN"],Privileged:false});
   expect(specs[2].HostConfig).toMatchObject({NetworkMode:`container:${holder}`,CapDrop:["ALL"],Privileged:false});
   expect(specs[2].HostConfig.CapAdd).toBeUndefined();
+  expect(specs[0].HostConfig.ExtraHosts).toBeUndefined();
+  const raw=specs[2].Env.find((v:string)=>v.startsWith("LAB_EGRESS_PINS_JSON=")).split("=")[1];
+  const policy=JSON.parse(raw);
+  expect(policy.hosts).toEqual(hosts);
+  expect(JSON.parse(specs[1].Cmd[3])).toEqual(policy.hosts);
+  expect(Number(specs[1].Cmd[4])).toBe(policy.expiresAt);
   await removeAdminEgressProxy(name,sid,f.client as any);
   expect(f.events.slice(-2)).toEqual(["remove:gateway","remove:holder"]);expect(f.containers.size).toBe(0);
  });
@@ -80,7 +92,10 @@ describe("protected administrator egress lifecycle",()=>{
   const f=fixture({badHolder:true});await expect(start(f)).rejects.toThrow("namespace holder");expect(f.events).not.toContain("create:firewall");
  });
  it("failed gateway readiness cleans gateway before holder",async()=>{
-  const f=fixture({badGateway:true});await expect(start(f)).rejects.toThrow("namespace/profile");expect(f.events.slice(-2)).toEqual(["remove:gateway","remove:holder"]);
+  const f=fixture({badGateway:true});await expect(start(f)).rejects.toThrow("namespace/profile");expect(f.events).not.toContain("start:gateway");expect(f.events.slice(-2)).toEqual(["remove:gateway","remove:holder"]);
+ });
+ it("rejects duplicate pin environment entries before gateway start",async()=>{
+  const f=fixture({duplicatePins:true});await expect(start(f)).rejects.toThrow("namespace/profile");expect(f.events).not.toContain("start:gateway");
  });
  it("persistent helper blocks admission and preserves holder",async()=>{
   const f=fixture({sticky:"firewall"});await expect(start(f)).rejects.toThrow("remains");expect(f.events).not.toContain("create:gateway");expect(f.events).not.toContain("remove:holder");
@@ -92,3 +107,26 @@ describe("protected administrator egress lifecycle",()=>{
   expect(()=>verifyAdminEgressProxyInspect({Name:`/${name}`,Image:image,Config:{User:"1000:1000",Labels:adminEgressProxyLabels(sid)},HostConfig:{NetworkMode:"bridge",Privileged:false,ReadonlyRootfs:true,CapDrop:["ALL"],SecurityOpt:["no-new-privileges:true"],Memory:64*1024*1024,MemorySwap:64*1024*1024,PidsLimit:32}},sid,image)).toThrow();
  });
 });
+
+it("rejects missing initializer fingerprint even with successful exit",async()=>{const f=fixture({badFingerprint:true});await expect(start(f)).rejects.toThrow("initializer evidence");expect(f.events).not.toContain("create:gateway");});
+async function liveFixture(opts:Parameters<typeof fixture>[0]={}){
+ const f=fixture(opts);const guest="1".repeat(64),owner="u:"+"2".repeat(62);
+ for(const [key,value] of Object.entries({...config(),RUNNER_EXECUTION_POOL:"zoeskoul-learning",ZOESKOUL_LEARNING_ADMIN_LABS_ENABLED:"true",ZOESKOUL_LEARNING_ADMIN_EGRESS_LIVE_RENEWAL:"true"}))vi.stubEnv(key,value);
+ const generation=setAdminLabSwitch(true).generation;
+ await createAdminEgressProxy(sid,network,image,f.client as any,process.env,{generation,hardLifetimeMs:7200000});
+ f.addGuest(guest,owner);
+ const session=createSession({id:sid,ownerKey:owner,kind:"shell",labMode:"admin",adminTopicSlug:"full-privileges",adminNetworkName:network,adminEgressProxyName:name,containerId:guest,workspaceDir:"",idleTimeoutMs:1800000,hardLifetimeMs:7200000});
+ session.state="waiting_for_input";
+ vi.stubEnv("ZOESKOUL_LEARNING_ADMIN_EGRESS_PINS_JSON",JSON.stringify({...manifest(),expiresAt:Math.floor(Date.now()/1000)+1800}));
+ return {f,session,guest};
+}
+async function finishLive(f?:ReturnType<typeof fixture>){try{if(f)await removeAdminEgressProxy(name,sid,f.client as any);}finally{deleteSession(sid);setAdminLabSwitch(false);vi.unstubAllEnvs();}}
+it("rotates gateway and firewall while keeping the student container",async()=>{let f:ReturnType<typeof fixture>|undefined;try{const x=await liveFixture();f=x.f;await rotateExistingSession(sid,f.client as any);expect(f.events.slice(9)).toEqual(["remove:gateway","create:firewall","start:firewall","wait:firewall","remove:firewall","create:gateway","start:gateway"]);expect(f.containers.has(x.guest)).toBe(true);expect(f.containers.has(holder)).toBe(true);expect(f.containers.has(gateway)).toBe(false);expect(f.containers.has("f".repeat(64))).toBe(true);}finally{await finishLive(f);}});
+it("failed transaction removes egress and never recreates gateway",async()=>{let f:ReturnType<typeof fixture>|undefined;try{const x=await liveFixture({renewalFails:true});f=x.f;await expect(rotateExistingSession(sid,f.client as any)).rejects.toThrow("Firewall renewal failed");expect(f.events.filter(v=>v==="create:gateway")).toHaveLength(1);expect(f.containers.has(x.guest)).toBe(true);expect(f.containers.has(holder)).toBe(false);}finally{await finishLive(f);}});
+it("renewal evidence mismatch prevents replacement",async()=>{let f:ReturnType<typeof fixture>|undefined;try{const x=await liveFixture({wrongRenewalEvidence:true});f=x.f;await expect(rotateExistingSession(sid,f.client as any)).rejects.toThrow("renewal evidence");expect(f.events.filter(v=>v==="create:gateway")).toHaveLength(1);}finally{await finishLive(f);}});
+it("operator revocation during helper prevents gateway replacement",async()=>{let f:ReturnType<typeof fixture>|undefined;try{const x=await liveFixture({revokeDuringRenewal:()=>{setAdminLabSwitch(false);}});f=x.f;await expect(rotateExistingSession(sid,f.client as any)).rejects.toThrow();expect(f.events.filter(v=>v==="create:gateway")).toHaveLength(1);}finally{await finishLive(f);}});
+it("unexpected endpoint prevents renewal helper execution",async()=>{let f:ReturnType<typeof fixture>|undefined;try{const x=await liveFixture({foreignEndpoint:true});f=x.f;await expect(rotateExistingSession(sid,f.client as any)).rejects.toThrow("membership changed");expect(f.events.filter(v=>v==="create:firewall")).toHaveLength(1);}finally{await finishLive(f);}});
+it("feature flag OFF leaves old gateway and policy untouched",async()=>{let f:ReturnType<typeof fixture>|undefined;try{const x=await liveFixture();f=x.f;vi.stubEnv("ZOESKOUL_LEARNING_ADMIN_EGRESS_LIVE_RENEWAL","false");await rotateExistingSession(sid,f.client as any);expect(f.events).toHaveLength(9);}finally{await finishLive(f);}});
+
+it("terminal cancellation during helper cannot be followed by gateway replacement",async()=>{let f:ReturnType<typeof fixture>|undefined;let session:ReturnType<typeof createSession>|undefined;try{const x=await liveFixture({revokeDuringRenewal:()=>{if(session){session.state="canceled";session.finalizedAt=Date.now();}}});f=x.f;session=x.session;await expect(rotateExistingSession(sid,f.client as any)).rejects.toThrow();expect(f.events.filter(v=>v==="create:gateway")).toHaveLength(1);}finally{await finishLive(f);}});
+it("graded administrator sessions do not receive live renewal",async()=>{let f:ReturnType<typeof fixture>|undefined;try{const x=await liveFixture();f=x.f;x.session.adminTopicSlug="final-capstone-secure-project";await rotateExistingSession(sid,f.client as any);expect(f.events).toHaveLength(9);}finally{await finishLive(f);}});

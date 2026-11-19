@@ -388,7 +388,9 @@ async function startDockerSessionUncoordinated(
         const egress = adminEgressConfig();
         if (egress) {
           adminEgressProxyName = adminEgressProxyNameForStartup(sessionId);
-          await createAdminEgressProxy(sessionId, adminNetworkName, egress.image);
+          await createAdminEgressProxy(sessionId, adminNetworkName, egress.image, undefined, process.env, {
+            generation: adminGeneration!, hardLifetimeMs: timeouts.hardLifetimeMs!,
+          });
           assertAdminLabSwitch(adminGeneration);
         }
       }

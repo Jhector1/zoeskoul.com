@@ -5,6 +5,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"io"
 	"log"
@@ -80,10 +81,66 @@ func validHost(h string) bool {
 type lookuper interface {
 	LookupIPAddr(context.Context, string) ([]net.IPAddr, error)
 }
-type systemLookup struct{ r *net.Resolver }
 
-func (s systemLookup) LookupIPAddr(ctx context.Context, host string) ([]net.IPAddr, error) {
-	return s.r.LookupIPAddr(ctx, host)
+// A gateway receives its own immutable policy from the trusted Runner. It never
+// resolves names through the holder's /etc/hosts or a DNS server. A later policy
+// generation will use a replacement gateway, not student-controlled reloads.
+type pinnedLookup struct {
+	hosts     map[string][]net.IPAddr
+	expiresAt int64
+	deadline  time.Time
+}
+
+func parsePinSnapshot(raw string, now time.Time) (*pinnedLookup, error) {
+	if len(raw) == 0 || len(raw) > 8192 {
+		return nil, errors.New("invalid policy size")
+	}
+	var p struct {
+		ExpiresAt int64               `json:"expiresAt"`
+		Hosts     map[string][]string `json:"hosts"`
+	}
+	dec := json.NewDecoder(strings.NewReader(raw))
+	dec.DisallowUnknownFields()
+	if err := dec.Decode(&p); err != nil {
+		return nil, errors.New("invalid policy JSON")
+	}
+	if err := dec.Decode(new(any)); err != io.EOF {
+		return nil, errors.New("trailing policy JSON")
+	}
+	if p.ExpiresAt <= now.Unix() || p.ExpiresAt-now.Unix() > 3600 || p.ExpiresAt-now.Unix() < 10 || len(p.Hosts) != 3 {
+		return nil, errors.New("invalid policy deadline or hosts")
+	}
+	// Subtract the same two-second guard as the independent kernel initializer.
+	deadline := now.Add(time.Unix(p.ExpiresAt-2, 0).Sub(now))
+	out := &pinnedLookup{hosts: make(map[string][]net.IPAddr), expiresAt: p.ExpiresAt - 2, deadline: deadline}
+	for _, host := range []string{"archive.ubuntu.com", "security.ubuntu.com", "example.com"} {
+		values := p.Hosts[host]
+		if len(values) < 1 || len(values) > 32 {
+			return nil, errors.New("invalid policy address count")
+		}
+		seen := make(map[string]bool)
+		for _, value := range values {
+			addr, err := netip.ParseAddr(value)
+			if err != nil || addr.String() != value || !publicIP(addr) || seen[value] {
+				return nil, errors.New("invalid policy address")
+			}
+			seen[value] = true
+			out.hosts[host] = append(out.hosts[host], net.IPAddr{IP: net.IP(addr.AsSlice())})
+		}
+	}
+	return out, nil
+}
+func (p *pinnedLookup) valid(now time.Time) bool {
+	return now.Unix() < p.expiresAt && now.Before(p.deadline)
+}
+func (p *pinnedLookup) LookupIPAddr(ctx context.Context, host string) ([]net.IPAddr, error) {
+	if err := ctx.Err(); err != nil {
+		return nil, err
+	}
+	if !p.valid(time.Now()) || len(p.hosts[host]) == 0 {
+		return nil, errors.New("policy expired or destination denied")
+	}
+	return p.hosts[host], nil
 }
 
 func resolvePinned(ctx context.Context, lookup lookuper, host string) (netip.Addr, error) {
@@ -192,6 +249,7 @@ func parseGet(r *http.Request) (string, string, error) {
 type gateway struct {
 	cidr   netip.Prefix
 	lookup lookuper
+	lease  *pinnedLookup
 	dialer net.Dialer
 	slots  chan struct{}
 }
@@ -229,7 +287,19 @@ func (g *gateway) dialPinned(ctx context.Context, ip netip.Addr, port int) (net.
 	return conn, nil
 }
 
+func (g *gateway) requestDeadline(max time.Duration) time.Time {
+	deadline := time.Now().Add(max)
+	if g.lease != nil && g.lease.deadline.Before(deadline) {
+		return g.lease.deadline
+	}
+	return deadline
+}
+
 func (g *gateway) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	if g.lease != nil && !g.lease.valid(time.Now()) {
+		http.Error(w, "policy expired", http.StatusServiceUnavailable)
+		return
+	}
 	if r.URL != nil && r.URL.Path == "/_healthz" && r.Method == http.MethodGet {
 		host, _, _ := net.SplitHostPort(r.RemoteAddr)
 		if host == "127.0.0.1" {
@@ -270,7 +340,7 @@ func (g *gateway) connect(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "upstream address denied", http.StatusForbidden)
 		return
 	}
-	ctx, cancel := context.WithTimeout(r.Context(), 5*time.Second)
+	ctx, cancel := context.WithDeadline(r.Context(), g.requestDeadline(5*time.Second))
 	upstream, err := g.dialPinned(ctx, ip, 443)
 	cancel()
 	if err != nil {
@@ -294,7 +364,7 @@ func (g *gateway) connect(w http.ResponseWriter, r *http.Request) {
 	if _, err = io.WriteString(client, "HTTP/1.1 200 Connection Established\r\n\r\n"); err != nil {
 		return
 	}
-	deadline := time.Now().Add(maxTunnelSeconds * time.Second)
+	deadline := g.requestDeadline(maxTunnelSeconds * time.Second)
 	client.SetDeadline(deadline)
 	upstream.SetDeadline(deadline)
 	finished := make(chan struct{}, 2)
@@ -322,7 +392,7 @@ func (g *gateway) forwardHTTP(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "upstream address denied", http.StatusForbidden)
 		return
 	}
-	ctx, cancel := context.WithTimeout(r.Context(), 20*time.Second)
+	ctx, cancel := context.WithDeadline(r.Context(), g.requestDeadline(20*time.Second))
 	defer cancel()
 	// The transport sends the logical Host but dials only the validated address.
 	req, err := http.NewRequestWithContext(ctx, r.Method, "http://"+host+path, nil)
@@ -396,13 +466,17 @@ func main() {
 	if err != nil {
 		log.Fatalf("fail-closed gateway configuration: %s", err)
 	}
-	g := &gateway{cidr: cidr, lookup: systemLookup{r: net.DefaultResolver},
+	pins, err := parsePinSnapshot(os.Getenv("LAB_EGRESS_PINS_JSON"), time.Now())
+	if err != nil {
+		log.Fatal("fail-closed gateway policy configuration")
+	}
+	g := &gateway{cidr: cidr, lookup: pins, lease: pins,
 		dialer: net.Dialer{Timeout: 5 * time.Second, KeepAlive: -1},
 		slots:  make(chan struct{}, maxConcurrent)}
 	server := &http.Server{Addr: listenAddr, Handler: g,
 		ReadHeaderTimeout: 5 * time.Second, ReadTimeout: 15 * time.Second,
 		IdleTimeout: 2 * time.Second, MaxHeaderBytes: 16 << 10,
 		ErrorLog: log.New(os.Stderr, "gateway: ", log.LstdFlags)}
-	log.Printf("phase2c3 supervised gateway ready; labCIDR=%s", cidr.String())
+	log.Printf("phase2c8b2a supervised pinned gateway ready; labCIDR=%s", cidr.String())
 	log.Fatal(server.ListenAndServe())
 }

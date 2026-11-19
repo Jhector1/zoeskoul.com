@@ -2,7 +2,7 @@
 # Trusted one-shot initializer. Never mounted into students or gateway.
 set -euo pipefail
 [[ $# == 5 ]] || exit 1
-python3 - "$@" <<'PY'
+python3 -I - "$@" <<'PY'
 import ipaddress,sys,socket,time,subprocess,re
 inode,cidr,lab,manifest,deadline=sys.argv[1:]
 assert re.fullmatch(r'[0-9]+',inode) and open('/proc/self/status').read()
@@ -57,5 +57,10 @@ report=json.loads(subprocess.check_output([nft,'-j','list','table','inet','zoe_l
 chains={x['chain']['name']:x['chain'] for x in report if 'chain' in x}
 assert set(chains)=={'input','output','forward'} and all(x['policy']=='drop' and x['hook']==name for name,x in chains.items())
 sets={x['set']['name'] for x in report if 'set' in x}; assert sets=={'approved_http','approved_https'}
+sys.path.insert(0, '/usr/local/lib/zoe-firewall')
+from firewall_renewal_execute import inspect_table, expected_addresses
+fingerprint, addresses = inspect_table({'nftables':report})
+if addresses != expected_addresses(hosts): raise ValueError('Initial firewall addresses mismatch')
+print('ZOE_FIREWALL_STRUCTURE_SHA256='+fingerprint)
 print('ZOE_FIREWALL_INSTALLED_AND_VERIFIED')
 PY

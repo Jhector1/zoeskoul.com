@@ -9,7 +9,7 @@ RUN go test -count=1 ./... && go build -trimpath -ldflags='-s -w' -o /out/gatewa
 
 FROM scratch
 LABEL com.zoeskoul.learning.egress-proxy="v1" \
-      com.zoeskoul.learning.egress-gateway-phase="2c3-development-audit-only"
+      com.zoeskoul.learning.egress-gateway-phase="2c8b2a-pinned-policy-dev-v1"
 COPY --from=build /out/gateway /gateway
 USER 1000:1000
 EXPOSE 3128

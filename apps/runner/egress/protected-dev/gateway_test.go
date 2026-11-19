@@ -4,12 +4,14 @@ import (
 	"bufio"
 	"context"
 	"errors"
+	"fmt"
 	"net"
 	"net/http"
 	"net/http/httptest"
 	"net/netip"
 	"strings"
 	"testing"
+	"time"
 )
 
 type fakeLookup struct {
@@ -162,5 +164,66 @@ func TestClientOnlyLoopbackHealth(t *testing.T) {
 		if w.Code != tc.code {
 			t.Errorf("health from %s expected %d got %d", tc.ip, tc.code, w.Code)
 		}
+	}
+}
+
+func testSnapshot(expiry int64) string {
+	return fmt.Sprintf(`{"expiresAt":%d,"hosts":{"archive.ubuntu.com":["185.125.190.81"],"security.ubuntu.com":["185.125.190.82"],"example.com":["93.184.215.14"]}}`, expiry)
+}
+func TestExplicitSnapshotLookup(t *testing.T) {
+	now := time.Now()
+	p, err := parsePinSnapshot(testSnapshot(now.Unix()+600), now)
+	if err != nil {
+		t.Fatal(err)
+	}
+	addr, err := resolvePinned(context.Background(), p, "example.com")
+	if err != nil || addr.String() != "93.184.215.14" {
+		t.Fatalf("pin mismatch %v %v", addr, err)
+	}
+	if _, err := p.LookupIPAddr(context.Background(), "google.com"); err == nil {
+		t.Fatal("unapproved hostname")
+	}
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+	if _, err := p.LookupIPAddr(ctx, "example.com"); err == nil {
+		t.Fatal("canceled lookup")
+	}
+}
+func TestSnapshotRejectsInvalid(t *testing.T) {
+	now := time.Now()
+	valid := testSnapshot(now.Unix() + 600)
+	for _, raw := range []string{"", "{}", valid + "{}", testSnapshot(now.Unix() - 1), testSnapshot(now.Unix() + 3601), testSnapshot(now.Unix() + 9), strings.Replace(valid, "93.184.215.14", "169.254.169.254", 1), strings.Replace(valid, "93.184.215.14", "::1", 1), strings.Replace(valid, `"93.184.215.14"`, `"93.184.215.14","93.184.215.14"`, 1), strings.Replace(valid, `"example.com"`, `"google.com"`, 1), strings.Replace(valid, `"hosts":`, `"extra":1,"hosts":`, 1)} {
+		if _, err := parsePinSnapshot(raw, now); err == nil {
+			t.Fatalf("invalid policy accepted %s", raw)
+		}
+	}
+}
+func TestSnapshotExpiryAndHealth(t *testing.T) {
+	now := time.Now()
+	p, err := parsePinSnapshot(testSnapshot(now.Unix()+60), now)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !p.valid(now) || p.valid(now.Add(60*time.Second)) {
+		t.Fatal("deadline not bounded")
+	}
+	// A backwards wall clock cannot extend the in-process monotonic deadline.
+	p.deadline = now.Add(-time.Second)
+	if p.valid(now) {
+		t.Fatal("monotonic expiry not enforced")
+	}
+	if _, err := p.LookupIPAddr(context.Background(), "example.com"); err == nil {
+		t.Fatal("expired lookup")
+	}
+	g := &gateway{lease: p, lookup: p}
+	r := httptest.NewRequest("GET", "http://127.0.0.1/_healthz", nil)
+	r.RemoteAddr = "127.0.0.1:40000"
+	w := httptest.NewRecorder()
+	g.ServeHTTP(w, r)
+	if w.Code != 503 {
+		t.Fatalf("expired gateway health %d", w.Code)
+	}
+	if g.requestDeadline(30 * time.Second).After(p.deadline) {
+		t.Fatal("request outlives lease")
 	}
 }

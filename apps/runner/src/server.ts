@@ -1,5 +1,6 @@
 import { createServer } from "node:http";
 import { startAdminEgressRenewal } from "./services/execution/adminEgressRenewal.js";
+import { startAdminEgressRotation } from "./services/execution/adminEgressProxy.js";
 import { app } from "./app.js";
 import { env } from "./lib/env.js";
 import { attachSessionWsServer } from "./ws/sessionWsServer.js";
@@ -25,6 +26,7 @@ async function main() {
 
   // Own the renewal lifecycle in the trusted Runner, never in a student request.
   startAdminEgressRenewal();
+  startAdminEgressRotation();
 
   const rateLimitPruneTimer = setInterval(pruneStartRateLimitBuckets, 60_000);
   if (typeof rateLimitPruneTimer.unref === "function") {
