@@ -1,4 +1,5 @@
 import { createHash, randomBytes, randomUUID } from "node:crypto";
+import { assertZoebuildPreviewAdmissionOpen } from "./zoebuildPreviewAdmission.js";
 import { env } from "../../lib/env.js";
 import { trustedTanstackDevelopmentWorkspaces } from "./tanstackDevelopmentWorkspaceStore.js";
 import { trustedTanstackDevelopmentSources } from "./tanstackDevelopmentSourceStore.js";
@@ -40,9 +41,12 @@ async function startAdmittedPreviewWithMode(
   if (input.operationCorrelation !== undefined && !/^[a-f0-9]{16}$/.test(input.operationCorrelation))
     throw new Error("Invalid preview diagnostic correlation.");
   if (typeof input.authorize !== "function") throw new Error("Preview authorization required.");
+  assertZoebuildPreviewAdmissionOpen();
   const {request,ownerKey} = input;
   const endQueue = input.telemetry?.begin("queue_wait");
   try { return await sharedPreviewStartCoordinator.run(async () => {
+    // A queued admission may have waited while the operator closed the gate.
+    assertZoebuildPreviewAdmissionOpen();
     endQueue?.("ok");
     const endStart = sharedPreviewProjectDrains.beginStart(ownerKey,request.buildProjectId);
     let endLifecycleStart:()=>void=()=>{};
@@ -326,6 +330,7 @@ export async function reuseAdmittedTanstackPreview(input: Readonly<{
       input.request.operation !== "production-build") {
     throw new Error("Invalid TanStack preview identity.");
   }
+  assertZoebuildPreviewAdmissionOpen();
   const finishStart = sharedPreviewProjectDrains.beginStart(
     input.ownerKey,input.request.buildProjectId);
   try {

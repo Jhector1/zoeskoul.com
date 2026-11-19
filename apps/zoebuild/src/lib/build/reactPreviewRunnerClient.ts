@@ -181,6 +181,30 @@ export async function proxyFetchTrustedReactDevelopmentPreviewAtRunner(args:Read
   );
 }
 
+/** Private application operation, never selected by the public resource route. */
+export async function executeTrustedDevelopmentApplicationGetAtRunner(args:Readonly<{
+  actorKey:string;previewId:string;buildProjectId:string;sourceVersion:number;path:string;
+}>):Promise<Readonly<{sourceVersion:number;response:ReactPreviewFetchResult}>> {
+  const result=await runnerPost<{ok:true;sourceVersion:number;response:ReactPreviewFetchResult}>(
+    `/build/previews/${encodeURIComponent(args.previewId)}/development-fetch`,args.actorKey,
+    {buildProjectId:args.buildProjectId,sourceVersion:args.sourceVersion,path:args.path,
+      method:"GET",accept:"*/*",applicationRpc:"tanstack-json-get-v1"});
+  if(result?.ok!==true)throw new Error("Application preview unavailable.");
+  return result;
+}
+
+/** Explicit mutation command, independent of the resource-read path. */
+export async function executeTrustedDevelopmentApplicationPostAtRunner(args:Readonly<{
+  actorKey:string;previewId:string;buildProjectId:string;sourceVersion:number;path:string;bodyBase64:string;
+}>):Promise<Readonly<{sourceVersion:number;response:ReactPreviewFetchResult}>> {
+  const result=await runnerPost<{ok:true;sourceVersion:number;response:ReactPreviewFetchResult}>(
+    `/build/previews/${encodeURIComponent(args.previewId)}/development-fetch`,args.actorKey,
+    {buildProjectId:args.buildProjectId,sourceVersion:args.sourceVersion,path:args.path,
+      method:"POST",accept:"*/*",applicationRpc:"tanstack-json-post-v1",bodyBase64:args.bodyBase64});
+  if(result?.ok!==true)throw new Error("Application preview unavailable.");
+  return result;
+}
+
 /** Phase 4E3C3B: server-to-server HMR ticket request.
  * Only the dedicated ZoeBuild authorization layer may call this; do not
  * include the Runner service credential in any browser response. */

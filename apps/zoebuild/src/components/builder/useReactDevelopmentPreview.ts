@@ -227,6 +227,8 @@ export function useReactDevelopmentPreview(input: Readonly<{
     };
     const bridge=createDevelopmentHmrIframeBridge({
       documentUrl:currentDocumentUrl,
+      ...(process.env.NEXT_PUBLIC_ZOEBUILD_DEVELOPMENT_APPLICATION_RPC_ENABLED === "true" ?
+        {getApplicationRpcVersion:()=>confirmedVersionRef.current} : {}),
       onBound:()=>{bound=true;diagnostic("bridge_bound");markMeaningfulRecovery();},
       onClientReady:()=>diagnostic("iframe_vite_client_ready"),
       onDeliveryFailure:()=>fallbackToImmutable("iframe_hmr_delivery_overflow"),

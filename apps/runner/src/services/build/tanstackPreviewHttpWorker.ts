@@ -6,7 +6,7 @@
  * destinations. Not connected to any route in Phase 3B1.
  */
 export const TANSTACK_PREVIEW_HTTP_WORKER = String.raw`
-import base64, binascii, concurrent.futures, http.client, json, socket, sys, threading, time
+import base64, binascii, concurrent.futures, http.client, json, re, socket, sys, threading, time
 
 MAX_REQUEST = 256 * 1024
 MAX_RESPONSE = 6 * 1024 * 1024
@@ -45,6 +45,29 @@ def perform(item):
                 if not isinstance(entry, str) or len(entry) > 256 or any(ord(c) < 32 or ord(c) > 126 for c in entry):
                     raise ValueError("invalid headers")
                 headers[value] = entry
+        rpc = item.get("applicationRpc")
+        mutation = rpc == "tanstack-json-post-v1"
+        deadline = item.get("mutationDeadlineMs")
+        def check_mutation_deadline():
+            now = time.time_ns() // 1000000
+            if not isinstance(deadline, int) or isinstance(deadline, bool) or deadline <= now or deadline > now + 20000:
+                raise WorkerFailure("deadline")
+        if mutation:
+            check_mutation_deadline()
+            if method != "POST" or set(supplied) != {"accept", "content-type"} or supplied.get("content-type") != "application/json" or not body or len(body) > 65536 or not re.fullmatch(r"/api/build/projects/[A-Za-z0-9_-]+/preview/preview_[a-f0-9-]+/content/[A-Za-z0-9_-]{32}/_serverFn/[A-Za-z0-9_-]{1,2048}", path):
+                raise ValueError("invalid mutation request")
+            parsed = json.loads(body.decode("utf-8", errors="strict"))
+            if not isinstance(parsed, dict):
+                raise ValueError("invalid mutation body")
+        elif deadline is not None:
+            raise ValueError("unexpected mutation deadline")
+        if rpc is not None:
+            if not mutation and (rpc != "tanstack-json-get-v1" or method != "GET" or body or set(supplied) != {"accept"} or not re.fullmatch(r"/api/build/projects/[A-Za-z0-9_-]+/preview/preview_[a-f0-9-]+/content/[A-Za-z0-9_-]{32}/_serverFn/[A-Za-z0-9_-]{1,2048}(?:\?payload=[^&]*)?", path)):
+                raise ValueError("invalid rpc request")
+            headers["Accept"] = "application/x-tss-framed, application/x-ndjson, application/json"
+            headers["X-TSR-ServerFn"] = "true"
+            # This is a fixed, trusted loopback hop, not a forwarded browser Origin.
+            headers["Origin"] = "http://127.0.0.1:5173"
         # A fresh HTTPConnection per request: no shared tenant sessions.
         # Hardcoded IPv4 loopback, no redirects, no caller-selected host/port.
         connection = http.client.HTTPConnection("127.0.0.1", 5173, timeout=20)
@@ -54,6 +77,8 @@ def perform(item):
         except (ConnectionRefusedError, ConnectionResetError, socket.timeout, TimeoutError, OSError):
             raise WorkerFailure("loopback_connection")
         try:
+            if mutation:
+                check_mutation_deadline()  # Never start an expired queued mutation.
             connection.request(method, path, body=body if method == "POST" else None, headers=headers)
             reply = connection.getresponse()
             data = reply.read(MAX_RESPONSE + 1) if method != "HEAD" else b""
@@ -64,6 +89,11 @@ def perform(item):
             raise WorkerFailure("vite_response")
         header_type = reply.getheader("Content-Type", "")
         safe_headers = {"content-type": header_type} if isinstance(header_type, str) and 0 < len(header_type) <= 180 else {}
+        if rpc in ("tanstack-json-get-v1", "tanstack-json-post-v1"):
+            flags = [v for k, v in reply.getheaders() if k.lower() == "x-tss-serialized"]
+            raw_flags = [v for k, v in reply.getheaders() if k.lower() == "x-tss-raw"]
+            if flags == ["true"] and not raw_flags:
+                safe_headers["x-tss-serialized"] = "true"
         result = {"id": ident, "status": reply.status, "headers": safe_headers,
                   "bodyBase64": base64.b64encode(data).decode("ascii"),
                   "upstreamDurationMs": upstream_ms}

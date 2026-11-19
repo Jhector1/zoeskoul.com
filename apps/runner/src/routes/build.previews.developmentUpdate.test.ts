@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 import type { Request, Response, NextFunction } from "express";
 import type { ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contracts";
 import { makeTanstackDevelopmentUpdateRoute } from "./build.previews.developmentUpdate.js";
+import { DevelopmentPreviewUpdateFailure } from "../services/build/tanstackDevelopmentPreviewUpdate.js";
 
 const previewId = "preview_12345678-1234-4123-8123-123456789abc";
 const actorKey = `u:${"a".repeat(64)}`;
@@ -105,5 +106,17 @@ describe("Phase 4C disabled-by-default development update HTTP boundary", () => 
     const h = setup({commit: async () => ({action:"restart_required",sourceVersion:7,
       reason:"dependency changed",changedPaths:["secret/path"]})});
     expect(await h.call()).toEqual({code:409,payload:{ok:false,code:"RESTART_REQUIRED",sourceVersion:7}});
+  });
+});
+
+
+describe("H10Q2 private typed update failure response",()=>{
+  it("classifies only trusted typed failures, without returning details",async()=>{
+    const pre=setup({commit:async()=>{throw new DevelopmentPreviewUpdateFailure("pre_write_authority","pre_write_authority");}});
+    expect(await pre.call()).toEqual({code:503,payload:{ok:false,code:"UPDATE_PRE_WRITE_AUTHORITY_FAILED"}});
+    const post=setup({commit:async()=>{throw new DevelopmentPreviewUpdateFailure("quarantined","post_write_authority");}});
+    expect(await post.call()).toEqual({code:503,payload:{ok:false,code:"UPDATE_QUARANTINED"}});
+    const unknown=setup({commit:async()=>{throw Error("UPDATE_QUARANTINED secret");}});
+    expect(await unknown.call()).toEqual({code:503,payload:{ok:false,code:"UPDATE_UNAVAILABLE"}});
   });
 });

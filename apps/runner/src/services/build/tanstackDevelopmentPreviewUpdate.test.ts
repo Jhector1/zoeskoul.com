@@ -3,6 +3,7 @@ import type { ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contr
 import { SharedFullStackPreviewRegistry } from "./sharedPreviewRegistry.js";
 import { createTanstackPreviewIdentity } from "./tanstackPreviewIdentity.js";
 import { coordinateTanstackDevelopmentPreviewUpdate } from "./tanstackDevelopmentPreviewUpdate.js";
+import { PreviewObservability } from "./previewObservability.js";
 
 vi.mock("./tanstackPreviewSourceAuthorization.js", () => ({
   authorizeTanstackPreviewSource: vi.fn(),
@@ -26,6 +27,7 @@ const old = request(7,"old");
 const next = request(8,"next");
 function fixture(opts: {close?: () => Promise<void>;mode?:"immutable"|"development"} = {}) {
   const registry = new SharedFullStackPreviewRegistry();
+  const observability = new PreviewObservability();
   const close = vi.fn(opts.close ?? (async () => undefined));
   registry.register({id:"preview_a",mode:opts.mode ?? "development",ownerKey:"actor",
     buildProjectId:"p",sourceVersion:7,identity:createTanstackPreviewIdentity(old,image),
@@ -35,11 +37,11 @@ function fixture(opts: {close?: () => Promise<void>;mode?:"immutable"|"developme
   const apply = vi.fn(async (_args: unknown) => undefined);
   const update = (previous = old, subsequent = next, overrides: Record<string,unknown> = {}) =>
     coordinateTanstackDevelopmentPreviewUpdate({
-      registry,previewId:"preview_a",actorKey:"actor",previous,next:subsequent,
+      registry,observability,previewId:"preview_a",actorKey:"actor",previous,next:subsequent,
       authorizeCurrentSavedSource:authorize,verifyLiveWorkspace:healthy,
       applyApprovedSource:apply,...overrides,
     } as Parameters<typeof coordinateTanstackDevelopmentPreviewUpdate>[0]);
-  return {registry,close,authorize,healthy,apply,update};
+  return {registry,observability,close,authorize,healthy,apply,update};
 }
 function gate() {
   let release!: () => void;
@@ -86,7 +88,7 @@ describe("serialized development preview update coordinator (not wired to HTTP)"
   it("refuses authority failure and dead workspace before the first write", async () => {
     const f=fixture();
     f.authorize.mockRejectedValueOnce(new Error("No DB source authorization."));
-    await expect(f.update()).rejects.toThrow("No DB source authorization.");
+    await expect(f.update()).rejects.toMatchObject({category:"pre_write_authority",stage:"pre_write_authority"});
     f.healthy.mockResolvedValueOnce(false);
     await expect(f.update()).rejects.toThrow("Preview not found.");
     expect(f.apply).not.toHaveBeenCalled();
@@ -170,5 +172,48 @@ describe("serialized development preview update coordinator (not wired to HTTP)"
     expect(f.registry.developmentUpdatePending("preview_a")).toBe(false);
     await expect(f.update()).rejects.toThrow("Preview source is stale.");
     expect(f.registry.developmentUpdatePending("preview_a")).toBe(false);
+  });
+});
+
+
+describe("H10Q2 bounded update stage evidence", () => {
+  it("records only stages actually reached on success", async () => {
+    const f=fixture(); await f.update();
+    const d=f.observability.snapshot().durations;
+    for(const stage of ["queue_wait","owner_check","pre_write_authority","source_resolve",
+      "admission","workspace_verify","workspace_write","post_write_authority","lease_commit","snapshot_publish","total"])
+      expect(d[`development_update.${stage}.ok`]).toMatchObject({count:1});
+    expect(d["development_update.cleanup.ok"]).toBeUndefined();
+  });
+  it("classifies pre-write authority failure without mutating or leaking the error", async () => {
+    const f=fixture(); f.authorize.mockRejectedValueOnce(new Error("secret authority detail"));
+    await expect(f.update()).rejects.toMatchObject({category:"pre_write_authority",stage:"pre_write_authority",message:"Saved-source authority rejected the request."});
+    expect(f.apply).not.toHaveBeenCalled(); expect(f.registry.get("preview_a")?.sourceVersion).toBe(7);
+    const d=f.observability.snapshot().durations;
+    expect(d["development_update.pre_write_authority.error"].count).toBe(1);
+    expect(d["development_update.total.error"].count).toBe(1);
+    expect(d["development_update.workspace_write.ok"]).toBeUndefined();
+    expect(JSON.stringify(d)).not.toContain("secret authority detail");
+  });
+  it("distinguishes post-write authority failure and unsuccessful cleanup", async () => {
+    const f=fixture({close:async()=>{throw new Error("secret cleanup detail");}});
+    f.authorize.mockResolvedValueOnce(undefined).mockRejectedValueOnce(new Error("secret DB detail"));
+    await expect(f.update()).rejects.toMatchObject({category:"quarantined",stage:"post_write_authority"});
+    expect(f.registry.snapshot().quarantined).toBe(1);
+    const d=f.observability.snapshot().durations;
+    expect(d["development_update.workspace_write.ok"].count).toBe(1);
+    expect(d["development_update.post_write_authority.error"].count).toBe(1);
+    expect(d["development_update.cleanup.error"].count).toBe(1);
+    expect(d["development_update.lease_commit.ok"]).toBeUndefined();
+    expect(JSON.stringify(d)).not.toMatch(/secret|preview_a/);
+  });
+  it("distinguishes source publication failure after CAS and quarantines",async()=>{
+    const f=fixture();
+    await expect(f.update(old,next,{afterCommittedLease:async()=>{throw Error("publication failed");}}))
+      .rejects.toMatchObject({category:"quarantined",stage:"snapshot_publish"});
+    const d=f.observability.snapshot().durations;
+    expect(d["development_update.lease_commit.ok"].count).toBe(1);
+    expect(d["development_update.snapshot_publish.error"].count).toBe(1);
+    expect(f.registry.get("preview_a")).toBeNull();
   });
 });

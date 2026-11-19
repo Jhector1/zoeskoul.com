@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import type { Request, Response, NextFunction } from "express";
+import * as admission from "../services/build/zoebuildPreviewAdmission.js";
 import { makeTanstackDevelopmentStartRoute } from "./build.previews.developmentStart.js";
 import type { startAdmittedTanstackDevelopmentPreview } from
   "../services/build/tanstackPreviewSharedLifecycle.js";
@@ -48,6 +49,20 @@ describe("Phase 4D private development lease startup gate",()=>{
     expect((await b.call()).status).toBe(404);
     expect(a.start).not.toHaveBeenCalled();
     expect(b.start).not.toHaveBeenCalled();
+  });
+  it("refuses managed closure before source authority and rechecks after identity resolution",async()=>{
+    const gate=vi.spyOn(admission,"assertZoebuildPreviewAdmissionOpen");
+    const closed=()=>{throw new admission.ZoebuildPreviewMaintenanceError();};
+    try {
+      gate.mockImplementation(closed);
+      const first=setup();
+      expect(await first.call()).toEqual({status:503,payload:{ok:false,code:"PREVIEW_MAINTENANCE"}});
+      expect(first.check).not.toHaveBeenCalled(); expect(first.authority).not.toHaveBeenCalled();
+      gate.mockImplementationOnce(()=>{});
+      const second=setup();
+      expect(await second.call()).toEqual({status:503,payload:{ok:false,code:"PREVIEW_MAINTENANCE"}});
+      expect(second.resolve).toHaveBeenCalledOnce(); expect(second.start).not.toHaveBeenCalled();
+    } finally { gate.mockRestore(); }
   });
   it("rejects noncanonical actor, stack, revision before network or Docker",async()=>{
     for(const overrides of [

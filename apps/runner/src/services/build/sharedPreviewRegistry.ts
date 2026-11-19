@@ -24,10 +24,21 @@ export type FullStackPreviewLease = Readonly<{
 export type PreviewLifecycleState = "idle" | "starting" | "ready" |
   "updating" | "recovering" | "closing" | "controlled_fallback";
 
+/** Only emitted after validating an existing development lease's owner/project.
+ * Still fail closed: this signals a retryable fence, not permission to read. */
+export class DevelopmentPreviewRevisionTransitionError extends Error {
+  constructor() { super("Preview not found."); this.name="DevelopmentPreviewRevisionTransitionError"; }
+}
+
 export class SharedFullStackPreviewRegistry {
   private readonly live = new Map<string, FullStackPreviewLease>();
   private readonly closing = new Map<string, Promise<void>>();
-  private readonly healthChecks = new Map<string, Promise<boolean>>();
+  // Activity touches must not invalidate a successful probe. Registration,
+  // revision commits and quarantine each create a distinct lifecycle generation.
+  private readonly generations = new Map<string, symbol>();
+  private readonly healthChecks = new Map<string, Readonly<{
+    generation: symbol; result: Promise<boolean>;
+  }>>();
   /** Exclusive per-lease updates; always account for pending updates on close. */
   private readonly updates = new Map<string, Promise<void>>();
   private readonly activeUpdates = new Set<string>();
@@ -86,6 +97,7 @@ export class SharedFullStackPreviewRegistry {
     // Normalize legacy callers explicitly to immutable; all capacity and close
     // accounting remains shared across both modes.
     this.live.set(lease.id, { ...lease, mode });
+    this.generations.set(lease.id, Symbol());
   }
   touch(id: string, at: number) {
     const lease = this.live.get(id);
@@ -111,9 +123,10 @@ export class SharedFullStackPreviewRegistry {
       const update = this.updates.get(id);
       if (update) await update;
       const healthCheck = this.healthChecks.get(id);
-      if (healthCheck) await healthCheck.catch(() => false);
+      if (healthCheck) await healthCheck.result.catch(() => false);
       await lease.close();
       this.live.delete(id);
+      this.generations.delete(id);
     })();
     void task.then(() => endCleanup("ok"), () => endCleanup("error"));
     void task.then(settle, fail);
@@ -150,10 +163,10 @@ export class SharedFullStackPreviewRegistry {
         !lease.ownerKey || lease.ownerKey !== input.ownerKey ||
         lease.buildProjectId !== input.buildProjectId ||
         !Number.isSafeInteger(input.sourceVersion) || input.sourceVersion < 1 ||
-        lease.sourceVersion !== input.sourceVersion ||
-        lease.basePath.startsWith("/quarantined/") ||
-        this.closing.has(input.previewId) || this.updates.has(input.previewId))
+        lease.basePath.startsWith("/quarantined/") || this.closing.has(input.previewId))
       throw new Error("Preview not found.");
+    if (lease.sourceVersion !== input.sourceVersion || this.updates.has(input.previewId))
+      throw new DevelopmentPreviewRevisionTransitionError();
     return lease;
   }
 
@@ -215,6 +228,7 @@ export class SharedFullStackPreviewRegistry {
       sourceVersion: input.nextVersion, identity: input.nextIdentity,
       lastActivityAt: Date.now()};
     this.live.set(id, updated);
+    this.generations.set(id, Symbol());
     return updated;
   }
 
@@ -225,6 +239,7 @@ export class SharedFullStackPreviewRegistry {
     if (!lease || lease.mode !== "development" || !this.activeUpdates.has(id))
       throw new Error("Preview not found.");
     this.live.set(id, {...lease, basePath:`/quarantined/${id}/`});
+    this.generations.set(id, Symbol());
   }
 
   /** Reattach only an exact, live, previously authorized mutable lease.
@@ -302,17 +317,29 @@ export class SharedFullStackPreviewRegistry {
    * reuse by itself; callers must first verify owner/project/source identity. */
   async checkLive(id: string, healthCheck: (lease: FullStackPreviewLease) => Promise<boolean>) {
     const lease = this.live.get(id);
-    if (!lease || lease.basePath.startsWith("/quarantined/") || this.closing.has(id)) return false;
+    const generation = this.generations.get(id);
+    if (!lease || !generation || lease.basePath.startsWith("/quarantined/") || this.closing.has(id)) return false;
     let check = this.healthChecks.get(id);
+    if (check && check.generation !== generation) {
+      // Do not borrow a pending result for a previous committed revision.
+      // Keep the single-flight invariant, then probe this exact generation.
+      await check.result;
+      if (this.closing.has(id) || this.generations.get(id) !== generation) return false;
+      check = this.healthChecks.get(id);
+      if (check && check.generation !== generation) return false;
+    }
     if (!check) {
-      check = Promise.resolve().then(() => healthCheck(lease)).then(Boolean, () => false);
-      this.healthChecks.set(id, check);
-      void check.finally(() => {
-        if (this.healthChecks.get(id) === check) this.healthChecks.delete(id);
+      const current = this.live.get(id);
+      if (!current || this.generations.get(id) !== generation || this.closing.has(id)) return false;
+      const pending = {generation, result:Promise.resolve().then(() => healthCheck(current)).then(Boolean, () => false)};
+      check = pending;
+      this.healthChecks.set(id, pending);
+      void pending.result.finally(() => {
+        if (this.healthChecks.get(id) === pending) this.healthChecks.delete(id);
       }).catch(() => undefined);
     }
-    const healthy = await check;
-    if (!healthy || this.closing.has(id) || this.live.get(id) !== lease) return false;
+    const healthy = await check.result;
+    if (!healthy || this.closing.has(id) || this.generations.get(id) !== generation) return false;
     this.touch(id,Date.now());
     return true;
   }
@@ -337,6 +364,7 @@ export class SharedFullStackPreviewRegistry {
     if (this.closing.size || this.healthChecks.size || this.updates.size || this.startingProjects.size)
       throw new Error("Cannot reset active preview cleanup.");
     this.live.clear();
+    this.generations.clear();
   }
 }
 export const sharedFullStackPreviews = new SharedFullStackPreviewRegistry();

@@ -17,6 +17,13 @@ export type PreviewOperationTimingStage = typeof PREVIEW_OPERATION_TIMING_STAGES
 export type PreviewTimingOutcome = "ok" | "error" | "cancelled" | "pending" | "unavailable" | "skipped";
 export type PreviewStartKind = "cold" | "restart" | "reuse";
 
+export const DEVELOPMENT_UPDATE_STAGES = [
+  "queue_wait", "owner_check", "pre_write_authority", "source_resolve",
+  "admission", "workspace_verify", "workspace_write", "post_write_authority",
+  "lease_commit", "snapshot_publish", "cleanup", "total",
+] as const;
+export type DevelopmentUpdateStage = typeof DEVELOPMENT_UPDATE_STAGES[number];
+
 export type PreviewStageTiming = Readonly<{
   outcome: PreviewTimingOutcome;
   durationMs?: number;
@@ -104,6 +111,14 @@ export class PreviewObservability {
 
   recordStage(name: PreviewOperationTimingStage, durationMs: number) {
     this.observe(`stage.${name}`, durationMs);
+  }
+
+  recordDevelopmentUpdateStage(stage: DevelopmentUpdateStage,
+    outcome: "ok" | "error" | "restart_required", durationMs: number) {
+    // Fixed dimensions only. Never pass identity, source or error text.
+    if (!DEVELOPMENT_UPDATE_STAGES.includes(stage) ||
+        !["ok", "error", "restart_required"].includes(outcome)) return;
+    this.observe(`development_update.${stage}.${outcome}`, durationMs);
   }
 
   recordLeaseReuse() {

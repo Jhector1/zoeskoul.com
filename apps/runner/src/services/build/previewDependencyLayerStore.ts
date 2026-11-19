@@ -1,7 +1,7 @@
 import { createHash, randomUUID } from "node:crypto";
-import { constants, type Stats } from "node:fs";
+import { constants } from "node:fs";
 import fs from "node:fs/promises";
-import { createReadStream } from "node:fs";
+import { Worker } from "node:worker_threads";
 import path from "node:path";
 import { performance } from "node:perf_hooks";
 import { env } from "../../lib/env.js";
@@ -70,125 +70,151 @@ export function previewDependencyLayerKey(input: Readonly<{
     .digest("hex");
 }
 
-function within(root: string, absolute: string) {
-  return absolute === root || absolute.startsWith(root + path.sep);
+/** Static trusted worker code. Paths and limits are data, never interpolated
+ * into executable source. Keep the v1 byte digest and locale order identical.
+ * Synchronous syscalls run off the Runner event loop, avoiding per-file libuv
+ * dispatch and duplicate prefetch stats. Never use mtime as a cache hit proof. */
+const ATTESTATION_WORKER = String.raw`
+const fs = require('node:fs');
+const path = require('node:path');
+const { createHash } = require('node:crypto');
+const { parentPort, workerData } = require('node:worker_threads');
+const { root, options, maxFiles, maxBytes } = workerData;
+const failed = reason => ({ ok: false, reason });
+function same(a, b) {
+  return a.dev === b.dev && a.ino === b.ino && a.mode === b.mode &&
+    a.nlink === b.nlink && a.size === b.size &&
+    a.mtimeNs === b.mtimeNs && a.ctimeNs === b.ctimeNs;
+}
+function scan() {
+  let st, canonical;
+  try {
+    st = fs.lstatSync(root, { bigint: true });
+    if (!st.isDirectory() || st.isSymbolicLink()) return failed('root-unavailable');
+    canonical = fs.realpathSync(root);
+  } catch { return failed('root-unavailable'); }
+  const digest = createHash('sha256');
+  const buffer = Buffer.alloc(256 * 1024);
+  let bytes = 0, files = 0;
+  function walk(dir, prefix, before) {
+    const children = fs.readdirSync(dir, { withFileTypes: true })
+      .sort((a,b) => a.name.localeCompare(b.name));
+    for (const child of children) {
+      if (++files > maxFiles) return 'file-limit';
+      const filename = path.join(dir, child.name);
+      const relative = prefix ? prefix + '/' + child.name : child.name;
+      const info = fs.lstatSync(filename, { bigint: true });
+      if (info.isSymbolicLink()) {
+        const target = fs.readlinkSync(filename);
+        if (path.isAbsolute(target)) return 'unsafe-link';
+        let resolved;
+        try { resolved = fs.realpathSync(filename); } catch { return 'unsafe-link'; }
+        if (resolved !== canonical && !resolved.startsWith(canonical + path.sep)) return 'unsafe-link';
+        if (!same(info, fs.lstatSync(filename, { bigint: true }))) return 'read-failure';
+        digest.update('L\0' + relative + '\0' + target + '\0');
+      } else if (info.isDirectory()) {
+        digest.update('D\0' + relative + '\0');
+        const error = walk(filename, relative, info);
+        if (error) return error;
+      } else if (info.isFile()) {
+        if (!options.allowExternalHardlinks && info.nlink > 1n) return 'external-hardlink';
+        if (info.size < 0n || info.size > BigInt(maxBytes - bytes)) return 'byte-limit';
+        const size = Number(info.size);
+        bytes += size;
+        digest.update('F\0' + relative + '\0' + (Number(info.mode) & 0o111) + '\0' + size + '\0');
+        if (!options.metadataOnly) {
+          // Never follow a substituted final-component link or block on a FIFO.
+          // Pin the inode, validate identity, and hash exactly the declared bytes.
+          const fd = fs.openSync(filename, fs.constants.O_RDONLY | fs.constants.O_NOFOLLOW | fs.constants.O_NONBLOCK);
+          try {
+            const opened = fs.fstatSync(fd, { bigint: true });
+            if (!opened.isFile() || !same(info, opened)) return 'read-failure';
+            let read = 0;
+            while (read < size) {
+              const n = fs.readSync(fd, buffer, 0, Math.min(buffer.length, size - read), null);
+              if (n <= 0) return 'read-failure';
+              digest.update(buffer.subarray(0,n)); read += n;
+            }
+            if (fs.readSync(fd, buffer, 0, 1, null) !== 0 ||
+                !same(opened, fs.fstatSync(fd, { bigint: true }))) return 'read-failure';
+          } finally { fs.closeSync(fd); }
+        }
+      } else return 'unsupported-entry';
+    }
+    // Detect directory-entry replacements during traversal. These are extra
+    // stability checks, not a substitute for reading any regular file's bytes.
+    if (!same(before, fs.lstatSync(dir, { bigint: true }))) return 'read-failure';
+    return null;
+  }
+  try {
+    const error = walk(root, '', st);
+    if (error) return failed(error);
+    return { ok: true, tree: { digest: digest.digest('hex'), bytes, files } };
+  } catch { return failed('read-failure'); }
+}
+parentPort.postMessage(scan());
+`;
+
+// Global (not per tree or per store) bound on off-thread filesystem work.
+// Release a slot only after its worker exits; queue wait is included in verification.
+const MAX_ATTESTATION_WORKERS = 2;
+let activeAttestationWorkers = 0;
+const attestationWaiters: Array<() => void> = [];
+async function reserveAttestationWorker(): Promise<() => void> {
+  if (activeAttestationWorkers < MAX_ATTESTATION_WORKERS) activeAttestationWorkers++;
+  else await new Promise<void>(resolve => attestationWaiters.push(resolve));
+  return () => {
+    const next = attestationWaiters.shift();
+    if (next) next(); else activeAttestationWorkers--;
+  };
 }
 
-/** Verify file content, symlink containment, and bounded disk footprint. */
+function validateAttestation(value: unknown): TreeAttestation {
+  if (value && typeof value === "object") {
+    const a = value as TreeAttestation;
+    if (a.ok === true && a.tree && typeof a.tree.digest === "string" && KEY.test(a.tree.digest) &&
+        Number.isSafeInteger(a.tree.bytes) && a.tree.bytes >= 0 && a.tree.bytes <= MAX_ITEM_BYTES &&
+        Number.isSafeInteger(a.tree.files) && a.tree.files >= 0 && a.tree.files <= MAX_FILES)
+      return a;
+    if (a.ok === false && ["root-unavailable", "file-limit", "byte-limit", "unsafe-link",
+      "external-hardlink", "unsupported-entry", "read-failure"].includes(a.reason)) return a;
+  }
+  return { ok: false, reason: "read-failure" };
+}
+
+/** A complete byte scan on every acquire. Existing manifests remain valid. */
 async function attestTree(root: string, options: Readonly<{
   allowExternalHardlinks?: boolean;
   metadataOnly?: boolean;
 }> = {}): Promise<TreeAttestation> {
-  const st = await fs.lstat(root).catch(() => null);
-  if (!st?.isDirectory() || st.isSymbolicLink())
-    return { ok: false, reason: "root-unavailable" };
-  const canonical = await fs.realpath(root).catch(() => null);
-  if (!canonical) return { ok: false, reason: "root-unavailable" };
-  const digest = createHash("sha256");
-  let bytes = 0;
-  let files = 0;
-  let rejection: Extract<TreeAttestation, { ok: false }>["reason"] | null = null;
-  const reject = (reason: NonNullable<typeof rejection>) => {
-    rejection = reason;
-    return false;
-  };
-  const walk = async (dir: string, prefix: string): Promise<boolean> => {
-    const children = (await fs.readdir(dir, { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name));
-    // The layer is verified against its exact byte digest on EVERY acquire.
-    // Prefetch only a small bounded window of regular files: this overlaps
-    // slow filesystem reads without changing hash order or trusting mtimes.
-    // Never buffer large packages; keep the runner's 512 MiB memory limit safe.
-    const PREFETCH_FILES = 6;
-    const PREFETCH_FILE_BYTES = 256 * 1024;
-    const prefetched = new Map<number, Promise<Buffer | null>>();
-    const fillPrefetch = (from: number) => {
-      if (options.metadataOnly) return;
-      let active = prefetched.size;
-      for (let i = from; i < children.length && active < PREFETCH_FILES; i++) {
-        if (!children[i]!.isFile() || prefetched.has(i)) continue;
-        const filename = path.join(dir, children[i]!.name);
-        // Read failures are handled as verification failures, not an
-        // unhandled rejected promise while another file is being checked.
-        prefetched.set(i, fs.lstat(filename).then((st) =>
-          st.isFile() && st.size <= PREFETCH_FILE_BYTES
-            ? fs.readFile(filename) : null,
-        ).catch(() => null));
-        active++;
-      }
-    };
-    // Overlap independent metadata lookups without changing the canonical
-    // depth-first digest order. This accelerates wide pnpm trees while keeping
-    // strict byte hashing, link checks and the total file budget unchanged.
-    // Each promise absorbs errors, including when an earlier sibling rejects,
-    // so abandoned lookahead never creates an unhandled rejection.
-    const METADATA_LOOKAHEAD = 8;
-    const metadata = new Map<number, Promise<Stats | null>>();
-    let nextMetadata = 0;
-    const fillMetadata = () => {
-      while (nextMetadata < children.length && metadata.size < METADATA_LOOKAHEAD) {
-        const i = nextMetadata++;
-        metadata.set(i, fs.lstat(path.join(dir, children[i]!.name)).catch(() => null));
-      }
-    };
-    for (const [i, child] of children.entries()) {
-      fillMetadata();
-      fillPrefetch(i);
-      if (++files > MAX_FILES) return reject("file-limit");
-      const filename = path.join(dir, child.name);
-      const relative = prefix ? `${prefix}/${child.name}` : child.name;
-      const info = await metadata.get(i);
-      metadata.delete(i);
-      if (!info) return reject("read-failure");
-      if (info.isSymbolicLink()) {
-        const target = await fs.readlink(filename);
-        if (path.isAbsolute(target)) return reject("unsafe-link");
-        const resolved = await fs.realpath(filename).catch(() => null);
-        if (!resolved || !within(canonical, resolved)) return reject("unsafe-link");
-        digest.update(`L\0${relative}\0${target}\0`);
-      } else if (info.isDirectory()) {
-        digest.update(`D\0${relative}\0`);
-        if (!await walk(filename, relative)) return false;
-      } else if (info.isFile()) {
-        // Do not accept an inode also reachable through a writable external
-        // path. A read-only Docker mount does not make its other hardlinks RO.
-        if (!options.allowExternalHardlinks && info.nlink > 1)
-          return reject("external-hardlink");
-        bytes += info.size;
-        if (bytes > MAX_ITEM_BYTES) return reject("byte-limit");
-        digest.update(`F\0${relative}\0${info.mode & 0o111}\0${info.size}\0`);
-        // Stream large files so a cache check cannot allocate hundreds of MiB
-        // inside the runner's 512 MiB service memory allowance.
-        if (!options.metadataOnly) {
-          const prefetchedRead = prefetched.get(i);
-          const smallFile = prefetchedRead ? await prefetchedRead : null;
-          prefetched.delete(i);
-          if (smallFile && smallFile.length === info.size) {
-            digest.update(smallFile);
-          } else {
-            // Large files remain streamed; a disappeared/changed small file
-            // must never pass merely because its prefetch was unsuccessful.
-            let streamed = 0;
-            for await (const chunk of createReadStream(filename)) {
-              streamed += (chunk as Buffer).byteLength;
-              digest.update(chunk as Buffer);
-            }
-            if (streamed !== info.size) return reject("read-failure");
-          }
-        }
-      } else return reject("unsupported-entry");
-    }
-    return true;
-  };
+  const release = await reserveAttestationWorker();
   try {
-    if (!await walk(root, ""))
-      return { ok: false, reason: rejection ?? "read-failure" };
+    return await new Promise<TreeAttestation>((resolve) => {
+      let result: TreeAttestation = { ok: false, reason: "read-failure" };
+      let failed = false;
+      const worker = new Worker(ATTESTATION_WORKER, {
+        eval: true, execArgv: [], env: {},
+        workerData: { root, options, maxBytes: MAX_ITEM_BYTES, maxFiles: MAX_FILES },
+        resourceLimits: { maxOldGenerationSizeMb: 48, maxYoungGenerationSizeMb: 8, stackSizeMb: 4 },
+      });
+      // Request termination after ten minutes; never accept a timed-out worker.
+      // A blocked kernel filesystem call may delay termination and slot release.
+      const timeout = setTimeout(() => { failed = true; void worker.terminate().catch(() => undefined); }, 10 * 60_000);
+      worker.once("message", (value: unknown) => { result = validateAttestation(value); });
+      worker.once("error", () => { failed = true; });
+      worker.once("exit", (code) => {
+        clearTimeout(timeout);
+        resolve(!failed && code === 0 ? result : { ok: false, reason: "read-failure" });
+      });
+    });
   } catch { return { ok: false, reason: "read-failure" }; }
-  return { ok: true, tree: { digest: digest.digest("hex"), bytes, files } };
+  finally { release(); }
 }
 
 export class PreviewDependencyLayerStore {
   private readonly leases = new Map<string, number>();
   private readonly removing = new Set<string>();
+  private readonly verifying = new Map<string, number>();
   private readonly root: string;
   private readonly workspaceRoot: string;
   private readonly now: () => number;
@@ -277,13 +303,12 @@ export class PreviewDependencyLayerStore {
   }
 
   private async remove(key: string): Promise<boolean> {
-    if (this.leases.get(key) || this.removing.has(key)) return false;
+    if (this.leases.get(key) || this.verifying.get(key) || this.removing.has(key)) return false;
     this.removing.add(key);
     try {
-      // The marker closes the verification-to-lease race: lookup checks it
-      // immediately before issuing a lease, with no await between the check
-      // and lease accounting.
-      if (this.leases.get(key)) return false;
+      // Pin a verification until it fails or becomes a counted lease. Never
+      // remove and republish its path between byte attestation and lease issue.
+      if (this.leases.get(key) || this.verifying.get(key)) return false;
       const dir = this.entry(key);
       const st = await fs.lstat(dir).catch(() => null);
       if (st?.isSymbolicLink()) { await fs.unlink(dir); return true; }
@@ -387,29 +412,40 @@ export class PreviewDependencyLayerStore {
       previewObservability.recordDependencyLayerLookup("unavailable", durationMs, null);
       return { outcome: "unavailable", verificationMs: null, lease: null };
     }
-    const verified = await this.verified(key);
-    if (verified.outcome !== "hit") {
-      this.misses += 1;
-      if (verified.outcome === "rejected") this.rejected += 1;
-      if (verified.outcome === "corrupt") this.corrupt += 1;
-      const durationMs = performance.now() - startedAt;
-      previewObservability.recordDependencyLayerLookup(
-        verified.outcome, durationMs, verified.verificationMs,
-      );
-      return { outcome: verified.outcome, verificationMs: verified.verificationMs, lease: null };
-    }
     if (this.removing.has(key)) {
       this.misses += 1;
-      const durationMs = performance.now() - startedAt;
-      previewObservability.recordDependencyLayerLookup(
-        "miss", durationMs, verified.verificationMs,
-      );
-      return { outcome: "miss", verificationMs: verified.verificationMs, lease: null };
+      previewObservability.recordDependencyLayerLookup("miss", performance.now() - startedAt, null);
+      return { outcome: "miss", verificationMs: null, lease: null };
     }
-    this.hits += 1;
-    const durationMs = performance.now() - startedAt;
-    previewObservability.recordDependencyLayerLookup("hit", durationMs, verified.verificationMs);
-    return { outcome: "hit", verificationMs: verified.verificationMs, lease: this.lease(key) };
+    this.verifying.set(key, (this.verifying.get(key) ?? 0) + 1);
+    try {
+      const verified = await this.verified(key);
+      if (verified.outcome !== "hit") {
+        this.misses += 1;
+        if (verified.outcome === "rejected") this.rejected += 1;
+        if (verified.outcome === "corrupt") this.corrupt += 1;
+        const durationMs = performance.now() - startedAt;
+        previewObservability.recordDependencyLayerLookup(
+          verified.outcome, durationMs, verified.verificationMs,
+        );
+        return { outcome: verified.outcome, verificationMs: verified.verificationMs, lease: null };
+      }
+      if (this.removing.has(key)) {
+        this.misses += 1;
+        const durationMs = performance.now() - startedAt;
+        previewObservability.recordDependencyLayerLookup(
+          "miss", durationMs, verified.verificationMs,
+        );
+        return { outcome: "miss", verificationMs: verified.verificationMs, lease: null };
+      }
+      this.hits += 1;
+      const durationMs = performance.now() - startedAt;
+      previewObservability.recordDependencyLayerLookup("hit", durationMs, verified.verificationMs);
+      return { outcome: "hit", verificationMs: verified.verificationMs, lease: this.lease(key) };
+    } finally {
+      const count = (this.verifying.get(key) ?? 1) - 1;
+      if (count) this.verifying.set(key, count); else this.verifying.delete(key);
+    }
   }
 
   async acquire(key: string): Promise<DependencyLayerLease | null> {

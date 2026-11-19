@@ -305,3 +305,59 @@ describe("K20D3F persistent verified dependency layers", () => {
     lease!.release();
   });
 });
+
+
+describe("H10S1 full-byte worker attestation", () => {
+  it("rejects same-length tampering even when the original mtime is restored", async () => {
+    const { first, store } = await fixture();
+    const lease = (await store.publish(key(), first))!;
+    const target = path.join(lease.nodeModulesDir, "foo", "index.js");
+    const original = await fs.stat(target);
+    lease.release();
+    await fs.writeFile(target, "export default 999");
+    await fs.utimes(target, original.atime, original.mtime);
+    expect((await store.lookup(key())).outcome).toBe("corrupt");
+  });
+
+  it("rejects an external hardlink and an executable mode change after publication", async () => {
+    const { root, first, store } = await fixture();
+    const lease = (await store.publish(key(), first))!;
+    const target = path.join(lease.nodeModulesDir, "foo", "index.js");
+    lease.release();
+    const original = await fs.stat(target);
+    const external = path.join(root, "external.js");
+    await fs.link(target, external);
+    expect((await store.lookup(key())).outcome).toBe("corrupt");
+    await fs.unlink(external);
+    await fs.chmod(target, (original.mode & 0o777) ^ 0o100);
+    expect((await store.lookup(key())).outcome).toBe("corrupt");
+  });
+
+  it("holds a verification pin until a successful lookup becomes a lease", async () => {
+    const { first, store } = await fixture();
+    const lease = (await store.publish(key(), first))!;
+    lease.release();
+    // Delay only manifest reading in the trusted store, not any worker bytes.
+    const internal = store as unknown as {
+      manifest(key: string): Promise<unknown>;
+      remove(key: string): Promise<boolean>;
+    };
+    const original = internal.manifest.bind(store);
+    let resume!: () => void;
+    let entered!: () => void;
+    const blocked = new Promise<void>(resolve => { resume = resolve; });
+    const reading = new Promise<void>(resolve => { entered = resolve; });
+    vi.spyOn(internal, "manifest").mockImplementation(async k => {
+      entered(); await blocked; return original(k);
+    });
+    const pending = store.lookup(key());
+    await reading;
+    try { expect(await internal.remove(key())).toBe(false); }
+    finally { resume(); }
+    const result = await pending;
+    expect(result.outcome).toBe("hit");
+    expect(await internal.remove(key())).toBe(false);
+    result.lease?.release();
+    expect(await internal.remove(key())).toBe(true);
+  });
+});

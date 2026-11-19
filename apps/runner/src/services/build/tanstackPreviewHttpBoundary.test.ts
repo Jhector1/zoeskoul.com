@@ -73,3 +73,38 @@ describe("TanStack full-stack HTTP preview security boundary", () => {
       bodyBase64:Buffer.alloc(TANSTACK_PREVIEW_MAX_RESPONSE_BYTES+1).toString("base64")})).toThrow();
   });
 });
+
+
+describe("explicit internal JSON GET RPC protocol",()=>{
+ const base="/api/build/projects/project/preview/preview_12345678-1234-4123-8123-123456789abc/content/"+"a".repeat(32)+"/";
+ const id=(file:string)=>Buffer.from(JSON.stringify({file,export:"getSiteInfo_createServerFn_handler"})).toString("base64url");
+ const url=base+"_serverFn/"+id("/src/functions/siteInfo.functions.ts?tss-serverfn-split");
+ it("constructs the explicit bounded mode without browser Origin",()=>{
+  const result=normalizeTanstackPreviewHttpRequest({basePath:base,path:url,method:"GET",headers:{accept:"*/*"},applicationRpc:"tanstack-json-get-v1"});
+  expect(result).toMatchObject({applicationRpc:"tanstack-json-get-v1",headers:{accept:"application/x-tss-framed, application/x-ndjson, application/json"},bodyBase64:""});
+ });
+ it("rejects traversal, arbitrary paths, duplicate queries and browser headers",()=>{
+  for(const path of [base+"src/index.tsx",base+"_serverFn/"+id("/src/../secret.ts?tss-serverfn-split"),url+"?payload=%7B%7D&payload=%7B%7D"])
+   expect(()=>normalizeTanstackPreviewHttpRequest({basePath:base,path,method:"GET",applicationRpc:"tanstack-json-get-v1"})).toThrow();
+  expect(()=>normalizeTanstackPreviewHttpRequest({basePath:base,path:url,method:"GET",headers:{origin:"null"},applicationRpc:"tanstack-json-get-v1"})).toThrow();
+ });
+ it("preserves serialized JSON metadata only for this exact mode",()=>{
+  const bodyBase64=Buffer.from('{"value":1}').toString("base64");
+  const reply={status:200,headers:{"content-type":"application/json","x-tss-serialized":"true","set-cookie":"bad"},bodyBase64};
+  expect(normalizeTanstackPreviewHttpResponse(reply,"tanstack-json-get-v1").headers).toEqual({"content-type":"application/json","cache-control":"no-store","x-tss-serialized":"true"});
+  expect(normalizeTanstackPreviewHttpResponse(reply).headers).not.toHaveProperty("x-tss-serialized");
+  expect(()=>normalizeTanstackPreviewHttpResponse({...reply,headers:{...reply.headers,"content-type":"application/x-tss-framed; v=1"}},"tanstack-json-get-v1")).toThrow();
+ });
+});
+
+
+describe("H10P3A finite JSON mutation transport",()=>{
+ const basePath="/api/build/projects/project/preview/preview_123e4567-e89b-42d3-a456-426614174000/content/"+"C".repeat(32)+"/";
+ const id=Buffer.from(JSON.stringify({file:"/src/functions/mutate.ts?tss-serverfn-split",export:"mutate_handler"})).toString("base64url");
+ const request=()=>({basePath,path:basePath+"_serverFn/"+id,method:"POST",headers:{accept:"*/*","content-type":"application/json"},bodyBase64:"e30=",applicationRpc:"tanstack-json-post-v1",mutationDeadlineMs:Date.now()+10_000});
+ it("preserves only the exact bounded JSON mutation protocol",()=>{
+  const input=request();expect(normalizeTanstackPreviewHttpRequest(input)).toMatchObject({method:"POST",applicationRpc:"tanstack-json-post-v1",bodyBase64:"e30=",mutationDeadlineMs:input.mutationDeadlineMs});
+  for(const over of [{method:"GET"},{path:input.path+"?payload=e30="},{bodyBase64:""},{bodyBase64:"YWJj"},{mutationDeadlineMs:Date.now()-100},{headers:{...input.headers,origin:"null"}},{applicationRpc:"tanstack-json-get-v1"}])
+   expect(()=>normalizeTanstackPreviewHttpRequest({...input,...over})).toThrow();
+ });
+});

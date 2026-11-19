@@ -1,4 +1,5 @@
 import "server-only";
+import { RunnerHttpError } from "@zoeskoul/platform-server/server/runnerClient";
 import { requireOwnedReactPreviewProject, ReactPreviewRequestError } from "@/lib/build/reactPreviewServer";
 import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
 import { proxyFetchTrustedReactDevelopmentPreviewAtRunner } from "@/lib/build/reactPreviewRunnerClient";
@@ -41,10 +42,44 @@ export async function issueOwnedDevelopmentPreviewBrowserRead(input:Readonly<{
 /** Token-bound GET/HEAD. The sandbox iframe has no access to editor cookies,
  * so each asset is checked against current DB ownership/revision and the
  * Runner's independently fenced development lease. */
-export async function readOwnedDevelopmentPreviewBrowserContent(input:Readonly<{
+type BrowserReadInput=Readonly<{
   token:string;buildProjectId:string;previewId:string;path:string;
   method:"GET"|"HEAD";accept:"*/*"|"text/css";
-}>):Promise<Response> {
+}>;
+
+/** Retry only known module/static asset paths, never arbitrary application
+ * routes or server-function calls. GET/HEAD resource reads are replayed only
+ * for a proven revision transition, not a general Vite or network failure. */
+function retryableResource(input:BrowserReadInput):boolean {
+  if (!input.token.startsWith("dpg1.") || (input.method!=="GET" && input.method!=="HEAD")) return false;
+  const path=input.path.split("?",1)[0];
+  return path==="@vite/client" || path==="@react-refresh" ||
+    path==="@id/virtual:tanstack-start-dev-client-entry" ||
+    (/^(?:src|node_modules)\//.test(path) && /\.(?:[cm]?[jt]sx?|css|scss|json|svg|woff2?|png|jpe?g|webp)$/i.test(path));
+}
+function isRevisionTransition(error:unknown):boolean {
+  return (error instanceof RunnerHttpError && error.status===409 && error.code==="REVISION_TRANSITION") ||
+    (error instanceof ReactPreviewRequestError && error.status===409 && error.code==="BUILD_PREVIEW_READ_REVISION_TRANSITION");
+}
+
+export async function readOwnedDevelopmentPreviewBrowserContent(input:BrowserReadInput):Promise<Response> {
+  // Bounded number of attempts and retry scheduling window, not cancellation
+  // of an already in-flight DB or Runner operation. Every attempt starts from
+  // full grant and current project ownership validation; no cached authority.
+  const deadline=performance.now()+8_000;
+  for(let attempt=0;;attempt++) {
+    try { return await readDevelopmentPreviewOnce(input); }
+    catch(error) {
+      if(!retryableResource(input) || !isRevisionTransition(error) || attempt>=9) throw error;
+      const delay=Math.min(1000,100*2**attempt);
+      if(performance.now()+delay>=deadline) throw error;
+      await new Promise<void>(resolve=>setTimeout(resolve,delay));
+      if(performance.now()>=deadline) throw error;
+    }
+  }
+}
+
+async function readDevelopmentPreviewOnce(input:BrowserReadInput):Promise<Response> {
   const started=Date.now();
   let stage="feature_gate";
   try {
@@ -101,8 +136,11 @@ export async function readOwnedDevelopmentPreviewBrowserContent(input:Readonly<{
   const after = await requireOwnedReactPreviewProject({
     access:{userId:claims.userId,entitlements:[]},buildProjectId:claims.buildProjectId,
   });
-  if (after.sourceVersion !== activeRevision)
+  if (after.sourceVersion !== activeRevision) {
+    if (durable && liveRead && retryableResource(input))
+      throw new ReactPreviewRequestError("BUILD_PREVIEW_READ_REVISION_TRANSITION","Preview unavailable.",409);
     throw new ReactPreviewRequestError("BUILD_PREVIEW_NOT_FOUND","Preview unavailable.",404);
+  }
   // Revocation, expiry or loss of ownership during an in-flight Docker read
   // must not return a successful response.
   stage="grant_recheck";
@@ -117,8 +155,9 @@ export async function readOwnedDevelopmentPreviewBrowserContent(input:Readonly<{
     process.env.ZOEBUILD_DEVELOPMENT_PREVIEW_HMR_TICKET_ENABLED === "true");
   } catch(error) {
     if(process.env.NODE_ENV==="development") {
-      const status=error instanceof ReactPreviewRequestError ? error.status : null;
-      console.warn("[ZOE-PREVIEW-READ]",JSON.stringify({method:input.method,stage,status,elapsedMs:Date.now()-started}));
+      const status=error instanceof ReactPreviewRequestError || error instanceof RunnerHttpError ? error.status : null;
+      console.warn("[ZOE-PREVIEW-READ]",JSON.stringify({method:input.method,stage,status,
+        ...(isRevisionTransition(error)?{category:"revision_transition"}:{}),elapsedMs:Date.now()-started}));
     }
     throw error;
   }

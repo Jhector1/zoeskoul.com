@@ -48,3 +48,68 @@ describe("Phase 4E3C4B2 browser durable grant renewal",()=>{
   expect(calls).toBe(4);
  });
 });
+
+
+describe("H10R1 exact durable revision reconciliation",()=>{
+ function fixture(mode:"lost"|"unavailable"|"renew-outage"|"conflict"|"denied", reconcile=true){
+  const replacement="preview_22222222-2222-4222-8222-222222222222";
+  const replacementUrl=`${root}/${replacement}/development/content/${token}/`;
+  let starts=0,updates=0,renewals=0;
+  const fetchClient=vi.fn(async(path:string,init:RequestInit)=>{
+   const version=JSON.parse(String(init.body)).sourceVersion;
+   if(path.endsWith("/development/start")){starts++;return json({ok:true,previewId:starts===1?previewId:replacement,sourceVersion:version});}
+   if(path.endsWith("/development/read-access")){const documentUrl=starts===1?url:replacementUrl;return json({ok:true,documentUrl,basePath:documentUrl,sourceVersion:version});}
+   if(path.endsWith("/development/update")){
+    updates++;
+    if(mode==="lost")throw Error("connection reset");
+    if(mode==="unavailable")return json({ok:false},503);
+    if(mode==="conflict")return json({ok:false},409);
+    if(mode==="denied")return json({ok:false},403);
+    return json({ok:true,action:"updated",sourceVersion:version});
+   }
+   if(path.endsWith("/development/renew-access")){
+    renewals++;
+    expect(JSON.parse(String(init.body))).toEqual({sourceVersion:version,grantToken:token});
+    if(mode==="renew-outage" && renewals===1)return json({ok:false},503);
+    return reconcile?json({ok:true,sourceVersion:version}):json({ok:false},404);
+   }
+   throw Error("unexpected path");
+  });
+  return {session:createDevelopmentPreviewBrowserSession({buildProjectId:"project_1",fetchClient}),counts:()=>({starts,updates,renewals}),replacementUrl};
+ }
+ for(const mode of ["lost","unavailable","renew-outage"] as const){
+  it(`reconciles ${mode} once without replaying workspace mutation`,async()=>{
+   const {session,counts}=fixture(mode);await session.start(7);
+   await expect(session.update(8)).rejects.toMatchObject({code:"UNAVAILABLE"});
+   expect(session.snapshot()).toBeNull();
+   expect(await session.restart(8)).toMatchObject({previewId,sourceVersion:8,documentUrl:url});
+   expect(counts()).toEqual({starts:1,updates:1,renewals:mode==="renew-outage"?2:1});
+  });
+ }
+ it("uses independent admission if proof fails; never reinstates old grant",async()=>{
+  const {session,counts,replacementUrl}=fixture("lost",false);await session.start(7);
+  await expect(session.update(8)).rejects.toThrow();
+  expect((await session.restart(8)).documentUrl).toBe(replacementUrl);
+  expect(counts()).toEqual({starts:2,updates:1,renewals:1});
+ });
+ for(const mode of ["conflict","denied"] as const){
+  it(`does not reconcile a definitive ${mode} response`,async()=>{
+   const {session,counts,replacementUrl}=fixture(mode);await session.start(7);
+   await expect(session.update(8)).rejects.toThrow();
+   expect((await session.restart(8)).documentUrl).toBe(replacementUrl);
+   expect(counts()).toEqual({starts:2,updates:1,renewals:0});
+  });
+ }
+ it("never uses a candidate for a different revision",async()=>{
+  const {session,counts,replacementUrl}=fixture("lost");await session.start(7);
+  await expect(session.update(8)).rejects.toThrow();
+  expect((await session.restart(9)).documentUrl).toBe(replacementUrl);
+  expect(counts()).toEqual({starts:2,updates:1,renewals:0});
+ });
+ it("discards the hidden recovery candidate on close",async()=>{
+  const {session,counts}=fixture("lost");await session.start(7);
+  await expect(session.update(8)).rejects.toThrow();session.close();
+  await expect(session.restart(8)).rejects.toMatchObject({code:"CLOSED"});
+  expect(counts()).toEqual({starts:1,updates:1,renewals:0});
+ });
+});

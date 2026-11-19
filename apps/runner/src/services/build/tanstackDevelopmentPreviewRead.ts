@@ -1,6 +1,6 @@
 import { sharedFullStackPreviews, type SharedFullStackPreviewRegistry } from "./sharedPreviewRegistry.js";
 import { fetchTanstackHttpInsideSandbox } from "./tanstackPreviewDockerTransport.js";
-import { normalizeTanstackPreviewHttpRequest } from "./tanstackPreviewHttpBoundary.js";
+import { normalizeTanstackPreviewHttpRequest, TANSTACK_JSON_GET_RPC, type TanstackJsonGetRpc } from "./tanstackPreviewHttpBoundary.js";
 import { tanstackInternalPreviewPath } from "./tanstackPreviewRuntimePolicy.js";
 
 /** Only a relative Vite path may cross the ZoeBuild-to-Runner boundary.
@@ -71,6 +71,7 @@ export async function readOwnedTanstackDevelopmentPreview(input: Readonly<{
   path: string;
   method: "GET" | "HEAD";
   accept: "*/*" | "text/css";
+  applicationRpc?: TanstackJsonGetRpc;
 }>, deps: Readonly<{
   registry: Pick<SharedFullStackPreviewRegistry,
     "assertDevelopmentReadOpen" | "touch">;
@@ -88,11 +89,16 @@ export async function readOwnedTanstackDevelopmentPreview(input: Readonly<{
     buildProjectId:input.buildProjectId, sourceVersion:input.sourceVersion,
   };
   const relativePath = normalizeDevelopmentPreviewRelativePath(input.path);
+  const first = decodeURIComponent(relativePath.split("?",1)[0]!.split("/",1)[0]!);
+  if (input.applicationRpc === undefined && first.toLowerCase() === "_serverfn")
+    throw new Error("Preview RPC requires separate authorization.");
+  if (input.applicationRpc !== undefined && input.applicationRpc !== TANSTACK_JSON_GET_RPC)
+    throw new Error("Invalid preview RPC protocol.");
   const before = deps.registry.assertDevelopmentReadOpen(identity);
   const safe = normalizeTanstackPreviewHttpRequest({
     basePath: before.basePath,
     path: before.basePath + relativePath, method: input.method,
-    headers: {accept:input.accept},
+    headers: {accept:input.accept}, applicationRpc:input.applicationRpc,
   });
   const internalPath = tanstackInternalPreviewPath(before.basePath,safe);
   const response = await deps.transport(before.containerId, {...safe,path:internalPath});
@@ -103,6 +109,19 @@ export async function readOwnedTanstackDevelopmentPreview(input: Readonly<{
       after.basePath !== before.basePath ||
       after.identity.fingerprint !== before.identity.fingerprint)
     throw new Error("Preview not found.");
+  if (input.applicationRpc === TANSTACK_JSON_GET_RPC) {
+    // Reject capability-bearing JSON, rather than silently altering Seroval
+    // records. Check parsed strings (including escaped strings) as well as bytes.
+    const text = Buffer.from(response.bodyBase64,"base64").toString("utf8");
+    const token = before.basePath.split("/").at(-2)!;
+    const canonical = JSON.stringify(JSON.parse(text));
+    if (text.includes(token) || canonical.includes(token) ||
+        text.includes(DEVELOPMENT_PREVIEW_PUBLIC_BASE_MARKER.slice(0,-1)) ||
+        canonical.includes(DEVELOPMENT_PREVIEW_PUBLIC_BASE_MARKER.slice(0,-1)))
+      throw new Error("Unsafe preview RPC response.");
+    deps.registry.touch(input.previewId,Date.now());
+    return {sourceVersion:after.sourceVersion,response};
+  }
   deps.registry.touch(input.previewId,Date.now());
   return {sourceVersion:after.sourceVersion,response:redactDevelopmentPreviewBasePath(response,before.basePath)};
 }

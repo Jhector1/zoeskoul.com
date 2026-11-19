@@ -164,3 +164,28 @@ describe("Phase 4F5H10K capability stem redaction",()=>{
   expect(redactDevelopmentPreviewBasePath(binary,basePath)).toBe(binary);
  });
 });
+
+
+describe("explicit application JSON GET RPC read fence",()=>{
+ const id=Buffer.from(JSON.stringify({file:"/src/functions/siteInfo.functions.ts?tss-serverfn-split",export:"getSiteInfo_createServerFn_handler"})).toString("base64url");
+ it("does not enable RPC for an ordinary resource read",async()=>{
+  const f=fixture();
+  for(const path of ["_serverFn/"+id,"%5fserverFn/"+id])
+   await expect(readOwnedTanstackDevelopmentPreview({...f.args,path},{registry:f.registry,transport:f.transport as unknown as typeof fetchTanstackHttpInsideSandbox})).rejects.toThrow();
+  expect(f.transport).not.toHaveBeenCalled();
+ });
+ it("uses the existing owner and revision fence and preserves serialized bytes",async()=>{
+  const f=fixture();
+  const response={status:200,headers:{"content-type":"application/json","x-tss-serialized":"true"},bodyBase64:Buffer.from('{"result":1}').toString("base64")};
+  const transport=vi.fn(async(_id:string,_req:unknown)=>response);
+  const args={...f.args,path:"_serverFn/"+id,applicationRpc:"tanstack-json-get-v1" as const};
+  const deps={registry:f.registry,transport:transport as unknown as typeof fetchTanstackHttpInsideSandbox};
+  expect(await readOwnedTanstackDevelopmentPreview(args,deps)).toEqual({sourceVersion:7,response});
+  expect(transport).toHaveBeenCalledExactlyOnceWith("test-container",expect.objectContaining({applicationRpc:"tanstack-json-get-v1",method:"GET",path:basePath+args.path}));
+  transport.mockClear();
+  await expect(readOwnedTanstackDevelopmentPreview({...args,ownerKey:other},deps)).rejects.toThrow();
+  expect(transport).not.toHaveBeenCalled();
+  transport.mockResolvedValueOnce({...response,bodyBase64:Buffer.from(JSON.stringify({secret:basePath})).toString("base64")});
+  await expect(readOwnedTanstackDevelopmentPreview(args,deps)).rejects.toThrow("Unsafe preview RPC response.");
+ });
+});

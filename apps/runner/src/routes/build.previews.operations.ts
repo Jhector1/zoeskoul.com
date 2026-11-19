@@ -1,4 +1,5 @@
 import type { RequestHandler } from "express";
+import { assertZoebuildPreviewAdmissionOpen, ZoebuildPreviewMaintenanceError } from "../services/build/zoebuildPreviewAdmission.js";
 import { parseTrustedBuildJobRequest } from "@zoeskoul/build-executor-contracts";
 import type { ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contracts";
 import { env } from "../lib/env.js";
@@ -22,6 +23,7 @@ const operations = new PreviewOperationRegistry<OperationRequest>(journal,
     // The queued worker revalidates the trusted signed-lock contract even
     // after the authenticated HTTP admission gate has returned 202.
     assertTanstackPreviewStartupEnabled();
+    assertZoebuildPreviewAdmissionOpen();
     authorizeTanstackPreviewSource(admitted.request);
     const operationPhase=(phase:TanstackPreviewStartPhase)=>onPhase(
       phase==="dependencies" ? "dependencies" :
@@ -58,11 +60,15 @@ export const startBuildPreviewOperationRoute: RequestHandler = async (req, res) 
     if (request.stackId !== "tanstack-start-v1" || request.templateId !== "tanstack-start-v1")
       return res.status(400).json({ ok:false, error:"Unsupported preview project stack." });
     assertTanstackPreviewStartupEnabled();
+    assertZoebuildPreviewAdmissionOpen();
     authorizeTanstackPreviewSource(request);
     const identity = await resolveTanstackPreviewIdentity(request);
+    assertZoebuildPreviewAdmissionOpen();
     const operation = await operations.start(actorKey, {request,identity});
     return res.status(operation.state === "ready" ? 200 : 202).json({ ok:true, operation });
   } catch (error) {
+    if (error instanceof ZoebuildPreviewMaintenanceError)
+      return res.status(503).json({ok:false,code:"PREVIEW_MAINTENANCE"});
     const msg = error instanceof Error ? error.message : "";
     const code = msg === "Preview source is stale." ? "PREVIEW_NEWER_OPERATION" :
       /Runner is busy|Too many active sessions/.test(msg) ? "PREVIEW_CAPACITY" : "PREVIEW_START_FAILED";

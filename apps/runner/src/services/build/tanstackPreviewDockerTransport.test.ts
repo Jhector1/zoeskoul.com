@@ -78,3 +78,56 @@ describe("TanStack Docker HTTP worker protocol diagnostics", () => {
     expect(stream.destroyed).toBe(true);
   });
 });
+
+// Simulate the caller deadline, not the actual Python socket timeout.
+describe("H10S2 isolated transport deadlines",()=>{
+  const request={method:"GET" as const,path:"/asset.js",headers:{accept:"*/*"},bodyBase64:""};
+  const flush=async()=>{for(let i=0;i<20;i++)await Promise.resolve();};
+  function fixture(){
+    const stream=new FakeDockerStream();
+    const exec=vi.fn(async()=>({start:async()=>stream}));
+    vi.mocked(docker.getContainer).mockReturnValue({exec} as never);
+    return {stream,exec};
+  }
+  function reply(stream:FakeDockerStream,index:number){
+    stream.reply({id:JSON.parse(stream.writes[index]).id,status:200,headers:{"content-type":"text/css"},bodyBase64:"",upstreamDurationMs:1});
+  }
+  it("preserves healthy requests and consumes one correlated late reply",async()=>{
+    vi.useFakeTimers();const container="isolated-deadline";const {stream,exec}=fixture();
+    try{
+      const first=fetchTanstackHttpInsideSandbox(container,request).catch(error=>error);
+      await flush();expect(stream.writes).toHaveLength(1);
+      await vi.advanceTimersByTimeAsync(12_000);
+      const second=fetchTanstackHttpInsideSandbox(container,request);
+      await flush();expect(stream.writes).toHaveLength(2);
+      await vi.advanceTimersByTimeAsync(12_000);
+      expect(await first).toMatchObject({stage:"deadline"});expect(stream.destroyed).toBe(false);
+      reply(stream,0);reply(stream,1);await expect(second).resolves.toMatchObject({status:200});
+      const third=fetchTanstackHttpInsideSandbox(container,request);await flush();reply(stream,2);
+      await expect(third).resolves.toMatchObject({status:200});expect(exec).toHaveBeenCalledTimes(1);
+      await vi.advanceTimersByTimeAsync(48_000);expect(stream.destroyed).toBe(false);
+    }finally{await retireTanstackHttpWorker(container);vi.useRealTimers();}
+  });
+  it("retains timed-out slots and retires a persistently stuck worker",async()=>{
+    vi.useFakeTimers();const container="bounded-deadlines";const {stream}=fixture();
+    try{
+      const operations=Array.from({length:32},()=>fetchTanstackHttpInsideSandbox(container,request).catch(error=>error));
+      await flush();expect(stream.writes).toHaveLength(32);
+      await vi.advanceTimersByTimeAsync(24_000);
+      for(const result of await Promise.all(operations))expect(result).toMatchObject({stage:"deadline"});
+      expect(stream.destroyed).toBe(false);
+      await expect(fetchTanstackHttpInsideSandbox(container,request)).rejects.toMatchObject({stage:"worker_protocol"});
+      expect(stream.writes).toHaveLength(32);
+      await vi.advanceTimersByTimeAsync(24_000);expect(stream.destroyed).toBe(true);
+    }finally{await retireTanstackHttpWorker(container);vi.useRealTimers();}
+  });
+  it("rejects an unknown reply and never replays outstanding requests",async()=>{
+    const container="unknown-deadline-reply";const {stream}=fixture();
+    try{
+      const p=fetchTanstackHttpInsideSandbox(container,request).catch(error=>error);
+      await flush();expect(stream.writes).toHaveLength(1);
+      stream.reply({id:999,status:200});expect(await p).toMatchObject({stage:"worker_protocol"});
+      expect(stream.destroyed).toBe(true);expect(stream.writes).toHaveLength(1);
+    }finally{await retireTanstackHttpWorker(container);}
+  });
+});

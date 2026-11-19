@@ -1,4 +1,5 @@
 import type { Request, RequestHandler } from "express";
+import { assertZoebuildPreviewAdmissionOpen, ZoebuildPreviewMaintenanceError } from "../services/build/zoebuildPreviewAdmission.js";
 import {
   parseTrustedBuildJobRequest,
   type ProductionBuildJobRequestV1,
@@ -98,6 +99,7 @@ export function makeTanstackDevelopmentStartRoute(
     let stage: FailureStage = "dependency_authorization";
     try {
       // Never allocate a Docker sandbox without current DB authority.
+      assertZoebuildPreviewAdmissionOpen();
       deps.verifySignedLock(request);
       stage = "saved_source_authority";
       await deps.assertSavedSource(actorKey, request);
@@ -105,6 +107,7 @@ export function makeTanstackDevelopmentStartRoute(
       const identity = await deps.resolveIdentity(request);
       // The lifecycle rechecks the DB before launch AND after readiness.
       stage = "lease_admission";
+      assertZoebuildPreviewAdmissionOpen();
       const preview = await deps.start({
         ownerKey:actorKey, request, identity,
         authorize:async (ownerKey, candidate) => {
@@ -118,7 +121,9 @@ export function makeTanstackDevelopmentStartRoute(
       // This remains private to the service-to-service client. The legacy
       // browser capability routes explicitly exclude development leases.
       return res.status(200).json({ok:true,preview});
-    } catch {
+    } catch (error) {
+      if (error instanceof ZoebuildPreviewMaintenanceError)
+        return res.status(503).json({ok:false,code:"PREVIEW_MAINTENANCE"});
       console.warn("RUNNER development preview start failed", {
         requestCorrelation: requestId ?? "unavailable",
         stage,

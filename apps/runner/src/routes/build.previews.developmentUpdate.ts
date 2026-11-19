@@ -9,6 +9,7 @@ import { sharedFullStackPreviews } from "../services/build/sharedPreviewRegistry
 import { trustedTanstackDevelopmentSources } from "../services/build/tanstackDevelopmentSourceStore.js";
 import { trustedTanstackDevelopmentWorkspaces } from "../services/build/tanstackDevelopmentWorkspaceStore.js";
 import { updateCanonicalTanstackDevelopmentPreview } from "../services/build/tanstackDevelopmentCanonicalUpdate.js";
+import { DevelopmentPreviewUpdateFailure } from "../services/build/tanstackDevelopmentPreviewUpdate.js";
 import { authorizeTanstackPreviewSource } from "../services/build/tanstackPreviewSourceAuthorization.js";
 import { assertCurrentTanstackSavedSourceAtZoeBuild } from "../services/build/tanstackSavedSourceAuthorityClient.js";
 
@@ -130,6 +131,10 @@ export function makeTanstackDevelopmentUpdateRoute(
       return res.status(200).json({ ok: true, action: "updated",
         sourceVersion: result.sourceVersion });
     } catch (error) {
+      if (error instanceof DevelopmentPreviewUpdateFailure) {
+        return res.status(503).json({ok:false,code:error.category === "quarantined" ?
+          "UPDATE_QUARANTINED" : "UPDATE_PRE_WRITE_AUTHORITY_FAILED"});
+      }
       const message = error instanceof Error ? error.message : "";
       // Do not expose signed approvals, source bytes, filesystem paths, or
       // private DB/authority error details through an HTTP response.

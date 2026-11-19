@@ -40,7 +40,9 @@ export function prepareDevelopmentPreviewBrowserResponse(input:Readonly<{
     // and document links retain the slash already present in the response.
     const changed=original.split(DEVELOPMENT_PREVIEW_PUBLIC_BASE_MARKER.slice(0,-1))
       .join(publicBase.replace(/\/$/, ""));
-    const document=HTML.test(type) && nativeIframeHmr ? injectNativeIframeHmrBootstrap(changed) : changed;
+    const document=HTML.test(type) && nativeIframeHmr ? injectNativeIframeHmrBootstrap(changed,
+      process.env.ZOEBUILD_DEVELOPMENT_APPLICATION_RPC_ENABLED === "true" &&
+      process.env.NEXT_PUBLIC_ZOEBUILD_DEVELOPMENT_APPLICATION_RPC_ENABLED === "true" ? publicBase : undefined) : changed;
     bytes=Buffer.from(document,"utf8");
     if(bytes.length>6*1024*1024)throw new Error("Preview content too large.");
   }

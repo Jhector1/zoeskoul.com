@@ -29,7 +29,7 @@ export type DevelopmentBrowserSession = Readonly<{
 
 export class DevelopmentBrowserSessionError extends Error {
   constructor(readonly code: "INVALID_REVISION" | "RESTART_REQUIRED" |
-    "BUSY" | "UNAVAILABLE" | "CLOSED", message: string) {
+    "BUSY" | "UNAVAILABLE" | "CLOSED", message: string, readonly httpStatus?: number) {
     super(message);
     this.name = "DevelopmentBrowserSessionError";
   }
@@ -73,7 +73,7 @@ async function postRevision(fetchClient: FetchClient, path: string, sourceVersio
     });
   } catch (error) {
     diagnostic("control_transport_failure");
-    throw error;
+    throw new DevelopmentBrowserSessionError("UNAVAILABLE", "Development preview transport unavailable.");
   }
   let body: unknown = null;
   if ((response.headers.get("content-type") ?? "").startsWith("application/json")) {
@@ -84,6 +84,7 @@ async function postRevision(fetchClient: FetchClient, path: string, sourceVersio
     throw new DevelopmentBrowserSessionError(
       response.status === 409 ? "RESTART_REQUIRED" : "UNAVAILABLE",
       response.status === 409 ? "Saved preview revision must restart." : "Development preview unavailable.",
+      response.status,
     );
   return body;
 }
@@ -104,6 +105,13 @@ export function createDevelopmentPreviewBrowserSession(input: Readonly<{
   const now = input.now ?? Date.now;
   const root = `/api/build/projects/${encodeURIComponent(input.buildProjectId)}/preview`;
   let current: DevelopmentBrowserSession | null = null;
+  // Private recovery hint, never a renderable/current session. It can be
+  // consumed only once by restart for the exact requested durable revision.
+  let recovery: {lease: DevelopmentBrowserSession; sourceVersion: number} | null = null;
+  function uncertain(error: unknown): boolean {
+    return error instanceof DevelopmentBrowserSessionError && error.code === "UNAVAILABLE" &&
+      (error.httpStatus === undefined || error.httpStatus < 400 || error.httpStatus >= 500);
+  }
   let busy = false;
   let closed = false;
   let generation = 0;
@@ -163,6 +171,7 @@ export function createDevelopmentPreviewBrowserSession(input: Readonly<{
     revision(sourceVersion);
     if (current) throw new DevelopmentBrowserSessionError("RESTART_REQUIRED", "Active lease already exists.");
     const stamp = begin();
+    recovery=null;
     try {
       return await admit(sourceVersion,stamp);
     } catch (error) {
@@ -174,15 +183,32 @@ export function createDevelopmentPreviewBrowserSession(input: Readonly<{
     revision(sourceVersion);
     const stamp=begin();
     current=null;
-    try { return await admit(sourceVersion,stamp); }
+    const candidate=recovery;
+    recovery=null;
+    try {
+      if(candidate && candidate.sourceVersion===sourceVersion) {
+        try {
+          // Existing authenticated renew endpoint checks durable grant, DB
+          // revision and the exact fenced live Runner lease. No source write.
+          current=await renewDurable(candidate.lease,sourceVersion,stamp);
+          return current;
+        } catch {
+          assertActive(stamp);
+          // No proof: leave the old lease non-renderable. Ordinary independent
+          // saved-source admission remains the existing fallback policy.
+        }
+      }
+      return await admit(sourceVersion,stamp);
+    }
     catch(error) { current=null;throw error; }
     finally { end(); }
   }
   async function update(sourceVersion: number): Promise<DevelopmentBrowserSession> {
     revision(sourceVersion);
     const stamp = begin();
+    const lease = current;
+    recovery=null;
     try {
-      const lease = current;
       if (!lease || sourceVersion !== lease.sourceVersion + 1) {
         current = null; // never continue a nonsequential or unknown lease
         throw new DevelopmentBrowserSessionError("RESTART_REQUIRED", "A new saved preview lease is required.");
@@ -213,13 +239,16 @@ export function createDevelopmentPreviewBrowserSession(input: Readonly<{
       return current;
     } catch (error) {
       current = null; // post-write failure may quarantine the Runner lease
+      if (!closed && generation===stamp && lease && sourceVersion===lease.sourceVersion+1 &&
+          durableToken(lease) && uncertain(error)) recovery={lease,sourceVersion};
       throw error;
     } finally { end(); }
   }
   async function renew(): Promise<DevelopmentBrowserSession> {
     const stamp = begin();
+    const lease = current;
+    recovery=null;
     try {
-      const lease = current;
       if (!lease) throw new DevelopmentBrowserSessionError("RESTART_REQUIRED", "Preview lease unavailable.");
       current = durableToken(lease)
         ? await renewDurable(lease,lease.sourceVersion,stamp)
@@ -227,6 +256,8 @@ export function createDevelopmentPreviewBrowserSession(input: Readonly<{
       return current;
     } catch (error) {
       current = null; // no expired grant can remain visible as valid
+      if (!closed && generation===stamp && lease && durableToken(lease) && uncertain(error))
+        recovery={lease,sourceVersion:lease.sourceVersion};
       throw error;
     } finally { end(); }
   }
@@ -234,6 +265,6 @@ export function createDevelopmentPreviewBrowserSession(input: Readonly<{
     start, restart, update, renew,
     snapshot: (): DevelopmentBrowserSession | null => current ? { ...current } : null,
     renewalDue: (): boolean => current !== null && now() - current.grantIssuedAt >= READ_TOKEN_REFRESH_MS,
-    close: () => { closed = true; generation++; current = null; },
+    close: () => { closed = true; generation++; current = null; recovery=null; },
   };
 }

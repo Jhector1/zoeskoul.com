@@ -1,4 +1,8 @@
 import {afterEach,beforeEach,describe,expect,it,vi} from "vitest";
+import { RunnerHttpError } from "@zoeskoul/platform-server/server/runnerClient";
+vi.mock("@zoeskoul/platform-server/server/runnerClient",()=>({RunnerHttpError:class RunnerHttpError extends Error {
+ constructor(public status:number,message:string,public code?:string){super(message);}
+}}));
 import {requireOwnedReactPreviewProject} from "./reactPreviewServer";
 import {requireRunnerActorKey} from "@/lib/server/runnerActorKey";
 import {proxyFetchTrustedReactDevelopmentPreviewAtRunner} from "./reactPreviewRunnerClient";
@@ -54,5 +58,54 @@ describe("Phase 4E3C4B2 durable preview asset security",()=>{
   await expect(issueOwnedDevelopmentPreviewBrowserRead({access,buildProjectId:"project_1",previewId,sourceVersion:8}))
    .rejects.toMatchObject({status:503});
   expect(createDurablePreviewGrant).toHaveBeenCalledTimes(1);
+ });
+});
+
+
+describe("Phase 4F5H10P bounded durable resource revision retry",()=>{
+ const moduleArgs={...args,path:"node_modules/.pnpm/pkg@1/node_modules/pkg/index.js?v=123"};
+ const transition=()=>new RunnerHttpError(409,"Preview unavailable.","REVISION_TRANSITION");
+ it("rechecks current ownership and grant before a retry of a Vite module",async()=>{
+  vi.mocked(proxyFetchTrustedReactDevelopmentPreviewAtRunner).mockRejectedValueOnce(transition());
+  expect((await readOwnedDevelopmentPreviewBrowserContent(moduleArgs)).status).toBe(200);
+  expect(proxyFetchTrustedReactDevelopmentPreviewAtRunner).toHaveBeenCalledTimes(2);
+  expect(lookupDurablePreviewGrant).toHaveBeenCalledTimes(2);
+  expect(checkDurablePreviewGrant).toHaveBeenCalledTimes(3);
+  expect(requireOwnedReactPreviewProject).toHaveBeenCalledTimes(3);
+ });
+ it("re-resolves the current committed revision instead of replaying the stale version",async()=>{
+  vi.mocked(requireOwnedReactPreviewProject).mockResolvedValueOnce({sourceVersion:8} as never).mockResolvedValue({sourceVersion:9} as never);
+  vi.mocked(proxyFetchTrustedReactDevelopmentPreviewAtRunner).mockRejectedValueOnce(transition()).mockResolvedValue({sourceVersion:9,response:{status:200,headers:{"content-type":"text/javascript"},bodyBase64:Buffer.from("export default 9").toString("base64")}});
+  expect((await readOwnedDevelopmentPreviewBrowserContent(moduleArgs)).status).toBe(200);
+  expect(proxyFetchTrustedReactDevelopmentPreviewAtRunner).toHaveBeenNthCalledWith(1,expect.objectContaining({sourceVersion:8}));
+  expect(proxyFetchTrustedReactDevelopmentPreviewAtRunner).toHaveBeenNthCalledWith(2,expect.objectContaining({sourceVersion:9}));
+ });
+ it("does not retry general 404s, application data requests, or revoked grants",async()=>{
+  vi.mocked(proxyFetchTrustedReactDevelopmentPreviewAtRunner).mockRejectedValueOnce(new RunnerHttpError(404,"Missing","NOT_FOUND"));
+  await expect(readOwnedDevelopmentPreviewBrowserContent(moduleArgs)).rejects.toMatchObject({status:404});
+  expect(proxyFetchTrustedReactDevelopmentPreviewAtRunner).toHaveBeenCalledTimes(1);
+  for(const path of ["_serverFn/abc","api/health",""]){
+   vi.mocked(proxyFetchTrustedReactDevelopmentPreviewAtRunner).mockRejectedValueOnce(transition());
+   await expect(readOwnedDevelopmentPreviewBrowserContent({...args,path})).rejects.toMatchObject({status:409});
+  }
+  expect(proxyFetchTrustedReactDevelopmentPreviewAtRunner).toHaveBeenCalledTimes(4);
+  vi.mocked(proxyFetchTrustedReactDevelopmentPreviewAtRunner).mockRejectedValueOnce(transition());
+  vi.mocked(checkDurablePreviewGrant).mockResolvedValueOnce(undefined).mockRejectedValueOnce(new Error("revoked"));
+  await expect(readOwnedDevelopmentPreviewBrowserContent(moduleArgs)).rejects.toThrow("revoked");
+  expect(proxyFetchTrustedReactDevelopmentPreviewAtRunner).toHaveBeenCalledTimes(5);
+ });
+ it("discards bytes read before a DB revision change and obtains a fresh module",async()=>{
+  vi.mocked(requireOwnedReactPreviewProject).mockResolvedValueOnce({sourceVersion:8} as never).mockResolvedValue({sourceVersion:9} as never);
+  vi.mocked(proxyFetchTrustedReactDevelopmentPreviewAtRunner).mockResolvedValueOnce({sourceVersion:8,response:{status:200,headers:{"content-type":"text/javascript"},bodyBase64:Buffer.from("export default 8").toString("base64")}}).mockResolvedValue({sourceVersion:9,response:{status:200,headers:{"content-type":"text/javascript"},bodyBase64:Buffer.from("export default 9").toString("base64")}});
+  expect(await (await readOwnedDevelopmentPreviewBrowserContent(moduleArgs)).text()).toBe("export default 9");
+ });
+ it("stops after a bounded number of transitions",async()=>{
+  vi.useFakeTimers();
+  try {
+   vi.mocked(proxyFetchTrustedReactDevelopmentPreviewAtRunner).mockRejectedValue(transition());
+   const result=expect(readOwnedDevelopmentPreviewBrowserContent(moduleArgs)).rejects.toMatchObject({status:409});
+   await vi.advanceTimersByTimeAsync(9000);await result;
+   expect(proxyFetchTrustedReactDevelopmentPreviewAtRunner).toHaveBeenCalledTimes(10);
+  } finally {vi.useRealTimers();}
  });
 });

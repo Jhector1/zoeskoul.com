@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { SharedFullStackPreviewRegistry } from "./sharedPreviewRegistry.js";
+import { SharedFullStackPreviewRegistry, DevelopmentPreviewRevisionTransitionError } from "./sharedPreviewRegistry.js";
 
 const identity={sourceFingerprint:"source",dependencyFingerprint:"dependencies",
   runtimeImageId:`sha256:${"a".repeat(64)}`,fingerprint:"identity"} as const;
@@ -230,5 +230,77 @@ describe("development preview reattachment identity and liveness",()=>{
     finishHealth();
     expect(await claim).toBeNull();
     await closing;
+  });
+});
+
+
+describe("Phase 4F5H10P lease generation and revision fence",()=>{
+  function setup(){
+    const registry=new SharedFullStackPreviewRegistry();
+    registry.register({...lease("dev","owner","project",async()=>{},Date.now()),mode:"development"});
+    return registry;
+  }
+  it("keeps health checks valid across concurrent resource touches",async()=>{
+    const registry=setup();
+    let finish!:(value:boolean)=>void;
+    const probe=registry.checkLive("dev",()=>new Promise<boolean>(r=>{finish=r;}));
+    await Promise.resolve();
+    registry.touch("dev",Date.now());
+    finish(true);
+    await expect(probe).resolves.toBe(true);
+  });
+  it("returns the same healthy result to concurrent reuse callers",async()=>{
+    const registry=setup();
+    let count=0;
+    let finish!:(value:boolean)=>void;
+    const probe=()=>{count++;return new Promise<boolean>(r=>{finish=r;});};
+    const a=registry.checkLive("dev",probe), b=registry.checkLive("dev",probe);
+    await Promise.resolve();finish(true);
+    expect(await Promise.all([a,b])).toEqual([true,true]);
+    expect(count).toBe(1);
+  });
+  it("does not reuse an old generation's health result after a revision commit",async()=>{
+    const registry=setup();
+    let finish!:(value:boolean)=>void;
+    const old=registry.checkLive("dev",()=>new Promise<boolean>(r=>{finish=r;}));
+    await Promise.resolve();
+    await registry.withDevelopmentUpdate("dev",async()=>{
+      registry.commitDevelopmentUpdate("dev",{expectedVersion:1,expectedFingerprint:identity.fingerprint,
+        nextVersion:2,nextIdentity:{...identity,fingerprint:"next",sourceFingerprint:"next-source"}});
+    });
+    let checks=0;
+    const fresh=registry.checkLive("dev",async current=>{checks++;return current.sourceVersion===2;});
+    finish(true);
+    expect(await old).toBe(false);
+    expect(await fresh).toBe(true);
+    expect(checks).toBe(1);
+  });
+  it("invalidates an outstanding probe when the lease is quarantined",async()=>{
+    const registry=setup();
+    let finish!:(value:boolean)=>void;
+    const old=registry.checkLive("dev",()=>new Promise<boolean>(r=>{finish=r;}));
+    await Promise.resolve();
+    await registry.withDevelopmentUpdate("dev",async()=>registry.quarantineDevelopmentUpdate("dev"));
+    finish(true);
+    expect(await old).toBe(false);
+    expect(await registry.checkLive("dev",async()=>true)).toBe(false);
+  });
+  it("classifies revision transitions only for a matching live owner and project",async()=>{
+    const registry=setup();
+    const args={previewId:"dev",ownerKey:"owner",buildProjectId:"project",sourceVersion:1};
+    expect(()=>registry.assertDevelopmentReadOpen({...args,sourceVersion:2})).toThrow(DevelopmentPreviewRevisionTransitionError);
+    let finish!:()=>void;
+    const pending=registry.withDevelopmentUpdate("dev",async()=>new Promise<void>(r=>{finish=r;}));
+    await Promise.resolve();
+    try {
+      expect(()=>registry.assertDevelopmentReadOpen(args)).toThrow(DevelopmentPreviewRevisionTransitionError);
+      for(const invalid of [{...args,ownerKey:"other"},{...args,buildProjectId:"other"},{...args,sourceVersion:0}]) {
+        try {registry.assertDevelopmentReadOpen(invalid);throw new Error("Unexpected read");}
+        catch(error){expect(error).not.toBeInstanceOf(DevelopmentPreviewRevisionTransitionError);expect((error as Error).message).toBe("Preview not found.");}
+      }
+    } finally {finish();await pending;}
+    expect(registry.assertDevelopmentReadOpen(args).sourceVersion).toBe(1);
+    await registry.close("dev");
+    expect(()=>registry.assertDevelopmentReadOpen(args)).toThrow("Preview not found.");
   });
 });

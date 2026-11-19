@@ -27,7 +27,7 @@ export class TanstackPreviewTransportError extends Error {
 }
 
 const workerFailureStages = new Set<TanstackPreviewTransportFailureStage>([
-  "worker_protocol", "loopback_connection", "vite_request", "vite_response",
+  "worker_protocol", "loopback_connection", "vite_request", "vite_response", "deadline",
 ]);
 
 /** Validate the one-line worker envelope without surfacing worker-controlled
@@ -48,11 +48,12 @@ export function validateTanstackPreviewWorkerReply(value: unknown, expectedId = 
   return value;
 }
 
-type PendingReply = Readonly<{
+type PendingReply = {
   resolve: (reply: object) => void;
   reject: (error: TanstackPreviewTransportError) => void;
   timer: ReturnType<typeof setTimeout>;
-}>;
+  expired: boolean;
+};
 type PreviewHttpWorker = {
   containerId: string;
   stream: NodeJS.ReadWriteStream & Readonly<{destroy():void}>;
@@ -66,6 +67,11 @@ type PreviewHttpWorker = {
 };
 const MAX_REPLY = 9 * 1024 * 1024;
 const MAX_PENDING = 32;
+const REQUEST_DEADLINE_MS = 24_000;
+// A timed-out operation may still produce a reply. Keep its slot occupied
+// until that reply arrives, or retire the entire stuck worker after a bounded
+// grace period. This is not cancellation of the upstream operation.
+const EXPIRED_REPLY_GRACE_MS = 24_000;
 const workers = new Map<string,Promise<PreviewHttpWorker>>();
 
 function failWorker(worker:PreviewHttpWorker,error:TanstackPreviewTransportError) {
@@ -73,7 +79,8 @@ function failWorker(worker:PreviewHttpWorker,error:TanstackPreviewTransportError
   worker.closed=true;
   worker.stdout.destroy();worker.stderr.destroy();worker.stream.destroy();
   for(const pending of worker.pending.values()){
-    clearTimeout(pending.timer);pending.reject(error);
+    clearTimeout(pending.timer);
+    if(!pending.expired)pending.reject(error);
   }
   worker.pending.clear();
   if(worker.registration && workers.get(worker.containerId)===worker.registration)
@@ -118,6 +125,7 @@ async function createWorker(containerId:string):Promise<PreviewHttpWorker> {
       const pending=worker.pending.get(id);
       if(!pending){failWorker(worker,new TanstackPreviewTransportError("worker_protocol"));return;}
       worker.pending.delete(id);clearTimeout(pending.timer);
+      if(pending.expired)continue; // Known late reply; never delivered or replayed.
       try{pending.resolve(validateTanstackPreviewWorkerReply(rawReply,id));}
       catch(error){pending.reject(error instanceof TanstackPreviewTransportError
         ? error : new TanstackPreviewTransportError("worker_protocol"));}
@@ -134,8 +142,11 @@ async function acquireWorker(containerId:string) {
   if(!worker){
     worker=createWorker(containerId);
     workers.set(containerId,worker);
-    void worker.then(value=>{value.registration=worker;});
-    void worker.catch(()=>{if(workers.get(containerId)===worker)workers.delete(containerId);});
+    const registration=worker;
+    void registration.then(value=>{
+      value.registration=registration;
+      if(value.closed && workers.get(containerId)===registration)workers.delete(containerId);
+    },()=>{if(workers.get(containerId)===registration)workers.delete(containerId);});
   }
   return worker;
 }
@@ -162,9 +173,17 @@ async function requestWorker(worker:PreviewHttpWorker,request:TanstackPreviewTra
   }
   return new Promise<object>((resolve,reject)=>{
     const timer=setTimeout(()=>{
-      failWorker(worker,new TanstackPreviewTransportError("deadline"));
-    },24_000);
-    worker.pending.set(id,{resolve,reject,timer});
+      const pending=worker.pending.get(id);
+      if(worker.closed || !pending || pending.expired)return;
+      pending.expired=true;
+      // Reject only this caller, retain its correlated slot and bound memory.
+      pending.timer=setTimeout(()=>{
+        if(worker.pending.get(id)===pending)
+          failWorker(worker,new TanstackPreviewTransportError("deadline"));
+      },EXPIRED_REPLY_GRACE_MS);
+      pending.reject(new TanstackPreviewTransportError("deadline"));
+    },REQUEST_DEADLINE_MS);
+    worker.pending.set(id,{resolve,reject,timer,expired:false});
     try{worker.stream.write(JSON.stringify({id,...request})+"\n");}
     catch{failWorker(worker,new TanstackPreviewTransportError("worker_protocol"));}
   });
@@ -184,10 +203,13 @@ export async function fetchTanstackHttpInsideSandbox(containerId: string,
   const endDockerExec = previewObservability.beginDockerExec();
   try {
   const worker=await acquireWorker(containerId);
+  if(request.applicationRpc==="tanstack-json-post-v1" &&
+    (typeof request.mutationDeadlineMs!=="number" || Date.now()>=request.mutationDeadlineMs))
+    throw new TanstackPreviewTransportError("deadline");
   const reply=await requestWorker(worker,request);
   // No Set-Cookie, Location, or caller-supplied authentication can emerge.
   let normalized: ReturnType<typeof normalizeTanstackPreviewHttpResponse>;
-  try { normalized = normalizeTanstackPreviewHttpResponse(reply); }
+  try { normalized = normalizeTanstackPreviewHttpResponse(reply,request.applicationRpc); }
   catch { throw new TanstackPreviewTransportError("worker_protocol"); }
   if (normalized.upstreamDurationMs !== null)
     previewObservability.observeViteUpstream(normalized.upstreamDurationMs);

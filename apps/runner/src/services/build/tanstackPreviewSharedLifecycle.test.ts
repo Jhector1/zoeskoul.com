@@ -1,4 +1,5 @@
 import {afterEach,describe,expect,it,vi} from "vitest";
+import * as admission from "./zoebuildPreviewAdmission.js";
 import { sharedFullStackPreviews } from "./sharedPreviewRegistry.js";
 import { reuseAdmittedTanstackPreview, startAdmittedTanstackPreview, stopAdmittedTanstackPreview } from "./tanstackPreviewSharedLifecycle.js";
 import { fetchTanstackHttpInsideSandbox } from "./tanstackPreviewDockerTransport.js";
@@ -25,6 +26,23 @@ afterEach(async()=>{
   sharedFullStackPreviews.resetForTests(); steps.length=0;
 });
 describe("TanStack preview uses the shared Runner admission",()=>{
+  it("refuses new and queued starts and reuse while preserving cancellation",async()=>{
+    const input={ownerKey:"owner",request,identity,authorize:async()=>{},driverFactory:()=>driver};
+    const first=await startAdmittedTanstackPreview(input);
+    const gate=vi.spyOn(admission,"assertZoebuildPreviewAdmissionOpen");
+    const closed=()=>{throw new admission.ZoebuildPreviewMaintenanceError();};
+    try {
+      gate.mockImplementation(closed);
+      await expect(startAdmittedTanstackPreview(input)).rejects.toThrow(admission.ZoebuildPreviewMaintenanceError);
+      await expect(reuseAdmittedTanstackPreview(input)).rejects.toThrow(admission.ZoebuildPreviewMaintenanceError);
+      gate.mockImplementationOnce(()=>{});
+      await expect(startAdmittedTanstackPreview(input)).rejects.toThrow(admission.ZoebuildPreviewMaintenanceError);
+      expect(sharedFullStackPreviews.get(first.previewId)).not.toBeNull();
+      expect(steps.filter(step=>step==="launch")).toHaveLength(1);
+      await stopAdmittedTanstackPreview("owner",first.previewId);
+      expect(sharedFullStackPreviews.count()).toBe(0);
+    } finally { gate.mockRestore(); }
+  });
   it("refuses execution before server-verified source authorization",async()=>{
     await expect(startAdmittedTanstackPreview({ownerKey:"owner",request,identity,
       authorize:async()=>{throw Error("Unapproved dependencies")},driverFactory:()=>driver})).rejects.toThrow("Unapproved");
