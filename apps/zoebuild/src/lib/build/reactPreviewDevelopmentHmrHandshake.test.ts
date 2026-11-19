@@ -37,13 +37,14 @@ function setup() {
   const flush=()=>{let n=0;while(tasks.length){assert.ok(++n<1000);tasks.shift()!();}};
   let parentListener:((event:WireEvent)=>void)|null=null;
   let childListener:((event:WireEvent)=>void)|null=null;
-  let nonce=0, bound=0, ready=0, failures=0;
+  let nonce=0, bound=0, ready=0, failures=0, reloads=0;
   let revisionReady=true;
   let childPort:FakePort|null=null;
   const parent={postMessage(data:WireMessage){tasks.push(()=>parentListener?.({data,source:child}));}};
   const child={postMessage(data:WireMessage,_origin:string,ports:FakePort[]){tasks.push(()=>childListener?.({data,source:parent,ports}));}};
   const parentWindow={location:{href:"http://localhost:3004/editor"},addEventListener(_kind:string,fn:(event:WireEvent)=>void){parentListener=fn;},removeEventListener(){parentListener=null;}};
-  const parentDocument={querySelectorAll(){return [{src:"http://localhost:3004"+doc,contentWindow:child}];}};
+  const frame={get src(){return "http://localhost:3004"+doc;},set src(value:string){assert.equal(value,"http://localhost:3004"+doc);reloads++;},contentWindow:child};
+  const parentDocument={querySelectorAll(){return [frame];}};
   class FakeChannel {port1=new FakePort(tasks);port2=new FakePort(tasks);constructor(){this.port1.peer=this.port2;this.port2.peer=this.port1;childPort=this.port2;}}
   for(const [key,value] of Object.entries({window:parentWindow,document:parentDocument,MessageChannel:FakeChannel}))Object.defineProperty(globalThis,key,{value,writable:true,configurable:true});
   const bridge=createDevelopmentHmrIframeBridge({documentUrl:doc,onBound:()=>bound++,onClientReady:()=>ready++,onDeliveryFailure:()=>failures++,canDeliverFrames:()=>revisionReady});
@@ -59,7 +60,7 @@ function setup() {
       return {socket,events};
     };
   }
-  return {bridge,flush,newDocument,setRevisionReady:(value:boolean)=>{revisionReady=value;},sendFromIframe:(data:WireMessage)=>childPort?.postMessage(data),counts:()=>({bound,ready,failures})};
+  return {bridge,flush,newDocument,setRevisionReady:(value:boolean)=>{revisionReady=value;},sendFromIframe:(data:WireMessage)=>childPort?.postMessage(data),counts:()=>({bound,ready,failures,reloads})};
 }
 
 describe("Phase 4F5H10F virtual Vite socket handshake",()=>{
@@ -95,18 +96,33 @@ describe("Phase 4F5H10F virtual Vite socket handshake",()=>{
     const c=f.newDocument()();f.flush();f.bridge.setConnected(true);f.bridge.push(connected);f.bridge.push(update);f.flush();
     assert.deepEqual(c.events,["open","connected","update"]);
   }));
-  it("clears old frames and requires a new handshake after disconnect",()=>harness(f=>{
-    f.bridge.setConnected(true);f.bridge.push(connected);f.bridge.push(update);
-    const create=f.newDocument();f.flush();f.bridge.setConnected(false);f.flush();
-    f.bridge.setConnected(true);const c=create();f.flush();assert.deepEqual(c.events,["open"]);
-    f.bridge.push(connected);f.flush();assert.deepEqual(c.events,["open","connected"]);
+  it("suspends Vite on a real gap and reloads exactly once after the new handshake",()=>harness(f=>{
+    f.bridge.setConnected(true);f.bridge.push(connected);
+    const old=f.newDocument()();f.flush();
+    f.bridge.setConnected(false);f.flush();
+    assert.deepEqual(old.events,["open","connected"]);
+    assert.equal(f.counts().reloads,0);
+    f.bridge.setConnected(true);f.flush();
+    assert.equal(f.counts().reloads,0);
+    f.bridge.push(connected);f.flush();
+    assert.equal(f.counts().reloads,1);
+    assert.deepEqual(old.events,["open","connected"]);
+    const fresh=f.newDocument()();f.flush();
+    assert.deepEqual(fresh.events,["open","connected"]);
+    f.bridge.push(update);f.flush();
+    assert.deepEqual(fresh.events,["open","connected","update"]);
+    assert.equal(f.counts().reloads,1);
   }));
   it("ignores a stale client acknowledgement from the previous connection generation",()=>harness(f=>{
-    f.bridge.setConnected(true);const create=f.newDocument();f.flush();
+    f.bridge.setConnected(true);f.newDocument();f.flush();
+    f.setRevisionReady(false);
     f.bridge.setConnected(false);f.bridge.setConnected(true);f.bridge.push(connected);f.bridge.push(update);
     f.sendFromIframe({kind:"client-ready",generation:1});f.flush();
     assert.equal(f.counts().ready,0);
-    const c=create();f.flush();assert.deepEqual(c.events,["open","connected","update"]);
+    assert.equal(f.counts().reloads,0);
+    f.setRevisionReady(true);f.bridge.flushReady();f.flush();
+    assert.equal(f.counts().reloads,1);
+    const c=f.newDocument()();f.flush();assert.deepEqual(c.events,["open","connected"]);
   }));
   it("holds Vite updates until the editor confirms the renewed revision grant",()=>harness(f=>{
     f.bridge.setConnected(true);f.bridge.push(connected);
@@ -121,13 +137,29 @@ describe("Phase 4F5H10F virtual Vite socket handshake",()=>{
     f.bridge.flushReady();f.flush();
     assert.deepEqual(c.events,["open","connected","update","update"]);
   }));
-  it("reports loss of fenced frames instead of pretending they were delivered",()=>harness(f=>{
+  it("waits for the precise revision grant after loss of fenced frames",()=>harness(f=>{
     f.bridge.setConnected(true);f.bridge.push(connected);
     const c=f.newDocument()();f.flush();
     f.setRevisionReady(false);f.bridge.push(update);f.flush();
-    f.bridge.setConnected(false);f.flush();
-    assert.equal(f.counts().failures,1);
+    f.bridge.setConnected(false);f.bridge.setConnected(true);f.bridge.push(connected);f.flush();
+    assert.equal(f.counts().reloads,0);
     f.setRevisionReady(true);f.bridge.flushReady();f.flush();
+    assert.equal(f.counts().reloads,1);
+    assert.deepEqual(c.events,["open","connected"]);
+    const fresh=f.newDocument()();f.flush();
+    assert.deepEqual(fresh.events,["open","connected"]);
+    assert.equal(f.counts().failures,0);
+  }));
+  it("does not emit an iframe close event when the parent retires the bridge",()=>harness(f=>{
+    f.bridge.setConnected(true);f.bridge.push(connected);
+    const c=f.newDocument()();f.flush();
+    f.bridge.close();f.flush();
+    assert.deepEqual(c.events,["open","connected"]);
+    assert.equal(f.counts().reloads,0);
+  }));
+  it("still allows an explicit virtual socket close",()=>harness(f=>{
+    f.bridge.setConnected(true);f.bridge.push(connected);
+    const c=f.newDocument()();f.flush();c.socket.close();f.flush();
     assert.deepEqual(c.events,["open","connected","close"]);
   }));
   it("fails explicitly rather than silently dropping frames on queue overflow",()=>harness(f=>{

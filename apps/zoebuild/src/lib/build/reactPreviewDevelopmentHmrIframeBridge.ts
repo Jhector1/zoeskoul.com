@@ -35,6 +35,7 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
   onBound?:()=>void;
   onClientReady?:()=>void;
   onDeliveryFailure?:()=>void;
+  onResync?:()=>void;
   getApplicationRpcVersion?:()=>number|null;
   canDeliverFrames?:()=>boolean;
 }>) {
@@ -48,6 +49,10 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
   let connectedFrame:string|null=null;
   let connectedDelivered=false;
   let previousNonce:string|null=null;
+  // A transport gap is not a reliable Vite event stream. Only the parent
+  // may recover by loading the exact currently authorized document.
+  let needsResync=false;
+  let resyncTimer:ReturnType<typeof setTimeout>|null=null;
   const rpcInflight=new Set<AbortController>();
   let lastRpcId=0;
   async function relayApplicationRpc(current:MessagePort, value:unknown, frame:HTMLIFrameElement) {
@@ -66,7 +71,7 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
     const mutation=keys==="base,body,id,kind,method,path"&&command.method==="POST";
     const operation=mutation&&applicationMutationPath(command.path)&&applicationMutationBody(command.body)
       ? {method:"POST",body:command.body} : null;
-    if(!identity||!input.getApplicationRpcVersion||typeof version!=="number"||!Number.isSafeInteger(version)||version<1||
+    if(needsResync||!identity||!input.getApplicationRpcVersion||typeof version!=="number"||!Number.isSafeInteger(version)||version<1||
       (mutation?!operation:keys!=="base,id,kind,path")||command.base!==input.documentUrl||
       !applicationRpcPath(command.path)||rpcInflight.size>=4){reply({error:true});return;}
     const abort=new AbortController();rpcInflight.add(abort);
@@ -99,13 +104,33 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
     connectedDelivered=false;
   }
   function flush() {
-    if (closed || !connected || !port || !clientReady || !connectedFrame ||
+    if (closed || !connected || !port || !connectedFrame ||
         input.canDeliverFrames?.() === false) return;
+    if (needsResync) {
+      const frame=uniqueIframe(input.documentUrl);
+      if (!frame?.contentWindow) { close(); input.onDeliveryFailure?.(); return; }
+      // The gap may have lost arbitrary Vite updates. Do not synthesize a
+      // Vite reconnect, replay RPCs, or deliver buffered updates to stale JS.
+      // Reload only this exact authorized iframe, not the editor or runtime.
+      const target=new URL(input.documentUrl,window.location.href).href;
+      discard();
+      buffered.length=0;
+      needsResync=false;
+      input.onResync?.();
+      if(resyncTimer===null)resyncTimer=setTimeout(()=>{
+        resyncTimer=null;close();input.onDeliveryFailure?.();
+      },15_000);
+      try { frame.src=target; }
+      catch { close();input.onDeliveryFailure?.(); }
+      return;
+    }
+    if (!clientReady) return;
     if (!connectedDelivered) {
       port.postMessage({kind:"frame",text:connectedFrame});
       connectedDelivered=true;
     }
     for (const text of buffered.splice(0)) port.postMessage({kind:"frame",text});
+    if(resyncTimer!==null){clearTimeout(resyncTimer);resyncTimer=null;}
   }
   function onMessage(event:MessageEvent) {
     if (closed || !event.data || typeof event.data!=="object" ||
@@ -138,6 +163,7 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
     port.start();
     frame.contentWindow.postMessage({kind:"zoebuild-hmr-port",nonce:previousNonce},"*",[channel.port2]);
     if (connected) port.postMessage({kind:"open",generation:connectionGeneration});
+    flush();
   }
   window.addEventListener("message",onMessage);
   function setConnected(value:boolean) {
@@ -146,13 +172,11 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
     connected=value;
     if (changed) connectionGeneration++;
     if (!value) {
-      // A connection loss while holding revision-fenced updates cannot be
-      // treated as successful delivery. Use existing bounded recovery.
-      if (buffered.length > 0 && input.canDeliverFrames?.() === false) {
-        close();
-        input.onDeliveryFailure?.();
-        return;
-      }
+      // Do not mistake a real gap for healthy ticket rotation. Any old
+      // document must be resynchronized once an actual new handshake AND
+      // the exact renewed grant are available. Never signal Vite to use
+      // its own opaque-origin-incompatible SharedWorker reconnection.
+      if(changed)needsResync=true;
       buffered.length=0;
       connectedFrame=null;
       connectedDelivered=false;
@@ -184,6 +208,7 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
   function close() {
     if (closed) return;
     closed=true;
+    if(resyncTimer!==null){clearTimeout(resyncTimer);resyncTimer=null;}
     buffered.length=0;
     connectedFrame=null;
     window.removeEventListener("message",onMessage);

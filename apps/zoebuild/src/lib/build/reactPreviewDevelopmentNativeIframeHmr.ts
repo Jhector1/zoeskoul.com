@@ -120,7 +120,7 @@ export const ZOEBUILD_IFRAME_HMR_SCRIPT = String.raw`(function () {
     send(data) {
       if (this.readyState !== 1 || !channel) throw new DOMException("Not connected", "InvalidStateError");
       // The Runner only accepts native Vite ping, never arbitrary iframe input.
-      if (data === '{"type":"ping"}') channel.postMessage({kind:"ping"});
+      if (channelOpen && data === '{"type":"ping"}') channel.postMessage({kind:"ping"});
     }
     receive(data) {
       if (this.readyState !== 1 || typeof data !== "string" || data.length > MAX) return;
@@ -177,7 +177,12 @@ export const ZOEBUILD_IFRAME_HMR_SCRIPT = String.raw`(function () {
       } else if (value.kind==="disconnect") {
         channelOpen=false;
         channelGeneration=0;
-        for (const socket of sockets) socket.close();
+        // Transport retirement/recovery belongs to the trusted parent.
+        // Emitting a synthetic close here starts Vite's SharedWorker ping
+        // loop, which is forbidden in this deliberately opaque iframe.
+        // Keep existing virtual sockets suspended until the parent either
+        // reloads this authorized document or retires the iframe. Explicit
+        // application close() still has ordinary WebSocket semantics.
       }
     };
     channel.start();

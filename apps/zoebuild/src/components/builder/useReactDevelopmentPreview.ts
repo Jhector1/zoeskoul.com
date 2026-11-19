@@ -260,6 +260,7 @@ export function useReactDevelopmentPreview(input: Readonly<{
         {getApplicationRpcVersion:readyVersion} : {}),
       onBound:()=>{bound=true;diagnostic("bridge_bound");markMeaningfulRecovery();},
       onClientReady:()=>diagnostic("iframe_vite_client_ready"),
+      onResync:()=>{bound=false;meaningfulReported=false;diagnostic("iframe_transport_gap_resync");},
       onDeliveryFailure:()=>fallbackToImmutable("iframe_hmr_delivery_overflow"),
     });
     const bindTimeout=window.setTimeout(()=>{
