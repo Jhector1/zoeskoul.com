@@ -36,6 +36,7 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
   onClientReady?:()=>void;
   onDeliveryFailure?:()=>void;
   getApplicationRpcVersion?:()=>number|null;
+  canDeliverFrames?:()=>boolean;
 }>) {
   if (!PUBLIC_DOC.test(input.documentUrl)) throw new Error("Invalid HMR document grant.");
   let closed=false;
@@ -98,7 +99,8 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
     connectedDelivered=false;
   }
   function flush() {
-    if (closed || !connected || !port || !clientReady || !connectedFrame) return;
+    if (closed || !connected || !port || !clientReady || !connectedFrame ||
+        input.canDeliverFrames?.() === false) return;
     if (!connectedDelivered) {
       port.postMessage({kind:"frame",text:connectedFrame});
       connectedDelivered=true;
@@ -144,6 +146,13 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
     connected=value;
     if (changed) connectionGeneration++;
     if (!value) {
+      // A connection loss while holding revision-fenced updates cannot be
+      // treated as successful delivery. Use existing bounded recovery.
+      if (buffered.length > 0 && input.canDeliverFrames?.() === false) {
+        close();
+        input.onDeliveryFailure?.();
+        return;
+      }
       buffered.length=0;
       connectedFrame=null;
       connectedDelivered=false;
@@ -181,5 +190,5 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
     port?.postMessage({kind:"disconnect"});
     discard();
   }
-  return {setConnected,push,close};
+  return {setConnected,push,close,flushReady:flush};
 }

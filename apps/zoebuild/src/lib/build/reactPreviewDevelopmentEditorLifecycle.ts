@@ -58,12 +58,12 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
       input.onWaiting();
       return;
     }
+    phase="ready";
     input.onDocument({
       previewId: session.previewId,
       sourceVersion: session.sourceVersion,
       documentUrl: session.documentUrl,
     });
-    phase="ready";
   }
   async function pump(): Promise<void> {
     if (disposed || failed || running || pending === null) return;
@@ -178,6 +178,17 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
     // read grants expire without renewal after this tab closes.
     input.controller.close();
   }
-  return {savedRevision,renewIfDue,dispose,snapshot:()=>({phase,recoveryAttempts,
+  // Canonical browser-side readiness, not server authorization. Never
+  // expose the old revision while a save/update/reconciliation is pending.
+  // A same-revision periodic renewal may keep the existing grant usable.
+  function readyDocument(): DevelopmentEditorDocument | null {
+    if (disposed || failed || !selectedReady || pending !== null ||
+        (phase !== "ready" && phase !== "renewing")) return null;
+    const session = input.controller.snapshot();
+    if (!session || session.sourceVersion !== selectedVersion) return null;
+    return {previewId:session.previewId,sourceVersion:session.sourceVersion,
+      documentUrl:session.documentUrl};
+  }
+  return {savedRevision,renewIfDue,dispose,readyDocument,snapshot:()=>({phase,recoveryAttempts,
     selectedVersion,selectedReady,pending,running}) as const};
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
 import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 import { exportWorkspaceEntries } from "@zoeskoul/learner-workspace/ide/fsTree";
@@ -40,7 +40,13 @@ export function useReactDevelopmentPreview(input: Readonly<{
   workspace: WorkspaceStateV2;
 }>): Readonly<{ preview: Preview | null; fallback: boolean }> {
   const activeRef = useRef<{ projectId: string; lifecycle: Active } | null>(null);
-  const confirmedVersionRef = useRef<number | null>(null);
+  // The committed editor inputs fence the old lease before passive effects
+  // can schedule the next update. Bind readiness to the exact document too.
+  const selectedRef = useRef({
+    projectId: input.buildProjectId, sourceVersion: input.sourceVersion,
+    savedSourceReady: input.savedSourceReady, active: false,
+  });
+  const bridgeWakeRef = useRef<(() => void) | null>(null);
   const recoveryCircuitRef = useRef<ReturnType<typeof createDevelopmentRecoveryCircuit> | null>(null);
   const fallbackRetryDelayRef = useRef<number | null>(null);
   if (!recoveryCircuitRef.current) recoveryCircuitRef.current=createDevelopmentRecoveryCircuit({
@@ -63,6 +69,15 @@ export function useReactDevelopmentPreview(input: Readonly<{
   const fallback = resultForProject?.fallback ?? false;
   const active = input.enabled && !fallback;
 
+  useLayoutEffect(() => {
+    selectedRef.current = {projectId: input.buildProjectId,
+      sourceVersion: input.sourceVersion, savedSourceReady: input.savedSourceReady, active};
+    bridgeWakeRef.current?.();
+    return () => {
+      selectedRef.current = {...selectedRef.current,active:false};
+    };
+  }, [active,input.buildProjectId,input.sourceVersion,input.savedSourceReady]);
+
   useEffect(() => {
     if (!active) {
       if (!input.enabled) setResult(null);
@@ -78,7 +93,9 @@ export function useReactDevelopmentPreview(input: Readonly<{
       controller,
       onDocument: ({ sourceVersion, documentUrl, previewId }) => {
         if (!alive) return;
-        confirmedVersionRef.current=sourceVersion;
+        // The controller has now confirmed the grant for this saved revision.
+        // Wake the existing bridge (if still bound to that exact document).
+        bridgeWakeRef.current?.();
         // Without native HMR, a confirmed authoritative document is the
         // strongest available recovery signal. Native mode waits for bridge +
         // Vite confirmation below before resetting the persistent circuit.
@@ -225,10 +242,22 @@ export function useReactDevelopmentPreview(input: Readonly<{
       recoveryCircuitRef.current?.meaningfulRecovery(input.buildProjectId);
       diagnostic("meaningful_recovery");
     };
+    const readyVersion=():number|null=>{
+      const wanted=selectedRef.current;
+      const bound=activeRef.current;
+      if(disposed || fallbackIssued || !wanted.active || !wanted.savedSourceReady ||
+          wanted.projectId!==input.buildProjectId || bound?.projectId!==wanted.projectId)
+        return null;
+      const ready=bound.lifecycle.readyDocument();
+      return ready && ready.sourceVersion===wanted.sourceVersion &&
+        ready.previewId===currentPreviewId && ready.documentUrl===currentDocumentUrl
+        ? ready.sourceVersion : null;
+    };
     const bridge=createDevelopmentHmrIframeBridge({
       documentUrl:currentDocumentUrl,
+      canDeliverFrames:()=>readyVersion()!==null,
       ...(process.env.NEXT_PUBLIC_ZOEBUILD_DEVELOPMENT_APPLICATION_RPC_ENABLED === "true" ?
-        {getApplicationRpcVersion:()=>confirmedVersionRef.current} : {}),
+        {getApplicationRpcVersion:readyVersion} : {}),
       onBound:()=>{bound=true;diagnostic("bridge_bound");markMeaningfulRecovery();},
       onClientReady:()=>diagnostic("iframe_vite_client_ready"),
       onDeliveryFailure:()=>fallbackToImmutable("iframe_hmr_delivery_overflow"),
@@ -261,8 +290,8 @@ export function useReactDevelopmentPreview(input: Readonly<{
     };
     const connect=async () => {
       if (disposed || connecting) return;
-      const version=confirmedVersionRef.current;
-      if (!Number.isSafeInteger(version) || !version || version<1) return;
+      const version=readyVersion();
+      if (version===null) return;
       const attempt=rotation.beginAttempt();
       if(attempt===null)return;
       connecting=true;
@@ -313,10 +342,19 @@ export function useReactDevelopmentPreview(input: Readonly<{
         if (!disposed) scheduleRecovery("socket_connect_failed",attempt,next);
       } finally {connecting=false;}
     };
-    void connect();
+    const wake=()=>{
+      if(disposed || readyVersion()===null)return;
+      bridge.flushReady();
+      // A recovery timer may have fired while the revision was fenced.
+      // Resume the connection when the exact grant is usable again.
+      if(!socket && !connecting && retryTimer===null)void connect();
+    };
+    bridgeWakeRef.current=wake;
+    wake();
     const rotate=window.setInterval(()=>{void connect();},HMR_ROTATE_MS);
     return () => {
       disposed=true;
+      if(bridgeWakeRef.current===wake)bridgeWakeRef.current=null;
       window.clearInterval(rotate);
       window.clearTimeout(bindTimeout);
       if(retryTimer!==null)window.clearTimeout(retryTimer);

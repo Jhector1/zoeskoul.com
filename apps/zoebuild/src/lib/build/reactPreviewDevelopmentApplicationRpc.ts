@@ -28,6 +28,12 @@ export function developmentApplicationRpcEnabled():boolean {
     process.env.ZOEBUILD_DEVELOPMENT_PREVIEW_HMR_TICKET_ENABLED==="true";
 }
 function reject(status:number) {return new Response(null,{status,headers:HEADERS});}
+function revisionConflict(stage:"before_source"|"before_dispatch_abort"|"runner_revision"|"after_source"|"after_grant_abort") {
+  // Development-only fixed category; no actor, project, token or request data.
+  if(process.env.NODE_ENV==="development")
+    console.info("[ZOE-HMR]",JSON.stringify({event:"application_rpc_conflict",stage}));
+  return reject(409);
+}
 /** Unlike the shared helper, this check never bypasses origin validation in dev. */
 export function validApplicationRpcOrigin(req:Request):boolean {
   try {
@@ -104,23 +110,23 @@ export async function handleDevelopmentApplicationRpc(req:Request,identity:Reado
     try{body=await readEnvelope(req);}catch{return reject(400);}
     // Resolve the saved revision independently of the iframe and caller body.
     const project=await requireOwnedReactPreviewProject({access,buildProjectId:identity.buildProjectId});
-    if(project.sourceVersion!==body.sourceVersion)return reject(409);
+    if(project.sourceVersion!==body.sourceVersion)return revisionConflict("before_source");
     const grantIdentity={userId,...identity,sourceVersion:body.sourceVersion};
     await checkDurablePreviewGrant(body.grantToken,grantIdentity);
     const actorKey=await requireRunnerActorKey(userId);
-    if(req.signal.aborted)return reject(409);
+    if(req.signal.aborted)return revisionConflict("before_dispatch_abort");
     const command={actorKey,...identity,sourceVersion:body.sourceVersion,path:body.path};
     const result=body.method==="POST"
       ? await executeTrustedDevelopmentApplicationPostAtRunner({...command,bodyBase64:Buffer.from(body.body,"utf8").toString("base64")})
       : await executeTrustedDevelopmentApplicationGetAtRunner(command);
-    if(result.sourceVersion!==body.sourceVersion)return reject(409);
+    if(result.sourceVersion!==body.sourceVersion)return revisionConflict("runner_revision");
     // A revoked session/grant or newer saved revision cannot release a response.
     const afterAccess=await loadCurrentBuildAccessSnapshot(req,{requireAuthority:true});
     if(afterAccess.userId!==userId||req.signal.aborted)return reject(403);
     const after=await requireOwnedReactPreviewProject({access:afterAccess,buildProjectId:identity.buildProjectId});
-    if(after.sourceVersion!==body.sourceVersion)return reject(409);
+    if(after.sourceVersion!==body.sourceVersion)return revisionConflict("after_source");
     await checkDurablePreviewGrant(body.grantToken,grantIdentity);
-    if(req.signal.aborted)return reject(409);
+    if(req.signal.aborted)return revisionConflict("after_grant_abort");
     return validatedApplicationRpcResponse(result.response);
   }catch{return reject(404);}
 }

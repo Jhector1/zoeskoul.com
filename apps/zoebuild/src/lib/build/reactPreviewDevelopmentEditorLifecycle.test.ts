@@ -39,6 +39,28 @@ describe("Phase 4E3B saved-revision editor integration",()=>{
     f.lifecycle.dispose();await flush();
     expect(f.controller.close).toHaveBeenCalledOnce();
   });
+  it("fences the prior revision through update and grant confirmation",async()=>{
+    const f=make();f.lifecycle.savedRevision(7,true);await flush();
+    expect(f.lifecycle.readyDocument()?.sourceVersion).toBe(7);
+    let finish!:(v:ReturnType<typeof document>)=>void;
+    f.controller.update.mockImplementationOnce(()=>new Promise(resolve=>{
+      finish=v=>{f.setSnapshot(v);resolve(v);};
+    }));
+    f.lifecycle.savedRevision(7,false);
+    expect(f.lifecycle.readyDocument()).toBeNull();
+    f.lifecycle.savedRevision(8,true);
+    expect(f.lifecycle.readyDocument()).toBeNull();
+    // Even a controller snapshot for N+1 cannot release frames before publish.
+    f.setSnapshot(document(8));
+    expect(f.lifecycle.readyDocument()).toBeNull();
+    f.onDocument.mockImplementationOnce(()=>{
+      expect(f.lifecycle.readyDocument()?.sourceVersion).toBe(8);
+    });
+    finish(document(8));await flush();
+    expect(f.lifecycle.readyDocument()?.sourceVersion).toBe(8);
+    f.lifecycle.dispose();
+    expect(f.lifecycle.readyDocument()).toBeNull();
+  });
   it("recovers a skipped revision from authoritative startup",async()=>{
     const f=make();f.lifecycle.savedRevision(7,true);await flush();
     f.lifecycle.savedRevision(9,true);await flush();

@@ -10,7 +10,7 @@ function setup(enabled=true,childOrigin="null") {
   type Message={data:any,source?:unknown,origin?:string,ports?:Port[]};
   class Port { peer?:Port; onmessage?: (m:Message)=>void; closed=false; start(){} close(){this.closed=true;} postMessage(data:unknown){const peer=this.peer;queueMicrotask(()=>{if(!this.closed&&!peer?.closed)peer?.onmessage?.({data});});} }
   let parentListener:((m:Message)=>void)|undefined,childListener:((m:Message)=>void)|undefined;
-  let childPort:Port|undefined,version=9;
+  let childPort:Port|undefined,version:number|null=9;
   const parent={postMessage(data:unknown){queueMicrotask(()=>parentListener?.({data,source:child,origin:childOrigin}));}};
   const child={postMessage(data:unknown,_origin:string,ports:Port[]){childPort=ports[0];queueMicrotask(()=>childListener?.({data,source:parent,origin,ports}));}};
   const frame={src:origin+doc,contentWindow:child};
@@ -23,7 +23,7 @@ function setup(enabled=true,childOrigin="null") {
   const win={parent,fetch:native,location:{href:origin+doc},WebSocket:class extends EventTarget{},addEventListener(_type:string,fn:(m:Message)=>void){childListener=fn;}};
   const html=injectNativeIframeHmrBootstrap("<head></head>",doc);const script=html.split("<script>")[1]!.split("</script>")[0]!;
   runInNewContext(script,{window:win,URL,Headers,Response,TextEncoder,TextDecoder,EventTarget,Event,MessageEvent,DOMException,crypto:{getRandomValues:(bytes:Uint8Array)=>bytes.fill(7)},setTimeout,clearTimeout,setInterval:()=>1,clearInterval:()=>{}});
-  return {bridge,relay,native,fetch:(url:string,init:any=opts)=>(win.fetch as unknown as typeof fetch)(url,init),setVersion:(v:number)=>{version=v;},send:(message:unknown)=>childPort?.postMessage(message)};
+  return {bridge,relay,native,fetch:(url:string,init:any=opts)=>(win.fetch as unknown as typeof fetch)(url,init),setVersion:(v:number|null)=>{version=v;},send:(message:unknown)=>childPort?.postMessage(message)};
 }
 afterEach(()=>vi.unstubAllGlobals());
 describe("H10P2C native fetch relay",()=>{
@@ -31,6 +31,22 @@ describe("H10P2C native fetch relay",()=>{
   it("does not intercept assets and rejects application POST and arbitrary custom headers",async()=>{const f=setup();try{expect(await (await f.fetch(origin+doc+"src/App.tsx")).text()).toBe("native");await expect(f.fetch(origin+doc+"_serverFn/abc",{...opts,method:"POST"})).rejects.toThrow();await expect(f.fetch(origin+doc+"_serverFn/abc",{...opts,headers:{...opts.headers,authorization:"invalid"}})).rejects.toThrow();expect(f.relay).not.toHaveBeenCalled();}finally{f.bridge.close();}});
   it("does not dispatch an already aborted operation",async()=>{const f=setup();try{const abort=new AbortController();abort.abort();await expect(f.fetch(origin+doc+"_serverFn/abc",{...opts,signal:abort.signal})).rejects.toMatchObject({name:"AbortError"});expect(f.relay).not.toHaveBeenCalled();}finally{f.bridge.close();}});
   it("rejects stale in-flight results and does not retry",async()=>{const f=setup();try{f.relay.mockImplementationOnce(async()=>{f.setVersion(10);return new Response('{"result":"old"}',{headers:{"content-type":"application/json","x-tss-serialized":"true"}});});await expect(f.fetch(origin+doc+"_serverFn/abc")).rejects.toThrow();expect(f.relay).toHaveBeenCalledTimes(1);}finally{f.bridge.close();}});
+  it("never dispatches or replays GET or POST commands during a revision fence",async()=>{
+    const f=setup();try{
+      await new Promise(resolve=>setTimeout(resolve,0));
+      f.setVersion(null);
+      await expect(f.fetch(origin+doc+"_serverFn/abc")).rejects.toThrow();
+      const options={method:"POST",headers:{...opts.headers,"content-type":"application/json"},body:'{"data":1}'};
+      await expect(f.fetch(origin+doc+"_serverFn/abc",options)).rejects.toThrow();
+      expect(f.relay).not.toHaveBeenCalled();
+      f.setVersion(10);
+      await new Promise(resolve=>setTimeout(resolve,0));
+      expect(f.relay).not.toHaveBeenCalled();
+      await f.fetch(origin+doc+"_serverFn/abc");
+      expect(f.relay).toHaveBeenCalledTimes(1);
+      expect(JSON.parse(String(f.relay.mock.calls[0]![1].body))).toMatchObject({sourceVersion:10});
+    }finally{f.bridge.close();}
+  });
   it("rejects a nonmatching base without dispatch",async()=>{const f=setup();try{await new Promise(resolve=>setTimeout(resolve,0));f.send({kind:"application-rpc",id:1,base:doc+"other/",path:"_serverFn/abc"});await new Promise(resolve=>setTimeout(resolve,0));expect(f.relay).not.toHaveBeenCalled();}finally{f.bridge.close();}});
 });
 
