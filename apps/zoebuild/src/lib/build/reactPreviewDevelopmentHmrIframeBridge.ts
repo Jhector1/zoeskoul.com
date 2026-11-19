@@ -22,12 +22,34 @@ export function safeViteIframeFrame(raw: unknown, publicBase: string): string | 
   return normalized.length <= FRAME_LIMIT ? normalized : null;
 }
 
-function uniqueIframe(expectedPath: string): HTMLIFrameElement | null {
-  const expected = new URL(expectedPath,window.location.href).href;
-  const candidates=Array.from(document.querySelectorAll<HTMLIFrameElement>("iframe[src]"))
-    .filter(frame=>frame.src===expected);
-  // Never attach a port to an ambiguous or unintended iframe.
-  return candidates.length===1 ? candidates[0] : null;
+// Only the trusted React renderer may register the precise document it created.
+// A same-origin URL prefix alone is NOT proof of iframe ownership.
+type RegisteredDocument = Readonly<{frame:HTMLIFrameElement; url:string}>;
+const documents=new Map<string, Map<RegisteredDocument,symbol>>();
+const documentIdentity=new WeakMap<HTMLIFrameElement,RegisteredDocument>();
+export function registerDevelopmentHmrDocument(root:string, documentUrl:string, frame:HTMLIFrameElement):()=>void {
+  if (!PUBLIC_DOC.test(root)) return ()=>undefined;
+  const base=new URL(root,window.location.href);
+  const url=new URL(documentUrl,window.location.href);
+  if (url.origin!==base.origin || url.username || url.password ||
+      !url.pathname.startsWith(base.pathname) || frame.src!==url.href ||
+      frame.getAttribute("sandbox")!=="allow-scripts") return ()=>undefined;
+  const previous=documentIdentity.get(frame);
+  const entry=previous?.url===url.href?previous:{frame,url:url.href};
+  documentIdentity.set(frame,entry);
+  const entries=documents.get(root)??new Map<RegisteredDocument,symbol>();
+  const generation=Symbol();entries.set(entry,generation);documents.set(root,entries);
+  return ()=>{
+    if(entries.get(entry)!==generation)return;
+    entries.delete(entry);if(!entries.size && documents.get(root)===entries)documents.delete(root);
+  };
+}
+function uniqueDocument(root:string):RegisteredDocument|null {
+  const entries=documents.get(root);
+  if(!entries || entries.size!==1)return null;
+  const entry=entries.keys().next().value;
+  return entry && entry.frame.isConnected && entry.frame.src===entry.url &&
+    entry.frame.getAttribute("sandbox")==="allow-scripts" ? entry : null;
 }
 
 export function createDevelopmentHmrIframeBridge(input: Readonly<{
@@ -48,21 +70,25 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
   let clientReady=false;
   let connectedFrame:string|null=null;
   let connectedDelivered=false;
-  let previousNonce:string|null=null;
+  let boundDocument:RegisteredDocument|null=null;
+  let boundNonce:string|null=null;
+  let offerSequence=0;
+  let confirmedOffer=0;
+  const candidates=new Map<string,{port:MessagePort;timer:ReturnType<typeof setTimeout>;offer:number}>();
   // A transport gap is not a reliable Vite event stream. Only the parent
   // may recover by loading the exact currently authorized document.
   let needsResync=false;
   let resyncTimer:ReturnType<typeof setTimeout>|null=null;
   const rpcInflight=new Set<AbortController>();
   let lastRpcId=0;
-  async function relayApplicationRpc(current:MessagePort, value:unknown, frame:HTMLIFrameElement) {
+  async function relayApplicationRpc(current:MessagePort, value:unknown, document:RegisteredDocument) {
     if(!value||typeof value!=="object"||Array.isArray(value))return;
     const command=value as Record<string,unknown>;
     const id=command.id;
     if(typeof id!=="number"||!Number.isSafeInteger(id)||id<=lastRpcId)return;
     lastRpcId=id;
     const reply=(data:Record<string,unknown>)=>{
-      if(!closed&&port===current&&uniqueIframe(input.documentUrl)===frame)
+      if(!closed&&port===current&&uniqueDocument(input.documentUrl)===document)
         try{current.postMessage({kind:"application-rpc-result",id,...data});}catch{/* retired port */}
     };
     const identity=applicationRpcIdentity(input.documentUrl);
@@ -96,8 +122,9 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
     }catch{reply({error:true});}finally{window.clearTimeout(timer);rpcInflight.delete(abort);}
   }
   function discard() {
-    try {port?.close();} catch { /* iframe may have navigated */ }
-    port=null;
+    // Settle old iframe promises explicitly; never replay a sent operation.
+    try {port?.postMessage({kind:"retired"});port?.close();} catch { /* iframe may have navigated */ }
+    port=null;boundDocument=null;boundNonce=null;
     for(const controller of rpcInflight)controller.abort();
     rpcInflight.clear();lastRpcId=0;
     clientReady=false;
@@ -105,14 +132,16 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
   }
   function flush() {
     if (closed || !connected || !port || !connectedFrame ||
+        uniqueDocument(input.documentUrl)!==boundDocument ||
         input.canDeliverFrames?.() === false) return;
     if (needsResync) {
-      const frame=uniqueIframe(input.documentUrl);
-      if (!frame?.contentWindow) { close(); input.onDeliveryFailure?.(); return; }
+      const document=uniqueDocument(input.documentUrl);
+      if (!document?.frame.contentWindow || document!==boundDocument) return;
+      const frame=document.frame;
       // The gap may have lost arbitrary Vite updates. Do not synthesize a
       // Vite reconnect, replay RPCs, or deliver buffered updates to stale JS.
       // Reload only this exact authorized iframe, not the editor or runtime.
-      const target=new URL(input.documentUrl,window.location.href).href;
+      const target=document.url;
       discard();
       buffered.length=0;
       needsResync=false;
@@ -132,38 +161,57 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
     for (const text of buffered.splice(0)) port.postMessage({kind:"frame",text});
     if(resyncTimer!==null){clearTimeout(resyncTimer);resyncTimer=null;}
   }
+  function retireCandidate(nonce:string) {
+    const candidate=candidates.get(nonce);if(!candidate)return;
+    candidates.delete(nonce);clearTimeout(candidate.timer);
+    try{candidate.port.postMessage({kind:"retired"});candidate.port.close();}catch{/* unbound */}
+  }
   function onMessage(event:MessageEvent) {
-    if (closed || !event.data || typeof event.data!=="object" ||
-        event.data.kind!=="zoebuild-hmr-iframe-ready" || !NONCE.test(event.data.nonce)) return;
-    const frame=uniqueIframe(input.documentUrl);
-    if (!frame?.contentWindow || frame.contentWindow!==event.source || event.data.nonce===previousNonce) return;
-    previousNonce=event.data.nonce;
-    discard();
+    if (closed || event.origin!=="null" || !event.data || typeof event.data!=="object" ||
+        event.data.kind!=="zoebuild-hmr-iframe-ready" || typeof event.data.nonce!=="string" || !NONCE.test(event.data.nonce)) return;
+    const document=uniqueDocument(input.documentUrl);
+    const frame=document?.frame;
+    const nonce=event.data.nonce;
+    if (!document || !frame?.contentWindow || frame.contentWindow!==event.source ||
+        (boundDocument===document && boundNonce===nonce) || candidates.has(nonce) || candidates.size>=4) return;
+    // A WindowProxy can survive document navigation. A stale announcement may
+    // arrive after a newer document is installed. Do not evict the live port
+    // until the candidate proves it accepted the transfer for its own nonce.
     const channel=new MessageChannel();
     const current=channel.port1;
-    port=current;
+    const offer=++offerSequence;
+    const timer=setTimeout(()=>retireCandidate(nonce),5000);
+    candidates.set(nonce,{port:current,timer,offer});
     current.onmessage=(message:MessageEvent)=>{
-      if (closed || port!==current) return;
-      if (message.data?.kind==="bound") input.onBound?.();
-      else if (message.data?.kind==="client-ready" && connected &&
+      if(closed)return;
+      if(candidates.get(nonce)?.port===current) {
+        if(message.data?.kind!=="bound")return;
+        if(offer<=confirmedOffer || uniqueDocument(input.documentUrl)!==document || frame.contentWindow!==event.source) {
+          retireCandidate(nonce);return;
+        }
+        candidates.delete(nonce);clearTimeout(timer);
+        // An older handshake must not retire a newer confirmed document.
+        discard();
+        port=current;boundDocument=document;boundNonce=nonce;confirmedOffer=offer;
+        for(const [other,candidate] of candidates)if(candidate.offer<offer)retireCandidate(other);
+        input.onBound?.();
+        if(connected)current.postMessage({kind:"open",generation:connectionGeneration});
+        flush();return;
+      }
+      if(port!==current || boundDocument!==document || uniqueDocument(input.documentUrl)!==document)return;
+      if (message.data?.kind==="client-ready" && connected &&
           message.data.generation===connectionGeneration) {
         if (!clientReady) input.onClientReady?.();
         clientReady=true;
-        // A fresh virtual socket needs the actual Vite connected frame.
         connectedDelivered=false;
         flush();
+      } else if (message.data?.kind==="application-rpc" && input.getApplicationRpcVersion) {
+        void relayApplicationRpc(current,message.data,document);
       }
-      else if (message.data?.kind==="application-rpc" && event.origin==="null" && input.getApplicationRpcVersion &&
-          uniqueIframe(input.documentUrl)===frame) {
-        void relayApplicationRpc(current,message.data,frame);
-      }
-      // All other iframe commands are ignored. RPC has a separate fixed and
-      // authenticated endpoint; it never sends arbitrary commands to Runner.
     };
-    port.start();
-    frame.contentWindow.postMessage({kind:"zoebuild-hmr-port",nonce:previousNonce},"*",[channel.port2]);
-    if (connected) port.postMessage({kind:"open",generation:connectionGeneration});
-    flush();
+    current.start();
+    try{frame.contentWindow.postMessage({kind:"zoebuild-hmr-port",nonce},"*",[channel.port2]);}
+    catch{retireCandidate(nonce);}
   }
   window.addEventListener("message",onMessage);
   function setConnected(value:boolean) {
@@ -212,6 +260,7 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
     buffered.length=0;
     connectedFrame=null;
     window.removeEventListener("message",onMessage);
+    for(const nonce of [...candidates.keys()])retireCandidate(nonce);
     port?.postMessage({kind:"disconnect"});
     discard();
   }

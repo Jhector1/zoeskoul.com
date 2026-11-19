@@ -17,6 +17,7 @@ export const ZOEBUILD_IFRAME_HMR_SCRIPT = String.raw`(function () {
   const nonce = Array.from(nonceBytes,b=>b.toString(16).padStart(2,"0")).join("");
   const sockets = new Set();
   let channel = null;
+  let retired = false;
   let channelOpen = false;
   let channelGeneration = 0;
   const MAX = 65536;
@@ -70,6 +71,7 @@ export const ZOEBUILD_IFRAME_HMR_SCRIPT = String.raw`(function () {
       const path=url.pathname.slice(rpcBase.length)+url.search;
       if(path.length>4096||/[\\#\u0000-\u0020\u007f]/.test(path)||!/^_serverFn\/[A-Za-z0-9_-]{1,2048}(?:\?payload=[^&?]*)?$/.test(path)||
           rpcPending.size>=rpcLimit)return Promise.reject(error());
+      if(retired)return Promise.reject(new TypeError("Preview application document retired."));
       const signal=init?.signal;
       if(signal?.aborted)return Promise.reject(new DOMException("Aborted","AbortError"));
       return new Promise((resolve,reject)=>{
@@ -174,6 +176,11 @@ export const ZOEBUILD_IFRAME_HMR_SCRIPT = String.raw`(function () {
         }
         try{settleRpc(value.id,null,new Response(value.body,{status:value.status,headers:{"content-type":"application/json","x-tss-serialized":"true"}}));}
         catch{settleRpc(value.id,new TypeError("Preview application request unavailable."));}
+      } else if (value.kind==="retired") {
+        retired=true;
+        channelOpen=false;channelGeneration=0;
+        for(const id of [...rpcPending.keys()])settleRpc(id,new TypeError("Preview application document retired."));
+        channel.close();
       } else if (value.kind==="disconnect") {
         channelOpen=false;
         channelGeneration=0;

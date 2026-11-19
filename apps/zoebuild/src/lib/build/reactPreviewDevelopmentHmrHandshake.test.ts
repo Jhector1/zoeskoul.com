@@ -1,7 +1,7 @@
 import { describe, it } from "vitest";
 import assert from "node:assert/strict";
 import { runInNewContext } from "node:vm";
-import { createDevelopmentHmrIframeBridge } from "./reactPreviewDevelopmentHmrIframeBridge";
+import { createDevelopmentHmrIframeBridge, registerDevelopmentHmrDocument } from "./reactPreviewDevelopmentHmrIframeBridge";
 import { createDevelopmentPreviewBrowserSession } from "./reactPreviewDevelopmentBrowserSession";
 import { createDevelopmentPreviewEditorLifecycle } from "./reactPreviewDevelopmentEditorLifecycle";
 import { ZOEBUILD_IFRAME_HMR_SCRIPT } from "./reactPreviewDevelopmentNativeIframeHmr";
@@ -10,7 +10,7 @@ const doc="/api/build/projects/project_a/preview/preview_123e4567-e89b-42d3-a456
 const connected=JSON.stringify({type:"connected"});
 const update=JSON.stringify({type:"update",updates:[]});
 type WireMessage={kind:string;text?:string;nonce?:string;generation?:number};
-type WireEvent={data:WireMessage;source?:unknown;ports?:FakePort[]};
+type WireEvent={data:WireMessage;source?:unknown;origin?:string;ports?:FakePort[]};
 class FakePort {
   peer:FakePort|null=null;
   closed=false;
@@ -28,7 +28,7 @@ function harness(run:(f:ReturnType<typeof setup>)=>void) {
   const old=keys.map(key=>Object.getOwnPropertyDescriptor(globalThis,key));
   const f=setup();
   try {run(f);} finally {
-    f.bridge.close();
+    f.bridge.close();f.unregister();
     keys.forEach((key,i)=>{const value=old[i];if(value)Object.defineProperty(globalThis,key,value);else Reflect.deleteProperty(globalThis,key);});
   }
 }
@@ -40,13 +40,15 @@ function setup() {
   let nonce=0, bound=0, ready=0, failures=0, reloads=0;
   let revisionReady=true;
   let childPort:FakePort|null=null;
-  const parent={postMessage(data:WireMessage){tasks.push(()=>parentListener?.({data,source:child}));}};
+  const parent={postMessage(data:WireMessage){tasks.push(()=>parentListener?.({data,source:child,origin:"null"}));}};
   const child={postMessage(data:WireMessage,_origin:string,ports:FakePort[]){tasks.push(()=>childListener?.({data,source:parent,ports}));}};
   const parentWindow={location:{href:"http://localhost:3004/editor"},addEventListener(_kind:string,fn:(event:WireEvent)=>void){parentListener=fn;},removeEventListener(){parentListener=null;}};
-  const frame={get src(){return "http://localhost:3004"+doc;},set src(value:string){assert.equal(value,"http://localhost:3004"+doc);reloads++;},contentWindow:child};
+  let documentPath=doc;
+  const frame={get src(){return "http://localhost:3004"+documentPath;},set src(value:string){assert.equal(value,"http://localhost:3004"+documentPath);reloads++;},contentWindow:child,isConnected:true,getAttribute:()=>"allow-scripts"};
   const parentDocument={querySelectorAll(){return [frame];}};
   class FakeChannel {port1=new FakePort(tasks);port2=new FakePort(tasks);constructor(){this.port1.peer=this.port2;this.port2.peer=this.port1;childPort=this.port2;}}
   for(const [key,value] of Object.entries({window:parentWindow,document:parentDocument,MessageChannel:FakeChannel}))Object.defineProperty(globalThis,key,{value,writable:true,configurable:true});
+  let unregister=registerDevelopmentHmrDocument(doc,documentPath,frame as unknown as HTMLIFrameElement);
   const bridge=createDevelopmentHmrIframeBridge({documentUrl:doc,onBound:()=>bound++,onClientReady:()=>ready++,onDeliveryFailure:()=>failures++,canDeliverFrames:()=>revisionReady});
   function newDocument(){
     const win={parent,WebSocket:class Native extends EventTarget {},addEventListener(_type:string,fn:(event:WireEvent)=>void){childListener=fn;}};
@@ -60,7 +62,7 @@ function setup() {
       return {socket,events};
     };
   }
-  return {bridge,flush,newDocument,setRevisionReady:(value:boolean)=>{revisionReady=value;},sendFromIframe:(data:WireMessage)=>childPort?.postMessage(data),counts:()=>({bound,ready,failures,reloads})};
+  return {bridge,flush,newDocument,unregister:()=>unregister(),navigate:(path:string)=>{unregister();documentPath=path;unregister=registerDevelopmentHmrDocument(doc,path,frame as unknown as HTMLIFrameElement);},announce:(nonce:string)=>parent.postMessage({kind:"zoebuild-hmr-iframe-ready",nonce}),setRevisionReady:(value:boolean)=>{revisionReady=value;},sendFromIframe:(data:WireMessage)=>childPort?.postMessage(data),counts:()=>({bound,ready,failures,reloads})};
 }
 
 describe("Phase 4F5H10F virtual Vite socket handshake",()=>{
@@ -85,6 +87,25 @@ describe("Phase 4F5H10F virtual Vite socket handshake",()=>{
     assert.deepEqual(second.events,["open","connected"]);
     f.bridge.push(update);f.flush();assert.deepEqual(second.events,["open","connected","update"]);
     assert.deepEqual(first.events,["open","connected"]);
+  }));
+  it("binds the exact renderer-registered About document and preserves it during gap reload",()=>harness(f=>{
+    f.bridge.setConnected(true);f.bridge.push(connected);
+    const old=f.newDocument()();f.flush();
+    f.navigate(doc+"about");
+    const about=f.newDocument()();f.flush();
+    f.bridge.push(update);f.flush();
+    assert.deepEqual(old.events,["open","connected"]);
+    assert.deepEqual(about.events,["open","connected","update"]);
+    f.bridge.setConnected(false);f.bridge.setConnected(true);f.bridge.push(connected);f.flush();
+    assert.equal(f.counts().reloads,1);
+  }));
+  it("does not retire an acknowledged document for an unacknowledged stale nonce",()=>harness(f=>{
+    f.bridge.setConnected(true);f.bridge.push(connected);
+    const c=f.newDocument()();f.flush();
+    f.announce("ff".repeat(16));f.flush();
+    f.bridge.push(update);f.flush();
+    assert.deepEqual(c.events,["open","connected","update"]);
+    assert.equal(f.counts().bound,1);
   }));
   it("does not fabricate a connected frame or release updates before an actual one arrives",()=>harness(f=>{
     f.bridge.setConnected(true);f.bridge.push(update);
@@ -220,7 +241,7 @@ it("does not release an HMR event between the real source update and durable gra
     assert.deepEqual(c.events,["open","connected","update"]);
     assert.equal(lifecycle.readyDocument()?.documentUrl,doc);
   }finally{
-    lifecycle.dispose();f.bridge.close();
+    lifecycle.dispose();f.bridge.close();f.unregister();
     keys.forEach((key,i)=>{const value=old[i];if(value)Object.defineProperty(globalThis,key,value);else Reflect.deleteProperty(globalThis,key);});
   }
 });

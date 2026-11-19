@@ -30,6 +30,12 @@ describe("ZoeBuild persistent React preview host",()=>{
   expect(host).toContain("enabled&&entry?.preview");
  });
 
+  it("registers the native iframe from the trusted renderer, not the shared immutable renderer",()=>{
+   const native=read("src/components/builder/DevelopmentRemoteWebPreview.tsx");
+   expect(native).toContain("registerDevelopmentHmrDocument(root,documentUrl,frame)");
+   expect(native).toContain("ref={bindFrame}");
+   expect(native).toContain('sandbox="allow-scripts"');
+  });
  it("does not weaken the iframe sandbox",()=>{
   expect(host).not.toContain("allow-same-origin");
  });

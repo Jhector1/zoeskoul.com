@@ -1,6 +1,7 @@
 "use client";
 
-import {useEffect, useRef, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
+import { registerDevelopmentHmrDocument } from "@/lib/build/reactPreviewDevelopmentHmrIframeBridge";
 import type {RemoteWebPreviewDescriptor} from "@zoeskoul/learner-workspace/runner/remotePreview";
 import {
   developmentPreviewDocumentUrl, isTrustedDevelopmentPreviewRoot,
@@ -29,10 +30,14 @@ export default function DevelopmentRemoteWebPreview({preview}: Readonly<{
   const [position, setPosition] = useState(0);
   const [refresh, setRefresh] = useState(0);
   const [delivery, setDelivery] = useState<Delivery>("loading");
-  const iframe = useRef<HTMLIFrameElement | null>(null);
+  const unregisterFrame = useRef<(() => void) | null>(null);
   const latestProbe = useRef(0);
   const page = history[position] ?? ROOT_ROUTE;
   const documentUrl = root ? developmentPreviewDocumentUrl(root, page) : null;
+  const bindFrame=useCallback((frame:HTMLIFrameElement|null)=>{
+    unregisterFrame.current?.();unregisterFrame.current=null;
+    if(frame && root && documentUrl)unregisterFrame.current=registerDevelopmentHmrDocument(root,documentUrl,frame);
+  },[root,documentUrl]);
 
   useEffect(() => { setDelivery("loading"); latestProbe.current++; }, [documentUrl, refresh]);
   useEffect(() => {
@@ -99,7 +104,7 @@ export default function DevelopmentRemoteWebPreview({preview}: Readonly<{
     </div>
     <div className="relative min-h-0 flex-1">
       {documentUrl && preview.state !== "error" ? <iframe
-        ref={iframe}
+        ref={bindFrame}
         key={`${documentUrl}:${refresh}`}
         title="Saved ZoeBuild development preview"
         src={documentUrl}
