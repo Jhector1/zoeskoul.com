@@ -131,3 +131,21 @@ export function createDevelopmentHmrRotationCoordinator<T extends ClosableSocket
   }
   return {beginAttempt,promote,recordFailure,meaningfulRecovery,close};
 }
+
+/** One browser-controller generation owns exactly one recovery handoff.
+ * The existing per-project circuit bounds fresh development admissions.
+ * A retry never selects the immutable lane. Once terminal fallback is
+ * selected there is no automatic native admission from this handoff. */
+export function createDevelopmentRecoveryHandoff(decide:()=>DevelopmentRecoveryDecision) {
+  let closed=false;
+  return {
+    request(): Readonly<{kind:"development";delayMs:number}|{kind:"immutable"}> | null {
+      if(closed)return null;
+      closed=true;
+      const decision=decide();
+      return decision.retry && decision.delayMs!==null
+        ? {kind:"development",delayMs:decision.delayMs} : {kind:"immutable"};
+    },
+    close(){closed=true;},
+  };
+}

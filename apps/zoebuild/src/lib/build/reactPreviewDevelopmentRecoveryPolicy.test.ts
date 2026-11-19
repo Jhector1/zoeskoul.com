@@ -2,6 +2,7 @@ import {describe,expect,it,vi} from "vitest";
 import {
   createDevelopmentHmrRotationCoordinator,
   createDevelopmentRecoveryCircuit,
+  createDevelopmentRecoveryHandoff,
 } from "./reactPreviewDevelopmentRecoveryPolicy";
 
 const socket=()=>({close:vi.fn()});
@@ -65,5 +66,34 @@ describe("development HMR socket rotation",()=>{
     expect(c.meaningfulRecovery(id,recovered)).toBe(true);
     const next=socket(),nextId=c.beginAttempt()!;
     expect(c.recordFailure(nextId,next)).toMatchObject({attempt:0,handled:false,retainedActive:true});
+  });
+});
+
+
+describe("exclusive development recovery handoff",()=>{
+  it("coalesces lifecycle and socket failures from one controller",()=>{
+    const circuit=createDevelopmentRecoveryCircuit({maxFailures:3,baseDelayMs:100,maxDelayMs:500});
+    const decide=vi.fn(()=>circuit.fail("project"));
+    const h=createDevelopmentRecoveryHandoff(decide);
+    expect(h.request()).toEqual({kind:"development",delayMs:100});
+    expect(h.request()).toBeNull();
+    expect(decide).toHaveBeenCalledTimes(1);
+    expect(circuit.snapshot().failures).toBe(1);
+  });
+  it("stays native until terminal fallback, with no retry delay after fallback",()=>{
+    const circuit=createDevelopmentRecoveryCircuit({maxFailures:3,baseDelayMs:100,maxDelayMs:500});
+    const next=()=>createDevelopmentRecoveryHandoff(()=>circuit.fail("project"));
+    expect(next().request()).toEqual({kind:"development",delayMs:100});
+    expect(next().request()).toEqual({kind:"development",delayMs:200});
+    const last=next();
+    expect(last.request()).toEqual({kind:"immutable"});
+    expect(last.request()).toBeNull();
+    expect(circuit.snapshot().circuitOpen).toBe(true);
+  });
+  it("ignores retired controller callbacks without charging the new circuit",()=>{
+    const decide=vi.fn(()=>({attempt:1,retry:true,delayMs:100}));
+    const retired=createDevelopmentRecoveryHandoff(decide);retired.close();
+    expect(retired.request()).toBeNull();
+    expect(decide).not.toHaveBeenCalled();
   });
 });

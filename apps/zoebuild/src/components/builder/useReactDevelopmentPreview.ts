@@ -12,6 +12,7 @@ import { createDevelopmentHmrIframeBridge } from "@/lib/build/reactPreviewDevelo
 import {
   createDevelopmentHmrRotationCoordinator,
   createDevelopmentRecoveryCircuit,
+  createDevelopmentRecoveryHandoff,
 } from "@/lib/build/reactPreviewDevelopmentRecoveryPolicy";
 
 type Preview = RemoteWebPreviewDescriptor & {
@@ -39,7 +40,7 @@ export function useReactDevelopmentPreview(input: Readonly<{
   savedSourceReady: boolean;
   workspace: WorkspaceStateV2;
 }>): Readonly<{ preview: Preview | null; fallback: boolean }> {
-  const activeRef = useRef<{ projectId: string; lifecycle: Active } | null>(null);
+  const activeRef = useRef<{ projectId: string; lifecycle: Active; recover: () => void } | null>(null);
   // The committed editor inputs fence the old lease before passive effects
   // can schedule the next update. Bind readiness to the exact document too.
   const selectedRef = useRef({
@@ -48,7 +49,7 @@ export function useReactDevelopmentPreview(input: Readonly<{
   });
   const bridgeWakeRef = useRef<(() => void) | null>(null);
   const recoveryCircuitRef = useRef<ReturnType<typeof createDevelopmentRecoveryCircuit> | null>(null);
-  const fallbackRetryDelayRef = useRef<number | null>(null);
+  const [recoveryPlan, setRecoveryPlan] = useState<{projectId:string;delayMs:number} | null>(null);
   if (!recoveryCircuitRef.current) recoveryCircuitRef.current=createDevelopmentRecoveryCircuit({
     maxFailures:LIFECYCLE_FAILURE_LIMIT,baseDelayMs:1_000,maxDelayMs:8_000,
   });
@@ -67,7 +68,8 @@ export function useReactDevelopmentPreview(input: Readonly<{
   // briefly receive a prior project's tokenized iframe URL on first render.
   const resultForProject = result?.projectId === input.buildProjectId ? result : null;
   const fallback = resultForProject?.fallback ?? false;
-  const active = input.enabled && !fallback;
+  const recovering = recoveryPlan?.projectId === input.buildProjectId;
+  const active = input.enabled && !fallback && !recovering;
 
   useLayoutEffect(() => {
     selectedRef.current = {projectId: input.buildProjectId,
@@ -89,10 +91,38 @@ export function useReactDevelopmentPreview(input: Readonly<{
       buildProjectId,
       fetchClient: (path, init) => fetch(path, init),
     });
-    const lifecycle = createDevelopmentPreviewEditorLifecycle({
+    // Both lifecycle and socket failure notifications belong to this one
+    // controller generation. Do not start two competing recovery lanes.
+    const handoff = createDevelopmentRecoveryHandoff(() =>
+      recoveryCircuitRef.current!.fail(buildProjectId));
+    const recover = () => {
+      if (!alive || activeRef.current?.lifecycle !== lifecycle ||
+          selectedRef.current.projectId !== buildProjectId || !selectedRef.current.active) return;
+      const decision = handoff.request();
+      if (!decision) return;
+      // Fence and retire this browser controller synchronously. This does NOT
+      // cancel the server lease or replay any application/workspace mutation.
+      activeRef.current = null;
+      lifecycle.dispose();
+      if(process.env.NODE_ENV==="development") console.info("[ZOE-HMR]",JSON.stringify({event:"recovery_handoff",lane:decision.kind}));
+      if (decision.kind === "development") {
+        setRecoveryPlan({projectId:buildProjectId,delayMs:decision.delayMs});
+        setResult(current=>({projectId:buildProjectId,previewId:null,
+          preview:{src:null,state:"starting",message:"Reconnecting to the saved development preview…",
+            revision:current?.projectId===buildProjectId ? current.preview?.revision??0 : 0},
+          confirmed:null,attempted:null,fallback:false}));
+      } else {
+        // Terminal fallback is exclusive. Do not automatically start native
+        // admission while the immutable hook owns the project's preview.
+        setRecoveryPlan(null);
+        setResult({projectId:buildProjectId,preview:null,previewId:null,
+          confirmed:null,attempted:null,fallback:true});
+      }
+    };
+    const lifecycle: Active = createDevelopmentPreviewEditorLifecycle({
       controller,
       onDocument: ({ sourceVersion, documentUrl, previewId }) => {
-        if (!alive) return;
+        if (!alive || activeRef.current?.lifecycle !== lifecycle) return;
         // The controller has now confirmed the grant for this saved revision.
         // Wake the existing bridge (if still bound to that exact document).
         bridgeWakeRef.current?.();
@@ -120,7 +150,7 @@ export function useReactDevelopmentPreview(input: Readonly<{
         }));
       },
       onWaiting: () => {
-        if (!alive) return;
+        if (!alive || activeRef.current?.lifecycle !== lifecycle) return;
         setResult(current => ({
           projectId: buildProjectId,
           previewId: current?.projectId === buildProjectId ? current.previewId : null,
@@ -138,23 +168,11 @@ export function useReactDevelopmentPreview(input: Readonly<{
         }));
       },
       onFailure: () => {
-        if (!alive) return;
         if(process.env.NODE_ENV==="development") console.info("[ZOE-HMR]",JSON.stringify({event:"lifecycle_failure"}));
-        const decision=recoveryCircuitRef.current!.fail(buildProjectId);
-        fallbackRetryDelayRef.current=decision.retry ? decision.delayMs : null;
-        // Immediately detach the mutable iframe; the unchanged immutable
-        // hook takes over after teardown and best-effort lease cancellation.
-        setResult({
-          projectId: buildProjectId,
-          preview: null,
-          previewId: null,
-          confirmed: null,
-          attempted: null,
-          fallback: true,
-        });
+        recover();
       },
     });
-    activeRef.current = { projectId: buildProjectId, lifecycle };
+    activeRef.current = { projectId: buildProjectId, lifecycle, recover };
     setResult(current => ({
       projectId: buildProjectId,
       previewId: null,
@@ -164,25 +182,25 @@ export function useReactDevelopmentPreview(input: Readonly<{
     const renewTimer = window.setInterval(() => {void lifecycle.renewIfDue();}, RENEW_CHECK_MS);
     return () => {
       alive = false;
+      handoff.close();
       window.clearInterval(renewTimer);
       if (activeRef.current?.lifecycle === lifecycle) activeRef.current = null;
       lifecycle.dispose();
     };
   }, [input.buildProjectId, input.enabled, active]);
 
-  // Immutable rendering is a bounded recovery surface, not a terminal mode.
-  // Re-enter the authoritative development lifecycle after a short backoff;
-  // the Runner independently preserves any still-healthy development lease.
+  // Backoff belongs solely to the development lane. While waiting, keep
+  // fallback=false and a starting descriptor so the immutable hook stays off.
   useEffect(()=>{
-    if(!input.enabled || !fallback)return;
-    const delay=fallbackRetryDelayRef.current;
-    if(delay===null)return;
-    const timer=window.setTimeout(()=>setResult(current=>
-      current?.projectId===input.buildProjectId
-        ? {...current,fallback:false,preview:null,previewId:null}
-        : current),delay);
+    if (!recoveryPlan) return;
+    if (!input.enabled || recoveryPlan.projectId !== input.buildProjectId || fallback) {
+      setRecoveryPlan(current=>current===recoveryPlan ? null : current);
+      return;
+    }
+    const timer=window.setTimeout(()=>setRecoveryPlan(current=>
+      current===recoveryPlan ? null : current), recoveryPlan.delayMs);
     return ()=>window.clearTimeout(timer);
-  },[fallback,input.buildProjectId,input.enabled]);
+  },[recoveryPlan,input.buildProjectId,input.enabled,fallback]);
 
   useEffect(() => {
     if (!active) return;
@@ -206,6 +224,8 @@ export function useReactDevelopmentPreview(input: Readonly<{
         !nativeHmrEnabled) return;
     const origin=process.env.NEXT_PUBLIC_ZOEBUILD_DEVELOPMENT_HMR_PUBLIC_ORIGIN;
     if (!origin || !/\/dpg1\.[A-Za-z0-9_-]{43}\/$/.test(currentDocumentUrl)) return;
+    const recoveryOwner=activeRef.current;
+    if (!recoveryOwner || recoveryOwner.projectId!==input.buildProjectId) return;
     let disposed=false;
     let bound=false;
     let viteConnectedAttempt:number|null=null;
@@ -217,14 +237,11 @@ export function useReactDevelopmentPreview(input: Readonly<{
       if(process.env.NODE_ENV==="development") console.info("[ZOE-HMR]",JSON.stringify({event,bound,elapsedMs:Math.round(performance.now()-started)}));
     };
     diagnostic("bridge_start");
-    const fallbackToImmutable=(reason:string)=>{
-      if (disposed || fallbackIssued) return;
+    const requestDevelopmentRecovery=(reason:string)=>{
+      if (disposed || fallbackIssued || activeRef.current!==recoveryOwner) return;
       fallbackIssued=true;
       diagnostic(reason);
-      const decision=recoveryCircuitRef.current!.fail(input.buildProjectId);
-      fallbackRetryDelayRef.current=decision.retry ? decision.delayMs : null;
-      setResult(current=>current?.projectId===input.buildProjectId
-        ? {...current,preview:null,previewId:null,fallback:true} : current);
+      recoveryOwner.recover();
     };
     type BrowserSocket=ReturnType<typeof createDevelopmentHmrBrowserSocket>;
     const rotation=createDevelopmentHmrRotationCoordinator<BrowserSocket>({
@@ -233,12 +250,11 @@ export function useReactDevelopmentPreview(input: Readonly<{
     let activeAttempt:number|null=null;
     let activeSocket:BrowserSocket|null=null;
     const markMeaningfulRecovery=()=>{
-      if(meaningfulReported || !bound ||
+      if(disposed || fallbackIssued || activeRef.current!==recoveryOwner || meaningfulReported || !bound ||
           activeAttempt===null || !activeSocket ||
           viteConnectedAttempt!==activeAttempt ||
           !rotation.meaningfulRecovery(activeAttempt,activeSocket))return;
       meaningfulReported=true;
-      fallbackRetryDelayRef.current=null;
       recoveryCircuitRef.current?.meaningfulRecovery(input.buildProjectId);
       diagnostic("meaningful_recovery");
     };
@@ -261,10 +277,10 @@ export function useReactDevelopmentPreview(input: Readonly<{
       onBound:()=>{bound=true;diagnostic("bridge_bound");markMeaningfulRecovery();},
       onClientReady:()=>diagnostic("iframe_vite_client_ready"),
       onResync:()=>{bound=false;meaningfulReported=false;diagnostic("iframe_transport_gap_resync");},
-      onDeliveryFailure:()=>fallbackToImmutable("iframe_hmr_delivery_overflow"),
+      onDeliveryFailure:()=>requestDevelopmentRecovery("iframe_hmr_delivery_overflow"),
     });
     const bindTimeout=window.setTimeout(()=>{
-      if (!disposed && !bound) fallbackToImmutable("bridge_bind_timeout");
+      if (!disposed && !bound) requestDevelopmentRecovery("bridge_bind_timeout");
     },15_000);
     let socket: ReturnType<typeof createDevelopmentHmrBrowserSocket> | null=null;
     let connecting=false;
@@ -280,7 +296,7 @@ export function useReactDevelopmentPreview(input: Readonly<{
       candidate.close();
       diagnostic(`${reason}_retry_${decision.attempt}`);
       if(!decision.retry || decision.delayMs===null) {
-        fallbackToImmutable(reason);
+        requestDevelopmentRecovery(reason);
         return;
       }
       if(retryTimer!==null)return;
