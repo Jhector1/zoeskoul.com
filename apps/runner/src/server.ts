@@ -1,4 +1,5 @@
 import { createServer } from "node:http";
+import { startAdminEgressRenewal } from "./services/execution/adminEgressRenewal.js";
 import { app } from "./app.js";
 import { env } from "./lib/env.js";
 import { attachSessionWsServer } from "./ws/sessionWsServer.js";
@@ -21,6 +22,9 @@ async function main() {
   // Fail-closed: no listener or admission while a previous process may still
   // have Docker containers, workspaces or unreconciled recovery journals.
   await cleanupRunnerOrphansOnStartup();
+
+  // Own the renewal lifecycle in the trusted Runner, never in a student request.
+  startAdminEgressRenewal();
 
   const rateLimitPruneTimer = setInterval(pruneStartRateLimitBuckets, 60_000);
   if (typeof rateLimitPruneTimer.unref === "function") {
