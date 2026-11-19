@@ -25,6 +25,7 @@ import {
   clearAllTimeouts,
 } from "../sessions/timeoutManager.js";
 import { resolveTimeoutPolicy } from "../sessions/timeoutPolicy.js";
+import { resolveAdminSessionTimeoutPolicy } from "../execution/adminSessionTimeoutPolicy.js";
 import { consumeStartToken } from "../sessions/startRateLimit.js";
 import { resolveOwnedShellSession } from "../sessions/ownedShellSession.js";
 import {
@@ -330,7 +331,7 @@ async function startDockerSessionUncoordinated(
       requestedWallTimeoutMs: normalized.wallTimeoutMs,
     });
     const timeouts = labMode === "admin"
-      ? { ...standardTimeouts, idleTimeoutMs: 5 * 60 * 1000, hardLifetimeMs: 10 * 60 * 1000 }
+      ? resolveAdminSessionTimeoutPolicy(adminTopicSlug)
       : standardTimeouts;
     if (labMode === "admin") {
       // Disposable root guest must NEVER create or mount a host workspace.
