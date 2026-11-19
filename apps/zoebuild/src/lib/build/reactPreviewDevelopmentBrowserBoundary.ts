@@ -17,11 +17,14 @@ export function browserError(requestId:string,error:unknown) {
     return response(requestId,{ok:false,code:error.code,message:error.message},error.status);
   if (error instanceof RunnerHttpError) {
     const status=error.status===404?404:error.status===409?409:503;
+    const retryableUpdate=status===503 && error.code==="UPDATE_PRE_WRITE_AUTHORITY_FAILED";
     return response(requestId,{ok:false,
       code:status===404?"BUILD_PREVIEW_NOT_FOUND":status===409?
-        "BUILD_PREVIEW_SOURCE_CONFLICT":"BUILD_PREVIEW_UNAVAILABLE",
+        "BUILD_PREVIEW_SOURCE_CONFLICT":retryableUpdate?
+          "BUILD_PREVIEW_UPDATE_RETRYABLE":"BUILD_PREVIEW_UNAVAILABLE",
       message:status===409?"Preview revision is stale or requires restart.":
-        "Development preview is unavailable.",
+        retryableUpdate?"Development preview update was not applied.":
+          "Development preview is unavailable.",
     },status);
   }
   return response(requestId,{ok:false,code:"BUILD_PREVIEW_UNAVAILABLE",

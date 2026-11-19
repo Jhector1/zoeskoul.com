@@ -5,7 +5,7 @@ import { Worker } from "node:worker_threads";
 import path from "node:path";
 import { performance } from "node:perf_hooks";
 import { env } from "../../lib/env.js";
-import { assertWorkspaceRootCanGrowBy } from "../workspace/workspacePolicy.js";
+import { reserveWorkspaceRootCapacity } from "../workspace/workspacePolicy.js";
 import {
   previewObservability,
   type DependencyLayerLookupOutcome,
@@ -218,7 +218,9 @@ export class PreviewDependencyLayerStore {
   private readonly root: string;
   private readonly workspaceRoot: string;
   private readonly now: () => number;
-  private readonly reserveCapacity: (root: string, additionalBytes: number) => Promise<void>;
+  private readonly reserveCapacity: (root: string, additionalBytes: number) =>
+    Promise<void | (()=>void)>;
+  private readonly verificationFlights=new Map<string,Promise<Awaited<ReturnType<PreviewDependencyLayerStore["verified"]>>>>();
   private readonly activeStaging = new Set<string>();
   private publicationTail: Promise<void> = Promise.resolve();
   private lookups = 0;
@@ -234,13 +236,13 @@ export class PreviewDependencyLayerStore {
     workspaceRoot: string = env.workspaceRoot,
     options: Readonly<{
       now?: () => number;
-      reserveCapacity?: (root: string, additionalBytes: number) => Promise<void>;
+      reserveCapacity?: (root: string, additionalBytes: number) => Promise<void | (()=>void)>;
     }> = {},
   ) {
     this.workspaceRoot = workspaceRoot;
     this.root = path.join(workspaceRoot, ".zoebuild-preview-dependency-layers-v1");
     this.now = options.now ?? Date.now;
-    this.reserveCapacity = options.reserveCapacity ?? assertWorkspaceRootCanGrowBy;
+    this.reserveCapacity = options.reserveCapacity ?? reserveWorkspaceRootCapacity;
   }
 
   private entry(key: string): string {
@@ -300,6 +302,19 @@ export class PreviewDependencyLayerStore {
         attestation.tree.bytes !== m.bytes || attestation.tree.files !== m.files)
       return { outcome: "corrupt", manifest: null, verificationMs };
     return { outcome: "hit", manifest: m, verificationMs };
+  }
+
+  /** Coalesce only overlapping verification of the exact immutable-key path.
+   * The completed result is never cached: every later acquire still performs
+   * a full-byte scan, so tampering after the flight is detected. */
+  private verifyOncePerFlight(key:string) {
+    const active=this.verificationFlights.get(key);
+    if(active)return active;
+    const created=this.verified(key).finally(()=>{
+      if(this.verificationFlights.get(key)===created)this.verificationFlights.delete(key);
+    });
+    this.verificationFlights.set(key,created);
+    return created;
   }
 
   private async remove(key: string): Promise<boolean> {
@@ -419,7 +434,7 @@ export class PreviewDependencyLayerStore {
     }
     this.verifying.set(key, (this.verifying.get(key) ?? 0) + 1);
     try {
-      const verified = await this.verified(key);
+      const verified = await this.verifyOncePerFlight(key);
       if (verified.outcome !== "hit") {
         this.misses += 1;
         if (verified.outcome === "rejected") this.rejected += 1;
@@ -521,8 +536,9 @@ export class PreviewDependencyLayerStore {
         published.reduce((sum, m) => sum + m.bytes, 0) + inspected.tree.bytes > MAX_TOTAL_BYTES) {
       return skip("cache-capacity");
     }
+    let releaseCapacity:()=>void=()=>{};
     try {
-      await this.reserveCapacity(this.workspaceRoot, inspected.tree.bytes);
+      releaseCapacity=(await this.reserveCapacity(this.workspaceRoot,inspected.tree.bytes))??(()=>{});
     } catch {
       return skip("disk-headroom");
     }
@@ -574,7 +590,7 @@ export class PreviewDependencyLayerStore {
           return winner;
         }
         if (this.leases.get(key)) return skip("layer-in-use");
-        await this.remove(key);
+        if (!await this.remove(key)) return skip("layer-in-use");
       }
       await fs.rename(staged, dest);
       this.published += 1;
@@ -596,6 +612,7 @@ export class PreviewDependencyLayerStore {
     } finally {
       this.activeStaging.delete(stagedName);
       await fs.rm(staged, { force: true, recursive: true }).catch(() => undefined);
+      releaseCapacity();
     }
   }
 

@@ -117,4 +117,17 @@ describe("ZoeBuild preview observability", () => {
     });
     expect(JSON.stringify(snapshot)).not.toContain("owner-a");
   });
+
+  it("separates actual Docker exec creation from multiplexed transport requests",()=>{
+    let now=0;const metrics=new PreviewObservability(()=>now);
+    const endExec=metrics.beginDockerExec();now=2;endExec("ok");
+    const readiness=metrics.beginTransportRequest("readiness");now=5;
+    readiness("loopback_connection");
+    const application=metrics.beginTransportRequest("application");now=8;application(null);
+    expect(metrics.snapshot()).toMatchObject({
+      dockerExec:{active:0,started:1,failed:0},
+      transportRequests:{active:0,started:2,failed:1,readinessFailures:1,
+        failureStages:{loopback_connection:1}},
+    });
+  });
 });

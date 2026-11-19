@@ -308,6 +308,50 @@ describe("K20D3F persistent verified dependency layers", () => {
 
 
 describe("H10S1 full-byte worker attestation", () => {
+  it("coalesces overlapping exact-key scans but never caches a completed attestation",async()=>{
+    const {first,store}=await fixture();
+    const published=(await store.publish(key(),first))!;published.release();
+    const internal=store as unknown as {verified(key:string):Promise<unknown>};
+    const original=internal.verified.bind(store);
+    let release!:()=>void;
+    const gate=new Promise<void>(resolve=>{release=resolve;});
+    let calls=0;
+    vi.spyOn(internal,"verified").mockImplementation(async candidate=>{
+      calls++;await gate;return original(candidate);
+    });
+    const one=store.lookup(key());
+    const two=store.lookup(key());
+    await vi.waitFor(()=>expect(calls).toBe(1));
+    release();
+    const results=await Promise.all([one,two]);
+    expect(results.map(result=>result.outcome)).toEqual(["hit","hit"]);
+    results.forEach(result=>result.lease?.release());
+    const target=path.join(published.nodeModulesDir,"foo","index.js");
+    await fs.writeFile(target,"tampered after shared verification");
+    expect((await store.lookup(key())).outcome).toBe("corrupt");
+    expect(calls).toBe(2);
+  });
+
+  it("pins all overlapping verification waiters and releases pins after failure",async()=>{
+    const {first,store}=await fixture();
+    const published=(await store.publish(key(),first))!;published.release();
+    const internal=store as unknown as {verified(key:string):Promise<unknown>;remove(key:string):Promise<boolean>};
+    let fail!:(error:Error)=>void;
+    const spy=vi.spyOn(internal,"verified").mockImplementationOnce(()=>new Promise((_resolve,reject)=>{fail=reject;}));
+    const one=store.lookup(key()); const two=store.lookup(key());
+    const results=Promise.allSettled([one,two]);
+    await vi.waitFor(()=>expect(spy).toHaveBeenCalledTimes(1));
+    // Wait for both callers to pin the key before rejecting the common flight.
+    const pins=store as unknown as {verifying:Map<string,number>};
+    await vi.waitFor(()=>expect(pins.verifying.get(key())).toBe(2));
+    expect(await internal.remove(key())).toBe(false);
+    fail(Error("test verification failed"));
+    expect((await results).map(r=>r.status)).toEqual(["rejected","rejected"]);
+    const again=await store.lookup(key());
+    expect(again.outcome).toBe("hit");
+    again.lease?.release();
+    expect(await internal.remove(key())).toBe(true);
+  });
   it("rejects same-length tampering even when the original mtime is restored", async () => {
     const { first, store } = await fixture();
     const lease = (await store.publish(key(), first))!;

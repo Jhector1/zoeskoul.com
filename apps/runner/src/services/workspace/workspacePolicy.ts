@@ -1,5 +1,6 @@
 import crypto from "node:crypto";
 import fs from "node:fs/promises";
+import { constants } from "node:fs";
 import path from "node:path";
 import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 import {
@@ -243,7 +244,7 @@ export type WorkspaceUsage = {
   entries: number;
 };
 
-export async function getDirectoryUsage(
+async function getLegacyDirectoryUsage(
   dir: string,
   limits?: { maxBytes?: number; maxEntries?: number },
 ): Promise<WorkspaceUsage> {
@@ -290,6 +291,75 @@ export async function getDirectoryUsage(
 
   await walk(dir);
   return { bytes, entries };
+}
+
+/** Dedicated shared-group executor accounting. No path lists or whole-tree
+ * closures are retained. On Linux, each directory is opened no-follow and
+ * descendants are resolved through its held descriptor, not a mutable ancestor.
+ * Count hardlinks per name, consistent with the existing quota definition.
+ * This is a bounded observation, not a filesystem snapshot or an OS quota. */
+export async function getStrictDirectoryUsage(
+  dir: string,
+  limits?: { maxBytes?: number; maxEntries?: number },
+): Promise<WorkspaceUsage> {
+  let bytes = 0;
+  let entries = 0;
+  const exceeded = () => (limits?.maxEntries !== undefined && entries > limits.maxEntries) ||
+    (limits?.maxBytes !== undefined && bytes > limits.maxBytes);
+  const same = (a: {dev:number;ino:number}, b: {dev:number;ino:number}) =>
+    a.dev === b.dev && a.ino === b.ino;
+  const linux = process.platform === "linux";
+  async function walk(current: string, depth: number): Promise<void> {
+    if (exceeded()) return;
+    if (depth >= 128) throw new Error("Runner workspace accounting depth exceeded.");
+    const original = await fs.lstat(current);
+    if (!original.isDirectory() || original.isSymbolicLink())
+      throw new Error("Unsafe workspace accounting directory.");
+    const handle = await fs.open(current, constants.O_RDONLY | constants.O_DIRECTORY | constants.O_NOFOLLOW);
+    try {
+      const opened = await handle.stat();
+      if (!same(original, opened)) throw new Error("Workspace accounting directory changed.");
+      const anchored = linux ? `/proc/self/fd/${handle.fd}` : current;
+      const listing = await fs.opendir(anchored, {bufferSize: 64});
+      try {
+        while (!exceeded()) {
+          const batch: string[] = [];
+          for (let i=0; i<16 && !exceeded(); i++) {
+            const child = await listing.read();
+            if (!child) break;
+            entries++;
+            batch.push(path.join(anchored,child.name));
+          }
+          if (!batch.length || exceeded()) break;
+          // All launched metadata work settles before closing the parent fd.
+          const stats = await Promise.allSettled(batch.map(target=>fs.lstat(target)));
+          for (let i=0;i<stats.length&&!exceeded();i++) {
+            const result = stats[i];
+            if (result.status === "rejected") throw result.reason;
+            const stat = result.value;
+            if (stat.isDirectory()) await walk(batch[i],depth+1);
+            else if (stat.isFile()) bytes += stat.size;
+          }
+        }
+      } finally { await listing.close(); }
+      const end = await fs.lstat(current);
+      if (!same(opened,end) || !end.isDirectory() || end.isSymbolicLink())
+        throw new Error("Workspace accounting directory changed.");
+    } finally { await handle.close(); }
+  }
+  try { await walk(path.resolve(dir),0); }
+  catch { throw new Error("Runner workspace accounting incomplete."); }
+  return {bytes,entries};
+}
+
+export async function getDirectoryUsage(
+  dir: string,
+  limits?: { maxBytes?: number; maxEntries?: number },
+): Promise<WorkspaceUsage> {
+  // Preserve the existing Learning/legacy filesystem contract. The dedicated
+  // shared-group policy is explicitly opt-in and not enabled in Learning.
+  return env.workspaceFilesystemPolicy === "shared-group-v1"
+    ? getStrictDirectoryUsage(dir,limits) : getLegacyDirectoryUsage(dir,limits);
 }
 
 export async function getDirectoryBytes(dir: string): Promise<number> {
@@ -350,6 +420,57 @@ export async function assertRunnerFilesystemHasCapacity(root: string) {
   }
 }
 
+type CapacityState = {tail:Promise<void>; reservedBytes:number; users:number};
+const capacityStates = new Map<string,CapacityState>();
+
+/** Process-local ledger. Count queued, executing AND held reservations,
+ * including zero-byte callers. No asynchronous eviction of a live state. */
+export async function reserveWorkspaceRootCapacity(
+  root:string, additionalBytes:number,
+):Promise<()=>void> {
+  if (!Number.isSafeInteger(additionalBytes) || additionalBytes<0 ||
+      additionalBytes>env.maxWorkspaceRootBytes)
+    throw new Error("Invalid Runner workspace capacity reservation.");
+  const key=path.resolve(root);
+  let state=capacityStates.get(key);
+  if (!state) {
+    state={tail:Promise.resolve(),reservedBytes:0,users:0};
+    capacityStates.set(key,state);
+  }
+  const held=state;
+  held.users++;
+  const done=()=>{
+    held.users--;
+    if (held.users===0 && held.reservedBytes===0 && capacityStates.get(key)===held)
+      capacityStates.delete(key);
+  };
+  const prior=held.tail;
+  let unlock!:()=>void;
+  held.tail=new Promise<void>(resolve=>{unlock=resolve;});
+  await prior;
+  try {
+    await fs.mkdir(key,{recursive:true});
+    const requested=held.reservedBytes+additionalBytes;
+    const remaining=env.maxWorkspaceRootBytes-requested;
+    if (remaining<0) throw new Error("Runner workspace root cannot reserve additional storage.");
+    const usage=await getDirectoryUsage(key,{maxBytes:remaining});
+    if (usage.bytes>remaining)
+      throw new Error("Runner workspace root cannot reserve additional storage.");
+    const capacity=await getRunnerFilesystemCapacity(key);
+    if (capacity&&capacity.freeBytes-requested<capacity.requiredFreeBytes)
+      throw new Error("Runner host disk cannot reserve additional storage.");
+    held.reservedBytes+=additionalBytes;
+  } catch(error) { done(); throw error; }
+  finally { unlock(); }
+  let released=false;
+  return ()=>{
+    if (released) return;
+    released=true;
+    held.reservedBytes-=additionalBytes;
+    done();
+  };
+}
+
 /** Reserve capacity for a trusted, bounded copy before it is created.
  * The workspace-root scan already includes dependency layers, live workspaces,
  * and private pnpm stores, so this is one joint accounting boundary rather
@@ -358,6 +479,10 @@ export async function assertWorkspaceRootCanGrowBy(
   root: string,
   additionalBytes: number,
 ) {
+  if (env.workspaceFilesystemPolicy === "shared-group-v1") {
+    const release=await reserveWorkspaceRootCapacity(root,additionalBytes);
+    release(); return;
+  }
   if (!Number.isSafeInteger(additionalBytes) || additionalBytes < 0 ||
       additionalBytes > env.maxWorkspaceRootBytes) {
     throw new Error("Invalid Runner workspace capacity reservation.");
@@ -375,6 +500,10 @@ export async function assertWorkspaceRootCanGrowBy(
 }
 
 export async function assertWorkspaceRootHasCapacity(root: string) {
+  if (env.workspaceFilesystemPolicy === "shared-group-v1") {
+    const release=await reserveWorkspaceRootCapacity(root,0);
+    release(); return;
+  }
   await fs.mkdir(root, { recursive: true }).catch(() => {});
 
   const usage = await getDirectoryUsage(root, {

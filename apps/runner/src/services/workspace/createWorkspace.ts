@@ -5,8 +5,9 @@ import type { FileEntry } from "@zoeskoul/code-contracts";
 import { env } from "../../lib/env.js";
 import {
   assertSafeWorkspacePath,
-  assertWorkspaceRootHasCapacity,
   normalizeWorkspaceEntries,
+  reserveWorkspaceRootCapacity,
+  assertWorkspaceRootHasCapacity,
   type NormalizedWorkspaceEntry,
 } from "./workspacePolicy.js";
 import { ensureWorkspaceWritableForShellUser } from "./workspacePermissions.js";
@@ -98,8 +99,7 @@ export async function createWorkspace(
 ) {
   const rootBase = env.workspaceRoot;
 
-  // Observability only: no changes to workspace authorization, file writes,
-  // ownership, capacity enforcement, or cleanup. No source names or contents.
+  // Bounded stage diagnostics; never log source names or contents.
   const started = Date.now();
   let checkpoint = started;
   const timings = {
@@ -111,32 +111,37 @@ export async function createWorkspace(
     runtimeFilesMs: 0,
     permissionsMs: 0,
   };
-  let stage = "root-ready";
-  await ensureWorkspaceRoot(rootBase);
-  timings.rootReadyMs = Date.now() - checkpoint;
-  checkpoint = Date.now();
-  stage = "quota";
-  await assertWorkspaceRootHasCapacity(rootBase);
-  timings.quotaMs = Date.now() - checkpoint;
-  checkpoint = Date.now();
-
-  stage = "normalize";
-  const normalized = normalizeWorkspaceEntries(files ?? [], {
-    dropRunnerManaged: true,
-  });
-  timings.normalizeMs = Date.now() - checkpoint;
-  checkpoint = Date.now();
-
-  const root = path.join(rootBase, `zoeskoul-run-${crypto.randomUUID()}`);
-  // Optional trusted lifecycle hook: durable owner records the future path
-  // before the first mkdir, closing the crash/rollback identification gap.
-  await options.onWorkspaceAllocated?.(root);
-  stage = "workspace-directory";
-  await ensureWorkspaceDir(root);
-  timings.workspaceDirMs = Date.now() - checkpoint;
-  checkpoint = Date.now();
-
+  type Stage="root-preparation"|"entry-normalization"|"quota-verification"|
+    "journal-allocation"|"directory-creation"|"write-entries"|"runtime-files"|"permissions";
+  let stage:Stage="root-preparation";
+  let root:string|null=null;
+  let allocated=false;
+  let releaseCapacity:(()=>void)|null=null;
   try {
+    await ensureWorkspaceRoot(rootBase);
+    timings.rootReadyMs=Date.now()-checkpoint;checkpoint=Date.now();
+    stage="entry-normalization";
+    const normalized=normalizeWorkspaceEntries(files??[],{dropRunnerManaged:true});
+    timings.normalizeMs=Date.now()-checkpoint;checkpoint=Date.now();
+    // Reserve only normalized source bytes. The root is still reconciled in
+    // full; the reservation remains held through writes and cleanup.
+    const incomingBytes=normalized.reduce((total,entry)=>total+
+      (entry.kind==="file" ? entry.storage==="binary" ? entry.bytes.byteLength :
+        Buffer.byteLength(entry.content,"utf8") : 0),0);
+    stage="quota-verification";
+    if (env.workspaceFilesystemPolicy === "shared-group-v1")
+      releaseCapacity=await reserveWorkspaceRootCapacity(rootBase,incomingBytes);
+    else await assertWorkspaceRootHasCapacity(rootBase);
+    timings.quotaMs=Date.now()-checkpoint;checkpoint=Date.now();
+    root=path.join(rootBase,`zoeskoul-run-${crypto.randomUUID()}`);
+    // Optional trusted lifecycle hook: durable owner records the future path
+    // before the first mkdir, closing the crash/rollback identification gap.
+    stage="journal-allocation";
+    await options.onWorkspaceAllocated?.(root);
+    stage="directory-creation";
+    await ensureWorkspaceDir(root);
+    allocated=true;
+    timings.workspaceDirMs=Date.now()-checkpoint;checkpoint=Date.now();
     stage = "write-entries";
     await writeInitialEntries(root, normalized);
     timings.writeEntriesMs = Date.now() - checkpoint;
@@ -162,7 +167,7 @@ export async function createWorkspace(
       stage,
       elapsedMs: Date.now() - started,
     });
-    await fs.rm(root, { recursive: true, force: true }).catch(() => {});
+    if(root && allocated)await fs.rm(root,{recursive:true,force:true}).catch(()=>{});
     throw err;
-  }
+  } finally {releaseCapacity?.();}
 }

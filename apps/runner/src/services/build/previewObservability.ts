@@ -68,6 +68,11 @@ export class PreviewObservability {
   private dockerExecActive = 0;
   private dockerExecStarted = 0;
   private dockerExecFailed = 0;
+  private transportRequestsActive=0;
+  private transportRequestsStarted=0;
+  private transportRequestsFailed=0;
+  private readinessTransportFailures=0;
+  private readonly transportFailureStages:Record<string,number>={};
   private cleanupAttempts = 0;
   private cleanupFailures = 0;
   private readonly dependencyLayerLookups: Record<DependencyLayerLookupOutcome, number> = {
@@ -179,6 +184,25 @@ export class PreviewObservability {
     };
   }
 
+  beginTransportRequest(purpose:"readiness"|"application") {
+    this.transportRequestsActive++;
+    this.transportRequestsStarted++;
+    const startedAt=this.now();
+    let finished=false;
+    return (stage:string|null)=>{
+      if(finished)return;
+      finished=true;
+      this.transportRequestsActive=Math.max(0,this.transportRequestsActive-1);
+      if(stage!==null){
+        this.transportRequestsFailed++;
+        if(purpose==="readiness")this.readinessTransportFailures++;
+        if(/^[a-z_]{3,40}$/.test(stage))
+          this.transportFailureStages[stage]=(this.transportFailureStages[stage]??0)+1;
+      }
+      this.observe("transport_request",this.now()-startedAt);
+    };
+  }
+
   observeViteUpstream(durationMs: number) {
     this.observe("vite_upstream", durationMs);
   }
@@ -215,6 +239,13 @@ export class PreviewObservability {
         active: this.dockerExecActive,
         started: this.dockerExecStarted,
         failed: this.dockerExecFailed,
+      },
+      transportRequests:{
+        active:this.transportRequestsActive,
+        started:this.transportRequestsStarted,
+        failed:this.transportRequestsFailed,
+        readinessFailures:this.readinessTransportFailures,
+        failureStages:{...this.transportFailureStages},
       },
       cleanup: { attempts: this.cleanupAttempts, failures: this.cleanupFailures },
       dependencyLayers: {

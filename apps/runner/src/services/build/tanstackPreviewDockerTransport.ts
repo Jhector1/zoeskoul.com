@@ -88,6 +88,8 @@ function failWorker(worker:PreviewHttpWorker,error:TanstackPreviewTransportError
 }
 
 async function createWorker(containerId:string):Promise<PreviewHttpWorker> {
+  const endDockerExec=previewObservability.beginDockerExec();
+  try {
   const exec = await docker.getContainer(containerId).exec({
     Cmd: ["python3", "-u", "-c", TANSTACK_PREVIEW_HTTP_WORKER],
     AttachStdin: true, AttachStdout: true, AttachStderr: false, Tty: false,
@@ -134,7 +136,12 @@ async function createWorker(containerId:string):Promise<PreviewHttpWorker> {
   worker.stdout.on("error",()=>failWorker(worker,new TanstackPreviewTransportError("worker_protocol")));
   stream.on("error",()=>failWorker(worker,new TanstackPreviewTransportError("docker_exec_attach")));
   stream.on("close",()=>failWorker(worker,new TanstackPreviewTransportError("worker_protocol")));
+  endDockerExec("ok");
   return worker;
+  } catch(error) {
+    endDockerExec("error");
+    throw error;
+  }
 }
 
 async function acquireWorker(containerId:string) {
@@ -193,14 +200,16 @@ async function requestWorker(worker:PreviewHttpWorker,request:TanstackPreviewTra
  * is exposed; workers are never shared across containers or tenant leases.
  * This is deliberately not the HMR/WebSocket bridge. */
 export async function fetchTanstackHttpInsideSandbox(containerId: string,
-  request: TanstackPreviewTransportRequest): Promise<Readonly<{
+  request: TanstackPreviewTransportRequest,
+  options:Readonly<{purpose?:"readiness"|"application"}>={},
+): Promise<Readonly<{
     status: number;
     headers: Readonly<Record<string,string>>;
     bodyBase64: string;
     timing?: Readonly<{dockerExecMs:number;viteUpstreamMs:number|null}>;
   }>> {
   const startedAt = performance.now();
-  const endDockerExec = previewObservability.beginDockerExec();
+  const endRequest=previewObservability.beginTransportRequest(options.purpose??"application");
   try {
   const worker=await acquireWorker(containerId);
   if(request.applicationRpc==="tanstack-json-post-v1" &&
@@ -213,7 +222,7 @@ export async function fetchTanstackHttpInsideSandbox(containerId: string,
   catch { throw new TanstackPreviewTransportError("worker_protocol"); }
   if (normalized.upstreamDurationMs !== null)
     previewObservability.observeViteUpstream(normalized.upstreamDurationMs);
-  endDockerExec("ok");
+  endRequest(null);
   return {
     status: normalized.status,
     headers: normalized.headers,
@@ -224,8 +233,9 @@ export async function fetchTanstackHttpInsideSandbox(containerId: string,
     },
   } as const;
   } catch (error) {
-    endDockerExec("error");
-    throw error instanceof TanstackPreviewTransportError
+    const safe=error instanceof TanstackPreviewTransportError
       ? error : new TanstackPreviewTransportError("worker_protocol");
+    endRequest(safe.stage);
+    throw safe;
   }
 }

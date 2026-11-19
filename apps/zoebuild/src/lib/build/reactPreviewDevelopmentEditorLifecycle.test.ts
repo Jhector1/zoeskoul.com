@@ -59,6 +59,20 @@ describe("Phase 4E3B saved-revision editor integration",()=>{
     expect(f.onDocument).toHaveBeenLastCalledWith(expect.objectContaining({sourceVersion:8}));
     f.lifecycle.dispose();
   });
+  it("exposes explicit serialized lifecycle transitions",async()=>{
+    let finish!:(value:ReturnType<typeof document>)=>void;
+    const f=make();
+    f.controller.start.mockImplementationOnce(()=>new Promise(resolve=>{finish=resolve;}));
+    f.lifecycle.savedRevision(7,false);
+    expect(f.lifecycle.snapshot()).toMatchObject({phase:"waiting-for-save",selectedVersion:7,
+      selectedReady:false});
+    f.lifecycle.savedRevision(7,true);
+    expect(f.lifecycle.snapshot()).toMatchObject({phase:"starting",running:true});
+    f.setSnapshot(document(7));finish(document(7));await flush();
+    expect(f.lifecycle.snapshot()).toMatchObject({phase:"ready",running:false,pending:null});
+    f.lifecycle.dispose();
+    expect(f.lifecycle.snapshot().phase).toBe("closed");
+  });
   it("renews a due grant but never renews during a dirty or stale source",async()=>{
     const f=make();f.lifecycle.savedRevision(7,true);await flush();
     f.setDue(true);await f.lifecycle.renewIfDue();
@@ -77,6 +91,33 @@ describe("Phase 4E3B saved-revision editor integration",()=>{
     expect(f.onFailure).not.toHaveBeenCalled();
     expect(f.controller.update).toHaveBeenCalledTimes(1);
     expect(f.controller.restart).toHaveBeenCalledWith(8);
+    f.lifecycle.dispose();
+  });
+  it("retries a proven pre-write rejection without restart or lease replacement",async()=>{
+    const f=make();f.lifecycle.savedRevision(7,true);await flush();
+    // Use the actual prototype so the lifecycle's typed safety gate is tested.
+    const {DevelopmentBrowserSessionError}=await import("./reactPreviewDevelopmentBrowserSession");
+    f.controller.update.mockRejectedValueOnce(
+      new DevelopmentBrowserSessionError("RETRYABLE_UPDATE","not applied",503));
+    f.lifecycle.savedRevision(8,true);
+    for(let i=0;i<8;i++)await flush();
+    expect(f.controller.update).toHaveBeenCalledTimes(2);
+    expect(f.controller.restart).not.toHaveBeenCalled();
+    expect(f.onDocument).toHaveBeenLastCalledWith(expect.objectContaining({sourceVersion:8}));
+    f.lifecycle.dispose();
+  });
+  it("does not replay an older rejected revision when a newer saved revision arrives",async()=>{
+    const f=make();f.lifecycle.savedRevision(7,true);await flush();
+    const {DevelopmentBrowserSessionError}=await import("./reactPreviewDevelopmentBrowserSession");
+    let reject!:(error:Error)=>void;
+    f.controller.update.mockImplementationOnce(()=>new Promise((_resolve,fail)=>{reject=fail;}));
+    f.lifecycle.savedRevision(8,true);
+    f.lifecycle.savedRevision(9,true);
+    reject(new DevelopmentBrowserSessionError("RETRYABLE_UPDATE","not applied",503));
+    for(let i=0;i<8;i++)await flush();
+    expect(f.controller.update).toHaveBeenCalledTimes(1);
+    expect(f.controller.restart).toHaveBeenCalledWith(9);
+    expect(f.onDocument).toHaveBeenLastCalledWith(expect.objectContaining({sourceVersion:9}));
     f.lifecycle.dispose();
   });
   it("fails closed after the bounded recovery budget",async()=>{

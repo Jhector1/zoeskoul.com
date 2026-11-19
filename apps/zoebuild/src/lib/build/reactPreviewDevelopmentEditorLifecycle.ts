@@ -10,6 +10,8 @@ import type {
 import { DevelopmentBrowserSessionError } from "./reactPreviewDevelopmentBrowserSession";
 
 type SessionController = ReturnType<typeof createDevelopmentPreviewBrowserSession>;
+export type DevelopmentEditorLifecyclePhase="idle"|"waiting-for-save"|"starting"|
+  "updating"|"retrying-update"|"reconciling"|"renewing"|"ready"|"failed"|"closed";
 
 export type DevelopmentEditorDocument = Readonly<{
   sourceVersion: number;
@@ -33,6 +35,8 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
   let selectedReady = false;
   let recoveryAttempts=0;
   let recovering=false;
+  let retryVersion:number|null=null;
+  let phase:DevelopmentEditorLifecyclePhase="idle";
   const maxRecoveryAttempts=input.maxRecoveryAttempts ?? 3;
   const recoveryDelay=input.recoveryDelay ??
     ((attempt:number)=>new Promise<void>(resolve=>setTimeout(resolve,Math.min(1500,250*attempt))));
@@ -43,6 +47,7 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
   function fail() {
     if (disposed || failed) return;
     failed = true;
+    phase="failed";
     pending = null;
     input.controller.close();
     input.onFailure();
@@ -58,25 +63,36 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
       sourceVersion: session.sourceVersion,
       documentUrl: session.documentUrl,
     });
+    phase="ready";
   }
   async function pump(): Promise<void> {
     if (disposed || failed || running || pending === null) return;
     running = true;
+    let attemptedVersion:number|null=null;
     try {
       while (!disposed && !failed && pending !== null) {
         const version = pending;
         pending = null;
+        attemptedVersion=version;
         const current = input.controller.snapshot();
         let session: DevelopmentBrowserSession;
-        if(recovering) {
+        if(retryVersion!==null) {
+          const exactRetry=retryVersion===version;
+          retryVersion=null;
+          phase=exactRetry?"retrying-update":"reconciling";
+          session=exactRetry ? await input.controller.update(version) : await input.controller.restart(version);
+        } else if(recovering) {
+          phase="reconciling";
           session=await input.controller.restart(version);
         } else if (!current) {
+          phase="starting";
           session = await input.controller.start(version);
         } else if (version === current.sourceVersion) {
           session = current;
         } else if (version === current.sourceVersion + 1) {
+          phase="updating";
           session = await input.controller.update(version);
-        } else session = await input.controller.restart(version);
+        } else {phase="reconciling";session = await input.controller.restart(version);}
         recovering=false;
         recoveryAttempts=0;
         if (disposed || failed) break;
@@ -89,7 +105,15 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
       if(!disposed && !failed && selectedReady && version!==null &&
           recoveryAttempts<maxRecoveryAttempts) {
         recoveryAttempts++;
-        recovering=true;
+        // A pre-write rejection has no uncertain side effect and is the only
+        // mutation failure that may be replayed. Transport loss, post-write
+        // failure and generic 5xx responses must use proof-based restart /
+        // durable-grant reconciliation instead.
+        const retryable=attemptedVersion===version && error instanceof DevelopmentBrowserSessionError &&
+          error.code==="RETRYABLE_UPDATE";
+        retryVersion=retryable?version:null;
+        recovering=!retryable;
+        phase=recovering?"reconciling":"retrying-update";
         input.onWaiting();
         await recoveryDelay(recoveryAttempts);
         if(!disposed && !failed && selectedReady && selectedVersion===version)
@@ -107,6 +131,7 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
     selectedVersion = sourceVersion;
     selectedReady = sourceIsSaved;
     if (!sourceIsSaved) {
+      phase="waiting-for-save";
       pending = null;
       const current = input.controller.snapshot();
       if (!current || current.sourceVersion !== sourceVersion) input.onWaiting();
@@ -122,10 +147,12 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
     const current = input.controller.snapshot();
     if (!current || selectedVersion !== current.sourceVersion) return;
     running = true;
+    phase="renewing";
     try {
       const renewed = await input.controller.renew();
       if (!disposed && !failed) publish(renewed);
     } catch(error) {
+      if (disposed || failed) return;
       if(error instanceof DevelopmentBrowserSessionError &&
           error.code==="RESTART_REQUIRED" && selectedVersion!==null) {
         recovering=true;
@@ -143,6 +170,7 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
   function dispose() {
     if (disposed) return;
     disposed = true;
+    phase="closed";
     pending = null;
     // Dispose this tab's browser controller, not the Runner's owned lease.
     // The Runner's bounded idle/hard-lifetime sweeper and explicit cancel /
@@ -150,5 +178,6 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
     // read grants expire without renewal after this tab closes.
     input.controller.close();
   }
-  return {savedRevision, renewIfDue, dispose};
+  return {savedRevision,renewIfDue,dispose,snapshot:()=>({phase,recoveryAttempts,
+    selectedVersion,selectedReady,pending,running}) as const};
 }

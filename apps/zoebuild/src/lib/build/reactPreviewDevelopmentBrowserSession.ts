@@ -29,7 +29,8 @@ export type DevelopmentBrowserSession = Readonly<{
 
 export class DevelopmentBrowserSessionError extends Error {
   constructor(readonly code: "INVALID_REVISION" | "RESTART_REQUIRED" |
-    "BUSY" | "UNAVAILABLE" | "CLOSED", message: string, readonly httpStatus?: number) {
+    "RETRYABLE_UPDATE" | "BUSY" | "UNAVAILABLE" | "CLOSED", message: string,
+    readonly httpStatus?: number) {
     super(message);
     this.name = "DevelopmentBrowserSessionError";
   }
@@ -82,8 +83,13 @@ async function postRevision(fetchClient: FetchClient, path: string, sourceVersio
   diagnostic("control_response", response.status, response.ok && exactKeys(body, ["ok"]) && body.ok === true);
   if (!response.ok || !exactKeys(body, ["ok"]) || body.ok !== true)
     throw new DevelopmentBrowserSessionError(
-      response.status === 409 ? "RESTART_REQUIRED" : "UNAVAILABLE",
-      response.status === 409 ? "Saved preview revision must restart." : "Development preview unavailable.",
+      response.status === 409 ? "RESTART_REQUIRED" :
+        operation === "update" && response.status === 503 && exactKeys(body,["code"]) &&
+          body.code === "BUILD_PREVIEW_UPDATE_RETRYABLE" ? "RETRYABLE_UPDATE" : "UNAVAILABLE",
+      response.status === 409 ? "Saved preview revision must restart." :
+        operation === "update" && response.status === 503 && exactKeys(body,["code"]) &&
+          body.code === "BUILD_PREVIEW_UPDATE_RETRYABLE" ?
+          "Development preview update was not applied." : "Development preview unavailable.",
       response.status,
     );
   return body;
@@ -108,6 +114,8 @@ export function createDevelopmentPreviewBrowserSession(input: Readonly<{
   // Private recovery hint, never a renderable/current session. It can be
   // consumed only once by restart for the exact requested durable revision.
   let recovery: {lease: DevelopmentBrowserSession; sourceVersion: number} | null = null;
+  // A pre-write rejection is a retry capability, NOT a renderable document.
+  let retry: {lease: DevelopmentBrowserSession; sourceVersion: number} | null = null;
   function uncertain(error: unknown): boolean {
     return error instanceof DevelopmentBrowserSessionError && error.code === "UNAVAILABLE" &&
       (error.httpStatus === undefined || error.httpStatus < 400 || error.httpStatus >= 500);
@@ -147,7 +155,9 @@ export function createDevelopmentPreviewBrowserSession(input: Readonly<{
     if (data.sourceVersion !== sourceVersion || typeof data.previewId !== "string" ||
         !PREVIEW_ID.test(data.previewId))
       throw new DevelopmentBrowserSessionError("UNAVAILABLE", "Invalid Runner preview identity.");
-    current = await readGrant(data.previewId, sourceVersion, snapshot);
+    const granted = await readGrant(data.previewId, sourceVersion, snapshot);
+    assertActive(snapshot);
+    current = granted;
     return current;
   }
   function durableToken(lease:DevelopmentBrowserSession):string|null {
@@ -172,6 +182,7 @@ export function createDevelopmentPreviewBrowserSession(input: Readonly<{
     if (current) throw new DevelopmentBrowserSessionError("RESTART_REQUIRED", "Active lease already exists.");
     const stamp = begin();
     recovery=null;
+    retry=null;
     try {
       return await admit(sourceVersion,stamp);
     } catch (error) {
@@ -185,12 +196,15 @@ export function createDevelopmentPreviewBrowserSession(input: Readonly<{
     current=null;
     const candidate=recovery;
     recovery=null;
+    retry=null;
     try {
       if(candidate && candidate.sourceVersion===sourceVersion) {
         try {
           // Existing authenticated renew endpoint checks durable grant, DB
           // revision and the exact fenced live Runner lease. No source write.
-          current=await renewDurable(candidate.lease,sourceVersion,stamp);
+          const renewed=await renewDurable(candidate.lease,sourceVersion,stamp);
+          assertActive(stamp);
+          current=renewed;
           return current;
         } catch {
           assertActive(stamp);
@@ -206,8 +220,10 @@ export function createDevelopmentPreviewBrowserSession(input: Readonly<{
   async function update(sourceVersion: number): Promise<DevelopmentBrowserSession> {
     revision(sourceVersion);
     const stamp = begin();
-    const lease = current;
+    const lease = current ?? (retry?.sourceVersion === sourceVersion ? retry.lease : null);
+    retry=null;
     recovery=null;
+    let awaitingWrite = false;
     try {
       if (!lease || sourceVersion !== lease.sourceVersion + 1) {
         current = null; // never continue a nonsequential or unknown lease
@@ -216,18 +232,23 @@ export function createDevelopmentPreviewBrowserSession(input: Readonly<{
       // The previous revision's token becomes stale as soon as DB CAS advances.
       // Do not expose the old iframe URL after starting this mutation.
       current = null;
+      awaitingWrite = true;
       const data = await postRevision(input.fetchClient,
         `${root}/${encodeURIComponent(lease.previewId)}/development/update`, sourceVersion);
+      awaitingWrite = false;
       assertActive(stamp);
       if (data.action !== "updated" || data.sourceVersion !== sourceVersion)
         throw new DevelopmentBrowserSessionError("UNAVAILABLE", "Invalid development update response.");
       // Durable DB grants are renewed in place, so the iframe URL never
       // changes and cannot accidentally become an expired static token.
       if(durableToken(lease)) {
-        current=await renewDurable(lease,sourceVersion,stamp);
+        const renewed=await renewDurable(lease,sourceVersion,stamp);
+        assertActive(stamp);
+        current=renewed;
         return current;
       }
       const newGrant = await readGrant(lease.previewId, sourceVersion, stamp);
+      assertActive(stamp);
       // Existing document and module URL stay unchanged only when explicitly
       // opted in AND a still-unexpired grant has comfortable lifetime left.
       // Server rechecks current database source + Runner lease on every read.
@@ -238,7 +259,19 @@ export function createDevelopmentPreviewBrowserSession(input: Readonly<{
         : newGrant;
       return current;
     } catch (error) {
-      current = null; // post-write failure may quarantine the Runner lease
+      // This bounded response is emitted only when the Runner proves that the
+      // failure happened before the workspace write. Retain the exact lease so
+      // the editor may retry the idempotent N -> N+1 update. Every other
+      // failure remains uncertain or destructive and invalidates the session.
+      current = null;
+      if (closed || generation !== stamp) {
+        retry = null;
+        assertActive(stamp);
+      }
+      if (awaitingWrite && lease && sourceVersion === lease.sourceVersion + 1 &&
+          error instanceof DevelopmentBrowserSessionError && error.code === "RETRYABLE_UPDATE") {
+        retry = {lease, sourceVersion};
+      }
       if (!closed && generation===stamp && lease && sourceVersion===lease.sourceVersion+1 &&
           durableToken(lease) && uncertain(error)) recovery={lease,sourceVersion};
       throw error;
@@ -248,11 +281,14 @@ export function createDevelopmentPreviewBrowserSession(input: Readonly<{
     const stamp = begin();
     const lease = current;
     recovery=null;
+    retry=null;
     try {
       if (!lease) throw new DevelopmentBrowserSessionError("RESTART_REQUIRED", "Preview lease unavailable.");
-      current = durableToken(lease)
+      const renewed = durableToken(lease)
         ? await renewDurable(lease,lease.sourceVersion,stamp)
         : await readGrant(lease.previewId, lease.sourceVersion, stamp);
+      assertActive(stamp);
+      current = renewed;
       return current;
     } catch (error) {
       current = null; // no expired grant can remain visible as valid
@@ -265,6 +301,6 @@ export function createDevelopmentPreviewBrowserSession(input: Readonly<{
     start, restart, update, renew,
     snapshot: (): DevelopmentBrowserSession | null => current ? { ...current } : null,
     renewalDue: (): boolean => current !== null && now() - current.grantIssuedAt >= READ_TOKEN_REFRESH_MS,
-    close: () => { closed = true; generation++; current = null; recovery=null; },
+    close: () => { closed = true; generation++; current = null; recovery=null; retry=null; },
   };
 }

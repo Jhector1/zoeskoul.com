@@ -137,6 +137,63 @@ describe("Phase 4E3A saved revision browser control plane", () => {
     await expect(session.update(8)).rejects.toMatchObject({code:"RESTART_REQUIRED"});
     expect(session.snapshot()).toBe(null);
   });
+  it("retains and safely retries the same lease only for a proven pre-write failure",async()=>{
+    let updates=0;
+    const fetchClient=vi.fn(async(path:string,init:RequestInit)=>{
+      const version=JSON.parse(String(init.body)).sourceVersion;
+      if(path.endsWith("/development/start"))return json({ok:true,previewId,sourceVersion:7});
+      if(path.endsWith("/development/read-access"))return json({ok:true,sourceVersion:version,
+        documentUrl:READ,basePath:READ});
+      if(path.endsWith("/development/update")){
+        updates++;
+        return updates===1
+          ? json({ok:false,code:"BUILD_PREVIEW_UPDATE_RETRYABLE"},503)
+          : json({ok:true,action:"updated",sourceVersion:version});
+      }
+      return json({ok:true,sourceVersion:version,documentUrl:READ,basePath:READ});
+    });
+    const session=createDevelopmentPreviewBrowserSession({buildProjectId:project,fetchClient});
+    await session.start(7);
+    await expect(session.update(8)).rejects.toMatchObject({code:"RETRYABLE_UPDATE"});
+    expect(session.snapshot()).toBeNull();
+    expect(session.renewalDue()).toBe(false);
+    await expect(session.update(8)).resolves.toMatchObject({previewId,sourceVersion:8});
+    expect(updates).toBe(2);
+    expect(fetchClient.mock.calls.filter(([path])=>path.endsWith("/development/start")))
+      .toHaveLength(1);
+  });
+  it("never restores a closed session after delayed pre-write rejection",async()=>{
+    let complete!:(value:Response)=>void;
+    const fetchClient=vi.fn(async (path:string)=>{
+      if(path.endsWith("/development/start"))return json({ok:true,previewId,sourceVersion:7});
+      if(path.endsWith("/development/read-access"))return json({ok:true,sourceVersion:7,documentUrl:READ,basePath:READ});
+      return new Promise<Response>(resolve=>{complete=resolve;});
+    });
+    const session=createDevelopmentPreviewBrowserSession({buildProjectId:project,fetchClient});
+    await session.start(7);
+    const pending=session.update(8);
+    session.close();
+    complete(json({ok:false,code:"BUILD_PREVIEW_UPDATE_RETRYABLE"},503));
+    await expect(pending).rejects.toMatchObject({code:"CLOSED"});
+    expect(session.snapshot()).toBeNull();
+    await expect(session.update(8)).rejects.toMatchObject({code:"CLOSED"});
+    expect(fetchClient).toHaveBeenCalledTimes(3);
+  });
+  it("does not retry a write after an update succeeded but grant issuance failed",async()=>{
+    const fetchClient=vi.fn(async(path:string,init:RequestInit)=>{
+      const version=JSON.parse(String(init.body)).sourceVersion;
+      if(path.endsWith("/development/start"))return json({ok:true,previewId,sourceVersion:7});
+      if(path.endsWith("/development/update"))return json({ok:true,action:"updated",sourceVersion:8});
+      return version===7 ? json({ok:true,sourceVersion:7,documentUrl:READ,basePath:READ}) :
+        json({ok:false,code:"BUILD_PREVIEW_UPDATE_RETRYABLE"},503);
+    });
+    const session=createDevelopmentPreviewBrowserSession({buildProjectId:project,fetchClient});
+    await session.start(7);
+    await expect(session.update(8)).rejects.toMatchObject({code:"UNAVAILABLE"});
+    expect(session.snapshot()).toBeNull();
+    await expect(session.update(8)).rejects.toMatchObject({code:"RESTART_REQUIRED"});
+    expect(fetchClient.mock.calls.filter(([p])=>p.endsWith("/development/update"))).toHaveLength(1);
+  });
   it("fails closed when its owner closes while an in-flight start is resolving", async () => {
     let resolveFetch!: (r: Response) => void;
     const fetchClient = vi.fn(() => new Promise<Response>(resolve => {resolveFetch=resolve;}));

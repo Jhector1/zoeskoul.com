@@ -11,6 +11,7 @@ describe("Phase 4E3C4B3 isolated iframe HMR transport",()=>{
     expect(injected.indexOf("__zoebuildHmrInstalled")).toBeLessThan(injected.indexOf("@vite/client"));
     expect(ZOEBUILD_IFRAME_HMR_SCRIPT).toContain('"vite-hmr"');
     expect(ZOEBUILD_IFRAME_HMR_SCRIPT).not.toContain("RUNNER_SHARED_SECRET");
+    expect(ZOEBUILD_IFRAME_HMR_SCRIPT).toContain('init?.method===undefined?"GET":init.method');
   });
   it("fails closed without a safe head or with preexisting bootstrap",()=>{
     expect(()=>injectNativeIframeHmrBootstrap("<body>No head</body>")).toThrow();

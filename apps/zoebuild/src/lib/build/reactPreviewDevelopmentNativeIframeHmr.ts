@@ -52,7 +52,9 @@ export const ZOEBUILD_IFRAME_HMR_SCRIPT = String.raw`(function () {
       if(typeof input!=="string"&&!(input instanceof URL))return Promise.reject(error());
       let headers;
       try{headers=new Headers(init?.headers);}catch{return Promise.reject(error());}
-      const method=init?.method;
+      // Native fetch defaults an omitted method to GET. TanStack's server
+      // function client relies on that standard default in some call paths.
+      const method=init?.method===undefined?"GET":init.method;
       const mutation=method==="POST";
       if((method!=="GET"&&!mutation)||init?.credentials==="include"||url.username||url.password||url.hash||
           headers.get("x-tsr-serverfn")!=="true"||headers.get("accept")!=="application/x-tss-framed, application/x-ndjson, application/json"||

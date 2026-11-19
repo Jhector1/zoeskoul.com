@@ -8,7 +8,9 @@ import { POST } from "./route";
 vi.mock("@zoeskoul/platform-server/http",()=>({enforceSameOriginPost:vi.fn()}));
 vi.mock("@/lib/build/currentBuildAccess",()=>({loadCurrentBuildAccessSnapshot:vi.fn()}));
 vi.mock("@/lib/build/reactPreviewDevelopmentUpdate",()=>({updateOwnedReactDevelopmentPreviewFromSavedSource:vi.fn()}));
-vi.mock("@zoeskoul/platform-server/server/runnerClient",()=>({RunnerHttpError:class RunnerHttpError extends Error {status=503;}}));
+vi.mock("@zoeskoul/platform-server/server/runnerClient",()=>({RunnerHttpError:class RunnerHttpError extends Error {
+  constructor(public status=503,message="runner",public code?:string){super(message);}
+}}));
 vi.mock("@/lib/build/reactPreviewServer",()=>({
   ReactPreviewRequestError:class ReactPreviewRequestError extends Error {
     constructor(public code:string,message:string,public status:number){super(message);}
@@ -57,5 +59,14 @@ describe("Phase 4E1 saved-source revision-only browser update route",()=>{
     const result=await POST(req(),ctx);
     expect(result.status).toBe(503);
     expect(JSON.stringify(await result.json())).not.toContain("secret DB connection string");
+  });
+  it("exposes only the bounded pre-write classification needed for safe retry",async()=>{
+    const {RunnerHttpError}=await import("@zoeskoul/platform-server/server/runnerClient");
+    vi.mocked(updateOwnedReactDevelopmentPreviewFromSavedSource).mockRejectedValueOnce(
+      new RunnerHttpError(503,"private authority detail","UPDATE_PRE_WRITE_AUTHORITY_FAILED"));
+    const result=await POST(req(),ctx);
+    expect(result.status).toBe(503);
+    expect(await result.json()).toMatchObject({ok:false,code:"BUILD_PREVIEW_UPDATE_RETRYABLE",
+      message:"Development preview update was not applied."});
   });
 });

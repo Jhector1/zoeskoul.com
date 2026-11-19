@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
+import { vi } from "vitest";
 import { createWorkspace, ensureWorkspaceRuntimeFiles } from "./createWorkspace.js";
 
 describe("createWorkspace", () => {
@@ -26,6 +27,20 @@ describe("createWorkspace", () => {
         createdRoots.push(root);
         expect(allocated).toBe(root);
         expect((await fs.stat(root)).isDirectory()).toBe(true);
+    });
+
+    it("classifies journal allocation failures without logging paths or error text",async()=>{
+        const warning=vi.spyOn(console,"warn").mockImplementation(()=>undefined);
+        try {
+            await expect(createWorkspace([],{onWorkspaceAllocated:async candidate=>{
+                throw new Error(`private-source-and-path:${candidate}`);
+            }})).rejects.toThrow("private-source-and-path");
+            expect(warning).toHaveBeenCalledOnce();
+            expect(warning.mock.calls[0]?.[0]).toBe("RUNNER workspace creation failed");
+            expect(warning.mock.calls[0]?.[1]).toMatchObject({stage:"journal-allocation"});
+            expect(JSON.stringify(warning.mock.calls)).not.toContain("zoeskoul-run-");
+            expect(JSON.stringify(warning.mock.calls)).not.toContain("private-source");
+        } finally { warning.mockRestore(); }
     });
 
     it("accepts .keep starter files for terminal workspaces", async () => {

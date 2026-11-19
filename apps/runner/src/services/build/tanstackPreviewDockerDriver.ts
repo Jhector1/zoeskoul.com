@@ -318,7 +318,7 @@ export function makeTanstackPreviewDockerDriver(
     async probe(containerId) {
       return fetchTanstackHttpInsideSandbox(containerId, {
         method: "GET", path: basePath, headers: { accept: "text/html" }, bodyBase64: "",
-      });
+      },{purpose:"readiness"});
     },
     diagnose: async id => captureTanstackStartupEvidence(docker.getContainer(id)),
     destroy: removePreviewContainer,
