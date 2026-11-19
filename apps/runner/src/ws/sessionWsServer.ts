@@ -10,6 +10,13 @@ import { writeInput } from "../services/docker/writeInput.js";
 import { killSession } from "../services/docker/killSession.js";
 import { resizeSession } from "../services/docker/resizeSession.js";
 import { verifyAttachToken } from "../lib/ptyAttachToken.js";
+import { isGlobalAdminShell, mayAttachGlobalAdminShell } from "../services/execution/adminReattachPolicy.js";
+import { adminLabSwitchStatus } from "../services/execution/learningAdminSwitch.js";
+
+function globalAdminTransportAllowed(session: NonNullable<ReturnType<typeof getSession>>, actorKey: string) {
+    return !isGlobalAdminShell(session) || mayAttachGlobalAdminShell(session, actorKey,
+        process.env.ZOESKOUL_LEARNING_ADMIN_LABS_ENABLED === "true" && adminLabSwitchStatus().enabled, Date.now());
+}
 
 type ClientToServerMessage =
     | { type: "input"; data: string }
@@ -97,7 +104,7 @@ export function closeSessionSockets(
 
 function bindSessionSocket(ws: WebSocket, sessionId: string, actorKey: string) {
     const session = getSession(sessionId);
-    if (!session || session.ownerKey !== actorKey) {
+    if (!session || session.ownerKey !== actorKey || !globalAdminTransportAllowed(session, actorKey)) {
         safeSend(ws, { type: "error", message: "Session not found." });
         ws.close();
         return;
@@ -109,10 +116,16 @@ function bindSessionSocket(ws: WebSocket, sessionId: string, actorKey: string) {
         state: session.state,
     });
     registerSessionSocket(sessionId, ws);
-    touchSession(sessionId);
+    if (!isGlobalAdminShell(session)) touchSession(sessionId);
 
     for (const ev of session.events) {
         safeSend(ws, { type: "event", event: ev });
+    }
+
+    // Global admin clients can distinguish replay completion from transport ready.
+    // This frame does not renew the session or alter ordinary terminal protocols.
+    if (isGlobalAdminShell(session)) {
+        safeSend(ws, { type: "admin_replay_complete", sessionId, seq: session.seq });
     }
 
     const unsubscribe = subscribeSession(sessionId, (event) => {
@@ -122,7 +135,7 @@ function bindSessionSocket(ws: WebSocket, sessionId: string, actorKey: string) {
     ws.on("message", async (raw) => {
         try {
             const current = getSession(sessionId);
-            if (!current || current.ownerKey !== actorKey) {
+            if (!current || current.ownerKey !== actorKey || !globalAdminTransportAllowed(current, actorKey)) {
                 safeSend(ws, { type: "error", message: "Forbidden." });
                 ws.close();
                 return;
@@ -138,7 +151,7 @@ function bindSessionSocket(ws: WebSocket, sessionId: string, actorKey: string) {
             }
 
             if (msg.type === "ping") {
-                touchSession(sessionId);
+                if (!isGlobalAdminShell(current)) touchSession(sessionId);
                 safeSend(ws, { type: "pong" });
                 return;
             }
@@ -218,7 +231,7 @@ export function attachSessionWsServer() {
         }
 
         const session = getSession(sessionId);
-        if (!session || session.ownerKey !== claims.actor) {
+        if (!session || session.ownerKey !== claims.actor || !globalAdminTransportAllowed(session, claims.actor)) {
             console.error("RUNNER WS forbidden", {
                 sessionId,
                 hasSession: !!session,

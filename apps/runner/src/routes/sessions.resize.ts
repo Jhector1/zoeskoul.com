@@ -2,6 +2,8 @@ import type { RequestHandler } from "express";
 import { getRequiredActorKey } from "../middleware/serviceAuth.js";
 import { getSession, touchSession } from "../services/sessions/sessionStore.js";
 import { docker } from "../services/docker/dockerClient.js";
+import { isGlobalAdminShell, mayAttachGlobalAdminShell } from "../services/execution/adminReattachPolicy.js";
+import { adminLabSwitchStatus } from "../services/execution/learningAdminSwitch.js";
 
 export const resizeSessionRoute: RequestHandler = async (req, res) => {
     try {
@@ -30,10 +32,14 @@ export const resizeSessionRoute: RequestHandler = async (req, res) => {
             });
         }
 
+        if (isGlobalAdminShell(session) && !mayAttachGlobalAdminShell(session, actorKey,
+            process.env.ZOESKOUL_LEARNING_ADMIN_LABS_ENABLED === "true" && adminLabSwitchStatus().enabled, Date.now())) {
+            return res.status(403).json({ ok: false, error: "Administrative lab unavailable." });
+        }
         const container = docker.getContainer(session.containerId);
         await container.resize({ w: cols, h: rows });
 
-        touchSession(sessionId);
+        if (!isGlobalAdminShell(session)) touchSession(sessionId);
 
         return res.json({ ok: true });
     } catch (e: any) {

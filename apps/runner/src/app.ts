@@ -17,6 +17,7 @@ import { sessionsReplaceWorkspaceRoute } from "./routes/sessions.replaceWorkspac
 import { sessionsWorkspaceFileRoute } from "./routes/sessions.workspaceFileRoute.js";
 import { heartbeatSessionRoute } from "./routes/sessions.heartbeat.js";
 import { activeSessionsRoute } from "./routes/sessions.active.js";
+import { reattachAdminSessionRoute } from "./routes/sessions.admin.reattach.js";
 import { validateBuildJobRoute } from "./routes/build.jobs.validate.js";
 import { executeBuildDependencyLockBootstrapRoute } from "./routes/build.jobs.dependencyLockBootstrap.js";
 import { executeBuildProductionRoute } from "./routes/build.jobs.productionBuild.js";
@@ -146,6 +147,7 @@ app.use("/sessions/:sessionId/snapshot-workspace", blockAdminWorkspaceApis);
 app.use("/sessions/:sessionId/replace-workspace", blockAdminWorkspaceApis);
 app.use("/sessions/:sessionId/files", blockAdminWorkspaceApis);
 app.post("/sessions/active", activeSessionsRoute);
+app.post("/sessions/:sessionId/admin/reattach", reattachAdminSessionRoute);
 app.post("/sessions/:sessionId/input", inputSessionRoute);
 app.post("/sessions/:sessionId/resize", resizeSessionRoute);
 app.post("/sessions/:sessionId/cancel", cancelSessionRoute);
