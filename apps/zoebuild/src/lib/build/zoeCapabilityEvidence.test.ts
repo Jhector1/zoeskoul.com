@@ -2,7 +2,7 @@ import {describe, expect, it} from "vitest";
 import {buildZoeCapabilityEvidence, ZOE_CAPABILITY_CONVERSATION_POLICY} from "./zoeCapabilityEvidence";
 
 const input = {
-  project: {stackId: "react-vite-v1", status: "draft", sourceVersion: 28},
+  project: {stackId: "tanstack-start-v1", status: "draft", sourceVersion: 28},
   publishEnabled: false,
   aiEditAllowed: true,
   commerceLookup: "loaded" as const,
@@ -16,12 +16,14 @@ const input = {
 };
 
 describe("Zoé server-owned capability awareness", () => {
-  it("states actual React/Vite scope without claiming Next.js/Spring Boot execution", () => {
+  it("states canonical TanStack scope without claiming Next.js/Spring Boot execution", () => {
     const reality=buildZoeCapabilityEvidence(input);
     expect(reality.projectRuntime.currentProjectSupported).toBe(true);
     expect(reality.projectRuntime.nextJsServerRuntime).toBe("not-supported");
     expect(reality.projectRuntime.springBootJavaRuntime).toBe("not-supported");
-    expect(reality.operations.reactVitePreview).toContain("not-probed");
+    expect(reality.projectRuntime.supportedExecutableStack).toBe("tanstack-start-v1");
+    expect(reality.operations.tanstackDevelopmentPreview).toContain("not-probed");
+    expect(reality.operations.ordinaryAiEditScope).toContain("presentation-source-only");
     expect(reality.operations.isolatedProductionBuild).toBe("implemented-but-not-run");
     expect(reality.operations.compiledSitePublish).toContain("unavailable");
   });
@@ -38,7 +40,9 @@ describe("Zoé server-owned capability awareness", () => {
       routes:[{provider:"stripe",environment:"test",capability:"payments",connected:true}]});
     expect(reality.commerce.providers.find(p=>p.id==="stripe")?.connectionObservation)
       .toBe("active-connection-observed");
-    expect(reality.operations.compiledSitePublish).toContain("requires-authorized-build");
+    expect(reality.operations.compiledSitePublish).toContain("unavailable");
+    expect(reality.operations.cloudflareWorkerPublish).toContain("not-implemented");
+    expect(reality.operations.domainRegistration).toContain("not-established");
     expect(reality.evidenceLimits.join(" ")).toContain("not a live Runner health check");
   });
   it("keeps database failures unknown instead of guessing no provider connection", () => {
@@ -47,12 +51,20 @@ describe("Zoé server-owned capability awareness", () => {
     expect(reality.commerce.projectStoreObservation).toBe("unknown");
   });
   it("restricts archived and unsupported projects and independently gated editing", () => {
-    const archived=buildZoeCapabilityEvidence({...input,project:{stackId:"react-vite-v1",status:"archived",sourceVersion:28}});
+    const archived=buildZoeCapabilityEvidence({...input,project:{stackId:"tanstack-start-v1",status:"archived",sourceVersion:28}});
     expect(archived.operations.projectSourceEditProposal).toContain("unavailable");
     const legacy=buildZoeCapabilityEvidence({...input,project:{stackId:"static-html-v1",status:"draft",sourceVersion:28}});
     expect(legacy.projectRuntime.currentProjectSupported).toBe(false);
     const noAccess=buildZoeCapabilityEvidence({...input,aiEditAllowed:false});
     expect(noAccess.operations.projectSourceEditProposal).toContain("unavailable");
+  });
+  it("distinguishes legacy static publishing from current TanStack editing", () => {
+    const legacy = buildZoeCapabilityEvidence({...input,publishEnabled:true,
+      project:{stackId:"react-vite-v1",status:"draft",sourceVersion:28}});
+    expect(legacy.projectRuntime.currentProjectSupported).toBe(false);
+    expect(legacy.operations.projectSourceEditProposal).toContain("unavailable");
+    expect(legacy.operations.compiledSitePublish).toContain("requires-authorized-build");
+    expect(legacy.operations.cloudflareWorkerPublish).toContain("not-implemented");
   });
   it("requires honest correction without model-specific keyword triggers", () => {
     expect(ZOE_CAPABILITY_CONVERSATION_POLICY).toContain("correct it candidly");

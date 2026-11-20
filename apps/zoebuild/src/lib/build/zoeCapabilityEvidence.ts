@@ -3,7 +3,7 @@
  * deliberately separates implemented operations from project readiness and
  * *observed* provider connection state. Nothing here grants permission.
  *
- * Keep supported project stacks tied to the React/Vite backend contract;
+ * Keep supported project stacks tied to the canonical TanStack Start contract;
  * the answer/intent/edit routes use this shared evidence, not an AI-written FAQ.
  */
 import {zoeProviderDirectoryEvidence} from "./zoeAssistantServiceIntent";
@@ -37,8 +37,12 @@ export type ZoeCapabilityInput = Readonly<{
 }>;
 
 export function buildZoeCapabilityEvidence(input: ZoeCapabilityInput) {
-  const isReact = input.project.stackId === "react-vite-v1";
-  const editable = input.project.status !== "archived" && isReact;
+  const isTanstack = input.project.stackId === "tanstack-start-v1";
+  const editable = input.project.status !== "archived" && isTanstack;
+  // The existing publish endpoint only accepts legacy React/Vite static artifacts.
+  // Registration of a Worker adapter is not evidence that it can deploy.
+  const legacyPublishCandidate = input.project.stackId === "react-vite-v1" &&
+    input.project.status !== "archived" && input.publishEnabled;
   const directory = zoeProviderDirectoryEvidence();
   const providers = input.runtimeProviders.map(provider => {
     const connections = input.connections.filter(c => c.provider === provider.id)
@@ -65,9 +69,11 @@ export function buildZoeCapabilityEvidence(input: ZoeCapabilityInput) {
     project: {stackId: input.project.stackId, status: input.project.status,
       sourceVersion: input.project.sourceVersion},
     projectRuntime: {
-      supportedExecutableStack: "react-vite-v1",
-      description: "React + Vite browser frontend; React Router is available for client-side routes",
-      currentProjectSupported: isReact,
+      supportedExecutableStack: "tanstack-start-v1",
+      description: "TanStack Start with React/TypeScript, file-based TanStack Router and Vite; registered target is a Cloudflare Worker bundle",
+      currentProjectSupported: isTanstack,
+      legacyReactVite: "retired-for-new-projects-and-ai-edits",
+      tanstackServerRuntime: "registered-framework-capability-not-unrestricted-ai-backend-editing",
       nextJsServerRuntime: "not-supported",
       springBootJavaRuntime: "not-supported",
       arbitraryServerBackend: "not-supported",
@@ -78,11 +84,17 @@ export function buildZoeCapabilityEvidence(input: ZoeCapabilityInput) {
       projectSourceEditProposal: editable && input.aiEditAllowed
         ? "supported-reviewed-proposal-only" : "unavailable-for-current-project-or-entitlement",
       sourceSave: editable ? "requires-reviewed-apply-and-source-version-verification" : "unavailable-for-current-project",
-      reactVitePreview: editable ? "implemented-but-runtime-not-probed" : "unsupported-for-current-project",
+      tanstackDevelopmentPreview: editable ? "implemented-but-runtime-not-probed" : "unsupported-for-current-project",
+      ordinaryAiEditScope: editable ? "reviewed-presentation-source-only; protected backend, auth, billing, provider secrets and dependency configuration excluded" : "unavailable-for-current-project",
+      backendIntegration: "requires-separately-authorized-implemented-workflow",
+      reactVitePreview: "not-the-canonical-development-runtime",
       isolatedProductionBuild: editable ? "implemented-but-not-run" : "unsupported-for-current-project",
-      compiledSitePublish: editable && input.publishEnabled
-        ? "endpoint-configured-requires-authorized-build-and-deployment-verification"
+      compiledSitePublish: legacyPublishCandidate
+        ? "legacy-static-endpoint-configured-requires-authorized-build-and-deployment-verification"
         : "unavailable-or-disabled-for-current-project",
+      cloudflareWorkerPublish: "registered-target-not-implemented-in-current-publish-endpoint",
+      customDomainManagement: "not-established-by-current-platform-evidence",
+      domainRegistration: "not-established-by-current-platform-evidence",
     },
     providerDirectory: directory.map(category => ({...category,
       warning: "Presentation/setup list only. Listed does not mean connected, executable or ready."})),
@@ -97,6 +109,7 @@ export function buildZoeCapabilityEvidence(input: ZoeCapabilityInput) {
 export const ZOE_CAPABILITY_CONVERSATION_POLICY = [
   "capabilityEvidence is server-derived evidence, more authoritative than general model knowledge, prior assistant messages, and the providerDirectory presentation list.",
   "Interpret the user's actual meaning, including whether they are asking about ability, advice, source generation, preview, execution, integration, or deployment. Do not use literal keyword triggers.",
+  "For new projects and ordinary AI edits, use the registered TanStack Start stack. Distinguish framework support from an implemented and authorized operation; a Worker target is not proof of live Cloudflare publishing. Never describe legacy React/Vite static publishing as TanStack deployment.",
   "Differentiate: explain or write example code; propose an authorized source edit; apply/save after review; compile; run a preview; publish a site; connect or execute an external provider. These are not interchangeable.",
   "When a framework or backend runtime is unsupported, say plainly which part is unsupported here. You can still discuss it or draft examples, but never promise in-product execution or quietly replace the requested stack.",
   "If a provider is listed but has no executable backend capability, say it is listed or planned rather than connected or operational. If observation is unknown, say connection status was not verified; do not guess disconnected.",

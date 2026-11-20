@@ -94,7 +94,7 @@ export async function POST(req:Request,ctx:{params:Promise<{buildProjectId:strin
       .map(n=>pathOf(project.workspace.nodes,n.id)).slice(0,75);
     const evidence=selectZoeAssistantSourceEvidence(project.workspace,project.activePath);
     const capabilityEvidence=await resolveZoeCapabilityReality({buildProjectId,project,
-      aiEditAllowed:!requiredMetering||resolveBuildAccess(access).canEditWithAi});
+      aiEditAllowed:resolveBuildAccess(access).canEditWithAi});
     const deploymentEvidence=await resolveZoeDeploymentReality({
       ownerId:access.userId,buildProjectId,currentSourceVersion:project.sourceVersion,
     });

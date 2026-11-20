@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
+import { buildZoeCapabilityEvidence } from "./zoeCapabilityEvidence";
 import { generateTanstackAgentProposal } from "./zoeTanstackAgentProposal";
 
 function fixture(files: Record<string,string>): WorkspaceStateV2 {
@@ -52,6 +53,23 @@ describe("P3B7E4B2E TanStack metered proposal handoff",()=>{
     expect(result.proposal.edits[0]?.beforeSha256).not.toBe("a".repeat(64));
     expect(result.proposal.buildVerification).toBeUndefined();
     expect((w.nodes.find(n=>n.kind==="file" && n.name==="index.tsx") as {content:string}).content).toBe(original);
+  });
+  it("passes server-derived capability evidence into the agent model request",async()=>{
+    const capabilityEvidence=buildZoeCapabilityEvidence({
+      project:{stackId:project.stackId,status:"draft",sourceVersion:project.sourceVersion},
+      publishEnabled:true,aiEditAllowed:true,commerceLookup:"failed",commerceStorePresent:false,
+      connections:[],routes:[],runtimeProviders:[],
+    });
+    let calls=0;
+    const result=await generateTanstackAgentProposal({workspace:workspace(),project,
+      userRequest:"Can you publish?",conversation:[],requestedPage:null,system:"Safe",
+      capabilityEvidence,generate:async(request)=>{
+        calls++;
+        expect(JSON.parse(request.user).capabilityEvidence).toEqual(capabilityEvidence);
+        return{text:action([],"Worker publishing is not available")};
+      }});
+    expect(calls).toBe(1);
+    expect(result.kind).toBe("clarification");
   });
   it("preflights private pages and wrong stack without a paid model call",async()=>{
     let calls=0;

@@ -1,3 +1,4 @@
+import type { buildZoeCapabilityEvidence } from "./zoeCapabilityEvidence";
 import { parseAiJsonText } from "@zoeskoul/ai-json";
 import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 import { makeZoeEditClarification } from "./zoeEditClarification";
@@ -25,6 +26,7 @@ export async function generateTanstackAgentProposal(input: Readonly<{
   conversation: readonly unknown[];
   requestedPage: string | null;
   system: string;
+  capabilityEvidence?: ReturnType<typeof buildZoeCapabilityEvidence>;
   generate: Parameters<typeof runZoeProjectAgent>[0]["generate"];
 }>): Promise<TanstackAgentProposalOutcome> {
   if (input.project.stackId !== "tanstack-start-v1") {
@@ -40,7 +42,7 @@ export async function generateTanstackAgentProposal(input: Readonly<{
   const output = await runZoeProjectAgent({
     workspace: input.workspace, project: input.project,
     userRequest: input.userRequest, conversation: input.conversation,
-    system: input.system, generate: input.generate,
+    system: input.system, generate: input.generate, capabilityEvidence: input.capabilityEvidence,
   });
   const parsed = parseAiJsonText<unknown>(output.text);
   if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {

@@ -20,6 +20,10 @@ describe("P3B7E4B2E TanStack editing ownership and metering",()=>{
       "requireZoeAiBillingOperationId", "resolveFirstReviewedPaidEditModel()",
       "createRequiredZoeBuildAssistantTransport", "generateTanstackAgentProposal",
       'send("proposal"', 'send("clarification"']) expect(post).toContain(marker);
+    expect(post).toContain("resolveZoeCapabilityReality({");
+    expect(post).toContain("aiEditAllowed:resolveBuildAccess(access).canEditWithAi");
+    expect(post).toContain("system,generate,capabilityEvidence");
+    expect(post.indexOf("resolveZoeCapabilityReality({")).toBeLessThan(post.indexOf("generateTanstackAgentProposal({"));
     expect(post).not.toContain("saveBuildProjectSourceCommand");
     expect(post).not.toContain("commitVerifiedTanstackReviewedEdit");
   });

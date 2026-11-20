@@ -168,6 +168,9 @@ export async function POST(req: Request, ctx: { params: Promise<{buildProjectId:
               transport:selectedTransport,userId:access.userId!,operationId:meteringOperationId,
               purpose:"edit",stepIndex,
             }) : selectedTransport).generateJsonText(request);
+      const capabilityEvidence = await resolveZoeCapabilityReality({
+        buildProjectId,project,aiEditAllowed:resolveBuildAccess(access).canEditWithAi,
+      });
       const system = [
         "You are Zoé editing the EXISTING user's TanStack Start React/TypeScript project, not creating a new runtime.",
         ZOE_CAPABILITY_CONVERSATION_POLICY,
@@ -185,7 +188,7 @@ export async function POST(req: Request, ctx: { params: Promise<{buildProjectId:
           workspace:project.workspace,
           project:{title:project.title,stackId:project.stackId,sourceVersion:project.sourceVersion,
             activePath:project.activePath},
-          userRequest:prompt,conversation,requestedPage,system,generate,
+          userRequest:prompt,conversation,requestedPage,system,generate,capabilityEvidence,
         });
         generationStage = "proposal_validation";
         return outcome;

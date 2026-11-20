@@ -1,3 +1,4 @@
+import type { buildZoeCapabilityEvidence } from "./zoeCapabilityEvidence";
 import { parseAiJsonText, type AiJsonRequest } from "@zoeskoul/ai-json";
 import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 import { createZoeProjectFileTools, ZoeProjectFileToolError } from "./zoeProjectFileTools";
@@ -128,6 +129,7 @@ export async function runZoeProjectAgent(input: Readonly<{
   conversation: readonly unknown[];
   project: Readonly<{title: string; stackId: string | null; sourceVersion: number; activePath: string | null}>;
   system: string;
+  capabilityEvidence?: ReturnType<typeof buildZoeCapabilityEvidence>;
   generate: (request: AiJsonRequest, stepIndex: number) => Promise<{
     text: string; metadata?: {reasoningSummary?: string};
   }>;
@@ -460,6 +462,7 @@ export async function runZoeProjectAgent(input: Readonly<{
       instruction: input.userRequest,
       conversation: input.conversation,
       project: input.project,
+      capabilityEvidence: input.capabilityEvidence,
       availableFileCount: tools.count,
       initialInventory: step === 0 ? {
         entries:initialInventory.entries.map(({path,characters,imports}) => ({path,characters,imports})),
