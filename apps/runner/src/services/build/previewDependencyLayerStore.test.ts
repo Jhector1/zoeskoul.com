@@ -99,6 +99,29 @@ describe("K20D3F persistent verified dependency layers", () => {
     expect(await fs.lstat(path.join(first, "node_modules"))).toHaveProperty("mode");
   });
 
+  it("accepts a contained relative symlink chain and verifies its published bytes", async () => {
+    const { first, store } = await fixture();
+    const modules = path.join(first, "node_modules");
+    await fs.symlink("foo", path.join(modules, "alias"));
+    const lease = await store.publish(key(), first);
+    expect(lease).not.toBeNull();
+    expect(await fs.readFile(path.join(lease!.nodeModulesDir, "alias", "index.js"), "utf8"))
+      .toBe("export default 123");
+    lease!.release();
+    const verified = await store.acquire(key());
+    expect(verified).not.toBeNull();
+    verified!.release();
+  });
+
+  it.each(["missing", "broken", "missing/../foo"])(
+    "rejects unresolved or cyclic symlink target %s", async target => {
+      const { first, store } = await fixture();
+      await fs.symlink(target, path.join(first, "node_modules", "broken"));
+      expect(await store.publish(key(), first)).toBeNull();
+      expect(await store.acquire(key())).toBeNull();
+    },
+  );
+
   it("rejects wrong owner, project, dependencies, install command or runtime image", async () => {
     const { first, store } = await fixture();
     const lease = await store.publish(key(), first);

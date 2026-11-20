@@ -93,7 +93,7 @@ function scan() {
   try {
     st = fs.lstatSync(root, { bigint: true });
     if (!st.isDirectory() || st.isSymbolicLink()) return failed('root-unavailable');
-    canonical = fs.realpathSync(root);
+    canonical = fs.realpathSync.native(root);
   } catch { return failed('root-unavailable'); }
   const digest = createHash('sha256');
   const buffer = Buffer.alloc(256 * 1024);
@@ -110,7 +110,7 @@ function scan() {
         const target = fs.readlinkSync(filename);
         if (path.isAbsolute(target)) return 'unsafe-link';
         let resolved;
-        try { resolved = fs.realpathSync(filename); } catch { return 'unsafe-link'; }
+        try { resolved = fs.realpathSync.native(filename); } catch { return 'unsafe-link'; }
         if (resolved !== canonical && !resolved.startsWith(canonical + path.sep)) return 'unsafe-link';
         if (!same(info, fs.lstatSync(filename, { bigint: true }))) return 'read-failure';
         digest.update('L\0' + relative + '\0' + target + '\0');
