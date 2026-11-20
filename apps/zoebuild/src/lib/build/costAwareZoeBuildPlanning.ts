@@ -7,7 +7,7 @@ import {
 } from "@zoeskoul/build-ai";
 
 import {
-  classifyBuildRequest,
+  profileFromValidatedSpecification,
   resolveBuildModelRoute,
   type BuildModelCandidate,
   type BuildRequestProfile,
@@ -22,25 +22,6 @@ import {
   resolveZoeBuildAiConfig,
   type ZoeBuildAiProviderId,
 } from "./createZoeBuildAiPlanner";
-
-export class BuildArchitectureUnsupportedError
-  extends Error {
-  readonly code =
-    "BUILD_ARCHITECTURE_UNSUPPORTED" as const;
-
-  constructor(
-    readonly profile:
-      BuildRequestProfile,
-  ) {
-    super(
-      profile.unsupportedReason ??
-        "ZoeBuild does not yet have a trusted registered stack for this request.",
-    );
-
-    this.name =
-      "BuildArchitectureUnsupportedError";
-  }
-}
 
 export type ZoeBuildAiRoutingAttempt =
   Readonly<{
@@ -140,124 +121,6 @@ function mediaKinds(
   );
 }
 
-function asRecord(
-  value: unknown,
-): Record<string, unknown> {
-  return (
-    typeof value ===
-      "object" &&
-    value !== null &&
-    !Array.isArray(value)
-  )
-    ? value as Record<
-        string,
-        unknown
-      >
-    : {};
-}
-
-/**
- * Architecture is deterministic.
- *
- * The model can choose presentation-oriented fields
- * such as name and pages, but it cannot promote a
- * static project to a database app, invent a stack,
- * add commerce/payment mechanics, or alter deployment
- * ownership.
- */
-function lockArchitecture(
-  planner:
-    BuildAiPlanner,
-  profile:
-    BuildRequestProfile,
-): BuildAiPlanner {
-  if (
-    !profile.supported ||
-    !profile.stackId
-  ) {
-    throw new BuildArchitectureUnsupportedError(
-      profile,
-    );
-  }
-
-  return {
-    async generateProjectSpecification(
-      input,
-    ) {
-      const designContext = [
-        input.prompt,
-        "",
-        "ZoeBuild has already selected the application architecture.",
-        "Do not redesign or replace the architecture.",
-        `Site kind: ${profile.siteKind}.`,
-        `Industry: ${profile.industry ?? "unspecified"}.`,
-        `Complexity: ${profile.complexity}.`,
-        "",
-        "AI responsibilities:",
-        ...profile
-          .dynamicResponsibilities
-          .map(
-            (item) =>
-              `- ${item}`,
-          ),
-        "",
-        "Deterministic responsibilities that must not be invented or replaced:",
-        ...profile
-          .staticResponsibilities
-          .map(
-            (item) =>
-              `- ${item}`,
-          ),
-      ].join("\n");
-
-      const generated =
-        await planner
-          .generateProjectSpecification({
-            ...input,
-            prompt:
-              designContext,
-          });
-
-      const modelSpecification =
-        asRecord(
-          generated.specification,
-        );
-
-      return {
-        ...generated,
-
-        specification: {
-          ...modelSpecification,
-
-          projectType:
-            profile.projectType,
-
-          targets: [
-            "web",
-          ],
-
-          requirements: {
-            ...profile.requirements,
-          },
-
-          commerce:
-            profile.requirements.commerce
-              ? { storefrontRuntime: "tanstack-start" }
-              : null,
-
-          stackId:
-            profile.stackId,
-
-          deployment: {
-            preference:
-              profile.deploymentPreference,
-          },
-        },
-      };
-    },
-  };
-}
-
 function providerFailureStatus(
   error: unknown,
 ): number | null {
@@ -336,10 +199,7 @@ function shouldEscalate(
     BuildAiPlanningError
   ) {
     return (
-      error.code ===
-        "BUILD_AI_SPEC_INVALID" ||
-      error.code ===
-        "BUILD_AI_STACK_INCOMPATIBLE"
+      error.code === "BUILD_AI_SPEC_INVALID"
     );
   }
 
@@ -401,21 +261,6 @@ export async function planCostAwareZoeBuildProject(
   if (process.env.ZOEBUILD_AI_CREDITS_ENFORCEMENT === "required" && !input.metering) {
     throw new Error("BUILD_AI_CREDITS_METERING_REQUIRED");
   }
-  const profile =
-    classifyBuildRequest(
-      input.prompt,
-    );
-
-  if (
-    !profile.supported ||
-    !profile.stackId
-  ) {
-    // Deliberately occurs before any provider call.
-    throw new BuildArchitectureUnsupportedError(
-      profile,
-    );
-  }
-
   const mode =
     normalizedRoutingMode();
 
@@ -425,10 +270,8 @@ export async function planCostAwareZoeBuildProject(
           manualCandidate(),
         ]
       : resolveBuildModelRoute(
-          profile,
-          mediaKinds(
-            input.media,
-          ),
+          mediaKinds(input.media),
+          { billingEnforced: Boolean(input.metering) },
         ).candidates.filter(
           (candidate) =>
             hasCredential(
@@ -459,15 +302,9 @@ export async function planCostAwareZoeBuildProject(
     const candidate =
       candidates[index];
 
-    const planner =
-      lockArchitecture(
-        createCandidatePlanner(
-          candidate,
-          index,
-          input.metering,
-        ),
-        profile,
-      );
+    // The model interprets the original prompt. The existing build-ai parser
+    // and stack compatibility gate validate its result without overwriting it.
+    const planner = createCandidatePlanner(candidate, index, input.metering);
 
     try {
       const plan =
@@ -492,7 +329,7 @@ export async function planCostAwareZoeBuildProject(
         plan,
         routing: {
           mode,
-          profile,
+          profile: profileFromValidatedSpecification(plan.specification),
           selected: {
             provider:
               candidate.provider,

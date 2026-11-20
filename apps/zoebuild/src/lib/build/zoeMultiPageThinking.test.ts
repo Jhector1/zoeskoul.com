@@ -4,7 +4,7 @@ import {describe, expect, it, vi} from "vitest";
 vi.mock("./buildWorkspaceMutation", () => ({parseBuildWorkspaceMutation: (value: unknown) => value}));
 import type {WorkspaceStateV2} from "@zoeskoul/learner-workspace/ide/types";
 import type { ZoeSourceEdit } from "./zoeTargetedSourceEdit";
-import {sha256, requestedStaticPage, validateZoeEdits, assertStaticPageProposal,
+import {sha256, validateZoeEdits, assertStaticPageProposal,
   applyZoeEditsToWorkspace} from "./zoeTargetedSourceEdit";
 import {readZoeEditEventStream} from "./zoeEditEventStream";
 import {linkZoeStaticPageInHome} from "./zoeStaticPageLinks";
@@ -20,15 +20,6 @@ const edits: readonly ZoeSourceEdit[] = [
 ];
 
 describe("ZoeBuild real static pages",()=>{
-  it("recognizes real page creation requests including private/privacy typo",()=>{
-    expect(requestedStaticPage("add a private policy page")).toBe("privacy.html");
-    expect(requestedStaticPage("Create a Privacy Policy page")).toBe("privacy.html");
-    expect(requestedStaticPage("put the privacy policy in its own page")).toBe("privacy.html");
-    expect(requestedStaticPage("Move the About section to a separate page")).toBe("about.html");
-    expect(requestedStaticPage("Separate the contact information into its own page")).toBe("contact.html");
-    expect(requestedStaticPage("Please put the FAQ on its own URL")).toBe("faq.html");
-    expect(requestedStaticPage("change the hero")).toBeNull();
-  });
   it("accepts new privacy.html and homepage link as an atomic reviewed proposal",()=>{
     const valid=validateZoeEdits(workspace,edits);
     expect(valid[1]?.create).toBe(true);

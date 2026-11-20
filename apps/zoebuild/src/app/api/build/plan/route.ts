@@ -19,7 +19,6 @@ import {
   ZoeBuildAiConfigurationError,
 } from "@/lib/build/createZoeBuildAiPlanner";
 import {
-  BuildArchitectureUnsupportedError,
   planCostAwareZoeBuildProject,
 } from "@/lib/build/costAwareZoeBuildPlanning";
 import {
@@ -213,28 +212,6 @@ export async function POST(req: Request) {
     if (error instanceof ZoeAiOperationIdentityError) {
       return json(requestId, {ok:false, code:error.code, message:"A new AI attempt identifier is required."}, 400);
     }
-    if (error instanceof BuildArchitectureUnsupportedError) {
-      return json(
-        requestId,
-        {
-          ok: false,
-          code: error.code,
-          message: error.message,
-          profile: {
-            siteKind:
-              error.profile.siteKind,
-            industry:
-              error.profile.industry,
-            complexity:
-              error.profile.complexity,
-            commerceMode:
-              error.profile.commerceMode,
-          },
-        },
-        422,
-      );
-    }
-
     if (error instanceof ZoeBuildAiConfigurationError) {
       return json(
         requestId,
@@ -277,6 +254,12 @@ export async function POST(req: Request) {
     }
 
     if (error instanceof BuildAiPlanningError) {
+      if (error.code === "BUILD_AI_STACK_INCOMPATIBLE") {
+        return json(requestId, {
+          ok: false, code: "BUILD_ARCHITECTURE_UNSUPPORTED",
+          message: "The requested architecture needs capabilities that the current ZoeBuild runtime cannot satisfy. " + error.issues.join(" "),
+        }, 422);
+      }
       return json(
         requestId,
         {

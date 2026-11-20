@@ -12,7 +12,7 @@ import {
 } from "@zoeskoul/build-core";
 import {
   listBuildStacks,
-  requireBuildStack,
+  getBuildStack,
 } from "@zoeskoul/build-registry";
 
 export const BUILD_AI_PROMPT_LIMITS = {
@@ -119,8 +119,19 @@ function validateGeneratedSpecification(
     throw error;
   }
 
-  const stack =
-    requireBuildStack(specification.stackId);
+  const stack = getBuildStack(specification.stackId);
+  if (!stack) {
+    throw new BuildAiPlanningError(
+      "BUILD_AI_SPEC_INVALID", "AI selected an unregistered ZoeBuild stack.",
+    );
+  }
+  // The current canonical Worker runtime is not a static or mobile deployment.
+  if (stack.id === "tanstack-start-v1" && specification.deployment.preference !== "managed-runtime") {
+    throw new BuildAiPlanningError(
+      "BUILD_AI_STACK_INCOMPATIBLE", "The selected stack does not support the requested deployment preference.",
+      ["TanStack Start currently requires the managed runtime deployment target."],
+    );
+  }
   const compatibility =
     evaluateProjectStack(specification, stack);
 
@@ -274,10 +285,12 @@ export const BUILD_AI_PROJECT_SPECIFICATION_SYSTEM_PROMPT = [
   'Allowed targets: "web", "ios", "android".',
   "requirements must contain booleans for backend, database, auth, storage, payments, email, and commerce.",
   `commerce must be null for non-commerce work or a bounded object with storefrontRuntime from the registered contract: ${BUILD_STOREFRONT_RUNTIMES.join(", ")}; commerce provider ownership is resolved server-side and must not appear in the Build specification.`,
-  "Commerce provider/runtime are architecture metadata and deterministic ZoeBuild planning owns the final values.",
+  "You own the semantic interpretation and propose the requirements, screens and architecture. ZoeBuild validates the proposed specification; it does not rewrite it based on keywords. Provider connections and execution authority remain server-owned.",
   "Interpret the actual application goal in open-ended terms: games, tools, dashboards, storefronts, websites and novel applications are all valid web application ideas, not mandatory categories.",
   "pages must be an array of concise, distinct human-readable screen names, not file paths or URLs. Put the desired entry screen first. A single screen or an empty list is valid; never invent mandatory Home, About, navigation, header, footer or marketing content.",
-  "Infer reversible implementation details only when useful. Do not add unrequested accounts, databases, payments or integrations. Distinguish genuinely required functionality from optional recommendations.",
+  "Follow the actual user intent, including negation, fiction, simulations, unusual ideas, context, language and explicit constraints. Treat examples as examples, not fixed categories. A game about a store is not a live store unless the user wants real transactions.",
+  "Infer reversible implementation details only when useful. Do not add unrequested accounts, databases, payments or integrations. Distinguish genuinely required functionality from optional recommendations. Never delete a genuinely required capability merely to pass the platform stack gate.",
+  "Use the registered technical project type and target to describe the execution runtime, not an application category. For browser applications, the canonical TanStack Start stack uses fullstack-app, web and managed-runtime even for a client-only game or tool; backend is true only if needed. Do not claim that unsupported native targets or services are available.",
   "Initial generation creates TanStack presentation scaffolds, not completed business workflows. Do not claim that a planned page implements checkout, bookings, accounts, messaging, or data persistence.",
   "A registered deployment target does not mean the app has been deployed or a domain has been connected.",
   `Registered stacks: ${BUILD_AI_REGISTERED_STACK_GUIDANCE}.`,

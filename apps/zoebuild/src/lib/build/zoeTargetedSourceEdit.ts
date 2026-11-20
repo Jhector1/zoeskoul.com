@@ -2,7 +2,6 @@ import { createHash, randomUUID } from "node:crypto";
 import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 import { parseBuildWorkspaceMutation } from "./buildWorkspaceMutation";
 import { isZoeStaticPagePath, linkZoeStaticPageInHome } from "./zoeStaticPageLinks";
-import { isZoeStandalonePageInstruction } from "./zoeAssistantEditIntent";
 import {isZoeReactPageSourcePath,ZOE_REACT_ROUTER_MARKER} from "./zoeReactRouteEdits";
 import { invalidZoeReactPageSource } from "./zoeReactPageGraphValidation";
 import { isTanstackSourceWorkspace, isTanstackEditableSource, isTanstackCreatableSource } from "./zoeTanstackSourcePolicy";
@@ -104,18 +103,6 @@ export class ZoeEditInputError extends Error {
   constructor(readonly code: string, message: string) {
     super(message); this.name = "ZoeEditInputError";
   }
-}
-
-/** Whitelisted top-level pages only. No arbitrary file or folder creation by AI. */
-
-export function requestedStaticPage(prompt: string): string | null {
-  if (!isZoeStandalonePageInstruction(prompt)) return null;
-  if (/\bprivacy\b|\bprivate\s+policy\b/i.test(prompt)) return "privacy.html";
-  if (/\bterms(?:\s+of\s+service|\s+and\s+conditions)?\b/i.test(prompt)) return "terms.html";
-  if (/\babout(?:\s+us)?\b/i.test(prompt)) return "about.html";
-  if (/\bcontact(?:\s+us)?\b/i.test(prompt)) return "contact.html";
-  if (/\b(?:faq|frequently\s+asked\s+questions)\b/i.test(prompt)) return "faq.html";
-  return null;
 }
 
 /** Independently verify that the requested page is an actual document, not a homepage section. */

@@ -129,3 +129,30 @@ describe(
     );
   },
 );
+
+
+describe("semantic architecture is not coerced to fit the runtime", () => {
+  it("keeps a game about a store separate from real commerce", async () => {
+    const proposal = {...validSpecification, name: "Shop simulation", pages: ["Play"], commerce: null};
+    const model = planner(proposal);
+    const prompt = "Build a restaurant shop simulation game, no real checkout or accounts.";
+    const result = await planBuildProjectFromPrompt({prompt, planner: model});
+    expect(model.generateProjectSpecification).toHaveBeenCalledWith({prompt, media: [], maxOutputTokens: undefined});
+    expect(result.specification).toEqual(proposal);
+  });
+  it("preserves a catalog plan without inventing payments", async () => {
+    const proposal = {...validSpecification, name: "Catalog", requirements: {...validSpecification.requirements, commerce: true},
+      commerce: {storefrontRuntime: "tanstack-start"}};
+    expect((await planBuildProjectFromPrompt({prompt: "Store catalog only. No checkout.", planner: planner(proposal)})).specification).toEqual(proposal);
+  });
+  it.each(["auth", "database", "storage", "email"] as const)("rejects unsupported %s without deleting the requirement", async capability => {
+    await expect(planBuildProjectFromPrompt({prompt: "A real application", planner: planner({
+      ...validSpecification, requirements: {...validSpecification.requirements, [capability]: true},
+    })})).rejects.toMatchObject({code: "BUILD_AI_STACK_INCOMPATIBLE"});
+  });
+  it("does not turn an unsupported deployment request into a fake supported deployment", async () => {
+    await expect(planBuildProjectFromPrompt({prompt: "Native deployment", planner: planner({
+      ...validSpecification, deployment: {preference: "mobile-cloud"},
+    })})).rejects.toMatchObject({code: "BUILD_AI_STACK_INCOMPATIBLE"});
+  });
+});

@@ -15,7 +15,7 @@ import { loadCurrentBuildAccessSnapshot } from "@/lib/build/currentBuildAccess";
 import { createPrismaBuildProjectReader } from "@/lib/build/readBuildProjects";
 import { createPrismaBuildProjectSourceWriter } from "@/lib/build/saveBuildProjectSource";
 import { createZoeBuildAiJsonTransport, resolveZoeBuildAiConfig, type ZoeBuildAiProviderId } from "@/lib/build/createZoeBuildAiPlanner";
-import { classifyBuildRequest, resolveBuildModelRoute } from "@zoeskoul/build-routing";
+import { resolveBuildModelRoute } from "@zoeskoul/build-routing";
 import { listZoeEditableFiles, sha256, validateZoeEdits, previewZoeEdits, applyZoeEditsToWorkspace, ZoeEditInputError,
   assertStaticPageProposal,
   ZOE_EDIT_MAX_CONTEXT_CHARS, ZOE_EDIT_MAX_PROMPT_CHARS } from "@/lib/build/zoeTargetedSourceEdit";
@@ -77,12 +77,12 @@ async function jsonBody(req: Request, maxBytes = MAX_PROMPT_REQUEST): Promise<Re
   } catch { return null; }
   finally { reader.releaseLock(); }
 }
-function editingTransport(prompt: string) {
+function editingTransport() {
   if (process.env.ZOEBUILD_AI_ROUTING_MODE?.trim().toLowerCase() === "manual") {
     return createZoeBuildAiJsonTransport(resolveZoeBuildAiConfig(process.env));
   }
-  // Reuse ZoeBuild's economical provider priorities; never require a separate AI account.
-  const route = resolveBuildModelRoute(classifyBuildRequest(prompt), []);
+  // Reuse ZoeBuild's configured model routing without classifying the prompt.
+  const route = resolveBuildModelRoute();
   const keys: Record<string, string | undefined> = {
     openai: process.env.OPENAI_API_KEY,
     gemini: process.env.GEMINI_API_KEY,
@@ -161,7 +161,7 @@ export async function POST(req: Request, ctx: { params: Promise<{buildProjectId:
       // No manual/unpriced fallback is permitted when customer credits are required.
       const selectedTransport = requiredMetering
         ? createZoeBuildAiJsonTransport(resolveFirstReviewedPaidEditModel())
-        : editingTransport(prompt);
+        : editingTransport();
       const generate: Parameters<typeof runZoeProjectAgent>[0]["generate"] = (request,stepIndex) =>
         (requiredMetering
           ? createRequiredZoeBuildAssistantTransport({
@@ -322,7 +322,7 @@ export async function POST(req: Request, ctx: { params: Promise<{buildProjectId:
     // transport is constructed. Failure cannot downgrade to an unmetered call.
     const selectedTransport = requiredMetering
       ? createZoeBuildAiJsonTransport(resolveFirstReviewedPaidEditModel())
-      : editingTransport(prompt);
+      : editingTransport();
     const transport = requiredMetering
       ? createRequiredZoeBuildAssistantTransport({
           transport: selectedTransport, userId: access.userId, operationId: meteringOperationId,

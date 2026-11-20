@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { BuildAccessError, getBuildProjectCommand, resolveBuildAccess } from "@zoeskoul/build-application";
 import { parseAiJsonText } from "@zoeskoul/ai-json";
-import { classifyBuildRequest, resolveBuildModelRoute } from "@zoeskoul/build-routing";
+import { resolveBuildModelRoute } from "@zoeskoul/build-routing";
 import { enforceSameOriginPost, exceedsContentLength } from "@zoeskoul/platform-server/http";
 import { rateLimit } from "@zoeskoul/platform-server/security/ratelimit";
 import { prisma } from "@zoeskoul/platform-server/prisma";
@@ -40,8 +40,8 @@ function intentTransport() {
   if (process.env.ZOEBUILD_AI_ROUTING_MODE?.trim().toLowerCase() === "manual") {
     return createZoeBuildAiJsonTransport(resolveZoeBuildAiConfig(process.env));
   }
-  // Classify as a simple job; don't buy an expensive model just for classification.
-  const routed = resolveBuildModelRoute(classifyBuildRequest("classify a short text request"), []);
+  // Model selection is independent of application intent; the model reasons over the request.
+  const routed = resolveBuildModelRoute();
   const available: Record<string, string | undefined> = {
     openai: process.env.OPENAI_API_KEY,
     gemini: process.env.GEMINI_API_KEY,

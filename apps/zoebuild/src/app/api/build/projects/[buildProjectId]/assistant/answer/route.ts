@@ -14,7 +14,7 @@ import {ZOE_CAPABILITY_CONVERSATION_POLICY} from "@/lib/build/zoeCapabilityEvide
 import {ZOE_NATURAL_CONVERSATION_POLICY} from "@/lib/build/zoeConversationV2";
 import {resolveZoeDeploymentReality} from "@/lib/build/zoeDeploymentReality";
 import { createZoeBuildAiJsonTransport, resolveZoeBuildAiConfig, type ZoeBuildAiProviderId } from "@/lib/build/createZoeBuildAiPlanner";
-import { classifyBuildRequest, resolveBuildModelRoute } from "@zoeskoul/build-routing";
+import { resolveBuildModelRoute } from "@zoeskoul/build-routing";
 import { deserializeZoeConversationHistory } from "@/lib/build/zoeConversationContext";
 import { createRequiredZoeBuildAssistantTransport } from "@/lib/build/serverOwnedZoeBuildMetering";
 import { requireZoeAiBillingOperationId, ZOE_AI_OPERATION_HEADER, ZoeAiOperationIdentityError } from "@/lib/build/aiBillingOperationIdentity";
@@ -38,7 +38,7 @@ function result(requestId:string, body:Record<string,unknown>,status=200) {
 function answerTransport() {
   if (process.env.ZOEBUILD_AI_ROUTING_MODE?.trim().toLowerCase()==="manual")
     return createZoeBuildAiJsonTransport(resolveZoeBuildAiConfig(process.env));
-  const routed=resolveBuildModelRoute(classifyBuildRequest("answer a technical question"),[]);
+  const routed=resolveBuildModelRoute();
   const keys:Record<string,string|undefined>={openai:process.env.OPENAI_API_KEY,
     gemini:process.env.GEMINI_API_KEY,claude:process.env.ANTHROPIC_API_KEY,
     deepseek:process.env.DEEPSEEK_API_KEY};
