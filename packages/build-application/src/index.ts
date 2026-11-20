@@ -626,3 +626,6 @@ export async function applyBuildProjectPlanCommand(
         materialized.dependencyLock,
     });
 }
+
+// AI4B1: authenticated, immutable media storage application service.
+export * from "./projectMediaStorage";
