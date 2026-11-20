@@ -31,6 +31,15 @@ describe("V1 isolated TanStack live-preview admission policy", () => {
       action:"live_candidate",reason:"eligible_source_change",changedPaths:["src/routes/index.tsx"],
     });
   });
+  it("admits the existing canonical root stylesheet across forward revisions only on development leases", () => {
+    const base = {...previous, files:[...previous.files,{path:"src/styles.css",content:"body {color:red}"}]};
+    const updated = {...base, sourceVersion:8, files:base.files.map(file => file.path === "src/styles.css" ? {...file,content:"body {color:blue}"} : file)};
+    expect(classifyTanstackPreviewTransition({mode:"development",previous:base,next:updated})).toMatchObject({action:"live_candidate",changedPaths:["src/styles.css"]});
+    expect(classifyTanstackPreviewTransition({mode:"immutable",previous:base,next:updated})).toMatchObject({action:"restart"});
+    for (const pathname of ["src/router.tsx","src/server/secret.ts","src/other.css","src/styles.css.ts","vite.config.ts","wrangler.jsonc"]) {
+      expect(classifyTanstackPreviewTransition({mode:"development",previous:base,next:{...updated,files:[...updated.files,{path:pathname,content:"changed"}]}})).toMatchObject({action:"restart",reason:"protected_files_changed"});
+    }
+  });
   it("never live-updates dependencies, signed approvals or configuration", () => {
     for (const filename of ["package.json","pnpm-lock.yaml","zoebuild-dependency-approval.json"]) {
       expect(classify("development", edit(filename,"changed"))).toMatchObject({

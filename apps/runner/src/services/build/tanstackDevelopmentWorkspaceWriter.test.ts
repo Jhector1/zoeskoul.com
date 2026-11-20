@@ -231,9 +231,30 @@ describe("suspended TanStack development workspace writer (not routed)", () => {
       .rejects.toMatchObject({code:"ENOENT"});
   });
 
+  it("updates the canonical root stylesheet in the same suspended workspace",async()=>{
+    const target=path.join(workspaceDir,"src/styles.css");
+    await fs.writeFile(target,"body {color:red}");
+    await update({changedPaths:["src/styles.css"],next:{files:[file("src/styles.css","body {color:blue}")]}});
+    expect(await fs.readFile(target,"utf8")).toBe("body {color:blue}");
+    expect(container.pause).toHaveBeenCalledOnce();
+    expect(container.unpause).toHaveBeenCalledOnce();
+    expect(paused).toBe(false);
+  });
+  it("rejects a symlink substituted for the canonical root stylesheet",async()=>{
+    const outside=path.join(parent,"outside.css");
+    await fs.writeFile(outside,"protected");
+    await fs.symlink(outside,path.join(workspaceDir,"src/styles.css"));
+    await expect(update({changedPaths:["src/styles.css"],next:{files:[file("src/styles.css","changed")]}})).rejects.toThrow("workspace update failed");
+    expect(await fs.readFile(outside,"utf8")).toBe("protected");
+    expect(paused).toBe(false);
+  });
   it("refuses protected, traversal, duplicated and oversized source inputs before Docker",async()=>{
     const attempts = [
       {changedPaths:["package.json"]},
+      {changedPaths:["src/other.css"]},
+      {changedPaths:["src/router.tsx"]},
+      {changedPaths:["src/server/secret.ts"]},
+      {changedPaths:["src/styles.css.ts"]},
       {changedPaths:["src/routes/../config.ts"]},
       {changedPaths:["src/routes/index.tsx","src/routes/INDEX.TSX"]},
       {changedPaths:["src/routes/index.tsx"],next:{files:[file("src/routes/index.tsx","x".repeat(512*1024+1))]}},

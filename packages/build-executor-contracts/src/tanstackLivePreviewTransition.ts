@@ -63,11 +63,14 @@ function fileMap(files: readonly BuildExecutorTextFile[]): Map<string,string> | 
   return map;
 }
 
-function supportedLiveSource(path: string): boolean {
+export function isTanstackLiveSourcePath(path: string): boolean {
+  if (!validPath(path)) return false;
   if (SOURCE_RESTART_NAMES.has(path) || SOURCE_RESTART_ROOTS.some(root => path.startsWith(root)))
     return false;
   // Phase 1: deliberately bounded to ordinary application source. Changing
   // configuration, generated output or dependency identity always restarts.
+  // The canonical TanStack template imports this root stylesheet.
+  if (path === "src/styles.css") return true;
   return /^src\/(?:routes|components|hooks|styles|lib)\/(?:[A-Za-z0-9_.-]+\/)*[A-Za-z0-9_.-]+\.(?:tsx?|jsx?|css|scss)$/.test(path);
 }
 
@@ -104,7 +107,7 @@ export function classifyTanstackPreviewTransition(input: Readonly<{
   }
   if (changes.some(path => INTEGRITY_FILES.has(path)))
     return result("restart", "dependencies_changed", changes);
-  if (changes.some(path => !supportedLiveSource(path)))
+  if (changes.some(path => !isTanstackLiveSourcePath(path)))
     return result("restart", "protected_files_changed", changes);
   if (input.mode !== "development")
     return result("restart", "immutable_lease", changes);

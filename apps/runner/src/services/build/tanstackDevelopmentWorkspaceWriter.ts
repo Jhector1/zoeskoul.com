@@ -2,7 +2,7 @@ import { constants, type BigIntStats } from "node:fs";
 import fs, { type FileHandle } from "node:fs/promises";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
-import type { ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contracts";
+import { isTanstackLiveSourcePath, type ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contracts";
 import { docker } from "../docker/dockerClient.js";
 
 /**
@@ -106,7 +106,6 @@ export async function applySuspendedTanstackDevelopmentSource(input: Readonly<{
   }
 }
 
-const ALLOWED_SOURCE = /^src\/(?:routes|components|hooks|styles|lib)\/(?:[A-Za-z0-9_.-]+\/)*[A-Za-z0-9_.-]+\.(?:tsx?|jsx?|css|scss)$/;
 const WORKSPACE_NAME = /^zoeskoul-run-[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i;
 const MAX_FILE_BYTES = 512 * 1024;
 const MAX_CHANGE_BYTES = 2 * 1024 * 1024;
@@ -139,7 +138,7 @@ function validateChanges(
   const changes: SourceChange[] = [];
   let totalBytes = 0;
   for (const candidate of changedPaths) {
-    if (!safePath(candidate) || !ALLOWED_SOURCE.test(candidate) ||
+    if (!safePath(candidate) || !isTanstackLiveSourcePath(candidate) ||
         selected.has(candidate.toLowerCase()))
       throw new Error("Unsafe development preview source path.");
     selected.add(candidate.toLowerCase());
