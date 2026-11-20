@@ -51,20 +51,18 @@ describe("new project site identity", () => {
     expect(file(saved, "src/data/site.ts")).toContain('name: "Blue Gallery"');
     expect(file(saved, "src/data/site.ts")).toContain('tagline: "Welcome to Blue Gallery"');
     expect(file(saved, "src/data/site.ts")).not.toContain("Zoé Build");
-    expect(file(saved, "src/components/SiteHeader.tsx")).toContain("{site.name}");
-    expect(file(saved, "src/components/SiteFooter.tsx")).toContain("{site.name}");
+    expect(saved.workspace.nodes.some(node => node.id === "src/components/SiteHeader.tsx")).toBe(false);
+    expect(saved.workspace.nodes.some(node => node.id === "src/components/SiteFooter.tsx")).toBe(false);
     expect(file(saved, "src/routes/__root.tsx")).toContain("title: site.name");
-    expect(file(saved, "src/routes/index.tsx")).toContain("`${site.name} | Home`");
-    expect(file(saved, "src/routes/about.tsx")).toContain("`About | ${site.name}`");
-    expect(file(saved, "src/routes/about.tsx")).toContain("About {site.name}");
-    expect(file(saved, "src/routes/index.tsx")).toContain('to="/about"');
+    expect(file(saved, "src/routes/index.tsx")).toContain('site.name + " | Home"');
+    expect(file(saved, "src/routes/about.tsx")).toContain('title={"About"}');
+    expect(file(saved, "src/routes/index.tsx")).toContain('to={"/about"}');
     expect(file(saved, "src/routes/index.tsx")).toContain("createFileRoute");
     expect(file(saved, "src/routes/about.tsx")).toContain("createFileRoute");
-    expect(file(saved, "src/components/SiteHeader.tsx")).toContain('to="/"');
+    expect(file(saved, "src/layouts/SiteLayout.tsx")).toContain("<Outlet />");
     for (const path of [
       "src/data/site.ts",
-      "src/components/SiteHeader.tsx",
-      "src/components/SiteFooter.tsx",
+      "src/layouts/SiteLayout.tsx",
       "src/routes/__root.tsx",
       "src/routes/index.tsx",
       "src/routes/about.tsx",
@@ -157,6 +155,6 @@ describe("new project site identity", () => {
     if (!saved) return;
     expect(file(saved, "src/data/site.ts")).toContain('name: "My Website"');
     expect(file(saved, "src/routes/index.tsx")).not.toContain("A new standard for building");
-    expect(file(saved, "src/components/SiteFooter.tsx")).not.toContain("Built with Zoé");
+    expect(saved.workspace.nodes.some(node => node.id === "src/components/SiteFooter.tsx")).toBe(false);
   });
 });

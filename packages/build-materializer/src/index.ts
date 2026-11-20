@@ -246,7 +246,7 @@ export function materializeBuildProject(
   };
 }
 
-/** Presentation-only initial scaffold. Labels and copy remain inert data. */
+/** Application-neutral scaffold. A plan describes screens, not a mandatory website shell. */
 function prepareTanstackPresentation(
   specification: ProjectSpecification,
   template: BuildTemplateDefinition,
@@ -254,26 +254,35 @@ function prepareTanstackPresentation(
   if (specification.stackId !== "tanstack-start-v1") return template;
   const files = new Map(template.files.map(file => [file.path, file.content]));
   if (files.size !== template.files.length) throw new Error("Duplicate TanStack template path");
-  const replace = (path: string, before: string, after: string) => {
-    const content = files.get(path);
-    if (content === undefined || content.split(before).length !== 2) {
-      throw new Error(`Unexpected TanStack presentation surface: ${path}`);
-    }
-    files.set(path, content.replace(before, () => after));
+  const set = (path: string, content: string) => {
+    if (!files.has(path)) throw new Error(`Unexpected TanStack presentation surface: ${path}`);
+    files.set(path, content);
   };
   const add = (path: string, content: string) => {
     if (files.has(path)) throw new Error(`TanStack presentation path collision: ${path}`);
     files.set(path, content);
   };
   const json = (value: unknown) => JSON.stringify(value);
-  const navigation = [{ to: "/", label: "Home" }, { to: "/about", label: "About" }];
-  const labels = new Set(["home", "about"]);
-  const used = new Set(["index", "about", "api", "root"]);
+  // The reference template is unchanged. Strip its example website chrome from generated apps.
+  for (const path of ["src/routes/about.tsx", "src/components/SiteHeader.tsx", "src/components/SiteFooter.tsx"]) {
+    if (!files.delete(path)) throw new Error(`Unexpected TanStack presentation surface: ${path}`);
+  }
+  set("src/layouts/SiteLayout.tsx", [
+    'import { Outlet } from "@tanstack/react-router";',
+    'export function SiteLayout() { return <main id="main-content"><Outlet /></main>; }', '',
+  ].join("\n"));
+  const navigation: { to: string; label: string }[] = [];
+  const labels = new Set<string>();
+  const used = new Set(["index", "route", "api", "root"]);
   for (const [index, raw] of specification.pages.entries()) {
     const label = raw.trim();
     const key = label.normalize("NFKC").toLowerCase();
     if (!label || labels.has(key)) continue;
     labels.add(key);
+    if (navigation.length === 0) {
+      navigation.push({ to: "/", label });
+      continue;
+    }
     const base = key.normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
       .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 48)
       .replace(/-+$/g, "") || `page-${index + 1}`;
@@ -282,51 +291,82 @@ function prepareTanstackPresentation(
       slug = `${base}-${suffix}`;
     }
     used.add(slug);
-    const to = `/${slug}`;
-    navigation.push({ to, label });
+    navigation.push({ to: `/${slug}`, label });
     add(`src/routes/${slug}.tsx`, [
       'import { createFileRoute } from "@tanstack/react-router";',
       'import { PlannedPage } from "../components/PlannedPage";',
-      `export const Route = createFileRoute(${json(to)})({`,
+      `export const Route = createFileRoute(${json(`/${slug}`)})({`,
       `  head: () => ({ meta: [{ title: ${json(label)} }] }),`,
       `  component: () => <PlannedPage title={${json(label)}} />,`,
       '});', '',
     ].join("\n"));
   }
-  if (navigation.length > 2) {
-    add("src/components/PlannedPage.tsx", [
-      'export function PlannedPage({ title }: Readonly<{ title: string }>) {',
-      '  return <section className="page-shell"><h1>{title}</h1>',
-      '    <p>This page is a starting point. Its content and any business functionality still need implementation.</p>',
-      '  </section>;', '}', '',
-    ].join("\n"));
-    replace("src/data/site.ts", 'navigation: [\n    { to: "/", label: "Home" },\n    { to: "/about", label: "About" },\n  ]',
-      `navigation: ${JSON.stringify(navigation, null, 2)}`);
+  const design = specification.design ? parseBuildDesignSpecification(specification.design) : null;
+  const site = files.get("src/data/site.ts");
+  if (site === undefined) throw new Error("Missing TanStack site data");
+  // Retain the existing identity contract consumed by the trusted application service.
+  set("src/data/site.ts", [
+    'export const site = {',
+    '  name: "My Website",',
+    '  tagline: "Welcome to My Website",',
+    `  description: ${json(design?.content.heroBody ?? "Application scaffold; implementation pending.")},`,
+    ...(design ? [`  heroTitle: ${json(design.content.heroTitle)},`, `  heroEyebrow: ${json(design.content.eyebrow)},`] : []),
+    `  navigation: ${json(navigation)},`,
+    '} as const;', '',
+  ].join("\n"));
+  add("src/components/PlannedPage.tsx", [
+    'import type { ReactNode } from "react";',
+    'export function PlannedPage({ title, description, children }: Readonly<{ title: string; description?: string; children?: ReactNode }>) {',
+    '  return <section className="page-shell"><h1>{title}</h1>',
+    '    {description && <p>{description}</p>}',
+    '    <p>This screen is a starting point. Its content and functionality still need implementation.</p>',
+    '    {children}',
+    '  </section>;', '}', '',
+  ].join("\n"));
+  const entry = navigation[0];
+  const otherPages = navigation.slice(1);
+  // Optional scaffold links expose planned routes, not a persistent site navigation shell.
+  set("src/routes/index.tsx", [
+    `import { createFileRoute${otherPages.length ? ", Link" : ""} } from "@tanstack/react-router";`,
+    'import { PlannedPage } from "../components/PlannedPage";',
+    'import { site } from "../data/site";',
+    'export const Route = createFileRoute("/")({',
+    `  head: () => ({ meta: [{ title: site.name${entry ? ` + ${json(` | ${entry.label}`)}` : ""} }] }),`,
+    '  component: EntryScreen,', '});', '',
+    'function EntryScreen() {',
+    `  return <PlannedPage title={${design ? "site.heroTitle" : entry ? json(entry.label) : "site.name"}}${design ? " description={site.description}" : ""}>`,
+    ...(otherPages.length ? [
+      '    <ul aria-label="Other planned screens">',
+      ...otherPages.map(page => `      <li><Link to={${json(page.to)}}>{${json(page.label)}}</Link></li>`),
+      '    </ul>',
+    ] : []),
+    '  </PlannedPage>;', '}', '',
+  ].join("\n"));
+  const root = files.get("src/routes/__root.tsx");
+  if (root === undefined || root.split('<a href="/">Back to home</a>').length !== 2) {
+    throw new Error("Unexpected TanStack root document");
   }
-  const cssPath = "src/styles.css";
-  let css = files.get(cssPath);
-  if (css === undefined) throw new Error("Missing TanStack root stylesheet");
-  if (navigation.length > 2) css += "\n.site-header, .site-nav { flex-wrap: wrap; }\n";
-  if (specification.design) {
-    // Validate again at the render boundary. No arbitrary CSS or executable content.
-    const design = parseBuildDesignSpecification(specification.design);
-    const { palette, content, layout } = design;
-    replace("src/data/site.ts", 'description: "Explore what this site has to offer."',
-      `description: ${json(content.heroBody)},\n  heroTitle: ${json(content.heroTitle)},\n  heroEyebrow: ${json(content.eyebrow)}`);
-    replace("src/routes/index.tsx", '<p className="eyebrow">Welcome</p>',
-      '<p className="eyebrow">{site.heroEyebrow}</p>');
-    replace("src/routes/index.tsx", '{info.tagline}', '{site.heroTitle}');
-    const radius = { soft: "24px", sharp: "4px", minimal: "12px" }[layout.cardTreatment];
-    const tracking = { minimal: "-.045em", editorial: "-.06em", bold: "-.07em", luxury: "-.035em", playful: "-.025em", technical: "-.04em" }[design.style];
-    css += `\n:root { color: ${palette.text}; background: ${palette.surface}; }\n` +
-      `.site-header, .site-footer { border-color: ${palette.border}; }\n` +
-      `.eyebrow { color: ${palette.muted}; }\n` +
-      `.button-link { background: ${palette.accent}; color: ${palette.accentContrast}; border-radius: ${radius}; }\n` +
-      `h1 { letter-spacing: ${tracking}; }\n` +
-      (layout.hero === "centered" ? ".page-shell { text-align: center; }\n" :
-        layout.hero === "editorial" ? ".page-shell { width: min(940px, calc(100% - 36px)); }\n" : "");
-  }
-  files.set(cssPath, css);
+  set("src/routes/__root.tsx", root
+    .replace("createRootRoute, HeadContent, Scripts", "createRootRoute, HeadContent, Scripts, Link")
+    .replace('<a href="/">Back to home</a>', '<Link to="/">Return to application</Link>'));
+  // Only neutral scaffold styles; actual application layout is an agent implementation decision.
+  set("src/styles.css", [
+    `:root { font-family: ui-sans-serif, system-ui, sans-serif; color: ${design?.palette.text ?? "#172033"}; background: ${design?.palette.surface ?? "#f8fafc"}; }`,
+    '* { box-sizing: border-box; }',
+    'body { margin: 0; }',
+    'a { color: inherit; }',
+    '.skip-link { position: absolute; left: -999px; top: 0; padding: 12px; background: white; color: black; }',
+    '.skip-link:focus { left: 12px; z-index: 100; }',
+    '.page-shell { width: min(800px, calc(100% - 32px)); margin: 32px auto; }',
+    '.page-shell p { line-height: 1.6; }',
+    ...(design ? [
+      `.page-shell a { color: ${design.palette.accent}; }`,
+      `.page-shell h1 { letter-spacing: ${{ minimal: "-.045em", editorial: "-.06em", bold: "-.07em", luxury: "-.035em", playful: "-.025em", technical: "-.04em" }[design.style]}; }`,
+      ...(design.layout.hero === "centered" ? ['.page-shell { text-align: center; }'] :
+        design.layout.hero === "editorial" ? ['.page-shell { width: min(940px, calc(100% - 36px)); }'] : []),
+    ] : []),
+    '',
+  ].join("\n"));
   return { ...template, files: Array.from(files, ([path, content]) => ({ path, content })) };
 }
 

@@ -50,7 +50,7 @@ describe("build materializer", () => {
     expect(project.workspace.expanded).toContain("src/routes");
   });
 
-  it("scaffolds distinct planned routes with safe literal labels and shared layout", () => {
+  it("scaffolds distinct planned routes with safe literal labels and no mandatory website chrome", () => {
     const pages = ["Home", "ABOUT", "Menu", "Menu!", "index", "../../foo", "<script>alert(1)</script>", "菜单"];
     const project = materializeRegisteredBuildProject({ specification: { ...specification(), pages }, createdAt: 1 });
     const files = new Map(project.workspace.nodes.filter(node => node.kind === "file").map(node => [node.id, node.content ?? ""]));
@@ -58,10 +58,28 @@ describe("build materializer", () => {
       expect(files.get(`src/routes/${path}.tsx`)).toContain(`createFileRoute("/${path}")`);
     }
     expect(files.get("src/routes/script-alert-1-script.tsx")).toContain('title={"<script>alert(1)</script>"}');
-    expect(files.get("src/data/site.ts")).toContain('"to": "/menu-2"');
+    expect(files.get("src/data/site.ts")).toContain('"to":"/menu-2"');
     expect(files.get("src/components/PlannedPage.tsx")).toContain("still need implementation");
     expect(files.get("src/routes/api.health.ts")).toContain('createFileRoute("/api/health")');
     expect([...files.keys()].some(path => path.includes(".."))).toBe(false);
+  });
+
+  it.each([
+    ["Chess game", ["Play"]],
+    ["Calculator", ["Calculator"]],
+    ["Drawing tool", []],
+    ["Dashboard", ["Overview", "Reports"]],
+  ] as const)("creates application-neutral screens: %s", (name, pages) => {
+    const result = materializeRegisteredBuildProject({ specification: { ...specification(), name, pages }, createdAt: 1 });
+    const files = new Map(result.workspace.nodes.filter(node => node.kind === "file").map(node => [node.id, node.content ?? ""]));
+    expect(files.has("src/routes/about.tsx")).toBe(false);
+    expect(files.has("src/components/SiteHeader.tsx")).toBe(false);
+    expect(files.has("src/components/SiteFooter.tsx")).toBe(false);
+    expect(files.get("src/layouts/SiteLayout.tsx")).toContain("<Outlet />");
+    expect(files.get("src/routes/index.tsx")).toContain(pages.length ? `title={${JSON.stringify(pages[0])}}` : "title={site.name}");
+    expect(files.get("src/routes/index.tsx")).not.toContain('to="/about"');
+    expect(files.get("src/styles.css")).not.toContain(".site-header");
+    expect(files.has("src/routes/reports.tsx")).toBe(pages.length === 2);
   });
 
   it("is deterministic and requires a generated dependency lock", () => {

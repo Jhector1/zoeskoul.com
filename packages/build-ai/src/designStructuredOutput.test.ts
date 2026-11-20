@@ -68,6 +68,12 @@ describe(
       },
     );
 
+    it("plans screens without imposing a website structure", () => {
+      expect(BUILD_AI_PROJECT_SPECIFICATION_SYSTEM_PROMPT).toContain("Put the desired entry screen first");
+      expect(BUILD_AI_PROJECT_SPECIFICATION_SYSTEM_PROMPT).toContain("never invent mandatory Home, About");
+      expect(BUILD_AI_PROJECT_SPECIFICATION_SYSTEM_PROMPT).toContain("A single screen or an empty list is valid");
+    });
+
     it("uses registered storefront runtime and distinguishes scaffolds from real operations", () => {
       expect(BUILD_AI_PROJECT_SPECIFICATION_SYSTEM_PROMPT).toContain(BUILD_STOREFRONT_RUNTIMES.join(", "));
       expect(BUILD_AI_PROJECT_SPECIFICATION_SYSTEM_PROMPT).not.toContain('storefrontRuntime "static"');
