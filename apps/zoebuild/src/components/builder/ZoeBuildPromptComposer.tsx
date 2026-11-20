@@ -15,6 +15,7 @@ import {
 import Tooltip from "@zoeskoul/learner-workspace/ui/Tooltip";
 import {usePathname} from "next/navigation";
 import {isAiCreditShortage} from "@/lib/billing/creditShortage";
+import {takeInitialBuildPrompt} from "@/lib/build/starterProjectSpecifications";
 
 export const ZOEBUILD_COMPOSER_MAX_MEDIA_FILES = 4;
 
@@ -45,6 +46,7 @@ export function ZoeBuildPromptComposer(props: {
     draft: ShopifyImportDraft,
   ) => void;
   placeholder?: string;
+  initialPromptProjectId?: string;
 }) {
   const [value, setValue] = useState("");
   const [files, setFiles] = useState<File[]>([]);
@@ -53,6 +55,16 @@ export function ZoeBuildPromptComposer(props: {
   const submitInFlightRef = useRef(false);
   // Do not erase a newer draft if the user edits while the prior request resolves.
   const draftRevisionRef = useRef(0);
+  useEffect(() => {
+    if (!props.initialPromptProjectId || draftRevisionRef.current !== 0) return;
+    try {
+      const draft = takeInitialBuildPrompt(window.sessionStorage, props.initialPromptProjectId);
+      if (draft !== null) {
+        draftRevisionRef.current += 1;
+        setValue(draft);
+      }
+    } catch { /* A blocked browser store never triggers an AI request. */ }
+  }, [props.initialPromptProjectId]);
   const [outOfCredits,setOutOfCredits]=useState(false);
   const pathname=usePathname();
   const segment=pathname?.split("/")[1];

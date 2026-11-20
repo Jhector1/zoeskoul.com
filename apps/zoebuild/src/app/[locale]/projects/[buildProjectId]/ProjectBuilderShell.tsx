@@ -1319,7 +1319,7 @@ export default function ProjectBuilderShell(props: {
               ) : null}
               {pendingFileEdit.edits.map((edit) => (
                 <details key={edit.path}>
-                  <summary>{edit.create ? "New page: " : "Edit: "}{edit.path}</summary>
+                  <summary>{edit.create ? "New file: " : "Edit: "}{edit.path}</summary>
                   <p>{edit.create ? "New file (did not exist)" : "Before"}</p>
                   <pre style={{whiteSpace:"pre-wrap",wordBreak:"break-word",maxHeight:180,overflow:"auto"}}>{edit.beforePreview}</pre>
                   <p>After</p>
@@ -1383,6 +1383,7 @@ export default function ProjectBuilderShell(props: {
 
         <div className="zb-project-assistant-composer">
           <ZoeBuildPromptComposer
+                    initialPromptProjectId={props.project.buildProjectId}
                     onPrompt={planChange}
                     onShopifyImport={
                       importShopify

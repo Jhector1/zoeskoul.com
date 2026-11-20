@@ -12,7 +12,7 @@ export function createStarterProjectSpecification(name: string): Record<string, 
     projectType: "fullstack-app",
     targets: ["web"],
     requirements: {
-      backend: true,
+      backend: false,
       database: false,
       auth: false,
       storage: false,
@@ -20,8 +20,46 @@ export function createStarterProjectSpecification(name: string): Record<string, 
       email: false,
       commerce: false,
     },
-    pages: ["Home"],
+    pages: [],
     stackId: "tanstack-start-v1",
     deployment: { preference: "managed-runtime" },
   };
+}
+
+// One-time, tab-local handoff of an optional, user-written initial prompt.
+// Not billing state, authorization, project metadata, or a provider request.
+export const INITIAL_BUILD_PROMPT_MAX_CHARS = 8_000;
+const INITIAL_PROMPT_TTL_MS = 10 * 60 * 1000;
+type InitialPromptStorage = Pick<Storage, "getItem" | "setItem" | "removeItem">;
+function initialPromptKey(projectId: string) {
+  return `zoebuild:initial-prompt:v1:${encodeURIComponent(projectId)}`;
+}
+
+export function storeInitialBuildPrompt(storage: InitialPromptStorage, projectId: string,
+  prompt: string, now = Date.now()): boolean {
+  const value = prompt.trim();
+  if (!projectId || !value || value.length > INITIAL_BUILD_PROMPT_MAX_CHARS) return false;
+  try {
+    storage.setItem(initialPromptKey(projectId), JSON.stringify({value, expiresAt: now + INITIAL_PROMPT_TTL_MS}));
+    return true;
+  } catch { return false; }
+}
+
+export function takeInitialBuildPrompt(storage: InitialPromptStorage, projectId: string,
+  now = Date.now()): string | null {
+  if (!projectId) return null;
+  try {
+    const key = initialPromptKey(projectId);
+    const raw = storage.getItem(key);
+    if (raw === null) return null;
+    // Consume before returning it. No automatic generation, even on refresh.
+    storage.removeItem(key);
+    const draft: unknown = JSON.parse(raw);
+    if (!draft || typeof draft !== "object" || Array.isArray(draft)) return null;
+    const {value, expiresAt} = draft as Record<string, unknown>;
+    if (typeof value !== "string" || !value.trim() || value.length > INITIAL_BUILD_PROMPT_MAX_CHARS ||
+        typeof expiresAt !== "number" || !Number.isSafeInteger(expiresAt) ||
+        expiresAt <= now || expiresAt > now + INITIAL_PROMPT_TTL_MS) return null;
+    return value;
+  } catch { return null; }
 }

@@ -8,6 +8,8 @@ import {
   it,
 } from "vitest";
 
+import {createStarterProjectSpecification, storeInitialBuildPrompt, takeInitialBuildPrompt, INITIAL_BUILD_PROMPT_MAX_CHARS} from "../../lib/build/starterProjectSpecifications";
+
 const client =
   readFileSync(
     new URL(
@@ -122,3 +124,53 @@ describe(
     );
   },
 );
+
+function memoryStorage() {
+  const entries = new Map<string,string>();
+  return {getItem: (key:string) => entries.get(key) ?? null,
+    setItem: (key:string,value:string) => {entries.set(key,value);},
+    removeItem: (key:string) => {entries.delete(key);}};
+}
+describe("Open-ended initial prompt handoff", () => {
+  it("uses a neutral runtime bootstrap without declared application screens or managed features", () => {
+    const spec = createStarterProjectSpecification("  My game  ");
+    expect(spec.name).toBe("My game");
+    expect(spec.pages).toEqual([]);
+    expect(Object.values(spec.requirements as Record<string,boolean>).every(v => v === false)).toBe(true);
+    expect(spec.stackId).toBe("tanstack-start-v1");
+  });
+  it("preserves arbitrary user ideas verbatim apart from outer whitespace and consumes only the named project", () => {
+    const store = memoryStorage();
+    const idea = "Créer un jeu de boutique, sans paiement.\nUse a canvas.";
+    expect(storeInitialBuildPrompt(store,"p1",idea,100)).toBe(true);
+    expect(takeInitialBuildPrompt(store,"p2",101)).toBeNull();
+    expect(takeInitialBuildPrompt(store,"p1",101)).toBe(idea);
+    expect(takeInitialBuildPrompt(store,"p1",102)).toBeNull();
+  });
+  it("rejects oversized, expired and corrupt drafts, and tolerates unavailable storage", () => {
+    const store = memoryStorage();
+    expect(storeInitialBuildPrompt(store,"p","x".repeat(INITIAL_BUILD_PROMPT_MAX_CHARS+1),100)).toBe(false);
+    expect(storeInitialBuildPrompt(store,"p","idea",100)).toBe(true);
+    expect(takeInitialBuildPrompt(store,"p",600100)).toBeNull();
+    expect(takeInitialBuildPrompt(store,"p",100)).toBeNull();
+    store.setItem("zoebuild:initial-prompt:v1:p","invalid json");
+    expect(takeInitialBuildPrompt(store,"p",100)).toBeNull();
+    expect(takeInitialBuildPrompt(store,"p",100)).toBeNull();
+    const denied = {getItem: () => {throw new Error("denied");}, setItem: () => {throw new Error("denied");}, removeItem: () => {throw new Error("denied");}};
+    expect(storeInitialBuildPrompt(denied,"p","idea",100)).toBe(false);
+    expect(takeInitialBuildPrompt(denied,"p",100)).toBeNull();
+  });
+  it("hands the draft to the existing composer, never an automatic AI provider request", () => {
+    const composer = readFileSync(new URL("./ZoeBuildPromptComposer.tsx",import.meta.url),"utf8");
+    const shell = readFileSync(new URL("../../app/[locale]/projects/[buildProjectId]/ProjectBuilderShell.tsx",import.meta.url),"utf8");
+    expect(client).toContain("storeInitialBuildPrompt(window.sessionStorage, projectId, idea)");
+    expect(client).toContain("createdProjectRef.current = projectId");
+    expect(client).not.toContain("/assistant/");
+    expect(composer).toContain("takeInitialBuildPrompt(window.sessionStorage, props.initialPromptProjectId)");
+    expect(composer).toContain("draftRevisionRef.current !== 0");
+    expect(shell).toContain("initialPromptProjectId={props.project.buildProjectId}");
+    expect(shell).toContain("onPrompt={planChange}");
+    expect(shell).toContain("/assistant/intent");
+    expect(shell).toContain("/assistant/edit");
+  });
+});
