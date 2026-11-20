@@ -47,14 +47,14 @@ pull_with_retry() {
 }
 
 echo "Pulling production images..."
-pull_with_retry docker compose pull web social-challenge-scheduler postgres redis
+./db17-guard.sh
+pull_with_retry docker compose pull web social-challenge-scheduler redis
 
-echo "Starting database and Redis..."
+echo "Verifying external PostgreSQL 17 and starting Redis..."
 docker compose up \
   -d \
   --wait \
   --wait-timeout 180 \
-  postgres \
   redis
 
 echo "Running database migrations..."
@@ -84,7 +84,6 @@ docker compose ps
 echo "Running smoke tests..."
 ./smoke-test.sh
 
-echo "Pruning unused images..."
-docker image prune -f >/dev/null || true
+echo "Image cleanup is managed separately; rollback images retained."
 
 echo "ZoeSkoul Web deployment completed successfully."

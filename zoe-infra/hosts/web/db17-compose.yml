@@ -1,0 +1,57 @@
+services:
+  postgres:
+    image: ${POSTGRES_IMAGE}
+    container_name: zoeskoul-postgres17
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD_FILE: /run/secrets/admin_password
+      POSTGRES_INITDB_ARGS: >-
+        --locale=C.UTF-8
+        --encoding=UTF8
+        --locale-provider=libc
+        --auth-local=peer
+        --auth-host=scram-sha-256
+        --data-checksums
+
+    secrets:
+      - admin_password
+
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+    networks:
+      - default
+      - database_private
+
+    shm_size: 128m
+
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -h 127.0.0.1 -U postgres -d postgres
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  database_private:
+    external: true
+    name: zoeskoul_db_private
+
+secrets:
+  admin_password:
+    file: ./admin-password
+
+volumes:
+  pgdata:
+    external: true
+    name: zoeskoul_pg17_data

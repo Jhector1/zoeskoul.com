@@ -1,77 +1,26 @@
 #!/usr/bin/env bash
-set -euo pipefail
-
+set -Eeuo pipefail
+umask 077
 cd "$(dirname "$0")"
-
-if [ ! -f .env ]; then
-  echo "Missing .env" >&2
-  exit 1
-fi
-
-# deploy.sh exports the exact image tag selected for the deployment.
-# Preserve that caller-owned value across loading .env so a stale IMAGE_TAG
-# stored in production configuration can never change the migration image.
-CALLER_IMAGE_TAG_SET="${IMAGE_TAG+x}"
-CALLER_IMAGE_TAG="${IMAGE_TAG-}"
-
-# Preserve an explicit caller migration-command override as well.
-CALLER_MIGRATE_COMMAND_SET="${MIGRATE_COMMAND+x}"
-CALLER_MIGRATE_COMMAND="${MIGRATE_COMMAND-}"
-
-set -a
-# shellcheck disable=SC1091
-. ./.env
-set +a
-
-if [ "$CALLER_IMAGE_TAG_SET" = "x" ]; then
-  export IMAGE_TAG="$CALLER_IMAGE_TAG"
-else
-  # Standalone migrations follow the normal mutable production tag.
-  # IMAGE_TAG values stored in .env are intentionally not authoritative.
-  export IMAGE_TAG="prod"
-fi
-
-if [ "$CALLER_MIGRATE_COMMAND_SET" = "x" ]; then
-  export MIGRATE_COMMAND="$CALLER_MIGRATE_COMMAND"
-fi
-
-: "${GHCR_OWNER:?required}"
-
-CMD="${MIGRATE_COMMAND:-pnpm --filter @zoeskoul/web exec prisma migrate deploy --schema ../../packages/db/prisma/schema.prisma}"
-EXPECTED_IMAGE="ghcr.io/${GHCR_OWNER}/zoeskoul-web:${IMAGE_TAG}"
-
-echo "Running production migration:"
-echo "  image=${EXPECTED_IMAGE}"
-echo "  command=${CMD}"
-
-echo
-echo "Verifying migration image..."
-docker image inspect "$EXPECTED_IMAGE" \
-  --format 'migration_image_id={{.Id}}'
-
-echo
-echo "Verifying migration bundle..."
-IMAGE_TAG="$IMAGE_TAG" docker compose run \
-  --rm \
-  --no-deps \
-  web \
-  sh -lc '
-    set -eu
-
-    DIR=/app/packages/db/prisma/migrations
-
-    test -d "$DIR"
-
-    COUNT="$(find "$DIR" -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d " ")"
-
-    echo "migration_container_image_ready=YES"
-    echo "migration_count=${COUNT}"
-  '
-
-echo
-echo "Applying migrations..."
-IMAGE_TAG="$IMAGE_TAG" docker compose run \
-  --rm \
-  --no-deps \
-  web \
-  sh -lc "$CMD"
+./db17-guard.sh
+TAG=${IMAGE_TAG:-prod}
+[[ "$TAG" =~ ^[A-Za-z0-9_.-]+$ ]]
+# Compose resolves the same image selection used by deploy.sh.
+IMAGE=$(IMAGE_TAG="$TAG" docker compose config --format json | python3 -c 'import json,sys; print(json.load(sys.stdin)["services"]["web"]["image"])')
+IMAGE=$(docker image inspect "$IMAGE" --format '{{.Id}}')
+SECRET="$HOME/.local/share/zoeskoul-db17-hotfix/db5a-stage/migration-url"
+test -s "$SECRET"
+python3 - "$SECRET" <<'PYSECRET'
+import sys,urllib.parse
+from pathlib import Path
+u=urllib.parse.urlsplit(Path(sys.argv[1]).read_text().strip())
+assert (u.scheme,u.hostname,u.port,u.path,u.username)==('postgresql','zoeskoul-postgres17',5432,'/zoeskoul','zoeskoul_migrate')
+PYSECRET
+# No app environment, no public or Internet-facing network, no migration password in Docker arguments.
+docker run --rm -i --pull never --no-healthcheck --network zoeskoul_db_private --entrypoint sh --cap-drop ALL --security-opt no-new-privileges "$IMAGE" -c '
+ set -eu
+ IFS= read -r DATABASE_URL
+ export DATABASE_URL
+ unset ADMIN_DATABASE_URL WEB_DATABASE_URL DIRECT_URL
+ exec pnpm --filter @zoeskoul/web exec prisma migrate deploy --schema ../../packages/db/prisma/schema.prisma
+' < "$SECRET"
