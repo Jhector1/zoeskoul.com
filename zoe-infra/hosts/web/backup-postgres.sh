@@ -1,25 +1,18 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -Eeuo pipefail
+umask 077
 cd "$(dirname "$0")"
-
-if [ ! -f .env ]; then
-  echo "Missing .env" >&2
-  exit 1
-fi
-set -a
-# shellcheck disable=SC1091
-. ./.env
-set +a
-
-BACKUP_DIR="${BACKUP_DIR:-/opt/zoeskoul-backups/postgres}"
-sudo mkdir -p "$BACKUP_DIR"
-sudo chown "$USER":"$USER" "$BACKUP_DIR"
-
-TS="$(date +%Y%m%d-%H%M%S)"
-OUT="$BACKUP_DIR/zoeskoul-postgres-$TS.sql.gz"
-
-docker compose exec -T postgres pg_dump -U "$POSTGRES_USER" "$POSTGRES_DB" | gzip > "$OUT"
-chmod 600 "$OUT"
-
-echo "Backup written: $OUT"
-find "$BACKUP_DIR" -type f -name 'zoeskoul-postgres-*.sql.gz' -mtime +"${BACKUP_RETENTION_DAYS:-14}" -delete
+./db17-guard.sh
+DIR="${BACKUP_DIR:-$HOME/.local/share/zoeskoul-db17-hotfix/backups}"
+mkdir -p -m 700 "$DIR"
+test ! -L "$DIR"
+test "$(stat -c %a "$DIR")" = 700
+OUT="$DIR/zoeskoul-$(date -u +%Y%m%dT%H%M%SZ)-$$.dump"
+trap 'rm -f -- "$OUT.partial"' EXIT
+docker exec -u postgres zoeskoul-postgres17 pg_dump -w -U postgres -Fc -d zoeskoul </dev/null > "$OUT.partial"
+test -s "$OUT.partial"
+docker exec -i zoeskoul-postgres17 pg_restore --list < "$OUT.partial" >/dev/null
+mv "$OUT.partial" "$OUT"
+(cd "$DIR"; sha256sum "$(basename "$OUT")" > "$(basename "$OUT").sha256")
+echo "BACKUP=$OUT"
+echo 'DB17_LOCAL_BACKUP_PASS (off-site replication and retention are separate)'
