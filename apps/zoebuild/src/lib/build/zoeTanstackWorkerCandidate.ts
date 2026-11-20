@@ -4,7 +4,7 @@ import { createHash } from "node:crypto";
 import { createRegisteredProductionBuildJob, BuildPreparationError } from "@zoeskoul/build-preparation";
 import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 import type { ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contracts";
-import { RunnerHttpError } from "@zoeskoul/platform-server/server/runnerClient";
+import { RunnerHttpError, type RunnerBuildDiagnostic } from "@zoeskoul/platform-server/server/runnerClient";
 import { rateLimit } from "@zoeskoul/platform-server/security/ratelimit";
 import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
 import { executeTrustedProductionBuildAtRunner } from "./buildExecutorValidation";
@@ -26,6 +26,7 @@ export type TanstackCandidateBuildVerification = Readonly<{
   artifactSha256: string | null;
   capacitySource: "local-hourly-limit" | "runner-busy" | "runner-unavailable" | null;
   browser: "not-run";
+  buildDiagnostic?: RunnerBuildDiagnostic;
 }>;
 
 /** Exactly the reviewed candidate (never a browser artifact, source digest, or mutable preview). */
@@ -111,13 +112,18 @@ export async function verifyTanstackWorkerEditCandidate(input: Readonly<{
       return response("not-run", "runner-response-mismatch", snapshotSha256);
     if (error instanceof RunnerHttpError) {
       const status = error.status;
-      if ([400, 422].includes(status)) return response("failed", "runner-build-rejected", snapshotSha256);
+      if ([400, 422].includes(status)) {
+        return {...response("failed", "runner-build-rejected", snapshotSha256),
+          ...(error.buildDiagnostic ? {buildDiagnostic:error.buildDiagnostic} : {})};
+      }
       if ([401, 403].includes(status)) return response("not-run", "runner-unauthorized", snapshotSha256);
       if ([404, 405].includes(status)) return response("not-run", "runner-not-found", snapshotSha256);
-      if ([408, 504].includes(status)) return response("not-run", "runner-timeout", snapshotSha256);
+      if ([408, 504].includes(status)) return {...response("not-run", "runner-timeout", snapshotSha256),
+        ...(error.buildDiagnostic ? {buildDiagnostic:error.buildDiagnostic} : {})};
       if (status === 429) return response("not-run", "capacity", snapshotSha256, null, "runner-busy");
       if (status === 503) return response("not-run", "capacity", snapshotSha256, null, "runner-unavailable");
-      if (status >= 500) return response("not-run", "runner-service-error", snapshotSha256);
+      if (status >= 500) return {...response("not-run", "runner-service-error", snapshotSha256),
+        ...(error.buildDiagnostic ? {buildDiagnostic:error.buildDiagnostic} : {})};
       return response("not-run", "unavailable", snapshotSha256);
     }
     if (error instanceof Error && ["AbortError", "TimeoutError"].includes(error.name))

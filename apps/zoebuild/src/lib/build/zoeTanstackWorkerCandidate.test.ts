@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { describe, expect, it, vi } from "vitest";
-import { RunnerHttpError } from "@zoeskoul/platform-server/server/runnerClient";
+import { RunnerHttpError, parseRunnerBuildDiagnostic } from "@zoeskoul/platform-server/server/runnerClient";
 import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 import { sha256 } from "./zoeTargetedSourceEdit";
 import { prepareTanstackWorkerEditCandidate, verifyTanstackWorkerEditCandidate } from "./zoeTanstackWorkerCandidate";
@@ -136,5 +136,24 @@ describe("P3B7E4B2C exact candidate Worker verification",()=>{
     expect(result.request.sourceVersion).toBe(7);
     expect(result.snapshotSha256).toMatch(/^[a-f0-9]{64}$/);
     expect("sourceVersionAfterSave" in result).toBe(false);
+  });
+});
+
+
+describe("compiler diagnostic boundary",()=>{
+  it("retains only bounded candidate locations and never raw compiler prose",async()=>{
+    const marker={code:"TS2322",path:"src/routes/index.tsx",line:2,column:3};
+    const buildDiagnostic=parseRunnerBuildDiagnostic({stage:"build",category:"nonzero-exit",exitCode:2,
+      oomKilled:false,timedOut:false,logProbe:"available",raw:"PRIVATE_SECRET",compilerDiagnostics:[
+      {...marker,message:"PRIVATE_SECRET"},{...marker,path:"/secret"},{...marker,line:0},{...marker,code:"PRIVATE_SECRET"},
+    ]},{operation:"production-build",files:[{path:marker.path}]});
+    expect(buildDiagnostic?.compilerDiagnostics).toEqual([marker]);
+    const deps=dependencies({error:new RunnerHttpError(422,"PRIVATE_SECRET","BUILD_COMPILATION_REJECTED",buildDiagnostic)});
+    const value=await verifyTanstackWorkerEditCandidate({...input(),dependencies:deps.injected});
+    expect(value).toMatchObject({state:"failed",artifactSha256:null,buildDiagnostic:{compilerDiagnostics:[marker]}});
+    expect(JSON.stringify(value)).not.toContain("PRIVATE_SECRET");
+  });
+  it("rejects malformed diagnostic envelopes",()=>{
+    expect(parseRunnerBuildDiagnostic({stage:"build",category:"SECRET"},{operation:"production-build",files:[]})).toBeUndefined();
   });
 });

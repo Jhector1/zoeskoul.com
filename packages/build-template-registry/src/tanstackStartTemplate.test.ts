@@ -77,4 +77,17 @@ describe("canonical TanStack Start generated app blueprint", () => {
     const all = [...files.values()].join("\n");
     expect(all).not.toMatch(/ZOEBUILD_DEPENDENCY_APPROVAL_SECRET|WEB_DATABASE_URL|ADMIN_DATABASE_URL/);
   });
+
+  it("types the trusted preview environment in the generated Vite config", () => {
+    const config = files.get("vite.config.ts") ?? "";
+    const manifest = JSON.parse(files.get("package.json") ?? "{}");
+    const tsconfig = JSON.parse(files.get("tsconfig.json") ?? "{}");
+    expect(config).toContain("declare const process:");
+    expect(config).toContain("ZOEBUILD_PREVIEW_BASE_PATH?: string");
+    expect(config).toContain("ZOEBUILD_PREVIEW_HMR_ENABLED?: string");
+    expect(config).toContain("process.env.ZOEBUILD_PREVIEW_BASE_PATH");
+    expect(config).toContain("process.env.ZOEBUILD_PREVIEW_HMR_ENABLED");
+    expect(manifest.devDependencies["@types/node"]).toBeUndefined();
+    expect(tsconfig.compilerOptions.types).toEqual(["vite/client"]);
+  });
 });

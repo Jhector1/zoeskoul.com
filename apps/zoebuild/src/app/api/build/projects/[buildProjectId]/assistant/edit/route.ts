@@ -623,7 +623,8 @@ export async function PATCH(req: Request, ctx: { params: Promise<{buildProjectId
             ? "The proposed TanStack Worker did not compile. No source was saved. Request a corrected proposal."
             : "Trusted Worker verification could not finish. No source was saved. Retry this same reviewed proposal without another AI request.",
           verification:{state:verification.state,reason:verification.reason,
-            verificationId:verification.verificationId,capacitySource:verification.capacitySource},
+            verificationId:verification.verificationId,capacitySource:verification.capacitySource,
+            ...(verification.buildDiagnostic ? {buildDiagnostic:verification.buildDiagnostic} : {})},
         },409);
       }
       if (outcome.kind === "not-found")
