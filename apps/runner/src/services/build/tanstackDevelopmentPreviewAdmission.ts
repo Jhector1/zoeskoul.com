@@ -41,7 +41,7 @@ export function assessTanstackDevelopmentPreviewUpdate(input: Readonly<{
       previous.sourceVersion !== lease.sourceVersion ||
       next.buildProjectId !== lease.buildProjectId ||
       !Number.isSafeInteger(next.sourceVersion) ||
-      next.sourceVersion !== lease.sourceVersion + 1)
+      next.sourceVersion <= lease.sourceVersion)
     throw new Error("Preview source is stale.");
 
   // Prevent a caller from substituting a fabricated previous snapshot, even

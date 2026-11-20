@@ -77,10 +77,10 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
         const current = input.controller.snapshot();
         let session: DevelopmentBrowserSession;
         if(retryVersion!==null) {
-          const exactRetry=retryVersion===version;
+          const eligibleRetry=version>=retryVersion;
           retryVersion=null;
-          phase=exactRetry?"retrying-update":"reconciling";
-          session=exactRetry ? await input.controller.update(version) : await input.controller.restart(version);
+          phase=eligibleRetry?"retrying-update":"reconciling";
+          session=eligibleRetry ? await input.controller.update(version) : await input.controller.restart(version);
         } else if(recovering) {
           phase="reconciling";
           session=await input.controller.restart(version);
@@ -89,7 +89,7 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
           session = await input.controller.start(version);
         } else if (version === current.sourceVersion) {
           session = current;
-        } else if (version === current.sourceVersion + 1) {
+        } else if (version > current.sourceVersion) {
           phase="updating";
           session = await input.controller.update(version);
         } else {phase="reconciling";session = await input.controller.restart(version);}
@@ -109,9 +109,9 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
         // mutation failure that may be replayed. Transport loss, post-write
         // failure and generic 5xx responses must use proof-based restart /
         // durable-grant reconciliation instead.
-        const retryable=attemptedVersion===version && error instanceof DevelopmentBrowserSessionError &&
+        const retryable=attemptedVersion!==null && version>=attemptedVersion && error instanceof DevelopmentBrowserSessionError &&
           error.code==="RETRYABLE_UPDATE";
-        retryVersion=retryable?version:null;
+        retryVersion=retryable?attemptedVersion:null;
         recovering=!retryable;
         phase=recovering?"reconciling":"retrying-update";
         input.onWaiting();

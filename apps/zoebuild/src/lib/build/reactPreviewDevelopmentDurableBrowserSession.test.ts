@@ -8,12 +8,12 @@ const json=(data:unknown,status=200)=>new Response(JSON.stringify(data),{
  status,headers:{"content-type":"application/json"}});
 afterEach(()=>vi.unstubAllEnvs());
 describe("Phase 4E3C4B2 browser durable grant renewal",()=>{
- it("retains exact iframe URL on consecutive saves and renewals",async()=>{
+ it("retains exact iframe URL on consecutive and skipped saves and renewals",async()=>{
   let now=1000;let saved=7;let renewals=0;
   const fetchClient=vi.fn(async(path:string,init:RequestInit)=>{
    if(path.endsWith("/development/start"))return json({ok:true,previewId,sourceVersion:7});
    if(path.endsWith("/development/read-access"))return json({ok:true,documentUrl:url,basePath:url,sourceVersion:7});
-   if(path.endsWith("/development/update")){saved++;return json({ok:true,action:"updated",sourceVersion:saved});}
+   if(path.endsWith("/development/update")){saved=JSON.parse(String(init.body)).sourceVersion;return json({ok:true,action:"updated",sourceVersion:saved});}
    if(path.endsWith("/development/renew-access")){
     const body=JSON.parse(String(init.body));expect(body).toEqual({sourceVersion:saved,grantToken:token});
     renewals++;return json({ok:true,sourceVersion:saved});
@@ -22,7 +22,7 @@ describe("Phase 4E3C4B2 browser durable grant renewal",()=>{
   });
   const session=createDevelopmentPreviewBrowserSession({buildProjectId:"project_1",fetchClient,now:()=>now});
   const initial=await session.start(7);
-  for(const version of [8,9,10]) {
+  for(const version of [8,11,12]) {
    now+=5000;expect((await session.update(version)).documentUrl).toBe(initial.documentUrl);
    expect(session.snapshot()?.sourceVersion).toBe(version);
   }

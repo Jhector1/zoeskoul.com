@@ -59,10 +59,16 @@ describe("Phase 4E3C2 private Docker HMR relay fence (no public route)",()=>{
     expect(f.sendText).toHaveBeenCalledOnce();
     relay.close();
   });
-  it("fails closed on skipped or regressed committed revisions",async()=>{
+  it("keeps the same socket across a committed revision gap and fences regression",async()=>{
     const f=fixture();
     const relay=await openOwnedTanstackDevelopmentHmrRelay({identity,onText:f.onText,onClose:f.onClose},f as never);
-    f.setVersion(9);
+    f.setPending(true);f.upstream('{"type":"update"}');
+    expect(f.onText).not.toHaveBeenCalled();
+    f.setVersion(12);f.setPending(false);
+    relay.sendText('{"type":"ping"}');
+    expect(f.onText).toHaveBeenCalledOnce();
+    expect(f.close).not.toHaveBeenCalled();
+    f.onText.mockClear();f.setVersion(11);
     expect(()=>relay.sendText("late")).toThrow(PrivateHmrRelayError);
     expect(f.close).toHaveBeenCalledOnce();
     expect(f.onText).not.toHaveBeenCalled();

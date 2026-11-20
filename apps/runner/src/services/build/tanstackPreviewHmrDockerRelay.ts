@@ -142,7 +142,7 @@ export async function openTanstackHmrWorkerInDocker(
   return result;
 }
 
-/** One authenticated lease may advance through consecutive, DB-attested
+/** One authenticated lease may advance through strictly increasing, DB-attested
  * revisions. During an update Vite may publish HMR messages before the
  * Runner commits the revision. Hold them in a small bounded queue and release
  * only after the update coordinator has committed the next revision.
@@ -184,7 +184,7 @@ export async function openOwnedTanstackDevelopmentHmrRelay(input: Readonly<{
         current.buildProjectId!==input.identity.buildProjectId ||
         current.containerId!==before.containerId || current.basePath!==before.basePath ||
         !Number.isSafeInteger(current.sourceVersion) ||
-        current.sourceVersion<lastVersion || current.sourceVersion>lastVersion+1) {
+        current.sourceVersion<lastVersion) {
       stop();
       throw new PrivateHmrRelayError();
     }
@@ -192,7 +192,7 @@ export async function openOwnedTanstackDevelopmentHmrRelay(input: Readonly<{
     // Assert the close/quarantine/read barrier (not just an owned map entry).
     try {deps.registry.assertDevelopmentReadOpen({...input.identity,sourceVersion:current.sourceVersion});}
     catch {stop();throw new PrivateHmrRelayError();}
-    // The source-authorized coordinator commits +1 after the post-write DB
+    // The source-authorized coordinator commits a newer revision after the post-write DB
     // check. A failed write quarantines the lease instead of reaching here.
     lastVersion=current.sourceVersion;
     return "open";

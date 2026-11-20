@@ -107,8 +107,10 @@ export function makeTanstackDevelopmentUpdateRoute(
         lease.ownerKey !== actorKey ||
         lease.buildProjectId !== next.buildProjectId)
       return res.status(404).json({ ok: false, code: "NOT_FOUND" });
+    // Full DB-authorized snapshots may skip saved revisions; the coordinator
+    // still compares against the exact locked lease and canonical prior bytes.
     if (!Number.isSafeInteger(next.sourceVersion) ||
-        next.sourceVersion !== lease.sourceVersion + 1)
+        next.sourceVersion <= lease.sourceVersion)
       return res.status(409).json({ ok: false, code: "STALE_REVISION" });
 
     try {

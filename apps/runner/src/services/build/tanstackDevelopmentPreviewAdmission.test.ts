@@ -61,9 +61,14 @@ describe("Runner development preview source admission (no mutations)", () => {
     expect(() => assess({ actorKey:"" })).toThrow("Forbidden.");
     expect(authorizeTanstackPreviewSource).not.toHaveBeenCalled();
   });
-  it("blocks stale, skipped, same-version and cross-project source", () => {
+  it("accepts a newer full snapshot but still checks its exact previous lease", () => {
+    const later=request(12,"latest");
+    expect(assess({next:later})).toMatchObject({action:"live_candidate",expectedSourceVersion:8,nextSourceVersion:12,changedPaths:["src/routes/index.tsx"]});
+    expect(authorizeTanstackPreviewSource).toHaveBeenCalledExactlyOnceWith(later);
+  });
+  it("blocks stale, same-version and cross-project source", () => {
     for (const change of [
-      {...next,sourceVersion:10}, {...next,sourceVersion:8},
+      {...next,sourceVersion:7}, {...next,sourceVersion:8}, {...next,sourceVersion:9.5},
       {...next,buildProjectId:"other"}, {...next,sourceVersion:0},
     ]) expect(() => assess({next:change})).toThrow("Preview source is stale.");
     expect(() => assess({previous:{...previous,sourceVersion:7}}))

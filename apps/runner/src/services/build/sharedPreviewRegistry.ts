@@ -218,7 +218,7 @@ export class SharedFullStackPreviewRegistry {
     const lease = this.assertDevelopmentUpdateOpen(id,
       input.expectedVersion, input.expectedFingerprint);
     if (!Number.isSafeInteger(input.nextVersion) ||
-        input.nextVersion !== input.expectedVersion + 1 ||
+        input.nextVersion <= input.expectedVersion ||
         !input.nextIdentity?.fingerprint || !input.nextIdentity.sourceFingerprint ||
         input.nextIdentity.runtimeImageId !== lease.identity.runtimeImageId ||
         input.nextIdentity.dependencyFingerprint !== lease.identity.dependencyFingerprint ||

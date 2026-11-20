@@ -25,7 +25,7 @@ function setup(overrides: Record<string, unknown> = {}) {
   }) => {
     await input.authorizeCurrentSavedSource(input.actorKey, input.next);
     await input.authorizeCurrentSavedSource(input.actorKey, input.next);
-    return {action:"updated" as const, sourceVersion:8,reason:"source edit", changedPaths:["src/main.tsx"]};
+    return {action:"updated" as const, sourceVersion:input.next.sourceVersion,reason:"source edit", changedPaths:["src/main.tsx"]};
   });
   const deps = {
     enabled: () => true,
@@ -93,6 +93,14 @@ describe("Phase 4C disabled-by-default development update HTTP boundary", () => 
     expect(h.saved).toHaveBeenNthCalledWith(1,actorKey,next);
     expect(h.saved).toHaveBeenNthCalledWith(2,actorKey,next);
     expect(h.signed).toHaveBeenCalledTimes(3);
+  });
+  it("forwards a newer snapshot across a revision gap with both authority checks",async()=>{
+    const later={...next,sourceVersion:12};
+    const h=setup({parse:()=>later});
+    expect(await h.call()).toEqual({code:200,payload:{ok:true,action:"updated",sourceVersion:12}});
+    expect(h.saved).toHaveBeenCalledTimes(2);
+    expect(h.saved).toHaveBeenNthCalledWith(1,actorKey,later);
+    expect(h.saved).toHaveBeenNthCalledWith(2,actorKey,later);
   });
   it("fails closed when signed dependency approval or saved-source authority rejects", async () => {
     const badApproval = setup({verifySignedLock: () => {throw new Error("unapproved");}});

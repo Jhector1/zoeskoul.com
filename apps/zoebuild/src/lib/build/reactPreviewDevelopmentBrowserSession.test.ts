@@ -78,12 +78,26 @@ describe("Phase 4E3A saved revision browser control plane", () => {
       vi.unstubAllEnvs();
     }
   });
-  it("refuses skipped revisions without forwarding an update to Runner", async () => {
+  it("refuses older revisions without forwarding an update to Runner", async () => {
     const {session,fetchClient} = driver();
     await session.start(7);
-    await expect(session.update(9)).rejects.toMatchObject({code:"RESTART_REQUIRED"});
+    await expect(session.update(6)).rejects.toMatchObject({code:"RESTART_REQUIRED"});
     expect(fetchClient).toHaveBeenCalledTimes(2);
     expect(session.snapshot()).toBe(null);
+  });
+  it("updates a newer full saved revision without replacing the lease",async()=>{
+    const fetchClient=vi.fn(async(path:string,init:RequestInit)=>{
+      const sourceVersion=JSON.parse(String(init.body)).sourceVersion;
+      if(path.endsWith("/development/start"))return json({ok:true,previewId,sourceVersion});
+      if(path.endsWith("/development/update"))return json({ok:true,action:"updated",sourceVersion});
+      return json({ok:true,sourceVersion,documentUrl:READ,basePath:READ});
+    });
+    const session=createDevelopmentPreviewBrowserSession({buildProjectId:project,fetchClient});
+    await session.start(7);
+    expect(await session.update(12)).toMatchObject({previewId,sourceVersion:12});
+    expect(fetchClient.mock.calls.filter(([p])=>p.endsWith("/development/start"))).toHaveLength(1);
+    const updates=fetchClient.mock.calls.filter(([p])=>p.endsWith("/development/update"));
+    expect(updates).toHaveLength(1);expect(JSON.parse(String(updates[0]![1].body))).toEqual({sourceVersion:12});
   });
   it("restarts a skipped revision through saved-source admission without browser source",async()=>{
     const secondPreview="preview_22222222-2222-4222-8222-222222222222";
@@ -157,7 +171,7 @@ describe("Phase 4E3A saved revision browser control plane", () => {
     await expect(session.update(8)).rejects.toMatchObject({code:"RETRYABLE_UPDATE"});
     expect(session.snapshot()).toBeNull();
     expect(session.renewalDue()).toBe(false);
-    await expect(session.update(8)).resolves.toMatchObject({previewId,sourceVersion:8});
+    await expect(session.update(12)).resolves.toMatchObject({previewId,sourceVersion:12});
     expect(updates).toBe(2);
     expect(fetchClient.mock.calls.filter(([path])=>path.endsWith("/development/start")))
       .toHaveLength(1);

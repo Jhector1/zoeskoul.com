@@ -3,8 +3,8 @@
  *
  * Sends ONLY a persisted sourceVersion to the authenticated ZoeBuild API.
  * A development lease is mutable and must never be treated like an immutable
- * preview. The Runner permits only exact N -> N+1 updates; gaps require an
- * independently authorized replacement lease, never a speculative update.
+ * preview. The Runner permits strictly newer complete saved snapshots; exact prior
+ * lease CAS and current DB authorization remain mandatory on every update.
  *
  * Browser URLs are scoped, short-lived, read-only, and intentionally never
  * include Docker/Vite capabilities. The caller must renew the grant before
@@ -220,13 +220,13 @@ export function createDevelopmentPreviewBrowserSession(input: Readonly<{
   async function update(sourceVersion: number): Promise<DevelopmentBrowserSession> {
     revision(sourceVersion);
     const stamp = begin();
-    const lease = current ?? (retry?.sourceVersion === sourceVersion ? retry.lease : null);
+    const lease = current ?? (retry && sourceVersion >= retry.sourceVersion ? retry.lease : null);
     retry=null;
     recovery=null;
     let awaitingWrite = false;
     try {
-      if (!lease || sourceVersion !== lease.sourceVersion + 1) {
-        current = null; // never continue a nonsequential or unknown lease
+      if (!lease || sourceVersion <= lease.sourceVersion) {
+        current = null; // never continue a regressed or unknown lease
         throw new DevelopmentBrowserSessionError("RESTART_REQUIRED", "A new saved preview lease is required.");
       }
       // The previous revision's token becomes stale as soon as DB CAS advances.
@@ -261,18 +261,18 @@ export function createDevelopmentPreviewBrowserSession(input: Readonly<{
     } catch (error) {
       // This bounded response is emitted only when the Runner proves that the
       // failure happened before the workspace write. Retain the exact lease so
-      // the editor may retry the idempotent N -> N+1 update. Every other
+      // the editor may retry the same or a newer authorized saved snapshot. Every other
       // failure remains uncertain or destructive and invalidates the session.
       current = null;
       if (closed || generation !== stamp) {
         retry = null;
         assertActive(stamp);
       }
-      if (awaitingWrite && lease && sourceVersion === lease.sourceVersion + 1 &&
+      if (awaitingWrite && lease && sourceVersion > lease.sourceVersion &&
           error instanceof DevelopmentBrowserSessionError && error.code === "RETRYABLE_UPDATE") {
         retry = {lease, sourceVersion};
       }
-      if (!closed && generation===stamp && lease && sourceVersion===lease.sourceVersion+1 &&
+      if (!closed && generation===stamp && lease && sourceVersion>lease.sourceVersion &&
           durableToken(lease) && uncertain(error)) recovery={lease,sourceVersion};
       throw error;
     } finally { end(); }

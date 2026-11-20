@@ -61,11 +61,11 @@ describe("Phase 4E3B saved-revision editor integration",()=>{
     f.lifecycle.dispose();
     expect(f.lifecycle.readyDocument()).toBeNull();
   });
-  it("recovers a skipped revision from authoritative startup",async()=>{
+  it("updates a skipped revision using the existing authoritative lease",async()=>{
     const f=make();f.lifecycle.savedRevision(7,true);await flush();
     f.lifecycle.savedRevision(9,true);await flush();
-    expect(f.controller.update).not.toHaveBeenCalled();
-    expect(f.controller.restart).toHaveBeenCalledWith(9);
+    expect(f.controller.update).toHaveBeenCalledExactlyOnceWith(9);
+    expect(f.controller.restart).not.toHaveBeenCalled();
     expect(f.onFailure).not.toHaveBeenCalled();
     f.lifecycle.dispose();
   });
@@ -137,8 +137,9 @@ describe("Phase 4E3B saved-revision editor integration",()=>{
     f.lifecycle.savedRevision(9,true);
     reject(new DevelopmentBrowserSessionError("RETRYABLE_UPDATE","not applied",503));
     for(let i=0;i<8;i++)await flush();
-    expect(f.controller.update).toHaveBeenCalledTimes(1);
-    expect(f.controller.restart).toHaveBeenCalledWith(9);
+    expect(f.controller.update).toHaveBeenCalledTimes(2);
+    expect(f.controller.update).toHaveBeenLastCalledWith(9);
+    expect(f.controller.restart).not.toHaveBeenCalled();
     expect(f.onDocument).toHaveBeenLastCalledWith(expect.objectContaining({sourceVersion:9}));
     f.lifecycle.dispose();
   });

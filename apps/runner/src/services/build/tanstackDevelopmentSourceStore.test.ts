@@ -90,16 +90,16 @@ describe("private canonical development source snapshots",()=>{
   it("advances only with the exact committed identity and rejects stale source",async()=>{
     const f=fixture();
     f.store.registerFromAdmittedStart(f.record);
-    const next=request(8);
+    const next=request(12);
     const nextIdentity=createTanstackPreviewIdentity(next,IMAGE);
     await f.registry.withDevelopmentUpdate(f.id,async()=>{
       f.registry.commitDevelopmentUpdate(f.id,{
         expectedVersion:7,expectedFingerprint:f.identity.fingerprint,
-        nextVersion:8,nextIdentity,
+        nextVersion:12,nextIdentity,
       });
       const committed=f.registry.get(f.id)!;
       expect(f.store.resolve(committed)).toBeNull();
-      expect(()=>f.store.advanceAfterCommittedLease(committed,request(9)))
+      expect(()=>f.store.advanceAfterCommittedLease(committed,request(11)))
         .toThrow("committed source identity mismatch");
       f.store.advanceAfterCommittedLease(committed,next);
       expect(f.store.resolve(committed)).toEqual(next);

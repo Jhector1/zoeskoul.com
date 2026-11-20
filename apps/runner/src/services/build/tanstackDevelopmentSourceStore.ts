@@ -94,7 +94,7 @@ export class TrustedTanstackDevelopmentSourceStore {
         record.ownerKey !== lease.ownerKey || record.buildProjectId !== lease.buildProjectId ||
         record.containerId !== lease.containerId ||
         !Number.isSafeInteger(record.source.sourceVersion) ||
-        record.source.sourceVersion + 1 !== lease.sourceVersion ||
+        record.source.sourceVersion >= lease.sourceVersion ||
         !sourceMatchesLease(next,lease))
       throw new Error("Development preview committed source identity mismatch.");
     this.records.set(lease.id, Object.freeze({...record,source:copySource(next)}));

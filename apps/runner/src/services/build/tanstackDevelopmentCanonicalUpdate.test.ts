@@ -84,6 +84,19 @@ describe("canonical development preview source CAS (not routed)",()=>{
     expect(f.sources.resolve(lease)).toEqual(next);
   });
 
+  it("reconciles a skipped full snapshot in the same container, then rejects an older save",async()=>{
+    const f=fixture();const next=request(12,"latest");
+    expect(await f.update(next)).toMatchObject({action:"updated",sourceVersion:12});
+    expect(f.authorizeCurrentSavedSource).toHaveBeenCalledTimes(2);
+    expect(applySuspendedTanstackDevelopmentSource).toHaveBeenCalledExactlyOnceWith({
+      containerId:CID,workspaceRoot:ROOT,workspaceDir:DIR,changedPaths:["src/routes/index.tsx"],next,
+    });
+    const lease=f.registry.get(f.previewId)!;
+    expect(lease.containerId).toBe(CID);expect(f.sources.resolve(lease)).toEqual(next);
+    await expect(f.update(request(10,"older"))).rejects.toThrow("Preview source is stale.");
+    expect(applySuspendedTanstackDevelopmentSource).toHaveBeenCalledTimes(1);
+    expect(f.close).not.toHaveBeenCalled();
+  });
   it("resolves the latest canonical source after queuing and supports successive revisions",async()=>{
     const f=fixture();const next=request(8,"second");const later=request(9,"third");
     const hold=gate();

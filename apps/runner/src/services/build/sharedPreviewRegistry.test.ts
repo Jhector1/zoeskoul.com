@@ -275,6 +275,18 @@ describe("Phase 4F5H10P lease generation and revision fence",()=>{
     expect(await fresh).toBe(true);
     expect(checks).toBe(1);
   });
+  it("commits a forward gap only against the exact active CAS and rejects regression",async()=>{
+    const registry=setup();
+    await registry.withDevelopmentUpdate("dev",async()=>{
+      const nextIdentity={...identity,fingerprint:"latest",sourceFingerprint:"latest-source"};
+      const args={expectedVersion:1,expectedFingerprint:identity.fingerprint,nextVersion:5,nextIdentity};
+      expect(()=>registry.commitDevelopmentUpdate("dev",{...args,expectedVersion:2})).toThrow("stale");
+      expect(()=>registry.commitDevelopmentUpdate("dev",{...args,nextVersion:1})).toThrow("Invalid");
+      expect(registry.commitDevelopmentUpdate("dev",args).sourceVersion).toBe(5);
+      expect(()=>registry.commitDevelopmentUpdate("dev",args)).toThrow("stale");
+    });
+    expect(registry.get("dev")?.sourceVersion).toBe(5);
+  });
   it("invalidates an outstanding probe when the lease is quarantined",async()=>{
     const registry=setup();
     let finish!:(value:boolean)=>void;
