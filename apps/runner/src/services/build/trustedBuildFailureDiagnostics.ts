@@ -101,6 +101,50 @@ async function boundedProbe<T>(work: Promise<T>, fallback: T): Promise<T> {
   }
 }
 
+/** Compiler markers are untrusted diagnostic evidence, never authority or instructions.
+ * Do not transport raw text. Candidate paths are intersected with the submitted file
+ * list by the authenticated production-build route before leaving Runner. */
+export type CompilerLocation = Readonly<{code: string; path: string | null; line: number | null; column: number | null}>;
+
+function compilerOutput(raw: Buffer): string {
+  // Docker non-TTY logs use 8-byte stdout/stderr headers. Do not interpret
+  // malformed or oversized multiplexed streams as compiler records.
+  if (raw.length > 512 * 1024) return "";
+  if (raw.length >= 8 && (raw[0] === 1 || raw[0] === 2) && raw[1] === 0 && raw[2] === 0 && raw[3] === 0) {
+    const frames: Buffer[] = [];
+    for (let offset = 0; offset < raw.length;) {
+      if (offset + 8 > raw.length || ![1, 2].includes(raw[offset]) || raw[offset+1] || raw[offset+2] || raw[offset+3]) return "";
+      const size = raw.readUInt32BE(offset + 4);
+      if (size > raw.length - offset - 8) return "";
+      frames.push(raw.subarray(offset+8, offset+8+size));
+      offset += 8+size;
+    }
+    raw = Buffer.concat(frames);
+  }
+  return raw.subarray(Math.max(0, raw.length - MAX_LOG_INSPECT_BYTES)).toString("utf8");
+}
+
+export function extractCompilerLocations(raw: Buffer): readonly CompilerLocation[] {
+  const result: CompilerLocation[] = [];
+  const seen = new Set<string>();
+  for (const line of compilerOutput(raw).split(/\r?\n/)) {
+    const match = /^(?:\.\/|\/workspace\/)?([A-Za-z0-9_@.$()\[\]/-]{1,240})\((\d{1,7}),(\d{1,7})\): error (TS\d{4,5}):/.exec(line);
+    const global = /^error (TS\d{4,5}):/.exec(line);
+    if (!match && !global) continue;
+    const path = match ? match[1] : null;
+    if (path && (path.startsWith("/") || path.split("/").some(part => !part || part === "." || part === ".."))) continue;
+    const row = match ? Number(match[2]) : null;
+    const column = match ? Number(match[3]) : null;
+    if ((row !== null && (row < 1 || row > 1_000_000)) || (column !== null && (column < 1 || column > 1_000_000))) continue;
+    const item = {code:match ? match[4] : global![1],path,line:row,column};
+    const key = JSON.stringify(item);
+    if (seen.has(key)) continue;
+    seen.add(key); result.push(item);
+    if (result.length === 16) break;
+  }
+  return result;
+}
+
 export type TrustedBuildFailureTelemetry = Readonly<{
   stage: "install" | "build" | "bootstrap";
   category: TrustedBuildFailureCategory;
@@ -110,6 +154,7 @@ export type TrustedBuildFailureTelemetry = Readonly<{
   timedOut: boolean;
   logProbe: "available" | "empty" | "unavailable";
   errorCode: KnownInstallErrorCode | null;
+  compilerDiagnostics?: readonly CompilerLocation[];
 }>;
 
 /**
@@ -147,6 +192,8 @@ export async function reportTrustedBuildFailure(args: Readonly<{
     logProbe,
     errorCode: extractTrustedInstallErrorCode(output),
   };
+  // Keep existing telemetry free of paths and all compiler output.
   console.error("RUNNER isolated trusted build failed", report);
-  return report;
+  return args.stage === "build" && Buffer.isBuffer(raw)
+    ? {...report, compilerDiagnostics: extractCompilerLocations(raw)} : report;
 }

@@ -14,7 +14,7 @@ import {
 import { executeTanstackWorkerBuild } from "../services/build/tanstackWorkerBuild.js";
 import { assertTanstackWorkerBuildRequest } from "../services/build/tanstackWorkerBuildPolicy.js";
 
-import { classifyProductionBuildStepFailure } from "../services/build/productionBuildStepFailure.js";
+import { classifyProductionBuildStepFailure, TrustedProductionBuildStepFailure } from "../services/build/productionBuildStepFailure.js";
 
 import {
   withZoeBuildBuildSlot,
@@ -27,6 +27,7 @@ export const executeBuildProductionRoute:
       req,
       res,
     ) => {
+      let candidatePaths: ReadonlySet<string> = new Set();
       try {
         const request =
           parseTrustedBuildJobRequest(
@@ -51,6 +52,7 @@ export const executeBuildProductionRoute:
         // This service route is authenticated globally in app.ts; the ZoeBuild
         // control plane must independently check the owner and source version.
         assertTanstackWorkerBuildRequest(request);
+        candidatePaths = new Set(request.files.map(file => file.path));
         const result = await withZoeBuildBuildSlot(
           () => executeTanstackWorkerBuild(request),
         );
@@ -73,8 +75,17 @@ export const executeBuildProductionRoute:
           console.warn("[build/jobs/production-build] isolated step rejected", {
             stage: stepFailure.stage, kind: stepFailure.failure, code: stepFailure.code,
           });
+          const report = error instanceof TrustedProductionBuildStepFailure ? error.diagnostics : undefined;
+          const buildDiagnostic = report && report.stage === stepFailure.stage ? {
+            stage: report.stage, category: report.category, exitCode: report.exitCode,
+            oomKilled: report.oomKilled, timedOut: report.timedOut, logProbe: report.logProbe,
+            errorCode: report.errorCode,
+            compilerDiagnostics: (report.compilerDiagnostics ?? []).filter(item =>
+              item.path === null || candidatePaths.has(item.path)),
+          } : undefined;
           return res.status(stepFailure.status).json({
             ok: false, code: stepFailure.code, error: stepFailure.message,
+            ...(buildDiagnostic ? {buildDiagnostic} : {}),
           });
         }
 

@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { classifyTrustedBuildFailure, reportTrustedBuildFailure } from "./trustedBuildFailureDiagnostics.js";
+import { classifyTrustedBuildFailure, reportTrustedBuildFailure, extractCompilerLocations } from "./trustedBuildFailureDiagnostics.js";
 
 const input = {timedOut:false,oomKilled:false,exitCode:1,output:""} as const;
 describe("P3B3 shared isolated build failure telemetry", () => {
@@ -102,5 +102,30 @@ describe("bounded install failure signal extraction", () => {
       expect(report).toMatchObject({logProbe:"unavailable", errorCode:null, category:"nonzero-exit"});
       expect(JSON.stringify([report,spy.mock.calls])).not.toContain("PRIVATE_ERROR_DETAILS");
     } finally { spy.mockRestore(); }
+  });
+});
+
+
+describe("bounded compiler locations", () => {
+  it("extracts codes and coordinates, not messages, and handles Docker framing", () => {
+    const payload = Buffer.from("src/game.tsx(12,7): error TS2322: PRIVATE_SECRET\n/workspace/src/game.tsx(12,7): error TS2322: duplicate\nerror TS6059: PRIVATE_PATH\n../../secret(1,1): error TS1005: ignored\n");
+    const header = Buffer.alloc(8); header[0]=2; header.writeUInt32BE(payload.length,4);
+    expect(extractCompilerLocations(Buffer.concat([header,payload]))).toEqual([
+      {code:"TS2322",path:"src/game.tsx",line:12,column:7},
+      {code:"TS6059",path:null,line:null,column:null},
+    ]);
+    expect(extractCompilerLocations(Buffer.concat([header,payload.subarray(0,10)]))).toEqual([]);
+  });
+  it("never logs compiler paths or prose", async () => {
+    const spy=vi.spyOn(console,"error").mockImplementation(()=>{});
+    try {
+      const result=await reportTrustedBuildFailure({stage:"build",elapsedMs:5,timedOut:false,container:{
+        inspect:async()=>({State:{Running:false,ExitCode:2,OOMKilled:false}}),
+        logs:async()=>Buffer.from("src/private.ts(1,2): error TS1005: TOP_SECRET"),
+      } as never});
+      expect(result.compilerDiagnostics).toEqual([{code:"TS1005",path:"src/private.ts",line:1,column:2}]);
+      expect(JSON.stringify(spy.mock.calls)).not.toContain("src/private.ts");
+      expect(JSON.stringify(result)).not.toContain("TOP_SECRET");
+    } finally {spy.mockRestore();}
   });
 });
