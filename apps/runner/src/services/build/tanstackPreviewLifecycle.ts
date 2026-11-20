@@ -148,32 +148,51 @@ export async function startIsolatedTanstackPreview(driver: TanstackPreviewDriver
     endFirstSsr?.(opts.signal?.aborted ? "cancelled" : "error");
     // Cleanup is mandatory even if readiness, installation, or cancellation fails.
     const earlier = error instanceof TanstackPreviewCleanupError ? error : null;
-    let containerFailed = false;
-    let workspaceFailed = false;
+    // An inner driver error may own a container that launch/prepare never
+    // returned. Never reclaim its workspace until that cleanup has succeeded.
+    let outstandingContainer = containerId;
+    let outstandingWorkspace = workspaceDir;
     const endCleanup = containerId || workspaceDir
       ? previewObservability.beginCleanup() : null;
-    if (containerId) await driver.destroy(containerId).catch(() => { containerFailed = true; });
-    if (workspaceDir) await driver.cleanup(workspaceDir).catch(() => { workspaceFailed = true; });
-    endCleanup?.(earlier || containerFailed || workspaceFailed ? "error" : "ok");
-    if (earlier || containerFailed || workspaceFailed) {
-      // Retry ONLY resources that have not been confirmed removed. A failed
-      // Docker teardown must never silently turn into a free capacity slot.
+    if (!earlier) {
+      if (outstandingContainer) {
+        try { await driver.destroy(outstandingContainer); outstandingContainer = null; }
+        catch { /* Keep both resources accounted until verified teardown. */ }
+      }
+      if (!outstandingContainer && outstandingWorkspace) {
+        try { await driver.cleanup(outstandingWorkspace); outstandingWorkspace = null; }
+        catch { /* Keep the exact workspace for retry. */ }
+      }
+    }
+    endCleanup?.(earlier || outstandingContainer || outstandingWorkspace ? "error" : "ok");
+    if (earlier || outstandingContainer || outstandingWorkspace) {
       const outstanding = {
-        containerId: containerFailed ? containerId : (earlier?.orphan.containerId ?? null),
-        workspaceDir: workspaceFailed ? workspaceDir : (earlier?.orphan.workspaceDir ?? null),
+        containerId: earlier?.orphan.containerId ?? outstandingContainer,
+        workspaceDir: earlier?.orphan.workspaceDir ?? outstandingWorkspace,
       };
-      // Recoveries that already succeeded must not be retried; a second
-      // workspace deletion might not be idempotent on every storage backend.
-      const pending: Array<() => Promise<void>> = [
-        ...(earlier ? [() => earlier.recover()] : []),
-        ...(containerFailed && containerId ? [containerId].map((id) => () => driver.destroy(id)) : []),
-        ...(workspaceFailed && workspaceDir ? [workspaceDir].map((dir) => () => driver.cleanup(dir)) : []),
-      ];
-      const recover = async () => {
-        const results = await Promise.allSettled(pending.map(task => task()));
-        for (let i = results.length - 1; i >= 0; i--)
-          if (results[i].status === "fulfilled") pending.splice(i, 1);
-        if (pending.length) throw new Error("TanStack preview orphan cleanup still incomplete.");
+      const pending: Array<() => Promise<void>> = [];
+      if (earlier) pending.push(() => earlier.recover());
+      if (outstandingContainer && outstandingContainer !== earlier?.orphan.containerId) {
+        const id = outstandingContainer;
+        pending.push(() => driver.destroy(id));
+      }
+      if (outstandingWorkspace && outstandingWorkspace !== earlier?.orphan.workspaceDir) {
+        const dir = outstandingWorkspace;
+        pending.push(() => driver.cleanup(dir));
+      }
+      // Never run a destroy and workspace deletion in parallel. Remove each
+      // step only after success; concurrent recovery callers join one flight.
+      let recoveryFlight: Promise<void> | null = null;
+      const recover = (): Promise<void> => {
+        if (recoveryFlight) return recoveryFlight;
+        recoveryFlight = (async () => {
+          while (pending.length) {
+            try { await pending[0](); }
+            catch { throw new Error("TanStack preview orphan cleanup still incomplete."); }
+            pending.shift();
+          }
+        })().finally(() => { recoveryFlight = null; });
+        return recoveryFlight;
       };
       throw new TanstackPreviewCleanupError(outstanding, recover, error);
     }
@@ -183,10 +202,7 @@ export async function startIsolatedTanstackPreview(driver: TanstackPreviewDriver
 
 export async function stopIsolatedTanstackPreview(driver: Pick<TanstackPreviewDriver,"destroy"|"cleanup">,
   handle: TanstackSandboxHandle): Promise<void> {
-  let failure: unknown;
-  try { await driver.destroy(handle.containerId); }
-  catch (error) { failure = error; }
-  try { await driver.cleanup(handle.workspaceDir); }
-  catch (error) { failure ??= error; }
-  if (failure) throw failure;
+  // Do not delete a workspace while Docker may still be using its mount.
+  await driver.destroy(handle.containerId);
+  await driver.cleanup(handle.workspaceDir);
 }

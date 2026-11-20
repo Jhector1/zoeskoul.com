@@ -73,10 +73,49 @@ describe("TanStack orphaned startup cleanup", () => {
     );
     expect(error).toBeInstanceOf(TanstackPreviewCleanupError);
     expect(error.orphan.containerId).toBe("docker123");
-    expect(error.orphan.workspaceDir).toBeNull();
+    expect(error.orphan.workspaceDir).toBe("/temp/project");
+    expect(steps).not.toContain("cleanup");
     await error.recover();
     expect(attempts).toBe(2);
     expect(steps).toContain("cleanup");
+  });
+
+  it("does not reclaim the workspace while a launch-owned orphan remains", async () => {
+    const steps: string[] = [];
+    let attempts = 0;
+    const inner = new TanstackPreviewCleanupError({containerId:"orphan",workspaceDir:null}, async () => {
+      steps.push("recover-container");
+      if (++attempts === 1) throw new Error("not removed");
+    }, new Error("launch failed"));
+    const driver = {...fakeDriver(steps), launch:async()=>{throw inner;}};
+    const error: TanstackPreviewCleanupError = await startIsolatedTanstackPreview(driver).catch(e=>e);
+    expect(error.orphan).toEqual({containerId:"orphan",workspaceDir:"/temp/project"});
+    expect(steps).toEqual(["prepare"]);
+    await expect(error.recover()).rejects.toThrow("incomplete");
+    expect(steps).not.toContain("cleanup");
+    const one=error.recover(); const two=error.recover();
+    expect(one).toBe(two);
+    await Promise.all([one,two]);
+    expect(steps).toEqual(["prepare","recover-container","recover-container","cleanup"]);
+    await error.recover();
+    expect(steps.filter(s=>s==="cleanup")).toHaveLength(1);
+  });
+
+  it("never reclaims a mounted workspace after a failed normal stop", async () => {
+    const steps:string[]=[];
+    const driver={...fakeDriver(steps),destroy:async()=>{steps.push("destroy");throw Error("still mounted");}};
+    await expect(stopIsolatedTanstackPreview(driver,{containerId:"orphan",workspaceDir:"/temp/project"})).rejects.toThrow("still mounted");
+    expect(steps).toEqual(["destroy"]);
+  });
+
+  it("does not retry a confirmed destroy when only workspace cleanup failed", async () => {
+    const steps:string[]=[];let attempts=0;
+    const driver={...fakeDriver(steps,"never"),cleanup:async()=>{steps.push("cleanup");if(++attempts===1)throw Error("busy");}};
+    const error:TanstackPreviewCleanupError=await startIsolatedTanstackPreview(driver,{timeoutMs:800}).catch(e=>e);
+    expect(error.orphan).toEqual({containerId:null,workspaceDir:"/temp/project"});
+    await error.recover();
+    expect(steps.filter(s=>s==="destroy")).toHaveLength(1);
+    expect(steps.filter(s=>s==="cleanup")).toHaveLength(2);
   });
 
   it("preserves cleanup recovery from a failure inside driver prepare", async () => {

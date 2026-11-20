@@ -5,6 +5,8 @@ import { makeTanstackDevelopmentStartRoute } from "./build.previews.developmentS
 import type { startAdmittedTanstackDevelopmentPreview } from
   "../services/build/tanstackPreviewSharedLifecycle.js";
 
+import { previewObservability } from "../services/build/previewObservability.js";
+
 type DevelopmentStartInput = Parameters<typeof startAdmittedTanstackDevelopmentPreview>[0];
 
 const actorKey = `u:${"a".repeat(64)}`;
@@ -91,6 +93,24 @@ describe("Phase 4D private development lease startup gate",()=>{
     expect(h.start).toHaveBeenCalledOnce();
     expect(h.authority).toHaveBeenCalledWith(actorKey,request);
     expect(h.start.mock.calls[0]?.[0]).toMatchObject({ownerKey:actorKey,request,identity});
+  });
+  it("records native startup stages including failure before driver admission", async () => {
+    const before=previewObservability.snapshot();
+    const h=setup({start:async(input:DevelopmentStartInput)=>{
+      expect(input.telemetry).toBeDefined();
+      const end=input.telemetry!.begin("workspace_create");end("ok");return preview;
+    }});
+    expect((await h.call()).status).toBe(200);
+    const failed=setup({assertSavedSource:async()=>{throw Error("missing");}});
+    expect((await failed.call()).status).toBe(503);
+    const after=previewObservability.snapshot();
+    expect(after.nativeStartup.started-before.nativeStartup.started).toBe(2);
+    expect(after.nativeStartup.succeeded-before.nativeStartup.succeeded).toBe(1);
+    expect(after.nativeStartup.failed-before.nativeStartup.failed).toBe(1);
+    expect(after.nativeStartup.active).toBe(before.nativeStartup.active);
+    expect(after.operations.started).toBe(before.operations.started);
+    expect(after.durations["native_start.stage.workspace_create"].count-(before.durations["native_start.stage.workspace_create"]?.count??0)).toBe(1);
+    expect(after.durations["native_start.stage.operation_total"].count-(before.durations["native_start.stage.operation_total"]?.count??0)).toBe(2);
   });
   it("fails closed when saved source is wrong or the authority is down",async()=>{
     const h=setup({assertSavedSource:async()=>{throw Error("missing");}});

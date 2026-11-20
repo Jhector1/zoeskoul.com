@@ -13,7 +13,7 @@ import { sharedFullStackPreviews } from "./sharedPreviewRegistry.js";
 import { sharedPreviewStartCoordinator, sharedPreviewProjectDrains } from "./sharedPreviewRuntimeState.js";
 import { reserveTanstackPreviewCapacity, reclaimTanstackPreviewCapacity, TANSTACK_PREVIEW_HARD_LIFETIME_MS } from "./tanstackPreviewCapacity.js";
 import { fetchTanstackHttpInsideSandbox } from "./tanstackPreviewDockerTransport.js";
-import type { PreviewOperationTelemetry } from "./previewObservability.js";
+import { previewObservability, type PreviewOperationTelemetry } from "./previewObservability.js";
 import type { TanstackPreviewIdentity } from "./tanstackPreviewIdentity.js";
 
 /** Internal authenticated route integration. The caller MUST verify
@@ -142,7 +142,11 @@ async function startAdmittedPreviewWithMode(
         // Source/runtime/dependency changes and revision gaps recover from the
         // newly re-attested saved request. Close the one owner/project lease
         // first so a one-slot runner can replace it without overcommit.
-        for (const prior of projectLeases) await closeAfterFreshAuthority(prior.id);
+        if (projectLeases.length) {
+          await previewObservability.measureStartupDetail("native_prior_lease_retire", async () => {
+            for (const prior of projectLeases) await closeAfterFreshAuthority(prior.id);
+          });
+        }
       } else {
         for (const prior of projectLeases) {
           if (prior.sourceVersion > request.sourceVersion) throw new Error("Preview source is stale.");

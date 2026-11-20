@@ -36,6 +36,14 @@ export type PreviewOperationTimingSnapshot = Readonly<{
   stages: Readonly<Record<PreviewOperationTimingStage, PreviewStageTiming>>;
 }>;
 
+const STARTUP_DETAIL_STAGES = [
+  "publication_queue", "source_inspect", "publication_lookup", "publication_sweep",
+  "dependency_copy", "detached_attestation", "staging_cleanup",
+  "transport_retire", "container_remove", "workspace_reclaim", "cleanup_journal",
+  "native_source_authority", "native_runtime_identity", "native_source_recheck", "native_prior_lease_retire",
+] as const;
+type StartupDetailStage = typeof STARTUP_DETAIL_STAGES[number];
+
 type FinalOutcome = "ok" | "error" | "cancelled";
 type Clock = () => number;
 type DurationSummary = { count: number; totalMs: number; maxMs: number };
@@ -55,6 +63,7 @@ function emptySummary(): DurationSummary {
 
 export class PreviewObservability {
   private readonly durations = new Map<string, DurationSummary>();
+  private readonly nativeStartup = { active: 0, started: 0, succeeded: 0, failed: 0, cancelled: 0 };
   private operationsActive = 0;
   private operationsStarted = 0;
   private operationsSucceeded = 0;
@@ -107,6 +116,28 @@ export class PreviewObservability {
     return new PreviewOperationTelemetry(this, input, this.now());
   }
 
+  // Native development start has a different HTTP lifecycle from the legacy
+  // operation registry. Keep its aggregate counts and stage series separate.
+  beginNativeStartup() {
+    this.nativeStartup.active += 1;
+    this.nativeStartup.started += 1;
+    const sink = {
+      now: () => this.now(),
+      recordStage: (stage: PreviewOperationTimingStage, durationMs: number) => {
+        this.observe(`native_start.stage.${stage}`, durationMs);
+      },
+      finishOperation: (outcome: FinalOutcome) => {
+        this.nativeStartup.active -= 1;
+        if (outcome === "ok") this.nativeStartup.succeeded += 1;
+        else if (outcome === "cancelled") this.nativeStartup.cancelled += 1;
+        else this.nativeStartup.failed += 1;
+      },
+    };
+    // The timing sink does not export a cold/reuse classification: actual
+    // stages (e.g. no workspace_create for reattachment) provide evidence.
+    return new PreviewOperationTelemetry(sink, {startKind:"cold",reuseCandidate:false}, this.now());
+  }
+
   finishOperation(outcome: FinalOutcome) {
     this.operationsActive = Math.max(0, this.operationsActive - 1);
     if (outcome === "ok") this.operationsSucceeded += 1;
@@ -124,6 +155,19 @@ export class PreviewObservability {
     if (!DEVELOPMENT_UPDATE_STAGES.includes(stage) ||
         !["ok", "error", "restart_required"].includes(outcome)) return;
     this.observe(`development_update.${stage}.${outcome}`, durationMs);
+  }
+
+  async measureStartupDetail<T>(stage: StartupDetailStage, work: () => Promise<T>): Promise<T> {
+    const startedAt = this.now();
+    let outcome: "ok" | "error" = "error";
+    try {
+      const value = await work();
+      outcome = "ok";
+      return value;
+    } finally {
+      if (STARTUP_DETAIL_STAGES.includes(stage))
+        this.observe(`startup_detail.${stage}.${outcome}`, this.now() - startedAt);
+    }
   }
 
   recordLeaseReuse() {
@@ -221,6 +265,7 @@ export class PreviewObservability {
 
   snapshot() {
     return {
+      nativeStartup: { ...this.nativeStartup },
       operations: {
         active: this.operationsActive,
         started: this.operationsStarted,
@@ -268,7 +313,7 @@ export class PreviewOperationTelemetry {
   private finalOutcome: FinalOutcome | null = null;
 
   constructor(
-    private readonly metrics: PreviewObservability,
+    private readonly metrics: Pick<PreviewObservability, "now" | "recordStage" | "finishOperation">,
     private readonly identity: Readonly<{startKind: PreviewStartKind; reuseCandidate: boolean}>,
     private readonly startedAt: number,
   ) {}

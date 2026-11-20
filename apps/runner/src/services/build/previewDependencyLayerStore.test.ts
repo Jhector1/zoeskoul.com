@@ -139,6 +139,37 @@ describe("K20D3F persistent verified dependency layers", () => {
     again!.release();
   });
 
+  it("preserves executable mode and relative symlink while detaching internal hardlinks", async () => {
+    const {first, store} = await fixture();
+    const source = path.join(first, "node_modules");
+    await fs.writeFile(path.join(source, "executable"), "#!/bin/sh\n", {mode:0o751});
+    // Creation modes are masked by the installer's restrictive umask (077).
+    await fs.chmod(path.join(source, "executable"), 0o751);
+    expect((await fs.stat(path.join(source, "executable"))).mode & 0o777).toBe(0o751);
+    await fs.link(path.join(source, "executable"), path.join(source, "another"));
+    await fs.symlink("executable", path.join(source, "link"));
+    const lease = await store.publish(key(), first);
+    expect(lease).not.toBeNull();
+    try {
+      const a = await fs.stat(path.join(lease!.nodeModulesDir, "executable"));
+      const b = await fs.stat(path.join(lease!.nodeModulesDir, "another"));
+      const original = await fs.stat(path.join(source, "executable"));
+      expect(a.mode & 0o777).toBe(0o751);
+      expect(b.mode & 0o777).toBe(0o751);
+      expect(original.mode & 0o777).toBe(0o751);
+      expect(a.nlink).toBe(1);
+      expect(b.nlink).toBe(1);
+      expect(a.ino).not.toBe(b.ino);
+      expect(a.ino).not.toBe(original.ino);
+      expect(await fs.readlink(path.join(lease!.nodeModulesDir, "link"))).toBe("executable");
+      await fs.writeFile(path.join(source, "another"), "changed");
+      expect(await fs.readFile(path.join(lease!.nodeModulesDir, "executable"), "utf8")).toBe("#!/bin/sh\n");
+    } finally { lease?.release(); }
+    const verified = await store.acquire(key());
+    expect(verified).not.toBeNull();
+    verified?.release();
+  });
+
   it("does not modify the rootless-installed source or require mkdir permission inside it", async () => {
     const { first, store } = await fixture();
     const original = path.join(first, "node_modules");

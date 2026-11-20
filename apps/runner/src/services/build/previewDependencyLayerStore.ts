@@ -1,5 +1,7 @@
 import { createHash, randomUUID } from "node:crypto";
 import { constants } from "node:fs";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 import fs from "node:fs/promises";
 import { Worker } from "node:worker_threads";
 import path from "node:path";
@@ -209,6 +211,38 @@ async function attestTree(root: string, options: Readonly<{
     });
   } catch { return { ok: false, reason: "read-failure" }; }
   finally { release(); }
+}
+
+// Only a fixed, image-owned GNU coreutils executable is eligible. On macOS
+// and other images retain the original Node copy. Never retry a failed copy
+// into a partially populated destination; publication will discard staging.
+const runCopyTool = promisify(execFile);
+const COPY_TOOL = "/bin/cp";
+const COPY_ENV = { PATH: "/usr/bin:/bin", LC_ALL: "C" };
+let nativeCopySupport: Promise<boolean> | undefined;
+function supportsNativeDetachedCopy(): Promise<boolean> {
+  if (process.platform !== "linux") return Promise.resolve(false);
+  return nativeCopySupport ??= runCopyTool(COPY_TOOL, ["--version"], {
+    env: COPY_ENV, timeout: 2_000, killSignal: "SIGKILL", maxBuffer: 4096,
+  }).then(({stdout}) => stdout.startsWith("cp (GNU coreutils)"), () => false);
+}
+
+async function cloneInstalledDependencyTree(source: string, cloned: string): Promise<void> {
+  if (await supportsNativeDetachedCopy()) {
+    // Caller has already checked the private, quiescent installed source and
+    // reserved prospective capacity. Destination is fresh private staging.
+    // Do not preserve hardlinks, dereference symlinks, or copy ownership/xattrs.
+    // The existing detached-tree full-byte attestation remains authoritative.
+    await runCopyTool(COPY_TOOL, ["-R", "-P", "--preserve=mode",
+      "--no-preserve=links,ownership,xattr", "--reflink=auto", "--", source, cloned], {
+      env: COPY_ENV, timeout: 120_000, killSignal: "SIGKILL", maxBuffer: 4096,
+    });
+    return;
+  }
+  await fs.cp(source, cloned, {
+    recursive: true, force: false, errorOnExist: true,
+    verbatimSymlinks: true, mode: constants.COPYFILE_FICLONE,
+  });
 }
 
 export class PreviewDependencyLayerStore {
@@ -481,7 +515,7 @@ export class PreviewDependencyLayerStore {
     const prior = this.publicationTail;
     let release!: () => void;
     this.publicationTail = new Promise<void>(resolve => { release = resolve; });
-    await prior;
+    await previewObservability.measureStartupDetail("publication_queue", () => prior);
     try {
       return await this.publishExclusive(key, workspaceDir);
     } finally {
@@ -511,9 +545,8 @@ export class PreviewDependencyLayerStore {
     // Safety and capacity validation BEFORE using additional storage. This
     // input is private and no longer modified by the trusted install container.
     // External hardlinks are allowed only here, before detachment.
-    const inspected = await attestTree(source, {
-      allowExternalHardlinks: true, metadataOnly: true,
-    });
+    const inspected = await previewObservability.measureStartupDetail("source_inspect", () =>
+      attestTree(source, { allowExternalHardlinks: true, metadataOnly: true }));
     if (!inspected.ok) return skip(`source-tree-${inspected.reason}`);
     for (const name of [".vite", ".vite-temp"]) {
       const entry = await fs.lstat(path.join(source, name)).catch(() => null);
@@ -521,7 +554,7 @@ export class PreviewDependencyLayerStore {
         return skip("vite-mount-target-conflict");
       }
     }
-    const existing = await this.acquire(key);
+    const existing = await previewObservability.measureStartupDetail("publication_lookup", () => this.acquire(key));
     if (existing) {
       this.publishSkipped += 1;
       previewObservability.recordDependencyLayerPublication(
@@ -529,7 +562,7 @@ export class PreviewDependencyLayerStore {
       );
       return existing;
     }
-    await this.sweep(key, inspected.tree.bytes).catch(() => undefined);
+    await previewObservability.measureStartupDetail("publication_sweep", () => this.sweep(key, inspected.tree.bytes)).catch(() => undefined);
     const published = (await Promise.all((await fs.readdir(this.root))
       .filter(name => KEY.test(name)).map(name => this.manifest(name)))).filter((m): m is Manifest => m !== null);
     if (published.length >= MAX_ENTRIES ||
@@ -552,11 +585,8 @@ export class PreviewDependencyLayerStore {
       const cloned = path.join(staged, "node_modules");
       // Explicitly detach pnpm's content-addressed hardlinks. Never mount a
       // writable hardlink outside this layer into another preview.
-      await fs.cp(source, cloned, {
-        recursive: true, force: false, errorOnExist: true,
-        verbatimSymlinks: true, mode: constants.COPYFILE_FICLONE,
-      });
-      // Node fs.cp preserves the source directory mode. A rootless install
+      await previewObservability.measureStartupDetail("dependency_copy", () => cloneInstalledDependencyTree(source, cloned));
+      // Copy preserves the source directory mode. A rootless install
       // may have a read-only (0555) node_modules root, so writing .vite
       // mount points into the DETACHED copy would fail with EACCES.
       // Make only our private copy owner-writable; never chmod the source.
@@ -570,7 +600,7 @@ export class PreviewDependencyLayerStore {
       }
       // This scan rejects any hardlink that survived the copy and symlinks
       // that now escape the copied tree. A digest covers *actual* bytes.
-      const tree = await attestTree(cloned);
+      const tree = await previewObservability.measureStartupDetail("detached_attestation", () => attestTree(cloned));
       if (!tree.ok) return skip(`detached-tree-${tree.reason}`);
       const manifest: Manifest = {
         schema: SCHEMA, key, createdAt: this.now(), ...tree.tree,
@@ -610,9 +640,13 @@ export class PreviewDependencyLayerStore {
       );
       return null;
     } finally {
-      this.activeStaging.delete(stagedName);
-      await fs.rm(staged, { force: true, recursive: true }).catch(() => undefined);
-      releaseCapacity();
+      try {
+        await previewObservability.measureStartupDetail("staging_cleanup", () =>
+          fs.rm(staged, { force: true, recursive: true })).catch(() => undefined);
+      } finally {
+        this.activeStaging.delete(stagedName);
+        releaseCapacity();
+      }
     }
   }
 

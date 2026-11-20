@@ -14,6 +14,8 @@ import { resolveTanstackPreviewIdentity } from
 import { startAdmittedTanstackDevelopmentPreview } from
   "../services/build/tanstackPreviewSharedLifecycle.js";
 
+import { previewObservability } from "../services/build/previewObservability.js";
+
 const ACTOR_KEY = /^u:[0-9a-f]{64}$/;
 const REQUEST_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 type FailureStage = "dependency_authorization" | "saved_source_authority" |
@@ -96,30 +98,33 @@ export function makeTanstackDevelopmentStartRoute(
     }
     if (requestId !== undefined && !REQUEST_ID.test(requestId))
       return res.status(400).json({ok:false,code:"INVALID_REQUEST"});
+    const telemetry = previewObservability.beginNativeStartup();
+    let outcome: "ok" | "error" = "error";
     let stage: FailureStage = "dependency_authorization";
     try {
       // Never allocate a Docker sandbox without current DB authority.
       assertZoebuildPreviewAdmissionOpen();
       deps.verifySignedLock(request);
       stage = "saved_source_authority";
-      await deps.assertSavedSource(actorKey, request);
+      await previewObservability.measureStartupDetail("native_source_authority", () => deps.assertSavedSource(actorKey, request));
       stage = "runtime_identity";
-      const identity = await deps.resolveIdentity(request);
+      const identity = await previewObservability.measureStartupDetail("native_runtime_identity", () => deps.resolveIdentity(request));
       // The lifecycle rechecks the DB before launch AND after readiness.
       stage = "lease_admission";
       assertZoebuildPreviewAdmissionOpen();
       const preview = await deps.start({
-        ownerKey:actorKey, request, identity,
+        ownerKey:actorKey, request, identity, telemetry,
         authorize:async (ownerKey, candidate) => {
           stage = "saved_source_recheck";
           deps.verifySignedLock(candidate);
-          await deps.assertSavedSource(ownerKey,candidate);
+          await previewObservability.measureStartupDetail("native_source_recheck", () => deps.assertSavedSource(ownerKey,candidate));
           stage = "lease_admission";
         },
         onPhase:(phase) => { stage = phase === "queued" ? "lease_admission" : phase; },
       });
       // This remains private to the service-to-service client. The legacy
       // browser capability routes explicitly exclude development leases.
+      outcome = "ok";
       return res.status(200).json({ok:true,preview});
     } catch (error) {
       if (error instanceof ZoebuildPreviewMaintenanceError)
@@ -132,6 +137,8 @@ export function makeTanstackDevelopmentStartRoute(
       });
       // No source bytes, dependency approvals or Docker internals in errors.
       return res.status(503).json({ok:false,code:"DEVELOPMENT_START_UNAVAILABLE"});
+    } finally {
+      telemetry.finish(outcome);
     }
   };
 }

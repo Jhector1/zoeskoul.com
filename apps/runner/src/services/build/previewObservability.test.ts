@@ -118,6 +118,33 @@ describe("ZoeBuild preview observability", () => {
     expect(JSON.stringify(snapshot)).not.toContain("owner-a");
   });
 
+  it("keeps native start counters and stage timings separate from immutable operations", () => {
+    let now=0; const metrics=new PreviewObservability(()=>now);
+    const native=metrics.beginNativeStartup();
+    const workspace=native.begin("workspace_create"); now=7; workspace("ok");
+    now=12; native.finish("ok"); native.finish("error");
+    const failed=metrics.beginNativeStartup();now=15;failed.finish("error");
+    const snapshot=metrics.snapshot();
+    expect(snapshot.nativeStartup).toEqual({active:0,started:2,succeeded:1,failed:1,cancelled:0});
+    expect(snapshot.operations.started).toBe(0);
+    expect(snapshot.durations["native_start.stage.workspace_create"]).toEqual({count:1,totalMs:7,maxMs:7});
+    expect(snapshot.durations["native_start.stage.operation_total"]).toEqual({count:2,totalMs:15,maxMs:12});
+    expect(snapshot.durations["stage.workspace_create"]).toBeUndefined();
+  });
+
+  it("measures fixed startup details without masking errors or including identity", async () => {
+    let now = 0;
+    const metrics = new PreviewObservability(() => now);
+    expect(await metrics.measureStartupDetail("dependency_copy", async () => {now = 7; return 42;})).toBe(42);
+    const failure = new Error("private path");
+    await expect(metrics.measureStartupDetail("workspace_reclaim", async () => {now = 10; throw failure;})).rejects.toBe(failure);
+    expect(metrics.snapshot().durations).toMatchObject({
+      "startup_detail.dependency_copy.ok": {count:1,totalMs:7,maxMs:7},
+      "startup_detail.workspace_reclaim.error": {count:1,totalMs:3,maxMs:3},
+    });
+    expect(JSON.stringify(metrics.snapshot())).not.toContain("private path");
+  });
+
   it("separates actual Docker exec creation from multiplexed transport requests",()=>{
     let now=0;const metrics=new PreviewObservability(()=>now);
     const endExec=metrics.beginDockerExec();now=2;endExec("ok");

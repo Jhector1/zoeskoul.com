@@ -155,19 +155,25 @@ export function makeTanstackPreviewDockerDriver(
     }
   }
   async function removeContainer(id: string) {
-    await retireTanstackHttpWorker(id);
-    try { await docker.getContainer(id).remove({ force: true }); }
-    catch (error) {
-      if (!(typeof error === "object" && error !== null &&
-          "statusCode" in error && error.statusCode === 404)) throw error;
-    }
-    await journal.write({ containerId: null });
-    await forgetIfEmpty();
+    await previewObservability.measureStartupDetail("transport_retire", () => retireTanstackHttpWorker(id));
+    await previewObservability.measureStartupDetail("container_remove", async () => {
+      try { await docker.getContainer(id).remove({ force: true }); }
+      catch (error) {
+        if (!(typeof error === "object" && error !== null &&
+            "statusCode" in error && error.statusCode === 404)) throw error;
+      }
+    });
+    await previewObservability.measureStartupDetail("cleanup_journal", async () => {
+      await journal.write({ containerId: null });
+      await forgetIfEmpty();
+    });
   }
   async function removeWorkspace(dir: string) {
-    await removeTanstackWorkspaceStrict(env.workspaceRoot, dir);
-    await journal.write({ workspaceDir: null });
-    await forgetIfEmpty();
+    await previewObservability.measureStartupDetail("workspace_reclaim", () => removeTanstackWorkspaceStrict(env.workspaceRoot, dir));
+    await previewObservability.measureStartupDetail("cleanup_journal", async () => {
+      await journal.write({ workspaceDir: null });
+      await forgetIfEmpty();
+    });
   }
   async function removePreviewContainer(id: string) {
     await removeContainer(id);
