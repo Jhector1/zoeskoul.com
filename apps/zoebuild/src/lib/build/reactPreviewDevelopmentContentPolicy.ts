@@ -23,7 +23,7 @@ export function publicDevelopmentPreviewBasePath(
  * Leave JavaScript/CSS intact except for exact inert-base substitution. */
 export function prepareDevelopmentPreviewBrowserResponse(input:Readonly<{
   status:number;headers:Readonly<Record<string,string>>;bodyBase64:string;
-}>, publicBase:string,method:"GET"|"HEAD",nativeIframeHmr=false):Response {
+}>, publicBase:string,method:"GET"|"HEAD",nativeIframeHmr=false,sourceVersion?:number):Response {
   const type=input.headers["content-type"]??"";
   if (!MIME.test(type) || !Number.isInteger(input.status) || input.status < 200 || input.status > 599 ||
       (input.status >= 300 && input.status < 400) ||
@@ -42,7 +42,7 @@ export function prepareDevelopmentPreviewBrowserResponse(input:Readonly<{
       .join(publicBase.replace(/\/$/, ""));
     const document=HTML.test(type) && nativeIframeHmr ? injectNativeIframeHmrBootstrap(changed,
       process.env.ZOEBUILD_DEVELOPMENT_APPLICATION_RPC_ENABLED === "true" &&
-      process.env.NEXT_PUBLIC_ZOEBUILD_DEVELOPMENT_APPLICATION_RPC_ENABLED === "true" ? publicBase : undefined) : changed;
+      process.env.NEXT_PUBLIC_ZOEBUILD_DEVELOPMENT_APPLICATION_RPC_ENABLED === "true" ? publicBase : undefined,sourceVersion) : changed;
     bytes=Buffer.from(document,"utf8");
     if(bytes.length>6*1024*1024)throw new Error("Preview content too large.");
   }

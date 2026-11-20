@@ -4,7 +4,7 @@ import { runInNewContext } from "node:vm";
 import { createDevelopmentHmrIframeBridge, registerDevelopmentHmrDocument } from "./reactPreviewDevelopmentHmrIframeBridge";
 import { createDevelopmentPreviewBrowserSession } from "./reactPreviewDevelopmentBrowserSession";
 import { createDevelopmentPreviewEditorLifecycle } from "./reactPreviewDevelopmentEditorLifecycle";
-import { ZOEBUILD_IFRAME_HMR_SCRIPT } from "./reactPreviewDevelopmentNativeIframeHmr";
+import { injectNativeIframeHmrBootstrap, ZOEBUILD_IFRAME_HMR_SCRIPT } from "./reactPreviewDevelopmentNativeIframeHmr";
 
 const doc="/api/build/projects/project_a/preview/preview_123e4567-e89b-42d3-a456-426614174000/development/content/dpg1."+"a".repeat(43)+"/";
 const connected=JSON.stringify({type:"connected"});
@@ -23,22 +23,24 @@ class FakePort {
     if(!this.closed && peer) this.tasks.push(()=>{if(!peer.closed)peer.onmessage?.({data});});
   }
 }
-function harness(run:(f:ReturnType<typeof setup>)=>void) {
+function harness(run:(f:ReturnType<typeof setup>)=>void,versioned=false) {
   const keys=["window","document","MessageChannel"] as const;
   const old=keys.map(key=>Object.getOwnPropertyDescriptor(globalThis,key));
-  const f=setup();
+  const f=setup(versioned);
   try {run(f);} finally {
     f.bridge.close();f.unregister();
     keys.forEach((key,i)=>{const value=old[i];if(value)Object.defineProperty(globalThis,key,value);else Reflect.deleteProperty(globalThis,key);});
   }
 }
-function setup() {
+function setup(versioned=false) {
   const tasks:(()=>void)[]=[];
   const flush=()=>{let n=0;while(tasks.length){assert.ok(++n<1000);tasks.shift()!();}};
   let parentListener:((event:WireEvent)=>void)|null=null;
   let childListener:((event:WireEvent)=>void)|null=null;
   let nonce=0, bound=0, ready=0, failures=0, reloads=0;
   let revisionReady=true;
+  let revision=9;
+  let childLoad:(()=>void)|undefined;
   let childPort:FakePort|null=null;
   const parent={postMessage(data:WireMessage){tasks.push(()=>parentListener?.({data,source:child,origin:"null"}));}};
   const child={postMessage(data:WireMessage,_origin:string,ports:FakePort[]){tasks.push(()=>childListener?.({data,source:parent,ports}));}};
@@ -49,10 +51,12 @@ function setup() {
   class FakeChannel {port1=new FakePort(tasks);port2=new FakePort(tasks);constructor(){this.port1.peer=this.port2;this.port2.peer=this.port1;childPort=this.port2;}}
   for(const [key,value] of Object.entries({window:parentWindow,document:parentDocument,MessageChannel:FakeChannel}))Object.defineProperty(globalThis,key,{value,writable:true,configurable:true});
   let unregister=registerDevelopmentHmrDocument(doc,documentPath,frame as unknown as HTMLIFrameElement);
-  const bridge=createDevelopmentHmrIframeBridge({documentUrl:doc,onBound:()=>bound++,onClientReady:()=>ready++,onDeliveryFailure:()=>failures++,canDeliverFrames:()=>revisionReady});
-  function newDocument(){
-    const win={parent,WebSocket:class Native extends EventTarget {},addEventListener(_type:string,fn:(event:WireEvent)=>void){childListener=fn;}};
-    runInNewContext(ZOEBUILD_IFRAME_HMR_SCRIPT,{window:win,EventTarget,Event,MessageEvent,DOMException,CloseEvent:class extends Event {},crypto:{getRandomValues(bytes:Uint8Array){bytes.fill(++nonce);return bytes;}},setTimeout(fn:()=>void){tasks.push(fn);return 1;},setInterval(){return 1;},clearInterval(){}});
+  const bridge=createDevelopmentHmrIframeBridge({documentUrl:doc,onBound:()=>bound++,onClientReady:()=>ready++,onDeliveryFailure:()=>failures++,canDeliverFrames:()=>revisionReady,...(versioned?{getReadySourceVersion:()=>revisionReady?revision:null}:{})});
+  function newDocument(sourceVersion=revision){
+    childLoad=undefined;
+    const win={parent,WebSocket:class Native extends EventTarget {},addEventListener(type:string,fn:(event:WireEvent)=>void){if(type==="load")childLoad=()=>fn({data:{kind:"load"}});else childListener=fn;}};
+    const script=versioned?injectNativeIframeHmrBootstrap("<head></head>",undefined,sourceVersion).split("<script>")[1]!.split("</script>")[0]!:ZOEBUILD_IFRAME_HMR_SCRIPT;
+    runInNewContext(script,{window:win,EventTarget,Event,MessageEvent,DOMException,CloseEvent:class extends Event {},crypto:{getRandomValues(bytes:Uint8Array){bytes.fill(++nonce);return bytes;}},setTimeout(fn:()=>void){tasks.push(fn);return 1;},setInterval(){return 1;},clearInterval(){}});
     return ()=>{
       const socket=Reflect.construct(win.WebSocket,["ws://example.test/","vite-hmr"]) as EventTarget & {readyState:number;close():void};
       const events:string[]=[];
@@ -62,7 +66,7 @@ function setup() {
       return {socket,events};
     };
   }
-  return {bridge,flush,newDocument,unregister:()=>unregister(),navigate:(path:string)=>{unregister();documentPath=path;unregister=registerDevelopmentHmrDocument(doc,path,frame as unknown as HTMLIFrameElement);},announce:(nonce:string)=>parent.postMessage({kind:"zoebuild-hmr-iframe-ready",nonce}),setRevisionReady:(value:boolean)=>{revisionReady=value;},sendFromIframe:(data:WireMessage)=>childPort?.postMessage(data),counts:()=>({bound,ready,failures,reloads})};
+  return {bridge,flush,newDocument,unregister:()=>unregister(),navigate:(path:string)=>{unregister();documentPath=path;unregister=registerDevelopmentHmrDocument(doc,path,frame as unknown as HTMLIFrameElement);},announce:(nonce:string)=>parent.postMessage({kind:"zoebuild-hmr-iframe-ready",nonce}),setRevisionReady:(value:boolean)=>{revisionReady=value;},setRevision:(value:number)=>{revision=value;},load:()=>childLoad?.(),sendFromIframe:(data:WireMessage)=>childPort?.postMessage(data),counts:()=>({bound,ready,failures,reloads})};
 }
 
 describe("Phase 4F5H10F virtual Vite socket handshake",()=>{
@@ -244,4 +248,59 @@ it("does not release an HMR event between the real source update and durable gra
     lifecycle.dispose();f.bridge.close();f.unregister();
     keys.forEach((key,i)=>{const value=old[i];if(value)Object.defineProperty(globalThis,key,value);else Reflect.deleteProperty(globalThis,key);});
   }
+});
+
+
+describe("H10W2D versioned initial document recovery",()=>{
+  it("holds edit frames during boot but allows the native connected handshake",()=>harness(f=>{
+    f.bridge.setConnected(true);f.bridge.push(connected);
+    const c=f.newDocument(9)();f.flush();
+    f.bridge.push(update);f.flush();
+    assert.deepEqual(c.events,["open","connected"]);
+    f.load();f.flush();
+    assert.deepEqual(c.events,["open","connected","update"]);
+    assert.equal(f.counts().reloads,0);
+  },true));
+  it("recovers a mixed boot only once the exact newer grant is ready",()=>harness(f=>{
+    f.bridge.setConnected(true);f.bridge.push(connected);
+    const c=f.newDocument(9)();f.flush();
+    f.setRevisionReady(false);f.setRevision(10);f.bridge.push(update);
+    f.load();f.flush();assert.equal(f.counts().reloads,0);
+    f.setRevisionReady(true);f.bridge.flushReady();f.flush();
+    assert.equal(f.counts().reloads,1);
+    assert.deepEqual(c.events,["open","connected"]);
+    const fresh=f.newDocument(10)();f.flush();f.load();f.flush();
+    f.bridge.push(update);f.flush();assert.deepEqual(fresh.events,["open","connected","update"]);
+    assert.equal(f.counts().reloads,1);
+  },true));
+  it("recovers when the old SSR document binds after a newer grant is ready",()=>harness(f=>{
+    f.setRevision(10);f.bridge.setConnected(true);f.bridge.push(connected);
+    f.navigate(doc+"about");f.newDocument(9)();f.flush();
+    assert.equal(f.counts().reloads,1);
+    const fresh=f.newDocument(10)();f.flush();f.load();f.flush();
+    assert.deepEqual(fresh.events,["open","connected"]);
+    assert.equal(f.counts().reloads,1);
+  },true));
+  it("preserves the same iframe and ordinary HMR for successive settled edits",()=>harness(f=>{
+    f.bridge.setConnected(true);f.bridge.push(connected);
+    const c=f.newDocument(9)();f.flush();f.load();f.flush();
+    for(const version of [10,11,12]){
+      f.setRevisionReady(false);f.setRevision(version);f.bridge.push(update);f.flush();
+      f.setRevisionReady(true);f.bridge.flushReady();f.flush();
+    }
+    assert.deepEqual(c.events,["open","connected","update","update","update"]);
+    assert.equal(f.counts().reloads,0);
+  },true));
+  it("retains a load signal that happens before the port is bound",()=>harness(f=>{
+    f.bridge.setConnected(true);f.bridge.push(connected);
+    const c=f.newDocument(9)();f.load();f.flush();
+    f.bridge.push(update);f.flush();assert.deepEqual(c.events,["open","connected","update"]);
+    assert.equal(f.counts().reloads,0);
+  },true));
+  it("does not reload for a temporary fence that returns to the same document revision",()=>harness(f=>{
+    f.bridge.setConnected(true);f.bridge.push(connected);const c=f.newDocument(9)();f.flush();
+    f.setRevisionReady(false);f.load();f.flush();
+    f.setRevisionReady(true);f.bridge.flushReady();f.flush();
+    assert.equal(f.counts().reloads,0);assert.deepEqual(c.events,["open","connected"]);
+  },true));
 });

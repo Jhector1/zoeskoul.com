@@ -272,11 +272,12 @@ export function useReactDevelopmentPreview(input: Readonly<{
     const bridge=createDevelopmentHmrIframeBridge({
       documentUrl:currentDocumentUrl,
       canDeliverFrames:()=>readyVersion()!==null,
+      getReadySourceVersion:readyVersion,
       ...(process.env.NEXT_PUBLIC_ZOEBUILD_DEVELOPMENT_APPLICATION_RPC_ENABLED === "true" ?
         {getApplicationRpcVersion:readyVersion} : {}),
       onBound:()=>{bound=true;diagnostic("bridge_bound");markMeaningfulRecovery();},
       onClientReady:()=>diagnostic("iframe_vite_client_ready"),
-      onResync:()=>{bound=false;meaningfulReported=false;diagnostic("iframe_transport_gap_resync");},
+      onResync:reason=>{bound=false;meaningfulReported=false;diagnostic(reason==="document_boot_revision"?"iframe_document_boot_revision_resync":"iframe_transport_gap_resync");},
       onDeliveryFailure:()=>requestDevelopmentRecovery("iframe_hmr_delivery_overflow"),
     });
     const bindTimeout=window.setTimeout(()=>{

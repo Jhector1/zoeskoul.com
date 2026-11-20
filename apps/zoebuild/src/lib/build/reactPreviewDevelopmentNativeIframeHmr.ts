@@ -22,6 +22,15 @@ export const ZOEBUILD_IFRAME_HMR_SCRIPT = String.raw`(function () {
   let channelGeneration = 0;
   const MAX = 65536;
   const rpcBase = null;
+  // Server-stamped revision of this HTML response, not an authorization claim.
+  const documentSourceVersion = null;
+  let documentLoaded = false;
+  function reportDocumentLoaded() {
+    documentLoaded=true;
+    if(channel && !retired)channel.postMessage({kind:"document-loaded"});
+  }
+  if(documentSourceVersion!==null)
+    window.addEventListener("load",reportDocumentLoaded,{once:true});
   const rpcPending = new Map();
   let rpcSequence = 0;
   const rpcLimit = 4;
@@ -193,7 +202,8 @@ export const ZOEBUILD_IFRAME_HMR_SCRIPT = String.raw`(function () {
       }
     };
     channel.start();
-    channel.postMessage({kind:"bound"});
+    channel.postMessage({kind:"bound",...(documentSourceVersion===null?{}:{sourceVersion:documentSourceVersion})});
+    if(documentLoaded)channel.postMessage({kind:"document-loaded"});
     if(rpcBase!==null)for(const [id,entry] of rpcPending)sendRpc(id,entry);
   });
   let attempts=0;
@@ -205,7 +215,7 @@ export const ZOEBUILD_IFRAME_HMR_SCRIPT = String.raw`(function () {
 })();`;
 
 /** Fail closed rather than inserting after Vite's client has already loaded. */
-export function injectNativeIframeHmrBootstrap(html: string, applicationBase?: string): string {
+export function injectNativeIframeHmrBootstrap(html: string, applicationBase?: string, sourceVersion?: number): string {
   if (typeof html !== "string" || html.length > 6*1024*1024 || html.includes("__zoebuildHmrInstalled"))
     throw new Error("Unsafe HMR document.");
   const head=/<head(?:\s[^<>]*)?>/i.exec(html);
@@ -213,7 +223,9 @@ export function injectNativeIframeHmrBootstrap(html: string, applicationBase?: s
   const offset=head.index+head[0].length;
   if(applicationBase!==undefined && !/^\/api\/build\/projects\/[A-Za-z0-9_-]{1,128}\/preview\/preview_[a-f0-9-]{36}\/development\/content\/dpg1\.[A-Za-z0-9_-]{43}\/$/i.test(applicationBase))
     throw new Error("Unsafe application RPC base.");
+  if(sourceVersion!==undefined && (!Number.isSafeInteger(sourceVersion)||sourceVersion<1))throw new Error("Invalid preview document revision.");
   const script=applicationBase===undefined?ZOEBUILD_IFRAME_HMR_SCRIPT:
     ZOEBUILD_IFRAME_HMR_SCRIPT.replace("const rpcBase = null;","const rpcBase = "+JSON.stringify(applicationBase)+";");
-  return html.slice(0,offset)+"<script>"+script+"</script>"+html.slice(offset);
+  const stamped=sourceVersion===undefined?script:script.replace("const documentSourceVersion = null;","const documentSourceVersion = "+sourceVersion+";");
+  return html.slice(0,offset)+"<script>"+stamped+"</script>"+html.slice(offset);
 }

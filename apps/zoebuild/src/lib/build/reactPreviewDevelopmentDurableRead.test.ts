@@ -109,3 +109,21 @@ describe("Phase 4F5H10P bounded durable resource revision retry",()=>{
   } finally {vi.useRealTimers();}
  });
 });
+
+
+describe("H10W2D authoritative HTML document revision",()=>{
+ it("stamps only the checked current revision into native iframe HTML",async()=>{
+  vi.stubEnv("ZOEBUILD_NATIVE_IFRAME_HMR_ENABLED","true");
+  vi.stubEnv("ZOEBUILD_DEVELOPMENT_PREVIEW_HMR_TICKET_ENABLED","true");
+  vi.mocked(proxyFetchTrustedReactDevelopmentPreviewAtRunner).mockResolvedValue({sourceVersion:8,response:{status:200,headers:{"content-type":"text/html"},bodyBase64:Buffer.from("<html><head></head><body>ok</body></html>").toString("base64")}});
+  const html=await (await readOwnedDevelopmentPreviewBrowserContent(args)).text();
+  expect(html).toContain("const documentSourceVersion = 8;");
+  expect(checkDurablePreviewGrant).toHaveBeenCalledTimes(2);
+ });
+ it("does not publish a document when ownership revision changes during SSR",async()=>{
+  vi.stubEnv("ZOEBUILD_NATIVE_IFRAME_HMR_ENABLED","true");
+  vi.stubEnv("ZOEBUILD_DEVELOPMENT_PREVIEW_HMR_TICKET_ENABLED","true");
+  vi.mocked(requireOwnedReactPreviewProject).mockResolvedValueOnce({sourceVersion:8} as never).mockResolvedValueOnce({sourceVersion:9} as never);
+  await expect(readOwnedDevelopmentPreviewBrowserContent(args)).rejects.toMatchObject({status:404});
+ });
+});

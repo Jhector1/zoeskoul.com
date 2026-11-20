@@ -57,7 +57,8 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
   onBound?:()=>void;
   onClientReady?:()=>void;
   onDeliveryFailure?:()=>void;
-  onResync?:()=>void;
+  onResync?:(reason:"transport_gap"|"document_boot_revision")=>void;
+  getReadySourceVersion?:()=>number|null;
   getApplicationRpcVersion?:()=>number|null;
   canDeliverFrames?:()=>boolean;
 }>) {
@@ -78,6 +79,19 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
   // A transport gap is not a reliable Vite event stream. Only the parent
   // may recover by loading the exact currently authorized document.
   let needsResync=false;
+  let bootRevision:number|null=null;
+  let bootLoadSeen=false;
+  let bootSettled=false;
+  let bootRevisionChanged=false;
+  // The load signal is a continuity hint, not proof of React hydration or
+  // authority. Only the trusted editor's exact ready lease controls recovery.
+  function checkDocumentBoot() {
+    if(!input.getReadySourceVersion || bootRevision===null || bootSettled)return;
+    const ready=input.getReadySourceVersion();
+    if(ready===null)return;
+    if(ready!==bootRevision){bootRevisionChanged=true;needsResync=true;}
+    else if(bootLoadSeen)bootSettled=true;
+  }
   let resyncTimer:ReturnType<typeof setTimeout>|null=null;
   const rpcInflight=new Set<AbortController>();
   let lastRpcId=0;
@@ -97,7 +111,8 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
     const mutation=keys==="base,body,id,kind,method,path"&&command.method==="POST";
     const operation=mutation&&applicationMutationPath(command.path)&&applicationMutationBody(command.body)
       ? {method:"POST",body:command.body} : null;
-    if(needsResync||!identity||!input.getApplicationRpcVersion||typeof version!=="number"||!Number.isSafeInteger(version)||version<1||
+    checkDocumentBoot();
+    if(needsResync||(bootRevision!==null&&!bootSettled&&version!==bootRevision)||!identity||!input.getApplicationRpcVersion||typeof version!=="number"||!Number.isSafeInteger(version)||version<1||
       (mutation?!operation:keys!=="base,id,kind,path")||command.base!==input.documentUrl||
       !applicationRpcPath(command.path)||rpcInflight.size>=4){reply({error:true});return;}
     const abort=new AbortController();rpcInflight.add(abort);
@@ -129,11 +144,13 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
     rpcInflight.clear();lastRpcId=0;
     clientReady=false;
     connectedDelivered=false;
+    bootRevision=null;bootLoadSeen=false;bootSettled=false;bootRevisionChanged=false;
   }
   function flush() {
     if (closed || !connected || !port || !connectedFrame ||
         uniqueDocument(input.documentUrl)!==boundDocument ||
         input.canDeliverFrames?.() === false) return;
+    checkDocumentBoot();
     if (needsResync) {
       const document=uniqueDocument(input.documentUrl);
       if (!document?.frame.contentWindow || document!==boundDocument) return;
@@ -142,10 +159,13 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
       // Vite reconnect, replay RPCs, or deliver buffered updates to stale JS.
       // Reload only this exact authorized iframe, not the editor or runtime.
       const target=document.url;
+      const reason=bootRevisionChanged?"document_boot_revision":"transport_gap";
       discard();
       buffered.length=0;
       needsResync=false;
-      input.onResync?.();
+      // Old, unconfirmed offers must not rebind after navigating the frame.
+      for(const nonce of [...candidates.keys()])retireCandidate(nonce);
+      input.onResync?.(reason);
       if(resyncTimer===null)resyncTimer=setTimeout(()=>{
         resyncTimer=null;close();input.onDeliveryFailure?.();
       },15_000);
@@ -158,6 +178,9 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
       port.postMessage({kind:"frame",text:connectedFrame});
       connectedDelivered=true;
     }
+    // The real connected handshake may proceed, but do not deliver edit
+    // frames into a document still loading its initial module graph.
+    if(input.getReadySourceVersion && !bootSettled)return;
     for (const text of buffered.splice(0)) port.postMessage({kind:"frame",text});
     if(resyncTimer!==null){clearTimeout(resyncTimer);resyncTimer=null;}
   }
@@ -186,6 +209,10 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
       if(closed)return;
       if(candidates.get(nonce)?.port===current) {
         if(message.data?.kind!=="bound")return;
+        const version=message.data.sourceVersion;
+        if(input.getReadySourceVersion && (!Number.isSafeInteger(version)||version<1)) {
+          retireCandidate(nonce);return;
+        }
         if(offer<=confirmedOffer || uniqueDocument(input.documentUrl)!==document || frame.contentWindow!==event.source) {
           retireCandidate(nonce);return;
         }
@@ -193,6 +220,7 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
         // An older handshake must not retire a newer confirmed document.
         discard();
         port=current;boundDocument=document;boundNonce=nonce;confirmedOffer=offer;
+        bootRevision=input.getReadySourceVersion?version:null;
         for(const [other,candidate] of candidates)if(candidate.offer<offer)retireCandidate(other);
         input.onBound?.();
         if(connected)current.postMessage({kind:"open",generation:connectionGeneration});
@@ -204,6 +232,9 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
         if (!clientReady) input.onClientReady?.();
         clientReady=true;
         connectedDelivered=false;
+        flush();
+      } else if(message.data?.kind==="document-loaded" && bootRevision!==null) {
+        bootLoadSeen=true;
         flush();
       } else if (message.data?.kind==="application-rpc" && input.getApplicationRpcVersion) {
         void relayApplicationRpc(current,message.data,document);

@@ -152,7 +152,7 @@ async function readDevelopmentPreviewOnce(input:BrowserReadInput):Promise<Respon
   const publicBase=publicDevelopmentPreviewBasePath(claims.buildProjectId,claims.previewId,input.token);
   return await prepareDevelopmentPreviewBrowserResponse(result.response,publicBase,input.method,
     durable && process.env.ZOEBUILD_NATIVE_IFRAME_HMR_ENABLED === "true" &&
-    process.env.ZOEBUILD_DEVELOPMENT_PREVIEW_HMR_TICKET_ENABLED === "true");
+    process.env.ZOEBUILD_DEVELOPMENT_PREVIEW_HMR_TICKET_ENABLED === "true",activeRevision);
   } catch(error) {
     if(process.env.NODE_ENV==="development") {
       const status=error instanceof ReactPreviewRequestError || error instanceof RunnerHttpError ? error.status : null;
