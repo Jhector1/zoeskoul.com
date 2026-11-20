@@ -40,3 +40,10 @@ describe("ZoeBuild persistent React preview host",()=>{
   expect(host).not.toContain("allow-same-origin");
  });
 });
+
+it("clears retained backdrop on disable, project change or terminal preview error",()=>{
+ const host=read("src/components/builder/PersistentReactPreviewHost.tsx");
+ expect(host).toContain('entry.preview?.state === "error"');
+ expect(host).toContain('lastReadyPreviewRef.current=null;');
+ expect(host).toContain('inert={!shown}');
+});

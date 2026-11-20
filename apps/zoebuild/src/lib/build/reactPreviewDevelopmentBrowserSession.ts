@@ -233,15 +233,24 @@ export function createDevelopmentPreviewBrowserSession(input: Readonly<{
       // Do not expose the old iframe URL after starting this mutation.
       current = null;
       awaitingWrite = true;
+      const grantToken=durableToken(lease);
       const data = await postRevision(input.fetchClient,
-        `${root}/${encodeURIComponent(lease.previewId)}/development/update`, sourceVersion);
+        `${root}/${encodeURIComponent(lease.previewId)}/development/update`, sourceVersion,
+        grantToken ? {grantToken} : {});
       awaitingWrite = false;
       assertActive(stamp);
       if (data.action !== "updated" || data.sourceVersion !== sourceVersion)
         throw new DevelopmentBrowserSessionError("UNAVAILABLE", "Invalid development update response.");
       // Durable DB grants are renewed in place, so the iframe URL never
       // changes and cannot accidentally become an expired static token.
-      if(durableToken(lease)) {
+      if(grantToken) {
+        if(data.grantRenewed===true) {
+          current={...lease,sourceVersion,grantIssuedAt:now()};
+          return current;
+        }
+        if(data.grantRenewed===false)
+          throw new DevelopmentBrowserSessionError("UNAVAILABLE", "Updated preview grant could not be confirmed.");
+        // Legacy server acknowledgment: still require independent renewal.
         const renewed=await renewDurable(lease,sourceVersion,stamp);
         assertActive(stamp);
         current=renewed;

@@ -8,7 +8,8 @@ export class DevelopmentPreviewBodyError extends Error {
   }
 }
 
-export async function readDevelopmentPreviewRevision(request: Request): Promise<number> {
+/** Shared bounded JSON reader for revision and grant control requests. */
+export async function readDevelopmentPreviewControlBody(request: Request): Promise<Record<string,unknown>> {
   const type = request.headers.get("content-type") ?? "";
   if (!/^application\/json(?:\s*;\s*charset=utf-8)?$/i.test(type.trim()))
     throw new DevelopmentPreviewBodyError(400);
@@ -39,14 +40,18 @@ export async function readDevelopmentPreviewRevision(request: Request): Promise<
     const parsed: unknown = JSON.parse(new TextDecoder("utf-8",{fatal:true}).decode(raw));
     if (!parsed || typeof parsed !== "object" || Array.isArray(parsed))
       throw new DevelopmentPreviewBodyError(400);
-    const body = parsed as Record<string,unknown>;
+    return parsed as Record<string,unknown>;
+  } catch {
+    throw new DevelopmentPreviewBodyError(400);
+  }
+}
+
+export async function readDevelopmentPreviewRevision(request: Request): Promise<number> {
+    const body = await readDevelopmentPreviewControlBody(request);
     if (Object.keys(body).length !== 1 ||
         !Object.prototype.hasOwnProperty.call(body,"sourceVersion") ||
         !Number.isSafeInteger(body.sourceVersion) ||
         typeof body.sourceVersion !== "number" || body.sourceVersion < 1)
       throw new DevelopmentPreviewBodyError(400);
     return body.sourceVersion;
-  } catch {
-    throw new DevelopmentPreviewBodyError(400);
-  }
 }

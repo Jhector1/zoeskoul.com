@@ -113,3 +113,33 @@ describe("H10R1 exact durable revision reconciliation",()=>{
   expect(counts()).toEqual({starts:1,updates:1,renewals:0});
  });
 });
+
+describe("H10W2F7 combined browser acknowledgment",()=>{
+ for(const confirmed of [true,false])it(`handles combined grant=${confirmed} without replaying the update`,async()=>{
+  let writes=0,renewals=0;
+  const fetchClient=vi.fn(async(path:string,init:RequestInit)=>{
+   if(path.endsWith("/development/start"))return json({ok:true,previewId,sourceVersion:7});
+   if(path.endsWith("/development/read-access"))return json({ok:true,documentUrl:url,basePath:url,sourceVersion:7});
+   if(path.endsWith("/development/update")){
+    writes++;expect(JSON.parse(String(init.body))).toEqual({sourceVersion:8,grantToken:token});
+    return json({ok:true,action:"updated",sourceVersion:8,grantRenewed:confirmed});
+   }
+   if(path.endsWith("/development/renew-access")){renewals++;return json({ok:true,sourceVersion:8});}
+   throw Error("unexpected request");
+  });
+  const session=createDevelopmentPreviewBrowserSession({buildProjectId:"project_1",fetchClient});
+  await session.start(7);
+  if(confirmed){expect(await session.update(8)).toMatchObject({documentUrl:url,sourceVersion:8});expect(renewals).toBe(0);}
+  else {await expect(session.update(8)).rejects.toMatchObject({code:"UNAVAILABLE"});expect(session.snapshot()).toBeNull();
+   expect(await session.restart(8)).toMatchObject({documentUrl:url,sourceVersion:8});expect(renewals).toBe(1);}
+  expect(writes).toBe(1);
+ });
+ it("rejects a combined acknowledgment for the wrong source revision",async()=>{
+  const fetchClient=vi.fn(async(path:string)=>path.endsWith("/development/start")?json({ok:true,previewId,sourceVersion:7}):
+   path.endsWith("/development/read-access")?json({ok:true,documentUrl:url,basePath:url,sourceVersion:7}):
+   json({ok:true,action:"updated",sourceVersion:9,grantRenewed:true}));
+  const session=createDevelopmentPreviewBrowserSession({buildProjectId:"project_1",fetchClient});
+  await session.start(7);await expect(session.update(8)).rejects.toMatchObject({code:"UNAVAILABLE"});
+  expect(session.snapshot()).toBeNull();
+ });
+});

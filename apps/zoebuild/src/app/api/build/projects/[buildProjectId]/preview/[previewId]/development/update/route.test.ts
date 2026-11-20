@@ -4,6 +4,8 @@ import { loadCurrentBuildAccessSnapshot } from "@/lib/build/currentBuildAccess";
 import { updateOwnedReactDevelopmentPreviewFromSavedSource } from
   "@/lib/build/reactPreviewDevelopmentUpdate";
 import { POST } from "./route";
+import {renewOwnedDevelopmentPreviewGrant} from "@/lib/build/reactPreviewDevelopmentDurableGrantServer";
+vi.mock("@/lib/build/reactPreviewDevelopmentDurableGrantServer",()=>({renewOwnedDevelopmentPreviewGrant:vi.fn()}));
 
 vi.mock("@zoeskoul/platform-server/http",()=>({enforceSameOriginPost:vi.fn()}));
 vi.mock("@/lib/build/currentBuildAccess",()=>({loadCurrentBuildAccessSnapshot:vi.fn()}));
@@ -12,6 +14,7 @@ vi.mock("@zoeskoul/platform-server/server/runnerClient",()=>({RunnerHttpError:cl
   constructor(public status=503,message="runner",public code?:string){super(message);}
 }}));
 vi.mock("@/lib/build/reactPreviewServer",()=>({
+  parseReactPreviewId:vi.fn(v=>v),
   ReactPreviewRequestError:class ReactPreviewRequestError extends Error {
     constructor(public code:string,message:string,public status:number){super(message);}
   },
@@ -68,5 +71,43 @@ describe("Phase 4E1 saved-source revision-only browser update route",()=>{
     expect(result.status).toBe(503);
     expect(await result.json()).toMatchObject({ok:false,code:"BUILD_PREVIEW_UPDATE_RETRYABLE",
       message:"Development preview update was not applied."});
+  });
+});
+
+describe("H10W2F7 combined update and grant",()=>{
+  const grantToken="dpg1."+"a".repeat(43);
+  it("renews only after exact acknowledged update using authoritative access",async()=>{
+    const result=await POST(req({sourceVersion:10,grantToken}),ctx);
+    expect(await result.json()).toMatchObject({ok:true,action:"updated",sourceVersion:10,grantRenewed:true});
+    expect(loadCurrentBuildAccessSnapshot).toHaveBeenCalledWith(expect.any(Request),{requireAuthority:true});
+    expect(renewOwnedDevelopmentPreviewGrant).toHaveBeenCalledWith({access,buildProjectId:"project-1",previewId:id,sourceVersion:10,token:grantToken});
+    expect(vi.mocked(updateOwnedReactDevelopmentPreviewFromSavedSource).mock.invocationCallOrder[0]!).toBeLessThan(vi.mocked(renewOwnedDevelopmentPreviewGrant).mock.invocationCallOrder[0]!);
+  });
+  it("does not classify post-write renewal failure as a replayable update",async()=>{
+    vi.mocked(renewOwnedDevelopmentPreviewGrant).mockRejectedValueOnce(new Error("private token detail"));
+    const result=await POST(req({sourceVersion:10,grantToken}),ctx);
+    expect(result.status).toBe(200);
+    const body=await result.json();
+    expect(body).toMatchObject({ok:true,action:"updated",sourceVersion:10,grantRenewed:false});
+    expect(JSON.stringify(body)).not.toContain("private token detail");
+    expect(JSON.stringify(body)).not.toContain(grantToken);
+  });
+  it("fences renewal when the authenticated session changes after mutation",async()=>{
+    vi.mocked(loadCurrentBuildAccessSnapshot).mockResolvedValueOnce(access as never)
+      .mockResolvedValueOnce({userId:"other-owner"} as never);
+    const result=await POST(req({sourceVersion:10,grantToken}),ctx);
+    expect(await result.json()).toMatchObject({ok:true,grantRenewed:false});
+    expect(renewOwnedDevelopmentPreviewGrant).not.toHaveBeenCalled();
+  });
+  it("does not renew on pre-write refusal, malformed input or denied access",async()=>{
+    vi.mocked(loadCurrentBuildAccessSnapshot).mockResolvedValueOnce({userId:null} as never);
+    expect((await POST(req({sourceVersion:10,grantToken}),ctx)).status).toBe(401);
+    expect((await POST(req({sourceVersion:10,grantToken,files:[]}),ctx)).status).toBe(400);
+    expect(updateOwnedReactDevelopmentPreviewFromSavedSource).not.toHaveBeenCalled();
+    const {RunnerHttpError}=await import("@zoeskoul/platform-server/server/runnerClient");
+    vi.mocked(updateOwnedReactDevelopmentPreviewFromSavedSource).mockRejectedValueOnce(new RunnerHttpError(503,"private","UPDATE_PRE_WRITE_AUTHORITY_FAILED"));
+    const result=await POST(req({sourceVersion:10,grantToken}),ctx);
+    expect(await result.json()).toMatchObject({ok:false,code:"BUILD_PREVIEW_UPDATE_RETRYABLE"});
+    expect(renewOwnedDevelopmentPreviewGrant).not.toHaveBeenCalled();
   });
 });

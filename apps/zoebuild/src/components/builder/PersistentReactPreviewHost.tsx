@@ -133,7 +133,13 @@ export function PersistentReactPreviewProvider(props:Readonly<{children:ReactNod
 
   const api=useMemo<PreviewHostApi>(()=>({attachTarget,updatePreview,setActive}),
     [attachTarget,updatePreview,setActive]);
-  useEffect(()=>{
+  useLayoutEffect(()=>{
+    // A previously cached frame is never a fallback across an auth disable,
+    // project switch or terminal error. Retain it only for same-project preparation.
+    if (!enabled || !entry || entry.preview?.state === "error" ||
+        lastReadyPreviewRef.current?.projectId!==entry.buildProjectId) {
+      lastReadyPreviewRef.current=null;
+    }
     if (enabled && entry?.preview?.state === "ready" && entry.preview.src) {
       lastReadyPreviewRef.current = {projectId:entry.buildProjectId,preview:entry.preview};
     }
@@ -152,6 +158,7 @@ export function PersistentReactPreviewProvider(props:Readonly<{children:ReactNod
       data-preview-project={entry.buildProjectId}
       data-preview-slot={entry.activeSlotId??""}
       aria-hidden={!shown}
+      inert={!shown}
       style={{position:"fixed",top:rect?.top??0,left:rect?.left??0,
         width:rect?.width??0,height:rect?.height??0,zIndex:20,
         visibility:shown?"visible":"hidden",pointerEvents:shown?"auto":"none",
