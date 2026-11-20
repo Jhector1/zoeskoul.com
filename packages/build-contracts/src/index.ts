@@ -1167,3 +1167,6 @@ export function parseBuildDesignSpecification(
     content,
   };
 }
+
+// AI4A: provider-neutral, owner-scoped generated media domain.
+export * from "./mediaGeneration";
