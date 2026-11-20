@@ -14,7 +14,7 @@ import {
   shouldActivateTanstackPreviewHmr, assertTanstackSandboxOptions,
 } from "./tanstackPreviewRuntimePolicy.js";
 import { TanstackPreviewCleanupError, type TanstackPreviewDriver } from "./tanstackPreviewLifecycle.js";
-import { fetchTanstackHttpInsideSandbox, retireTanstackHttpWorker } from "./tanstackPreviewDockerTransport.js";
+import { fetchTanstackHttpInsideSandbox, probeTanstackListenerInsideSandbox, retireTanstackHttpWorker } from "./tanstackPreviewDockerTransport.js";
 import { previewObservability, type PreviewOperationTelemetry } from "./previewObservability.js";
 import type { TanstackPreviewIdentity } from "./tanstackPreviewIdentity.js";
 import {
@@ -321,6 +321,10 @@ export function makeTanstackPreviewDockerDriver(
         throw error;
       }
     },
+    ...(hmrOptions.mode === "development" ? {
+      probeListener: (containerId:string, timeoutMs:number) =>
+        probeTanstackListenerInsideSandbox(containerId, timeoutMs),
+    } : {}),
     async probe(containerId) {
       return fetchTanstackHttpInsideSandbox(containerId, {
         method: "GET", path: basePath, headers: { accept: "text/html" }, bodyBase64: "",

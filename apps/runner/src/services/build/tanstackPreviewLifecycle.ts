@@ -61,6 +61,9 @@ export class TanstackPreviewReadinessError extends Error {
 export type TanstackPreviewDriver = Readonly<{
   prepare(onPhase?: (phase: TanstackPreviewStartPhase) => void): Promise<string>;
   launch(workspaceDir: string): Promise<string>;
+  /** Native startup can separate TCP listener and full application readiness.
+   * Optional for legacy drivers and test doubles. */
+  probeListener?(containerId:string, timeoutMs:number):Promise<boolean>;
   probe(containerId: string): Promise<Readonly<{status: number; headers: Readonly<Record<string,string>>; bodyBase64: string}>>;
   /** Failure-path only: sanitized Docker state before cleanup removes the container. */
   diagnose?(containerId: string): Promise<TanstackStartupEvidence>;
@@ -91,7 +94,8 @@ export async function startIsolatedTanstackPreview(driver: TanstackPreviewDriver
     const startedAt = driver.now();
     opts.onPhase?.("readiness");
     endReadiness = opts.telemetry?.begin("vite_readiness") ?? null;
-    endFirstSsr = opts.telemetry?.begin("first_ssr") ?? null;
+    let listenerReady = !driver.probeListener;
+    if (listenerReady) endFirstSsr = opts.telemetry?.begin("first_ssr") ?? null;
     if (opts.signal?.aborted) throw new Error("Preview cancelled.");
     // Readiness deadline begins after launch, not during dependency install.
     let attempts = 0;
@@ -102,7 +106,33 @@ export async function startIsolatedTanstackPreview(driver: TanstackPreviewDriver
       if (opts.signal?.aborted) throw new Error("Preview cancelled.");
       attempts++;
       try {
+        if (!listenerReady && driver.probeListener) {
+          const budget = Math.max(1, Math.min(1000, Math.floor(timeoutMs - (driver.now() - startedAt))));
+          listenerReady = await driver.probeListener(containerId, budget);
+          if (!listenerReady) {
+            result = "transport_error";
+            transportStage = "loopback_connection";
+            lastHttpStatus = null;
+            if (opts.signal?.aborted) throw new Error("Preview cancelled.");
+            await driver.sleep(Math.min(100, Math.max(1, timeoutMs - (driver.now() - startedAt))));
+            continue;
+          }
+          if (opts.signal?.aborted) throw new Error("Preview cancelled.");
+          if (driver.now() - startedAt >= timeoutMs) {
+            result = "transport_error"; transportStage = "deadline"; lastHttpStatus = null;
+            break;
+          }
+          endReadiness?.("ok");
+          endReadiness = null;
+          endFirstSsr = opts.telemetry?.begin("first_ssr") ?? null;
+        }
+        if (opts.signal?.aborted || driver.now() - startedAt >= timeoutMs) break;
         const response = await driver.probe(containerId);
+        if (opts.signal?.aborted) throw new Error("Preview cancelled.");
+        if (driver.probeListener && driver.now() - startedAt >= timeoutMs) {
+          result = "transport_error"; transportStage = "deadline"; lastHttpStatus = null;
+          break;
+        }
         if (isTanstackSsrReady(response)) {
           endReadiness?.("ok");
           endFirstSsr?.("ok");
@@ -123,6 +153,7 @@ export async function startIsolatedTanstackPreview(driver: TanstackPreviewDriver
       await driver.sleep(Math.min(TANSTACK_PREVIEW_PROBE_INTERVAL_MS,
         Math.max(1, timeoutMs - (driver.now() - startedAt))));
     }
+    if (opts.signal?.aborted) throw new Error("Preview cancelled.");
     const diagnostic: TanstackReadinessDiagnostic = {
       result,
       attempts,

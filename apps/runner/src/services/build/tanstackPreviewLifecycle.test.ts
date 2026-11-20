@@ -55,6 +55,60 @@ describe("TanStack preview lifecycle without a second capacity registry",()=>{
 });
 
 
+describe("H10W2C separated native listener and SSR readiness", () => {
+  it("does not request application HTML until listening and measures sequential stages", async()=>{
+    const steps:string[]=[];
+    let clock=0;
+    let attempts=0;
+    const metrics=new PreviewObservability(()=>clock);
+    const telemetry=metrics.beginOperation({startKind:"cold",reuseCandidate:false});
+    const driver={...fakeDriver(steps), now:()=>clock,
+      sleep:async(ms:number)=>{clock+=ms;},
+      probeListener:async(_id:string, budget:number)=>{
+        expect(budget).toBeLessThanOrEqual(1000);
+        steps.push("listener");clock+=100;
+        return ++attempts===2;
+      },
+      probe:async()=>{steps.push("ssr");clock+=200;return good;},
+    };
+    await startIsolatedTanstackPreview(driver,{telemetry});
+    expect(steps).toEqual(["prepare","launch","listener","listener","ssr"]);
+    telemetry.finish("ok");
+    expect(telemetry.snapshot().stages.vite_readiness).toEqual({outcome:"ok",durationMs:300});
+    expect(telemetry.snapshot().stages.first_ssr).toEqual({outcome:"ok",durationMs:200});
+  });
+  it("never requests SSR when listener deadline expires and cleans both resources", async()=>{
+    const steps:string[]=[];
+    let clock=0;
+    const driver={...fakeDriver(steps),now:()=>clock,
+      sleep:async(ms:number)=>{clock+=ms;},
+      probeListener:async(_id:string,budget:number)=>{clock+=budget;return false;},
+    };
+    await expect(startIsolatedTanstackPreview(driver,{timeoutMs:300})).rejects.toBeInstanceOf(TanstackPreviewReadinessError);
+    expect(steps).toEqual(["prepare","launch","destroy","cleanup"]);
+  });
+  it("does not admit a listening socket without a valid rendered document", async()=>{
+    const steps:string[]=[];
+    const driver={...fakeDriver(steps,"never"),probeListener:async()=>true};
+    await expect(startIsolatedTanstackPreview(driver,{timeoutMs:1600})).rejects.toBeInstanceOf(TanstackPreviewReadinessError);
+    expect(steps).toContain("probe");
+    expect(steps.slice(-2)).toEqual(["destroy","cleanup"]);
+  });
+  it("does not admit after cancellation during listener readiness", async()=>{
+    const steps:string[]=[];const controller=new AbortController();
+    const driver={...fakeDriver(steps),probeListener:async()=>{controller.abort();return true;}};
+    await expect(startIsolatedTanstackPreview(driver,{signal:controller.signal})).rejects.toThrow("cancelled");
+    expect(steps).toEqual(["prepare","launch","destroy","cleanup"]);
+  });
+  it("rejects a late HTML response even if successful", async()=>{
+    const steps:string[]=[];let clock=0;
+    const driver={...fakeDriver(steps),now:()=>clock,probeListener:async()=>true,
+      probe:async()=>{clock=2000;return good;}};
+    await expect(startIsolatedTanstackPreview(driver,{timeoutMs:1600})).rejects.toBeInstanceOf(TanstackPreviewReadinessError);
+    expect(steps.slice(-2)).toEqual(["destroy","cleanup"]);
+  });
+});
+
 describe("TanStack orphaned startup cleanup", () => {
   it("preserves a retryable orphan when readiness fails and Docker teardown fails", async () => {
     const steps: string[] = [];

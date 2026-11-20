@@ -170,7 +170,12 @@ export async function retireTanstackHttpWorker(containerId:string):Promise<void>
   }catch{/* an already-failed worker has no live transport */}
 }
 
-async function requestWorker(worker:PreviewHttpWorker,request:TanstackPreviewTransportRequest) {
+type ListenerProbeRequest = Readonly<{operation:"probe-listener";timeoutMs:number}>;
+
+async function requestWorker(worker:PreviewHttpWorker,
+  request:TanstackPreviewTransportRequest | ListenerProbeRequest,
+  deadlineMs = REQUEST_DEADLINE_MS,
+) {
   if(worker.closed || worker.pending.size>=MAX_PENDING)
     throw new TanstackPreviewTransportError("worker_protocol");
   const id=worker.nextId++;
@@ -189,11 +194,24 @@ async function requestWorker(worker:PreviewHttpWorker,request:TanstackPreviewTra
           failWorker(worker,new TanstackPreviewTransportError("deadline"));
       },EXPIRED_REPLY_GRACE_MS);
       pending.reject(new TanstackPreviewTransportError("deadline"));
-    },REQUEST_DEADLINE_MS);
+    },deadlineMs);
     worker.pending.set(id,{resolve,reject,timer,expired:false});
     try{worker.stream.write(JSON.stringify({id,...request})+"\n");}
     catch{failWorker(worker,new TanstackPreviewTransportError("worker_protocol"));}
   });
+}
+
+/** Private startup-only probe. Never reachable from the application HTTP
+ * request grammar. Correlates on the same isolated Docker worker. */
+export async function probeTanstackListenerInsideSandbox(containerId:string, timeoutMs:number):Promise<boolean> {
+  if (!Number.isSafeInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > 1000)
+    throw new TanstackPreviewTransportError("worker_protocol");
+  const worker = await acquireWorker(containerId);
+  const reply = await requestWorker(worker,{operation:"probe-listener",timeoutMs},
+    Math.min(REQUEST_DEADLINE_MS, timeoutMs + 2000));
+  if (Object.keys(reply).length !== 2 || !("listening" in reply) || typeof reply.listening !== "boolean")
+    throw new TanstackPreviewTransportError("worker_protocol");
+  return reply.listening;
 }
 
 /** One bounded multiplexed worker per exact container. No socket or host port

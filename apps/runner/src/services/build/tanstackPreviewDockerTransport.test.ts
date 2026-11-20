@@ -6,6 +6,7 @@ vi.mock("../docker/dockerClient.js",()=>({docker:{
 import { docker } from "../docker/dockerClient.js";
 import {
   fetchTanstackHttpInsideSandbox,
+  probeTanstackListenerInsideSandbox,
   retireTanstackHttpWorker,
   TanstackPreviewTransportError,
   validateTanstackPreviewWorkerReply,
@@ -76,6 +77,34 @@ describe("TanStack Docker HTTP worker protocol diagnostics", () => {
     expect(start).toHaveBeenCalledTimes(1);
     await retireTanstackHttpWorker("container-multiplex");
     expect(stream.destroyed).toBe(true);
+  });
+});
+
+describe("H10W2C private listener protocol",()=>{
+  it("correlates boolean listener replies using the same worker and fixed request grammar",async()=>{
+    const container="listener-probe";
+    const stream=new FakeDockerStream();
+    const exec=vi.fn(async()=>({start:async()=>stream}));
+    vi.mocked(docker.getContainer).mockReturnValue({exec} as never);
+    try {
+      const probe=probeTanstackListenerInsideSandbox(container,500);
+      await vi.waitFor(()=>expect(stream.writes).toHaveLength(1));
+      const sent=JSON.parse(stream.writes[0]);
+      expect(sent).toEqual({id:1,operation:"probe-listener",timeoutMs:500});
+      stream.reply({id:1,listening:false});
+      await expect(probe).resolves.toBe(false);
+      const ready=probeTanstackListenerInsideSandbox(container,500);
+      await vi.waitFor(()=>expect(stream.writes).toHaveLength(2));
+      stream.reply({id:2,listening:true});
+      await expect(ready).resolves.toBe(true);
+      expect(exec).toHaveBeenCalledTimes(1);
+      const malformed=probeTanstackListenerInsideSandbox(container,500).catch(error=>error);
+      await vi.waitFor(()=>expect(stream.writes).toHaveLength(3));
+      stream.reply({id:3,listening:"true"});
+      expect(await malformed).toMatchObject({stage:"worker_protocol"});
+      await expect(probeTanstackListenerInsideSandbox(container,1001)).rejects.toMatchObject({stage:"worker_protocol"});
+      expect(stream.writes).toHaveLength(3);
+    }finally{await retireTanstackHttpWorker(container);}
   });
 });
 

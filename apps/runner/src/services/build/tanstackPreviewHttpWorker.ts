@@ -25,6 +25,30 @@ def perform(item):
         method, path = item.get("method"), item.get("path")
         if not isinstance(ident, int) or isinstance(ident, bool) or ident < 0:
             raise ValueError("invalid id")
+        if item.get("operation") == "probe-listener":
+            # Runner-internal only. Fixed loopback address, bounded polling,
+            # no application request or arbitrary destination.
+            budget = item.get("timeoutMs")
+            if set(item) != {"id", "operation", "timeoutMs"} or not isinstance(budget, int) or isinstance(budget, bool) or not 1 <= budget <= 1000:
+                raise ValueError("invalid listener probe")
+            until = time.monotonic() + budget / 1000
+            listening = False
+            while True:
+                remaining = until - time.monotonic()
+                if remaining <= 0:
+                    break
+                try:
+                    with socket.create_connection(("127.0.0.1", 5173), timeout=min(0.2, remaining)):
+                        listening = True
+                    break
+                except OSError:
+                    time.sleep(min(0.1, max(0, until - time.monotonic())))
+            with LOCK:
+                sys.stdout.write(json.dumps({"id": ident, "listening": listening}, separators=(",", ":")) + "\n")
+                sys.stdout.flush()
+            return
+        if "operation" in item:
+            raise ValueError("invalid operation")
         if method not in ("GET", "HEAD", "POST") or not isinstance(path, str) or len(path) > 4096:
             raise ValueError("invalid request")
         if not path.startswith("/") or path.startswith("//") or "\\" in path or "#" in path or any(ord(c) < 32 or ord(c) == 127 for c in path):
