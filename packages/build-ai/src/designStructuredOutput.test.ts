@@ -6,6 +6,7 @@ import {
 
 import {
   BUILD_COMMERCE_JSON_SCHEMA,
+  BUILD_STOREFRONT_RUNTIMES,
   BUILD_DESIGN_JSON_SCHEMA,
 } from "@zoeskoul/build-contracts";
 
@@ -66,6 +67,13 @@ describe(
         });
       },
     );
+
+    it("uses registered storefront runtime and distinguishes scaffolds from real operations", () => {
+      expect(BUILD_AI_PROJECT_SPECIFICATION_SYSTEM_PROMPT).toContain(BUILD_STOREFRONT_RUNTIMES.join(", "));
+      expect(BUILD_AI_PROJECT_SPECIFICATION_SYSTEM_PROMPT).not.toContain('storefrontRuntime "static"');
+      expect(BUILD_AI_PROJECT_SPECIFICATION_SYSTEM_PROMPT).toContain("not completed business workflows");
+      expect(BUILD_AI_PROJECT_SPECIFICATION_SYSTEM_PROMPT).toContain("not a live deployment result");
+    });
 
     it(
       "keeps model design responsibility presentation-only",

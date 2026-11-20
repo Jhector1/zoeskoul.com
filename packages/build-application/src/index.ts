@@ -608,7 +608,7 @@ export async function applyBuildProjectPlanCommand(
         input.specification,
 
       workspace:
-        materialized.workspace,
+        personalizeInitialGeneratedSite(materialized.workspace, input.specification.name),
 
       entryPath:
         materialized.entryPath,

@@ -1,5 +1,6 @@
 import {
   BUILD_COMMERCE_JSON_SCHEMA,
+  BUILD_STOREFRONT_RUNTIMES,
   BUILD_DESIGN_JSON_SCHEMA,
   BuildSpecificationError,
   parseProjectSpecification,
@@ -260,6 +261,7 @@ const BUILD_AI_REGISTERED_STACK_GUIDANCE =
         `projectTypes=${stack.projectTypes.join(",")}`,
         `targets=${stack.targets.join(",")}`,
         `capabilities=${capabilities}`,
+        `deploymentTarget=${stack.deploymentAdapterId} (registered target, not a live deployment result)`,
       ].join(" ");
     })
     .join(" | ");
@@ -271,9 +273,11 @@ export const BUILD_AI_PROJECT_SPECIFICATION_SYSTEM_PROMPT = [
   'Allowed projectType values: "static-site", "frontend-app", "fullstack-app", "mobile-app".',
   'Allowed targets: "web", "ios", "android".',
   "requirements must contain booleans for backend, database, auth, storage, payments, email, and commerce.",
-  'commerce must be null for non-commerce work or a bounded object with storefrontRuntime "static" or "react-vite"; commerce provider ownership is resolved server-side and must not appear in the Build specification.',
+  `commerce must be null for non-commerce work or a bounded object with storefrontRuntime from the registered contract: ${BUILD_STOREFRONT_RUNTIMES.join(", ")}; commerce provider ownership is resolved server-side and must not appear in the Build specification.`,
   "Commerce provider/runtime are architecture metadata and deterministic ZoeBuild planning owns the final values.",
-  "pages must be an array of concise page names.",
+  "pages must be an array of concise, distinct human-readable page names, not file paths or URLs. Include pages explicitly requested by the user and relevant public pages for the site purpose.",
+  "Initial generation creates TanStack presentation scaffolds, not completed business workflows. Do not claim that a planned page implements checkout, bookings, accounts, messaging, or data persistence.",
+  "A registered deployment target does not mean the app has been deployed or a domain has been connected.",
   `Registered stacks: ${BUILD_AI_REGISTERED_STACK_GUIDANCE}.`,
   "Select stackId only from the registered stacks above.",
   'Allowed deployment.preference values: "static", "managed-runtime", "mobile-cloud".',
@@ -281,7 +285,8 @@ export const BUILD_AI_PROJECT_SPECIFICATION_SYSTEM_PROMPT = [
   "Uploaded images, video, and voice/audio are context for understanding what the user wants to build.",
   "design is presentation-only structured data: palette, layout choices, and bounded user-facing copy.",
   "Never put HTML, CSS, JavaScript, executable code, commerce mechanics, authentication logic, provider configuration, or credentials inside design.",
-  "For user-facing sites, provide a compact design object when the user supplied enough visual or brand direction; otherwise use design: null.",
+  "For user-facing sites, choose a coherent bounded design object tailored to the user request, even when the user leaves visual choices open. Use design: null if a meaningful design cannot be inferred.",
+  "Use specific, relevant hero copy and readable high-contrast colors. Do not invent testimonials, prices, credentials, business addresses, or claims about completed integrations.",
   "Do not include source code, secrets, access tokens, provider credentials, or deployment credentials.",
 ].join("\n");
 

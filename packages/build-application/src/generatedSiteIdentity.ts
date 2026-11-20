@@ -35,7 +35,7 @@ export function personalizeInitialGeneratedSite(
       if (content.split(before).length !== 2) {
         throw new Error(`Unexpected initial TanStack site content: ${sitePath}`);
       }
-      content = content.replace(before, after);
+      content = content.replace(before, () => after);
     }
     return { ...node, content };
   });

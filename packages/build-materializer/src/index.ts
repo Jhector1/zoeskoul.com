@@ -1,4 +1,5 @@
 import { applyBuildDesignToTemplate } from "./commerceDesign";
+import { parseBuildDesignSpecification } from "@zoeskoul/build-contracts";
 import type {
   BuildStackDefinition,
   ProjectSpecification,
@@ -245,6 +246,90 @@ export function materializeBuildProject(
   };
 }
 
+/** Presentation-only initial scaffold. Labels and copy remain inert data. */
+function prepareTanstackPresentation(
+  specification: ProjectSpecification,
+  template: BuildTemplateDefinition,
+): BuildTemplateDefinition {
+  if (specification.stackId !== "tanstack-start-v1") return template;
+  const files = new Map(template.files.map(file => [file.path, file.content]));
+  if (files.size !== template.files.length) throw new Error("Duplicate TanStack template path");
+  const replace = (path: string, before: string, after: string) => {
+    const content = files.get(path);
+    if (content === undefined || content.split(before).length !== 2) {
+      throw new Error(`Unexpected TanStack presentation surface: ${path}`);
+    }
+    files.set(path, content.replace(before, () => after));
+  };
+  const add = (path: string, content: string) => {
+    if (files.has(path)) throw new Error(`TanStack presentation path collision: ${path}`);
+    files.set(path, content);
+  };
+  const json = (value: unknown) => JSON.stringify(value);
+  const navigation = [{ to: "/", label: "Home" }, { to: "/about", label: "About" }];
+  const labels = new Set(["home", "about"]);
+  const used = new Set(["index", "about", "api", "root"]);
+  for (const [index, raw] of specification.pages.entries()) {
+    const label = raw.trim();
+    const key = label.normalize("NFKC").toLowerCase();
+    if (!label || labels.has(key)) continue;
+    labels.add(key);
+    const base = key.normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 48)
+      .replace(/-+$/g, "") || `page-${index + 1}`;
+    let slug = base;
+    for (let suffix = 2; used.has(slug) || files.has(`src/routes/${slug}.tsx`); suffix++) {
+      slug = `${base}-${suffix}`;
+    }
+    used.add(slug);
+    const to = `/${slug}`;
+    navigation.push({ to, label });
+    add(`src/routes/${slug}.tsx`, [
+      'import { createFileRoute } from "@tanstack/react-router";',
+      'import { PlannedPage } from "../components/PlannedPage";',
+      `export const Route = createFileRoute(${json(to)})({`,
+      `  head: () => ({ meta: [{ title: ${json(label)} }] }),`,
+      `  component: () => <PlannedPage title={${json(label)}} />,`,
+      '});', '',
+    ].join("\n"));
+  }
+  if (navigation.length > 2) {
+    add("src/components/PlannedPage.tsx", [
+      'export function PlannedPage({ title }: Readonly<{ title: string }>) {',
+      '  return <section className="page-shell"><h1>{title}</h1>',
+      '    <p>This page is a starting point. Its content and any business functionality still need implementation.</p>',
+      '  </section>;', '}', '',
+    ].join("\n"));
+    replace("src/data/site.ts", 'navigation: [\n    { to: "/", label: "Home" },\n    { to: "/about", label: "About" },\n  ]',
+      `navigation: ${JSON.stringify(navigation, null, 2)}`);
+  }
+  const cssPath = "src/styles.css";
+  let css = files.get(cssPath);
+  if (css === undefined) throw new Error("Missing TanStack root stylesheet");
+  if (navigation.length > 2) css += "\n.site-header, .site-nav { flex-wrap: wrap; }\n";
+  if (specification.design) {
+    // Validate again at the render boundary. No arbitrary CSS or executable content.
+    const design = parseBuildDesignSpecification(specification.design);
+    const { palette, content, layout } = design;
+    replace("src/data/site.ts", 'description: "Explore what this site has to offer."',
+      `description: ${json(content.heroBody)},\n  heroTitle: ${json(content.heroTitle)},\n  heroEyebrow: ${json(content.eyebrow)}`);
+    replace("src/routes/index.tsx", '<p className="eyebrow">Welcome</p>',
+      '<p className="eyebrow">{site.heroEyebrow}</p>');
+    replace("src/routes/index.tsx", '{info.tagline}', '{site.heroTitle}');
+    const radius = { soft: "24px", sharp: "4px", minimal: "12px" }[layout.cardTreatment];
+    const tracking = { minimal: "-.045em", editorial: "-.06em", bold: "-.07em", luxury: "-.035em", playful: "-.025em", technical: "-.04em" }[design.style];
+    css += `\n:root { color: ${palette.text}; background: ${palette.surface}; }\n` +
+      `.site-header, .site-footer { border-color: ${palette.border}; }\n` +
+      `.eyebrow { color: ${palette.muted}; }\n` +
+      `.button-link { background: ${palette.accent}; color: ${palette.accentContrast}; border-radius: ${radius}; }\n` +
+      `h1 { letter-spacing: ${tracking}; }\n` +
+      (layout.hero === "centered" ? ".page-shell { text-align: center; }\n" :
+        layout.hero === "editorial" ? ".page-shell { width: min(940px, calc(100% - 36px)); }\n" : "");
+  }
+  files.set(cssPath, css);
+  return { ...template, files: Array.from(files, ([path, content]) => ({ path, content })) };
+}
+
 /**
  * Canonical registry-backed entry point used by the future Build application
  * service. Unknown stacks/templates and incompatible specifications fail
@@ -264,11 +349,10 @@ export function materializeRegisteredBuildProject(args: {
       stack.templateId,
     );
 
-  const template =
-    applyBuildDesignToTemplate(
-      args.specification,
-      registeredTemplate,
-    );
+  const template = prepareTanstackPresentation(
+    args.specification,
+    applyBuildDesignToTemplate(args.specification, registeredTemplate),
+  );
 
   return materializeBuildProject({
     specification:

@@ -66,6 +66,12 @@ describe("TanStack commerce materialization and design boundary", () => {
     expect(prepared.files.some((file) => file.path === "src/server/siteInfo.server.ts")).toBe(true);
   });
 
+  it("rejects invalid design CSS at the render boundary", () => {
+    expect(() => materializeRegisteredBuildProject({
+      specification: { ...specification, design: { ...design, palette: { ...design.palette, accent: "red; } body { display:none" } } }, createdAt: 1,
+    })).toThrow();
+  });
+
   it("creates a valid TanStack workspace without static commerce bridge or provider secrets", () => {
     const result = materializeRegisteredBuildProject({ specification, createdAt: 1 });
     const files = new Map(result.workspace.nodes.filter((node) => node.kind === "file")
@@ -75,6 +81,12 @@ describe("TanStack commerce materialization and design boundary", () => {
     expect(files.has("src/routes/__root.tsx")).toBe(true);
     expect(files.has("src/server/siteInfo.server.ts")).toBe(true);
     expect(files.has("src/commerce/provider.js")).toBe(false);
+    expect(files.get("src/data/site.ts")).toContain(JSON.stringify(design.content.heroTitle));
+    expect(files.get("src/routes/index.tsx")).toContain("{site.heroTitle}");
+    expect(files.get("src/styles.css")).toContain("#FAF7F2");
+    expect(files.has("src/routes/shop.tsx")).toBe(true);
+    expect(files.has("src/routes/cart.tsx")).toBe(true);
+    expect(files.get("src/components/PlannedPage.tsx")).toContain("still need implementation");
     expect(JSON.stringify(result.workspace).toLowerCase()).not.toContain("myshopify.com");
   });
 });

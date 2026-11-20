@@ -153,9 +153,9 @@ describe(
             "tanstack-start-v1",
         });
 
-        expect(
-          applied?.workspace.nodes.length,
-        ).toBeGreaterThan(0);
+        expect(applied?.workspace.nodes.length).toBeGreaterThan(0);
+        const site = applied?.workspace.nodes.find(node => node.id === "src/data/site.ts");
+        expect(site?.kind === "file" ? site.content : "").toContain(`name: ${JSON.stringify(specification().name)}`);
       },
     );
 

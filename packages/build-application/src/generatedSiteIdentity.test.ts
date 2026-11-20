@@ -91,6 +91,16 @@ describe("new project site identity", () => {
     );
   });
 
+  it("preserves dollar replacement sequences as literal project name data", async () => {
+    const { persistence, getSaved } = capture();
+    const name = "Studio $& $$ $`";
+    await createBuildProject({ ownerId: "owner", createdAt: 1,
+      specification: parseProjectSpecification({ ...base, name }), persistence });
+    const saved = getSaved();
+    if (!saved) throw new Error("Missing saved project");
+    expect(file(saved, "src/data/site.ts")).toContain(`name: ${JSON.stringify(name)}`);
+  });
+
   it("does not rewrite source when an existing project is saved", async () => {
     const existingSite = {
       version: 2 as const,

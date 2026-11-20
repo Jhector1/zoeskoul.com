@@ -50,6 +50,20 @@ describe("build materializer", () => {
     expect(project.workspace.expanded).toContain("src/routes");
   });
 
+  it("scaffolds distinct planned routes with safe literal labels and shared layout", () => {
+    const pages = ["Home", "ABOUT", "Menu", "Menu!", "index", "../../foo", "<script>alert(1)</script>", "菜单"];
+    const project = materializeRegisteredBuildProject({ specification: { ...specification(), pages }, createdAt: 1 });
+    const files = new Map(project.workspace.nodes.filter(node => node.kind === "file").map(node => [node.id, node.content ?? ""]));
+    for (const path of ["menu", "menu-2", "index-2", "foo", "script-alert-1-script", "page-8"]) {
+      expect(files.get(`src/routes/${path}.tsx`)).toContain(`createFileRoute("/${path}")`);
+    }
+    expect(files.get("src/routes/script-alert-1-script.tsx")).toContain('title={"<script>alert(1)</script>"}');
+    expect(files.get("src/data/site.ts")).toContain('"to": "/menu-2"');
+    expect(files.get("src/components/PlannedPage.tsx")).toContain("still need implementation");
+    expect(files.get("src/routes/api.health.ts")).toContain('createFileRoute("/api/health")');
+    expect([...files.keys()].some(path => path.includes(".."))).toBe(false);
+  });
+
   it("is deterministic and requires a generated dependency lock", () => {
     const first = materializeRegisteredBuildProject({
       specification: specification(), createdAt: 456,
