@@ -7,7 +7,8 @@ const intentRoute = readFileSync(new URL("../../app/api/build/projects/[buildPro
 describe("Zoé exploratory conversation dispatch",()=>{
   it("teaches the semantic classifier exploratory versus committed work",()=>{
     expect(intentRoute).toContain("First decide conversationMode independently of action");
-    expect(intentRoute).toContain("I'm starting a small online clothing store. Can you help me build it?");
+    expect(intentRoute).toContain("Politeness, phrasing as a question, domain, and wording do not decide intent");
+    expect(intentRoute).not.toContain("For a store with no specified provider");
     expect(intentRoute).toContain("Do NOT launch the source-editing or inspection workflow");
     expect(intentRoute).toContain("not a keyword or punctuation rule");
     expect(intentRoute).toContain("responseJsonSchema: zoeSemanticIntentSchema()");

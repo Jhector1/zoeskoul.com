@@ -60,7 +60,7 @@ export function zoeProjectAgentResponseSchema() {
     type: "object", additionalProperties: false,
     required: ["kind", "path", "query", "prefix", "offset", "limit", "summary", "edits", "patches", "reads"],
     properties: {
-      kind: {type: "string", enum: ["list", "read", "read_many", "inspect", "search", "patch", "stage", "propose"]},
+      kind: {type: "string", enum: ["list", "read", "read_many", "inspect", "search", "patch", "stage", "read_staged", "unstage", "propose"]},
       path: {type: "string"},
       query: {type: "string"},
       prefix: {type: "string"},
@@ -84,7 +84,7 @@ export function zoeProjectAgentResponseSchema() {
 }
 
 type InspectionAction = Readonly<{
-  kind: "list" | "read" | "read_many" | "inspect" | "search" | "patch" | "stage" | "propose";
+  kind: "list" | "read" | "read_many" | "inspect" | "search" | "patch" | "stage" | "read_staged" | "unstage" | "propose";
   path: string; query: string; prefix: string; offset: number; limit: number;
   summary: string; edits: unknown[]; patches: unknown[]; reads: unknown[];
 }>;
@@ -106,7 +106,7 @@ function parseAction(text: string): InspectionAction {
     throw new ZoeProjectAgentError("AGENT_INVALID_RESPONSE");
   }
   const item = value as Record<string, unknown>;
-  if (!(["list", "read", "read_many", "inspect", "search", "patch", "stage", "propose"] as unknown[]).includes(item.kind) ||
+  if (!(["list", "read", "read_many", "inspect", "search", "patch", "stage", "read_staged", "unstage", "propose"] as unknown[]).includes(item.kind) ||
       typeof item.path !== "string" || typeof item.query !== "string" || typeof item.prefix !== "string" ||
       !Number.isSafeInteger(item.offset) || !Number.isSafeInteger(item.limit) ||
       typeof item.summary !== "string" || !Array.isArray(item.edits)) {
@@ -134,6 +134,8 @@ export async function runZoeProjectAgent(input: Readonly<{
     text: string; metadata?: {reasoningSummary?: string};
   }>;
   maxSteps?: number;
+  /** Pure, authoritative candidate validation; never writes or runs a build. */
+  validateCandidate?: (candidate: Readonly<{summary:string; edits:readonly {path:string;content:string;create:boolean}[]; fullyReadPaths:readonly string[]}>) => string | null;
 }>): Promise<ZoeAgentResult> {
   const tools = createZoeProjectFileTools(input.workspace);
   const maxSteps = input.maxSteps ?? ZOE_PROJECT_AGENT_MAX_STEPS;
@@ -206,10 +208,13 @@ export async function runZoeProjectAgent(input: Readonly<{
           typeof patch.after !== "string") {
         throw new ZoeProjectAgentError("AGENT_INVALID_RESPONSE");
       }
-      const missing = validateReadCoverage([{path:patch.path,content:"",create:false}]);
-      if (missing.length) return "EXISTING_SOURCE_NOT_FULLY_READ";
       const current = candidate.get(patch.path);
-      if (current?.create === true) return "PATCH_TARGET_NEW_FILE";
+      // A new draft exists only in this staged map, never in the saved workspace.
+      // Existing source must still be fully inspected even after being staged.
+      if (current?.create !== true) {
+        const missing = validateReadCoverage([{path:patch.path,content:"",create:false}]);
+        if (missing.length) return "EXISTING_SOURCE_NOT_FULLY_READ";
+      }
       const content = current?.content ?? originalSource(patch.path);
       const before = patch.before;
       const start = content.indexOf(before);
@@ -217,7 +222,7 @@ export async function runZoeProjectAgent(input: Readonly<{
       if (content.indexOf(before, start + before.length) >= 0) return "PATCH_ANCHOR_AMBIGUOUS";
       candidate.set(patch.path, {path:patch.path,
         content:content.slice(0,start) + patch.after + content.slice(start + before.length),
-        create:false});
+        create:current?.create === true});
     }
     stagedEdits.clear();
     for (const [path,edit] of candidate) stagedEdits.set(path,edit);
@@ -254,14 +259,13 @@ export async function runZoeProjectAgent(input: Readonly<{
           }
         }
       }
-      if (item.action === "read" && typeof item.arguments.path === "string" &&
+      if ((item.action === "read" || item.action === "read_staged") && typeof item.arguments.path === "string" &&
           stagedEdits.has(item.arguments.path)) {
         const response = item.response;
         if (response && typeof response === "object") {
           const record = response as Record<string, unknown>;
           if (typeof record.content === "string") {
-            item.response = {path:item.arguments.path,offset:record.offset,
-              totalCharacters:record.totalCharacters,content:"[already staged; reread if needed]"};
+            item.response = {...record,content:"[already staged; reread if needed]"};
           }
         }
       }
@@ -475,6 +479,7 @@ export async function runZoeProjectAgent(input: Readonly<{
       stepsRemaining: maxSteps - step,
       fullyReadPaths: inspectedPaths(),
       stagedPaths: [...stagedEdits.keys()],
+      stagedFiles: [...stagedEdits.values()].map(({path,create,content})=>({path,create,characters:content.length})),
     });
     const output = await input.generate({
       schemaName: "ZoeProjectAgentStepV12K10",
@@ -488,7 +493,9 @@ export async function runZoeProjectAgent(input: Readonly<{
         "You may make noncritical architecture/design decisions spanning multiple authorized files without asking for permission for every folder. Inspect current imports and installed dependencies first. If a dependency is missing, use only the platform's trusted dependency-change workflow; never invent a package import or forge a lockfile. Honor selected model effort, authorization, and verify-before-save.",
         "An initial page of source paths and imports is supplied for free. prefetchedSources contains full, owner-authorized files already inspected by the server; do NOT spend model turns rereading those paths unless needed. Prefer ONE inspect plan for relevant remaining files: inspect with prefix:src/ reads all eligible source files under src/, or use reads:[{path,offset:0,limit:24000}] to select paths. The server reads multiple complete files internally in one tool turn and reports remainingPaths when the bounded observation fills. No project-wide file limit exists. Choose scope from real architecture, not keywords in the request.",
         "Output ONE JSON action per turn with all schema fields. For inspect use path or prefix or reads:[{path,offset:0,limit:24000}] (up to 24 explicitly requested paths); the server handles internal chunk pagination; remainingPaths and nextOffset tell you which sources are still not fully read. For list use prefix/offset/limit (limit 1-100); read uses path/offset/limit (limit 1-24000); read_many uses reads:[{path,offset,limit}] (up to 24 requested chunks, with bounded returns); search uses query/prefix/offset/limit (limit 1-40). Unused fields use empty strings, zero or empty arrays. All inspection actions require edits:[] and patches:[].",
-        "For substantial edits use stage to prepare COMPLETE new/replacement files per step (edits:[{path,content,create}]). For small changes to LARGE existing files use patch with patches:[{path,before,after}]: before MUST be an exact UNIQUE substring of the current staged/original file, after is its replacement. This avoids reprinting large unchanged files.",
+        "For substantial edits use stage to prepare COMPLETE new/replacement files per step (edits:[{path,content,create}]). For precise changes use patch with patches:[{path,before,after}]: before MUST be an exact UNIQUE substring of the current staged/original file, after is its replacement. Patches can also refine newly staged files without losing their create:true status.",
+        "The saved snapshot and unsaved candidate are separate. Use read_staged with path/offset/limit (1-24000) to inspect the CURRENT staged content, including newly created files. Ordinary read still inspects the saved snapshot. stagedFiles describes all candidate paths and sizes. Use unstage with path to discard one draft change, NOT a saved file; this does not delete source. Both actions require empty edits, patches and reads.",
+        "If authoritative candidate validation rejects a final proposal, inspect the rejection code and candidate metadata. Correct the issue, replace or unstage invalid drafts, and propose again within remaining steps. Never bypass authorization or fabricate verification.",
         "Finish with propose; do not use a separate patch or stage turn if a complete final answer is ready. A propose action MAY carry exact patches and complete edits in the same action, applied atomically in edits-then-patches order, or may use edits:[] and patches:[] when all changes were previously staged. Every existing source must be fully inspected before editing. All unused fields must be empty; every action must include patches:[] and reads:[]. Stay within the selected model's response budget. The server deterministically combines staged edits/patches for ONE reviewed candidate.",
         "Every edited existing source must be fully inspected first. A stage action does NOT save or apply source; the server combines staged changes only after propose, then the existing reviewed/verified save pipeline independently validates them.",
         "Use inspect for coordinated multi-file work rather than serial read actions. If inspect reports remainingPaths, request those paths in the next inspect action. For read_many use nextOffset/nextRequestIndex to finish the file. Do not waste paid steps relisting or rereading inspected content. Plan edits so you can stage and issue propose before the last step. If stepsRemaining is 1 and all necessary edits are already staged, issue propose NOW. Never claim source was saved or browser rendering was verified. If inspection steps run out or a whole-site change cannot be safely finished, do not claim completion; there will be no partial save.",
@@ -544,9 +551,18 @@ export async function runZoeProjectAgent(input: Readonly<{
           response:{reason:"EXISTING_SOURCE_NOT_FULLY_READ", paths:mergedMissing}});
         continue;
       }
+      const fullyReadPaths = inspectedPaths();
+      const rejection = merged.length ? input.validateCandidate?.({summary:action.summary,edits:merged,fullyReadPaths}) : null;
+      if (rejection) {
+        stagedEdits.clear();
+        for (const [path,edit] of beforeProposal) stagedEdits.set(path,edit);
+        observations.push({action:"propose-rejected",arguments:{},response:{
+          reason:"CANDIDATE_VALIDATION_FAILED",code:rejection}});
+        continue;
+      }
       return {text:JSON.stringify({summary:action.summary,edits:merged}),
         metadata:{reasoningSummary:summary},steps:step+1,
-        fullyReadPaths:inspectedPaths()};
+        fullyReadPaths};
     }
     if (action.kind === "patch") {
       if (action.edits.length > 0) throw new ZoeProjectAgentError("AGENT_INVALID_RESPONSE");
@@ -568,6 +584,24 @@ export async function runZoeProjectAgent(input: Readonly<{
       } else if (action.kind === "read_many") {
         observations.push({action:"read_many",arguments:{reads:action.reads},
           response:readMany(action.reads)});
+      } else if (action.kind === "read_staged") {
+        const draft = stagedEdits.get(action.path);
+        if (!draft) throw new ZoeProjectFileToolError("INVALID_PATH");
+        if (action.offset < 0 || action.offset > draft.content.length)
+          throw new ZoeProjectFileToolError("INVALID_OFFSET");
+        if (action.limit < 1 || action.limit > 24_000)
+          throw new ZoeProjectFileToolError("INVALID_PAGE_SIZE");
+        const content = draft.content.slice(action.offset,action.offset+action.limit);
+        const end = action.offset + content.length;
+        observations.push({action:"read_staged",arguments:{path:action.path,offset:action.offset,limit:action.limit},
+          response:{path:draft.path,source:"staged",create:draft.create,offset:action.offset,
+            totalCharacters:draft.content.length,content,nextOffset:end<draft.content.length?end:null}});
+        // Never grant saved-source inspection credit for a model-authored draft.
+      } else if (action.kind === "unstage") {
+        if (!stagedEdits.has(action.path)) throw new ZoeProjectFileToolError("INVALID_PATH");
+        compactStagedReadObservations();
+        stagedEdits.delete(action.path);
+        observations.push({action:"unstage",arguments:{path:action.path},response:{discarded:true}});
       } else if (action.kind === "read") {
         const response = tools.read(action.path,{offset:action.offset,length:action.limit});
         const prev = inspected.get(action.path) ?? [];

@@ -99,3 +99,25 @@ describe("P3B7E4B2E TanStack metered proposal handoff",()=>{
       generate:async()=>({text:action([{path:"src/routes/index.tsx",content:page("/","Changed"),create:false}])})})).rejects.toThrow();
   });
 });
+
+
+describe("AI3B authoritative candidate correction",()=>{
+  it("lets the agent correct a rejected source proposal using the same metered step loop",async()=>{
+    const w=workspace();const before=JSON.stringify(w);let calls=0;
+    const result=await generateTanstackAgentProposal({workspace:w,project,userRequest:"Create an interactive game",
+      conversation:[],requestedPage:null,system:"Implement the requested behavior",generate:async request=>{
+        calls++;
+        if(calls===1)return {text:action([{path:"src/server/game.ts",content:"export const score=0",create:true}])};
+        expect(JSON.parse(request.user).observations.at(-1).response).toMatchObject({reason:"CANDIDATE_VALIDATION_FAILED",code:"BUILD_TANSTACK_SOURCE_UNSAFE"});
+        expect(JSON.parse(request.user).stagedPaths).toEqual([]);
+        return {text:action([{path:"src/lib/game.ts",content:"export const increase=(score:number)=>score+1;",create:true},
+          {path:"src/routes/index.tsx",content:page("/","Play"),create:false}],"Game logic")};
+      }});
+    expect(calls).toBe(2);
+    expect(result.kind).toBe("proposal");
+    if(result.kind!=="proposal")return;
+    expect(result.proposal.edits.map(e=>e.path)).toEqual(["src/lib/game.ts","src/routes/index.tsx"]);
+    expect(result.proposal.buildVerification).toBeUndefined();
+    expect(JSON.stringify(w)).toBe(before);
+  });
+});

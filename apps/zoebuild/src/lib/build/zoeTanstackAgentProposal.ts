@@ -1,6 +1,7 @@
 import type { buildZoeCapabilityEvidence } from "./zoeCapabilityEvidence";
 import { parseAiJsonText } from "@zoeskoul/ai-json";
 import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
+import { BuildWorkspaceMutationError } from "./buildWorkspaceMutation";
 import { makeZoeEditClarification } from "./zoeEditClarification";
 import { runZoeProjectAgent } from "./zoeProjectAgentLoop";
 import { ZoeEditInputError, type ZoeSourceEditProposal } from "./zoeTargetedSourceEdit";
@@ -43,6 +44,19 @@ export async function generateTanstackAgentProposal(input: Readonly<{
     workspace: input.workspace, project: input.project,
     userRequest: input.userRequest, conversation: input.conversation,
     system: input.system, generate: input.generate, capabilityEvidence: input.capabilityEvidence,
+    validateCandidate: candidate => {
+      try {
+        prepareTanstackReviewedEdit({workspace:input.workspace,baseVersion:input.project.sourceVersion,
+          requestedPage:input.requestedPage,summary:candidate.summary,drafts:candidate.edits,
+          fullyInspectedPaths:candidate.fullyReadPaths});
+        return null;
+      } catch (error) {
+        // Only recover from known structural validation failures. No raw errors,
+        // source contents, provider output or build claims enter the next request.
+        if (error instanceof ZoeEditInputError || error instanceof BuildWorkspaceMutationError) return error.code;
+        throw error;
+      }
+    },
   });
   const parsed = parseAiJsonText<unknown>(output.text);
   if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {

@@ -115,3 +115,54 @@ describe("V12K10G paid agent step staging and exact patches",()=>{
     expect(count).toBe(1);
   });
 });
+
+
+describe("AI3B staged candidate editing",()=>{
+  it("reads and patches newly generated logic without granting snapshot read authority",async()=>{
+    const file="src/lib/game.ts";
+    const {result,prompts}=await run({"src/App.tsx":"original"},[
+      action("read",{path:"src/App.tsx"}),
+      action("stage",{edits:[{path:file,create:true,content:"export const score = 0;"}]}),
+      action("read_staged",{path:file,offset:0,limit:24000}),
+      action("patch",{patches:[{path:file,before:"score = 0",after:"score = 1"}]}),
+      action("read_staged",{path:file}),
+      action("propose",{summary:"Working game logic"}),
+    ]);
+    expect(JSON.parse(prompts[3]!).observations.at(-1).response).toMatchObject({source:"staged",create:true,content:"export const score = 0;"});
+    expect(JSON.parse(prompts[5]!).observations.at(-1).response.content).toBe("export const score = 1;");
+    expect(result.fullyReadPaths).toEqual(["src/App.tsx"]);
+    expect(JSON.parse(result.text).edits).toEqual([{path:file,create:true,content:"export const score = 1;"}]);
+  });
+  it("discards only candidate changes and keeps the saved source readable",async()=>{
+    const {result,prompts}=await run({"src/App.tsx":"saved","src/lib/logic.ts":"original"},[
+      action("read",{path:"src/App.tsx"}),
+      action("stage",{edits:[{path:"src/lib/game.ts",create:true,content:"draft"}]}),
+      action("unstage",{path:"src/lib/game.ts"}),
+      action("read_staged",{path:"src/lib/game.ts"}),
+      action("unstage",{path:"src/lib/logic.ts"}),
+      action("read",{path:"src/lib/logic.ts"}),
+      action("propose",{summary:"No changes"}),
+    ]);
+    expect(JSON.parse(result.text).edits).toEqual([]);
+    expect(JSON.parse(prompts[4]!).observations.at(-1).response.error).toBe("INVALID_PATH");
+    expect(JSON.parse(prompts[5]!).observations.at(-1).response.error).toBe("INVALID_PATH");
+    expect(JSON.parse(prompts[6]!).observations.at(-1).response.content).toBe("original");
+  });
+  it("bounds draft reads and rejects reading unstaged protected paths",async()=>{
+    const file="src/lib/large.ts";
+    const {result,prompts}=await run({"src/App.tsx":"saved",".env.local":"PRIVATE_DATA"},[
+      action("read",{path:"src/App.tsx"}),
+      action("stage",{edits:[{path:file,create:true,content:"a".repeat(25000)}]}),
+      action("read_staged",{path:file,limit:24001}),
+      action("read_staged",{path:file,limit:24000}),
+      action("read_staged",{path:file,offset:24000,limit:24000}),
+      action("read_staged",{path:".env.local"}),
+      action("propose"),
+    ]);
+    expect(JSON.parse(prompts[3]!).observations.at(-1).response.error).toBe("INVALID_PAGE_SIZE");
+    expect(JSON.parse(prompts[4]!).observations.at(-1).response.nextOffset).toBe(24000);
+    expect(JSON.parse(prompts[5]!).observations.at(-1).response).toMatchObject({content:"a".repeat(1000),nextOffset:null});
+    expect(prompts.join("")).not.toContain("PRIVATE_DATA");
+    expect(result.fullyReadPaths).toEqual(["src/App.tsx"]);
+  });
+});
