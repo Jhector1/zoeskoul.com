@@ -281,10 +281,13 @@ export async function executeBuildStep(
     // Final numeric snapshot before Docker resource removal; probe is best-effort.
     await progressMonitor?.captureFailure().catch(() => undefined);
     // Classify before resource removal, without changing the journal lifecycle.
-    await reportTrustedBuildFailure({
+    const diagnostics = await reportTrustedBuildFailure({
       container, stage: args.step, elapsedMs: Date.now() - startedAt,
       timedOut: error instanceof TrustedProductionBuildStepFailure && error.failure === "timeout",
     }).catch(() => undefined);
+    if (error instanceof TrustedProductionBuildStepFailure && diagnostics) {
+      error.diagnostics = diagnostics;
+    }
     throw error;
   } finally {
     await progressMonitor?.stop().catch(() => undefined);

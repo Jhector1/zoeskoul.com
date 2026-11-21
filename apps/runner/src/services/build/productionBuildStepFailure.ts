@@ -1,11 +1,14 @@
 /** Stable, sanitized failure signals for isolated production-build steps.
  * Never include container output, source, registry URLs or credentials here.
  */
+import type { TrustedBuildFailureTelemetry } from "./trustedBuildFailureDiagnostics.js";
+
 export type ProductionBuildStep = "install" | "build";
 export type ProductionBuildFailureKind = "nonzero-exit" | "timeout";
 
 export class TrustedProductionBuildStepFailure extends Error {
   readonly name = "TrustedProductionBuildStepFailure";
+  diagnostics?: TrustedBuildFailureTelemetry;
   constructor(
     readonly stage: ProductionBuildStep,
     readonly failure: ProductionBuildFailureKind,
