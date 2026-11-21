@@ -147,6 +147,7 @@ model BuildProject {
   commerceStore CommerceStore?
   chatMessages  ZoeBuildChatMessage[]
   browserReadGrants BuildDevelopmentPreviewReadGrant[]
+  mediaAssets BuildMediaAsset[]
 
   @@index([status, updatedAt])
   @@index([stackId])
@@ -172,6 +173,34 @@ model BuildDevelopmentPreviewReadGrant {
   @@index([buildProjectId, previewId, userId, revokedAt], map: "zoebuild_grants_lookup_idx")
   @@index([expiresAt], map: "zoebuild_grants_expires_idx")
   @@index([absoluteExpiresAt], map: "zoebuild_grants_absolute_idx")
+}
+
+
+/** AI4B3A — private, project-owned immutable generated/uploaded media metadata. */
+model BuildMediaAsset {
+  id             String       @id @db.VarChar(128)
+  buildProjectId String
+  ownerId        String       @db.VarChar(128)
+  objectKey      String       @unique @db.VarChar(512)
+  sha256         String       @db.VarChar(64)
+  kind           String       @db.VarChar(16)
+  origin         String       @db.VarChar(16)
+  visibility     String       @db.VarChar(16)
+  state          String       @db.VarChar(16)
+  mimeType       String       @db.VarChar(128)
+  byteLength     Int
+  width          Int?
+  height         Int?
+  durationMs     Int?
+  altText        String?      @db.VarChar(300)
+  providerId     String?      @db.VarChar(64)
+  modelId        String?      @db.VarChar(128)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  buildProject   BuildProject @relation(fields:[buildProjectId], references:[id], onDelete:Cascade)
+
+  @@index([buildProjectId, createdAt])
+  @@index([ownerId, buildProjectId, createdAt])
 }
 
 model CommerceStore {

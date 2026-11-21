@@ -632,3 +632,5 @@ export * from "./projectMediaStorage";
 
 // AI4B2: private R2 object-storage adapter (server-owned credentials only).
 export * from "./cloudflareR2ObjectStore";
+
+export * from "./prismaBuildMediaCatalogCore";
