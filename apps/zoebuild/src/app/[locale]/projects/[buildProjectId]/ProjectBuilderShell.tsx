@@ -56,6 +56,7 @@ import { fetchAuthoritativeAppliedProject, fetchAuthoritativeCurrentBuildProject
 import { verifyAppliedZoeSource } from "@/lib/build/verifyAppliedZoeSource";
 import actionStyles from "./ZoeAssistantActions.module.css";
 import ZoeAssistantMessage from "./ZoeAssistantMessage";
+import ProjectMediaLibrary from "@/components/builder/ProjectMediaLibrary";
 import { makeZoeChatTurn, type ZoeChatTurn } from "@/lib/build/zoeChatTurns";
 import { serializeZoeConversationHistory } from "@/lib/build/zoeConversationContext";
 import { mergeZoeChatHistory, readZoeChatHistoryPayload } from "@/lib/build/zoeChatHistoryClient";
@@ -1132,6 +1133,8 @@ export default function ProjectBuilderShell(props: {
           >
             Z
           </div>
+
+          <ProjectMediaLibrary buildProjectId={props.project.buildProjectId} context="chat" />
 
           <div>
             <strong>

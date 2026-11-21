@@ -6,6 +6,7 @@ import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
 
 import FullIDE from "@zoeskoul/learner-workspace/fullide/FullIDE";
+import ProjectMediaLibrary from "@/components/builder/ProjectMediaLibrary";
 import { PersistentReactPreviewSlot } from "@/components/builder/PersistentReactPreviewHost";
 import { hasUnsavedZoeWorkspaceSource } from "@/lib/build/zoeWorkspaceSourceDirty";
 import actionStyles from "./ZoeAssistantActions.module.css";
@@ -185,6 +186,8 @@ export default function BuildWorkspaceClient({
             ? `Unsaved changes · source v${sourceVersion}`
             : `Source v${sourceVersion}`}
         </span>
+
+        <ProjectMediaLibrary buildProjectId={project.buildProjectId} context="code" />
 
         <button
           type="button"
