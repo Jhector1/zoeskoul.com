@@ -7,7 +7,7 @@ name: ZoeBuild HMR Runner candidate image
 on:
   push:
     branches:
-      - feat/zoebuild-hmr-phase4f1-rc1
+      - feat/zoebuild-ai4b4e2t1-runner-release
     paths:
       - .github/workflows/zoebuild-hmr-runner-build.request
   workflow_dispatch:
@@ -33,12 +33,12 @@ jobs:
             dockerfile: apps/runner/Dockerfile
             repository: zoeskoul-runner
     env:
-      RELEASE_SHA: 71cc0c6dcc6746fdd4c541a8a63321a4f74f9f0e
+      RELEASE_SHA: 8cd5a360ddd4d04221958eab770dbbc037b0188b
     steps:
       - name: Check out exact validated release commit
         uses: actions/checkout@v4
         with:
-          ref: 71cc0c6dcc6746fdd4c541a8a63321a4f74f9f0e
+          ref: 8cd5a360ddd4d04221958eab770dbbc037b0188b
           persist-credentials: false
 
       - name: Verify Git provenance and Dockerfile
