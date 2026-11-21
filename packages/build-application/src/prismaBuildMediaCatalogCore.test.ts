@@ -16,6 +16,11 @@ function fixture(owner=scope.ownerId,archivedAt:Date|null=null){
    findScoped:async(s,k)=>{const v=rows.get(k);return v?.buildProjectId===s.buildProjectId&&v.ownerId===s.ownerId?v:null},
    createImmutable:async(row)=>{if(rows.has(row.id))return "conflict";rows.set(row.id,row);return "created"},
    findById:async(k)=>rows.get(k)??null,
+   listScoped:async(s,cursor,take)=>{
+     const matches=[...rows.values()].filter(r=>r.ownerId===s.ownerId && r.buildProjectId===s.buildProjectId);
+     const start=cursor ? matches.findIndex(r=>r.id===cursor)+1 : 0;
+     return matches.slice(start,start+take);
+   },
  };
  return {rows,...createDurableBuildMediaCatalog(port)};
 }
@@ -49,6 +54,17 @@ describe("AI4B3A durable media catalog boundary",()=>{
   const f=fixture();await f.catalog.insertIfAbsent(asset);
   const other={ownerId:"owner-other",buildProjectId:scope.buildProjectId};
   await expect(f.catalog.find(other,id)).rejects.toThrow("BUILD_MEDIA_ACCESS_DENIED");
+ });
+ it("lists scoped assets without leaking storage keys across project boundaries",async()=>{
+  const f=fixture();await f.catalog.insertIfAbsent(asset);
+  const page=await f.list(scope,null);
+  expect(page.items).toEqual([asset]);expect(page.nextCursor).toBeNull();
+  expect(await f.list(scope,id)).toEqual({items:[],nextCursor:null});
+  await expect(f.list(scope,"missing-asset-123")).rejects.toThrow("BUILD_MEDIA_CURSOR_INVALID");
+ });
+ it("lists are inaccessible to another owner or archived projects",async()=>{
+  await expect(fixture("different-owner").list(scope,null)).rejects.toThrow("BUILD_MEDIA_ACCESS_DENIED");
+  await expect(fixture(scope.ownerId,new Date()).list(scope,null)).rejects.toThrow("BUILD_MEDIA_ACCESS_DENIED");
  });
  it("does not trust a DB conflict result without a verified row",async()=>{
   const f=fixture();f.rows.set(id,{id,buildProjectId:"project-other",ownerId:"owner-other",

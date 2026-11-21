@@ -634,3 +634,6 @@ export * from "./projectMediaStorage";
 export * from "./cloudflareR2ObjectStore";
 
 export * from "./prismaBuildMediaCatalogCore";
+
+// AI4B4A hotfix: one canonical media contract surface for the editor app.
+export { BuildMediaContractError, BUILD_MEDIA_LIMITS } from "@zoeskoul/build-contracts";

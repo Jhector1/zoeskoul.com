@@ -17,10 +17,14 @@ export interface DurableMediaCatalogPort {
   findScoped(scope:BuildMediaProjectScope, assetId:string):Promise<MediaCatalogRecord|null>;
   createImmutable(row:MediaCatalogRecord): Promise<"created"|"conflict">;
   findById(assetId:string):Promise<MediaCatalogRecord|null>;
+  listScoped(scope:BuildMediaProjectScope,cursor:string|null,take:number):Promise<readonly MediaCatalogRecord[]>;
 }
 
 export function createDurableBuildMediaCatalog(port:DurableMediaCatalogPort): Readonly<{
   ownership: BuildMediaOwnershipReader; catalog: BuildMediaMetadataRepository;
+  list(scope:BuildMediaProjectScope,cursor:string|null):Promise<Readonly<{
+    items:readonly BuildMediaAsset[];nextCursor:string|null;
+  }>>;
 }> {
   async function validOwner(scope:BuildMediaProjectScope):Promise<void> {
     const project=await port.lookupProjectOwner(scope.buildProjectId);
@@ -50,6 +54,20 @@ export function createDurableBuildMediaCatalog(port:DurableMediaCatalogPort): Re
         const project=await port.lookupProjectOwner(id);
         return project && project.archivedAt===null ? project.ownerId : null;
       },
+    },
+    async list(scope,cursor) {
+      const trusted=parseBuildMediaScope(scope);
+      await validOwner(trusted);
+      if (cursor!==null) {
+        // Cursor must be one of this owner's project assets.
+        if (!/^[A-Za-z0-9_-]{10,128}$/.test(cursor) ||
+            !await port.findScoped(trusted,cursor))
+          throw new BuildMediaStorageError("BUILD_MEDIA_CURSOR_INVALID");
+      }
+      const rows=await port.listScoped(trusted,cursor,41);
+      if (rows.length>41)throw new BuildMediaStorageError("BUILD_MEDIA_CATALOG_RESULT_INVALID");
+      const items=rows.slice(0,40).map(r=>fromRow(r,trusted));
+      return {items,nextCursor:rows.length>40 ? items.at(-1)!.id : null};
     },
     catalog: {
       async find(scope,assetId) {

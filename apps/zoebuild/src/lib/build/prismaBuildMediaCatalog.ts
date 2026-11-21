@@ -31,6 +31,14 @@ export function createPrismaBuildMediaCatalog() {
     async findById(assetId) {
       return prisma.buildMediaAsset.findUnique({where:{id:assetId}});
     },
+    async listScoped(scope,cursor,take) {
+      return prisma.buildMediaAsset.findMany({
+        where:{buildProjectId:scope.buildProjectId,ownerId:scope.ownerId,
+          visibility:"private",state:"ready",kind:"image"},
+        orderBy:[{createdAt:"desc"},{id:"desc"}],take,
+        ...(cursor ? {cursor:{id:cursor},skip:1} : {}),
+      });
+    },
   };
   return createDurableBuildMediaCatalog(port);
 }
