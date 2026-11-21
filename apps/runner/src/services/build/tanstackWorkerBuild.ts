@@ -18,7 +18,7 @@ export async function executeTanstackWorkerBuild(
   request: ProductionBuildJobRequestV1,
 ) {
   assertTanstackWorkerBuildRequest(request);
-  const workspaceDir = await createWorkspace([...request.files]);
+  const workspaceDir = await createWorkspace([...request.files, ...(request.binaryFiles ?? [])]);
   const runId = randomUUID();
   try {
     await ensureWorkspaceWritableForShellUser(workspaceDir);

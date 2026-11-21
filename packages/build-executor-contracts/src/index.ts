@@ -23,6 +23,24 @@ export const BUILD_EXECUTOR_LIMITS = {
 } as const;
 
 export type BuildExecutorTextFile = Readonly<{ path: string; content: string }>;
+/** Hydrated, server-verified image bytes. No object keys, URLs, or upload grants
+ * cross the Runner API; the exact bytes are bounded again on the Runner. */
+export type BuildExecutorBinaryFile = Readonly<{
+  path: string;
+  encoding: "base64";
+  data: string;
+  mimeType: "image/png" | "image/jpeg" | "image/webp" | "image/avif";
+  sizeBytes: number;
+  checksum: string;
+}>;
+export const BUILD_EXECUTOR_BINARY_LIMITS = {
+  files: 150,
+  fileBytes: 5 * 1024 * 1024,
+  totalBytes: 5 * 1024 * 1024,
+  // Express and ZoeBuild share an 8 MiB trusted JSON boundary. Leave space
+  // for protocol metadata and possible escape overhead in source strings.
+  jsonBytes: BUILD_EXECUTOR_HTTP_BODY_LIMIT_BYTES - 4096,
+} as const;
 
 export type DependencyLockBootstrapJobRequestV1 = Readonly<{
   protocolVersion: typeof BUILD_EXECUTOR_PROTOCOL_VERSION;
@@ -42,6 +60,7 @@ export type ProductionBuildJobRequestV1 = Readonly<{
   stackId: string;
   templateId: string;
   files: readonly BuildExecutorTextFile[];
+  binaryFiles?: readonly BuildExecutorBinaryFile[];
 }>;
 
 export type TrustedBuildJobRequest =
@@ -225,13 +244,65 @@ function parseFiles(
   return files;
 }
 
+const IMAGE_MIME_BY_EXTENSION: Readonly<Record<string, BuildExecutorBinaryFile["mimeType"]>> = {
+  ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
+  ".webp": "image/webp", ".avif": "image/avif",
+};
+const BASE64_IMAGE = /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
+
+function parseBinaryFiles(value: unknown, text: readonly BuildExecutorTextFile[]): BuildExecutorBinaryFile[] {
+  if (!Array.isArray(value) || value.length > BUILD_EXECUTOR_BINARY_LIMITS.files ||
+      text.length + value.length > BUILD_EXECUTOR_LIMITS.files) {
+    throw new BuildExecutorContractError("Invalid trusted binary file count.");
+  }
+  const seen = new Set(text.map(file => file.path.toLocaleLowerCase("en-US")));
+  const result: BuildExecutorBinaryFile[] = [];
+  let total = 0;
+  for (const raw of value) {
+    const file = asRecord(raw);
+    if (!file || Object.keys(file).some(key => ![
+      "path", "encoding", "data", "mimeType", "sizeBytes", "checksum",
+    ].includes(key))) throw new BuildExecutorContractError("Invalid trusted binary file fields.");
+    const name = safeRelativePath(file.path);
+    const key = name.toLocaleLowerCase("en-US");
+    if (seen.has(key)) throw new BuildExecutorContractError("Duplicate trusted file path.");
+    seen.add(key);
+    const extension = /\.[^.\/]+$/.exec(name)?.[0]?.toLowerCase();
+    const allowedMime = extension && IMAGE_MIME_BY_EXTENSION[extension];
+    if (!allowedMime || file.mimeType !== allowedMime || file.encoding !== "base64" ||
+        typeof file.data !== "string" || typeof file.checksum !== "string" ||
+        !/^sha256:[a-f0-9]{64}$/.test(file.checksum) ||
+        !Number.isSafeInteger(file.sizeBytes) || Number(file.sizeBytes) < 1 ||
+        Number(file.sizeBytes) > BUILD_EXECUTOR_BINARY_LIMITS.fileBytes) {
+      throw new BuildExecutorContractError("Invalid trusted image metadata.");
+    }
+    // Length first: this must not run a regexp over an unbounded string.
+    const size = Number(file.sizeBytes);
+    const encodedLength = 4 * Math.ceil(size / 3);
+    if (file.data.length !== encodedLength || !BASE64_IMAGE.test(file.data)) {
+      throw new BuildExecutorContractError("Invalid trusted image base64.");
+    }
+    const padding = file.data.endsWith("==") ? 2 : file.data.endsWith("=") ? 1 : 0;
+    if ((encodedLength / 4) * 3 - padding !== size) {
+      throw new BuildExecutorContractError("Invalid trusted image length.");
+    }
+    total += size;
+    if (total > BUILD_EXECUTOR_BINARY_LIMITS.totalBytes) {
+      throw new BuildExecutorContractError("Trusted images exceed total byte limit.");
+    }
+    result.push({path:name,encoding:"base64",data:file.data,
+      mimeType:allowedMime,sizeBytes:size,checksum:file.checksum});
+  }
+  return result;
+}
+
 export function parseTrustedBuildJobRequest(value: unknown): TrustedBuildJobRequest {
   const input = asRecord(value);
   if (!input) throw new BuildExecutorContractError("Trusted Build executor request must be an object.");
 
   const allowed = new Set([
     "protocolVersion", "operation", "buildProjectId", "sourceVersion",
-    "stackId", "templateId", "files",
+    "stackId", "templateId", "files", "binaryFiles",
   ]);
   for (const key of Object.keys(input)) {
     if (!allowed.has(key)) {
@@ -285,18 +356,27 @@ export function parseTrustedBuildJobRequest(value: unknown): TrustedBuildJobRequ
     ),
   };
 
-  if (
-    operation === "dependency-lock-bootstrap"
-  ) {
-    return {
-      ...common,
-      operation,
-    };
+  if (operation === "dependency-lock-bootstrap") {
+    if (Object.prototype.hasOwnProperty.call(input, "binaryFiles")) {
+      throw new BuildExecutorContractError("Dependency bootstrap cannot transport image bytes.");
+    }
+    return {...common, operation};
   }
-
+  const binaryFiles = input.binaryFiles === undefined
+    ? undefined : parseBinaryFiles(input.binaryFiles, common.files);
+  if (binaryFiles?.length && (input.stackId !== "tanstack-start-v1" ||
+      input.templateId !== "tanstack-start-v1")) {
+    throw new BuildExecutorContractError("Trusted image transport is TanStack-only.");
+  }
+  if (binaryFiles !== undefined && utf8ByteLength(JSON.stringify({
+    ...common, operation, binaryFiles,
+  })) > BUILD_EXECUTOR_BINARY_LIMITS.jsonBytes) {
+    throw new BuildExecutorContractError("Trusted image request exceeds transport limit.");
+  }
   return {
     ...common,
     operation: "production-build",
+    ...(binaryFiles === undefined ? {} : {binaryFiles}),
   };
 }
 

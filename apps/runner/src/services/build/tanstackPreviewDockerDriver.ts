@@ -188,7 +188,7 @@ export function makeTanstackPreviewDockerDriver(
       const endWorkspace = telemetry?.begin("workspace_create");
       try {
         onPhase?.("workspace");
-        workspaceDir = await createWorkspace([...request.files], {
+        workspaceDir = await createWorkspace([...request.files, ...(request.binaryFiles ?? [])], {
           onWorkspaceAllocated: async (allocated) => {
             // Durable identity precedes creation; even an in-flight write or
             // failed rollback leaves a precise recovery record.

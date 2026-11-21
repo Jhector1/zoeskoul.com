@@ -73,3 +73,25 @@ describe("V1 isolated TanStack live-preview admission policy", () => {
     expect(classify("development",next(previous.files,5))).toMatchObject({action:"unchanged",reason:"unchanged"});
   });
 });
+
+describe("versioned binary edits never enter the text HMR writer", () => {
+  const asset={path:"public/image.png",encoding:"base64" as const,
+    mimeType:"image/png" as const,data:"YWJj",sizeBytes:3,
+    checksum:`sha256:${"a".repeat(64)}`};
+  it("forces restart on image creation, replacement, deletion, or text+image changes", () => {
+    const withImage={...previous,binaryFiles:[asset]};
+    expect(classifyTanstackPreviewTransition({mode:"development",previous,
+      next:{...withImage,sourceVersion:6}})).toMatchObject({action:"restart",reason:"protected_files_changed"});
+    expect(classifyTanstackPreviewTransition({mode:"development",previous:withImage,
+      next:{...withImage,sourceVersion:6,binaryFiles:[{...asset,data:"YWJk"}]}}))
+      .toMatchObject({action:"restart",reason:"protected_files_changed"});
+    expect(classifyTanstackPreviewTransition({mode:"development",previous:withImage,
+      next:{...previous,sourceVersion:6}})).toMatchObject({action:"restart",reason:"protected_files_changed"});
+    expect(classifyTanstackPreviewTransition({mode:"development",previous:withImage,
+      next:{...edit("src/routes/index.tsx","new"),binaryFiles:[{...asset,data:"YWJk"}]}}))
+      .toMatchObject({action:"restart",reason:"protected_files_changed"});
+    expect(classifyTanstackPreviewTransition({mode:"development",previous:withImage,
+      next:{...withImage,binaryFiles:[{...asset,data:"YWJk"}]}}))
+      .toMatchObject({action:"reject",reason:"invalid_revision"});
+  });
+});
