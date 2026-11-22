@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { TanstackWorkerArtifactV1 } from "@zoeskoul/build-executor-contracts";
-const m=vi.hoisted(()=>({create:vi.fn(),start:vi.fn(),remove:vi.fn(),inspect:vi.fn(),fetch:vi.fn(),probe:vi.fn(),retire:vi.fn(),read:vi.fn()}));
+const m=vi.hoisted(()=>({relay:vi.fn(),pilotEnabled:vi.fn(),create:vi.fn(),start:vi.fn(),remove:vi.fn(),inspect:vi.fn(),fetch:vi.fn(),probe:vi.fn(),retire:vi.fn(),read:vi.fn()}));
 vi.mock("../docker/dockerClient.js",()=>({docker:{createContainer:m.create}}));
 vi.mock("./executeProductionBuild.js",()=>({buildProductionBuildContainerOptions:({command}: {command:readonly string[]})=>({
   Image:"fixture", Cmd:[...command], Env:["RUNNER_EXEC_MODE=oneshot"], User:"1000:0", Labels:{},
@@ -8,6 +8,7 @@ vi.mock("./executeProductionBuild.js",()=>({buildProductionBuildContainerOptions
 })}));
 vi.mock("./tanstackPreviewDockerTransport.js",()=>({fetchTanstackHttpInsideSandbox:m.fetch,probeTanstackListenerInsideSandbox:m.probe,retireTanstackHttpWorker:m.retire}));
 vi.mock("./tanstackWorkerArtifact.js",()=>({readTanstackWorkerArtifact:m.read}));
+vi.mock("./tanstackWorkerBrowserPilot.js",()=>({serveWorkerBrowserPilot:m.relay,workerBrowserPilotEnabled:m.pilotEnabled,WORKER_BROWSER_PILOT_MAX_MS:45_000}));
 import { runTanstackWorkerRuntimeSmoke, workerSmokeContainerOptions } from "./tanstackWorkerRuntimeSmoke.js";
 const b64=(s:string)=>Buffer.from(s).toString("base64");
 const artifact:TanstackWorkerArtifactV1={type:"worker-bundle",serverOutputPath:"dist/server",assetsOutputPath:"dist/client",entrypoint:"index.js",sha256:"a".repeat(64),totalBytes:1,
@@ -71,4 +72,12 @@ describe("U18 runtime smoke orchestration",()=>{
   m.read.mockResolvedValue({...artifact,sha256:"b".repeat(64)});
   await expect(run().promise).rejects.toThrow(/artifact changed/);
  });
+});
+
+
+it("never exposes the operator relay for general runtime verification",async()=>{
+  m.pilotEnabled.mockReturnValue(true);
+  const onContainerCreated=vi.fn(async()=>{}),onContainerRemoved=vi.fn(async()=>{});
+  await expect(runTanstackWorkerRuntimeSmoke({workspaceDir:"/workspaces/fixture",artifact,runId:"run",onContainerCreated,onContainerRemoved,general:true})).resolves.toMatchObject({state:"passed"});
+  expect(m.relay).not.toHaveBeenCalled();expect(m.pilotEnabled).not.toHaveBeenCalled();
 });

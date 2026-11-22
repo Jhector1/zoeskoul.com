@@ -10,6 +10,15 @@ export function shouldRunWorkerSmoke(request: ProductionBuildJobRequestV1, flag 
     request.stackId === "tanstack-start-v1" && request.templateId === "tanstack-start-v1";
 }
 
+/** Service-owned opt-in; never inferred from request fields or browser input. */
+export function generalWorkerVerificationEnabled(flag = process.env.ZOEBUILD_GENERAL_WORKER_VERIFICATION, pool = process.env.RUNNER_EXECUTION_POOL): boolean {
+  return flag === "1" && pool === "zoebuild";
+}
+
+export function workerVerificationSnapshot(request: ProductionBuildJobRequestV1): string {
+  return createHash("sha256").update(JSON.stringify({files:request.files,binaryFiles:request.binaryFiles ?? []}), "utf8").digest("hex");
+}
+
 export const WORKER_REFERENCE_PROJECT = "zoebuild-u18-reference-fixture";
 export const WORKER_REFERENCE_ACTOR = "operator:zoebuild-u18-reference-v1";
 const REFERENCE_SNAPSHOT = "c75b365c27563a8e69b3d1991a6b3314a6ffd98b45ec4bf306514f54d696f978";
@@ -81,7 +90,7 @@ export function isDiscardableU18GeneratedMetadata(key: string, value: unknown, o
 
 /** Only this known, binding-free pilot is supported. Never pass generated config
  * to Wrangler, never forward account metadata, and never guess about bindings. */
-export function workerSmokeConfig(artifact: TanstackWorkerArtifactV1, reference = false) {
+export function workerSmokeConfig(artifact: TanstackWorkerArtifactV1, reference = false, general = false) {
   const file = artifact.files.find(f => f.path === "server/wrangler.json");
   assertMetadata(file);
   const bytes = Buffer.from(file.data, "base64");
@@ -113,6 +122,12 @@ export function workerSmokeConfig(artifact: TanstackWorkerArtifactV1, reference 
     // only the same enumerated shapes; never forward them or waive unknown
     // nonempty bindings. The original digest-bound exception is unchanged.
     if (isDiscardableU18GeneratedMetadata(key, value, observed || reference)) continue;
+    if (general) {
+      // These fields are discarded, never passed to the runtime. The two
+      // binding envelopes and other recognized forms must remain empty.
+      if (key === "python_modules" && emptyBindingEnvelope(value, ["exclude"])) continue;
+      if (key !== "python_modules" && isDiscardableU18GeneratedMetadata(key, value, true)) continue;
+    }
     assertMetadata(empty(value));
   }
   return {
@@ -139,8 +154,8 @@ const child = cp.spawn(process.execPath, ['/workspace/node_modules/wrangler/bin/
 child.on('error',()=>{process.exitCode=1});
 child.on('exit',code=>{process.exitCode=code===0?0:1});
 `;
-export function workerSmokeCommand(artifact: TanstackWorkerArtifactV1, reference = false): readonly string[] {
-  return ["node", "-e", WRAPPER, JSON.stringify(workerSmokeConfig(artifact, reference))];
+export function workerSmokeCommand(artifact: TanstackWorkerArtifactV1, reference = false, general = false): readonly string[] {
+  return ["node", "-e", WRAPPER, JSON.stringify(workerSmokeConfig(artifact, reference, general))];
 }
 
 export function selectWorkerSmokeAssets(artifact: TanstackWorkerArtifactV1, html: string) {

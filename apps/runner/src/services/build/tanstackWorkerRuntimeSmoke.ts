@@ -8,8 +8,8 @@ import { workerSmokeCommand, selectWorkerSmokeAssets } from "./tanstackWorkerRun
 import { readTanstackWorkerArtifact } from "./tanstackWorkerArtifact.js";
 import { serveWorkerBrowserPilot, workerBrowserPilotEnabled, WORKER_BROWSER_PILOT_MAX_MS } from "./tanstackWorkerBrowserPilot.js";
 
-export function workerSmokeContainerOptions(workspaceDir: string, artifact: TanstackWorkerArtifactV1, runId: string, reference = false) {
-  const command = workerSmokeCommand(artifact, reference);
+export function workerSmokeContainerOptions(workspaceDir: string, artifact: TanstackWorkerArtifactV1, runId: string, reference = false, general = false) {
+  const command = workerSmokeCommand(artifact, reference, general);
   const base = buildProductionBuildContainerOptions({workspaceDir, command, step:"build"});
   const options = {...base,
     Env:[...base.Env, TANSTACK_PREVIEW_OFFLINE_ENV, "WRANGLER_SEND_METRICS=false", "NODE_ENV=production"],
@@ -33,11 +33,12 @@ export async function runTanstackWorkerRuntimeSmoke(input: Readonly<{
   workspaceDir:string; artifact:TanstackWorkerArtifactV1; runId:string;
   onContainerCreated:(id:string)=>Promise<void>; onContainerRemoved:()=>Promise<void>;
   reference?: true;
+  general?: true;
 }>):Promise<TanstackWorkerRuntimeSmokeV1> {
   let stage: Extract<TanstackWorkerRuntimeSmokeV1,{state:"failed"}>["stage"]="configuration";
   const failed=():TanstackWorkerRuntimeSmokeV1=>({state:"failed",stage,artifactSha256:input.artifact.sha256});
   let options:ReturnType<typeof workerSmokeContainerOptions>;
-  try { options=workerSmokeContainerOptions(input.workspaceDir,input.artifact,input.runId,input.reference === true); }
+  try { options=workerSmokeContainerOptions(input.workspaceDir,input.artifact,input.runId,input.reference === true,input.general === true); }
   catch { return failed(); }
   stage="startup";
   const container=await docker.createContainer(options);
@@ -88,7 +89,7 @@ export async function runTanstackWorkerRuntimeSmoke(input: Readonly<{
     result={state:"passed",artifactSha256:input.artifact.sha256,homeStatus:200,healthStatus:200,verifiedClientAssets:2};
     // Temporary exact-artifact pilot. Never expose a TCP or application route.
     // A disconnected or absent operator cannot extend the original deadline.
-    if(input.reference || workerBrowserPilotEnabled(input.artifact.sha256)) {
+    if(!input.general && (input.reference || workerBrowserPilotEnabled(input.artifact.sha256))) {
       const windowMs=Math.min(WORKER_BROWSER_PILOT_MAX_MS,Math.floor(hardDeadline-performance.now()));
       if(windowMs>0) {
         try {

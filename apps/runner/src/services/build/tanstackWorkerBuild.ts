@@ -8,7 +8,7 @@ import { executeBuildStep } from "./executeProductionBuild.js";
 import { readTanstackWorkerArtifact } from "./tanstackWorkerArtifact.js";
 import { env } from "../../lib/env.js";
 import { createTanstackRecoveryJournal } from "./tanstackPreviewDurableRecovery.js";
-import { shouldRunWorkerSmoke, shouldRunReferenceWorkerSmoke, WORKER_REFERENCE_PROJECT } from "./tanstackWorkerRuntimePolicy.js";
+import { shouldRunWorkerSmoke, shouldRunReferenceWorkerSmoke, WORKER_REFERENCE_PROJECT, generalWorkerVerificationEnabled, workerVerificationSnapshot } from "./tanstackWorkerRuntimePolicy.js";
 import { runTanstackWorkerRuntimeSmoke } from "./tanstackWorkerRuntimeSmoke.js";
 
 /**
@@ -21,12 +21,15 @@ import { runTanstackWorkerRuntimeSmoke } from "./tanstackWorkerRuntimeSmoke.js";
 export async function executeTanstackWorkerBuild(
   request: ProductionBuildJobRequestV1,
   referenceAuthorized = false,
+  generalAuthorized = false,
 ) {
   assertTanstackWorkerBuildRequest(request);
   const reference = referenceAuthorized && shouldRunReferenceWorkerSmoke(request);
   if (referenceAuthorized !== reference || (request.buildProjectId === WORKER_REFERENCE_PROJECT && !reference))
     throw new Error("Reference fixture admission refused.");
-  const pilot = shouldRunWorkerSmoke(request) || reference;
+  const general = generalAuthorized && generalWorkerVerificationEnabled() && !reference && request.buildProjectId !== WORKER_REFERENCE_PROJECT;
+  if (generalAuthorized !== general) throw new Error("General Worker verification admission refused.");
+  const pilot = shouldRunWorkerSmoke(request) || reference || general;
   const journal = pilot ? createTanstackRecoveryJournal(env.workspaceRoot) : null;
   if (journal) await journal.write();
   const workspaceDir = await createWorkspace([...request.files, ...(request.binaryFiles ?? [])], {
@@ -55,10 +58,11 @@ export async function executeTanstackWorkerBuild(
     const runtimeSmoke = journal ? await runTanstackWorkerRuntimeSmoke({workspaceDir, artifact, runId,
       onContainerCreated: lifecycle.onContainerCreated!, onContainerRemoved: lifecycle.onContainerRemoved!,
       ...(reference ? {reference: true as const} : {}),
+      ...(general ? {general: true as const} : {}),
     }) : undefined;
     return { protocolVersion: request.protocolVersion, operation: "production-build" as const,
       buildProjectId: request.buildProjectId, sourceVersion: request.sourceVersion,
-      artifact, ...(runtimeSmoke ? {runtimeSmoke} : {}) };
+      artifact, ...(general ? {snapshotSha256:workerVerificationSnapshot(request)} : {}), ...(runtimeSmoke ? {runtimeSmoke} : {}) };
   } finally {
     // A failed workspace removal must propagate: never mark the build verified.
     if (liveContainer || journal?.current.containerId) {

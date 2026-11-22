@@ -14,7 +14,7 @@ import {
 
 import { executeTanstackWorkerBuild } from "../services/build/tanstackWorkerBuild.js";
 import { assertTanstackWorkerBuildRequest } from "../services/build/tanstackWorkerBuildPolicy.js";
-import { referenceOperatorAllowed, shouldRunReferenceWorkerSmoke, WORKER_REFERENCE_PROJECT } from "../services/build/tanstackWorkerRuntimePolicy.js";
+import { referenceOperatorAllowed, shouldRunReferenceWorkerSmoke, WORKER_REFERENCE_PROJECT, generalWorkerVerificationEnabled } from "../services/build/tanstackWorkerRuntimePolicy.js";
 
 import { classifyProductionBuildStepFailure, TrustedProductionBuildStepFailure } from "../services/build/productionBuildStepFailure.js";
 
@@ -60,9 +60,13 @@ export const executeBuildProductionRoute:
           !shouldRunReferenceWorkerSmoke(request))) {
           return res.status(403).json({ok:false,error:"Forbidden."});
         }
+        const general = !reference && generalWorkerVerificationEnabled();
+        if (general && !/^u:[a-f0-9]{64}$/.test(req.header("x-actor-key") ?? "")) {
+          return res.status(403).json({ok:false,error:"Forbidden."});
+        }
         candidatePaths = new Set(request.files.map(file => file.path));
         const result = await withZoeBuildBuildSlot(
-          () => reference ? executeTanstackWorkerBuild(request, true) : executeTanstackWorkerBuild(request),
+          () => reference ? executeTanstackWorkerBuild(request, true) : general ? executeTanstackWorkerBuild(request, false, true) : executeTanstackWorkerBuild(request),
         );
 
         return res

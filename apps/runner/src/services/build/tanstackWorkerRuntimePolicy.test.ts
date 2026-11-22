@@ -67,3 +67,21 @@ describe("U18F5 observed generated metadata compatibility", () => {
     expect(() => workerSmokeConfig({...artifact({...config,dev:{a:1,b:2,c:3,d:4,e:5}}),sha256:sha})).toThrow();
   });
 });
+
+
+describe("U20 general runtime boundary",()=>{
+  it("requires the explicit dedicated pool and rollout flag",async()=>{
+    const {generalWorkerVerificationEnabled,workerVerificationSnapshot}=await import("./tanstackWorkerRuntimePolicy.js");
+    expect(generalWorkerVerificationEnabled("1","zoebuild")).toBe(true);
+    for(const flag of ["","true","0"]) expect(generalWorkerVerificationEnabled(flag,"zoebuild")).toBe(false);
+    expect(generalWorkerVerificationEnabled("1","zoeskoul-learning")).toBe(false);
+    expect(workerVerificationSnapshot(req)).not.toBe(workerVerificationSnapshot({...req,files:[{path:"x.ts",content:"x"}]}));
+  });
+  it("reconstructs configuration for non-pilot artifacts and rejects nonempty bindings",()=>{
+    const meta={...config,jsx_factory:"React.createElement",durable_objects:{bindings:[]},python_modules:{exclude:[]},dev:{a:1,b:2,c:3,d:4,e:5}};
+    expect(workerSmokeConfig(artifact(meta),false,true)).not.toHaveProperty("dev");
+    expect(workerSmokeConfig(artifact(meta),false,true)).not.toHaveProperty("durable_objects");
+    for(const bad of [{...meta,durable_objects:{bindings:[{name:"BAD"}]}},{...meta,python_modules:{exclude:["x"]}},{...meta,services:[{binding:"X"}]}])
+      expect(()=>workerSmokeConfig(artifact(bad),false,true)).toThrow();
+  });
+});

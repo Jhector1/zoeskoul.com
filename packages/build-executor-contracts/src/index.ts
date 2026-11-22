@@ -450,6 +450,7 @@ export type TanstackWorkerBuildExecutionResponseV1 = Readonly<{
     operation: "production-build";
     buildProjectId: string;
     sourceVersion: number;
+    snapshotSha256?: string;
     artifact: TanstackWorkerArtifactV1;
     runtimeSmoke?: TanstackWorkerRuntimeSmokeV1;
   }>;
