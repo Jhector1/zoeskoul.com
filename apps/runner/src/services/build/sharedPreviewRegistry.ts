@@ -1,4 +1,5 @@
 import { previewObservability } from "./previewObservability.js";
+import type { TanstackPreviewLeaseMode } from "@zoeskoul/build-executor-contracts";
 import type { TanstackPreviewIdentity } from "./tanstackPreviewIdentity.js";
 
 /** Canonical live TanStack full-stack preview leases. All preview admission,
@@ -7,6 +8,8 @@ import type { TanstackPreviewIdentity } from "./tanstackPreviewIdentity.js";
  */
 export type FullStackPreviewLease = Readonly<{
   id: string;
+  /** Legacy callers remain immutable. No development lease is created by existing routes. */
+  mode?: TanstackPreviewLeaseMode;
   ownerKey: string;
   buildProjectId: string;
   sourceVersion: number;
@@ -42,7 +45,12 @@ export class SharedFullStackPreviewRegistry {
     if (!lease.id || !lease.ownerKey || !lease.buildProjectId ||
         !lease.identity?.fingerprint || this.live.has(lease.id))
       throw new Error("Invalid full-stack preview lease.");
-    this.live.set(lease.id, lease);
+    const mode = lease.mode ?? "immutable";
+    if (mode !== "immutable" && mode !== "development")
+      throw new Error("Invalid full-stack preview lease mode.");
+    // Normalize legacy callers explicitly to immutable; all capacity and close
+    // accounting remains shared across both modes.
+    this.live.set(lease.id, { ...lease, mode });
   }
   touch(id: string, at: number) {
     const lease = this.live.get(id);
@@ -86,7 +94,10 @@ export class SharedFullStackPreviewRegistry {
     maxLifetimeMs: number;
     healthCheck: (lease: FullStackPreviewLease) => Promise<boolean>;
   }>): Promise<FullStackPreviewLease | null> {
+    // Existing versioned-preview reuse MUST NOT claim a future mutable
+    // development lease even if every source/dependency hash matches.
     const lease = this.list().find(candidate =>
+      candidate.mode === "immutable" &&
       candidate.ownerKey === input.ownerKey &&
       candidate.buildProjectId === input.buildProjectId &&
       candidate.sourceVersion === input.sourceVersion &&

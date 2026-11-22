@@ -87,3 +87,46 @@ describe("shared ZoeBuild preview leases",()=>{
       healthCheck:async()=>true,maxLifetimeMs:60_000})).resolves.toBeNull();
   });
 });
+
+
+describe("development lease isolation (not enabled by preview routes)",()=>{
+  it("normalizes all existing callers to immutable and retains the mode on touch",()=>{
+    const registry=new SharedFullStackPreviewRegistry();
+    registry.register(lease("old","owner","project",async()=>{}));
+    expect(registry.get("old")?.mode).toBe("immutable");
+    registry.touch("old",Date.now());
+    expect(registry.get("old")?.mode).toBe("immutable");
+    expect(()=>registry.register({...lease("bad","owner","project",async()=>{}),
+      mode:"other" as "immutable"})).toThrow("Invalid full-stack preview lease mode");
+    expect(registry.count()).toBe(1);
+  });
+  it("never promotes a development lease through immutable reuse",async()=>{
+    const registry=new SharedFullStackPreviewRegistry();
+    let healthChecks=0;
+    registry.register({...lease("dev","owner","project",async()=>{},Date.now()),
+      mode:"development"});
+    const reused=await registry.claimReusable({
+      ownerKey:"owner",buildProjectId:"project",sourceVersion:1,identity,
+      maxLifetimeMs:60_000,
+      healthCheck:async()=>{healthChecks++;return true},
+    });
+    expect(reused).toBeNull();
+    expect(healthChecks).toBe(0);
+    expect(registry.snapshot().totalReserved).toBe(1);
+    expect(await registry.drain("owner","project")).toBe(1);
+    expect(registry.count()).toBe(0);
+  });
+  it("allows reuse of a matching immutable lease without claiming a development lease",async()=>{
+    const registry=new SharedFullStackPreviewRegistry();
+    registry.register({...lease("dev","owner","project",async()=>{},Date.now()),
+      mode:"development"});
+    registry.register(lease("immutable","owner","project",async()=>{},Date.now()));
+    const reused=await registry.claimReusable({
+      ownerKey:"owner",buildProjectId:"project",sourceVersion:1,identity,
+      maxLifetimeMs:60_000,healthCheck:async()=>true,
+    });
+    expect(reused?.id).toBe("immutable");
+    expect(reused?.mode).toBe("immutable");
+    expect(registry.count()).toBe(2);
+  });
+});
