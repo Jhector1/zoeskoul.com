@@ -55,7 +55,12 @@ function retryableResource(input:BrowserReadInput):boolean {
   const path=input.path.split("?",1)[0];
   return path==="@vite/client" || path==="@react-refresh" ||
     path==="@id/virtual:tanstack-start-dev-client-entry" ||
-    (/^(?:src|node_modules)\//.test(path) && /\.(?:[cm]?[jt]sx?|css|scss|json|svg|woff2?|png|jpe?g|webp)$/i.test(path));
+    (/^(?:src|node_modules)\//.test(path) && /\.(?:[cm]?[jt]sx?|css|scss|json|svg|woff2?|png|jpe?g|webp)$/i.test(path)) ||
+    // Public files are served by Vite without the `public/` prefix. Retry
+    // only ordinary static resources at known roots, and only for an explicit
+    // runner/DB revision transition. Missing files and untrusted 404s are
+    // never replayed, nor are application RPCs or arbitrary routes.
+    /^(?:images|assets|fonts|static)\/(?:[A-Za-z0-9_.-]+\/){0,8}[A-Za-z0-9_.-]+\.(?:png|jpe?g|gif|webp|avif|svg|ico|woff2?|ttf|otf)$/i.test(path);
 }
 function isRevisionTransition(error:unknown):boolean {
   return (error instanceof RunnerHttpError && error.status===409 && error.code==="REVISION_TRANSITION") ||

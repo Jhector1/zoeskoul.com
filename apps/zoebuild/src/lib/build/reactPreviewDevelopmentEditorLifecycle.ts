@@ -69,30 +69,36 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
     if (disposed || failed || running || pending === null) return;
     running = true;
     let attemptedVersion:number|null=null;
+    let attemptedAction:"start"|"update"|"restart"|"none"="none";
     try {
       while (!disposed && !failed && pending !== null) {
         const version = pending;
         pending = null;
         attemptedVersion=version;
+        attemptedAction="none";
         const current = input.controller.snapshot();
         let session: DevelopmentBrowserSession;
         if(retryVersion!==null) {
           const eligibleRetry=version>=retryVersion;
           retryVersion=null;
           phase=eligibleRetry?"retrying-update":"reconciling";
+          attemptedAction=eligibleRetry?"update":"restart";
           session=eligibleRetry ? await input.controller.update(version) : await input.controller.restart(version);
         } else if(recovering) {
           phase="reconciling";
+          attemptedAction="restart";
           session=await input.controller.restart(version);
         } else if (!current) {
           phase="starting";
+          attemptedAction="start";
           session = await input.controller.start(version);
         } else if (version === current.sourceVersion) {
           session = current;
         } else if (version > current.sourceVersion) {
           phase="updating";
+          attemptedAction="update";
           session = await input.controller.update(version);
-        } else {phase="reconciling";session = await input.controller.restart(version);}
+        } else {phase="reconciling";attemptedAction="restart";session = await input.controller.restart(version);}
         recovering=false;
         recoveryAttempts=0;
         if (disposed || failed) break;
@@ -102,7 +108,21 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
       }
     } catch(error) {
       const version=selectedVersion;
-      if(!disposed && !failed && selectedReady && version!==null &&
+      // A saved image rename/upload/remove is intentionally classified by the
+      // trusted Runner as RESTART_REQUIRED (HTTP 409). One source-fenced
+      // replacement is normal, not a failed recovery or a reason to burn the
+      // transient-failure budget. Only an UPDATE may take this fast path;
+      // repeated start/restart failures still consume the bounded budget.
+      const plannedRestart = attemptedAction==="update" && attemptedVersion!==null &&
+        version!==null && version>=attemptedVersion && selectedReady &&
+        error instanceof DevelopmentBrowserSessionError && error.code==="RESTART_REQUIRED";
+      if(!disposed && !failed && plannedRestart) {
+        retryVersion=null;
+        recovering=true;
+        phase="reconciling";
+        pending=version;
+        input.onWaiting();
+      } else if(!disposed && !failed && selectedReady && version!==null &&
           recoveryAttempts<maxRecoveryAttempts) {
         recoveryAttempts++;
         // A pre-write rejection has no uncertain side effect and is the only

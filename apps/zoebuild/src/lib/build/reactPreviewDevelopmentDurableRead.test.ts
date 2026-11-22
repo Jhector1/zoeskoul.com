@@ -80,6 +80,25 @@ describe("Phase 4F5H10P bounded durable resource revision retry",()=>{
   expect(proxyFetchTrustedReactDevelopmentPreviewAtRunner).toHaveBeenNthCalledWith(1,expect.objectContaining({sourceVersion:8}));
   expect(proxyFetchTrustedReactDevelopmentPreviewAtRunner).toHaveBeenNthCalledWith(2,expect.objectContaining({sourceVersion:9}));
  });
+ it.each(["images/red.png","images/nested/blue.webp","assets/logo.svg","fonts/site.woff2","static/hero.avif"])(
+  "revalidates ownership, grant, and new revision on a public asset transition: %s",async(path)=>{
+   vi.mocked(proxyFetchTrustedReactDevelopmentPreviewAtRunner)
+     .mockRejectedValueOnce(transition())
+     .mockResolvedValue({sourceVersion:8,response:{status:200,
+       headers:{"content-type":"image/png"},bodyBase64:Buffer.from("asset").toString("base64")}});
+   const response=await readOwnedDevelopmentPreviewBrowserContent({...args,path});
+   expect(response.status).toBe(200);
+   expect(proxyFetchTrustedReactDevelopmentPreviewAtRunner).toHaveBeenCalledTimes(2);
+   expect(lookupDurablePreviewGrant).toHaveBeenCalledTimes(2);
+   expect(checkDurablePreviewGrant).toHaveBeenCalledTimes(3);
+   expect(requireOwnedReactPreviewProject).toHaveBeenCalledTimes(3);
+  });
+ it.each(["public/images/a.png","_serverFn/images/a.png","images/../a.png","other/hero.png"])(
+  "does not replay a revision-transition response outside trusted static roots: %s",async(path)=>{
+   vi.mocked(proxyFetchTrustedReactDevelopmentPreviewAtRunner).mockRejectedValueOnce(transition());
+   await expect(readOwnedDevelopmentPreviewBrowserContent({...args,path})).rejects.toMatchObject({status:409});
+   expect(proxyFetchTrustedReactDevelopmentPreviewAtRunner).toHaveBeenCalledOnce();
+  });
  it("does not retry general 404s, application data requests, or revoked grants",async()=>{
   vi.mocked(proxyFetchTrustedReactDevelopmentPreviewAtRunner).mockRejectedValueOnce(new RunnerHttpError(404,"Missing","NOT_FOUND"));
   await expect(readOwnedDevelopmentPreviewBrowserContent(moduleArgs)).rejects.toMatchObject({status:404});
