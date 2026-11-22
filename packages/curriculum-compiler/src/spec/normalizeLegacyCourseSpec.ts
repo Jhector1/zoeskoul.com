@@ -7,6 +7,7 @@ import type {
     ExerciseKindMix,
 } from "@zoeskoul/curriculum-contracts";
 import { getCurriculumProfile } from "@zoeskoul/curriculum-profiles";
+import { mergeManifestIdeServiceConfigs } from "@zoeskoul/curriculum-contracts";
 
 function cleanString(value: unknown): string | undefined {
     return typeof value === "string" && value.trim() ? value.trim() : undefined;
@@ -86,6 +87,23 @@ function normalizePractice(value: unknown): PracticeConfig | undefined {
     };
 
     return Object.keys(result).length > 0 ? result : undefined;
+}
+
+/** Reuse the canonical manifest service merge for sparse authored scope metadata. */
+function normalizeAuthoredServiceDefaults(value: unknown): import("@zoeskoul/curriculum-contracts").ManifestIdeServiceConfig | undefined {
+    if (value == null) return undefined;
+    if (typeof value !== "object" || Array.isArray(value)) {
+        throw new Error("Authoring serviceDefaults must be an object");
+    }
+    const raw = value as Record<string, unknown>;
+    if (raw.administratorLab !== undefined &&
+        raw.administratorLab !== "disabled" && raw.administratorLab !== "eligible") {
+        // Privileged metadata is never silently normalized into an enabled mode.
+        throw new Error("Invalid administratorLab configuration");
+    }
+    return mergeManifestIdeServiceConfigs(
+        raw as import("@zoeskoul/curriculum-contracts").ManifestIdeServiceConfig,
+    ) ?? undefined;
 }
 
 function cleanNumberOrNull(value: unknown): number | null {
@@ -377,6 +395,7 @@ function normalizeTopic(
         learningGoals: cleanStringArray(topic?.learningGoals),
         practice: normalizePractice(topic?.practice),
         projectBrief: normalizeProjectBrief(topic?.projectBrief),
+        serviceDefaults: normalizeAuthoredServiceDefaults(topic?.serviceDefaults),
         projectJourney:
             topic?.projectJourney && typeof topic.projectJourney === "object"
                 ? { ...topic.projectJourney }
@@ -426,6 +445,7 @@ function normalizeModule(
             weekEnd: cleanNumberOrNull(section?.weekEnd),
             weeksLabel: cleanString(section?.weeksLabel) ?? null,
             practiceDefaults: normalizePractice(section?.practiceDefaults),
+            serviceDefaults: normalizeAuthoredServiceDefaults(section?.serviceDefaults),
 
             bullets: cleanStringArray(section?.bullets),
 
@@ -475,6 +495,7 @@ function normalizeModule(
         quizFocus: cleanStringArray(module?.quizFocus) ?? [],
         moduleProject: cleanModuleProject(module?.moduleProject),
         practiceDefaults: normalizePractice(module?.practiceDefaults),
+        serviceDefaults: normalizeAuthoredServiceDefaults(module?.serviceDefaults),
 
         weekStart: cleanNumberOrNull(module?.weekStart),
         weekEnd: cleanNumberOrNull(module?.weekEnd),
@@ -572,6 +593,7 @@ export function normalizeLegacyCourseSpec(raw: unknown): CourseSpec {
                 ? input.validationPolicy
                 : undefined,
         practiceDefaults: normalizePractice(input.practiceDefaults),
+        serviceDefaults: normalizeAuthoredServiceDefaults(input.serviceDefaults),
         intendedFor: Array.isArray(input.intendedFor)
             ? cleanStringArray(input.intendedFor)
             : cleanString(input.intendedFor),

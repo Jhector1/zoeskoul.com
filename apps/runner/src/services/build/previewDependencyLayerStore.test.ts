@@ -45,6 +45,28 @@ describe("K20D3F persistent verified dependency layers", () => {
     next!.release(); lease!.release();
   });
 
+  it("verifies wide dependency directories and still rejects byte-level tampering", async () => {
+    const { root, first, store } = await fixture();
+    const wide = path.join(first, "node_modules", ".pnpm", "foo", "node_modules", "foo");
+    for (let i = 0; i < 32; i++) {
+      await fs.writeFile(path.join(wide, `module-${i.toString().padStart(2, "0")}.js`),
+        `export const x = ${i};`);
+    }
+    const original = await store.publish(key(), first);
+    expect(original).not.toBeNull();
+    original?.release();
+    const restarted = new PreviewDependencyLayerStore(root);
+    const valid = await restarted.lookup(key());
+    expect(valid.outcome).toBe("hit");
+    valid.lease?.release();
+    const target = path.join(root, ".zoebuild-preview-dependency-layers-v1", key(),
+      "node_modules", ".pnpm", "foo", "node_modules", "foo", "module-17.js");
+    await fs.writeFile(target, "export const x = 999;");
+    const tampered = await restarted.lookup(key());
+    expect(tampered.outcome).toBe("corrupt");
+    expect(tampered.lease).toBeNull();
+  });
+
   it("rejects tampered file contents on every acquire", async () => {
     const { first, store } = await fixture();
     const lease = await store.publish(key(), first);
@@ -147,10 +169,30 @@ describe("K20D3F persistent verified dependency layers", () => {
       .not.toContain(key());
   });
 
-  it("identifies an oversized dependency tree without copying or increasing the quota", async () => {
+  it("passes the former 256 MiB item limit while retaining disk-headroom protection", async () => {
+    const { first, root } = await fixture();
+    const large = await fs.open(path.join(first, "node_modules", "within-new-cap.bin"), "w");
+    // Sparse file: metadata-only attestation tests the boundary without copying
+    // or hashing hundreds of MiB of data in CI.
+    try { await large.truncate(256 * 1024 * 1024 + 1); }
+    finally { await large.close(); }
+    const store = new PreviewDependencyLayerStore(root, {
+      reserveCapacity: async () => { throw new Error("disk reservation denied"); },
+    });
+    const info = vi.spyOn(console, "info").mockImplementation(() => undefined);
+    expect(await store.publish(key(), first)).toBeNull();
+    // The tree passes the item cap and reaches the next independent safeguard.
+    expect(info).toHaveBeenCalledWith(
+      "RUNNER React preview dependency layer publication",
+      { result: "skipped", reason: "disk-headroom" },
+    );
+    expect(store.snapshot()).toMatchObject({ publishAttempts: 1, publishSkipped: 1 });
+  });
+
+  it("rejects a tree above the bounded 640 MiB cap before copying it", async () => {
     const { first, store } = await fixture();
     const oversized = await fs.open(path.join(first, "node_modules", "oversized.bin"), "w");
-    try { await oversized.truncate(256 * 1024 * 1024 + 1); }
+    try { await oversized.truncate(640 * 1024 * 1024 + 1); }
     finally { await oversized.close(); }
     const info = vi.spyOn(console, "info").mockImplementation(() => undefined);
     expect(await store.publish(key(), first)).toBeNull();

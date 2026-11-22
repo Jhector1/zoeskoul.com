@@ -146,9 +146,32 @@ model BuildProject {
   artifacts     BuildArtifact[]
   commerceStore CommerceStore?
   chatMessages  ZoeBuildChatMessage[]
+  browserReadGrants BuildDevelopmentPreviewReadGrant[]
 
   @@index([status, updatedAt])
   @@index([stackId])
+}
+
+/** ZoeBuild-only renewable, revocable browser grants for development previews.
+ * The URL contains a random bearer; only its SHA-256 digest is stored here.
+ * Migration is additive. It must be applied before enabling durable grants.
+ */
+model BuildDevelopmentPreviewReadGrant {
+  id                String       @id @db.VarChar(64)
+  userId            String       @db.VarChar(128)
+  buildProjectId    String
+  previewId         String       @db.VarChar(128)
+  sourceVersionFloor Int
+  expiresAt         DateTime     @db.Timestamptz(3)
+  absoluteExpiresAt DateTime     @db.Timestamptz(3)
+  revokedAt         DateTime?    @db.Timestamptz(3)
+  createdAt         DateTime     @default(now()) @db.Timestamptz(3)
+  updatedAt         DateTime     @updatedAt @db.Timestamptz(3)
+  project           BuildProject @relation(fields: [buildProjectId], references: [id], onDelete: Cascade)
+
+  @@index([buildProjectId, previewId, userId, revokedAt], map: "zoebuild_grants_lookup_idx")
+  @@index([expiresAt], map: "zoebuild_grants_expires_idx")
+  @@index([absoluteExpiresAt], map: "zoebuild_grants_absolute_idx")
 }
 
 model CommerceStore {

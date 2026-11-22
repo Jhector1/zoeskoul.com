@@ -1,0 +1,112 @@
+name: Build ZoeLearning learner runtime (manual only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_runtime_digest:
+        description: "SHA-256 digest (sha256:...) of the verified shared zoeskoul-runtime base image"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-learner-runtime:
+    name: Build verified zoelearner runtime
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out immutable workflow revision
+        uses: actions/checkout@v4
+
+      - name: Validate pinned base runtime
+        id: base
+        shell: bash
+        env:
+          BASE_DIGEST: ${{ inputs.base_runtime_digest }}
+        run: |
+          set -euo pipefail
+          [[ "$BASE_DIGEST" =~ ^sha256:[a-f0-9]{64}$ ]] || {
+            echo 'Expected the SHA-256 digest of a verified zoeskoul-runtime image' >&2
+            exit 1
+          }
+          BASE="ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/zoeskoul-runtime@$BASE_DIGEST"
+          echo "reference=$BASE" >> "$GITHUB_OUTPUT"
+          echo "Using pinned base runtime digest $BASE_DIGEST"
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Verify published base image exists
+        shell: bash
+        env:
+          BASE: ${{ steps.base.outputs.reference }}
+        run: |
+          set -euo pipefail
+          docker buildx imagetools inspect "$BASE"
+
+      - name: Build Learning-only candidate locally
+        shell: bash
+        env:
+          BASE: ${{ steps.base.outputs.reference }}
+        run: |
+          set -euo pipefail
+          docker buildx build \
+            --platform linux/amd64 \
+            --provenance=false \
+            --load \
+            --build-arg "BASE_RUNTIME_IMAGE=$BASE" \
+            --file apps/runner/runtime/Dockerfile.zoelearner \
+            --tag zoeskoul-learning-runtime:identity-verify \
+            .
+
+      - name: Verify real non-root learner identity and inherited entrypoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          IMAGE='zoeskoul-learning-runtime:identity-verify'
+          test "$(docker image inspect --format '{{.Config.User}}' "$IMAGE")" = '1000:1000'
+          docker image inspect --format '{{json .Config.Entrypoint}}' "$IMAGE" \
+            | grep -F '/opt/runner/workspace-entrypoint.sh'
+          docker run --rm --network none --read-only --cap-drop ALL \
+            --security-opt no-new-privileges:true \
+            --entrypoint /bin/sh "$IMAGE" -ec '
+              test "$(id -u)" = 1000
+              test "$(id -g)" = 1000
+              test "$(whoami)" = zoelearner
+              test "$(id -un)" = zoelearner
+              test "$(id -gn)" = zoelearner
+              test "$(getent passwd 1000 | cut -d: -f1)" = zoelearner
+              test "$(getent group 1000 | cut -d: -f1)" = zoelearner
+            '
+          echo 'ZOELEARNING_REAL_ACCOUNT_IDENTITY_PASS'
+
+      - name: Publish independently named learning image
+        shell: bash
+        run: |
+          set -euo pipefail
+          IMAGE="ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/zoeskoul-learning-runtime:${GITHUB_SHA}"
+          docker tag zoeskoul-learning-runtime:identity-verify "$IMAGE"
+          docker push "$IMAGE"
+          INSPECT="$(docker buildx imagetools inspect "$IMAGE")"
+          DIGEST="$(printf '%s\n' "$INSPECT" | awk '$1 == "Digest:" { print $2; exit }')"
+          [[ "$DIGEST" =~ ^sha256:[a-f0-9]{64}$ ]] || {
+            echo 'Image publication did not produce an immutable digest' >&2
+            exit 1
+          }
+          {
+            echo '### Verified ZoeLearning-only runtime'
+            echo "- Source commit: \`${GITHUB_SHA}\`"
+            echo "- Immutable image: \`ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/zoeskoul-learning-runtime@$DIGEST\`"
+            echo '- UID/GID: 1000:1000; whoami: zoelearner'
+            echo '- Shared ZoeBuild runtime unchanged; no Runner restart or deployment'
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "ZOELEARNING_RUNTIME_IMAGE=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/zoeskoul-learning-runtime@$DIGEST"

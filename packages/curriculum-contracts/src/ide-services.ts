@@ -135,6 +135,12 @@ export type ManifestIdeServiceConfig = {
   layoutMode?: ManifestIdeLayoutMode;
   requires?: ManifestIdeServiceRequirements;
   terminalBootstrap?: ManifestTerminalBootstrap;
+  /**
+   * Curriculum UX hint only. A value of "eligible" NEVER grants root access:
+   * Web/Runner authorize the exact published topic, actor and session.
+   * Most courses inherit "disabled"; sparse descendant scopes can override it.
+   */
+  administratorLab?: "disabled" | "eligible";
 };
 
 export type LearningIdeServicePreset = ManifestIdeServicePreset;
@@ -236,6 +242,9 @@ export function mergeManifestIdeServiceConfigs(
       ...(config.preset ? { preset: config.preset } : {}),
       ...(config.runnerBackend ? { runnerBackend: config.runnerBackend } : {}),
       ...(config.layoutMode ? { layoutMode: config.layoutMode } : {}),
+      ...(config.administratorLab === "disabled" || config.administratorLab === "eligible"
+        ? { administratorLab: config.administratorLab }
+        : {}),
       ...(terminalBootstrap ? { terminalBootstrap } : {}),
       requires: {
         ...previousRequires,

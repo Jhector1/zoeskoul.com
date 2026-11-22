@@ -62,12 +62,17 @@
       "subjectSlug": "linux",
       "path": "subjects/linux",
       "courseOrder": [
-        "linux-terminal-fundamentals"
+        "linux-terminal-fundamentals",
+        "linux-files-permissions-users"
       ],
       "courses": [
         {
           "courseSlug": "linux-terminal-fundamentals",
           "path": "subjects/linux/courses/linux-terminal-fundamentals/course.spec.json"
+        },
+        {
+          "courseSlug": "linux-files-permissions-users",
+          "path": "subjects/linux/courses/linux-files-permissions-users/course.spec.json"
         }
       ]
     },

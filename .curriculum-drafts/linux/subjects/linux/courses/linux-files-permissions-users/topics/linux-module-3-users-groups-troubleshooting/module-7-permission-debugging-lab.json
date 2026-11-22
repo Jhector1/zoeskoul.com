@@ -1,0 +1,362 @@
+{
+  "title": "Project: Shared Team Directory",
+  "summary": "Identify a blocked path, propose least privilege, and repair only owned test fixtures.",
+  "minutes": 35,
+  "sketchBlocks": [
+    {
+      "id": "project-brief",
+      "cardTitle": "Project",
+      "title": "Project brief",
+      "bodyMarkdown": "## Project — Investigate a blocked team folder\n\nA colleague cannot open the team notes. You have a prepared, isolated project and a description of the colleague's **simulated** group membership. Investigate the access problem without changing real user accounts.\n\n**Your investigation**\n\n1. Check the identity in the practice terminal.\n2. Inspect the project root, the shared folder, and the note.\n3. Explain which owner, group, or other permissions apply in the scenario.\n4. Make only the authorized, targeted correction to the learner-owned fixture, then verify it.\n\n**Handoff:** Describe the evidence and your minimal fix. Do not assume that setting group bits makes someone a member of that group."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "module-7-permission-debugging-lab-step-1",
+      "kind": "code_input",
+      "title": "Collect evidence for a team access ticket",
+      "prompt": "**Try it yourself**\n\nA teammate cannot access a report; investigate the owned training fixture before deciding on a fix.\n\n1. Run `pwd` and `whoami`.\n2. Run `ls -ld team-lab team-lab/shared`.\n3. Run `ls -l team-lab/shared/report.txt` and read the file owner/group columns.\n\n**Check your work:** You can distinguish a target file permission from parent traversal permissions without changing ownership.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "hint": "The team identity scenario is hypothetical; do not create or switch Linux accounts.",
+      "help": {
+        "concept": "You can distinguish a target file permission from parent traversal permissions without changing ownership.",
+        "hint_1": "Run `pwd` and `whoami`.",
+        "hint_2": "The team identity scenario is hypothetical; do not create or switch Linux accounts."
+      },
+      "starterCode": "# Collect evidence for a team access ticket\n# Follow the numbered instructions in the exercise card.\n",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "pwd\nwhoami\nls -ld team-lab team-lab/shared\nls -l team-lab/shared/report.txt\n",
+      "instructions": "**Try it yourself**\n\nA teammate cannot access a report; investigate the owned training fixture before deciding on a fix.\n\n1. Run `pwd` and `whoami`.\n2. Run `ls -ld team-lab team-lab/shared`.\n3. Run `ls -l team-lab/shared/report.txt` and read the file owner/group columns.\n\n**Check your work:** You can distinguish a target file permission from parent traversal permissions without changing ownership.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Collect evidence for a team access ticket\n# Follow the numbered instructions in the exercise card.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "team-lab/README.md",
+          "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/report.txt",
+          "content": "Example report; synthetic training content.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/notes.txt",
+          "content": "Team notes for the course.\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "pwd\nwhoami\nls -ld team-lab team-lab/shared\nls -l team-lab/shared/report.txt\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "team-lab/README.md",
+          "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/report.txt",
+          "content": "Example report; synthetic training content.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/notes.txt",
+          "content": "Team notes for the course.\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^pwd$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^whoami$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^ls\\s+\\-ld\\s+team\\-lab\\s+team\\-lab/shared$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^ls\\s+\\-l\\s+team\\-lab/shared/report\\.txt$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "No sudo in learner exercises."
+          },
+          {
+            "pattern": "(^|\\s)su(\\s|$)",
+            "message": "Do not switch user identities."
+          },
+          {
+            "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+            "message": "Changing users or ownership is outside this course lab."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+            "message": "Do not recursively change permissions."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+            "message": "Never make the practice workspace world writable."
+          }
+        ]
+      }
+    },
+    {
+      "id": "module-7-permission-debugging-lab-step-2",
+      "kind": "code_input",
+      "title": "Compare user membership with the team folder",
+      "prompt": "**Try it yourself**\n\nDetermine which class of bits would apply to the current user versus a hypothetical nonmember.\n\n1. Run `whoami`, `id`, and `groups`.\n2. Run `ls -ld team-lab/shared`.\n3. Compare the directory owner/group columns to your real account; then reason about the other class for a nonmember.\n\n**Check your work:** You can identify the applicable class for the executing identity without assuming group membership or using administrative commands.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "hint": "Permission bits depend on UID/GID matches; never assume the learner belongs to a named team group.",
+      "help": {
+        "concept": "You can identify the applicable class for the executing identity without assuming group membership or using administrative commands.",
+        "hint_1": "Run `whoami`, `id`, and `groups`.",
+        "hint_2": "Permission bits depend on UID/GID matches; never assume the learner belongs to a named team group."
+      },
+      "starterCode": "# Compare user membership with the team folder\n# Follow the numbered instructions in the exercise card.\n",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "whoami\nid\ngroups\nls -ld team-lab/shared\n",
+      "instructions": "**Try it yourself**\n\nDetermine which class of bits would apply to the current user versus a hypothetical nonmember.\n\n1. Run `whoami`, `id`, and `groups`.\n2. Run `ls -ld team-lab/shared`.\n3. Compare the directory owner/group columns to your real account; then reason about the other class for a nonmember.\n\n**Check your work:** You can identify the applicable class for the executing identity without assuming group membership or using administrative commands.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Compare user membership with the team folder\n# Follow the numbered instructions in the exercise card.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "team-lab/README.md",
+          "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/report.txt",
+          "content": "Example report; synthetic training content.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/notes.txt",
+          "content": "Team notes for the course.\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "whoami\nid\ngroups\nls -ld team-lab/shared\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "team-lab/README.md",
+          "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/report.txt",
+          "content": "Example report; synthetic training content.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/notes.txt",
+          "content": "Team notes for the course.\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^whoami$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^id$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^groups$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^ls\\s+\\-ld\\s+team\\-lab/shared$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "No sudo in learner exercises."
+          },
+          {
+            "pattern": "(^|\\s)su(\\s|$)",
+            "message": "Do not switch user identities."
+          },
+          {
+            "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+            "message": "Changing users or ownership is outside this course lab."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+            "message": "Do not recursively change permissions."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+            "message": "Never make the practice workspace world writable."
+          }
+        ]
+      }
+    },
+    {
+      "id": "module-7-permission-debugging-lab-step-3",
+      "kind": "code_input",
+      "title": "Recommend a minimal traversal repair",
+      "prompt": "**Try it yourself**\n\nThe hypothetical team needs access to a named report without making the entire tree world-writable.\n\n1. Run `ls -ld team-lab team-lab/shared`.\n2. Run `ls -l team-lab/shared/report.txt`.\n3. Locate the first ancestor missing search (`x`) for the intended identity, then describe the minimum authorized correction.\n\n**Check your work:** No ownership change or broad chmod is performed. Your recommendation accounts for both the path and target mode.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "hint": "Do not run `chown`, `chgrp`, or `sudo` to force group membership in the learning sandbox.",
+      "help": {
+        "concept": "No ownership change or broad chmod is performed. Your recommendation accounts for both the path and target mode.",
+        "hint_1": "Run `ls -ld team-lab team-lab/shared`.",
+        "hint_2": "Do not run `chown`, `chgrp`, or `sudo` to force group membership in the learning sandbox."
+      },
+      "starterCode": "# Recommend a minimal traversal repair\n# Follow the numbered instructions in the exercise card.\n",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "ls -ld team-lab team-lab/shared\nls -l team-lab/shared/report.txt\n",
+      "instructions": "**Try it yourself**\n\nThe hypothetical team needs access to a named report without making the entire tree world-writable.\n\n1. Run `ls -ld team-lab team-lab/shared`.\n2. Run `ls -l team-lab/shared/report.txt`.\n3. Locate the first ancestor missing search (`x`) for the intended identity, then describe the minimum authorized correction.\n\n**Check your work:** No ownership change or broad chmod is performed. Your recommendation accounts for both the path and target mode.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Recommend a minimal traversal repair\n# Follow the numbered instructions in the exercise card.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "team-lab/README.md",
+          "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/report.txt",
+          "content": "Example report; synthetic training content.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/notes.txt",
+          "content": "Team notes for the course.\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "ls -ld team-lab team-lab/shared\nls -l team-lab/shared/report.txt\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "team-lab/README.md",
+          "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/report.txt",
+          "content": "Example report; synthetic training content.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/notes.txt",
+          "content": "Team notes for the course.\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^ls\\s+\\-ld\\s+team\\-lab\\s+team\\-lab/shared$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^ls\\s+\\-l\\s+team\\-lab/shared/report\\.txt$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "No sudo in learner exercises."
+          },
+          {
+            "pattern": "(^|\\s)su(\\s|$)",
+            "message": "Do not switch user identities."
+          },
+          {
+            "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+            "message": "Changing users or ownership is outside this course lab."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+            "message": "Do not recursively change permissions."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+            "message": "Never make the practice workspace world writable."
+          }
+        ]
+      }
+    },
+    {
+      "id": "module-7-permission-debugging-lab-check-3",
+      "kind": "single_choice",
+      "title": "Project reasoning 3",
+      "prompt": "Which command is acceptable in the sandbox?",
+      "hint": "Use safe permission principles from the lesson.",
+      "help": {
+        "concept": "Shared Team Directory",
+        "hint_1": "Inspect the scenario carefully. Prefer the narrowest access that meets the requirement.",
+        "hint_2": "Compare the effective identity, relevant directory traversal, and target mode. Privileged account management is conceptual, not executable."
+      },
+      "options": [
+        "sudo su",
+        "groupadd editors",
+        "ls -ld team-lab"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    }
+  ],
+  "projectDraft": {
+    "title": "Project: Shared Team Directory",
+    "stepIds": [
+      "module-7-permission-debugging-lab-step-1",
+      "module-7-permission-debugging-lab-step-2",
+      "module-7-permission-debugging-lab-step-3"
+    ]
+  }
+}

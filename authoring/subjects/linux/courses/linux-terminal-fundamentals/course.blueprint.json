@@ -14,10 +14,10 @@
     "cybersecurity students who need Linux basics"
   ],
   "goals": [
-    "Use the Linux terminal safely for navigation and file workflow",
-    "Create, copy, move, rename, delete, and inspect files/folders",
-    "Connect terminal commands to visible workspace changes",
-    "Prepare for permissions, Bash scripting, Git, SSH, and server basics"
+    "Use pwd, ls, ls -a, and cd to inspect and navigate an existing Linux workspace",
+    "Create, copy, move, rename, and safely remove specific workspace files after instruction",
+    "Write and append short text with echo, >, and >>; verify it with cat, head, tail, and wc -l",
+    "Complete the Community Media Archive using inspect first, change second, verify last"
   ],
   "teachingStyle": {
     "tone": "friendly, practical, beginner-safe, terminal-first, and project-oriented",
@@ -52,7 +52,10 @@
       "Prepend a standalone reading-only course welcome without replacing the first technical sketch.",
       "Use book-like technical prose and concept-specific help.",
       "Keep the final capstone in one section and one topic with five cumulative Community Media Archive steps.",
-      "Remind learners to press Enter after each terminal command in every terminal-workspace exercise prompt."
+      "Remind learners to press Enter after each terminal command in every terminal-workspace exercise prompt.",
+      "Module 1 Terminal Map uses pre-seeded paths; do not introduce mkdir/touch until Module 2.",
+      "Module 2 must cover echo, >, >>, and safe single-file rm before the capstone.",
+      "Retain stable published IDs even when learner-facing titles are corrected."
     ]
   }
 }

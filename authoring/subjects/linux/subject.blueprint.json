@@ -5,12 +5,18 @@
   "title": "Linux",
   "summary": "A practical Linux path starting with terminal navigation and file workflow, then growing into permissions, Bash, developer tools, and server basics.",
   "courseOrder": [
-    "linux-terminal-fundamentals"
+    "linux-terminal-fundamentals",
+    "linux-files-permissions-users"
   ],
   "milestones": [
     {
       "courseSlug": "linux-terminal-fundamentals",
       "outcome": "Use the terminal to navigate folders, create and organize files, inspect text, and complete workspace-checked Linux tasks."
+    },
+    {
+      "courseSlug": "linux-files-permissions-users",
+      "outcome": "Read and safely modify permission bits on learner-owned files; diagnose directory traversal and complete an isolated least-privilege project.",
+      "status": "draft"
     }
   ]
 }

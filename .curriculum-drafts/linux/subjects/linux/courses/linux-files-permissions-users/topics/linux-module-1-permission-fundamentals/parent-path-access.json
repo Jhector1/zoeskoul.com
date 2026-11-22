@@ -1,0 +1,1113 @@
+{
+  "title": "Diagnose Parent Directory Access",
+  "summary": "Use ls -ld on each parent component to find missing traversal permission.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "concept-1",
+      "cardTitle": "Learn",
+      "title": "Diagnose Parent Directory Access",
+      "bodyMarkdown": "Inspect an inaccessible path one component at a time, starting from the containing directories. `ls -ld path` reports the mode **of that directory**, whereas `ls -l path` normally reports entries *inside* that directory.\n\n```bash\nls -ld secure-lab\nls -ld secure-lab/public\nls -l secure-lab/public\n```\n\n**Worked example:** `secure-lab/public/README.md` is `644`, but `secure-lab` is `700` and the reader is not the owner. They normally cannot reach the README by this path, irrespective of the file's own read bit. Investigate the parent; do not broadly relax every child.",
+      "tryItExercises": [
+        {
+          "id": "parent-path-access-try-1",
+          "kind": "code_input",
+          "title": "Locate your practice workspace",
+          "prompt": "**Try it yourself · 1 of 4**\n\nA document is readable on paper but may be unreachable through its parent path.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\npwd\n```\n\n**Check:** Check the printed working directory before acting on practice files.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `pwd` on the supplied practice fixture.",
+          "help": {
+            "concept": "Check the printed working directory before acting on practice files.",
+            "hint_1": "Try the single command `pwd`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Locate your practice workspace\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "pwd\n",
+          "instructions": "**Try it yourself · 1 of 4**\n\nA document is readable on paper but may be unreachable through its parent path.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\npwd\n```\n\n**Check:** Check the printed working directory before acting on practice files.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Locate your practice workspace\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "pwd\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^pwd$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        },
+        {
+          "id": "parent-path-access-try-1-part-2",
+          "kind": "code_input",
+          "title": "Inspect directory permissions: secure-lab",
+          "prompt": "**Try it yourself · 2 of 4**\n\nA document is readable on paper but may be unreachable through its parent path.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -ld secure-lab\n```\n\n**Check:** Read the leading `d` and the owner/group/other permission bits; no mode change is needed.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `ls -ld secure-lab` on the supplied practice fixture.",
+          "help": {
+            "concept": "Read the leading `d` and the owner/group/other permission bits; no mode change is needed.",
+            "hint_1": "Try the single command `ls -ld secure-lab`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Inspect directory permissions: secure-lab\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "ls -ld secure-lab\n",
+          "instructions": "**Try it yourself · 2 of 4**\n\nA document is readable on paper but may be unreachable through its parent path.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -ld secure-lab\n```\n\n**Check:** Read the leading `d` and the owner/group/other permission bits; no mode change is needed.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Inspect directory permissions: secure-lab\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "ls -ld secure-lab\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^ls\\s+\\-ld\\s+secure\\-lab$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        },
+        {
+          "id": "parent-path-access-try-1-part-3",
+          "kind": "code_input",
+          "title": "Inspect directory permissions: secure-lab/public",
+          "prompt": "**Try it yourself · 3 of 4**\n\nA document is readable on paper but may be unreachable through its parent path.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -ld secure-lab/public\n```\n\n**Check:** Read the leading `d` and the owner/group/other permission bits; no mode change is needed.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `ls -ld secure-lab/public` on the supplied practice fixture.",
+          "help": {
+            "concept": "Read the leading `d` and the owner/group/other permission bits; no mode change is needed.",
+            "hint_1": "Try the single command `ls -ld secure-lab/public`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Inspect directory permissions: secure-lab/public\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "ls -ld secure-lab/public\n",
+          "instructions": "**Try it yourself · 3 of 4**\n\nA document is readable on paper but may be unreachable through its parent path.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -ld secure-lab/public\n```\n\n**Check:** Read the leading `d` and the owner/group/other permission bits; no mode change is needed.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Inspect directory permissions: secure-lab/public\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "ls -ld secure-lab/public\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^ls\\s+\\-ld\\s+secure\\-lab/public$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        },
+        {
+          "id": "parent-path-access-try-1-part-4",
+          "kind": "code_input",
+          "title": "Inspect file permissions: secure-lab/public/README.md",
+          "prompt": "**Try it yourself · 4 of 4**\n\nA document is readable on paper but may be unreachable through its parent path.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -l secure-lab/public/README.md\n```\n\n**Check:** Read the listing, its owner and group, and its permission triplets; do not change the file.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `ls -l secure-lab/public/README.md` on the supplied practice fixture.",
+          "help": {
+            "concept": "Read the listing, its owner and group, and its permission triplets; do not change the file.",
+            "hint_1": "Try the single command `ls -l secure-lab/public/README.md`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Inspect file permissions: secure-lab/public/README.md\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "ls -l secure-lab/public/README.md\n",
+          "instructions": "**Try it yourself · 4 of 4**\n\nA document is readable on paper but may be unreachable through its parent path.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -l secure-lab/public/README.md\n```\n\n**Check:** Read the listing, its owner and group, and its permission triplets; do not change the file.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Inspect file permissions: secure-lab/public/README.md\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "ls -l secure-lab/public/README.md\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^ls\\s+\\-l\\s+secure\\-lab/public/README\\.md$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "concept-2",
+      "cardTitle": "Try it yourself",
+      "title": "Find the blocked doorway",
+      "bodyMarkdown": "A readable target can still be blocked by an ancestor directory. Work through the provided path from outside toward the file, checking one location at a time. Each Try has an independent workspace.",
+      "tryItExercises": [
+        {
+          "id": "parent-path-access-try-2",
+          "kind": "code_input",
+          "title": "Inspect directory permissions: secure-lab",
+          "prompt": "**Try it yourself · 1 of 3**\n\nInvestigate this scenario without trying to switch users: `secure-lab` is `700`, `public` is `755`, and README is `644`; the reader is not the owner.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -ld secure-lab\n```\n\n**Check:** Read the leading `d` and the owner/group/other permission bits; no mode change is needed.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `ls -ld secure-lab` on the supplied practice fixture.",
+          "help": {
+            "concept": "Read the leading `d` and the owner/group/other permission bits; no mode change is needed.",
+            "hint_1": "Try the single command `ls -ld secure-lab`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Inspect directory permissions: secure-lab\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "ls -ld secure-lab\n",
+          "instructions": "**Try it yourself · 1 of 3**\n\nInvestigate this scenario without trying to switch users: `secure-lab` is `700`, `public` is `755`, and README is `644`; the reader is not the owner.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -ld secure-lab\n```\n\n**Check:** Read the leading `d` and the owner/group/other permission bits; no mode change is needed.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Inspect directory permissions: secure-lab\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "ls -ld secure-lab\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^ls\\s+\\-ld\\s+secure\\-lab$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        },
+        {
+          "id": "parent-path-access-try-2-part-2",
+          "kind": "code_input",
+          "title": "Inspect directory permissions: secure-lab/public",
+          "prompt": "**Try it yourself · 2 of 3**\n\nInvestigate this scenario without trying to switch users: `secure-lab` is `700`, `public` is `755`, and README is `644`; the reader is not the owner.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -ld secure-lab/public\n```\n\n**Check:** Read the leading `d` and the owner/group/other permission bits; no mode change is needed.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `ls -ld secure-lab/public` on the supplied practice fixture.",
+          "help": {
+            "concept": "Read the leading `d` and the owner/group/other permission bits; no mode change is needed.",
+            "hint_1": "Try the single command `ls -ld secure-lab/public`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Inspect directory permissions: secure-lab/public\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "ls -ld secure-lab/public\n",
+          "instructions": "**Try it yourself · 2 of 3**\n\nInvestigate this scenario without trying to switch users: `secure-lab` is `700`, `public` is `755`, and README is `644`; the reader is not the owner.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -ld secure-lab/public\n```\n\n**Check:** Read the leading `d` and the owner/group/other permission bits; no mode change is needed.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Inspect directory permissions: secure-lab/public\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "ls -ld secure-lab/public\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^ls\\s+\\-ld\\s+secure\\-lab/public$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        },
+        {
+          "id": "parent-path-access-try-2-part-3",
+          "kind": "code_input",
+          "title": "Inspect file permissions: secure-lab/public/README.md",
+          "prompt": "**Try it yourself · 3 of 3**\n\nInvestigate this scenario without trying to switch users: `secure-lab` is `700`, `public` is `755`, and README is `644`; the reader is not the owner.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -l secure-lab/public/README.md\n```\n\n**Check:** Read the listing, its owner and group, and its permission triplets; do not change the file.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `ls -l secure-lab/public/README.md` on the supplied practice fixture.",
+          "help": {
+            "concept": "Read the listing, its owner and group, and its permission triplets; do not change the file.",
+            "hint_1": "Try the single command `ls -l secure-lab/public/README.md`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Inspect file permissions: secure-lab/public/README.md\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "ls -l secure-lab/public/README.md\n",
+          "instructions": "**Try it yourself · 3 of 3**\n\nInvestigate this scenario without trying to switch users: `secure-lab` is `700`, `public` is `755`, and README is `644`; the reader is not the owner.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -l secure-lab/public/README.md\n```\n\n**Check:** Read the listing, its owner and group, and its permission triplets; do not change the file.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Inspect file permissions: secure-lab/public/README.md\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "ls -l secure-lab/public/README.md\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^ls\\s+\\-l\\s+secure\\-lab/public/README\\.md$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "parent-path-access-q1",
+      "kind": "single_choice",
+      "title": "Inspect the directory itself",
+      "prompt": "Which command inspects a directory itself?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "ls -ld reports the directory mode.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "ls -ld reports the directory mode."
+      },
+      "options": [
+        "ls -ld dir",
+        "ls -l dir",
+        "cat dir"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "parent-path-access-q2",
+      "kind": "single_choice",
+      "title": "When a readable file is blocked",
+      "prompt": "Can a 644 file be inaccessible due to a 700 parent?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "A non-owner lacks ancestor traversal.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "A non-owner lacks ancestor traversal."
+      },
+      "options": [
+        "Yes",
+        "Never",
+        "Only for scripts"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "parent-path-access-q3",
+      "kind": "single_choice",
+      "title": "Where to start investigating",
+      "prompt": "What is the first step when a file opens with Permission denied?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "Diagnose before changing permissions.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "Diagnose before changing permissions."
+      },
+      "options": [
+        "chmod 777",
+        "Inspect ancestors and identity",
+        "Use sudo"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "parent-path-access-practice",
+      "kind": "code_input",
+      "title": "Gather an evidence-only access diagnosis",
+      "prompt": "**Try it yourself**\n\nThe security team wants proof of path modes before discussing the minimum authorized repair.\n\n1. Run `whoami` and `id`.\n2. Run `ls -ld secure-lab secure-lab/public`.\n3. Run `ls -l secure-lab/public/README.md` and identify which class would apply to your current identity.\n\n**Check your work:** The terminal shows identity plus both parent modes and the file mode. Suggest a minimal *hypothetical* traversal change, but do not run `chmod` here.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "hint": "Identity determines which triplet to evaluate; a directory’s `x` bit is necessary to access a known child.",
+      "help": {
+        "concept": "The terminal shows identity plus both parent modes and the file mode. Suggest a minimal *hypothetical* traversal change, but do not run `chmod` here.",
+        "hint_1": "Run `whoami` and `id`.",
+        "hint_2": "Identity determines which triplet to evaluate; a directory’s `x` bit is necessary to access a known child."
+      },
+      "starterCode": "# Gather an evidence-only access diagnosis\n# Follow the numbered instructions in the exercise card.\n",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "whoami\nid\nls -ld secure-lab secure-lab/public\nls -l secure-lab/public/README.md\n",
+      "instructions": "**Try it yourself**\n\nThe security team wants proof of path modes before discussing the minimum authorized repair.\n\n1. Run `whoami` and `id`.\n2. Run `ls -ld secure-lab secure-lab/public`.\n3. Run `ls -l secure-lab/public/README.md` and identify which class would apply to your current identity.\n\n**Check your work:** The terminal shows identity plus both parent modes and the file mode. Suggest a minimal *hypothetical* traversal change, but do not run `chmod` here.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Gather an evidence-only access diagnosis\n# Follow the numbered instructions in the exercise card.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "secure-lab/README.md",
+          "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/private-note.txt",
+          "content": "Dummy private note for permission practice. No real secrets.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/notes.txt",
+          "content": "Example learner notes; safe to change permission bits.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/shared/notes.txt",
+          "content": "Team meeting notes (practice only).\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/public/README.md",
+          "content": "This public guide has no sensitive data.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/scripts/run.sh",
+          "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "whoami\nid\nls -ld secure-lab secure-lab/public\nls -l secure-lab/public/README.md\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "secure-lab/README.md",
+          "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/private-note.txt",
+          "content": "Dummy private note for permission practice. No real secrets.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/notes.txt",
+          "content": "Example learner notes; safe to change permission bits.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/shared/notes.txt",
+          "content": "Team meeting notes (practice only).\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/public/README.md",
+          "content": "This public guide has no sensitive data.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/scripts/run.sh",
+          "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^whoami$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^id$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^ls\\s+\\-ld\\s+secure\\-lab\\s+secure\\-lab/public$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^ls\\s+\\-l\\s+secure\\-lab/public/README\\.md$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "No sudo in learner exercises."
+          },
+          {
+            "pattern": "(^|\\s)su(\\s|$)",
+            "message": "Do not switch user identities."
+          },
+          {
+            "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+            "message": "Changing users or ownership is outside this course lab."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+            "message": "Do not recursively change permissions."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+            "message": "Never make the practice workspace world writable."
+          }
+        ]
+      }
+    }
+  ]
+}

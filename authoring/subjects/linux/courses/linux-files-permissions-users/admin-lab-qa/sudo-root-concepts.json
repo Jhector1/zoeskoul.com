@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "purpose": "draft-admin-lab-qa-only",
+  "topicSlug": "sudo-root-concepts",
+  "exercises": [
+    {
+      "id": "sudo-qa-root-file",
+      "title": "Verify a root-owned file (sudo/root QA)",
+      "instructions": "Author-only, disposable administrator sandbox. First inspect `id`, `groups`, `sudo -l` and the sandbox root transition. Never modify the VM or host. In /workspace create qa-sudo/root.txt, then use the permitted sandbox administrator identity to set owner root:root and mode 0640. Verify with `stat`. The trusted verifier checks the resulting inode, NOT which command you typed. A missing file must fail before you create it.",
+      "expected": {
+        "required": [
+          {
+            "path": "/workspace/qa-sudo/root.txt",
+            "kind": "file",
+            "mode": "0640",
+            "uid": 0,
+            "gid": 0
+          }
+        ]
+      }
+    }
+  ]
+}

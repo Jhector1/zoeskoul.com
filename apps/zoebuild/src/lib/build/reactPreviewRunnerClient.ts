@@ -140,3 +140,76 @@ export async function cancelTrustedReactPreviewOperationAtRunner(args: Readonly<
   return runnerPost<{ ok:true }>(
     `/build/previews/operations/${encodeURIComponent(args.operationId)}/cancel`, args.actorKey, {buildProjectId:args.buildProjectId});
 }
+
+/** Phase 4D: private service-only creation of an isolated development lease.
+ * This method does not expose its capability to a browser. The caller MUST
+ * have derived the request from the currently saved, owned DB workspace. */
+export async function startTrustedReactDevelopmentPreviewAtRunner(args: Readonly<{
+  actorKey: string;
+  request: ProductionBuildJobRequestV1;
+  requestId?: string;
+}>): Promise<ReactPreviewStartResult> {
+  const result = await runnerPost<{ ok: true; preview: ReactPreviewStartResult }>(
+    "/build/previews/development/start", args.actorKey, args.request,
+    { requestId: args.requestId });
+  return result.preview;
+}
+
+/** Phase 4E1: owner-verified development update, never a browser capability.
+ * The caller MUST submit a fresh, DB-derived production-build request. */
+export async function updateTrustedReactDevelopmentPreviewAtRunner(args: Readonly<{
+  actorKey: string;
+  previewId: string;
+  request: ProductionBuildJobRequestV1;
+}>): Promise<Readonly<{ action: "updated"; sourceVersion: number }>> {
+  return runnerPost<{ ok: true; action: "updated"; sourceVersion: number }>(
+    `/build/previews/${encodeURIComponent(args.previewId)}/development-update`,
+    args.actorKey, args.request,
+  );
+}
+
+/** Phase 4E2B2: read-only authenticated Runner development fetch.
+ * The Runner independently asserts actor/project/lease/revision, and strips
+ * its private Vite base from textual responses. */
+export async function proxyFetchTrustedReactDevelopmentPreviewAtRunner(args:Readonly<{
+  actorKey:string; previewId:string; buildProjectId:string;
+  sourceVersion:number;path:string;method:"GET"|"HEAD";accept:"*/*"|"text/css";
+}>):Promise<Readonly<{sourceVersion:number;response:ReactPreviewFetchResult}>> {
+  return runnerPost<{ok:true;sourceVersion:number;response:ReactPreviewFetchResult}>(
+    `/build/previews/${encodeURIComponent(args.previewId)}/development-fetch`,
+    args.actorKey,
+    {buildProjectId:args.buildProjectId,sourceVersion:args.sourceVersion,
+      path:args.path,method:args.method,accept:args.accept},
+  );
+}
+
+/** Phase 4E3C3B: server-to-server HMR ticket request.
+ * Only the dedicated ZoeBuild authorization layer may call this; do not
+ * include the Runner service credential in any browser response. */
+export async function issueTrustedReactDevelopmentHmrTicketAtRunner(args: Readonly<{
+  actorKey: string;
+  previewId: string;
+  buildProjectId: string;
+  sourceVersion: number;
+  origin: string;
+}>): Promise<Readonly<{
+  ok: true;
+  ticket: string;
+  expiresInMs: number;
+  wsPath: string;
+}>> {
+  return runnerPost<{
+    ok: true;
+    ticket: string;
+    expiresInMs: number;
+    wsPath: string;
+  }>(
+    `/build/previews/${encodeURIComponent(args.previewId)}/development-hmr-ticket`,
+    args.actorKey,
+    {
+      buildProjectId: args.buildProjectId,
+      sourceVersion: args.sourceVersion,
+      origin: args.origin,
+    },
+  );
+}

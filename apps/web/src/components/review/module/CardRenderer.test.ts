@@ -281,6 +281,39 @@ describe("CardRenderer try it handling", () => {
         expect(projectHtml).toContain("Project card");
     });
 
+    it("shows a capped Try step indicator and binds only one question at a time", () => {
+        const multi = embeddedTryIt("try-multi-demo");
+        multi.spec.steps = [
+            { id: "inspect-user", exerciseKey: "try-user", difficulty: "easy", preferKind: "code_input", seedPolicy: "global" },
+            { id: "inspect-dir", exerciseKey: "try-dir", difficulty: "easy", preferKind: "code_input", seedPolicy: "global" },
+            { id: "inspect-file", exerciseKey: "try-file", difficulty: "easy", preferKind: "code_input", seedPolicy: "global" },
+        ];
+        const html = renderToStaticMarkup(React.createElement(
+            CardRenderer,
+            baseProps(sketchCard({ tryIt: multi })),
+        ));
+        const props = mocked.quizBlockProps.at(-1);
+        expect(props?.navigationMode).toBe("slideshow");
+        expect((props?.spec as { steps: unknown[] }).steps).toHaveLength(3);
+        expect(html).toContain("Step 1 of 3");
+        expect(html).toContain("embedded-try-step-progress");
+        expect(html.match(/data-testid="embedded-try-step-segment"/g)).toHaveLength(3);
+    });
+
+    it("preserves the existing navigation for a single Try exercise", () => {
+        const html = renderToStaticMarkup(React.createElement(
+            CardRenderer,
+            baseProps(sketchCard({ tryIt: embeddedTryIt("try-single-demo") })),
+        ));
+        expect(mocked.quizBlockProps.at(-1)?.navigationMode).toBe("scroll");
+        expect(html).not.toContain("embedded-try-step-progress");
+    });
+
+    it("does not alter the original quiz navigation mode", () => {
+        renderToStaticMarkup(React.createElement(CardRenderer, baseProps(quizCard())));
+        expect(mocked.quizBlockProps.at(-1)?.navigationMode).toBe("scroll");
+    });
+
     it("forwards whether the containing card is the last card in the topic", () => {
         renderToStaticMarkup(
             React.createElement(

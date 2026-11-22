@@ -1,0 +1,856 @@
+{
+  "authoringFormatVersion": "2.0",
+  "subjectSlug": "linux",
+  "courseSlug": "linux-files-permissions-users",
+  "catalogSlug": "linux",
+  "profileId": "bash",
+  "title": "Linux Files, Permissions, and Users",
+  "subtitle": "Understand Linux permissions, ownership, users, and safe access troubleshooting",
+  "intendedFor": "Students who completed Linux Terminal Fundamentals and need practical, least-privilege Linux file access skills.",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "courseOverview": {
+    "recommendedSequence": "Complete Modules 1–3 with guided labs, then use one cumulative pre-seeded workspace in Module 4.",
+    "summary": "Four-module progression from reading Linux permissions to precise chmod, identity and troubleshooting, and a secure project capstone.",
+    "moduleSummary": [
+      {
+        "moduleNumber": 1,
+        "title": "Understanding Linux Permissions",
+        "coreSkill": "Identify the current identity, decode mode strings, and inspect file versus directory access before changing anything."
+      },
+      {
+        "moduleNumber": 2,
+        "title": "Managing File and Directory Access",
+        "coreSkill": "Change the smallest necessary permission bits on safe learner-owned fixtures; verify symbolic and octal chmod with real mode checks."
+      },
+      {
+        "moduleNumber": 3,
+        "title": "Users, Groups, and Permission Troubleshooting",
+        "coreSkill": "Distinguish identity from permissions, explain privileged operations safely, investigate access errors, and understand umask."
+      },
+      {
+        "moduleNumber": 4,
+        "title": "Capstone: Secure Project Folder",
+        "coreSkill": "Apply inspection, least privilege, careful mode changes, and verified parent traversal to hand off a small project."
+      }
+    ]
+  },
+  "releasePlan": {
+    "currentRelease": {
+      "name": "draft-linux-files-permissions-users",
+      "startModuleNumber": 1,
+      "endModuleNumber": 4
+    },
+    "releases": [
+      {
+        "name": "draft-linux-files-permissions-users",
+        "startModuleNumber": 1,
+        "endModuleNumber": 4
+      }
+    ]
+  },
+  "policy": {
+    "exercisePolicy": {
+      "defaultMix": {
+        "single_choice": 0.2,
+        "multi_choice": 0.1,
+        "fill_blank_choice": 0.1,
+        "code_input": 0.6
+      },
+      "minimums": {
+        "technicalTopicCodeInputMin": 1,
+        "topicExerciseMin": 4
+      },
+      "generationTargets": {
+        "quizBankMin": 4,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 3,
+        "projectCodeInputMax": 5,
+        "maxAttempts": null
+      }
+    },
+    "projectPolicy": {
+      "minProjectsBeforeCapstone": 2,
+      "capstoneRequired": true
+    },
+    "qualityPolicy": {
+      "allowBlankTopicIds": false,
+      "allowDuplicateTopicIds": false,
+      "requireUniqueModuleSlugs": true,
+      "requireUniqueSectionSlugs": true,
+      "requireModuleProject": true,
+      "maxModuleProjectLength": 320
+    }
+  },
+  "authoringGuidance": [
+    "Course 2 is an authored DRAFT; do not register it as published course or seed database records until lessons, permission-bit checker and browser end-to-end tests pass.",
+    "Prerequisite is Linux Terminal Fundamentals: pwd, ls, cd, quoted paths, safe file creation and inspection.",
+    "Use profileId bash and the existing terminal-workspace-runner; reuse shell_task terminal_workspace without a second runner or checker pipeline.",
+    "Every interactive code_input must use fixedLanguage bash, recipeType shell_task, mode terminal_workspace, and an owned fixture under /workspace.",
+    "File-tree workspaceExpectations alone do NOT validate chmod mode bits. Require an approved server-owned permission-bit verifier using stat.S_IMODE or stat -c %a, after real execution.",
+    "Never trust browser-submitted permission claims, command text alone, or a mock grader; verify against the actual sandbox workspace state.",
+    "Standard Course 2 lessons remain unprivileged. Only the three explicitly administratorLab-eligible topics may invoke scoped sudo/chown/chgrp inside a server-authorized, disposable Linux administrator sandbox; never modify host accounts, host paths, or real secrets.",
+    "Teach privilege boundaries conceptually throughout. In administratorLab-eligible topics, any hands-on privileged command must remain inside the isolated lab, subject to existing server authorization and independent trusted evidence; no privilege in ordinary lessons.",
+    "Treat chmod -R and 777 as unsafe default fixes; never teach them as problem-solving recipes.",
+    "Learner-owned fixtures must be resettable; do not chmod away the learner’s ability to clean up lab folders.",
+    "Exercise-specific workspaces should reset fixtures; cumulative module projects/capstones intentionally share a project-scoped workspace.",
+    "Check exact final permission bits for selected fixture paths and that unrelated fixture permissions remain unchanged.",
+    "Reuse the existing trusted Runner filesystem evidence and Course 1 practice-validation pipeline. The isolated seven-path capstone author QA has passed PASS-FAIL-PASS, but recorded student grading remains blocked until existing published-student authorization, compiler contracts, and attempt handling are validated.",
+    "Use safe pre-seeded run.sh content to demonstrate execution; Bash scripting instruction belongs to Course 3.",
+    "Avoid printing real secrets in prompts, sample terminal output, or screenshots; secrets.env is populated with dummy placeholder text only.",
+    "Make every sketch explain its concept, a real example, common mistake, least-privilege choice, and a task-specific Try It if technical.",
+    "Every terminal command prompt should remind students to press Enter and verify with ls -l, ls -ld or stat.",
+    "Permission-denied lessons must distinguish file bits, ownership and parent-directory traversal; avoid guessing from the error message alone.",
+    "Module 3 least-privilege decisions remain conceptual; where an administratorLab-eligible topic demonstrates sudo, execution must use the authorized disposable lab and never the Ubuntu host.",
+    "Keep exactly four modules, with meaningful lesson sections and a single capstone. Topics per module depend on concept depth; do not pad counts.",
+    "All lesson prose and keyed checks are in MODULE_1_LESSONS.md through MODULE_4_LESSONS.md and LESSON_CHECKS.json; course source is a draft until reviewed/published.",
+    "Ordinary chmod exercises require verified non-symlink, learner-owned fixtures. Only the approved capstone may require its authored root-owned README in the isolated administrator lab; verify actual modes and ownership through the existing trusted Runner before student publication."
+  ],
+  "assessmentAndDelivery": {
+    "suggestedBeginnerRhythm": "Two guided lessons and one sandbox lab per week, with remediation for permissions/traversal mistakes.",
+    "recommendedCourseDeliverables": [
+      "Permission decoding worksheet",
+      "Read-only identity inspection",
+      "Symbolic chmod lab",
+      "Numeric chmod lab",
+      "Permission debugging project",
+      "Least privilege scenarios",
+      "Secure Project Handoff capstone"
+    ],
+    "toolingSuggestions": [
+      "ZoeSkoul Linux terminal sandbox",
+      "File explorer",
+      "ls -l and ls -ld",
+      "stat mode verification",
+      "server-owned permission-bit verifier"
+    ],
+    "closingNote": "Learners finish able to diagnose and minimally correct common permission problems without unsafe escalation."
+  },
+  "modules": [
+    {
+      "moduleNumber": 1,
+      "moduleSlug": "linux-module-1-permission-fundamentals",
+      "prefix": "linux_module_1",
+      "title": "Understanding Linux Permissions",
+      "purpose": "Identify the current identity, decode mode strings, and inspect file versus directory access before changing anything.",
+      "learningObjectives": [
+        "Decode file type and owner/group/other permission triplets from ls -l.",
+        "Inspect the effective identity and group membership without hardcoded user names.",
+        "Explain why directory traversal permission can block an otherwise readable file."
+      ],
+      "guidedExercises": [
+        "Inspect pre-seeded files with ls -l and directories with ls -ld.",
+        "Compare whoami, id, and groups to a file owner/group listing.",
+        "Diagnose which ancestor prevents traversal without changing fixture modes."
+      ],
+      "quizFocus": [
+        "Read mode strings accurately.",
+        "Apply user/group/other identities to access decisions.",
+        "Explain directory r/w/x and parent traversal."
+      ],
+      "moduleProject": "Permission Detective: explain file and parent-directory access for a pre-seeded workspace without modifying its modes.",
+      "sections": [
+        {
+          "sectionSlug": "linux-module-1-permission-strings",
+          "title": "Reading Permissions",
+          "summary": "Read mode strings, owners, groups, and effective identity.",
+          "topics": [
+            {
+              "topicId": "reading-permission-strings",
+              "title": "Read Linux Permission Strings",
+              "summary": "Decode -rwxr-x--- and drwxr-x---: file kind and permission triplets.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Distinguish leading type character and owner, group, other triplets.",
+                "Translate permission bits to who may read, write, and execute."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "projectFlow": "independent",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "current-user-and-groups",
+              "title": "Inspect User Identity",
+              "summary": "Use whoami, id and groups to inspect the executing identity without hardcoding a username.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Identify who owns the current terminal session.",
+                "Explain why supplementary groups matter."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "projectFlow": "independent",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "linux-module-1-directory-access",
+          "title": "Directory Traversal",
+          "summary": "Understand directory traversal and blocked ancestors.",
+          "topics": [
+            {
+              "topicId": "file-versus-directory-bits",
+              "title": "Files and Directories Use Bits Differently",
+              "summary": "Compare r/w/x for files and folders, with emphasis on directory traversal.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Explain directory execute as path traversal.",
+                "Understand directory write and execute are generally needed to create/remove entries."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "projectFlow": "independent",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "parent-path-access",
+              "title": "Diagnose Parent Directory Access",
+              "summary": "Use ls -ld on each parent component to find missing traversal permission.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Identify a blocked parent path before changing a file.",
+                "Avoid opening permissions more broadly than needed."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "projectFlow": "independent",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "linux-module-1-project",
+          "title": "Module Project",
+          "summary": "Read-only inspection and report of file and parent permissions.",
+          "topics": [
+            {
+              "topicId": "module-1-permission-detective",
+              "title": "Project: Permission Detective",
+              "summary": "Inspect a supplied tree, decode modes and explain access without changing the fixtures.",
+              "minutes": 30,
+              "technical": true,
+              "learningGoals": [
+                "Use ls -l, whoami, and id to produce a permission report from seeded files."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "project",
+                "projectFlow": "progressive",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            }
+          ],
+          "role": "project"
+        }
+      ]
+    },
+    {
+      "moduleNumber": 2,
+      "moduleSlug": "linux-module-2-managing-access",
+      "prefix": "linux_module_2",
+      "title": "Managing File and Directory Access",
+      "purpose": "Change the smallest necessary permission bits on safe learner-owned fixtures; verify symbolic and octal chmod with real mode checks.",
+      "learningObjectives": [
+        "Make precise symbolic chmod changes without recursive or broad permissions.",
+        "Compute octal values for owner, group and other.",
+        "Apply safe numeric modes to files and directories and verify them using stat."
+      ],
+      "guidedExercises": [
+        "Repair a supplied benign script with chmod u+x only.",
+        "Use chmod go-r to protect a test note and compare before/after.",
+        "Set a private fixture to 600 and public documentation to 644; inspect numeric modes."
+      ],
+      "quizFocus": [
+        "Choose symbolic versus numeric chmod.",
+        "Compare 600/644/700/755/770.",
+        "Verify actual mode bits and least privilege."
+      ],
+      "moduleProject": "Secure Your Workspace: adjust only vetted learner-owned paths; check exact modes, no unrelated changes.",
+      "sections": [
+        {
+          "sectionSlug": "linux-module-2-symbolic-chmod",
+          "title": "Targeted Symbolic Changes",
+          "summary": "Use chmod u/g/o changes, script execute bits, and careful verification.",
+          "topics": [
+            {
+              "topicId": "symbolic-chmod-basics",
+              "title": "Change Individual Bits with chmod",
+              "summary": "Practice chmod u+x, go-r and u=rw on learner-owned lab files.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Translate symbolic operators to resulting bits.",
+                "Verify change with ls -l."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "projectFlow": "independent",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "script-executable-bit",
+              "title": "Fix Permission Denied for a Safe Script",
+              "summary": "Given a verified pre-seeded run.sh, use chmod u+x and safely execute it.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Distinguish chmod u+x from running a script.",
+                "Verify only the owner execution bit changed."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "projectFlow": "independent",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "linux-module-2-numeric-chmod",
+          "title": "Numeric Modes",
+          "summary": "Convert rwx to octal and apply exact permission modes.",
+          "topics": [
+            {
+              "topicId": "numeric-permission-math",
+              "title": "Understand Octal Permission Math",
+              "summary": "Decode 600, 644, 700, 755, and 770 through read=4/write=2/execute=1.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Convert rwx strings to three octal digits.",
+                "Calculate minimum needed bits."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "projectFlow": "independent",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "apply-safe-numeric-modes",
+              "title": "Apply and Verify Numeric Modes",
+              "summary": "Use chmod 600/644/700 on learner-owned lab files and verify results with stat.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Set chosen permissions without modifying unrelated entries.",
+                "Use stat to verify octal mode."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "projectFlow": "independent",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "linux-module-2-project",
+          "title": "Module Project",
+          "summary": "Secure an owned script and a private note to the specified modes.",
+          "topics": [
+            {
+              "topicId": "module-3-secure-script-folder",
+              "title": "Project: Secure Your Workspace",
+              "summary": "Make and verify targeted permission changes on a trusted script and private note.",
+              "minutes": 32,
+              "technical": true,
+              "learningGoals": [
+                "Fix only missing owner execution and overbroad read bits on lab-owned paths."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "project",
+                "projectFlow": "progressive",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            }
+          ],
+          "role": "project"
+        }
+      ]
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "linux-module-3-users-groups-troubleshooting",
+      "prefix": "linux_module_3",
+      "title": "Users, Groups, and Permission Troubleshooting",
+      "purpose": "Distinguish identity from permissions, explain privileged operations safely, investigate access errors, and understand umask.",
+      "learningObjectives": [
+        "Interpret owner and group information without changing host accounts.",
+        "Explain when ownership administration would be required and why sudo is restricted.",
+        "Diagnose permission-denied failures by checking the actual access path.",
+        "Predict default mode changes under a given umask."
+      ],
+      "guidedExercises": [
+        "Compare simulated owner/group listings to the current identity.",
+        "Choose safe versus privileged actions in a scenario-based quiz.",
+        "Inspect an intentionally broken learner-owned path and recommend a minimal repair.",
+        "Calculate file/directory permission results with an example umask."
+      ],
+      "quizFocus": [
+        "Separate owner/group and mode issues.",
+        "Recognize sudo and root hazards.",
+        "Trace blocked parents and derive umask results."
+      ],
+      "moduleProject": "Shared Team Directory: analyze simulated team access, restore the minimum intended owner-owned modes, and explain privilege boundaries.",
+      "sections": [
+        {
+          "sectionSlug": "linux-module-3-identity-ownership",
+          "title": "Identity and Ownership",
+          "summary": "Compare owner, group, and effective identity; discuss ownership management conceptually.",
+          "topics": [
+            {
+              "topicId": "owner-group-identity",
+              "title": "Identify Owners and Groups",
+              "summary": "Inspect owner/group labels and primary/supplementary group memberships.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Read the owner and group columns in ls -l.",
+                "Identify when a user is not the owner."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "projectFlow": "independent",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "ownership-administration-concepts",
+              "title": "When Ownership Must Change",
+              "summary": "Explain chown/chgrp use cases and privileged ownership restrictions without running either command.",
+              "minutes": 22,
+              "technical": false,
+              "learningGoals": [
+                "Distinguish ownership problems from permission-bit problems.",
+                "Choose requesting administrator help rather than unsafe escalation."
+              ],
+              "practice": {
+                "conceptualOnly": true,
+                "tryIt": false,
+                "requiresTryIt": false,
+                "tryItPlacement": "none",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice"
+                ]
+              },
+              "serviceDefaults": {
+                "administratorLab": "eligible"
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "linux-module-3-least-privilege",
+          "title": "Root and Least Privilege",
+          "summary": "Decide when administrative access is inappropriate, without executing privileged commands.",
+          "topics": [
+            {
+              "topicId": "sudo-root-concepts",
+              "title": "Why sudo Exists",
+              "summary": "Understand administrator privileges and why ordinary labs must not require them.",
+              "minutes": 22,
+              "technical": false,
+              "learningGoals": [
+                "Choose between regular-user actions and administrative requests."
+              ],
+              "practice": {
+                "conceptualOnly": true,
+                "tryIt": false,
+                "requiresTryIt": false,
+                "tryItPlacement": "none",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice"
+                ]
+              },
+              "serviceDefaults": {
+                "administratorLab": "eligible"
+              }
+            },
+            {
+              "topicId": "least-privilege-decisions",
+              "title": "Least Privilege in Practice",
+              "summary": "Evaluate commands before executing: scope, purpose, ownership, and unintended access.",
+              "minutes": 22,
+              "technical": false,
+              "learningGoals": [
+                "Recognize chmod 777 and chmod -R as inappropriate beginner fixes.",
+                "Explain the smallest safe permission change."
+              ],
+              "practice": {
+                "conceptualOnly": true,
+                "tryIt": false,
+                "requiresTryIt": false,
+                "tryItPlacement": "none",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "linux-module-3-debugging-defaults",
+          "title": "Troubleshooting and Defaults",
+          "summary": "Diagnose inaccessible paths and calculate umask outcomes.",
+          "topics": [
+            {
+              "topicId": "permission-denied-triage",
+              "title": "Trace a Permission Denied Error",
+              "summary": "Inspect the actual file and all parent directories before selecting a fix.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Read modes and ownership first.",
+                "Apply a targeted chmod only when fixture owner and intended access warrant it."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "projectFlow": "independent",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "umask-and-default-modes",
+              "title": "Understand umask Safely",
+              "summary": "Inspect umask and understand default file/directory modes without changing global shell state.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Explain umask as a mask over creation permissions.",
+                "Avoid asserting a fixed umask value for every environment."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "projectFlow": "independent",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "linux-module-3-project",
+          "title": "Module Project",
+          "summary": "Explain and fix a controlled, learner-owned permissions mismatch.",
+          "topics": [
+            {
+              "topicId": "module-7-permission-debugging-lab",
+              "title": "Project: Shared Team Directory",
+              "summary": "Identify a blocked path, propose least privilege, and repair only owned test fixtures.",
+              "minutes": 35,
+              "technical": true,
+              "learningGoals": [
+                "Verify final modes and preserve unrelated entries."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "project",
+                "projectFlow": "progressive",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            }
+          ],
+          "role": "project"
+        }
+      ]
+    },
+    {
+      "moduleNumber": 4,
+      "moduleSlug": "linux-module-4-secure-project-capstone",
+      "prefix": "linux_module_4",
+      "title": "Capstone: Secure Project Folder",
+      "purpose": "Apply inspection, least privilege, careful mode changes, and verified parent traversal to hand off a small project.",
+      "learningObjectives": [
+        "Inventory before touching any file.",
+        "Secure private data, scripts, and intended shared access.",
+        "Verify actual mode bits and explain group membership assumptions."
+      ],
+      "guidedExercises": [
+        "Use one cumulative /workspace/secure-project tree for all five steps in the authorized disposable administrator lab; the seven-path final state is verified from the same live workspace.",
+        "Use ls -l, ls -ld, id, and stat before chmod.",
+        "Use sudo/chown only for the explicitly authored README.md ownership requirement inside the authorized sandbox. Do not change host users/groups, external paths, or apply chmod -R or 777."
+      ],
+      "quizFocus": [
+        "Use evidence for access decisions.",
+        "Check the exact expected modes.",
+        "Identify safe and unsafe changes."
+      ],
+      "moduleProject": "Secure Project Folder: complete and audit five cumulative least-privilege steps.",
+      "sections": [
+        {
+          "sectionSlug": "linux-module-4-capstone",
+          "title": "Final Capstone",
+          "summary": "Inspect, secure, verify, and document one cumulative isolated project with an intentionally root-owned README.md.",
+          "topics": [
+            {
+              "topicId": "final-capstone-secure-project",
+              "title": "Capstone: Secure Project Folder",
+              "summary": "Configure a private config, safe executable, public README, and shared directory with exact permission verification.",
+              "minutes": 100,
+              "technical": true,
+              "learningGoals": [
+                "Apply least-privilege modes to the isolated capstone workspace and verify one intentionally root-owned README.md.",
+                "Verify actual mode bits, explain effective access through directories, and preserve secrets."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "project",
+                "projectFlow": "progressive",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              },
+              "projectBrief": {
+                "scenario": "You must hand off a small development project containing a safe script, public documentation, a dummy private config, and a group-shared directory.",
+                "role": "Workspace access coordinator",
+                "workspace": "One cumulative /workspace/secure-project tree in an authorized disposable administrator sandbox, containing README.md (UID/GID 0:0), scripts/run.sh, secrets.env and shared/notes.txt (remaining entries UID/GID 1000:1000). Use only dummy credentials.",
+                "deliverable": "A verified seven-path secure-project tree and short access explanation. The only root-owned target is README.md; never use real credentials or touch host files.",
+                "stepCountTarget": 5,
+                "flow": "progressive",
+                "requirements": [
+                  "Run only in the server-authorized isolated administrator sandbox. Use the minimum sudo/chown required for README.md to be owned by 0:0; all other seven-path targets remain owned by 1000:1000. Never use recursive chmod or host paths.",
+                  "Use only a safe run.sh fixture or provided script content; do not require Bash scripting knowledge beyond Course 2 before Course 3.",
+                  "Check file permission bits AND parent directories; a readable file is not accessible through non-traversable parents.",
+                  "Use real mode checks via an approved sandboxed verifier (stat/st_mode); workspaceExpectations alone do not check permissions.",
+                  "Inspect identities with id and stat; for this explicitly authored capstone only, verify the fixed sandbox UID/GID target 1000:1000, and README.md 0:0. Do not infer host identities or group membership.",
+                  "Keep stable path identities and avoid printing actual secrets or loading real environment credentials.",
+                  "Use exactly one progressive capstone topic to preserve the cumulative workspace.",
+                  "Never imply mode 770 guarantees access to a group unless group membership matches."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Inspect Before Changing",
+                    "requirement": "Use pwd, ls -l, ls -ld, id, and stat to inventory the supplied secure-project tree and note current modes."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Protect the Private Config",
+                    "requirement": "Set secure-project/secrets.env to 600; verify mode without displaying its contents."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Prepare the Script and Documentation",
+                    "requirement": "Set scripts/run.sh to 700 and scripts/ to 700. Keep README.md at 644 with UID/GID 0:0 using authorized scoped sudo."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Configure Team Folder Access",
+                    "requirement": "Set shared/ to 770 and shared/notes.txt to 640; keep the project root at 755, inspect UID/GID 1000:1000, and explain group membership requirements."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Verify and Document Least Privilege",
+                    "requirement": "Verify all seven authored modes and ownership values through trusted filesystem evidence, including root-owned README.md; explain why scoped sudo was necessary only for README.md and why chmod 777 was unnecessary."
+                  }
+                ],
+                "targetModes": {
+                  "secure-project": "755",
+                  "secure-project/README.md": "644",
+                  "secure-project/scripts": "700",
+                  "secure-project/scripts/run.sh": "700",
+                  "secure-project/secrets.env": "600",
+                  "secure-project/shared": "770",
+                  "secure-project/shared/notes.txt": "640"
+                }
+              },
+              "serviceDefaults": {
+                "administratorLab": "eligible"
+              }
+            }
+          ],
+          "role": "capstone"
+        }
+      ],
+      "role": "capstone"
+    }
+  ],
+  "workspaceProfileId": "terminal-workspace-runner",
+  "workspacePolicyId": "linux-terminal-workspace",
+  "courseGenerationPolicy": {
+    "studentActionStyle": "terminal-workspace",
+    "forbidUnavailableWorkspaceActions": true,
+    "preferredTerms": {
+      "editor": "terminal",
+      "run button": "terminal command",
+      "output panel": "terminal output"
+    },
+    "notes": [
+      "End-to-end author-only seven-path verifier PASS-FAIL-PASS completed; do not publish until student grading, enrollment, compiler evidence propagation, and attempt handling are validated through the established Course 1 pipeline.",
+      "Use learner-owned fixtures for ordinary chmod labs. The administratorLab-eligible capstone alone uses the approved root-owned README.md fixture inside a disposable authorized sandbox.",
+      "Privileged commands are prohibited in ordinary lessons; only administratorLab-eligible topics may demonstrate them in an authorized, disposable sandbox.",
+      "The final capstone is one progressive project with five cumulative steps.",
+      "Teach and check parent directory traversal as well as file bits."
+    ]
+  },
+  "topicPolicies": {
+    "ownership-administration-concepts": {
+      "notes": [
+        "Regular practice remains conceptual; if author-approved hands-on sudo/chown/chgrp is exposed, use only the existing administratorLab-eligible isolated runtime and server authorization."
+      ]
+    },
+    "sudo-root-concepts": {
+      "notes": [
+        "Explain sudo conceptually in standard lessons. An approved administratorLab-eligible demonstration may test safe sudo commands in the disposable sandbox, never on a host or standard terminal."
+      ]
+    },
+    "least-privilege-decisions": {
+      "notes": [
+        "Give a safe decision-making quiz, not executable privileged commands."
+      ]
+    },
+    "final-capstone-secure-project": {
+      "notes": [
+        "Require the existing trusted Runner to inspect seven live paths, their exact modes, and UID/GID; command-history matching and file existence alone are not grading evidence.",
+        "One cumulative five-step capstone within Module 4; do not split into additional modules."
+      ]
+    }
+  },
+  "serviceDefaults": {
+    "administratorLab": "disabled"
+  }
+}

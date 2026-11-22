@@ -1,0 +1,29 @@
+import { NextResponse } from "next/server";
+import { RunnerHttpError } from "@zoeskoul/platform-server/server/runnerClient";
+import { ReactPreviewRequestError } from "@/lib/build/reactPreviewServer";
+import { DevelopmentPreviewBodyError } from "@/lib/build/reactPreviewDevelopmentHttp";
+
+export function response(requestId: string, data: Record<string,unknown>, status=200) {
+  const result=NextResponse.json({...data,requestId},{status});
+  result.headers.set("Cache-Control","no-store, max-age=0");
+  result.headers.set("X-Request-Id",requestId);
+  return result;
+}
+
+export function browserError(requestId:string,error:unknown) {
+  if (error instanceof DevelopmentPreviewBodyError)
+    return response(requestId,{ok:false,code:"BUILD_PREVIEW_INVALID",message:error.message},error.status);
+  if (error instanceof ReactPreviewRequestError)
+    return response(requestId,{ok:false,code:error.code,message:error.message},error.status);
+  if (error instanceof RunnerHttpError) {
+    const status=error.status===404?404:error.status===409?409:503;
+    return response(requestId,{ok:false,
+      code:status===404?"BUILD_PREVIEW_NOT_FOUND":status===409?
+        "BUILD_PREVIEW_SOURCE_CONFLICT":"BUILD_PREVIEW_UNAVAILABLE",
+      message:status===409?"Preview revision is stale or requires restart.":
+        "Development preview is unavailable.",
+    },status);
+  }
+  return response(requestId,{ok:false,code:"BUILD_PREVIEW_UNAVAILABLE",
+    message:"Development preview is unavailable."},503);
+}

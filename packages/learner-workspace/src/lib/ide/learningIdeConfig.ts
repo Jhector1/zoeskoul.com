@@ -34,6 +34,8 @@ export type LearningIdeFileActions = IdeFileActionsConfig;
 export type LearningIdeConfig = {
     preset?: LearningIdeServicePreset;
     runnerBackend?: LearningIdeRunnerBackend;
+    /** UI eligibility only; signed grants and server policy authorize root. */
+    administratorLab?: "disabled" | "eligible";
     requires?: LearningIdeServiceRequirements;
     layoutMode?: LearningIdeLayoutMode;
     terminalSessionScope?: TerminalSessionScope;
@@ -94,6 +96,7 @@ export function mergeLearningIdeConfigs(
             ...(merged ?? {}),
             ...(config.preset ? { preset: config.preset } : {}),
             ...(config.runnerBackend ? { runnerBackend: config.runnerBackend } : {}),
+            ...(config.administratorLab ? { administratorLab: config.administratorLab } : {}),
             ...(config.sqlPane ? { sqlPane: { ...previousSqlPane, ...config.sqlPane } } : {}),
             ...(config.layoutMode ? { layoutMode: config.layoutMode } : {}),
             ...(config.terminalSessionScope

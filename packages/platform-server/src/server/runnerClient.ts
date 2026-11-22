@@ -32,15 +32,24 @@ export async function runnerPost<T>(
   path: string,
   actorKey: string,
   body?: unknown,
+  options: Readonly<{ requestId?: string }> = {},
 ): Promise<T> {
   const url = `${getRunnerBaseUrl()}${path}`;
+  const requestId = options.requestId?.trim();
+  if (requestId !== undefined &&
+      !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(requestId)) {
+    throw new Error("Invalid Runner request correlation.");
+  }
 
   let res: Response;
 
   try {
     res = await fetch(url, {
       method: "POST",
-      headers: buildRunnerHeaders({ actorKey }),
+      headers: {
+        ...buildRunnerHeaders({ actorKey }),
+        ...(requestId ? { "x-request-id": requestId } : {}),
+      },
       body: body == null ? undefined : JSON.stringify(body),
       cache: "no-store",
     });

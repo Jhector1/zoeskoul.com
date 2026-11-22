@@ -59,10 +59,22 @@ export const snapshotWorkspaceRoute: RequestHandler = async (req, res) => {
             files,
             expiresAt: session.expiresAt ?? null,
         });
-    } catch (e: any) {
+    } catch (e: unknown) {
+        const code = (e as NodeJS.ErrnoException | null)?.code;
+        if (code === "EACCES" || code === "EPERM") {
+            // Linux permissions are part of the training exercise. Fail
+            // closed: never silently omit unreadable folders/files from a
+            // snapshot, which could erase learner data during a later merge.
+            // Do not expose the host's absolute filesystem paths to clients.
+            return res.status(409).json({
+                ok: false,
+                code: "WORKSPACE_SNAPSHOT_ACCESS_RESTRICTED",
+                error: "Workspace snapshot is unavailable while paths have restricted access. No files were synchronized.",
+            });
+        }
         return res.status(500).json({
             ok: false,
-            error: e?.message ?? "Failed to snapshot workspace.",
+            error: "Failed to snapshot workspace.",
         });
     }
 };

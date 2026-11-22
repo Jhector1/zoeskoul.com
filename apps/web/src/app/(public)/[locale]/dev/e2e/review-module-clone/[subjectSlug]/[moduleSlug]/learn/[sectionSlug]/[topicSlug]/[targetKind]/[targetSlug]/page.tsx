@@ -1,4 +1,5 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { canonicalDraftQaPreviewRoute } from "@/lib/dev/curriculumDrafts/draftPreviewCanonicalRoute";
 import ReviewModulePageClient from "@/app/(public)/[locale]/(learningZone)/subjects/[subjectSlug]/modules/[moduleSlug]/learn/ReviewModulePageClient";
 import { getResolvedReviewModule } from "@/lib/subjects/server/resolveSubjectPresentation";
 import { buildDraftPreviewReviewModule } from "@/lib/dev/curriculumDrafts/preview";
@@ -1118,6 +1119,53 @@ export default async function Page({
             resolvedParams.moduleSlug ?? "",
         )
         : null;
+
+    // Draft QA must never display a card from a different topic than the
+    // canonical draft source selected by topicDir. The dev clone historically
+    // skipped the canonical route guard used by normal learner pages: an
+    // unresolved quiz target fell back to the module's FIRST topic while
+    // practice requests still read the selected topicDir from the URL.
+    if (rawDraftPreview && draftQaMode && draftPreviewModule) {
+        const identityKeys = ["catalog", "subject", "moduleDir", "topicDir", "source", "draftQa"];
+        if (identityKeys.some((key) => Array.isArray(resolvedSearchParams[key]))) {
+            notFound();
+        }
+
+        const canonical = canonicalDraftQaPreviewRoute({
+            mod: draftPreviewModule,
+            topicDir: firstSearchParam(resolvedSearchParams, "topicDir") ?? "",
+            subjectSlug: resolvedParams.subjectSlug ?? "",
+            moduleSlug: resolvedParams.moduleSlug ?? "",
+            requested: {
+                sectionSlug: resolvedParams.sectionSlug ?? "",
+                topicSlug: resolvedParams.topicSlug ?? "",
+                targetKind: resolvedParams.targetKind ?? "",
+                targetSlug: resolvedParams.targetSlug ?? "",
+            },
+        });
+
+        if (canonical.status === "invalid") {
+            notFound();
+        }
+        if (canonical.status === "redirect") {
+            const target = canonical.target;
+            const parts = [
+                resolvedParams.locale ?? "en",
+                "dev", "e2e", "review-module-clone",
+                resolvedParams.subjectSlug ?? "",
+                resolvedParams.moduleSlug ?? "",
+                "learn", target.sectionSlug, target.topicSlug,
+                target.targetKind, target.targetSlug,
+            ];
+            const path = "/" + parts.map(encodeURIComponent).join("/");
+            const query = new URLSearchParams();
+            for (const [key, value] of Object.entries(resolvedSearchParams)) {
+                if (typeof value === "string") query.set(key, value);
+            }
+            const suffix = query.toString();
+            redirect(suffix ? `${path}?${suffix}` : path);
+        }
+    }
 
     if (generatedDraftPreview && !generatedPreviewModule) {
         console.info("[review-clone-not-found]", "generated-preview-missing");

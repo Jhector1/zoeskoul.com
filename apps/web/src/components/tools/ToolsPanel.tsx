@@ -11,6 +11,8 @@ import type { ToolsCtx, ToolId } from "./types";
 import { useActiveTool } from "./hooks/useActiveTool";
 import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
+import type { ScopedAdminTerminalSelection } from "@/lib/learning/client/resolveScopedAdminTerminal";
+import ScopedAdminLabTerminal from "@/components/tools/panes/ScopedAdminLabTerminal";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 import type { ToolRunnerPanePolicy, ToolSurface } from "@zoeskoul/curriculum-contracts";
@@ -50,6 +52,7 @@ export type ToolsPanelProps = {
     codeReadOnly?: boolean;
     toolSqlDialect: SqlDialect;
     ideConfig?: LearningIdeConfig | null;
+    scopedAdminTerminal?: ScopedAdminTerminalSelection;
     draftStorageMode?: "off" | "local";
     workspaceRuntimeCommitMode?: ReviewWorkspaceRuntimeCommitMode;
     onWorkspaceRuntimeCommit?: () => void | Promise<void>;
@@ -204,6 +207,7 @@ function ToolsPanelInner(props: ToolsPanelProps) {
                         readOnly={props.codeReadOnly === true}
                         toolSqlDialect={props.toolSqlDialect}
                         ideConfig={props.ideConfig}
+                        scopedAdminTerminal={props.scopedAdminTerminal}
                         draftStorageMode={props.draftStorageMode}
                         workspaceRuntimeCommitMode={props.workspaceRuntimeCommitMode}
                         onWorkspaceRuntimeCommit={props.onWorkspaceRuntimeCommit}
@@ -489,6 +493,7 @@ function CodePaneLayer(props: {
     readOnly: boolean;
     toolSqlDialect: SqlDialect;
     ideConfig?: LearningIdeConfig | null;
+    scopedAdminTerminal?: ScopedAdminTerminalSelection;
     draftStorageMode?: "off" | "local";
     workspaceRuntimeCommitMode?: ReviewWorkspaceRuntimeCommitMode;
     onWorkspaceRuntimeCommit?: () => void | Promise<void>;
@@ -520,7 +525,13 @@ function CodePaneLayer(props: {
 }) {
     let pane: React.ReactNode = null;
 
-    if (!props.codeEnabled) {
+    if (props.scopedAdminTerminal && props.scopedAdminTerminal.kind !== "ordinary") {
+        const selected = props.scopedAdminTerminal;
+        const key = selected.kind === "draft"
+            ? `draft:${selected.draft.module}:${selected.draft.topic}`
+            : `student:${selected.target.moduleSlug}:${selected.target.topicSlug}`;
+        pane = <ScopedAdminLabTerminal key={key} selection={selected} />;
+    } else if (!props.codeEnabled) {
         pane = (
             <div className="h-full rounded-xl border border-neutral-200 p-4 text-sm text-neutral-700 dark:border-white/10 dark:text-white/70">
                 Code tool is disabled for this subject.
@@ -594,6 +605,7 @@ const MemoCodePaneLayer = React.memo(
         prev.readOnly === next.readOnly &&
         prev.toolSqlDialect === next.toolSqlDialect &&
         prev.ideConfig === next.ideConfig &&
+        prev.scopedAdminTerminal === next.scopedAdminTerminal &&
         prev.draftStorageMode === next.draftStorageMode &&
         prev.workspaceRuntimeCommitMode === next.workspaceRuntimeCommitMode &&
         prev.onWorkspaceRuntimeCommit === next.onWorkspaceRuntimeCommit &&
@@ -720,6 +732,7 @@ function areToolsPanelPropsEqual(prev: ToolsPanelProps, next: ToolsPanelProps) {
         prev.codeReadOnly === next.codeReadOnly &&
         prev.toolSqlDialect === next.toolSqlDialect &&
         prev.ideConfig === next.ideConfig &&
+        prev.scopedAdminTerminal === next.scopedAdminTerminal &&
         prev.draftStorageMode === next.draftStorageMode &&
         prev.workspaceRuntimeCommitMode === next.workspaceRuntimeCommitMode &&
         prev.onWorkspaceRuntimeCommit === next.onWorkspaceRuntimeCommit &&

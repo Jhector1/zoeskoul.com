@@ -15,6 +15,7 @@ import { claimSavedDependencyFollowUp, clearSavedDependencyRecoveryGuards } from
 import { readPreviewOperationStatus } from "@/lib/build/previewOperationHttp";
 import { decideTanstackPreviewSync } from "@/lib/build/tanstackPreviewSyncDecision";
 import { recordPreviewBrowserTiming } from "@/lib/build/previewPerformance";
+import { useReactDevelopmentPreview } from "./useReactDevelopmentPreview";
 
 type PreviewSession = Readonly<{
   previewId: string;
@@ -201,7 +202,7 @@ function message(data: ApiPayload | null, fallback: string) {
   return typeof data?.message === "string" ? data.message : fallback;
 }
 
-export function useReactVitePreview(input: Readonly<{
+function useImmutableReactVitePreview(input: Readonly<{
   enabled: boolean;
   buildProjectId: string;
   sourceVersion: number;
@@ -1083,4 +1084,30 @@ export function useReactVitePreview(input: Readonly<{
   }, [input.enabled, input.sourceVersion, input.allowDependencyBootstrap, restart, syncCurrent, workspaceContentRevision]);
 
   return preview ? { ...preview, confirmedSourceVersion, attemptedSourceVersion, routes: registeredTanstackPreviewRoutes(initialWorkspaceEntries), onRetry: restart } : null;
+}
+
+
+/** Phase 4E3B — opt-in editor selection; immutable behavior is unchanged while
+ * NEXT_PUBLIC_ZOEBUILD_DEVELOPMENT_PREVIEW_EDITOR_ENABLED is not true.
+ * The new transport is a tokenized iframe reload, NOT Vite WebSocket HMR.
+ */
+export function useReactVitePreview(
+  input: Parameters<typeof useImmutableReactVitePreview>[0],
+): ReturnType<typeof useImmutableReactVitePreview> {
+  const experiment = process.env.NEXT_PUBLIC_ZOEBUILD_DEVELOPMENT_PREVIEW_EDITOR_ENABLED === "true";
+  const development = useReactDevelopmentPreview({
+    enabled: input.enabled && experiment,
+    buildProjectId: input.buildProjectId,
+    sourceVersion: input.sourceVersion,
+    savedSourceReady: input.allowDependencyBootstrap,
+    workspace: input.workspace,
+  });
+  // Hooks are unconditional. The existing immutable engine runs only when the
+  // experiment is off or a development lease fails and has been retired.
+  const immutable = useImmutableReactVitePreview({
+    ...input,
+    enabled: input.enabled && (!experiment || development.fallback),
+  });
+  if (experiment && !development.fallback) return development.preview;
+  return immutable;
 }

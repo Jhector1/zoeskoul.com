@@ -1,9 +1,7 @@
 "use client";
 
 import React, { useMemo } from "react";
-import { useSearchParams } from "next/navigation";
-import { usePathname } from "@/i18n/navigation";
-import NavButton from "@/components/ui/NavButton";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export default function CourseContentUpdateBanner({
                                                       show,
@@ -84,11 +82,8 @@ export default function CourseContentUpdateBanner({
                     </div>
                 </div>
 
-                <NavButton
+                <a
                     href={currentHref}
-                    hardReloadCurrent
-                    loadingText="Refreshing..."
-                    showSpinner
                     className="
         shrink-0 rounded-xl border px-4 py-2
         text-sm font-bold
@@ -104,7 +99,7 @@ export default function CourseContentUpdateBanner({
                     }}
                 >
                     Refresh now
-                </NavButton>
+                </a>
             </div>
         </div>
     );

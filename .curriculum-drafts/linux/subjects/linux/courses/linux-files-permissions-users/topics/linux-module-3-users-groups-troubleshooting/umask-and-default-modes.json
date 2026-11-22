@@ -1,0 +1,590 @@
+{
+  "title": "Understand umask Safely",
+  "summary": "Inspect umask and understand default file/directory modes without changing global shell state.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "concept-1",
+      "cardTitle": "Learn",
+      "title": "Understand Default Permission Masks",
+      "bodyMarkdown": "Programs typically create new files requesting mode `666` and directories requesting `777`, then the process `umask` removes permission bits. In simple examples, the effective result is bitwise masking, not subtraction; other tools and policies can further influence actual modes.\n\nExample: with umask `022`, a typical newly created regular file is `644`, while a typical newly created directory is `755`.\n\n| Requested | umask | Typical resulting mode |\n|---|---|---|\n| File `666` | `022` | `644` |\n| Directory `777` | `022` | `755` |\n| File `666` | `077` | `600` |\n| Directory `777` | `077` | `700` |\n\n```bash\numask\n```\n\nThis reads the current mask; **do not change your shell or global startup profile** in the lesson. Use a table exercise to calculate results under hypothetical masks.",
+      "tryItExercises": [
+        {
+          "id": "umask-and-default-modes-try-1",
+          "kind": "code_input",
+          "title": "Read the current umask",
+          "prompt": "**Try it yourself · 1 of 2**\n\nBefore predicting new-file permissions, determine the terminal’s current mask.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\numask\n```\n\n**Check:** Read the mask without changing it; you will interpret its effect in the lesson.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `umask` on the supplied practice fixture.",
+          "help": {
+            "concept": "Read the mask without changing it; you will interpret its effect in the lesson.",
+            "hint_1": "Try the single command `umask`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Read the current umask\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "umask\n",
+          "instructions": "**Try it yourself · 1 of 2**\n\nBefore predicting new-file permissions, determine the terminal’s current mask.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\numask\n```\n\n**Check:** Read the mask without changing it; you will interpret its effect in the lesson.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Read the current umask\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "umask\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^umask$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        },
+        {
+          "id": "umask-and-default-modes-try-1-part-2",
+          "kind": "code_input",
+          "title": "Inspect directory permissions: team-lab",
+          "prompt": "**Try it yourself · 2 of 2**\n\nBefore predicting new-file permissions, determine the terminal’s current mask.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -ld team-lab\n```\n\n**Check:** Read the leading `d` and the owner/group/other permission bits; no mode change is needed.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `ls -ld team-lab` on the supplied practice fixture.",
+          "help": {
+            "concept": "Read the leading `d` and the owner/group/other permission bits; no mode change is needed.",
+            "hint_1": "Try the single command `ls -ld team-lab`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Inspect directory permissions: team-lab\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "ls -ld team-lab\n",
+          "instructions": "**Try it yourself · 2 of 2**\n\nBefore predicting new-file permissions, determine the terminal’s current mask.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -ld team-lab\n```\n\n**Check:** Read the leading `d` and the owner/group/other permission bits; no mode change is needed.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Inspect directory permissions: team-lab\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "ls -ld team-lab\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^ls\\s+\\-ld\\s+team\\-lab$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "concept-2",
+      "cardTitle": "Try it yourself",
+      "title": "Predict what new files inherit",
+      "bodyMarkdown": "A process umask influences the default modes of newly created files and directories. Inspect the mask and the sample directory one command at a time.",
+      "tryItExercises": [
+        {
+          "id": "umask-and-default-modes-try-2",
+          "kind": "code_input",
+          "title": "Read the current umask",
+          "prompt": "**Try it yourself · 1 of 2**\n\nA project wants default files private to outsiders and group-readable to teammates.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\numask\n```\n\n**Check:** Read the mask without changing it; you will interpret its effect in the lesson.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `umask` on the supplied practice fixture.",
+          "help": {
+            "concept": "Read the mask without changing it; you will interpret its effect in the lesson.",
+            "hint_1": "Try the single command `umask`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Read the current umask\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "umask\n",
+          "instructions": "**Try it yourself · 1 of 2**\n\nA project wants default files private to outsiders and group-readable to teammates.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\numask\n```\n\n**Check:** Read the mask without changing it; you will interpret its effect in the lesson.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Read the current umask\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "umask\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^umask$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        },
+        {
+          "id": "umask-and-default-modes-try-2-part-2",
+          "kind": "code_input",
+          "title": "Inspect directory permissions: team-lab",
+          "prompt": "**Try it yourself · 2 of 2**\n\nA project wants default files private to outsiders and group-readable to teammates.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -ld team-lab\n```\n\n**Check:** Read the leading `d` and the owner/group/other permission bits; no mode change is needed.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `ls -ld team-lab` on the supplied practice fixture.",
+          "help": {
+            "concept": "Read the leading `d` and the owner/group/other permission bits; no mode change is needed.",
+            "hint_1": "Try the single command `ls -ld team-lab`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Inspect directory permissions: team-lab\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "ls -ld team-lab\n",
+          "instructions": "**Try it yourself · 2 of 2**\n\nA project wants default files private to outsiders and group-readable to teammates.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -ld team-lab\n```\n\n**Check:** Read the leading `d` and the owner/group/other permission bits; no mode change is needed.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Inspect directory permissions: team-lab\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "ls -ld team-lab\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^ls\\s+\\-ld\\s+team\\-lab$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "umask-and-default-modes-q1",
+      "kind": "single_choice",
+      "title": "New file defaults with `022`",
+      "prompt": "With umask 022, typical new regular file mode?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "666 & ~022 = 644.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "666 & ~022 = 644."
+      },
+      "options": [
+        "644",
+        "755",
+        "777"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "umask-and-default-modes-q2",
+      "kind": "single_choice",
+      "title": "New directories with `077`",
+      "prompt": "With umask 077, typical directory mode?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "777 & ~077 = 700.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "777 & ~077 = 700."
+      },
+      "options": [
+        "700",
+        "770",
+        "755"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "umask-and-default-modes-q3",
+      "kind": "single_choice",
+      "title": "What umask can remove",
+      "prompt": "Does umask add permission bits?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "Umask removes requested bits.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "Umask removes requested bits."
+      },
+      "options": [
+        "Yes",
+        "No, it masks them",
+        "Only on directories"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "umask-and-default-modes-practice",
+      "kind": "code_input",
+      "title": "Verify a local temporary umask experiment",
+      "prompt": "**Try it yourself**\n\nObserve how permissions on newly created items reflect a process-local mask.\n\n1. Run `umask` to read the current mask; do not change it.\n2. Create `umask-test.txt` using `touch` and `umask-test-dir` using `mkdir`; then run `stat -c \"%a %n\"` on both.\n3. Compare the observed modes with file `666` and directory `777` after removing your current umask bits.\n\n**Check your work:** The two new learner-owned entries have modes consistent with the active umask; do not expect fixed values because the learner environment may differ.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "hint": "Only read `umask` in this course; do not change shell or system policy.",
+      "help": {
+        "concept": "The two new learner-owned entries have modes consistent with the active umask; do not expect fixed values because the learner environment may differ.",
+        "hint_1": "Run `umask` to read the current mask; do not change it.",
+        "hint_2": "Only read `umask` in this course; do not change shell or system policy."
+      },
+      "starterCode": "# Verify a local temporary umask experiment\n# Follow the numbered instructions in the exercise card.\n",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "umask\ntouch umask-test.txt\nmkdir umask-test-dir\nstat -c \"%a %n\" umask-test.txt umask-test-dir\n",
+      "instructions": "**Try it yourself**\n\nObserve how permissions on newly created items reflect a process-local mask.\n\n1. Run `umask` to read the current mask; do not change it.\n2. Create `umask-test.txt` using `touch` and `umask-test-dir` using `mkdir`; then run `stat -c \"%a %n\"` on both.\n3. Compare the observed modes with file `666` and directory `777` after removing your current umask bits.\n\n**Check your work:** The two new learner-owned entries have modes consistent with the active umask; do not expect fixed values because the learner environment may differ.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Verify a local temporary umask experiment\n# Follow the numbered instructions in the exercise card.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "team-lab/README.md",
+          "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/report.txt",
+          "content": "Example report; synthetic training content.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/notes.txt",
+          "content": "Team notes for the course.\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "umask\ntouch umask-test.txt\nmkdir umask-test-dir\nstat -c \"%a %n\" umask-test.txt umask-test-dir\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "team-lab/README.md",
+          "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/report.txt",
+          "content": "Example report; synthetic training content.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/notes.txt",
+          "content": "Team notes for the course.\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^umask$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^touch\\s+umask\\-test\\.txt$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^mkdir\\s+umask\\-test\\-dir$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^stat\\s+\\-c\\s+\"%a\\s+%n\"\\s+umask\\-test\\.txt\\s+umask\\-test\\-dir$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "No sudo in learner exercises."
+          },
+          {
+            "pattern": "(^|\\s)su(\\s|$)",
+            "message": "Do not switch user identities."
+          },
+          {
+            "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+            "message": "Changing users or ownership is outside this course lab."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+            "message": "Do not recursively change permissions."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+            "message": "Never make the practice workspace world writable."
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "umask-test.txt"
+        ],
+        "requiredFolders": [
+          "umask-test-dir"
+        ]
+      }
+    }
+  ]
+}

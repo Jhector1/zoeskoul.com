@@ -1,0 +1,101 @@
+{
+  "title": "Least Privilege in Practice",
+  "summary": "Evaluate commands before executing: scope, purpose, ownership, and unintended access.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "concept-1",
+      "cardTitle": "Learn",
+      "title": "Choose the Minimum Needed Access",
+      "bodyMarkdown": "Least privilege means granting only the access required for the intended task. It is not the same as making access maximally convenient.\n\n| Scenario | Reasonable intent | Example mode |\n|---|---|---|\n| Private configuration fixture | Only owner reads and changes | `600` |\n| Documentation intended to be publicly readable | Owner writes; others read | `644` |\n| Vetted script only owner executes | Owner-only access | `700` |\n| Shared directory for one owning group | Owner/group may enter and modify | `770`, *with correct memberships* |\n\nThese are starting examples, not universal prescriptions. Directory traversal, user/group ownership, default ACLs and the actual audience matter. Permission changes should be as narrow as the validated requirement allows."
+    },
+    {
+      "id": "concept-2",
+      "cardTitle": "Try it yourself",
+      "title": "Choose access for a real purpose",
+      "bodyMarkdown": "**Try it yourself — think first**\n\nA project has a private configuration file, public documentation, and a team folder. Decide who actually needs to read, change, or enter each one.\n\nChoose the smallest useful permission set for each item, then explain why “give everyone full access” is not a good shortcut. Remember: a group-writable directory does not add anyone to that group."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "least-privilege-decisions-q1",
+      "kind": "single_choice",
+      "title": "Define least privilege",
+      "prompt": "What does least privilege mean?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "Scope rights to need.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "Scope rights to need."
+      },
+      "options": [
+        "Grant all access",
+        "Grant only required rights",
+        "Never allow any access"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "least-privilege-decisions-q2",
+      "kind": "single_choice",
+      "title": "Group permission versus membership",
+      "prompt": "Does setting shared/ to 770 create team memberships?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "Membership is independent from permissions.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "Membership is independent from permissions."
+      },
+      "options": [
+        "Yes",
+        "No",
+        "Only if owner root"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "least-privilege-decisions-q3",
+      "kind": "single_choice",
+      "title": "Avoid over-sharing private notes",
+      "prompt": "Which is excessive for private notes?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "777 grants everyone broad access.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "777 grants everyone broad access."
+      },
+      "options": [
+        "600",
+        "777",
+        "Owner rw"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "least-privilege-decisions-practice",
+      "kind": "single_choice",
+      "title": "Share a report safely",
+      "prompt": "A group may read a report, but only its owner should edit it. Which file mode expresses that?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "The owner has read/write, the group has read, and others have no access.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "The owner has read/write, the group has read, and others have no access."
+      },
+      "options": [
+        "640",
+        "660",
+        "644"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    }
+  ]
+}

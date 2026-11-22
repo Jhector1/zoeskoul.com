@@ -152,13 +152,29 @@ ssh -p 2222 \
 
   redis
   ssh -p 2222 -N -L 6380:127.0.0.1:6379 jean@127.0.0.1
-
+ ssh \
+  -o ControlMaster=no \
+  -o ControlPath=none \
+  -o ExitOnForwardFailure=yes \
+  -o ServerAliveInterval=30 \
+  -o ServerAliveCountMax=3 \
+  -N \
+  -R 127.0.0.1:33004:127.0.0.1:3004 \
+  -p 2222 \
+  jean@127.0.0.1
 cd ~/Documents/judge0-masyg/infra/judge0
 sudo docker compose down
 sudo docker compose up -d db redis
 sudo docker compose ps
 sudo docker compose up -d judge0 worker
 
+
+redis-server \
+  --bind 127.0.0.1 \
+  --protected-mode yes \
+  --port 6381 \
+  --save '' \
+  --appendonly no
 
 
 RUN_DRAFT_CODE_INPUT_GOLDENS=1 pnpm curr:course -- draft-goldens linux linux-terminal-fundamentals

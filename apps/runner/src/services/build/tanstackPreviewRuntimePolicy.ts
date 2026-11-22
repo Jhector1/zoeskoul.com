@@ -1,4 +1,5 @@
 import type { TanstackPreviewTransportRequest } from "./tanstackPreviewHttpBoundary.js";
+import type { ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contracts";
 
 /** Canonical runtime argv. No user-supplied commands, ports or environment. */
 export const TANSTACK_PREVIEW_DEV_COMMAND = [
@@ -15,6 +16,40 @@ export const TANSTACK_PREVIEW_INSTALL_COMMAND = [
  * the verified Miniflare fallback switch instead of attempting DNS. This is
  * preview-only; generated production builds still use the Cloudflare adapter. */
 export const TANSTACK_PREVIEW_OFFLINE_ENV = "CLOUDFLARE_CF_FETCH_ENABLED=false" as const;
+/** Only the isolated development container may consume this opt-in flag.
+ * It is NEVER a browser request or a field in a build request. */
+export const TANSTACK_PREVIEW_HMR_SANDBOX_ENV = "ZOEBUILD_PREVIEW_HMR_ENABLED=true" as const;
+
+/** A feature flag alone is insufficient. Until the authenticated WebSocket
+ * gateway is implemented and wired into the development lifecycle, the
+ * runtime must always pass websocketGatewayReady=false. */
+export function shouldActivateTanstackPreviewHmr(input: Readonly<{
+  mode: "immutable" | "development";
+  featureEnabled: boolean;
+  websocketGatewayReady: boolean;
+}>): boolean {
+  return input.mode === "development" && input.featureEnabled === true &&
+    input.websocketGatewayReady === true;
+}
+
+export class TanstackPreviewHmrSourceCompatibilityError extends Error {
+  constructor() {
+    super("Saved TanStack source is not compatible with native preview HMR.");
+    this.name = "TanstackPreviewHmrSourceCompatibilityError";
+  }
+}
+
+/** HMR is a saved-source contract, not a Runner rewrite. Legacy projects with
+ * `hmr: false` must be upgraded through the normal revisioned source writer. */
+export function assertTanstackPreviewHmrSourceCompatible(
+  request: Pick<ProductionBuildJobRequestV1, "files">,
+  enabled: boolean,
+): void {
+  if (!enabled) return;
+  const viteConfig = request.files.find(file => file.path === "vite.config.ts")?.content;
+  if (!viteConfig?.includes('hmr: process.env.ZOEBUILD_PREVIEW_HMR_ENABLED === "true"'))
+    throw new TanstackPreviewHmrSourceCompatibilityError();
+}
 /** Only Runner-minted browser capability URLs may become Vite's public base.
  * Never accept a base from application source or an HTTP request parameter. */
 export function tanstackPreviewDevCommand(basePath: string): readonly string[] {
@@ -72,7 +107,7 @@ export function assertTanstackSandboxOptions(options: Readonly<{
     PortBindings?: unknown;
     SecurityOpt?: readonly string[];
   };
-}>): void {
+}>, hmrEnabled = false): void {
   const config = options.HostConfig;
   const dependencyBind = config?.Binds?.[1] ?? "";
   const cachedDependencies = dependencyBind !== "";
@@ -82,6 +117,7 @@ export function assertTanstackSandboxOptions(options: Readonly<{
       `rw,noexec,nosuid,nodev,size=64m,uid=${sandboxUid},gid=${sandboxGid},mode=0700` &&
     config?.Tmpfs?.["/workspace/node_modules/.vite-temp"] ===
       `rw,noexec,nosuid,nodev,size=16m,uid=${sandboxUid},gid=${sandboxGid},mode=0700`;
+  const hmrEnv = options.Env?.filter(value => value.startsWith("ZOEBUILD_PREVIEW_HMR_ENABLED=")) ?? [];
   const basePath = options.Cmd?.[TANSTACK_PREVIEW_DEV_COMMAND.length + 1] ?? "";
   const baseIsValid = (() => {
     try { return JSON.stringify(options.Cmd) === JSON.stringify(tanstackPreviewDevCommand(basePath)); }
@@ -93,6 +129,8 @@ export function assertTanstackSandboxOptions(options: Readonly<{
       !options.Env.includes(`ZOEBUILD_PREVIEW_BASE_PATH=${basePath}`) ||
       options.Env.filter(value => value.startsWith("CLOUDFLARE_CF_FETCH_ENABLED=")).length !== 1 ||
       !options.Env.includes(TANSTACK_PREVIEW_OFFLINE_ENV) ||
+      hmrEnv.length !== (hmrEnabled ? 1 : 0) ||
+      (hmrEnabled && hmrEnv[0] !== TANSTACK_PREVIEW_HMR_SANDBOX_ENV) ||
       config.NetworkMode !== "none" || config.Privileged !== false ||
       config.ReadonlyRootfs !== true ||
       !/^\d+:\d+$/.test(options.User ?? "") ||

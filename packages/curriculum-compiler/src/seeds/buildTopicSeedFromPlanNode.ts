@@ -289,6 +289,10 @@ export function buildTopicSeedFromPlanNode(args: {
             adapterServiceDefaults,
             args.blueprint.idePolicy?.defaultServices,
             args.blueprint.idePolicy?.moduleServiceDefaults?.[args.module.moduleSlug],
+            args.spec?.serviceDefaults,
+            specModule?.serviceDefaults,
+            specSection?.serviceDefaults,
+            specTopic?.serviceDefaults,
         );
 
     const mergedRuntimeDefaults: ManifestRuntimeDefaults =

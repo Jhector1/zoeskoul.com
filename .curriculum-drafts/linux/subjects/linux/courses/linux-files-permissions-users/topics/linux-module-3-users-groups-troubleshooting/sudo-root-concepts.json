@@ -1,0 +1,101 @@
+{
+  "title": "Why sudo Exists",
+  "summary": "Understand administrator privileges and why ordinary labs must not require them.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "concept-1",
+      "cardTitle": "Learn",
+      "title": "Why Root Privileges Need Boundaries",
+      "bodyMarkdown": "Root is a privileged identity. `sudo` may allow an authorized user to run a command with elevated privileges after authentication and policy checks. Power magnifies the consequences of typos, overly broad paths, and accidental writes. Reading about `sudo` does not grant permission to use it.\n\n**Example decision:** A task asks you to repair `secure-lab/notes.txt`, which you own. Should you start with `sudo`? **No.** Inspect the file and ancestor directories, and make a narrowly scoped change only if you own the fixture. If an intended system path is inaccessible, stop and ask the administrator instead of bypassing permissions."
+    },
+    {
+      "id": "concept-2",
+      "cardTitle": "Try it yourself",
+      "title": "When should privileges be used?",
+      "bodyMarkdown": "**Try it yourself — decision exercise**\n\nYou own a file but cannot execute it. Another task requires changing a file owned by the system. Which one could you fix yourself? Which one requires explicit administrator authorization?\n\nExplain the difference without running privileged commands. `sudo` is a controlled capability, not the first answer to every permission error."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "sudo-root-concepts-q1",
+      "kind": "single_choice",
+      "title": "Understand root",
+      "prompt": "What is root in Linux?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "Root is privileged.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "Root is privileged."
+      },
+      "options": [
+        "A privileged identity",
+        "Home directory only",
+        "Text file"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "sudo-root-concepts-q2",
+      "kind": "single_choice",
+      "title": "Decide whether `sudo` is needed",
+      "prompt": "Should sudo be the first response to Permission denied?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "Fix errors with minimum authorization.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "Fix errors with minimum authorization."
+      },
+      "options": [
+        "Yes",
+        "No, diagnose first",
+        "Always for chmod"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "sudo-root-concepts-q3",
+      "kind": "single_choice",
+      "title": "Recognize an unsafe privileged command",
+      "prompt": "Is sudo chmod -R 777 / permitted in this course?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "Unsafe broad privileged modification is forbidden.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "Unsafe broad privileged modification is forbidden."
+      },
+      "options": [
+        "Yes",
+        "Never",
+        "Only after ls"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "sudo-root-concepts-practice",
+      "kind": "single_choice",
+      "title": "Read your own file without sudo",
+      "prompt": "Do you need sudo to read a file you own when your user has read permission?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "The effective user already has the necessary read permission.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "The effective user already has the necessary read permission."
+      },
+      "options": [
+        "Yes, always",
+        "No, not for an ordinary permitted read",
+        "Only when the file ends in .txt"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    }
+  ]
+}

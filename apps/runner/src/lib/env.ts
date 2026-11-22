@@ -16,6 +16,9 @@ const envSchema = z.object({
   PORT: intEnv(4001),
 
   RUNNER_IMAGE: z.string().min(1).default("zoeskoul-runtime:latest"),
+  // Optional image override exclusively for unprivileged ZoeLearning sessions.
+  // Build/preview profiles still use RUNNER_IMAGE.
+  RUNNER_LEARNING_IMAGE: z.string().min(1).optional(),
 
   DOCKER_SOCKET: z.string().min(1).default("/var/run/docker.sock"),
   DOCKER_HOST: z.string().optional(),
@@ -104,6 +107,10 @@ const envSchema = z.object({
 });
 
 const parsed = envSchema.parse(process.env);
+if (parsed.RUNNER_LEARNING_IMAGE &&
+    parsed.RUNNER_EXECUTION_POOL !== "zoeskoul-learning") {
+  throw new Error("RUNNER_LEARNING_IMAGE requires the dedicated ZoeLearning execution pool.");
+}
 if (parsed.RUNNER_WORKSPACE_FS_POLICY === "shared-group-v1" &&
     (parsed.RUNNER_EXECUTION_POOL !== "zoebuild" ||
      parsed.RUNNER_EXEC_UID !== 1000 || parsed.RUNNER_EXEC_GID !== 0 ||
@@ -115,6 +122,7 @@ if (parsed.RUNNER_WORKSPACE_FS_POLICY === "shared-group-v1" &&
 export const env = {
   port: parsed.PORT,
   runnerImage: parsed.RUNNER_IMAGE,
+  runnerLearningImage: parsed.RUNNER_LEARNING_IMAGE,
 
   dockerSocket: parsed.DOCKER_SOCKET,
   dockerHost: parsed.DOCKER_HOST ?? "",

@@ -1,0 +1,882 @@
+{
+  "title": "Identify Owners and Groups",
+  "summary": "Inspect owner/group labels and primary/supplementary group memberships.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "concept-1",
+      "cardTitle": "Learn",
+      "title": "Distinguish Owners, Groups, and Access",
+      "bodyMarkdown": "In `ls -l`, the fields after the link count usually include owner and owning group. They are metadata, not commands. Ownership is not the same as the currently active user, and an owner's own bits normally take precedence over the group and other triplets for that user.\n\n```bash\nwhoami\nid\ngroups\nls -l secure-lab\n```\n\n**Worked case:** `-rw-r----- 1 alex editors ... report.txt` and current user `sam`. If `sam` belongs to `editors`, the group `r--` triplet normally applies. If `sam` does not belong to `editors`, the other `---` triplet applies. This example does not assume that `alex` or `editors` exists on the learner's actual machine.",
+      "tryItExercises": [
+        {
+          "id": "owner-group-identity-try-1",
+          "kind": "code_input",
+          "title": "Identify the active user",
+          "prompt": "**Try it yourself · 1 of 3**\n\nA teammate needs to know who owns the team handoff document.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nwhoami\n```\n\n**Check:** The output identifies the effective user for this terminal.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `whoami` on the supplied practice fixture.",
+          "help": {
+            "concept": "The output identifies the effective user for this terminal.",
+            "hint_1": "Try the single command `whoami`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Identify the active user\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "whoami\n",
+          "instructions": "**Try it yourself · 1 of 3**\n\nA teammate needs to know who owns the team handoff document.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nwhoami\n```\n\n**Check:** The output identifies the effective user for this terminal.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Identify the active user\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "whoami\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^whoami$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        },
+        {
+          "id": "owner-group-identity-try-1-part-2",
+          "kind": "code_input",
+          "title": "Inspect user and group IDs",
+          "prompt": "**Try it yourself · 2 of 3**\n\nA teammate needs to know who owns the team handoff document.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nid\n```\n\n**Check:** Find the effective user ID and group identifiers in the output.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `id` on the supplied practice fixture.",
+          "help": {
+            "concept": "Find the effective user ID and group identifiers in the output.",
+            "hint_1": "Try the single command `id`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Inspect user and group IDs\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "id\n",
+          "instructions": "**Try it yourself · 2 of 3**\n\nA teammate needs to know who owns the team handoff document.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nid\n```\n\n**Check:** Find the effective user ID and group identifiers in the output.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Inspect user and group IDs\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "id\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^id$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        },
+        {
+          "id": "owner-group-identity-try-1-part-3",
+          "kind": "code_input",
+          "title": "Inspect file permissions: team-lab/README.md",
+          "prompt": "**Try it yourself · 3 of 3**\n\nA teammate needs to know who owns the team handoff document.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -l team-lab/README.md\n```\n\n**Check:** Read the listing, its owner and group, and its permission triplets; do not change the file.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `ls -l team-lab/README.md` on the supplied practice fixture.",
+          "help": {
+            "concept": "Read the listing, its owner and group, and its permission triplets; do not change the file.",
+            "hint_1": "Try the single command `ls -l team-lab/README.md`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Inspect file permissions: team-lab/README.md\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "ls -l team-lab/README.md\n",
+          "instructions": "**Try it yourself · 3 of 3**\n\nA teammate needs to know who owns the team handoff document.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -l team-lab/README.md\n```\n\n**Check:** Read the listing, its owner and group, and its permission triplets; do not change the file.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Inspect file permissions: team-lab/README.md\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "ls -l team-lab/README.md\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^ls\\s+\\-l\\s+team\\-lab/README\\.md$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "concept-2",
+      "cardTitle": "Try it yourself",
+      "title": "Match the account to the file",
+      "bodyMarkdown": "Current identity, group membership, and file ownership provide different pieces of access-control evidence. Check one piece at a time using the independent Try exercises below.",
+      "tryItExercises": [
+        {
+          "id": "owner-group-identity-try-2",
+          "kind": "code_input",
+          "title": "Inspect user and group IDs",
+          "prompt": "**Try it yourself · 1 of 4**\n\nA group member asks if group write on a file grants access without parent directory traversal.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nid\n```\n\n**Check:** Find the effective user ID and group identifiers in the output.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `id` on the supplied practice fixture.",
+          "help": {
+            "concept": "Find the effective user ID and group identifiers in the output.",
+            "hint_1": "Try the single command `id`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Inspect user and group IDs\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "id\n",
+          "instructions": "**Try it yourself · 1 of 4**\n\nA group member asks if group write on a file grants access without parent directory traversal.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nid\n```\n\n**Check:** Find the effective user ID and group identifiers in the output.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Inspect user and group IDs\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "id\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^id$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        },
+        {
+          "id": "owner-group-identity-try-2-part-2",
+          "kind": "code_input",
+          "title": "List your groups",
+          "prompt": "**Try it yourself · 2 of 4**\n\nA group member asks if group write on a file grants access without parent directory traversal.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\ngroups\n```\n\n**Check:** Notice which groups your current terminal account belongs to.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `groups` on the supplied practice fixture.",
+          "help": {
+            "concept": "Notice which groups your current terminal account belongs to.",
+            "hint_1": "Try the single command `groups`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# List your groups\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "groups\n",
+          "instructions": "**Try it yourself · 2 of 4**\n\nA group member asks if group write on a file grants access without parent directory traversal.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\ngroups\n```\n\n**Check:** Notice which groups your current terminal account belongs to.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# List your groups\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "groups\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^groups$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        },
+        {
+          "id": "owner-group-identity-try-2-part-3",
+          "kind": "code_input",
+          "title": "Inspect directory permissions: team-lab team-lab/shared",
+          "prompt": "**Try it yourself · 3 of 4**\n\nA group member asks if group write on a file grants access without parent directory traversal.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -ld team-lab team-lab/shared\n```\n\n**Check:** Read the leading `d` and the owner/group/other permission bits; no mode change is needed.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `ls -ld team-lab team-lab/shared` on the supplied practice fixture.",
+          "help": {
+            "concept": "Read the leading `d` and the owner/group/other permission bits; no mode change is needed.",
+            "hint_1": "Try the single command `ls -ld team-lab team-lab/shared`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Inspect directory permissions: team-lab team-lab/shared\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "ls -ld team-lab team-lab/shared\n",
+          "instructions": "**Try it yourself · 3 of 4**\n\nA group member asks if group write on a file grants access without parent directory traversal.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -ld team-lab team-lab/shared\n```\n\n**Check:** Read the leading `d` and the owner/group/other permission bits; no mode change is needed.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Inspect directory permissions: team-lab team-lab/shared\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "ls -ld team-lab team-lab/shared\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^ls\\s+\\-ld\\s+team\\-lab\\s+team\\-lab/shared$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        },
+        {
+          "id": "owner-group-identity-try-2-part-4",
+          "kind": "code_input",
+          "title": "Inspect file permissions: team-lab/shared/report.txt",
+          "prompt": "**Try it yourself · 4 of 4**\n\nA group member asks if group write on a file grants access without parent directory traversal.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -l team-lab/shared/report.txt\n```\n\n**Check:** Read the listing, its owner and group, and its permission triplets; do not change the file.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `ls -l team-lab/shared/report.txt` on the supplied practice fixture.",
+          "help": {
+            "concept": "Read the listing, its owner and group, and its permission triplets; do not change the file.",
+            "hint_1": "Try the single command `ls -l team-lab/shared/report.txt`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Inspect file permissions: team-lab/shared/report.txt\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "ls -l team-lab/shared/report.txt\n",
+          "instructions": "**Try it yourself · 4 of 4**\n\nA group member asks if group write on a file grants access without parent directory traversal.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -l team-lab/shared/report.txt\n```\n\n**Check:** Read the listing, its owner and group, and its permission triplets; do not change the file.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Inspect file permissions: team-lab/shared/report.txt\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "ls -l team-lab/shared/report.txt\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^ls\\s+\\-l\\s+team\\-lab/shared/report\\.txt$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "owner-group-identity-q1",
+      "kind": "single_choice",
+      "title": "Locate the owning group",
+      "prompt": "Where is the owning group displayed by ls -l?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "Owner and group are distinct fields.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "Owner and group are distinct fields."
+      },
+      "options": [
+        "After the owner field",
+        "After file size",
+        "Never"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "owner-group-identity-q2",
+      "kind": "single_choice",
+      "title": "Use the owner triplet",
+      "prompt": "Who normally uses the owner triplet?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "Ownership determines owner class.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "Ownership determines owner class."
+      },
+      "options": [
+        "Any group member",
+        "The owning user",
+        "Every logged-in user"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "owner-group-identity-q3",
+      "kind": "single_choice",
+      "title": "Decide who gets group permissions",
+      "prompt": "Do group permissions apply to all Linux users?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "Membership matters.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "Membership matters."
+      },
+      "options": [
+        "No",
+        "Yes",
+        "Only root"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "owner-group-identity-practice",
+      "kind": "code_input",
+      "title": "Document ownership evidence without changing users",
+      "prompt": "**Try it yourself**\n\nAn access review requires a record of current identity and file metadata.\n\n1. Run `whoami > owner-review.txt`.\n2. Append `id` and `groups` using `>>`.\n3. Append `ls -l team-lab/README.md` and view with `cat owner-review.txt`.\n\n**Check your work:** The `owner-review.txt` file contains real identity and file metadata, with no `chown`, `chgrp`, or user switching.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "hint": "Use redirection only for the report in the learner workspace; ownership administration is conceptual in this course.",
+      "help": {
+        "concept": "The `owner-review.txt` file contains real identity and file metadata, with no `chown`, `chgrp`, or user switching.",
+        "hint_1": "Run `whoami > owner-review.txt`.",
+        "hint_2": "Use redirection only for the report in the learner workspace; ownership administration is conceptual in this course."
+      },
+      "starterCode": "# Document ownership evidence without changing users\n# Follow the numbered instructions in the exercise card.\n",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "whoami > owner-review.txt\nid >> owner-review.txt\ngroups >> owner-review.txt\nls -l team-lab/README.md >> owner-review.txt\ncat owner-review.txt\n",
+      "instructions": "**Try it yourself**\n\nAn access review requires a record of current identity and file metadata.\n\n1. Run `whoami > owner-review.txt`.\n2. Append `id` and `groups` using `>>`.\n3. Append `ls -l team-lab/README.md` and view with `cat owner-review.txt`.\n\n**Check your work:** The `owner-review.txt` file contains real identity and file metadata, with no `chown`, `chgrp`, or user switching.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Document ownership evidence without changing users\n# Follow the numbered instructions in the exercise card.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "team-lab/README.md",
+          "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/report.txt",
+          "content": "Example report; synthetic training content.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/notes.txt",
+          "content": "Team notes for the course.\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "whoami > owner-review.txt\nid >> owner-review.txt\ngroups >> owner-review.txt\nls -l team-lab/README.md >> owner-review.txt\ncat owner-review.txt\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "team-lab/README.md",
+          "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/report.txt",
+          "content": "Example report; synthetic training content.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/notes.txt",
+          "content": "Team notes for the course.\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^whoami\\s+>\\s+owner\\-review\\.txt$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^id\\s+>>\\s+owner\\-review\\.txt$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^groups\\s+>>\\s+owner\\-review\\.txt$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^ls\\s+\\-l\\s+team\\-lab/README\\.md\\s+>>\\s+owner\\-review\\.txt$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^cat\\s+owner\\-review\\.txt$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "No sudo in learner exercises."
+          },
+          {
+            "pattern": "(^|\\s)su(\\s|$)",
+            "message": "Do not switch user identities."
+          },
+          {
+            "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+            "message": "Changing users or ownership is outside this course lab."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+            "message": "Do not recursively change permissions."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+            "message": "Never make the practice workspace world writable."
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "owner-review.txt"
+        ]
+      }
+    }
+  ]
+}
