@@ -29,7 +29,11 @@ describe("ZoeBuild TanStack preview dependency preparation", () => {
     );
 
     expect(hook).toContain("mayAutoRecoverReactPreviewDependencies({");
-    expect(hook).toContain("/dependency-lock/bootstrap");
+    const shared = source("../../lib/build/sharedPreviewDependencyPreparation.ts");
+    expect(shared).toContain("/dependency-lock/bootstrap");
+    expect(hook).toContain("requestSavedPreviewDependencyPreparation({");
+    expect(hook).toContain("useSharedPreviewDependencyPreparation(input)");
+    expect(hook.match(/!preparation\.blocked/g)).toHaveLength(2);
     expect(hook).toContain("bootstrapAllowedRef.current");
     expect(hook).not.toContain("window.location.reload()");
     expect(hook).toContain("await reconcilePreparedDependencies(startingVersion)");

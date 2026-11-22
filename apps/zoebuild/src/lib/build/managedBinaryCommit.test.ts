@@ -148,3 +148,32 @@ describe("AI4B4E2B2: guarded atomic source commit port",()=>{
   await expect(loadHydratedManagedBinaryRevision({scope,sourceVersion:7,port,readObject:async()=>null})).rejects.toThrow("MANAGED_ATOMIC_RECORD_INVALID");
  });
 });
+
+
+describe("U20G image lifecycle acceptance",()=>{
+ it("retains exact object identity across rename, move, deletion and historical reads",async()=>{
+  const f=fixture();
+  const commit=(baseVersion:number,previous:ManagedBinaryRevision,workspace:W)=>
+    prepareAndCommitManagedBinaryRevision({scope,baseVersion,previous,workspace,upload:f.upload,journal:f.journalWrite,port:f.port});
+  await commit(7,prior,w());
+  const first=f.committed!.revision;
+  await commit(8,first,w("renamed.png"));
+  const renamed=f.committed!.revision;
+  const moved=w("renamed.png");
+  moved.nodes=moved.nodes.map(node=>node.id===imageId?{...node,parentId:"public_0001"}:node);
+  await commit(9,renamed,moved);
+  const movedRevision=f.committed!.revision;
+  const deleted={...moved,activeFileId:"index_node_01",nodes:moved.nodes.filter(node=>node.id!==imageId)};
+  await commit(10,movedRevision,deleted);
+  expect(f.committed!.revision.bindings).toEqual([]);
+  expect(f.uploads).toEqual(["public/assets/images/hero.png"]);
+  expect(f.journal).toEqual([asset]);
+  for (const [revision,path] of [[8,"public/assets/images/hero.png"],[9,"public/assets/images/renamed.png"],[10,"public/renamed.png"]] as const){
+   const saved=f.data.get(revision);
+   if (!saved || saved.kind!=="managed") throw Error("historical revision missing");
+   expect(saved.revision.bindings[0]).toMatchObject({objectKey:key,assetId,path});
+   const hydrated=await loadHydratedManagedBinaryRevision({scope,sourceVersion:revision,port:f.port,readObject:async objectKey=>objectKey===key?sourceBytes:null});
+   expect(hydrated?.nodes.find(node=>node.id===imageId)?.binary?.data).toBe(Buffer.from(sourceBytes).toString("base64"));
+  }
+ });
+});
