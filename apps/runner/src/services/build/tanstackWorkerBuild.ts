@@ -6,6 +6,10 @@ import { cleanupWorkspaceNow } from "../workspace/cleanupWorkspace.js";
 import { ensureWorkspaceWritableForShellUser } from "../workspace/workspacePermissions.js";
 import { executeBuildStep } from "./executeProductionBuild.js";
 import { readTanstackWorkerArtifact } from "./tanstackWorkerArtifact.js";
+import { env } from "../../lib/env.js";
+import { createTanstackRecoveryJournal } from "./tanstackPreviewDurableRecovery.js";
+import { shouldRunWorkerSmoke } from "./tanstackWorkerRuntimePolicy.js";
+import { runTanstackWorkerRuntimeSmoke } from "./tanstackWorkerRuntimeSmoke.js";
 
 /**
  * Service-authenticated isolated Worker compilation. Never a deploy/publish
@@ -18,27 +22,44 @@ export async function executeTanstackWorkerBuild(
   request: ProductionBuildJobRequestV1,
 ) {
   assertTanstackWorkerBuildRequest(request);
-  const workspaceDir = await createWorkspace([...request.files, ...(request.binaryFiles ?? [])]);
-  const runId = randomUUID();
+  const pilot = shouldRunWorkerSmoke(request);
+  const journal = pilot ? createTanstackRecoveryJournal(env.workspaceRoot) : null;
+  if (journal) await journal.write();
+  const workspaceDir = await createWorkspace([...request.files, ...(request.binaryFiles ?? [])], {
+    ...(journal ? {onWorkspaceAllocated: (dir:string) => journal.write({workspaceDir:dir})} : {}),
+  });
+  const runId = journal?.runId ?? randomUUID();
+  let liveContainer = false;
+  const lifecycle = journal ? {
+    onContainerCreated: async (id:string) => { liveContainer=true; await journal.write({containerId:id}); },
+    onContainerRemoved: async () => { await journal.write({containerId:null}); liveContainer=false; },
+  } : {};
   try {
     await ensureWorkspaceWritableForShellUser(workspaceDir);
     // Never accept argv, env, Docker options or output names from the caller.
     // Strict cleanup makes a leaked build container a failed verification.
     await executeBuildStep({ workspaceDir,
       command: ["pnpm", "install", "--frozen-lockfile", "--ignore-scripts"],
-      step: "install", strictCleanup: true, tanstackRunId: runId });
+      step: "install", strictCleanup: true, tanstackRunId: runId, ...lifecycle });
     await executeBuildStep({ workspaceDir,
       command: ["pnpm", "exec", "vite", "build"],
-      step: "build", strictCleanup: true, tanstackRunId: runId });
+      step: "build", strictCleanup: true, tanstackRunId: runId, ...lifecycle });
     await executeBuildStep({ workspaceDir,
       command: ["pnpm", "exec", "tsc", "--noEmit"],
-      step: "build", strictCleanup: true, tanstackRunId: runId });
+      step: "build", strictCleanup: true, tanstackRunId: runId, ...lifecycle });
     const artifact = await readTanstackWorkerArtifact(workspaceDir);
+    const runtimeSmoke = journal ? await runTanstackWorkerRuntimeSmoke({workspaceDir, artifact, runId,
+      onContainerCreated: lifecycle.onContainerCreated!, onContainerRemoved: lifecycle.onContainerRemoved!,
+    }) : undefined;
     return { protocolVersion: request.protocolVersion, operation: "production-build" as const,
       buildProjectId: request.buildProjectId, sourceVersion: request.sourceVersion,
-      artifact };
+      artifact, ...(runtimeSmoke ? {runtimeSmoke} : {}) };
   } finally {
     // A failed workspace removal must propagate: never mark the build verified.
+    if (liveContainer || journal?.current.containerId) {
+      throw new Error("Worker build cleanup requires Runner reconciliation.");
+    }
     await cleanupWorkspaceNow(workspaceDir);
+    if (journal) { await journal.write({workspaceDir:null}); await journal.clear(); }
   }
 }

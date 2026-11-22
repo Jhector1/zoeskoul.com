@@ -434,6 +434,14 @@ export type TanstackWorkerArtifactV1 = Readonly<{
   }>[];
 }>;
 
+/** HTTP-only smoke evidence, independent of browser hydration or publishing. */
+export type TanstackWorkerRuntimeSmokeV1 = Readonly<{
+  state:"passed"; artifactSha256:string; homeStatus:200; healthStatus:200; verifiedClientAssets:2;
+}> | Readonly<{
+  state:"failed"; artifactSha256:string;
+  stage:"configuration"|"startup"|"ssr"|"health"|"client-assets";
+}>;
+
 /** Trusted Runner transport response; publication and save are separate operations. */
 export type TanstackWorkerBuildExecutionResponseV1 = Readonly<{
   ok: true;
@@ -443,6 +451,7 @@ export type TanstackWorkerBuildExecutionResponseV1 = Readonly<{
     buildProjectId: string;
     sourceVersion: number;
     artifact: TanstackWorkerArtifactV1;
+    runtimeSmoke?: TanstackWorkerRuntimeSmokeV1;
   }>;
 }>;
 
