@@ -14,11 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 85
     env:
-      RELEASE_SHA: d09e85f63ceca9c17fa9e190de5b04979251b071
+      RELEASE_SHA: e24b5d236df4a5ceffd7fdd3088ff70c923824db
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: d09e85f63ceca9c17fa9e190de5b04979251b071
+          ref: e24b5d236df4a5ceffd7fdd3088ff70c923824db
           persist-credentials: false
       - name: Verify source provenance
         shell: bash
@@ -48,9 +48,9 @@ jobs:
           push: true
           provenance: false
           sbom: false
-          tags: ghcr.io/${{ steps.owner.outputs.name }}/zoeskoul-runner:sha-d09e85f63ceca9c17fa9e190de5b04979251b071
+          tags: ghcr.io/${{ steps.owner.outputs.name }}/zoeskoul-runner:sha-e24b5d236df4a5ceffd7fdd3088ff70c923824db
           labels: |
-            org.opencontainers.image.revision=d09e85f63ceca9c17fa9e190de5b04979251b071
+            org.opencontainers.image.revision=e24b5d236df4a5ceffd7fdd3088ff70c923824db
       - name: Record immutable image identity
         shell: bash
         env:
