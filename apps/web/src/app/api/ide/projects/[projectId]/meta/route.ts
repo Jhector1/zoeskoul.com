@@ -1,3 +1,4 @@
+import {genericCodeProjectWhere} from "@zoeskoul/platform-server/projects/saveCodeProject";
 // src/app/api/ide/projects/[projectId]/meta/route.ts
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
@@ -96,6 +97,7 @@ export async function PATCH(
 
         const existing = await prisma.codeProject.findFirst({
             where: {
+                ...genericCodeProjectWhere,
                 id: projectId,
                 ownerId,
                 archivedAt: null,
@@ -169,6 +171,7 @@ export async function PATCH(
         const outcome = await prisma.$transaction(async (tx) => {
             const committed = await tx.codeProject.updateMany({
                 where: {
+                    ...genericCodeProjectWhere,
                     id: existing.id,
                     ownerId,
                     archivedAt: null,
@@ -183,7 +186,7 @@ export async function PATCH(
                 },
             });
             const latest = await tx.codeProject.findFirst({
-                where: { id: existing.id, ownerId, archivedAt: null },
+                where: { ...genericCodeProjectWhere, id: existing.id, ownerId, archivedAt: null },
                 select: {
                     id: true, title: true, description: true,
                     updatedAt: true, currentVersion: true,

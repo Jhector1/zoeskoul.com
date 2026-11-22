@@ -6,9 +6,9 @@ import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
 
 import FullIDE from "@zoeskoul/learner-workspace/fullide/FullIDE";
-import ProjectMediaLibrary from "@/components/builder/ProjectMediaLibrary";
 import { PersistentReactPreviewSlot } from "@/components/builder/PersistentReactPreviewHost";
 import { hasUnsavedZoeWorkspaceSource } from "@/lib/build/zoeWorkspaceSourceDirty";
+import {useZoeProjectMediaExplorer} from "@/components/builder/useZoeProjectMediaExplorer";
 import actionStyles from "./ZoeAssistantActions.module.css";
 
 export type BuildWorkspaceShellProject = Readonly<{
@@ -87,6 +87,14 @@ export default function BuildWorkspaceClient({
     },
     [onWorkspaceSnapshot, onWorkspaceViewChange],
   );
+
+  // FullIDE receives a read-only *projection* of R2 media. Every event sent
+  // into source save / Runner is stripped back to canonical application files.
+  const mediaExplorer = useZoeProjectMediaExplorer({
+    buildProjectId:project.buildProjectId,
+    sourceWorkspaceRef:latestWorkspaceRef,
+    onCanonicalWorkspaceChange:handleWorkspaceChange,
+  });
 
   const saveSource = useCallback(async () => {
     if (!dirty || saveState.kind === "saving") return;
@@ -187,7 +195,6 @@ export default function BuildWorkspaceClient({
             : `Source v${sourceVersion}`}
         </span>
 
-        <ProjectMediaLibrary buildProjectId={project.buildProjectId} context="code" />
 
         <button
           type="button"
@@ -203,6 +210,10 @@ export default function BuildWorkspaceClient({
         </button>
       </div>
 
+
+      {mediaExplorer.status ? (
+        <div role="status" className="zb-code-save-message">{mediaExplorer.status}</div>
+      ) : null}
 
       {saveState.message ? (
         <div
@@ -227,7 +238,9 @@ export default function BuildWorkspaceClient({
                 projectTitle={project.title}
                 projectDescription={project.description}
                 initialWorkspace={project.workspace}
-                onWorkspaceChange={handleWorkspaceChange}
+                externalWorkspace={mediaExplorer.externalWorkspace}
+                externalWorkspaceRevision={mediaExplorer.externalWorkspaceRevision}
+                onWorkspaceChange={mediaExplorer.onWorkspaceChange}
                 remoteWebPreview={remoteWebPreview}
                 webPreviewSessionKey={project.buildProjectId}
                 remoteWebPreviewSurface={

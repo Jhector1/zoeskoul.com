@@ -4,13 +4,15 @@ import {useEffect, useMemo, useRef, useState} from "react";
 import styles from "./ProjectRevisionHistory.module.css";
 import {groupRevisionsByDate} from "@/lib/build/historyDateGroups";
 import type {VersionFileChange} from "@/lib/build/compareSavedVersions";
+import {canSwitchHistoryRevision, canDeleteHistoryRevision} from "@/lib/build/historyRevisionActions";
 
-type Revision = Readonly<{version:number; createdAt:string; note:string|null; workspaceHash:string|null}>;
+type Revision = Readonly<{version:number; createdAt:string; note:string|null; workspaceHash:string|null; restoreAvailable?:boolean}>;
 type FilePreview = Readonly<{path:string; content:string; truncated:boolean}>;
 type Preview = Readonly<{files:FilePreview[]; omitted:number}>;
 
 export default function ProjectRevisionHistory(props: Readonly<{
   buildProjectId: string;
+  stackId: string;
   currentVersion: number;
   disabled: boolean;
   onRestored: (savedVersion:number, fromVersion:number) => Promise<void>;
@@ -49,6 +51,9 @@ export default function ProjectRevisionHistory(props: Readonly<{
 
   function requestAction(kind:"switch"|"delete", version:number) {
     if (busy || restoringRef.current || props.disabled || version === activeVersion) return;
+    const revision = revisions.find(item => item.version === version);
+    if (kind === "switch" && !canSwitchHistoryRevision(props.stackId, revision)) return;
+    if (kind === "delete" && !canDeleteHistoryRevision(props.stackId)) return;
     setDeleteConfirmation("");
     setPendingAction({kind,version});
   }
@@ -140,7 +145,8 @@ export default function ProjectRevisionHistory(props: Readonly<{
   }
 
   async function restoreVersion(version:number) {
-    if (busy || restoringRef.current || props.disabled || version === activeVersion || version > props.currentVersion) return;
+    if (busy || restoringRef.current || props.disabled || version === activeVersion || version > props.currentVersion ||
+        !canSwitchHistoryRevision(props.stackId, revisions.find(item => item.version === version))) return;
 
     restoringRef.current = true;
     setBusy(true);setSelected(version);setHistoryError(null);
@@ -181,7 +187,8 @@ export default function ProjectRevisionHistory(props: Readonly<{
   }
 
   async function deleteVersion(version:number) {
-    if (busy || restoringRef.current || props.disabled || version === activeVersion) return;
+    if (busy || restoringRef.current || props.disabled || version === activeVersion ||
+        !canDeleteHistoryRevision(props.stackId)) return;
 
     setBusy(true);setHistoryError(null);
     try {
@@ -208,7 +215,9 @@ export default function ProjectRevisionHistory(props: Readonly<{
       <span className={styles.chevron} aria-hidden="true">{expanded?"⌃":"⌄"}</span>
     </button>
     {expanded ? <div className={styles.body}>
-      <p className={styles.description}>Switch versions without adding saves. The selected version becomes Current; your live site remains unchanged.</p>
+      <p className={styles.description}>{props.stackId === "tanstack-start-v1"
+        ? "Review saved versions. Managed image revisions can be restored without reuploading assets. Legacy versions are read-only; your published site is unchanged."
+        : "Switch versions without adding saves. The selected version becomes Current; your live site remains unchanged."}</p>
       {props.disabled ? <p className={styles.notice}>Save unsaved code and finish the current action before restoring.</p> : null}
       {historyError ? <p role="alert" className={styles.error}>{historyError}</p> : null}
       {loading && !revisions.length ? <p role="status" className={styles.muted}>Loading versions…</p> : null}
@@ -235,15 +244,16 @@ export default function ProjectRevisionHistory(props: Readonly<{
                 <button type="button" className={styles.viewButton} disabled={busy}
                   onClick={()=>void viewVersion(revision.version)}>View files</button>
                 {revision.version !== activeVersion ? <>
-                  <button type="button" className={styles.restoreButton}
+                  {canSwitchHistoryRevision(props.stackId, revision) ? <button type="button" className={styles.restoreButton}
                     disabled={busy||props.disabled} onClick={()=>requestAction("switch",revision.version)}>
                     {busy&&selected===revision.version?"Switching…":"Switch to version"}
-                  </button>
+                  </button> : props.stackId === "tanstack-start-v1" ?
+                    <span className={styles.muted} title="This version is not an eligible managed image revision">Read-only version</span> : null}
                   <button type="button" className={styles.viewButton} disabled={busy}
                     onClick={()=>void compareVersion(revision.version)}>Compare</button>
-                  <button type="button" className={styles.deleteButton}
+                  {canDeleteHistoryRevision(props.stackId) ? <button type="button" className={styles.deleteButton}
                     aria-label={`Delete saved Version ${revision.version}`}
-                    disabled={busy||props.disabled} onClick={()=>requestAction("delete",revision.version)}>Delete</button>
+                    disabled={busy||props.disabled} onClick={()=>requestAction("delete",revision.version)}>Delete</button> : null}
                 </> : null}
               </div>
             </div>)}
@@ -290,7 +300,9 @@ export default function ProjectRevisionHistory(props: Readonly<{
         </h3>
         <p id="zoebuild-version-dialog-description">
           {pendingAction.kind === "switch"
-            ? "Its saved files and dependencies will become current. Your published website, orders, and connections will not change. No new version will be created."
+            ? (props.stackId === "tanstack-start-v1"
+              ? "This verified managed revision will become current without uploading the images again. An internal source version will advance, but no duplicate visible history entry will be created. The published site stays unchanged."
+              : "Its saved files and dependencies will become current. Your published website, orders, and connections will not change. No new version will be created.")
             : "This permanently deletes the selected saved version. Your current website is unchanged. This cannot be undone."}
         </p>
         {pendingAction.kind === "delete" ? <label className={styles.confirmLabel}>

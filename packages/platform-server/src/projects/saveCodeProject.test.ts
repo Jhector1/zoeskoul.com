@@ -119,3 +119,32 @@ describe("idempotent cloud project creation", () => {
         expect(tx.codeProject.create).not.toHaveBeenCalled();
     });
 });
+
+
+describe("generic learning namespace boundary", () => {
+    it("excludes build-linked projects before any mutation", async () => {
+        const findFirst = vi.fn().mockResolvedValue(null);
+        const updateMany = vi.fn();
+        const tx = {codeProject:{findFirst,updateMany},codeProjectRevision:{create:vi.fn()}};
+        await expect(saveCodeProjectInTransaction(tx as any,input(4),{genericOnly:true})).rejects.toThrow("Project not found");
+        expect(findFirst).toHaveBeenCalledWith(expect.objectContaining({where:expect.objectContaining({buildProject:{is:null},ownerId:"u1",id:"p1"})}));
+        expect(updateMany).not.toHaveBeenCalled();
+    });
+    it("keeps the namespace predicate on CAS and conflict reads", async () => {
+        const findFirst=vi.fn().mockResolvedValueOnce(row()).mockResolvedValueOnce(null);
+        const updateMany=vi.fn().mockResolvedValue({count:0});
+        const tx={codeProject:{findFirst,updateMany},codeProjectRevision:{create:vi.fn()}};
+        await expect(saveCodeProjectInTransaction(tx as any,input(4),{genericOnly:true})).rejects.toThrow("Project not found");
+        expect(updateMany.mock.calls[0][0].where.buildProject).toEqual({is:null});
+        expect(findFirst.mock.calls[1][0].where.buildProject).toEqual({is:null});
+        expect(tx.codeProjectRevision.create).not.toHaveBeenCalled();
+    });
+    it("keeps ordinary non-Web shared callers unchanged",async()=>{
+        const findFirst=vi.fn().mockResolvedValueOnce(row()).mockResolvedValueOnce(row(5));
+        const updateMany=vi.fn().mockResolvedValue({count:1});
+        const tx={codeProject:{findFirst,updateMany},codeProjectRevision:{create:vi.fn()}};
+        await saveCodeProjectInTransaction(tx as any,input(4));
+        expect(findFirst.mock.calls[0][0].where).not.toHaveProperty("buildProject");
+        expect(updateMany.mock.calls[0][0].where).not.toHaveProperty("buildProject");
+    });
+});

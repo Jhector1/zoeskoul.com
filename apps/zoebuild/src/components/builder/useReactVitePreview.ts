@@ -16,6 +16,8 @@ import { readPreviewOperationStatus } from "@/lib/build/previewOperationHttp";
 import { decideTanstackPreviewSync } from "@/lib/build/tanstackPreviewSyncDecision";
 import { recordPreviewBrowserTiming } from "@/lib/build/previewPerformance";
 import { useReactDevelopmentPreview } from "./useReactDevelopmentPreview";
+import { useSharedPreviewDependencyPreparation } from "./useSharedPreviewDependencyPreparation";
+import { requestSavedPreviewDependencyPreparation } from "@/lib/build/sharedPreviewDependencyPreparation";
 
 type PreviewSession = Readonly<{
   previewId: string;
@@ -532,20 +534,10 @@ function useImmutableReactVitePreview(input: Readonly<{
         // Runner backpressure is not a dependency-integrity denial. Retain the
         // exact saved-source CAS and wait only within a finite wall-clock
         // budget. Do not persist a one-retry token across page reloads.
-        const requestBootstrap = () => fetch(
-          `/api/build/projects/${encodeURIComponent(input.buildProjectId)}/dependency-lock/bootstrap`,
-          {
-            method: "POST",
-            credentials: "same-origin",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              reconcileExisting: true,
-              baseVersion: startingVersion,
-              autoRestoreDependencies: restoredDependencyPinnedRef.current,
-              autoPrepareProjectDependencies: !restoredDependencyPinnedRef.current,
-            }),
-          },
-        );
+        const requestBootstrap = () => requestSavedPreviewDependencyPreparation({
+          buildProjectId:input.buildProjectId,sourceVersion:startingVersion,
+          restoredDependencyPinned:restoredDependencyPinnedRef.current,
+        });
         const capacityStartedAt = Date.now();
         const bootstrapStartedAt = performance.now();
         let capacityRetries = 0;
@@ -1095,8 +1087,9 @@ export function useReactVitePreview(
   input: Parameters<typeof useImmutableReactVitePreview>[0],
 ): ReturnType<typeof useImmutableReactVitePreview> {
   const experiment = process.env.NEXT_PUBLIC_ZOEBUILD_DEVELOPMENT_PREVIEW_EDITOR_ENABLED === "true";
+  const preparation = useSharedPreviewDependencyPreparation(input);
   const development = useReactDevelopmentPreview({
-    enabled: input.enabled && experiment,
+    enabled: input.enabled && experiment && !preparation.blocked,
     buildProjectId: input.buildProjectId,
     sourceVersion: input.sourceVersion,
     savedSourceReady: input.allowDependencyBootstrap,
@@ -1106,8 +1099,11 @@ export function useReactVitePreview(
   // experiment is off or a development lease fails and has been retired.
   const immutable = useImmutableReactVitePreview({
     ...input,
-    enabled: input.enabled && (!experiment || development.fallback),
+    enabled: input.enabled && !preparation.blocked && (!experiment || development.fallback),
   });
+  if (preparation.blocked) return {src:null,state:preparation.state,message:preparation.message,
+    revision:0,confirmedSourceVersion:null,attemptedSourceVersion:input.sourceVersion,
+    routes:registeredTanstackPreviewRoutes(exportWorkspaceEntries(input.workspace.nodes)),onRetry:preparation.retry};
   if (experiment && !development.fallback) return development.preview;
   return immutable;
 }

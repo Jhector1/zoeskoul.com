@@ -57,12 +57,18 @@ async function assessOwnedBuildProjectDeletion(
     if (!project) return { status: "not-found" as const };
     if (project.codeProject.title !== input.expectedTitle) return { status: "title-mismatch" as const };
 
+    // A retained or pending private R2 object cannot be orphaned by a cascade.
+    // Check regardless of feature flags; missing schema fails closed.
+    const [managedRevisions,managedIntents] = await Promise.all([
+      tx.buildManagedBinaryRevision.count({where:{buildProjectId:project.id}}),
+      tx.buildManagedBinaryUploadIntent.count({where:{buildProjectId:project.id}}),
+    ]);
     const blocked = checkBuildProjectDeletion({
       orderCount: project.commerceStore?._count.orders ?? 0,
       hasExternalConnections: (project.commerceStore?.providerConnections ?? []).some(conn =>
         conn.provider !== "zoestore" || Boolean(conn.externalAccountRef || conn.credentialsSecretRef ||
           conn.storefrontSecretRef || conn.webhookSecretRef)),
-      hasExternalResources: project.resources.some(resource =>
+      hasExternalResources: managedRevisions > 0 || managedIntents > 0 || project.resources.some(resource =>
         resource.status !== "deleted" && (Boolean(resource.providerRef || resource.secretRef) ||
           ["requested", "provisioning", "ready", "deleting"].includes(resource.status))) ||
         project.deployments.some(deployment => Boolean(deployment.providerRef)),

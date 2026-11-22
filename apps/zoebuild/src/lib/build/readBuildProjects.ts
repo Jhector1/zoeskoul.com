@@ -134,11 +134,29 @@ export function createPrismaBuildProjectReader(
           ? null
           : parseProjectSpecification(row.specification);
 
+      // Never expose a stripped managed snapshot when an operator disables reads.
+      // This lookup uses the pre-existing history table, so legacy installs do
+      // not need the additive managed-binary migration merely to open projects.
+      if (process.env.ZOEBUILD_MANAGED_R2_READS !== "1") {
+        const history = await client.codeProjectRevision.findUnique({
+          where: {projectId_version: {projectId: row.codeProject.id, version: summary.sourceVersion}},
+          select: {meta: true},
+        });
+        if (history?.meta && typeof history.meta === "object" &&
+            Object.prototype.hasOwnProperty.call(history.meta, "managedBinaryRevisionDigest")) {
+          throw Error("MANAGED_READ_DISABLED_FOR_SAVED_REVISION");
+        }
+      }
       const detail: BuildProjectDetailRecord = {
         ...summary,
         entryPath: row.codeProject.entryPath,
         activePath: row.codeProject.activePath,
-        workspace: row.codeProject.workspace as unknown as WorkspaceStateV2,
+        workspace: process.env.ZOEBUILD_MANAGED_R2_READS === "1"
+          ? await (await import("./prismaManagedBinaryRead")).readCanonicalOwnedBuildWorkspace({
+              client, ownerId: userId, buildProjectId: projectId,
+              sourceVersion: summary.sourceVersion, legacyWorkspace: row.codeProject.workspace,
+            })
+          : row.codeProject.workspace as unknown as WorkspaceStateV2,
         specification,
       };
 

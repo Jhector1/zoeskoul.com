@@ -1,7 +1,9 @@
 import "server-only";
+import {managedBinaryWriteLane} from "./managedBinaryPrismaPolicy";
 
 import {
   BuildSourceConflictError,
+  BuildSourceInputError,
   type BuildProjectSourceWritePort,
 } from "@zoeskoul/build-application";
 import {
@@ -27,9 +29,17 @@ function toPrismaJson(value: unknown): Prisma.InputJsonValue {
 export function createPrismaBuildProjectSourceWriter(
   client: PrismaClient,
   options: Readonly<{createRevision?:boolean}> = {},
+  trustedDependencyMode?: "automatic" | "explicit",
 ): BuildProjectSourceWritePort {
   return {
     async saveOwnedBuildProjectSource(input) {
+      // One managed writer, selected only by trusted server configuration.
+      // No fallback after a failed managed operation.
+      if (managedBinaryWriteLane(input.buildProjectId)) {
+        const rehearsed = await (await import("./managedBinaryPilotSourceWriter"))
+          .savePilotManagedBinarySource(client, input, options, trustedDependencyMode);
+        if (rehearsed !== undefined) return rehearsed;
+      }
       return client.$transaction(async (tx) => {
         const userId = input.ownerId.trim();
         const buildProjectId = input.buildProjectId.trim();
@@ -62,12 +72,23 @@ export function createPrismaBuildProjectSourceWriter(
                 settings: true,
                 meta: true,
                 workspace: true,
+                currentVersion: true,
               },
             },
           },
         });
 
         if (!buildProject) return null;
+        // A disabled or unselected managed writer MUST NOT fall back to the
+        // legacy path for a head already committed with externalized bytes.
+        const history = await tx.codeProjectRevision.findUnique({
+          where: {projectId_version: {projectId: buildProject.codeProject.id,
+            version: buildProject.codeProject.currentVersion}}, select: {meta: true},
+        });
+        if (history?.meta && typeof history.meta === "object" &&
+            Object.prototype.hasOwnProperty.call(history.meta, "managedBinaryRevisionDigest")) {
+          throw new BuildSourceInputError("Managed project writes are disabled. Existing source is unchanged.");
+        }
 
         const parsed = parseBuildWorkspaceMutation(input.workspace);
         // User-authored package changes must not keep the OLD signed lock.

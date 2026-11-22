@@ -148,6 +148,8 @@ model BuildProject {
   chatMessages  ZoeBuildChatMessage[]
   browserReadGrants BuildDevelopmentPreviewReadGrant[]
   mediaAssets BuildMediaAsset[]
+  managedBinaryRevisions BuildManagedBinaryRevision[]
+  managedBinaryUploadIntents BuildManagedBinaryUploadIntent[]
 
   @@index([status, updatedAt])
   @@index([stackId])
@@ -201,6 +203,38 @@ model BuildMediaAsset {
 
   @@index([buildProjectId, createdAt])
   @@index([ownerId, buildProjectId, createdAt])
+}
+
+/** ZoeBuild-only server-side revision manifests, never exposed in browser source JSON. */
+model BuildManagedBinaryRevision {
+  buildProjectId String
+  sourceVersion Int
+  ownerId String @db.VarChar(128)
+  manifest Json
+  createdAt DateTime @default(now())
+  buildProject BuildProject @relation(fields: [buildProjectId], references: [id], onDelete: Cascade)
+
+  @@id([buildProjectId, sourceVersion])
+  @@index([ownerId, buildProjectId, sourceVersion])
+}
+
+/** Durable intent exists BEFORE the first private R2 PUT; not an exposed media catalog. */
+model BuildManagedBinaryUploadIntent {
+  assetId String @id @db.VarChar(128)
+  buildProjectId String
+  ownerId String @db.VarChar(128)
+  plannedBaseVersion Int
+  objectKey String @unique @db.VarChar(512)
+  sha256 String @db.VarChar(64)
+  mimeType String @db.VarChar(128)
+  byteLength Int
+  state String @default("pending") @db.VarChar(16)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  buildProject BuildProject @relation(fields: [buildProjectId], references: [id], onDelete: Cascade)
+
+  @@index([ownerId, buildProjectId, state, createdAt])
+  @@index([buildProjectId, plannedBaseVersion])
 }
 
 model CommerceStore {

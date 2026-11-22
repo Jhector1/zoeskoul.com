@@ -105,6 +105,33 @@ describe("Phase 4E3B saved-revision editor integration",()=>{
     expect(f.onWaiting).toHaveBeenCalled();
     f.lifecycle.dispose();
   });
+  it("handles a saved image rename 409 as one planned restart, not a failed recovery",async()=>{
+    const f=make();f.lifecycle.savedRevision(7,true);await flush();
+    const {DevelopmentBrowserSessionError}=await import("./reactPreviewDevelopmentBrowserSession");
+    f.controller.update.mockRejectedValueOnce(
+      new DevelopmentBrowserSessionError("RESTART_REQUIRED","binary change",409));
+    f.lifecycle.savedRevision(8,true);
+    for(let i=0;i<8;i++)await flush();
+    expect(f.controller.update).toHaveBeenCalledExactlyOnceWith(8);
+    expect(f.controller.restart).toHaveBeenCalledExactlyOnceWith(8);
+    expect(f.lifecycle.snapshot()).toMatchObject({phase:"ready",recoveryAttempts:0});
+    expect(f.onDocument).toHaveBeenLastCalledWith(expect.objectContaining({sourceVersion:8}));
+    expect(f.onFailure).not.toHaveBeenCalled();
+    f.lifecycle.dispose();
+  });
+  it("still fails closed when a planned binary restart cannot be admitted",async()=>{
+    const f=make();f.lifecycle.savedRevision(7,true);await flush();
+    const {DevelopmentBrowserSessionError}=await import("./reactPreviewDevelopmentBrowserSession");
+    f.controller.update.mockRejectedValueOnce(
+      new DevelopmentBrowserSessionError("RESTART_REQUIRED","binary change",409));
+    f.controller.restart.mockRejectedValue(new Error("Runner unavailable"));
+    f.lifecycle.savedRevision(8,true);
+    for(let i=0;i<24;i++)await flush();
+    expect(f.controller.update).toHaveBeenCalledOnce();
+    expect(f.controller.restart).toHaveBeenCalledTimes(4);
+    expect(f.onFailure).toHaveBeenCalledOnce();
+    f.lifecycle.dispose();
+  });
   it("uses bounded authoritative recovery after a transient update failure",async()=>{
     const f=make();f.lifecycle.savedRevision(7,true);await flush();
     f.controller.update.mockRejectedValueOnce(new Error("authority unavailable"));

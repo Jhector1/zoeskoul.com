@@ -78,6 +78,19 @@ describe("canonical TanStack Start generated app blueprint", () => {
     expect(all).not.toMatch(/ZOEBUILD_DEPENDENCY_APPROVAL_SECRET|WEB_DATABASE_URL|ADMIN_DATABASE_URL/);
   });
 
+  it("provides a base-aware public asset helper and a real favicon in new projects", () => {
+    const helper = files.get("src/lib/publicAssetUrl.ts") ?? "";
+    const root = files.get("src/routes/__root.tsx") ?? "";
+    expect(helper).toContain("import.meta.env.BASE_URL");
+    expect(helper).toContain("encodeURIComponent");
+    expect(helper).toContain('part === ".."');
+    expect(root).toContain('publicAssetUrl("/favicon.svg")');
+    expect(root).toContain('rel: "icon"');
+    expect(files.get("public/favicon.svg")).toContain("<svg");
+    // New-project helpers must not embed a private preview URL or grant token.
+    expect(helper).not.toContain("/api/build/projects/");
+    expect(helper).not.toContain("dpg1.");
+  });
   it("types the trusted preview environment in the generated Vite config", () => {
     const config = files.get("vite.config.ts") ?? "";
     const manifest = JSON.parse(files.get("package.json") ?? "{}");

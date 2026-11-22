@@ -1,5 +1,6 @@
 import "server-only";
 
+import {genericCodeProjectWhere} from "@zoeskoul/platform-server/projects/saveCodeProject";
 import type { PrismaClient } from "@/lib/prisma";
 import { Actor, actorKeyOf } from "@/lib/practice/actor";
 
@@ -19,8 +20,8 @@ export async function getCodeProjectForActor(
     const now = new Date();
     const actorKey = actorKeyOf(args.actor);
 
-    const project = await prisma.codeProject.findUnique({
-        where: { id: args.projectId },
+    const project = await prisma.codeProject.findFirst({
+        where: { ...genericCodeProjectWhere, id: args.projectId },
         include: {
             grants: {
                 where: {

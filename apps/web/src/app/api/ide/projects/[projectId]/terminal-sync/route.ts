@@ -1,3 +1,4 @@
+import {genericCodeProjectWhere} from "@zoeskoul/platform-server/projects/saveCodeProject";
 import { prisma } from "@/lib/prisma";
 import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
 import { runnerPost, RunnerHttpError } from "@/lib/server/runnerClient";
@@ -76,6 +77,7 @@ export async function POST(
 
         const existing = await prisma.codeProject.findFirst({
             where: {
+                ...genericCodeProjectWhere,
                 id: projectId,
                 ownerId: gate.actor.userId,
                 archivedAt: null,
@@ -187,7 +189,9 @@ export async function POST(
         const nextActivePath = pathOf(nextWorkspace.nodes, nextWorkspace.activeFileId);
 
         const updated = await prisma.codeProject.update({
-            where: { id: existing.id },
+            where: { ...genericCodeProjectWhere, id: existing.id,
+                ownerId: gate.actor.userId, archivedAt: null,
+                currentVersion: existing.currentVersion },
             data: {
                 workspace: toPrismaJson(nextWorkspace),
                 entryPath: nextEntryPath,
@@ -231,6 +235,9 @@ export async function POST(
             },
         });
     } catch (e: any) {
+        if (e?.code === "P2025") {
+            return jsonNoStore({ok: false, error: "Project no longer available or changed during sync."}, 409);
+        }
         if (e instanceof RunnerHttpError) {
             return jsonNoStore({ ok: false, error: e.message }, e.status);
         }

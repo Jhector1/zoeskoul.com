@@ -15,9 +15,6 @@ import {
   formatZoeBuildPlan,
   requestZoeBuildPlan,
 } from "@/lib/build/requestZoeBuildPlan";
-import type {
-  ShopifyImportDraft,
-} from "@/lib/import/shopify";
 
 export function ZoeBuildLanding() {
   const [mode, setMode] = useState<ZoeBuildMode>("preview");
@@ -40,13 +37,6 @@ export function ZoeBuildLanding() {
           : "Zoé could not create a build plan.",
       );
     }
-  }
-
-  function importShopify(draft: ShopifyImportDraft) {
-    setAiText(
-      `Shopify import ready: ${draft.hostname}. Connect Shopify to continue.`,
-    );
-    setMode("ai");
   }
 
   return (
@@ -81,7 +71,6 @@ export function ZoeBuildLanding() {
       <div className="zb-prompt-dock">
         <ZoeBuildPromptComposer
           onPrompt={prompt}
-          onShopifyImport={importShopify}
         />
       </div>
     </main>

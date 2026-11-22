@@ -10,6 +10,7 @@ import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
 import { executeTrustedProductionBuildAtRunner } from "./buildExecutorValidation";
 import { verifyTanstackWorkerBuildReceipt, TanstackWorkerReceiptError } from "./zoeTanstackWorkerReceipt";
 import { applyZoeEditsToWorkspace, type ZoeSourceEdit } from "./zoeTargetedSourceEdit";
+import { parseBuildWorkspaceMutation } from "./buildWorkspaceMutation";
 
 type Specification = Parameters<typeof createRegisteredProductionBuildJob>[0]["specification"];
 type Prepare = typeof createRegisteredProductionBuildJob;
@@ -26,7 +27,14 @@ export type TanstackCandidateBuildVerification = Readonly<{
   artifactSha256: string | null;
   capacitySource: "local-hourly-limit" | "runner-busy" | "runner-unavailable" | null;
   browser: "not-run";
+  runtimeSmoke?: ReturnType<typeof verifyTanstackWorkerBuildReceipt>["runtimeSmoke"];
   buildDiagnostic?: RunnerBuildDiagnostic;
+  receiptFailureStage?: string;
+  savedArtifactEvidence?: Readonly<{
+    artifactBytes: number;
+    artifactFiles: number;
+    binaryAssets: NonNullable<ReturnType<typeof verifyTanstackWorkerBuildReceipt>["binaryAssets"]>;
+  }>;
 }>;
 
 /** Exactly the reviewed candidate (never a browser artifact, source digest, or mutable preview). */
@@ -36,11 +44,17 @@ export function prepareTanstackWorkerEditCandidate(input: Readonly<{
   buildProjectId: string;
   specification: Specification;
   sourceVersion: number;
+  sourceKind?: "candidate" | "saved";
 }>, prepare: Prepare = createRegisteredProductionBuildJob): Readonly<{
   request: ProductionBuildJobRequestV1;
   snapshotSha256: string;
 }> {
-  const workspace = applyZoeEditsToWorkspace(input.workspace, input.edits);
+  if (input.sourceKind === "saved" && (!Array.isArray(input.edits) || input.edits.length !== 0)) {
+    throw new TypeError("Saved build verification must not include source edits.");
+  }
+  const workspace = input.sourceKind === "saved"
+    ? parseBuildWorkspaceMutation(input.workspace)
+    : applyZoeEditsToWorkspace(input.workspace, input.edits);
   const request = prepare({
     workspace,
     buildProjectId: input.buildProjectId,
@@ -48,7 +62,12 @@ export function prepareTanstackWorkerEditCandidate(input: Readonly<{
     sourceVersion: input.sourceVersion,
   });
   // The source fingerprint is recomputed from server-owned, sorted executor files.
-  const snapshotSha256 = createHash("sha256").update(JSON.stringify(request.files), "utf8").digest("hex");
+  // Preserve reviewed candidate fingerprint compatibility; saved verification
+  // additionally binds the exact canonical binary handoff.
+  const fingerprint = input.sourceKind === "saved"
+    ? {files: request.files, binaryFiles: request.binaryFiles ?? []}
+    : request.files;
+  const snapshotSha256 = createHash("sha256").update(JSON.stringify(fingerprint), "utf8").digest("hex");
   return {request, snapshotSha256};
 }
 
@@ -64,7 +83,9 @@ export async function verifyTanstackWorkerEditCandidate(input: Readonly<{
   edits: readonly ZoeSourceEdit[];
   specification: Specification;
   sourceVersion: number;
+  sourceKind?: "candidate" | "saved";
   verificationId?: string;
+  requireRuntimeReceipt?: boolean;
   /** Server-only dependency injection for executable tests, never HTTP input. */
   dependencies?: Readonly<{
     limit: typeof rateLimit;
@@ -105,11 +126,29 @@ export async function verifyTanstackWorkerEditCandidate(input: Readonly<{
   try {
     const actorKey = await deps.actorKey(input.userId);
     const execution: unknown = await deps.build({actorKey,request});
-    const receipt = verifyTanstackWorkerBuildReceipt({request, execution});
-    return response("passed", "runner-passed", snapshotSha256, receipt.artifactSha256);
+    const receipt = verifyTanstackWorkerBuildReceipt({request, execution,
+      inspectBinaryAssets: input.sourceKind === "saved", requireRuntimeReceipt: input.requireRuntimeReceipt === true});
+    const verified = response("passed", "runner-passed", snapshotSha256, receipt.artifactSha256);
+    return input.sourceKind === "saved" ? {...verified,
+      ...(receipt.runtimeSmoke ? {runtimeSmoke:receipt.runtimeSmoke} : {}), savedArtifactEvidence: {
+      artifactBytes: receipt.artifactBytes, artifactFiles: receipt.artifactFiles,
+      binaryAssets: receipt.binaryAssets ?? [],
+    }} : verified;
   } catch (error) {
-    if (error instanceof TanstackWorkerReceiptError)
-      return response("not-run", "runner-response-mismatch", snapshotSha256);
+    if (error instanceof TanstackWorkerReceiptError) {
+      const denied = response("not-run", "runner-response-mismatch", snapshotSha256);
+      if (input.sourceKind === "saved" && input.sourceVersion === 7 &&
+          input.buildProjectId === "cmwqiqnly0002eldlcafn1xjx" &&
+          process.env.NODE_ENV === "development" &&
+          process.env.AI4B4E2P_BROWSER_CONFIRM === "LOCAL_BROWSER_ONLY" &&
+          process.env.AI4B4E2E_CONFIRM === "EPHEMERAL_ONLY" &&
+          process.env.AI4B4E2E_TEST_DATABASE_NAME === "zoebuild_ai4b4e2e_test_13c8dff8ffe2" &&
+          process.env.ZOEBUILD_MANAGED_R2_PILOT_PROJECT_ID === input.buildProjectId &&
+          process.env.ZOEBUILD_PUBLISH_ENABLED === "0") {
+        return {...denied, receiptFailureStage: error.stage};
+      }
+      return denied;
+    }
     if (error instanceof RunnerHttpError) {
       const status = error.status;
       if ([400, 422].includes(status)) {
