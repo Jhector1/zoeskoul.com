@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "purpose": "draft-admin-lab-qa-only",
+  "topicSlug": "ownership-administration-concepts",
+  "exercises": [
+    {
+      "id": "ownership-qa-team-file",
+      "title": "Verify chown/chgrp outcome and least privilege",
+      "instructions": "Author-only, disposable administrator sandbox. Create /workspace/qa-ownership/team.txt, change its owner and group inside the container to UID 1000 and GID 1000, and restrict its mode to 0640. Use `id`, `ls -l`, and `stat` to inspect. The verifier checks UID, GID, and mode from an independent read-only sidecar; it does not trust your terminal transcript. Do not create or modify system users or host directories.",
+      "expected": {
+        "required": [
+          {
+            "path": "/workspace/qa-ownership/team.txt",
+            "kind": "file",
+            "mode": "0640",
+            "uid": 1000,
+            "gid": 1000
+          }
+        ]
+      }
+    }
+  ]
+}

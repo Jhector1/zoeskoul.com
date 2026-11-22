@@ -136,6 +136,43 @@ export default function CardRenderer(props: {
         workspaceCapabilities,
     } = props;
 
+    // One visible embedded Try question at a time. The existing QuizBlock
+    // slideshow owner policy binds only its active question to Tools; scroll
+    // mode can bind several independent shells at once and hit the Runner's
+    // per-actor terminal-start limit. This is a client presentation change,
+    // never a change to the server rate limit or workspace authorization.
+    const [embeddedTrySteps, setEmbeddedTrySteps] = React.useState<{
+        quizId: string;
+        activeIndex: number;
+        total: number;
+        statuses: string[];
+    } | null>(null);
+    const onEmbeddedTryNavigationChange = React.useCallback(
+        (state: CompactQuizNavigationState | null) => {
+            const next = state?.kind === "embedded_try_it" && state.total > 1
+                ? {
+                    quizId: state.quizId,
+                    activeIndex: state.activeIndex,
+                    total: state.total,
+                    statuses: state.stepStatuses ?? [],
+                }
+                : null;
+            setEmbeddedTrySteps((previous) => {
+                if (!next && !previous) return previous;
+                if (next && previous &&
+                    next.quizId === previous.quizId &&
+                    next.activeIndex === previous.activeIndex &&
+                    next.total === previous.total &&
+                    next.statuses.join(",") === previous.statuses.join(",")) {
+                    return previous;
+                }
+                return next;
+            });
+            onCompactQuizNavigationChange?.(state);
+        },
+        [onCompactQuizNavigationChange],
+    );
+
     const readOnlyPractice = !workspaceCapabilities.canSubmitPractice;
     const freeNavigation = resolveReviewFreeNavigation({
       unlockAll,
@@ -230,6 +267,18 @@ export default function CardRenderer(props: {
             (key) => tt.resolve(`@:${key}`),
         ) as typeof tryIt.spec;
 
+        const authoredSteps = Array.isArray((resolvedTryItSpec as { steps?: unknown[] }).steps)
+            ? (resolvedTryItSpec as { steps: unknown[] }).steps
+            : [];
+        const isMultiTry = authoredSteps.length > 1;
+        const liveSteps = embeddedTrySteps?.quizId === tryItId
+            ? embeddedTrySteps
+            : null;
+        const tryCount = liveSteps?.total ?? authoredSteps.length;
+        const tryIndex = Math.min(Math.max(liveSteps?.activeIndex ?? 0, 0), Math.max(tryCount - 1, 0));
+        // Long projects must not create 30+ little dots. A capped bar remains readable.
+        const visibleSegments = Math.min(tryCount, 6);
+
         const key = buildReviewQuizKey(resolvedTryItSpec, tryItId, versionStr);
 
         const runtimeDefaultsProps = buildQuizBlockRuntimeDefaultsProps({
@@ -242,6 +291,38 @@ export default function CardRenderer(props: {
 
         return (
             <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50/40 p-3 dark:border-emerald-400/20 dark:bg-emerald-950/20">
+                {isMultiTry ? (
+                    <div
+                        className="mb-3 grid gap-2 rounded-lg border border-emerald-200/70 bg-white/60 px-3 py-2 dark:border-emerald-400/20 dark:bg-black/20"
+                        role="group"
+                        aria-label={`Try it yourself: step ${tryIndex + 1} of ${tryCount}`}
+                        data-testid="embedded-try-step-progress"
+                    >
+                        <div className="flex items-center justify-between gap-2 text-xs font-semibold">
+                            <span>Try it yourself</span>
+                            <span className="tabular-nums">Step {tryIndex + 1} of {tryCount}</span>
+                        </div>
+                        <div className="flex gap-1.5" aria-hidden="true">
+                            {Array.from({ length: visibleSegments }, (_, index) => {
+                                const segmentStep = Math.floor((index * tryCount) / visibleSegments);
+                                const completed = segmentStep < tryIndex ||
+                                    liveSteps?.statuses?.[segmentStep] === "complete";
+                                const current = segmentStep === tryIndex;
+                                return (
+                                    <span
+                                        key={index}
+                                        data-testid="embedded-try-step-segment"
+                                        className={`h-1.5 min-w-0 flex-1 rounded-full ${
+                                            completed ? "bg-emerald-500" :
+                                            current ? "bg-teal-600" :
+                                            "bg-slate-300 dark:bg-slate-600"
+                                        }`}
+                                    />
+                                );
+                            })}
+                        </div>
+                    </div>
+                ) : null}
                 {process.env.NODE_ENV !== "production" ? (
                     <textarea
                         data-testid="cardrenderer-tryit-spec-e2e-input"
@@ -302,12 +383,15 @@ export default function CardRenderer(props: {
                         strictSequential={true}
                         unlimitedAttempts={true}
                         orderBase={orderBase + 5000}
-                        navigationMode={quizNavMode}
+                        // Multi-Try sketches must render ONE exercise at a time:
+                        // QuizBlock's slideshow mode only binds the active
+                        // practice step, preventing parallel terminal launches.
+                        navigationMode={isMultiTry ? "slideshow" : quizNavMode}
                         {...runtimeDefaultsProps}
                         routeExerciseId={routeExerciseId}
                         onNavigateToExerciseRoute={onNavigateToExerciseRoute}
                         compactNavigationKind="embedded_try_it"
-                        onCompactNavigationStateChange={active ? onCompactQuizNavigationChange : undefined}
+                        onCompactNavigationStateChange={active ? onEmbeddedTryNavigationChange : undefined}
                     />
                 )}
             </div>

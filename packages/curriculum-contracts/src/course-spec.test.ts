@@ -16,6 +16,21 @@ describe("curriculum contracts", () => {
         }>();
     });
 
+    it("supports sparse IDE services at all authored curriculum scopes", () => {
+        expectTypeOf<CourseSpec>().toMatchTypeOf<{
+            serviceDefaults?: { administratorLab?: "disabled" | "eligible" };
+            modules: Array<{
+                serviceDefaults?: { administratorLab?: "disabled" | "eligible" };
+                sections: Array<{
+                    serviceDefaults?: { administratorLab?: "disabled" | "eligible" };
+                    topics: Array<{
+                        serviceDefaults?: { administratorLab?: "disabled" | "eligible" };
+                    }>;
+                }>;
+            }>;
+        }>();
+    });
+
     it("defines subject plan publish target identity", () => {
         expectTypeOf<SubjectPlan>().toMatchTypeOf<{
             subjectSlug: string;

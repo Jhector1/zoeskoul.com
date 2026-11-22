@@ -428,6 +428,7 @@ function validateSection(
     }
 
     issues.push(...validateToolPresentationPolicy(section.tools, `${path}.tools`));
+    issues.push(...validateAdministratorLabServiceMetadata(section.serviceDefaults, `${path}.serviceDefaults`));
 
     if (section.description != null && !String(section.description).trim()) {
         issues.push(`${path}.description must not be blank if provided`);
@@ -514,6 +515,7 @@ function validateSection(
         }
 
         issues.push(...validateToolPresentationPolicy(topic.tools, `${topicPath}.tools`));
+        issues.push(...validateAdministratorLabServiceMetadata(topic.serviceDefaults, `${topicPath}.serviceDefaults`));
         for (const [lessonId, policy] of Object.entries(topic.lessonTools ?? {})) {
             issues.push(
                 ...validateToolPresentationPolicy(
@@ -632,6 +634,17 @@ function validateSection(
     }
 }
 
+function validateAdministratorLabServiceMetadata(value: unknown, path: string): string[] {
+    if (value == null) return [];
+    if (typeof value !== "object" || Array.isArray(value)) {
+        return [`${path} must be an object`];
+    }
+    const mode = (value as Record<string, unknown>).administratorLab;
+    return mode === undefined || mode === "disabled" || mode === "eligible"
+        ? []
+        : [`${path}.administratorLab must be "disabled" or "eligible"`];
+}
+
 export function validateCourseSpec(spec: CourseSpec): string[] {
     const issues: string[] = [];
     const profile = getCurriculumProfile(spec.profileId);
@@ -661,6 +674,7 @@ export function validateCourseSpec(spec: CourseSpec): string[] {
         issues.push("title is required");
     }
     issues.push(...validateToolPresentationPolicy(spec.tools, "tools"));
+    issues.push(...validateAdministratorLabServiceMetadata(spec.serviceDefaults, "serviceDefaults"));
     if (
         !isNonEmptyString((spec as any).description) &&
         !isNonEmptyString(spec.courseOverview?.summary)
@@ -789,6 +803,7 @@ export function validateCourseSpec(spec: CourseSpec): string[] {
         }
 
         issues.push(...validateToolPresentationPolicy(module.tools, `${modulePath}.tools`));
+        issues.push(...validateAdministratorLabServiceMetadata(module.serviceDefaults, `${modulePath}.serviceDefaults`));
 
         if (
             module.role != null &&

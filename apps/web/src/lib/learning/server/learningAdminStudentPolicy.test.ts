@@ -39,11 +39,15 @@ describe("Course 2 administrator admission policy", () => {
       subjectSlug: STUDENT_ADMIN_COURSE_SLUG,
       moduleSlug: admin.moduleSlug,
       topicId: admin.topicSlug,
+      serviceDefaults: { administratorLab: "eligible" },
     };
     expect(matchesPublishedAdminTopic(admin, compiled)).toBe(true);
     expect(matchesPublishedAdminTopic(admin, { ...compiled, subjectSlug: "linux--linux-files-permissions-users--draft" })).toBe(false);
     expect(matchesPublishedAdminTopic(admin, { ...compiled, topicId: "another-topic" })).toBe(false);
     expect(matchesPublishedAdminTopic(admin, { ...compiled, moduleSlug: "wrong-module" })).toBe(false);
+    expect(matchesPublishedAdminTopic(admin, { ...compiled, serviceDefaults: undefined })).toBe(false);
+    expect(matchesPublishedAdminTopic(admin, { ...compiled, serviceDefaults: { administratorLab: "disabled" } })).toBe(false);
+    expect(matchesPublishedAdminTopic(admin, { ...compiled, serviceDefaults: { administratorLab: true } })).toBe(false);
     expect(matchesPublishedAdminTopic(admin, null)).toBe(false);
   });
 });

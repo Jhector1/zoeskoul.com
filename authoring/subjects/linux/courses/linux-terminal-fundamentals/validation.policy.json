@@ -17,7 +17,13 @@
     "cat",
     "head",
     "tail",
-    "wc"
+    "wc",
+    "ls -a",
+    "quoted paths",
+    "echo",
+    ">",
+    ">>",
+    "wc -l"
   ],
   "disallowedConcepts": [
     "sudo",
@@ -58,7 +64,11 @@
       "Reject generic help repeated across unrelated commands.",
       "Require final capstones to use exactly one section, one topic, and multiple progressive steps.",
       "Require the capstone to use inspection, navigation, creation, writing, viewing, copying, moving, renaming, safe deletion, and final verification.",
-      "Reject terminal-workspace prompts that do not tell the learner to press Enter after typing the command."
+      "Reject terminal-workspace prompts that do not tell the learner to press Enter after typing the command.",
+      "Module 1 navigation project must use only pre-seeded paths and pwd, ls, ls -a, and cd; no mkdir/touch prerequisites.",
+      "Module 2 must explicitly teach echo with > and >> and safe single-file rm before the final capstone.",
+      "Use Community Media Archive consistently as the displayed capstone name; preserve existing stable topic IDs.",
+      "Never publish generated tasks with a command that has not been introduced in an earlier lesson."
     ]
   }
 }

@@ -2,7 +2,7 @@
  * Stage 4A: exact, published Course 2 administrative lab targets.
  * This is an upper bound on what can be requested, NOT proof of access.
  * The web server must still check the live actor, enrollment, published
- * module/topic metadata and the existing practice entitlement.
+ * module/topic metadata, explicit manifest capability and the existing practice entitlement.
  */
 export const STUDENT_ADMIN_COURSE_SLUG = "linux-files-permissions-users" as const;
 
@@ -55,5 +55,7 @@ export function matchesPublishedAdminTopic(
   if (!isPlainRecord(compiled)) return false;
   return compiled.subjectSlug === STUDENT_ADMIN_COURSE_SLUG &&
     compiled.moduleSlug === target.moduleSlug &&
-    compiled.topicId === target.topicSlug;
+    compiled.topicId === target.topicSlug &&
+    isPlainRecord(compiled.serviceDefaults) &&
+    compiled.serviceDefaults.administratorLab === "eligible";
 }

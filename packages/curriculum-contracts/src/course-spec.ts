@@ -2,6 +2,7 @@ import type { BlueprintRuntimePolicy, CourseVersionStatus } from "./blueprint.js
 import type { ExerciseKindMix } from "./exercise-policy.js";
 import type { PracticeConfig } from "./practice.js";
 import type { ToolPresentationPolicy } from "./tool-presentation.js";
+import type { ManifestIdeServiceConfig } from "./ide-services.js";
 import type {
     CourseGenerationPolicy,
     ModulePedagogyPolicy,
@@ -128,6 +129,8 @@ export type CourseSpecTopic = {
     projectJourney?: CourseSpecTopicProjectJourney;
     /** Topic-level Tools presentation override. */
     tools?: ToolPresentationPolicy;
+    /** Topic-scoped IDE capability metadata; authorization is server-owned. */
+    serviceDefaults?: ManifestIdeServiceConfig;
     /** Sparse lesson/card overrides keyed by emitted card id (for example sketch0, quiz, project). */
     lessonTools?: Record<string, ToolPresentationPolicy>;
     /** Sparse exercise overrides keyed by authored exercise id. */
@@ -148,6 +151,7 @@ export type CourseSpecSection = {
     bullets?: string[];
     practiceDefaults?: PracticeConfig;
     tools?: ToolPresentationPolicy;
+    serviceDefaults?: ManifestIdeServiceConfig;
 
     topics: CourseSpecTopic[];
 };
@@ -178,6 +182,7 @@ export type CourseSpecModule = {
     runtimePolicy?: CourseSpecRuntimePolicy;
     practiceDefaults?: PracticeConfig;
     tools?: ToolPresentationPolicy;
+    serviceDefaults?: ManifestIdeServiceConfig;
     sections: CourseSpecSection[];
 };
 
@@ -207,6 +212,8 @@ export type CourseSpec = {
     description?: string;
     /** Course-level Tools presentation override layered over blueprint/subject defaults. */
     tools?: ToolPresentationPolicy;
+    /** Defaults inherited by every module/section/topic, like SQL services. */
+    serviceDefaults?: ManifestIdeServiceConfig;
 
     sourceLocale: string;
     targetLocales: string[];

@@ -1,0 +1,859 @@
+{
+  "title": "Change Individual Bits with chmod",
+  "summary": "Practice chmod u+x, go-r and u=rw on learner-owned lab files.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "concept-1",
+      "cardTitle": "Learn",
+      "title": "Change Specific Bits with `chmod`",
+      "bodyMarkdown": "`chmod` changes the permission mode of a file or directory. Symbolic mode syntax targets an identity class: `u` (owner), `g` (group), `o` (other), or `a` (all). The operator `+` adds bits, `-` removes bits, and `=` sets the selected class exactly. The letters `r`, `w`, and `x` identify the bits.\n\nFor a disposable, *owned* fixture, read the current mode first:\n\n```bash\nls -l secure-lab/notes.txt\nchmod go-r secure-lab/notes.txt\nls -l secure-lab/notes.txt\n```\n\n`go-r` removes group and other read bits; it does not inherently set the owner's bits. Therefore inspect the before/after mode rather than predicting a complete final mode without knowing the initial state.\n\nExamples to reason about:\n\n| Command | Meaning |\n|---|---|\n| `chmod u+x run.sh` | Add execute for owner only |\n| `chmod go-r note.txt` | Remove group/other read |\n| `chmod u=rw note.txt` | Owner gets precisely read/write; execute cleared for owner |\n| `chmod o-rwx private/` | Remove all other-user bits from this directory |\n\n**Do not** use `chmod 777` as a default fix, and never run permission changes on paths you do not own or control.",
+      "tryItExercises": [
+        {
+          "id": "symbolic-chmod-basics-try-1",
+          "kind": "code_input",
+          "title": "Inspect file permissions: secure-lab/notes.txt",
+          "prompt": "**Try it yourself · 1 of 2**\n\nA learner-owned notes file should not expose its contents to group members or other users.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -l secure-lab/notes.txt\n```\n\n**Check:** Read the listing, its owner and group, and its permission triplets; do not change the file.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `ls -l secure-lab/notes.txt` on the supplied practice fixture.",
+          "help": {
+            "concept": "Read the listing, its owner and group, and its permission triplets; do not change the file.",
+            "hint_1": "Try the single command `ls -l secure-lab/notes.txt`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Inspect file permissions: secure-lab/notes.txt\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "ls -l secure-lab/notes.txt\n",
+          "instructions": "**Try it yourself · 1 of 2**\n\nA learner-owned notes file should not expose its contents to group members or other users.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -l secure-lab/notes.txt\n```\n\n**Check:** Read the listing, its owner and group, and its permission triplets; do not change the file.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Inspect file permissions: secure-lab/notes.txt\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "ls -l secure-lab/notes.txt\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^ls\\s+\\-l\\s+secure\\-lab/notes\\.txt$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        },
+        {
+          "id": "symbolic-chmod-basics-try-1-part-2",
+          "kind": "code_input",
+          "title": "Inspect numeric modes: secure-lab/notes.txt",
+          "prompt": "**Try it yourself · 2 of 2**\n\nA learner-owned notes file should not expose its contents to group members or other users.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nstat -c \"%a %n\" secure-lab/notes.txt\n```\n\n**Check:** Read the printed mode for the supplied practice item; this exercise does not assume a previous Try modified it.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `stat -c \"%a %n\" secure-lab/notes.txt` on the supplied practice fixture.",
+          "help": {
+            "concept": "Read the printed mode for the supplied practice item; this exercise does not assume a previous Try modified it.",
+            "hint_1": "Try the single command `stat -c \"%a %n\" secure-lab/notes.txt`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Inspect numeric modes: secure-lab/notes.txt\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "stat -c \"%a %n\" secure-lab/notes.txt\n",
+          "instructions": "**Try it yourself · 2 of 2**\n\nA learner-owned notes file should not expose its contents to group members or other users.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nstat -c \"%a %n\" secure-lab/notes.txt\n```\n\n**Check:** Read the printed mode for the supplied practice item; this exercise does not assume a previous Try modified it.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Inspect numeric modes: secure-lab/notes.txt\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "stat -c \"%a %n\" secure-lab/notes.txt\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^stat\\s+\\-c\\s+\"%a\\s+%n\"\\s+secure\\-lab/notes\\.txt$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "concept-2",
+      "cardTitle": "Try it yourself",
+      "title": "Change one bit, then verify",
+      "bodyMarkdown": "Symbolic `chmod` can target only the permission bits you intend to change. Practice each inspection or change separately using the supplied files.",
+      "tryItExercises": [
+        {
+          "id": "symbolic-chmod-basics-try-2",
+          "kind": "code_input",
+          "title": "Set access on secure-lab/notes.txt",
+          "prompt": "**Try it yourself · 1 of 3**\n\nAn editor approves the smallest change to keep training notes private.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nchmod 644 secure-lab/notes.txt\n```\n\n**Check:** Keep the file readable without making it executable. This changes only the supplied training fixture.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `chmod 644 secure-lab/notes.txt` on the supplied practice fixture.",
+          "help": {
+            "concept": "Keep the file readable without making it executable. This changes only the supplied training fixture.",
+            "hint_1": "Try the single command `chmod 644 secure-lab/notes.txt`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Set access on secure-lab/notes.txt\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "chmod 644 secure-lab/notes.txt\n",
+          "instructions": "**Try it yourself · 1 of 3**\n\nAn editor approves the smallest change to keep training notes private.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nchmod 644 secure-lab/notes.txt\n```\n\n**Check:** Keep the file readable without making it executable. This changes only the supplied training fixture.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Set access on secure-lab/notes.txt\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "chmod 644 secure-lab/notes.txt\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^chmod\\s+644\\s+secure\\-lab/notes\\.txt$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        },
+        {
+          "id": "symbolic-chmod-basics-try-2-part-2",
+          "kind": "code_input",
+          "title": "Set access on secure-lab/notes.txt",
+          "prompt": "**Try it yourself · 2 of 3**\n\nAn editor approves the smallest change to keep training notes private.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nchmod go-r secure-lab/notes.txt\n```\n\n**Check:** Remove read access for group and others. This changes only the supplied training fixture.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `chmod go-r secure-lab/notes.txt` on the supplied practice fixture.",
+          "help": {
+            "concept": "Remove read access for group and others. This changes only the supplied training fixture.",
+            "hint_1": "Try the single command `chmod go-r secure-lab/notes.txt`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Set access on secure-lab/notes.txt\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "chmod go-r secure-lab/notes.txt\n",
+          "instructions": "**Try it yourself · 2 of 3**\n\nAn editor approves the smallest change to keep training notes private.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nchmod go-r secure-lab/notes.txt\n```\n\n**Check:** Remove read access for group and others. This changes only the supplied training fixture.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Set access on secure-lab/notes.txt\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "chmod go-r secure-lab/notes.txt\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^chmod\\s+go\\-r\\s+secure\\-lab/notes\\.txt$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        },
+        {
+          "id": "symbolic-chmod-basics-try-2-part-3",
+          "kind": "code_input",
+          "title": "Inspect numeric modes: secure-lab/notes.txt",
+          "prompt": "**Try it yourself · 3 of 3**\n\nAn editor approves the smallest change to keep training notes private.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nstat -c \"%a %n\" secure-lab/notes.txt\n```\n\n**Check:** Read the printed mode for the supplied practice item; this exercise does not assume a previous Try modified it.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `stat -c \"%a %n\" secure-lab/notes.txt` on the supplied practice fixture.",
+          "help": {
+            "concept": "Read the printed mode for the supplied practice item; this exercise does not assume a previous Try modified it.",
+            "hint_1": "Try the single command `stat -c \"%a %n\" secure-lab/notes.txt`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Inspect numeric modes: secure-lab/notes.txt\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "stat -c \"%a %n\" secure-lab/notes.txt\n",
+          "instructions": "**Try it yourself · 3 of 3**\n\nAn editor approves the smallest change to keep training notes private.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nstat -c \"%a %n\" secure-lab/notes.txt\n```\n\n**Check:** Read the printed mode for the supplied practice item; this exercise does not assume a previous Try modified it.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Inspect numeric modes: secure-lab/notes.txt\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "stat -c \"%a %n\" secure-lab/notes.txt\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "secure-lab/README.md",
+              "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/private-note.txt",
+              "content": "Dummy private note for permission practice. No real secrets.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/notes.txt",
+              "content": "Example learner notes; safe to change permission bits.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/shared/notes.txt",
+              "content": "Team meeting notes (practice only).\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/public/README.md",
+              "content": "This public guide has no sensitive data.\n",
+              "language": "bash"
+            },
+            {
+              "path": "secure-lab/scripts/run.sh",
+              "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^stat\\s+\\-c\\s+\"%a\\s+%n\"\\s+secure\\-lab/notes\\.txt$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "symbolic-chmod-basics-q1",
+      "kind": "single_choice",
+      "title": "Add one execute bit",
+      "prompt": "What does chmod u+x mean?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "u selects owner, +x adds execute.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "u selects owner, +x adds execute."
+      },
+      "options": [
+        "Add owner execute",
+        "Add everyone execute",
+        "Remove owner execute"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "symbolic-chmod-basics-q2",
+      "kind": "single_choice",
+      "title": "Remove group and other read",
+      "prompt": "What does chmod go-r remove?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "g/o selects group/other.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "g/o selects group/other."
+      },
+      "options": [
+        "Owner read",
+        "Group and other read",
+        "All writes"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "symbolic-chmod-basics-q3",
+      "kind": "single_choice",
+      "title": "Set owner access exactly",
+      "prompt": "What does u=rw do?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "= sets class bits precisely.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "= sets class bits precisely."
+      },
+      "options": [
+        "Give owner exactly read/write",
+        "Add execute to owner",
+        "Change group ownership"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "symbolic-chmod-basics-practice",
+      "kind": "code_input",
+      "title": "Prove the symbolic change did not broaden access",
+      "prompt": "**Try it yourself**\n\nA reviewer needs evidence of your targeted chmod change.\n\n1. Run `chmod 644 secure-lab/notes.txt` to start at a known mode.\n2. Apply `chmod go-r secure-lab/notes.txt`.\n3. Run `ls -l` and `stat -c \"%a %n\"` on the exact same file.\n\n**Check your work:** The file remains owner-readable/writable with mode `600`; no directory or other file is changed.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "hint": "Avoid `chmod 777` or recursive chmod, which would grant unnecessary access.",
+      "help": {
+        "concept": "The file remains owner-readable/writable with mode `600`; no directory or other file is changed.",
+        "hint_1": "Run `chmod 644 secure-lab/notes.txt` to start at a known mode.",
+        "hint_2": "Avoid `chmod 777` or recursive chmod, which would grant unnecessary access."
+      },
+      "starterCode": "# Prove the symbolic change did not broaden access\n# Follow the numbered instructions in the exercise card.\n",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "chmod 644 secure-lab/notes.txt\nchmod go-r secure-lab/notes.txt\nls -l secure-lab/notes.txt\nstat -c \"%a %n\" secure-lab/notes.txt\n",
+      "instructions": "**Try it yourself**\n\nA reviewer needs evidence of your targeted chmod change.\n\n1. Run `chmod 644 secure-lab/notes.txt` to start at a known mode.\n2. Apply `chmod go-r secure-lab/notes.txt`.\n3. Run `ls -l` and `stat -c \"%a %n\"` on the exact same file.\n\n**Check your work:** The file remains owner-readable/writable with mode `600`; no directory or other file is changed.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Prove the symbolic change did not broaden access\n# Follow the numbered instructions in the exercise card.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "secure-lab/README.md",
+          "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/private-note.txt",
+          "content": "Dummy private note for permission practice. No real secrets.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/notes.txt",
+          "content": "Example learner notes; safe to change permission bits.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/shared/notes.txt",
+          "content": "Team meeting notes (practice only).\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/public/README.md",
+          "content": "This public guide has no sensitive data.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/scripts/run.sh",
+          "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "chmod 644 secure-lab/notes.txt\nchmod go-r secure-lab/notes.txt\nls -l secure-lab/notes.txt\nstat -c \"%a %n\" secure-lab/notes.txt\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "secure-lab/README.md",
+          "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/private-note.txt",
+          "content": "Dummy private note for permission practice. No real secrets.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/notes.txt",
+          "content": "Example learner notes; safe to change permission bits.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/shared/notes.txt",
+          "content": "Team meeting notes (practice only).\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/public/README.md",
+          "content": "This public guide has no sensitive data.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/scripts/run.sh",
+          "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^chmod\\s+644\\s+secure\\-lab/notes\\.txt$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^chmod\\s+go\\-r\\s+secure\\-lab/notes\\.txt$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^ls\\s+\\-l\\s+secure\\-lab/notes\\.txt$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^stat\\s+\\-c\\s+\"%a\\s+%n\"\\s+secure\\-lab/notes\\.txt$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "No sudo in learner exercises."
+          },
+          {
+            "pattern": "(^|\\s)su(\\s|$)",
+            "message": "Do not switch user identities."
+          },
+          {
+            "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+            "message": "Changing users or ownership is outside this course lab."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+            "message": "Do not recursively change permissions."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+            "message": "Never make the practice workspace world writable."
+          }
+        ]
+      }
+    }
+  ]
+}

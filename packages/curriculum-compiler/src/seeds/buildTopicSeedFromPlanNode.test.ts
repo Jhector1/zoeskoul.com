@@ -70,6 +70,47 @@ function makeBaseArgs(overrides: Partial<any> = {}) {
 }
 
 describe("buildTopicSeedFromPlanNode", () => {
+    it("inherits manifest IDE services across course/module/section/topic without granting root", () => {
+        const args = makeBaseArgs({
+            spec: {
+                serviceDefaults: { administratorLab: "disabled", runnerBackend: "pty" },
+                modules: [{
+                    moduleSlug: "m0",
+                    serviceDefaults: { layoutMode: "terminal_workspace" },
+                    sections: [{
+                        sectionSlug: "s0",
+                        serviceDefaults: { requires: { terminal: true } },
+                        topics: [{
+                            topicId: "t0",
+                            serviceDefaults: { administratorLab: "eligible" },
+                        }],
+                    }],
+                }],
+            },
+        });
+        const selected = buildTopicSeedFromPlanNode(args);
+        expect(selected.moduleServiceDefaults).toMatchObject({
+            runnerBackend: "pty",
+            layoutMode: "terminal_workspace",
+            requires: { terminal: true },
+            administratorLab: "eligible",
+        });
+        const normal = buildTopicSeedFromPlanNode({
+            ...args,
+            spec: {
+                ...args.spec,
+                modules: [{
+                    ...args.spec.modules[0],
+                    sections: [{
+                        ...args.spec.modules[0].sections[0],
+                        topics: [{ topicId: "t0", serviceDefaults: { administratorLab: "disabled" } }],
+                    }],
+                }],
+            },
+        });
+        expect(normal.moduleServiceDefaults?.administratorLab).toBe("disabled");
+    });
+
     it("attaches exercisePolicy and plannedExerciseCounts", () => {
         const seed = buildTopicSeedFromPlanNode({
             blueprint: {

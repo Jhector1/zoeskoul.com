@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "purpose": "draft-admin-lab-qa-only",
+  "topicSlug": "final-capstone-secure-project",
+  "exercises": [
+    {
+      "id": "capstone-qa-minimal-modes",
+      "title": "Verify the seven live capstone paths",
+      "instructions": "Use the SAME active administrator sandbox where you completed all five capstone steps. Configure the REAL /workspace/secure-project tree, not a separate qa-secure-project fixture. Verify the seven required files/directories, exact modes, and UID/GID ownership, including the root-owned README.md (0:0). Press Verify while this exact topic session remains active. The trusted Runner inspects the sandbox volume; browser command text or the independent code-input editor is not grading evidence. Do not modify host files, submit secrets, or leave this sandbox running after QA.",
+      "expected": {
+        "required": [
+          {
+            "path": "/workspace/secure-project",
+            "kind": "directory",
+            "mode": "0755",
+            "uid": 1000,
+            "gid": 1000
+          },
+          {
+            "path": "/workspace/secure-project/README.md",
+            "kind": "file",
+            "mode": "0644",
+            "uid": 0,
+            "gid": 0
+          },
+          {
+            "path": "/workspace/secure-project/scripts",
+            "kind": "directory",
+            "mode": "0700",
+            "uid": 1000,
+            "gid": 1000
+          },
+          {
+            "path": "/workspace/secure-project/scripts/run.sh",
+            "kind": "file",
+            "mode": "0700",
+            "uid": 1000,
+            "gid": 1000
+          },
+          {
+            "path": "/workspace/secure-project/secrets.env",
+            "kind": "file",
+            "mode": "0600",
+            "uid": 1000,
+            "gid": 1000
+          },
+          {
+            "path": "/workspace/secure-project/shared",
+            "kind": "directory",
+            "mode": "0770",
+            "uid": 1000,
+            "gid": 1000
+          },
+          {
+            "path": "/workspace/secure-project/shared/notes.txt",
+            "kind": "file",
+            "mode": "0640",
+            "uid": 1000,
+            "gid": 1000
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -4,7 +4,8 @@
   "profileId": "bash",
   "accessPolicy": "paid",
   "courseOrder": [
-    "linux-terminal-fundamentals"
+    "linux-terminal-fundamentals",
+    "linux-files-permissions-users"
   ],
   "publishTarget": {
     "liveSubjectSlug": "linux-terminal-fundamentals",
@@ -25,6 +26,14 @@
       "title": "Linux Terminal Fundamentals",
       "order": 1,
       "path": "courses/linux-terminal-fundamentals/course.spec.json"
+    },
+    {
+      "courseSlug": "linux-files-permissions-users",
+      "title": "Linux Files, Permissions, and Users",
+      "order": 2,
+      "path": "courses/linux-files-permissions-users/course.spec.json",
+      "status": "draft",
+      "prerequisiteCourseSlug": "linux-terminal-fundamentals"
     }
   ]
 }

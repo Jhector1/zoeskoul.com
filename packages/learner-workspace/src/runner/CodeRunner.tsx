@@ -43,6 +43,7 @@ import {
     normalizeRecoverableTerminalError,
     useWorkspaceTerminalController,
 } from "@zoeskoul/learner-workspace/runner/hooks/pty/useWorkspaceTerminalController";
+import { getAutomaticTerminalStartWaitMs } from "./terminalStartPacing";
 import {
     buildTerminalAutoOpenKey,
     createTerminalEvidence,
@@ -427,6 +428,55 @@ const TERMINAL_CAPACITY_POLL_MS = 5_000;
 const TERMINAL_CAPACITY_INVALIDATION_RETRY_MS = [0, 300, 1_000, 3_000] as const;
 const TERMINAL_AUTO_OPEN_VERIFY_DELAY_MS = 700;
 const TERMINAL_AUTO_OPEN_MAX_RECOVERY_ATTEMPTS = 2;
+/**
+ * The Runner allows five terminal starts per actor per minute. Switching between
+ * independently resettable Try exercises creates DIFFERENT shell workspaces, so
+ * no client code may reattach a shell from a different Try merely to evade this
+ * server limit. Keep one spare server slot for explicit learner actions.
+ *
+ * This is a best-effort same-browser-window safety budget, not authentication
+ * or a replacement for Runner rate limiting. Another browser tab/device can
+ * still cause a server-side 429; the existing recovery UI handles that case.
+ */
+const AUTOMATIC_TERMINAL_START_BUDGET = 4;
+const AUTOMATIC_TERMINAL_START_WINDOW_MS = 60_000;
+const terminalAutomaticStartHistory: number[] = [];
+
+function automaticTerminalStartWait(now = Date.now()): number {
+    const cutoff = now - AUTOMATIC_TERMINAL_START_WINDOW_MS;
+    for (let i = terminalAutomaticStartHistory.length - 1; i >= 0; i -= 1) {
+        if (terminalAutomaticStartHistory[i] <= cutoff) {
+            terminalAutomaticStartHistory.splice(i, 1);
+        }
+    }
+    return getAutomaticTerminalStartWaitMs({
+        starts: terminalAutomaticStartHistory,
+        now,
+        limit: AUTOMATIC_TERMINAL_START_BUDGET,
+        windowMs: AUTOMATIC_TERMINAL_START_WINDOW_MS,
+    });
+}
+
+/** Reserve synchronously immediately before starting, never during render. */
+function reserveAutomaticTerminalStart(now = Date.now()): number {
+    const delay = automaticTerminalStartWait(now);
+    if (delay === 0) terminalAutomaticStartHistory.push(now);
+    return delay;
+}
+
+/**
+ * Runner's rate bucket also includes starts from other automatic paths and
+ * earlier mounts. After an explicit server rate-limit response, quiet future
+ * background terminal acquisitions for a full rolling window. This is UX
+ * backpressure only; Runner remains authoritative.
+ */
+function noteRunnerTerminalStartRateLimit(now = Date.now()) {
+    terminalAutomaticStartHistory.splice(
+        0,
+        terminalAutomaticStartHistory.length,
+        ...Array.from({ length: AUTOMATIC_TERMINAL_START_BUDGET }, () => now),
+    );
+}
 const terminalAutoOpenClaims = new Map<string, number>();
 
 function pruneTerminalAutoOpenClaims(now: number) {
@@ -960,6 +1010,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const [pendingTerminalStartMode, setPendingTerminalStartMode] =
         useState<PendingTerminalStartMode | null>(null);
     const [terminalTabMessage, setTerminalTabMessage] = useState<string | null>(null);
+    const [terminalAutoOpenRetryTick, setTerminalAutoOpenRetryTick] = useState(0);
+    const [automaticTerminalDeferredUntil, setAutomaticTerminalDeferredUntil] = useState<number | null>(null);
     const [hydratedTerminalHostKey, setHydratedTerminalHostKey] = useState<string | null>(null);
     const terminalTabStrip = useMemo(
         () =>
@@ -1974,7 +2026,37 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         const startingTerminalId = pendingTerminalStartId;
         const startingMode = pendingTerminalStartMode ?? "attach";
         const startingOwnerKey = pendingTerminalOwnerKey;
+
+        /*
+         * Hydration and workspace-identity handoffs are automatic launches,
+         * even though the original attach path passed `userInitiated: true`.
+         * That bypassed the paced auto-open effect entirely. Use the SAME
+         * shared reservation for pending activation, including topic changes.
+         * Never reuse a different Try's existing workspace as a shortcut.
+         */
+        const initialWaitMs = automaticTerminalStartWait();
+        if (initialWaitMs > 0) {
+            setAutomaticTerminalDeferredUntil(Date.now() + initialWaitMs);
+            const retryTimer = window.setTimeout(
+                () => setTerminalAutoOpenRetryTick((value) => value + 1),
+                initialWaitMs + 30,
+            );
+            return () => window.clearTimeout(retryTimer);
+        }
+
+        let retryTimer: number | null = null;
         const timer = window.setTimeout(() => {
+            const latestWaitMs = reserveAutomaticTerminalStart();
+            if (latestWaitMs > 0) {
+                setAutomaticTerminalDeferredUntil(Date.now() + latestWaitMs);
+                retryTimer = window.setTimeout(
+                    () => setTerminalAutoOpenRetryTick((value) => value + 1),
+                    latestWaitMs + 30,
+                );
+                return;
+            }
+
+            setAutomaticTerminalDeferredUntil(null);
             void pendingWorkspaceTerm
                 .open({ userInitiated: true, throwOnFailure: true })
                 .catch(async (error) => {
@@ -1984,6 +2066,9 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                         error instanceof Error
                             ? error.message
                             : "Could not start the terminal.";
+                    if (/too many\s+(?:session\s+starts|terminal\s+starts|start\s+attempts)/i.test(rawMessage)) {
+                        noteRunnerTerminalStartRateLimit();
+                    }
                     const message =
                         normalizeRecoverableTerminalError(rawMessage).message ??
                         rawMessage;
@@ -2023,9 +2108,11 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
         return () => {
             window.clearTimeout(timer);
+            if (retryTimer !== null) window.clearTimeout(retryTimer);
         };
     }, [
         disabled,
+        terminalAutoOpenRetryTick,
         pendingTerminalOwnerKey,
         pendingTerminalStartId,
         pendingTerminalStartMode,
@@ -2146,7 +2233,6 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         cwd: workspaceTerminal?.cwd,
     });
 
-    const [terminalAutoOpenRetryTick, setTerminalAutoOpenRetryTick] = useState(0);
     const terminalAutoOpenRetryCountsRef = useRef<Map<string, number>>(new Map());
     const latestWorkspaceTerminalAutoOpenStateRef = useRef<
         (WorkspaceTerminalAutoOpenArgs & { terminalAutoOpenKey: string }) | null
@@ -2271,6 +2357,12 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     ]);
 
     useEffect(() => {
+        if (workspaceTerm.sessionId || workspaceTerm.started) {
+            setAutomaticTerminalDeferredUntil(null);
+        }
+    }, [workspaceTerm.sessionId, workspaceTerm.started]);
+
+    useEffect(() => {
         if (!ownershipReady || !workspaceTerm.available) return;
 
         if (
@@ -2298,17 +2390,43 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
          * remounts and prevents xterm crashes/HMR/recovery renders from hammering
          * the backend start endpoint until the user explicitly clicks Restart.
          */
+        // Each distinct Try may require a new isolated PTY. Delay automatic
+        // acquisition rather than hammering /sessions/ensure until it returns
+        // HTTP 429. Never silently reuse another Try's filesystem.
+        const waitMs = automaticTerminalStartWait();
+        if (waitMs > 0) {
+            setAutomaticTerminalDeferredUntil(Date.now() + waitMs);
+            const retryTimer = window.setTimeout(
+                () => setTerminalAutoOpenRetryTick((value) => value + 1),
+                waitMs + 30,
+            );
+            return () => window.clearTimeout(retryTimer);
+        }
+
         if (!shouldClaimTerminalAutoOpen(terminalAutoOpenKey)) {
             return;
         }
 
         let cancelled = false;
+        let retryTimer: number | null = null;
 
         const timer = window.setTimeout(() => {
-            if (cancelled) {
+            if (cancelled) return;
+
+            // Another terminal in the same browser window may have started
+            // between scheduling and this callback. Reserve atomically.
+            const latestWaitMs = reserveAutomaticTerminalStart();
+            if (latestWaitMs > 0) {
+                releaseTerminalAutoOpenClaim(terminalAutoOpenKey);
+                setAutomaticTerminalDeferredUntil(Date.now() + latestWaitMs);
+                retryTimer = window.setTimeout(
+                    () => setTerminalAutoOpenRetryTick((value) => value + 1),
+                    latestWaitMs + 30,
+                );
                 return;
             }
 
+            setAutomaticTerminalDeferredUntil(null);
             terminalAutoOpenRequestedKeyRef.current = terminalAutoOpenKey;
 
             void workspaceTerm.open({ userInitiated: false }).finally(() => {
@@ -2323,6 +2441,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         return () => {
             cancelled = true;
             window.clearTimeout(timer);
+            if (retryTimer !== null) window.clearTimeout(retryTimer);
             releaseTerminalAutoOpenClaim(terminalAutoOpenKey);
         };
     }, [
@@ -2864,6 +2983,17 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                 "terminal";
 
             return (
+                <div className="flex h-full min-h-0 flex-col">
+                    {automaticTerminalDeferredUntil !== null &&
+                    !workspaceTerm.sessionId &&
+                    !workspaceTerm.started ? (
+                        <div role="status" aria-live="polite"
+                            data-testid="terminal-auto-start-paced"
+                            className="border-b border-sky-300/20 bg-sky-500/5 px-3 py-2 text-xs text-slate-600 dark:text-slate-300">
+                            Preparing a separate terminal for this Try. Automatic starts are
+                            briefly paced to avoid the Runner's start limit.
+                        </div>
+                    ) : null}
                 <XtermTerminal
                     key={activeTerminalOwnerKey ?? activeTerminalId}
                     terminalFeed={
@@ -2923,6 +3053,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                     }
                     onInactiveInputAttempt={workspaceTerm.handleDisconnectedInputAttempt}
                 />
+                </div>
             );
         }
 

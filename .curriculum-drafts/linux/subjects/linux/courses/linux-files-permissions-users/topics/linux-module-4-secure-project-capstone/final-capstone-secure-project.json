@@ -1,0 +1,708 @@
+{
+  "title": "Capstone: Secure Project Folder",
+  "summary": "Configure a private config, safe executable, public README, and shared directory with exact permission verification.",
+  "minutes": 100,
+  "sketchBlocks": [
+    {
+      "id": "step-1",
+      "cardTitle": "Step 1 of 5",
+      "title": "Meet your secure project",
+      "bodyMarkdown": "## Final project — Secure a team handoff\n\nYou are preparing a small project for a teammate. The aim is to make its documentation readable, keep its settings private, allow a trusted script to run, and give the right people access to shared notes.\n\n**Your workspace is prepared for you.** When this project opens in the isolated Linux terminal, ZoeLearning should provide `/workspace/secure-project` with a README, a sample configuration file, a reviewed script, and shared notes. You should **not** have to create folders, write demonstration scripts, or fill in placeholder configuration values.\n\n### Step 1 — Explore what is already there\n\nOpen **Tools → Linux terminal** and inspect the sample project:\n\n```bash\nls -ld /workspace/secure-project /workspace/secure-project/scripts /workspace/secure-project/shared\nls -l /workspace/secure-project\n```\n\nFind the private configuration, the script, the README, and the shared notes. Which are files? Which are directories? What permissions do they start with?\n\n**Checkpoint:** You can explain what needs to change before making your first edit. If the sample project is missing, report a lab setup problem instead of recreating it by hand."
+    },
+    {
+      "id": "step-2",
+      "cardTitle": "Step 2 of 5",
+      "title": "Keep configuration private",
+      "bodyMarkdown": "### Step 2 — Protect the configuration\n\nThe sample `secrets.env` contains training text only, but treat it like a private configuration file. Its owner should be able to read and update it; nobody else should have access.\n\n**Try it yourself** in the same project terminal:\n\n```bash\nchmod 600 /workspace/secure-project/secrets.env\nstat -c '%a %u:%g %n' /workspace/secure-project/secrets.env\n```\n\n**Check:** The mode is `600`, and the owner/group remain `1000:1000`. You can verify the permissions without opening or printing the file's contents."
+    },
+    {
+      "id": "step-3",
+      "cardTitle": "Step 3 of 5",
+      "title": "Allow only the trusted script to run",
+      "bodyMarkdown": "### Step 3 — Prepare the script and README\n\nThe project already includes a harmless, reviewed script. It should be executable by its owner, while the folder containing it stays private. The README can remain readable by everyone.\n\n**Try it yourself:**\n\n```bash\nchmod 700 /workspace/secure-project/scripts\nchmod 700 /workspace/secure-project/scripts/run.sh\nchmod 644 /workspace/secure-project/README.md\nstat -c '%a %u:%g %n' /workspace/secure-project/scripts /workspace/secure-project/scripts/run.sh /workspace/secure-project/README.md\n```\n\n**Check:** The script folder and script are `700`; the README is `644`. These permissions describe who may use the files—not whether an unfamiliar script would be safe to run."
+    },
+    {
+      "id": "step-4",
+      "cardTitle": "Step 4 of 5",
+      "title": "Share notes without sharing everything",
+      "bodyMarkdown": "### Step 4 — Set up the team folder\n\nTeam notes need different access from the private configuration. Give the owning group access to the shared folder, but keep the rest of the project appropriately restricted.\n\n**Try it yourself:**\n\n```bash\nchmod 755 /workspace/secure-project\nchmod 770 /workspace/secure-project/shared\nchmod 640 /workspace/secure-project/shared/notes.txt\nsudo -n chown 0:0 /workspace/secure-project/README.md\n```\n\nThe last command is intentionally privileged: this **authorized isolated lab** includes one README that must be owned by root. Do not use it on a host computer or on unrelated paths.\n\n**Check:** The project is `755`, the team folder `770`, the notes `640`, and the README belongs to `0:0`. Explain why a teammate still needs appropriate group membership to benefit from group permissions."
+    },
+    {
+      "id": "step-5",
+      "cardTitle": "Step 5 of 5",
+      "title": "Check your work and hand it off",
+      "bodyMarkdown": "### Step 5 — Verify the complete project\n\nBefore you hand over the project, confirm the modes and owners of all seven paths. Keep using **the same terminal** where you made your changes.\n\n```bash\nstat -c '%a %u:%g %n' /workspace/secure-project /workspace/secure-project/README.md /workspace/secure-project/scripts /workspace/secure-project/scripts/run.sh /workspace/secure-project/secrets.env /workspace/secure-project/shared /workspace/secure-project/shared/notes.txt\n```\n\n| Project item | Target mode | Owner:group |\n|---|---|---|\n| Project folder | `755` | `1000:1000` |\n| README | `644` | `0:0` |\n| Scripts folder | `700` | `1000:1000` |\n| Reviewed script | `700` | `1000:1000` |\n| Private configuration | `600` | `1000:1000` |\n| Shared folder | `770` | `1000:1000` |\n| Team notes | `640` | `1000:1000` |\n\nNow select **Verify filesystem**. ZoeLearning checks the real project files, not merely the commands you typed. If a check fails, review the relevant mode or ownership and try again.\n\n**Your handoff:** In a few sentences, explain why the README is readable but root-owned, why the configuration is private, and how group membership affects access to the shared folder."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "final-capstone-secure-project-check-1",
+      "kind": "single_choice",
+      "title": "Protect the configuration",
+      "prompt": "What is the proper mode for the private dummy config?",
+      "hint": "Use safe permission principles from the lesson.",
+      "help": {
+        "concept": "You are preparing a sample project for a teammate. ZoeLearning creates the training files in a disposable lab, so you can focus on choosing the right permissions. A private configuration file should be accessible only to its owner. The separate Try it yourself exercises do not grade the administrator sandbox.",
+        "hint_1": "Inspect the scenario carefully. Prefer the narrowest access that meets the requirement.",
+        "hint_2": "Compare the effective identity, relevant directory traversal, and target mode. Only the owning user should read and write it."
+      },
+      "options": [
+        "600",
+        "644",
+        "777"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "final-capstone-secure-project-check-2",
+      "kind": "single_choice",
+      "title": "Who can enter the team folder?",
+      "prompt": "Does 770 automatically give all teammates access?",
+      "hint": "Use safe permission principles from the lesson.",
+      "help": {
+        "concept": "The shared folder is for a specific team. Group permissions apply to members of its owning group, and each parent directory must permit traversal. The sample project is provided automatically in the isolated capstone lab.",
+        "hint_1": "Inspect the scenario carefully. Prefer the narrowest access that meets the requirement.",
+        "hint_2": "Compare the effective identity, relevant directory traversal, and target mode. Group membership and ancestor access remain necessary."
+      },
+      "options": [
+        "Yes",
+        "No, group identity and path traversal matter",
+        "It grants global access"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "final-capstone-secure-project-check-3",
+      "kind": "single_choice",
+      "title": "What the final check measures",
+      "prompt": "What makes the capstone ready to pass?",
+      "hint": "Use safe permission principles from the lesson.",
+      "help": {
+        "concept": "A secure handoff depends on the real files, not a command you say you ran. Check each required path’s mode and owner, then use Verify filesystem in the same capstone lab. Your other Try it yourself cards have independent practice folders.",
+        "hint_1": "Inspect the scenario carefully. Prefer the narrowest access that meets the requirement.",
+        "hint_2": "Compare the effective identity, relevant directory traversal, and target mode. Observable filesystem state and reasoning must both pass."
+      },
+      "options": [
+        "Correct commands alone",
+        "Correct explanations alone",
+        "Exact safe modes, ownership checks and a handoff"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    },
+    {
+      "id": "final-capstone-secure-project-step-1",
+      "kind": "code_input",
+      "title": "Practice 1 · Inspect a sample folder",
+      "prompt": "**Try it yourself — inspection**\n\nThis activity has a separate ready-made practice folder. Inspect the project root, its subfolders, and its current permissions. Identify which entries are files and which are directories. Do not change anything yet.\n\n**For the final project:** carry out the five lesson steps in the separate isolated Linux terminal. This practice card does not check the ownership of that final project.",
+      "hint": "All these files are supplied as learner-owned starter files. Read real modes instead of assuming a particular umask.",
+      "help": {
+        "concept": "The inspection covers all five required targets; this step does not change any permission. This is a resettable, independent practice fixture; it does not inspect the privileged seven-path capstone or certify root ownership.",
+        "hint_1": "Run `pwd` and `ls -ld secure-project secure-project/scripts secure-project/shared`.",
+        "hint_2": "All these files are supplied as learner-owned starter files. Read real modes instead of assuming a particular umask."
+      },
+      "starterCode": "# Capstone 1: Inspect the starting workspace\n# Follow the numbered instructions in the exercise card.\n",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "pwd\nls -ld secure-project secure-project/scripts secure-project/shared\nls -l secure-project/README.md secure-project/secrets.env secure-project/scripts/run.sh\n",
+      "instructions": "**Try it yourself — inspection**\n\nThis activity has a separate ready-made practice folder. Inspect the project root, its subfolders, and its current permissions. Identify which entries are files and which are directories. Do not change anything yet.\n\n**For the final project:** carry out the five lesson steps in the separate isolated Linux terminal. This practice card does not check the ownership of that final project.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Capstone 1: Inspect the starting workspace\n# Follow the numbered instructions in the exercise card.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "secure-project/README.md",
+          "content": "# Secure Project\nPublic documentation for the safe handoff exercise.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/secrets.env",
+          "content": "ENVIRONMENT=training\nPLACEHOLDER=not-a-secret\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/scripts/run.sh",
+          "content": "#!/bin/sh\nprintf \"Secure project demo: OK\\n\"\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/shared/notes.txt",
+          "content": "Team handoff notes (practice).\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "pwd\nls -ld secure-project secure-project/scripts secure-project/shared\nls -l secure-project/README.md secure-project/secrets.env secure-project/scripts/run.sh\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "secure-project/README.md",
+          "content": "# Secure Project\nPublic documentation for the safe handoff exercise.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/secrets.env",
+          "content": "ENVIRONMENT=training\nPLACEHOLDER=not-a-secret\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/scripts/run.sh",
+          "content": "#!/bin/sh\nprintf \"Secure project demo: OK\\n\"\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/shared/notes.txt",
+          "content": "Team handoff notes (practice).\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^pwd$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^ls\\s+\\-ld\\s+secure\\-project\\s+secure\\-project/scripts\\s+secure\\-project/shared$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^ls\\s+\\-l\\s+secure\\-project/README\\.md\\s+secure\\-project/secrets\\.env\\s+secure\\-project/scripts/run\\.sh$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "No sudo in learner exercises."
+          },
+          {
+            "pattern": "(^|\\s)su(\\s|$)",
+            "message": "Do not switch user identities."
+          },
+          {
+            "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+            "message": "Changing users or ownership is outside this course lab."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+            "message": "Do not recursively change permissions."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+            "message": "Never make the practice workspace world writable."
+          }
+        ]
+      }
+    },
+    {
+      "id": "final-capstone-secure-project-step-2",
+      "kind": "code_input",
+      "title": "Practice 2 · Protect a private note",
+      "prompt": "**Try it yourself — private access**\n\nOn this ready-made practice folder, use `chmod 600` to make the dummy configuration file private. Check the mode with `stat` and explain which users can read it.\n\nThis card is independent practice; use the isolated Linux terminal for the complete seven-path project.",
+      "hint": "Use the exact file path, not a wildcard. Never read or print real secrets.",
+      "help": {
+        "concept": "The configuration is a regular file with mode `600` (`rw-------`), regardless of the file mode at startup. This is a resettable, independent practice fixture; it does not inspect the privileged seven-path capstone or certify root ownership.",
+        "hint_1": "Check `ls -l secure-project/secrets.env`.",
+        "hint_2": "Use the exact file path, not a wildcard. Never read or print real secrets."
+      },
+      "starterCode": "# Capstone 2: Protect the dummy configuration\n# Follow the numbered instructions in the exercise card.\n",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "ls -l secure-project/secrets.env\nchmod 600 secure-project/secrets.env\nstat -c \"%a %n\" secure-project/secrets.env\n",
+      "instructions": "**Try it yourself — private access**\n\nOn this ready-made practice folder, use `chmod 600` to make the dummy configuration file private. Check the mode with `stat` and explain which users can read it.\n\nThis card is independent practice; use the isolated Linux terminal for the complete seven-path project.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Capstone 2: Protect the dummy configuration\n# Follow the numbered instructions in the exercise card.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "secure-project/README.md",
+          "content": "# Secure Project\nPublic documentation for the safe handoff exercise.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/secrets.env",
+          "content": "ENVIRONMENT=training\nPLACEHOLDER=not-a-secret\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/scripts/run.sh",
+          "content": "#!/bin/sh\nprintf \"Secure project demo: OK\\n\"\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/shared/notes.txt",
+          "content": "Team handoff notes (practice).\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "ls -l secure-project/secrets.env\nchmod 600 secure-project/secrets.env\nstat -c \"%a %n\" secure-project/secrets.env\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "secure-project/README.md",
+          "content": "# Secure Project\nPublic documentation for the safe handoff exercise.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/secrets.env",
+          "content": "ENVIRONMENT=training\nPLACEHOLDER=not-a-secret\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/scripts/run.sh",
+          "content": "#!/bin/sh\nprintf \"Secure project demo: OK\\n\"\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/shared/notes.txt",
+          "content": "Team handoff notes (practice).\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^ls\\s+\\-l\\s+secure\\-project/secrets\\.env$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^chmod\\s+600\\s+secure\\-project/secrets\\.env$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^stat\\s+\\-c\\s+\"%a\\s+%n\"\\s+secure\\-project/secrets\\.env$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "No sudo in learner exercises."
+          },
+          {
+            "pattern": "(^|\\s)su(\\s|$)",
+            "message": "Do not switch user identities."
+          },
+          {
+            "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+            "message": "Changing users or ownership is outside this course lab."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+            "message": "Do not recursively change permissions."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+            "message": "Never make the practice workspace world writable."
+          }
+        ]
+      }
+    },
+    {
+      "id": "final-capstone-secure-project-step-3",
+      "kind": "code_input",
+      "title": "Practice 3 · Restrict the script and README",
+      "prompt": "**Try it yourself — script and documentation**\n\nUse the provided sample script. Set the script directory and script to `700`, and keep the README readable at `644`. Verify the three modes. Do not create or run an unknown script.\n\nThis is a separate practice folder, not the full project verification.",
+      "hint": "The scripts directory needs traversal for its owner; avoid granting execution to group or other.",
+      "help": {
+        "concept": "Directory `700`, script `700`, README `644`; no other paths changed. This is a resettable, independent practice fixture; it does not inspect the privileged seven-path capstone or certify root ownership.",
+        "hint_1": "Run `chmod 700 secure-project/scripts`.",
+        "hint_2": "The scripts directory needs traversal for its owner; avoid granting execution to group or other."
+      },
+      "starterCode": "# Capstone 3: Restrict the script and publish docs\n# Follow the numbered instructions in the exercise card.\n",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "chmod 700 secure-project/scripts\nchmod 700 secure-project/scripts/run.sh\nchmod 644 secure-project/README.md\nstat -c \"%a %n\" secure-project/scripts secure-project/scripts/run.sh secure-project/README.md\n",
+      "instructions": "**Try it yourself — script and documentation**\n\nUse the provided sample script. Set the script directory and script to `700`, and keep the README readable at `644`. Verify the three modes. Do not create or run an unknown script.\n\nThis is a separate practice folder, not the full project verification.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Capstone 3: Restrict the script and publish docs\n# Follow the numbered instructions in the exercise card.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "secure-project/README.md",
+          "content": "# Secure Project\nPublic documentation for the safe handoff exercise.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/secrets.env",
+          "content": "ENVIRONMENT=training\nPLACEHOLDER=not-a-secret\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/scripts/run.sh",
+          "content": "#!/bin/sh\nprintf \"Secure project demo: OK\\n\"\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/shared/notes.txt",
+          "content": "Team handoff notes (practice).\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "chmod 700 secure-project/scripts\nchmod 700 secure-project/scripts/run.sh\nchmod 644 secure-project/README.md\nstat -c \"%a %n\" secure-project/scripts secure-project/scripts/run.sh secure-project/README.md\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "secure-project/README.md",
+          "content": "# Secure Project\nPublic documentation for the safe handoff exercise.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/secrets.env",
+          "content": "ENVIRONMENT=training\nPLACEHOLDER=not-a-secret\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/scripts/run.sh",
+          "content": "#!/bin/sh\nprintf \"Secure project demo: OK\\n\"\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/shared/notes.txt",
+          "content": "Team handoff notes (practice).\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^chmod\\s+700\\s+secure\\-project/scripts$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^chmod\\s+700\\s+secure\\-project/scripts/run\\.sh$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^chmod\\s+644\\s+secure\\-project/README\\.md$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^stat\\s+\\-c\\s+\"%a\\s+%n\"\\s+secure\\-project/scripts\\s+secure\\-project/scripts/run\\.sh\\s+secure\\-project/README\\.md$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "No sudo in learner exercises."
+          },
+          {
+            "pattern": "(^|\\s)su(\\s|$)",
+            "message": "Do not switch user identities."
+          },
+          {
+            "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+            "message": "Changing users or ownership is outside this course lab."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+            "message": "Do not recursively change permissions."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+            "message": "Never make the practice workspace world writable."
+          }
+        ]
+      }
+    },
+    {
+      "id": "final-capstone-secure-project-step-4",
+      "kind": "code_input",
+      "title": "Practice 4 · Prepare a shared folder",
+      "prompt": "**Try it yourself — team access**\n\nSet the sample project root to `755` and the shared directory to `770`. Inspect both with `stat` and explain why the directory's group bits do not create group membership.\n\nThis practice folder is unprivileged. The final project’s root-owned README is handled only in its authorized isolated terminal.",
+      "hint": "Mode `770` is not a group assignment; you are not authorized to change ownership in this lab.",
+      "help": {
+        "concept": "Project root `755`, shared directory `770`. Group access still requires actual membership in the directory’s owning group. This is a resettable, independent practice fixture; it does not inspect the privileged seven-path capstone or certify root ownership.",
+        "hint_1": "Run `chmod 755 secure-project`.",
+        "hint_2": "Mode `770` is not a group assignment; you are not authorized to change ownership in this lab."
+      },
+      "starterCode": "# Capstone 4: Configure project root and shared folder\n# Follow the numbered instructions in the exercise card.\n",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "chmod 755 secure-project\nchmod 770 secure-project/shared\nls -ld secure-project secure-project/shared\nstat -c \"%a %n\" secure-project secure-project/shared\n",
+      "instructions": "**Try it yourself — team access**\n\nSet the sample project root to `755` and the shared directory to `770`. Inspect both with `stat` and explain why the directory's group bits do not create group membership.\n\nThis practice folder is unprivileged. The final project’s root-owned README is handled only in its authorized isolated terminal.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Capstone 4: Configure project root and shared folder\n# Follow the numbered instructions in the exercise card.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "secure-project/README.md",
+          "content": "# Secure Project\nPublic documentation for the safe handoff exercise.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/secrets.env",
+          "content": "ENVIRONMENT=training\nPLACEHOLDER=not-a-secret\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/scripts/run.sh",
+          "content": "#!/bin/sh\nprintf \"Secure project demo: OK\\n\"\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/shared/notes.txt",
+          "content": "Team handoff notes (practice).\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "chmod 755 secure-project\nchmod 770 secure-project/shared\nls -ld secure-project secure-project/shared\nstat -c \"%a %n\" secure-project secure-project/shared\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "secure-project/README.md",
+          "content": "# Secure Project\nPublic documentation for the safe handoff exercise.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/secrets.env",
+          "content": "ENVIRONMENT=training\nPLACEHOLDER=not-a-secret\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/scripts/run.sh",
+          "content": "#!/bin/sh\nprintf \"Secure project demo: OK\\n\"\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/shared/notes.txt",
+          "content": "Team handoff notes (practice).\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^chmod\\s+755\\s+secure\\-project$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^chmod\\s+770\\s+secure\\-project/shared$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^ls\\s+\\-ld\\s+secure\\-project\\s+secure\\-project/shared$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^stat\\s+\\-c\\s+\"%a\\s+%n\"\\s+secure\\-project\\s+secure\\-project/shared$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "No sudo in learner exercises."
+          },
+          {
+            "pattern": "(^|\\s)su(\\s|$)",
+            "message": "Do not switch user identities."
+          },
+          {
+            "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+            "message": "Changing users or ownership is outside this course lab."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+            "message": "Do not recursively change permissions."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+            "message": "Never make the practice workspace world writable."
+          }
+        ]
+      }
+    },
+    {
+      "id": "final-capstone-secure-project-step-5",
+      "kind": "code_input",
+      "title": "Practice 5 · Review all the mode bits",
+      "prompt": "**Try it yourself — full mode review**\n\nIn this resettable sample project, apply the required modes: project `755`, scripts folder `700`, trusted script `700`, private configuration `600`, shared folder `770`, and README `644`. Verify each with `stat`.\n\nThese are mode-practice exercises. The **final project** uses a different isolated terminal and a seven-path verifier that also checks ownership.",
+      "hint": "Each step has its own starter files during draft QA; do not assume a previous exercise’s changes persisted. Apply the complete set here.",
+      "help": {
+        "concept": "Final expected modes: root `755`, scripts `700`, shared `770`, config `600`, script `700`, README `644`. The Runner must validate actual modes and ownership before publication. This is a resettable, independent practice fixture; it does not inspect the privileged seven-path capstone or certify root ownership.",
+        "hint_1": "Set root `755`, scripts directory `700`, shared directory `770`.",
+        "hint_2": "Each step has its own starter files during draft QA; do not assume a previous exercise’s changes persisted. Apply the complete set here."
+      },
+      "starterCode": "# Capstone 5: Verify the complete access policy\n# Follow the numbered instructions in the exercise card.\n",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "chmod 755 secure-project\nchmod 700 secure-project/scripts\nchmod 770 secure-project/shared\nchmod 600 secure-project/secrets.env\nchmod 700 secure-project/scripts/run.sh\nchmod 644 secure-project/README.md\nstat -c \"%a %n\" secure-project secure-project/scripts secure-project/shared secure-project/secrets.env secure-project/scripts/run.sh secure-project/README.md\n",
+      "instructions": "**Try it yourself — full mode review**\n\nIn this resettable sample project, apply the required modes: project `755`, scripts folder `700`, trusted script `700`, private configuration `600`, shared folder `770`, and README `644`. Verify each with `stat`.\n\nThese are mode-practice exercises. The **final project** uses a different isolated terminal and a seven-path verifier that also checks ownership.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Capstone 5: Verify the complete access policy\n# Follow the numbered instructions in the exercise card.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "secure-project/README.md",
+          "content": "# Secure Project\nPublic documentation for the safe handoff exercise.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/secrets.env",
+          "content": "ENVIRONMENT=training\nPLACEHOLDER=not-a-secret\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/scripts/run.sh",
+          "content": "#!/bin/sh\nprintf \"Secure project demo: OK\\n\"\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/shared/notes.txt",
+          "content": "Team handoff notes (practice).\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "chmod 755 secure-project\nchmod 700 secure-project/scripts\nchmod 770 secure-project/shared\nchmod 600 secure-project/secrets.env\nchmod 700 secure-project/scripts/run.sh\nchmod 644 secure-project/README.md\nstat -c \"%a %n\" secure-project secure-project/scripts secure-project/shared secure-project/secrets.env secure-project/scripts/run.sh secure-project/README.md\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "secure-project/README.md",
+          "content": "# Secure Project\nPublic documentation for the safe handoff exercise.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/secrets.env",
+          "content": "ENVIRONMENT=training\nPLACEHOLDER=not-a-secret\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/scripts/run.sh",
+          "content": "#!/bin/sh\nprintf \"Secure project demo: OK\\n\"\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-project/shared/notes.txt",
+          "content": "Team handoff notes (practice).\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^chmod\\s+755\\s+secure\\-project$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^chmod\\s+700\\s+secure\\-project/scripts$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^chmod\\s+770\\s+secure\\-project/shared$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^chmod\\s+600\\s+secure\\-project/secrets\\.env$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^chmod\\s+700\\s+secure\\-project/scripts/run\\.sh$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^chmod\\s+644\\s+secure\\-project/README\\.md$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^stat\\s+\\-c\\s+\"%a\\s+%n\"\\s+secure\\-project\\s+secure\\-project/scripts\\s+secure\\-project/shared\\s+secure\\-project/secrets\\.env\\s+secure\\-project/scripts/run\\.sh\\s+secure\\-project/README\\.md$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "No sudo in learner exercises."
+          },
+          {
+            "pattern": "(^|\\s)su(\\s|$)",
+            "message": "Do not switch user identities."
+          },
+          {
+            "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+            "message": "Changing users or ownership is outside this course lab."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+            "message": "Do not recursively change permissions."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+            "message": "Never make the practice workspace world writable."
+          }
+        ]
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Secure Project Folder — five-step assessment",
+    "stepIds": [
+      "final-capstone-secure-project-step-1",
+      "final-capstone-secure-project-step-2",
+      "final-capstone-secure-project-step-3",
+      "final-capstone-secure-project-step-4",
+      "final-capstone-secure-project-step-5"
+    ]
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "title": "When Ownership Must Change",
+  "summary": "Explain chown/chgrp use cases and privileged ownership restrictions without running either command.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "concept-1",
+      "cardTitle": "Learn",
+      "title": "When Ownership Must Change",
+      "bodyMarkdown": "`chown` changes a file's owning user; `chgrp` changes its owning group. These are administration concepts here, not student lab commands. On a real Linux machine, changing ownership may require elevated privileges or specific ownership/group rules. Our learner sandbox is not a place to manage system accounts or change fixture ownership.\n\n**Scenario:** A team wants both members to edit a shared folder. Is `chmod 777 shared/` a good first fix? No. Determine intended collaborators, group identity, ancestor traversal, and whether a controlled administrator-owned setup should assign the directory to a shared group. Explain the change in plain language; **do not run chown, chgrp, or group-management commands**."
+    },
+    {
+      "id": "concept-2",
+      "cardTitle": "Try it yourself",
+      "title": "Decide when an administrator is needed",
+      "bodyMarkdown": "**Try it yourself — scenario**\n\nA coworker cannot edit a team document. The file’s mode appears correct, but the owning group does not match the team.\n\nWould changing its mode solve the real problem? What should the team ask an authorized administrator to check? **Describe** a sensible resolution; do not run `chown`, `chgrp`, or `sudo` in this practice."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "ownership-administration-concepts-q1",
+      "kind": "single_choice",
+      "title": "What `chgrp` changes",
+      "prompt": "What does chgrp conceptually change?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "chgrp changes group ownership.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "chgrp changes group ownership."
+      },
+      "options": [
+        "File content",
+        "Owning group",
+        "Umask"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "ownership-administration-concepts-q2",
+      "kind": "single_choice",
+      "title": "Ownership commands in this lab",
+      "prompt": "Should students execute chown in this sandbox?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "Ownership changes are conceptual here.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "Ownership changes are conceptual here."
+      },
+      "options": [
+        "Yes",
+        "No",
+        "Only with sudo"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "ownership-administration-concepts-q3",
+      "kind": "single_choice",
+      "title": "Ask for the right administrative fix",
+      "prompt": "What should a real team request for group mismatch?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "Group setup belongs to authorized admin.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "Group setup belongs to authorized admin."
+      },
+      "options": [
+        "chmod 777 everything",
+        "Authorized administration review",
+        "Delete accounts"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "ownership-administration-concepts-practice",
+      "kind": "single_choice",
+      "title": "Modes versus ownership",
+      "prompt": "What does chmod change on a file?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "chmod changes permission bits, not the owning user or user group membership.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "chmod changes permission bits, not the owning user or user group membership."
+      },
+      "options": [
+        "The owning user",
+        "The access mode bits",
+        "The group membership of every user"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,448 @@
+{
+  "title": "Project: Permission Detective",
+  "summary": "Inspect a supplied tree, decode modes and explain access without changing the fixtures.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "project-brief",
+      "cardTitle": "Project",
+      "title": "Project brief",
+      "bodyMarkdown": "## Project — Permission detective\n\nA teammate asks you to check a small project before it is shared. You have a **ready-made practice folder**; your job is to discover what its permissions mean, not to change them.\n\n**Your investigation**\n\n1. Inspect the project folder and its parent permissions with `ls -ld`.\n2. Read the owner, group, and permission triplets on the supplied files.\n3. Follow the path to the shared notes and decide who can traverse each directory.\n4. Write a short recommendation, supported by what you observed.\n\n**Handoff:** Which path is the likely barrier to access, and why? Use the supplied folder only. Do not change permissions in this read-only project."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "module-1-permission-detective-step-1",
+      "kind": "code_input",
+      "title": "Audit the project root without changing it",
+      "prompt": "**Try it yourself**\n\nYou are the on-call security assistant for a read-only permissions audit.\n\n1. Run `pwd` to confirm your location.\n2. Run `ls -ld secure-lab secure-lab/shared`.\n3. Run `ls -l secure-lab/README.md secure-lab/private-note.txt`.\n\n**Check your work:** You can describe each type and the three triplets; do not execute `chmod` in this project.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "hint": "Use `ls -ld` for directories and `ls -l` for named files.",
+      "help": {
+        "concept": "You can describe each type and the three triplets; do not execute `chmod` in this project.",
+        "hint_1": "Run `pwd` to confirm your location.",
+        "hint_2": "Use `ls -ld` for directories and `ls -l` for named files."
+      },
+      "starterCode": "# Audit the project root without changing it\n# Follow the numbered instructions in the exercise card.\n",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "pwd\nls -ld secure-lab secure-lab/shared\nls -l secure-lab/README.md secure-lab/private-note.txt\n",
+      "instructions": "**Try it yourself**\n\nYou are the on-call security assistant for a read-only permissions audit.\n\n1. Run `pwd` to confirm your location.\n2. Run `ls -ld secure-lab secure-lab/shared`.\n3. Run `ls -l secure-lab/README.md secure-lab/private-note.txt`.\n\n**Check your work:** You can describe each type and the three triplets; do not execute `chmod` in this project.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Audit the project root without changing it\n# Follow the numbered instructions in the exercise card.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "secure-lab/README.md",
+          "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/private-note.txt",
+          "content": "Dummy private note for permission practice. No real secrets.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/notes.txt",
+          "content": "Example learner notes; safe to change permission bits.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/shared/notes.txt",
+          "content": "Team meeting notes (practice only).\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/public/README.md",
+          "content": "This public guide has no sensitive data.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/scripts/run.sh",
+          "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "pwd\nls -ld secure-lab secure-lab/shared\nls -l secure-lab/README.md secure-lab/private-note.txt\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "secure-lab/README.md",
+          "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/private-note.txt",
+          "content": "Dummy private note for permission practice. No real secrets.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/notes.txt",
+          "content": "Example learner notes; safe to change permission bits.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/shared/notes.txt",
+          "content": "Team meeting notes (practice only).\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/public/README.md",
+          "content": "This public guide has no sensitive data.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/scripts/run.sh",
+          "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^pwd$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^ls\\s+\\-ld\\s+secure\\-lab\\s+secure\\-lab/shared$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^ls\\s+\\-l\\s+secure\\-lab/README\\.md\\s+secure\\-lab/private\\-note\\.txt$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "No sudo in learner exercises."
+          },
+          {
+            "pattern": "(^|\\s)su(\\s|$)",
+            "message": "Do not switch user identities."
+          },
+          {
+            "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+            "message": "Changing users or ownership is outside this course lab."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+            "message": "Do not recursively change permissions."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+            "message": "Never make the practice workspace world writable."
+          }
+        ]
+      }
+    },
+    {
+      "id": "module-1-permission-detective-step-2",
+      "kind": "code_input",
+      "title": "Match actual identity to file ownership",
+      "prompt": "**Try it yourself**\n\nA reviewer needs to understand which permission class applies to the current learner.\n\n1. Run `whoami`, `id`, and `groups`.\n2. Run `ls -l secure-lab/private-note.txt`.\n3. Compare the file owner and group with your actual identity.\n\n**Check your work:** Name the applicable owner/group/other triplet without assuming a particular username or UID.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "hint": "Compare identity first; do not combine all three permission triplets.",
+      "help": {
+        "concept": "Name the applicable owner/group/other triplet without assuming a particular username or UID.",
+        "hint_1": "Run `whoami`, `id`, and `groups`.",
+        "hint_2": "Compare identity first; do not combine all three permission triplets."
+      },
+      "starterCode": "# Match actual identity to file ownership\n# Follow the numbered instructions in the exercise card.\n",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "whoami\nid\ngroups\nls -l secure-lab/private-note.txt\n",
+      "instructions": "**Try it yourself**\n\nA reviewer needs to understand which permission class applies to the current learner.\n\n1. Run `whoami`, `id`, and `groups`.\n2. Run `ls -l secure-lab/private-note.txt`.\n3. Compare the file owner and group with your actual identity.\n\n**Check your work:** Name the applicable owner/group/other triplet without assuming a particular username or UID.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Match actual identity to file ownership\n# Follow the numbered instructions in the exercise card.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "secure-lab/README.md",
+          "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/private-note.txt",
+          "content": "Dummy private note for permission practice. No real secrets.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/notes.txt",
+          "content": "Example learner notes; safe to change permission bits.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/shared/notes.txt",
+          "content": "Team meeting notes (practice only).\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/public/README.md",
+          "content": "This public guide has no sensitive data.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/scripts/run.sh",
+          "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "whoami\nid\ngroups\nls -l secure-lab/private-note.txt\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "secure-lab/README.md",
+          "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/private-note.txt",
+          "content": "Dummy private note for permission practice. No real secrets.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/notes.txt",
+          "content": "Example learner notes; safe to change permission bits.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/shared/notes.txt",
+          "content": "Team meeting notes (practice only).\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/public/README.md",
+          "content": "This public guide has no sensitive data.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/scripts/run.sh",
+          "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^whoami$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^id$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^groups$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^ls\\s+\\-l\\s+secure\\-lab/private\\-note\\.txt$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "No sudo in learner exercises."
+          },
+          {
+            "pattern": "(^|\\s)su(\\s|$)",
+            "message": "Do not switch user identities."
+          },
+          {
+            "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+            "message": "Changing users or ownership is outside this course lab."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+            "message": "Do not recursively change permissions."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+            "message": "Never make the practice workspace world writable."
+          }
+        ]
+      }
+    },
+    {
+      "id": "module-1-permission-detective-step-3",
+      "kind": "code_input",
+      "title": "Complete the ancestor traversal diagnosis",
+      "prompt": "**Try it yourself**\n\nA hypothetical outsider can read `secure-lab/shared/notes.txt` only if every ancestor permits search.\n\n1. Run `ls -ld secure-lab secure-lab/shared`.\n2. Run `ls -l secure-lab/shared/notes.txt`.\n3. Evaluate the other-user `x` bit on each ancestor before the file read bit.\n\n**Check your work:** Explain the first blocked ancestor, if any, using the actual listing; no file mode is changed.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "hint": "For the outsider scenario, use only the `other` triplet at each ancestor.",
+      "help": {
+        "concept": "Explain the first blocked ancestor, if any, using the actual listing; no file mode is changed.",
+        "hint_1": "Run `ls -ld secure-lab secure-lab/shared`.",
+        "hint_2": "For the outsider scenario, use only the `other` triplet at each ancestor."
+      },
+      "starterCode": "# Complete the ancestor traversal diagnosis\n# Follow the numbered instructions in the exercise card.\n",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "ls -ld secure-lab secure-lab/shared\nls -l secure-lab/shared/notes.txt\n",
+      "instructions": "**Try it yourself**\n\nA hypothetical outsider can read `secure-lab/shared/notes.txt` only if every ancestor permits search.\n\n1. Run `ls -ld secure-lab secure-lab/shared`.\n2. Run `ls -l secure-lab/shared/notes.txt`.\n3. Evaluate the other-user `x` bit on each ancestor before the file read bit.\n\n**Check your work:** Explain the first blocked ancestor, if any, using the actual listing; no file mode is changed.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Complete the ancestor traversal diagnosis\n# Follow the numbered instructions in the exercise card.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "secure-lab/README.md",
+          "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/private-note.txt",
+          "content": "Dummy private note for permission practice. No real secrets.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/notes.txt",
+          "content": "Example learner notes; safe to change permission bits.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/shared/notes.txt",
+          "content": "Team meeting notes (practice only).\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/public/README.md",
+          "content": "This public guide has no sensitive data.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/scripts/run.sh",
+          "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "ls -ld secure-lab secure-lab/shared\nls -l secure-lab/shared/notes.txt\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "secure-lab/README.md",
+          "content": "# Secure Lab\nPublic project documentation for Linux permissions training.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/private-note.txt",
+          "content": "Dummy private note for permission practice. No real secrets.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/notes.txt",
+          "content": "Example learner notes; safe to change permission bits.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/shared/notes.txt",
+          "content": "Team meeting notes (practice only).\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/public/README.md",
+          "content": "This public guide has no sensitive data.\n",
+          "language": "bash"
+        },
+        {
+          "path": "secure-lab/scripts/run.sh",
+          "content": "#!/bin/sh\nprintf \"Linux course practice: OK\\n\"\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^ls\\s+\\-ld\\s+secure\\-lab\\s+secure\\-lab/shared$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^ls\\s+\\-l\\s+secure\\-lab/shared/notes\\.txt$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "No sudo in learner exercises."
+          },
+          {
+            "pattern": "(^|\\s)su(\\s|$)",
+            "message": "Do not switch user identities."
+          },
+          {
+            "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+            "message": "Changing users or ownership is outside this course lab."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+            "message": "Do not recursively change permissions."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+            "message": "Never make the practice workspace world writable."
+          }
+        ]
+      }
+    },
+    {
+      "id": "module-1-permission-detective-check-3",
+      "kind": "single_choice",
+      "title": "Project reasoning 3",
+      "prompt": "Which action belongs in a read-only permission audit?",
+      "hint": "Use safe permission principles from the lesson.",
+      "help": {
+        "concept": "Permission Detective",
+        "hint_1": "Inspect the scenario carefully. Prefer the narrowest access that meets the requirement.",
+        "hint_2": "Compare the effective identity, relevant directory traversal, and target mode. Course Module 1 never changes fixture permissions."
+      },
+      "options": [
+        "chmod -R 777",
+        "sudo chown",
+        "ls -ld secure-lab"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    }
+  ],
+  "projectDraft": {
+    "title": "Project: Permission Detective",
+    "stepIds": [
+      "module-1-permission-detective-step-1",
+      "module-1-permission-detective-step-2",
+      "module-1-permission-detective-step-3"
+    ]
+  }
+}

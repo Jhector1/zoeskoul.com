@@ -1,4 +1,5 @@
 import type { TanstackPreviewTransportRequest } from "./tanstackPreviewHttpBoundary.js";
+import type { ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contracts";
 
 /** Canonical runtime argv. No user-supplied commands, ports or environment. */
 export const TANSTACK_PREVIEW_DEV_COMMAND = [
@@ -29,6 +30,25 @@ export function shouldActivateTanstackPreviewHmr(input: Readonly<{
 }>): boolean {
   return input.mode === "development" && input.featureEnabled === true &&
     input.websocketGatewayReady === true;
+}
+
+export class TanstackPreviewHmrSourceCompatibilityError extends Error {
+  constructor() {
+    super("Saved TanStack source is not compatible with native preview HMR.");
+    this.name = "TanstackPreviewHmrSourceCompatibilityError";
+  }
+}
+
+/** HMR is a saved-source contract, not a Runner rewrite. Legacy projects with
+ * `hmr: false` must be upgraded through the normal revisioned source writer. */
+export function assertTanstackPreviewHmrSourceCompatible(
+  request: Pick<ProductionBuildJobRequestV1, "files">,
+  enabled: boolean,
+): void {
+  if (!enabled) return;
+  const viteConfig = request.files.find(file => file.path === "vite.config.ts")?.content;
+  if (!viteConfig?.includes('hmr: process.env.ZOEBUILD_PREVIEW_HMR_ENABLED === "true"'))
+    throw new TanstackPreviewHmrSourceCompatibilityError();
 }
 /** Only Runner-minted browser capability URLs may become Vite's public base.
  * Never accept a base from application source or an HTTP request parameter. */

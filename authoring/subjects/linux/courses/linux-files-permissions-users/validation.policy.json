@@ -1,0 +1,80 @@
+{
+  "policyId": "linux-files-permissions-users-validation",
+  "allowedConcepts": [
+    "whoami",
+    "id",
+    "groups",
+    "ls -l",
+    "ls -ld",
+    "chmod u+x",
+    "chmod go-r",
+    "chmod u=rw",
+    "chmod 600",
+    "chmod 644",
+    "chmod 700",
+    "chmod 755",
+    "chmod 770",
+    "stat",
+    "umask (read-only)",
+    "owner/group/other",
+    "rwx",
+    "directory traversal",
+    "octal permissions",
+    "least privilege",
+    "chown/chgrp (conceptual only)",
+    "sudo/root (conceptual only)"
+  ],
+  "disallowedConcepts": [
+    "sudo execution",
+    "su execution",
+    "chown execution",
+    "chgrp execution",
+    "useradd",
+    "groupadd",
+    "passwd",
+    "chmod -R",
+    "chmod 777 as a repair",
+    "writes outside learner workspace",
+    "setuid/setgid labs",
+    "real secrets",
+    "system service changes",
+    "network access"
+  ],
+  "validationRequirements": {
+    "usesShellTaskRecipe": true,
+    "usesTerminalWorkspaceLayout": true,
+    "terminalOnly": true,
+    "workspaceExpectationsRequired": true,
+    "terminalExpectationsAllowedForOutputChecks": true,
+    "actualPermissionBitsVerifierRequiredBeforePublish": true,
+    "graderMustRunInsideIsolatedExecutor": true,
+    "fixtureOwnerMustBeStudentUid": true,
+    "noRootOrSudoCommands": true,
+    "publishedContentReady": false,
+    "judge0NotRequired": true,
+    "moduleProjectsUseCumulativeScope": true,
+    "lessonDraftsIncluded": true,
+    "modeVerifierIntegratedWithRunner": false,
+    "curriculumPublishingRequiresReview": true
+  },
+  "rules": {
+    "executionValidation": [
+      "Do not grade file permissions from workspaceExpectations.requiredFiles alone or terminal command text. Validate actual post-execution mode bits.",
+      "Actual mode checks must execute inside the owned sandbox isolation boundary and compare stat.S_IMODE with explicit expected octal modes.",
+      "For ordinary student fixtures, verify ownership without assuming platform usernames, fixed UID/GID values or group membership. Only for final-capstone-secure-project in the separately authorized isolated administrator sandbox, verify the seven approved /workspace/secure-project paths: README.md is root-owned (0:0), while the other six paths are owned by sandbox UID/GID 1000:1000. Never infer host ownership.",
+      "The default noRootOrSudoCommands=true and fixtureOwnerMustBeStudentUid=true restrictions remain mandatory for ordinary student exercises. The sole exception is final-capstone-secure-project in an explicitly authorized isolated administrator sandbox: narrowly scoped sudo/chown may set /workspace/secure-project/README.md to root-owned 0:0, with all other capstone paths at sandbox UID/GID 1000:1000. No sudo, su, chown, or chgrp in ordinary lessons; no host paths, recursive chmod, system modification, or real secrets in any lesson.",
+      "Use resettable isolated test fixtures. Cumulative projects share only their intended project workspace.",
+      "Check that no unrelated fixture changed; reject broad chmod or world-writable modes.",
+      "Author-only draft QA proved the trusted Runner seven-path filesystem verifier PASS–FAIL–PASS in a disposable administrator sandbox, with no recorded QA attempt. This does not constitute published-student acceptance. Keep modeVerifierIntegratedWithRunner=false and publishedContentReady=false pending independent compiled published-topic digest approval, student access authorization and student end-to-end tests. No compilation or publication from this draft alignment."
+    ],
+    "pedagogy": [
+      "Read permission strings before modifying files.",
+      "Teach file versus directory traversal and parent directory access explicitly.",
+      "Use actual permission-denied debugging and smallest-repair tasks, not only command memorization.",
+      "Outside the separately authorized final-capstone-secure-project administrator sandbox, chown/chgrp and sudo/root remain conceptual-only: never invite ordinary students to execute privileged commands. In the isolated capstone only, explain narrowly scoped sudo/chown for root-owned README.md (0:0), six sandbox-owned paths (1000:1000), and why 777, recursive chmod, host changes and real secrets are prohibited.",
+      "Do not write Bash scripts in Course 2; supply trusted, vetted script fixtures.",
+      "Keep module project topics and capstone as separate steps with real verification and feedback.",
+      "Group concepts into four modules. Section/topic counts vary by complexity; no filler modules."
+    ]
+  }
+}

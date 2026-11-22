@@ -1,0 +1,781 @@
+{
+  "schemaVersion": "zoelearning-linux-authoring-exercises-v1",
+  "publicationState": "draft_not_importable_directly",
+  "note": "Editorial bank; transform into existing shell_task/terminal_workspace exercises only after checker implementation and content review. Do not treat this JSON as an executable grader.",
+  "topics": {
+    "reading-permission-strings": {
+      "moduleNumber": 1,
+      "title": "Read Linux Permission Strings",
+      "exercises": [
+        {
+          "id": "reading-permission-strings-q1",
+          "kind": "single_choice",
+          "prompt": "What does the first character d in drwxr-x--- mean?",
+          "choices": [
+            "Execute bit",
+            "Directory",
+            "Group member"
+          ],
+          "correctIndex": 1,
+          "explanation": "The first character denotes the file type."
+        },
+        {
+          "id": "reading-permission-strings-q2",
+          "kind": "single_choice",
+          "prompt": "Which triplet belongs to group in -rwxr-x---?",
+          "choices": [
+            "rwx",
+            "r-x",
+            "---"
+          ],
+          "correctIndex": 1,
+          "explanation": "The middle triplet is the group mode."
+        },
+        {
+          "id": "reading-permission-strings-q3",
+          "kind": "single_choice",
+          "prompt": "What is owner access for -rw-r-----?",
+          "choices": [
+            "Read/write",
+            "Read-only",
+            "Execute-only"
+          ],
+          "correctIndex": 0,
+          "explanation": "Owner has r and w, not x."
+        },
+        {
+          "id": "reading-permission-strings-practice",
+          "kind": "code_input",
+          "prompt": "Run ls -l on the provided secure-lab fixture; report type and three triplets. Press Enter.",
+          "verificationPlan": "read_only_observation",
+          "runtimeMode": "terminal_workspace",
+          "recipeType": "shell_task",
+          "releaseGate": "editorial_review"
+        }
+      ]
+    },
+    "current-user-and-groups": {
+      "moduleNumber": 1,
+      "title": "Inspect User Identity",
+      "exercises": [
+        {
+          "id": "current-user-and-groups-q1",
+          "kind": "single_choice",
+          "prompt": "Which command reports effective username?",
+          "choices": [
+            "whoami",
+            "chmod",
+            "ls -ld"
+          ],
+          "correctIndex": 0,
+          "explanation": "whoami displays the effective username."
+        },
+        {
+          "id": "current-user-and-groups-q2",
+          "kind": "single_choice",
+          "prompt": "What does id show?",
+          "choices": [
+            "Disk size",
+            "UID, GID and groups",
+            "File contents"
+          ],
+          "correctIndex": 1,
+          "explanation": "id reports identity and groups."
+        },
+        {
+          "id": "current-user-and-groups-q3",
+          "kind": "single_choice",
+          "prompt": "Does another user gain group bits simply because a file has group read?",
+          "choices": [
+            "Yes",
+            "No, membership matters",
+            "Only after pwd"
+          ],
+          "correctIndex": 1,
+          "explanation": "Applicable identity class matters."
+        },
+        {
+          "id": "current-user-and-groups-practice",
+          "kind": "code_input",
+          "prompt": "Run whoami, id, and groups; compare with pre-seeded ownership. Press Enter.",
+          "verificationPlan": "read_only_observation",
+          "runtimeMode": "terminal_workspace",
+          "recipeType": "shell_task",
+          "releaseGate": "editorial_review"
+        }
+      ]
+    },
+    "file-versus-directory-bits": {
+      "moduleNumber": 1,
+      "title": "Files and Directories Use Bits Differently",
+      "exercises": [
+        {
+          "id": "file-versus-directory-bits-q1",
+          "kind": "single_choice",
+          "prompt": "What does x mean for a directory?",
+          "choices": [
+            "Run a program",
+            "Traverse/search names",
+            "List all contents"
+          ],
+          "correctIndex": 1,
+          "explanation": "Directory x permits traversal/name lookup."
+        },
+        {
+          "id": "file-versus-directory-bits-q2",
+          "kind": "single_choice",
+          "prompt": "What do you usually need to create an entry in a directory?",
+          "choices": [
+            "w and x",
+            "Only r",
+            "File owner execute"
+          ],
+          "correctIndex": 0,
+          "explanation": "Directory changes normally require write and search."
+        },
+        {
+          "id": "file-versus-directory-bits-q3",
+          "kind": "single_choice",
+          "prompt": "What does directory r normally support?",
+          "choices": [
+            "Executing a script",
+            "Listing entry names",
+            "Deleting all files"
+          ],
+          "correctIndex": 1,
+          "explanation": "r allows enumeration of names, subject to traversal."
+        },
+        {
+          "id": "file-versus-directory-bits-practice",
+          "kind": "code_input",
+          "prompt": "Inspect provided file and directory modes using ls -l and ls -ld; explain traversal. Press Enter.",
+          "verificationPlan": "read_only_observation",
+          "runtimeMode": "terminal_workspace",
+          "recipeType": "shell_task",
+          "releaseGate": "editorial_review"
+        }
+      ]
+    },
+    "parent-path-access": {
+      "moduleNumber": 1,
+      "title": "Diagnose Parent Directory Access",
+      "exercises": [
+        {
+          "id": "parent-path-access-q1",
+          "kind": "single_choice",
+          "prompt": "Which command inspects a directory itself?",
+          "choices": [
+            "ls -ld dir",
+            "ls -l dir",
+            "cat dir"
+          ],
+          "correctIndex": 0,
+          "explanation": "ls -ld reports the directory mode."
+        },
+        {
+          "id": "parent-path-access-q2",
+          "kind": "single_choice",
+          "prompt": "Can a 644 file be inaccessible due to a 700 parent?",
+          "choices": [
+            "Yes",
+            "Never",
+            "Only for scripts"
+          ],
+          "correctIndex": 0,
+          "explanation": "A non-owner lacks ancestor traversal."
+        },
+        {
+          "id": "parent-path-access-q3",
+          "kind": "single_choice",
+          "prompt": "What is the first step when a file opens with Permission denied?",
+          "choices": [
+            "chmod 777",
+            "Inspect ancestors and identity",
+            "Use sudo"
+          ],
+          "correctIndex": 1,
+          "explanation": "Diagnose before changing permissions."
+        },
+        {
+          "id": "parent-path-access-practice",
+          "kind": "code_input",
+          "prompt": "Use ls -ld on each pre-seeded ancestor; name the first blocked parent. Press Enter.",
+          "verificationPlan": "read_only_observation",
+          "runtimeMode": "terminal_workspace",
+          "recipeType": "shell_task",
+          "releaseGate": "editorial_review"
+        }
+      ]
+    },
+    "module-1-permission-detective": {
+      "moduleNumber": 1,
+      "title": "Project: Permission Detective",
+      "exercises": [
+        {
+          "id": "module-1-permission-detective-project",
+          "kind": "project",
+          "prompt": "Inspect a supplied tree, decode modes and explain access without changing the fixtures.",
+          "verificationPlan": "read_only_report",
+          "steps": 3,
+          "releaseGate": "editorial_review",
+          "terminalSessionScope": "project"
+        }
+      ]
+    },
+    "symbolic-chmod-basics": {
+      "moduleNumber": 2,
+      "title": "Change Individual Bits with chmod",
+      "exercises": [
+        {
+          "id": "symbolic-chmod-basics-q1",
+          "kind": "single_choice",
+          "prompt": "What does chmod u+x mean?",
+          "choices": [
+            "Add owner execute",
+            "Add everyone execute",
+            "Remove owner execute"
+          ],
+          "correctIndex": 0,
+          "explanation": "u selects owner, +x adds execute."
+        },
+        {
+          "id": "symbolic-chmod-basics-q2",
+          "kind": "single_choice",
+          "prompt": "What does chmod go-r remove?",
+          "choices": [
+            "Owner read",
+            "Group and other read",
+            "All writes"
+          ],
+          "correctIndex": 1,
+          "explanation": "g/o selects group/other."
+        },
+        {
+          "id": "symbolic-chmod-basics-q3",
+          "kind": "single_choice",
+          "prompt": "What does u=rw do?",
+          "choices": [
+            "Give owner exactly read/write",
+            "Add execute to owner",
+            "Change group ownership"
+          ],
+          "correctIndex": 0,
+          "explanation": "= sets class bits precisely."
+        },
+        {
+          "id": "symbolic-chmod-basics-practice",
+          "kind": "code_input",
+          "prompt": "Use chmod go-r on the named learner-owned note and inspect mode; press Enter.",
+          "verificationPlan": "owned_mode_assertion",
+          "runtimeMode": "terminal_workspace",
+          "recipeType": "shell_task",
+          "releaseGate": "runner_mode_checker_required"
+        }
+      ]
+    },
+    "script-executable-bit": {
+      "moduleNumber": 2,
+      "title": "Fix Permission Denied for a Safe Script",
+      "exercises": [
+        {
+          "id": "script-executable-bit-q1",
+          "kind": "single_choice",
+          "prompt": "Which targets owner-only execute addition?",
+          "choices": [
+            "chmod +x",
+            "chmod u+x",
+            "chmod 777"
+          ],
+          "correctIndex": 1,
+          "explanation": "u+x targets the owner bit."
+        },
+        {
+          "id": "script-executable-bit-q2",
+          "kind": "single_choice",
+          "prompt": "Does bash run.sh prove its own execute bit is set?",
+          "choices": [
+            "Yes",
+            "No",
+            "Only on macOS"
+          ],
+          "correctIndex": 1,
+          "explanation": "Invoking interpreter can differ from direct execution."
+        },
+        {
+          "id": "script-executable-bit-q3",
+          "kind": "single_choice",
+          "prompt": "When is it safe to run a script fixture?",
+          "choices": [
+            "Any downloaded file",
+            "A reviewed pre-seeded owned fixture",
+            "After chmod 777"
+          ],
+          "correctIndex": 1,
+          "explanation": "Use vetted fixture only."
+        },
+        {
+          "id": "script-executable-bit-practice",
+          "kind": "code_input",
+          "prompt": "Use chmod u+x on pre-seeded owned run.sh, verify 700 and run vetted fixture; press Enter.",
+          "verificationPlan": "owned_mode_assertion",
+          "runtimeMode": "terminal_workspace",
+          "recipeType": "shell_task",
+          "releaseGate": "runner_mode_checker_required"
+        }
+      ]
+    },
+    "numeric-permission-math": {
+      "moduleNumber": 2,
+      "title": "Understand Octal Permission Math",
+      "exercises": [
+        {
+          "id": "numeric-permission-math-q1",
+          "kind": "single_choice",
+          "prompt": "What is octal value of rwx?",
+          "choices": [
+            "5",
+            "6",
+            "7"
+          ],
+          "correctIndex": 2,
+          "explanation": "4+2+1=7."
+        },
+        {
+          "id": "numeric-permission-math-q2",
+          "kind": "single_choice",
+          "prompt": "What is rw-r--r--?",
+          "choices": [
+            "644",
+            "755",
+            "600"
+          ],
+          "correctIndex": 0,
+          "explanation": "Owner 6, group 4, other 4."
+        },
+        {
+          "id": "numeric-permission-math-q3",
+          "kind": "single_choice",
+          "prompt": "What mode grants owner rw and no group/other?",
+          "choices": [
+            "755",
+            "600",
+            "777"
+          ],
+          "correctIndex": 1,
+          "explanation": "600 is owner rw only."
+        },
+        {
+          "id": "numeric-permission-math-practice",
+          "kind": "code_input",
+          "prompt": "Read modes on named fixtures, predict octal values, then compare with stat; press Enter.",
+          "verificationPlan": "read_only_observation",
+          "runtimeMode": "terminal_workspace",
+          "recipeType": "shell_task",
+          "releaseGate": "editorial_review"
+        }
+      ]
+    },
+    "apply-safe-numeric-modes": {
+      "moduleNumber": 2,
+      "title": "Apply and Verify Numeric Modes",
+      "exercises": [
+        {
+          "id": "apply-safe-numeric-modes-q1",
+          "kind": "single_choice",
+          "prompt": "What is suitable for a private dummy config?",
+          "choices": [
+            "644",
+            "600",
+            "777"
+          ],
+          "correctIndex": 1,
+          "explanation": "Only owner read/write."
+        },
+        {
+          "id": "apply-safe-numeric-modes-q2",
+          "kind": "single_choice",
+          "prompt": "What is intended for public traversal of a project root?",
+          "choices": [
+            "600",
+            "755",
+            "644"
+          ],
+          "correctIndex": 1,
+          "explanation": "Directories need x for traversal."
+        },
+        {
+          "id": "apply-safe-numeric-modes-q3",
+          "kind": "single_choice",
+          "prompt": "What must the grader check?",
+          "choices": [
+            "Command text",
+            "Actual inode mode bits",
+            "Browser note"
+          ],
+          "correctIndex": 1,
+          "explanation": "Stat.S_IMODE is necessary, with ownership/symlink checks."
+        },
+        {
+          "id": "apply-safe-numeric-modes-practice",
+          "kind": "code_input",
+          "prompt": "Set named owned private note to 600, and README to 644; independently verify inode modes. Press Enter.",
+          "verificationPlan": "owned_mode_assertion",
+          "runtimeMode": "terminal_workspace",
+          "recipeType": "shell_task",
+          "releaseGate": "runner_mode_checker_required"
+        }
+      ]
+    },
+    "module-3-secure-script-folder": {
+      "moduleNumber": 2,
+      "title": "Project: Secure Your Workspace",
+      "exercises": [
+        {
+          "id": "module-3-secure-script-folder-project",
+          "kind": "project",
+          "prompt": "Make and verify targeted permission changes on a trusted script and private note.",
+          "verificationPlan": "owned_mode_assertion",
+          "steps": 4,
+          "releaseGate": "runner_mode_checker_required",
+          "terminalSessionScope": "project"
+        }
+      ]
+    },
+    "owner-group-identity": {
+      "moduleNumber": 3,
+      "title": "Identify Owners and Groups",
+      "exercises": [
+        {
+          "id": "owner-group-identity-q1",
+          "kind": "single_choice",
+          "prompt": "Where is the owning group displayed by ls -l?",
+          "choices": [
+            "After the owner field",
+            "After file size",
+            "Never"
+          ],
+          "correctIndex": 0,
+          "explanation": "Owner and group are distinct fields."
+        },
+        {
+          "id": "owner-group-identity-q2",
+          "kind": "single_choice",
+          "prompt": "Who normally uses the owner triplet?",
+          "choices": [
+            "Any group member",
+            "The owning user",
+            "Every logged-in user"
+          ],
+          "correctIndex": 1,
+          "explanation": "Ownership determines owner class."
+        },
+        {
+          "id": "owner-group-identity-q3",
+          "kind": "single_choice",
+          "prompt": "Do group permissions apply to all Linux users?",
+          "choices": [
+            "No",
+            "Yes",
+            "Only root"
+          ],
+          "correctIndex": 0,
+          "explanation": "Membership matters."
+        },
+        {
+          "id": "owner-group-identity-practice",
+          "kind": "code_input",
+          "prompt": "Run whoami, id, and ls -l; identify group vs owner for a prepared sample. Press Enter.",
+          "verificationPlan": "read_only_observation",
+          "runtimeMode": "terminal_workspace",
+          "recipeType": "shell_task",
+          "releaseGate": "editorial_review"
+        }
+      ]
+    },
+    "ownership-administration-concepts": {
+      "moduleNumber": 3,
+      "title": "When Ownership Must Change",
+      "exercises": [
+        {
+          "id": "ownership-administration-concepts-q1",
+          "kind": "single_choice",
+          "prompt": "What does chgrp conceptually change?",
+          "choices": [
+            "File content",
+            "Owning group",
+            "Umask"
+          ],
+          "correctIndex": 1,
+          "explanation": "chgrp changes group ownership."
+        },
+        {
+          "id": "ownership-administration-concepts-q2",
+          "kind": "single_choice",
+          "prompt": "Should students execute chown in this sandbox?",
+          "choices": [
+            "Yes",
+            "No",
+            "Only with sudo"
+          ],
+          "correctIndex": 1,
+          "explanation": "Ownership changes are conceptual here."
+        },
+        {
+          "id": "ownership-administration-concepts-q3",
+          "kind": "single_choice",
+          "prompt": "What should a real team request for group mismatch?",
+          "choices": [
+            "chmod 777 everything",
+            "Authorized administration review",
+            "Delete accounts"
+          ],
+          "correctIndex": 1,
+          "explanation": "Group setup belongs to authorized admin."
+        },
+        {
+          "id": "ownership-administration-concepts-practice",
+          "kind": "scenario_choice",
+          "prompt": "Given a fictional group ownership mismatch, choose who should authorize a change; do not run commands.",
+          "verificationPlan": "conceptual_only",
+          "runtimeMode": null,
+          "recipeType": null,
+          "releaseGate": "editorial_review"
+        }
+      ]
+    },
+    "sudo-root-concepts": {
+      "moduleNumber": 3,
+      "title": "Why sudo Exists",
+      "exercises": [
+        {
+          "id": "sudo-root-concepts-q1",
+          "kind": "single_choice",
+          "prompt": "What is root in Linux?",
+          "choices": [
+            "A privileged identity",
+            "Home directory only",
+            "Text file"
+          ],
+          "correctIndex": 0,
+          "explanation": "Root is privileged."
+        },
+        {
+          "id": "sudo-root-concepts-q2",
+          "kind": "single_choice",
+          "prompt": "Should sudo be the first response to Permission denied?",
+          "choices": [
+            "Yes",
+            "No, diagnose first",
+            "Always for chmod"
+          ],
+          "correctIndex": 1,
+          "explanation": "Fix errors with minimum authorization."
+        },
+        {
+          "id": "sudo-root-concepts-q3",
+          "kind": "single_choice",
+          "prompt": "Is sudo chmod -R 777 / permitted in this course?",
+          "choices": [
+            "Yes",
+            "Never",
+            "Only after ls"
+          ],
+          "correctIndex": 1,
+          "explanation": "Unsafe broad privileged modification is forbidden."
+        },
+        {
+          "id": "sudo-root-concepts-practice",
+          "kind": "scenario_choice",
+          "prompt": "Classify permitted and prohibited administration scenarios without executing commands.",
+          "verificationPlan": "conceptual_only",
+          "runtimeMode": null,
+          "recipeType": null,
+          "releaseGate": "editorial_review"
+        }
+      ]
+    },
+    "least-privilege-decisions": {
+      "moduleNumber": 3,
+      "title": "Least Privilege in Practice",
+      "exercises": [
+        {
+          "id": "least-privilege-decisions-q1",
+          "kind": "single_choice",
+          "prompt": "What does least privilege mean?",
+          "choices": [
+            "Grant all access",
+            "Grant only required rights",
+            "Never allow any access"
+          ],
+          "correctIndex": 1,
+          "explanation": "Scope rights to need."
+        },
+        {
+          "id": "least-privilege-decisions-q2",
+          "kind": "single_choice",
+          "prompt": "Does setting shared/ to 770 create team memberships?",
+          "choices": [
+            "Yes",
+            "No",
+            "Only if owner root"
+          ],
+          "correctIndex": 1,
+          "explanation": "Membership is independent from permissions."
+        },
+        {
+          "id": "least-privilege-decisions-q3",
+          "kind": "single_choice",
+          "prompt": "Which is excessive for private notes?",
+          "choices": [
+            "600",
+            "777",
+            "Owner rw"
+          ],
+          "correctIndex": 1,
+          "explanation": "777 grants everyone broad access."
+        },
+        {
+          "id": "least-privilege-decisions-practice",
+          "kind": "scenario_choice",
+          "prompt": "Choose minimal read/write/execute grants for three simulated audiences; no commands.",
+          "verificationPlan": "conceptual_only",
+          "runtimeMode": null,
+          "recipeType": null,
+          "releaseGate": "editorial_review"
+        }
+      ]
+    },
+    "permission-denied-triage": {
+      "moduleNumber": 3,
+      "title": "Trace a Permission Denied Error",
+      "exercises": [
+        {
+          "id": "permission-denied-triage-q1",
+          "kind": "single_choice",
+          "prompt": "What should be inspected before changing target modes?",
+          "choices": [
+            "Parent traversal",
+            "Network speed",
+            "Clock time"
+          ],
+          "correctIndex": 0,
+          "explanation": "Ancestors may block access."
+        },
+        {
+          "id": "permission-denied-triage-q2",
+          "kind": "single_choice",
+          "prompt": "Can a 700 script fail if containing directory lacks x?",
+          "choices": [
+            "Yes",
+            "No",
+            "Only if not Bash"
+          ],
+          "correctIndex": 0,
+          "explanation": "Directory traversal is required."
+        },
+        {
+          "id": "permission-denied-triage-q3",
+          "kind": "single_choice",
+          "prompt": "What repair style is safest?",
+          "choices": [
+            "chmod -R 777",
+            "One owned named path",
+            "sudo every command"
+          ],
+          "correctIndex": 1,
+          "explanation": "Narrow changes reduce risk."
+        },
+        {
+          "id": "permission-denied-triage-practice",
+          "kind": "code_input",
+          "prompt": "Inspect the named owned broken fixture, repair only its blocked parent mode, and verify. Press Enter.",
+          "verificationPlan": "owned_mode_assertion",
+          "runtimeMode": "terminal_workspace",
+          "recipeType": "shell_task",
+          "releaseGate": "runner_mode_checker_required"
+        }
+      ]
+    },
+    "umask-and-default-modes": {
+      "moduleNumber": 3,
+      "title": "Understand umask Safely",
+      "exercises": [
+        {
+          "id": "umask-and-default-modes-q1",
+          "kind": "single_choice",
+          "prompt": "With umask 022, typical new regular file mode?",
+          "choices": [
+            "644",
+            "755",
+            "777"
+          ],
+          "correctIndex": 0,
+          "explanation": "666 & ~022 = 644."
+        },
+        {
+          "id": "umask-and-default-modes-q2",
+          "kind": "single_choice",
+          "prompt": "With umask 077, typical directory mode?",
+          "choices": [
+            "700",
+            "770",
+            "755"
+          ],
+          "correctIndex": 0,
+          "explanation": "777 & ~077 = 700."
+        },
+        {
+          "id": "umask-and-default-modes-q3",
+          "kind": "single_choice",
+          "prompt": "Does umask add permission bits?",
+          "choices": [
+            "Yes",
+            "No, it masks them",
+            "Only on directories"
+          ],
+          "correctIndex": 1,
+          "explanation": "Umask removes requested bits."
+        },
+        {
+          "id": "umask-and-default-modes-practice",
+          "kind": "code_input",
+          "prompt": "Read umask (do not set it); calculate two hypothetical masked default modes. Press Enter.",
+          "verificationPlan": "read_only_observation",
+          "runtimeMode": "terminal_workspace",
+          "recipeType": "shell_task",
+          "releaseGate": "editorial_review"
+        }
+      ]
+    },
+    "module-7-permission-debugging-lab": {
+      "moduleNumber": 3,
+      "title": "Project: Shared Team Directory",
+      "exercises": [
+        {
+          "id": "module-7-permission-debugging-lab-project",
+          "kind": "project",
+          "prompt": "Identify a blocked path, propose least privilege, and repair only owned test fixtures.",
+          "verificationPlan": "owned_mode_assertion",
+          "steps": 5,
+          "releaseGate": "runner_mode_checker_required",
+          "terminalSessionScope": "project"
+        }
+      ]
+    },
+    "final-capstone-secure-project": {
+      "moduleNumber": 4,
+      "title": "Capstone: Secure Project Folder",
+      "exercises": [
+        {
+          "id": "final-capstone-secure-project-project",
+          "kind": "project",
+          "prompt": "Configure a private config, safe executable, public README, and shared directory with exact permission verification.",
+          "verificationPlan": "capstone_mode_verifier",
+          "steps": 5,
+          "releaseGate": "runner_mode_checker_required",
+          "terminalSessionScope": "project"
+        }
+      ]
+    }
+  }
+}

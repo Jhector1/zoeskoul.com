@@ -1,5 +1,6 @@
 import type { Request, RequestHandler } from "express";
 import { assertZoebuildPreviewAdmissionOpen, ZoebuildPreviewMaintenanceError } from "../services/build/zoebuildPreviewAdmission.js";
+import { TanstackPreviewHmrSourceCompatibilityError } from "../services/build/tanstackPreviewRuntimePolicy.js";
 import {
   parseTrustedBuildJobRequest,
   type ProductionBuildJobRequestV1,
@@ -23,7 +24,9 @@ type FailureStage = "dependency_authorization" | "saved_source_authority" |
   "recovery_journal" | "workspace" | "dependencies" | "container" |
   "readiness" | "saved_source_recheck";
 
-function failureCategory(stage: FailureStage) {
+function failureCategory(stage: FailureStage, error: unknown) {
+  if (error instanceof TanstackPreviewHmrSourceCompatibilityError)
+    return "source_hmr_incompatible";
   if (stage === "saved_source_authority" || stage === "saved_source_recheck")
     return "source_authority_rejected";
   if (stage === "runtime_identity") return "runtime_identity_failed";
@@ -132,7 +135,7 @@ export function makeTanstackDevelopmentStartRoute(
       console.warn("RUNNER development preview start failed", {
         requestCorrelation: requestId ?? "unavailable",
         stage,
-        category: failureCategory(stage),
+        category: failureCategory(stage, error),
         status: 503,
       });
       // No source bytes, dependency approvals or Docker internals in errors.

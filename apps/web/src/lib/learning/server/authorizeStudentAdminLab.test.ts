@@ -43,6 +43,7 @@ describe("live published Course 2 admission", () => {
       subjectSlug: "linux-files-permissions-users",
       moduleSlug: target.moduleSlug,
       topicId: target.topicSlug,
+      serviceDefaults: { administratorLab: "eligible" },
     });
     mocks.practiceAccess.mockResolvedValue({ ok: true });
   });
@@ -80,6 +81,16 @@ describe("live published Course 2 admission", () => {
     mocks.manifest.mockReturnValueOnce(null);
     expect(await authorizeStudentAdminLab({actor,request,target})).toBe(false);
     mocks.manifest.mockReturnValueOnce({subjectSlug:"linux--linux-files-permissions-users--draft",moduleSlug:target.moduleSlug,topicId:target.topicSlug});
+    expect(await authorizeStudentAdminLab({actor,request,target})).toBe(false);
+    expect(mocks.practiceAccess).not.toHaveBeenCalled();
+  });
+
+  it("rejects an eligible topic with no published manifest capability", async () => {
+    mocks.manifest.mockReturnValueOnce({
+      subjectSlug: "linux-files-permissions-users",
+      moduleSlug: target.moduleSlug,
+      topicId: target.topicSlug,
+    });
     expect(await authorizeStudentAdminLab({actor,request,target})).toBe(false);
     expect(mocks.practiceAccess).not.toHaveBeenCalled();
   });

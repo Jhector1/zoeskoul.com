@@ -1,0 +1,58 @@
+{
+  "subjectSlug": "linux",
+  "catalogSlug": "linux",
+  "profileId": "bash",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "title": "Linux Files, Permissions, and Users",
+  "description": "A practical Linux course teaching file and directory permission bits, safe chmod, ownership concepts, and permission debugging.",
+  "level": "beginner-to-core",
+  "audience": [
+    "Linux Terminal Fundamentals graduates",
+    "programming students",
+    "cybersecurity beginners",
+    "developer beginners"
+  ],
+  "goals": [
+    "Interpret ls -l and ls -ld permission strings",
+    "Set minimal symbolic and numeric modes on owned files",
+    "Explain identity, ownership, group membership and root safety",
+    "Diagnose permission denied using evidence",
+    "Complete a secure-project least-privilege handoff"
+  ],
+  "teachingStyle": {
+    "tone": "practical, security-conscious, error-driven, and nonjudgmental",
+    "quizWeight": 0.25,
+    "projectWeight": 0.45,
+    "codeInputWeight": 0.6
+  },
+  "constraints": {
+    "moduleCount": 4,
+    "topicsPerModuleMin": 1,
+    "topicsPerModuleMax": 7,
+    "moduleSlugFormat": "<subjectSlug>-module-<number>-<short-topic-area>",
+    "sectionSlugFormat": "<subjectSlug>-module-<number>-<short-section-role>",
+    "prefixFormat": "<subject_slug_with_underscores>_module_<number>"
+  },
+  "courseSlug": "linux-files-permissions-users",
+  "trackSlug": "linux",
+  "workspaceProfileId": "terminal-workspace-runner",
+  "workspacePolicyId": "linux-terminal-workspace",
+  "courseGenerationPolicy": {
+    "studentActionStyle": "terminal-workspace",
+    "forbidUnavailableWorkspaceActions": true,
+    "preferredTerms": {
+      "editor": "terminal",
+      "run button": "terminal command",
+      "output panel": "terminal output"
+    },
+    "notes": [
+      "Do not publish until an end-to-end permission-bit verifier is implemented and tested.",
+      "Ordinary chmod lessons use only learner-owned pre-seeded Linux fixtures. The final capstone alone uses a separately authorized disposable administrator sandbox to verify the root-owned README.md (0:0) and six sandbox-owned paths; never modify host files.",
+      "Conceptual privileged/ownership lessons must not execute privileged commands.",
+      "The final capstone is one progressive project with five cumulative steps.",
+      "Teach and check parent directory traversal as well as file bits.",
+      "Only four modules: fundamentals, chmod, users/troubleshooting, and one capstone."
+    ]
+  }
+}

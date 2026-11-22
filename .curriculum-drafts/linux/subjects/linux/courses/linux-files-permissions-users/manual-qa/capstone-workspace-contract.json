@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "purpose": "draft-only-reference-author-qa-uses-server-authored-contract",
+  "courseSlug": "linux-files-permissions-users",
+  "topicSlug": "final-capstone-secure-project",
+  "runnerWorkspace": "/workspace",
+  "projectRoot": "/workspace/secure-project",
+  "trustedVerifierRequest": {
+    "required": [
+      {
+        "path": "/workspace/secure-project",
+        "kind": "directory",
+        "mode": "0755",
+        "uid": 1000,
+        "gid": 1000
+      },
+      {
+        "path": "/workspace/secure-project/README.md",
+        "kind": "file",
+        "mode": "0644",
+        "uid": 0,
+        "gid": 0
+      },
+      {
+        "path": "/workspace/secure-project/scripts",
+        "kind": "directory",
+        "mode": "0700",
+        "uid": 1000,
+        "gid": 1000
+      },
+      {
+        "path": "/workspace/secure-project/scripts/run.sh",
+        "kind": "file",
+        "mode": "0700",
+        "uid": 1000,
+        "gid": 1000
+      },
+      {
+        "path": "/workspace/secure-project/secrets.env",
+        "kind": "file",
+        "mode": "0600",
+        "uid": 1000,
+        "gid": 1000
+      },
+      {
+        "path": "/workspace/secure-project/shared",
+        "kind": "directory",
+        "mode": "0770",
+        "uid": 1000,
+        "gid": 1000
+      },
+      {
+        "path": "/workspace/secure-project/shared/notes.txt",
+        "kind": "file",
+        "mode": "0640",
+        "uid": 1000,
+        "gid": 1000
+      }
+    ]
+  },
+  "reviewStatus": "author-qa-route-connected-pending-live-fail-pass-and-manual-approval",
+  "warning": "Read-only reference for the author. The Web author QA loader uses the separate trusted server-authored contract; no student grade or code-input exercise credit is awarded."
+}

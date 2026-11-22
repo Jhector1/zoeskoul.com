@@ -17,22 +17,22 @@
       "title": "Terminal Navigation Basics",
       "purpose": "Learn what the terminal is, how to know where you are, how to list files, and how to move between folders.",
       "learningObjectives": [
-        "Explain what a terminal command does.",
-        "Use pwd and ls to inspect the current location.",
-        "Use cd, ., .., and ~ to move around safely.",
-        "Create a simple folder map using terminal commands."
+        "Explain what a terminal command does and identify prompts, commands, and output.",
+        "Use pwd and ls, including ls -a, to inspect locations and hidden entries.",
+        "Use cd, ., .., ~, and quoted paths to navigate safely.",
+        "Map an existing folder tree with inspection commands before learning file creation."
       ],
       "guidedExercises": [
-        "Use terminal commands to change the workspace file tree",
-        "Verify progress with pwd and ls",
-        "Use terminal output checks for inspection commands and workspace checks for file-changing tasks"
+        "Inspect a pre-provisioned lab tree with pwd, ls, and ls -a; do not create or delete files in Module 1.",
+        "Navigate nested and quoted paths with cd, cd .., cd ., and cd ~.",
+        "Verify location and visible/hidden names using terminal output checks."
       ],
       "quizFocus": [
         "command purpose",
         "safe command selection",
         "workspace structure"
       ],
-      "moduleProject": "Build a simple terminal map that proves you can create and navigate a nested workspace.",
+      "moduleProject": "Explore an existing Terminal Map fixture using only pwd, ls, ls -a, and cd; record the requested folders and verify each destination.",
       "sections": [
         {
           "sectionSlug": "linux-module-1-orientation",
@@ -46,16 +46,17 @@
               "minutes": 15,
               "technical": true,
               "practice": {
-                "conceptualOnly": true,
+                "conceptualOnly": false,
                 "requiresTryIt": true,
                 "runtimeMode": "terminal_workspace",
                 "expectedPracticeKinds": [
                   "single_choice",
                   "multi_choice",
-                  "fill_blank_choice"
+                  "fill_blank_choice",
+                  "code_input"
                 ],
                 "tryIt": true,
-                "tryItPlacement": "none",
+                "tryItPlacement": "all_sketches",
                 "terminalSessionScope": "exercise"
               },
               "learningGoals": [
@@ -67,11 +68,11 @@
             {
               "topicId": "where-am-i",
               "title": "Where Am I? pwd and ls",
-              "summary": "Use pwd and ls to inspect your current folder and see what is inside it.",
+              "summary": "Use pwd, ls, and ls -a to inspect the current folder, including hidden entries.",
               "minutes": 16,
               "technical": true,
               "learningGoals": [
-                "Use pwd and ls to inspect your current folder and see what is inside it."
+                "Inspect current path using pwd and distinguish ordinary listings from hidden entries with ls -a."
               ],
               "practice": {
                 "tryIt": true,
@@ -90,11 +91,11 @@
             {
               "topicId": "moving-around",
               "title": "Moving Around with cd",
-              "summary": "Use cd, .., ., and ~ to move between folders safely.",
+              "summary": "Use cd, .., ., ~, and quoted directory names to navigate supplied folders safely.",
               "minutes": 18,
               "technical": true,
               "learningGoals": [
-                "Use cd, .., ., and ~ to move between folders safely."
+                "Navigate absolute, relative, home, and quoted paths without assuming a directory exists."
               ],
               "practice": {
                 "tryIt": true,
@@ -121,11 +122,11 @@
             {
               "topicId": "module-1-terminal-map-project",
               "title": "Project: Terminal Map",
-              "summary": "Build a small folder map using pwd, ls, cd, mkdir, and touch.",
+              "summary": "Explore a prebuilt Terminal Map with pwd, ls, ls -a, and cd; no file creation is needed.",
               "minutes": 22,
               "technical": true,
               "learningGoals": [
-                "Build a small folder map using pwd, ls, cd, mkdir, and touch."
+                "Identify and visit specified directories in a seeded workspace using only navigation and inspection commands."
               ],
               "practice": {
                 "tryIt": true,
@@ -150,20 +151,20 @@
       "title": "Files, Folders, and Viewing Content",
       "purpose": "Create, copy, move, rename, delete, and inspect files from the terminal.",
       "learningObjectives": [
-        "Create folders and files with mkdir, mkdir -p, and touch.",
-        "Copy, move, and rename files using cp and mv.",
-        "Use safe deletion habits with rm.",
-        "Inspect text files with cat, head, tail, and wc."
+        "Create folders and files using mkdir, mkdir -p, and touch.",
+        "Copy, move, rename, and remove only explicitly targeted workspace files using cp, mv, and safe rm.",
+        "Write and append short text using echo with > and >>, understanding overwrite versus append.",
+        "Inspect and verify text using cat, head, tail, and wc -l."
       ],
       "guidedExercises": [
-        "Use terminal commands to change the workspace file tree",
-        "Verify progress with pwd and ls",
-        "Use terminal output checks for viewing commands and workspace checks for file-changing tasks"
+        "Create a small named folder/file fixture before using cp, mv, and safe rm.",
+        "Compare echo text > file (replace) with echo text >> file (append) in disposable lab files.",
+        "Verify file contents, line counts, and file tree outcomes using terminal and workspace checks."
       ],
       "quizFocus": [
-        "command purpose",
-        "safe command selection",
-        "workspace structure"
+        "safe copy/move/delete paths",
+        "append versus overwrite",
+        "file content and line-count verification"
       ],
       "moduleProject": "Organize a messy notes folder into a clean school workspace.",
       "sections": [
@@ -198,11 +199,11 @@
             {
               "topicId": "copy-move-rename",
               "title": "Copy, Move, and Rename",
-              "summary": "Use cp and mv to duplicate, organize, and rename files safely.",
+              "summary": "Use cp and mv to copy, rename, and organize files; remove only named disposable files with rm after inspecting their paths.",
               "minutes": 20,
               "technical": true,
               "learningGoals": [
-                "Use cp and mv to duplicate, organize, and rename files safely."
+                "Copy, move, rename, and safely delete a specified test file without recursive or broad deletion."
               ],
               "practice": {
                 "tryIt": true,
@@ -220,12 +221,13 @@
             },
             {
               "topicId": "viewing-file-contents",
-              "title": "Viewing File Contents",
-              "summary": "Inspect text files with cat, head, tail, and wc.",
+              "title": "Writing and Viewing File Contents",
+              "summary": "Write and append text with echo, >, and >>; verify contents using cat, head, tail, and wc -l.",
               "minutes": 18,
               "technical": true,
               "learningGoals": [
-                "Inspect text files with cat, head, tail, and wc."
+                "Use echo text > file to write a disposable file and echo text >> file to append without overwriting earlier lines.",
+                "Use cat, head, tail, and wc -l to inspect and verify file content."
               ],
               "practice": {
                 "tryIt": true,
@@ -288,9 +290,9 @@
         "Verify the finished workspace with terminal commands."
       ],
       "guidedExercises": [
-        "Inspect a messy workspace before organizing it",
-        "Create folders and marker files for a handoff",
-        "Use workspace validation to confirm the final structure"
+        "Inspect the pre-seeded inbox and destination folders before any changes.",
+        "Create folders and guide text, then organize and back up only the named records.",
+        "Use file-tree checks and targeted terminal verification to confirm the archive handoff."
       ],
       "quizFocus": [
         "choosing safe commands",
@@ -303,7 +305,7 @@
           "sectionSlug": "linux-module-3-capstone",
           "role": "capstone",
           "title": "Final Capstone",
-          "summary": "Organize and verify a community media archive in one cumulative project topic.",
+          "summary": "Complete the Community Media Archive using only skills introduced in Modules 1 and 2.",
           "topics": [
             {
               "topicId": "final-capstone-file-room-handoff",
@@ -343,7 +345,8 @@
                   "Use only commands taught in this course: pwd, ls, cd, mkdir, touch, echo, redirection, cat, head, tail, wc -l, cp, mv, and safe single-file rm.",
                   "Require inspection before changes and a targeted verification pass after changes.",
                   "Forbid sudo, recursive rm, chmod, chown, package installation, external networking, and commands not taught in the course.",
-                  "Keep every workspace path and expected result explicit and deterministic."
+                  "Keep every workspace path and expected result explicit and deterministic.",
+                  "The Module 2 writing lesson must teach echo, >, and >> before these capstone steps are published."
                 ],
                 "stepLadder": [
                   {

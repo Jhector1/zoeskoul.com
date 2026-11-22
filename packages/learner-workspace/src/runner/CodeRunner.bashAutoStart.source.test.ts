@@ -20,6 +20,59 @@ describe("Linux terminal automatic startup uses the existing PTY controller", ()
         expect(source).toContain('args.surfaceActive === false');
     });
 
+    it("paces automatic starts across Try changes without weakening the Runner limit", () => {
+        expect(source).toContain('AUTOMATIC_TERMINAL_START_BUDGET = 4');
+        expect(source).toContain('AUTOMATIC_TERMINAL_START_WINDOW_MS = 60_000');
+        expect(source).toContain('automaticTerminalStartWait()');
+        expect(source).toContain('reserveAutomaticTerminalStart()');
+        expect(source).toContain('terminal-auto-start-paced');
+        expect(source).toContain('setTerminalAutoOpenRetryTick((value) => value + 1)');
+        expect(source).not.toContain('forceNewSession: true');
+    });
+
+    it("paces the pending terminal hydration path as well as normal auto-open", () => {
+        const pending = source.split("const startingOwnerKey = pendingTerminalOwnerKey;")[1]
+            ?.split("if (!pendingTerminalStartId || !pendingWorkspaceTerminalReady)")[0] ?? "";
+        expect(pending).toContain("const initialWaitMs = automaticTerminalStartWait()");
+        expect(pending).toContain("const latestWaitMs = reserveAutomaticTerminalStart()");
+        expect(pending).toContain("setAutomaticTerminalDeferredUntil(Date.now() + initialWaitMs)");
+        expect(pending).toContain("noteRunnerTerminalStartRateLimit()");
+        expect(pending).toContain("terminalAutoOpenRetryTick,");
+        expect(pending).not.toContain("forceNew: true");
+    });
+
+    it("preserves the explicit Runner recovery, owner and workspace boundaries", () => {
+        expect(source).toContain("resolveWorkspaceTerminalHydration(restored)");
+        expect(source).toContain("handoffWorkspaceTerminalHost({");
+        expect(source).toContain("buildWorkspaceTerminalOwnerKey({");
+        expect(source).toContain("terminalWorkspaceIdentityKey");
+        expect(source).toContain("terminalAutoOpenRequestedKeyRef");
+    });
+
+    it("initializes terminal pacing state before the pending hydration effect reads it", () => {
+        const retryDeclaration = source.indexOf(
+            "const [terminalAutoOpenRetryTick, setTerminalAutoOpenRetryTick] = useState(0)",
+        );
+        const deferredDeclaration = source.indexOf(
+            "const [automaticTerminalDeferredUntil, setAutomaticTerminalDeferredUntil] = useState<number | null>(null)",
+        );
+        const pendingEffect = source.indexOf(
+            "const startingOwnerKey = pendingTerminalOwnerKey;",
+        );
+        const retryDependency = source.indexOf(
+            "terminalAutoOpenRetryTick,",
+            pendingEffect,
+        );
+
+        expect(retryDeclaration).toBeGreaterThan(-1);
+        expect(deferredDeclaration).toBeGreaterThan(-1);
+        expect(pendingEffect).toBeGreaterThan(-1);
+        expect(retryDependency).toBeGreaterThan(pendingEffect);
+        expect(retryDeclaration).toBeLessThan(pendingEffect);
+        expect(deferredDeclaration).toBeLessThan(pendingEffect);
+        expect(source.match(/const \[terminalAutoOpenRetryTick, setTerminalAutoOpenRetryTick\]/g)).toHaveLength(1);
+    });
+
     it("keeps existing authorization and bounded anti-hammer startup", () => {
         expect(source).toContain('isAuthenticated === true');
         expect(source).toContain('shouldClaimTerminalAutoOpen(terminalAutoOpenKey)');

@@ -11,7 +11,8 @@ import { assertTanstackWorkerBuildRequest } from "./tanstackWorkerBuildPolicy.js
 import {
   TANSTACK_PREVIEW_INSTALL_COMMAND, tanstackPreviewDevCommand,
   TANSTACK_PREVIEW_OFFLINE_ENV, TANSTACK_PREVIEW_HMR_SANDBOX_ENV,
-  shouldActivateTanstackPreviewHmr, assertTanstackSandboxOptions,
+  shouldActivateTanstackPreviewHmr, assertTanstackPreviewHmrSourceCompatible,
+  assertTanstackSandboxOptions,
 } from "./tanstackPreviewRuntimePolicy.js";
 import { TanstackPreviewCleanupError, type TanstackPreviewDriver } from "./tanstackPreviewLifecycle.js";
 import { fetchTanstackHttpInsideSandbox, probeTanstackListenerInsideSandbox, retireTanstackHttpWorker } from "./tanstackPreviewDockerTransport.js";
@@ -120,13 +121,7 @@ export function makeTanstackPreviewDockerDriver(
     featureEnabled:process.env.ZOEBUILD_DEVELOPMENT_PREVIEW_HMR_ENABLED === "true",
     websocketGatewayReady:hmrOptions.websocketGatewayReady,
   });
-  if (hmrEnabled) {
-    // Current saved projects still contain `hmr: false`. Do not silently
-    // claim HMR support for such projects or mutate approved saved source.
-    const viteConfig=request.files.find(file => file.path === "vite.config.ts")?.content;
-    if (!viteConfig?.includes('hmr: process.env.ZOEBUILD_PREVIEW_HMR_ENABLED === "true"'))
-      throw new Error("This saved TanStack project does not support development HMR.");
-  }
+  assertTanstackPreviewHmrSourceCompatible(request, hmrEnabled);
   // Validate before preparing a workspace or invoking Docker.
   const command = tanstackPreviewDevCommand(basePath);
   // Journal identity exists BEFORE a workspace is created. Docker labels make

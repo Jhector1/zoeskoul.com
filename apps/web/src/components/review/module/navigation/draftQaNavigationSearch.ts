@@ -1,3 +1,5 @@
+export const DRAFT_QA_REVIEW_ROUTE_CHANGED = "zoeskoul:draft-qa-review-route-changed";
+
 export function buildDraftQaNavigationSearch(args: {
   enabled: boolean;
   baseSearch: string;

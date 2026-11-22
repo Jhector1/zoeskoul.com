@@ -1,0 +1,970 @@
+{
+  "title": "Trace a Permission Denied Error",
+  "summary": "Inspect the actual file and all parent directories before selecting a fix.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "concept-1",
+      "cardTitle": "Learn",
+      "title": "Trace a Permission Denied Error",
+      "bodyMarkdown": "Use a repeatable diagnostic order:\n\n1. Confirm the intended path and current directory with `pwd`.\n2. Inspect the target with `ls -l` if accessible; distinguish file versus directory.\n3. Inspect ancestors with `ls -ld`; note any missing `x` for the intended identity.\n4. Inspect `whoami`, `id`, and `groups` to determine the applicable class.\n5. Determine the minimum authorized fix; only change owned, named fixtures.\n6. Verify after the change using mode inspection and the intended safe operation.\n\n**Worked case:** `./secure-lab/scripts/run.sh` fails. The script mode is `700`, but the containing directory is `600`. A directory without execute/traversal permission can block access. The correct fix is to inspect intended access and, where authorized and safe, restore the minimal directory `x` bit—not change the script to `777`.",
+      "tryItExercises": [
+        {
+          "id": "permission-denied-triage-try-1",
+          "kind": "code_input",
+          "title": "Identify the active user",
+          "prompt": "**Try it yourself · 1 of 3**\n\nA team member reports that `team-lab/shared/report.txt` cannot be opened by a hypothetical outsider.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nwhoami\n```\n\n**Check:** The output identifies the effective user for this terminal.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `whoami` on the supplied practice fixture.",
+          "help": {
+            "concept": "The output identifies the effective user for this terminal.",
+            "hint_1": "Try the single command `whoami`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Identify the active user\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "whoami\n",
+          "instructions": "**Try it yourself · 1 of 3**\n\nA team member reports that `team-lab/shared/report.txt` cannot be opened by a hypothetical outsider.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nwhoami\n```\n\n**Check:** The output identifies the effective user for this terminal.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Identify the active user\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "whoami\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^whoami$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        },
+        {
+          "id": "permission-denied-triage-try-1-part-2",
+          "kind": "code_input",
+          "title": "Inspect directory permissions: team-lab team-lab/shared",
+          "prompt": "**Try it yourself · 2 of 3**\n\nA team member reports that `team-lab/shared/report.txt` cannot be opened by a hypothetical outsider.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -ld team-lab team-lab/shared\n```\n\n**Check:** Read the leading `d` and the owner/group/other permission bits; no mode change is needed.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `ls -ld team-lab team-lab/shared` on the supplied practice fixture.",
+          "help": {
+            "concept": "Read the leading `d` and the owner/group/other permission bits; no mode change is needed.",
+            "hint_1": "Try the single command `ls -ld team-lab team-lab/shared`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Inspect directory permissions: team-lab team-lab/shared\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "ls -ld team-lab team-lab/shared\n",
+          "instructions": "**Try it yourself · 2 of 3**\n\nA team member reports that `team-lab/shared/report.txt` cannot be opened by a hypothetical outsider.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -ld team-lab team-lab/shared\n```\n\n**Check:** Read the leading `d` and the owner/group/other permission bits; no mode change is needed.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Inspect directory permissions: team-lab team-lab/shared\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "ls -ld team-lab team-lab/shared\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^ls\\s+\\-ld\\s+team\\-lab\\s+team\\-lab/shared$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        },
+        {
+          "id": "permission-denied-triage-try-1-part-3",
+          "kind": "code_input",
+          "title": "Inspect file permissions: team-lab/shared/report.txt",
+          "prompt": "**Try it yourself · 3 of 3**\n\nA team member reports that `team-lab/shared/report.txt` cannot be opened by a hypothetical outsider.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -l team-lab/shared/report.txt\n```\n\n**Check:** Read the listing, its owner and group, and its permission triplets; do not change the file.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `ls -l team-lab/shared/report.txt` on the supplied practice fixture.",
+          "help": {
+            "concept": "Read the listing, its owner and group, and its permission triplets; do not change the file.",
+            "hint_1": "Try the single command `ls -l team-lab/shared/report.txt`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Inspect file permissions: team-lab/shared/report.txt\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "ls -l team-lab/shared/report.txt\n",
+          "instructions": "**Try it yourself · 3 of 3**\n\nA team member reports that `team-lab/shared/report.txt` cannot be opened by a hypothetical outsider.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -l team-lab/shared/report.txt\n```\n\n**Check:** Read the listing, its owner and group, and its permission triplets; do not change the file.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Inspect file permissions: team-lab/shared/report.txt\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "ls -l team-lab/shared/report.txt\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^ls\\s+\\-l\\s+team\\-lab/shared/report\\.txt$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "concept-2",
+      "cardTitle": "Try it yourself",
+      "title": "Find the cause before fixing it",
+      "bodyMarkdown": "Trace a permission-denied report by inspecting the current identity, ancestor directories, and target file. Each Try below practices one safe, independently checked command. The end-of-topic challenge combines the steps into a complete diagnosis and repair.",
+      "tryItExercises": [
+        {
+          "id": "permission-denied-triage-try-2",
+          "kind": "code_input",
+          "title": "Set access on team-lab",
+          "prompt": "**Try it yourself · 1 of 5**\n\nPractice a single, narrowly scoped permission command on the supplied team folder. Each check uses a resettable fixture.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nchmod 700 team-lab\n```\n\n**Check:** Restrict access to the owner. This changes only the supplied training fixture.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `chmod 700 team-lab` on the supplied practice fixture.",
+          "help": {
+            "concept": "Restrict access to the owner. This changes only the supplied training fixture.",
+            "hint_1": "Try the single command `chmod 700 team-lab`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Set access on team-lab\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "chmod 700 team-lab\n",
+          "instructions": "**Try it yourself · 1 of 5**\n\nPractice a single, narrowly scoped permission command on the supplied team folder. Each check uses a resettable fixture.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nchmod 700 team-lab\n```\n\n**Check:** Restrict access to the owner. This changes only the supplied training fixture.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Set access on team-lab\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "chmod 700 team-lab\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^chmod\\s+700\\s+team\\-lab$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        },
+        {
+          "id": "permission-denied-triage-try-2-part-2",
+          "kind": "code_input",
+          "title": "Set access on team-lab/shared",
+          "prompt": "**Try it yourself · 2 of 5**\n\nPractice a single, narrowly scoped permission command on the supplied team folder. Each check uses a resettable fixture.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nchmod 600 team-lab/shared\n```\n\n**Check:** Mode 600 on a directory omits the search (`x`) bit. This isolated action is not a cumulative access-denial test.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `chmod 600 team-lab/shared` on the supplied practice fixture.",
+          "help": {
+            "concept": "Mode 600 on a directory omits the search (`x`) bit. This isolated action is not a cumulative access-denial test.",
+            "hint_1": "Try the single command `chmod 600 team-lab/shared`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Set access on team-lab/shared\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "chmod 600 team-lab/shared\n",
+          "instructions": "**Try it yourself · 2 of 5**\n\nPractice a single, narrowly scoped permission command on the supplied team folder. Each check uses a resettable fixture.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nchmod 600 team-lab/shared\n```\n\n**Check:** Mode 600 on a directory omits the search (`x`) bit. This isolated action is not a cumulative access-denial test.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Set access on team-lab/shared\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "chmod 600 team-lab/shared\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^chmod\\s+600\\s+team\\-lab/shared$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        },
+        {
+          "id": "permission-denied-triage-try-2-part-3",
+          "kind": "code_input",
+          "title": "Inspect directory permissions: team-lab/shared",
+          "prompt": "**Try it yourself · 3 of 5**\n\nPractice a single, narrowly scoped permission command on the supplied team folder. Each check uses a resettable fixture.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -ld team-lab/shared\n```\n\n**Check:** Read the leading `d` and the owner/group/other permission bits; no mode change is needed.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `ls -ld team-lab/shared` on the supplied practice fixture.",
+          "help": {
+            "concept": "Read the leading `d` and the owner/group/other permission bits; no mode change is needed.",
+            "hint_1": "Try the single command `ls -ld team-lab/shared`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Inspect directory permissions: team-lab/shared\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "ls -ld team-lab/shared\n",
+          "instructions": "**Try it yourself · 3 of 5**\n\nPractice a single, narrowly scoped permission command on the supplied team folder. Each check uses a resettable fixture.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nls -ld team-lab/shared\n```\n\n**Check:** Read the leading `d` and the owner/group/other permission bits; no mode change is needed.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Inspect directory permissions: team-lab/shared\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "ls -ld team-lab/shared\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^ls\\s+\\-ld\\s+team\\-lab/shared$",
+                "message": "Inspect only the named practice directory."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        },
+        {
+          "id": "permission-denied-triage-try-2-part-4",
+          "kind": "code_input",
+          "title": "Set access on team-lab/shared",
+          "prompt": "**Try it yourself · 4 of 5**\n\nPractice a single, narrowly scoped permission command on the supplied team folder. Each check uses a resettable fixture.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nchmod 700 team-lab/shared\n```\n\n**Check:** Mode 700 permits the folder owner to traverse it. This check uses a fresh fixture, so no previous change is assumed.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `chmod 700 team-lab/shared` on the supplied practice fixture.",
+          "help": {
+            "concept": "Mode 700 permits the folder owner to traverse it. This check uses a fresh fixture, so no previous change is assumed.",
+            "hint_1": "Try the single command `chmod 700 team-lab/shared`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Set access on team-lab/shared\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "chmod 700 team-lab/shared\n",
+          "instructions": "**Try it yourself · 4 of 5**\n\nPractice a single, narrowly scoped permission command on the supplied team folder. Each check uses a resettable fixture.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nchmod 700 team-lab/shared\n```\n\n**Check:** Mode 700 permits the folder owner to traverse it. This check uses a fresh fixture, so no previous change is assumed.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Set access on team-lab/shared\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "chmod 700 team-lab/shared\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^chmod\\s+700\\s+team\\-lab/shared$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        },
+        {
+          "id": "permission-denied-triage-try-2-part-5",
+          "kind": "code_input",
+          "title": "Inspect numeric modes: team-lab/shared",
+          "prompt": "**Try it yourself · 5 of 5**\n\nPractice a single, narrowly scoped permission command on the supplied team folder. Each check uses a resettable fixture.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nstat -c \"%a %n\" team-lab/shared\n```\n\n**Check:** Read the printed mode for the supplied practice item; this exercise does not assume a previous Try modified it.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "hint": "Run only `stat -c \"%a %n\" team-lab/shared` on the supplied practice fixture.",
+          "help": {
+            "concept": "Read the printed mode for the supplied practice item; this exercise does not assume a previous Try modified it.",
+            "hint_1": "Try the single command `stat -c \"%a %n\" team-lab/shared`.",
+            "hint_2": "Each Try has an independent, resettable workspace; later cards do not depend on earlier changes."
+          },
+          "starterCode": "# Inspect numeric modes: team-lab/shared\n# One command only; use the prepared practice files.\n",
+          "fixedLanguage": "bash",
+          "recipeType": "shell_task",
+          "mode": "terminal_workspace",
+          "entryFilePath": "main.sh",
+          "solutionCode": "stat -c \"%a %n\" team-lab/shared\n",
+          "instructions": "**Try it yourself · 5 of 5**\n\nPractice a single, narrowly scoped permission command on the supplied team folder. Each check uses a resettable fixture.\n\n**Do one thing:** Run this single command in the practice terminal:\n\n```bash\nstat -c \"%a %n\" team-lab/shared\n```\n\n**Check:** Read the printed mode for the supplied practice item; this exercise does not assume a previous Try modified it.\n\n*Each Try uses its own resettable practice workspace. Only change the supplied fixture; do not use sudo, recursive chmod, or host paths.*",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "# Inspect numeric modes: team-lab/shared\n# One command only; use the prepared practice files.\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "stat -c \"%a %n\" team-lab/shared\n",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "team-lab/README.md",
+              "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/report.txt",
+              "content": "Example report; synthetic training content.\n",
+              "language": "bash"
+            },
+            {
+              "path": "team-lab/shared/notes.txt",
+              "content": "Team notes for the course.\n",
+              "language": "bash"
+            }
+          ],
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "^stat\\s+\\-c\\s+\"%a\\s+%n\"\\s+team\\-lab/shared$",
+                "message": "Run the named command from the guided task in the Linux terminal."
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "No sudo in learner exercises."
+              },
+              {
+                "pattern": "(^|\\s)su(\\s|$)",
+                "message": "Do not switch user identities."
+              },
+              {
+                "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+                "message": "Changing users or ownership is outside this course lab."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+                "message": "Do not recursively change permissions."
+              },
+              {
+                "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+                "message": "Never make the practice workspace world writable."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "permission-denied-triage-q1",
+      "kind": "single_choice",
+      "title": "Check the path before changing it",
+      "prompt": "What should be inspected before changing target modes?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "Ancestors may block access.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "Ancestors may block access."
+      },
+      "options": [
+        "Parent traversal",
+        "Network speed",
+        "Clock time"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "permission-denied-triage-q2",
+      "kind": "single_choice",
+      "title": "The parent directory matters",
+      "prompt": "Can a 700 script fail if containing directory lacks x?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "Directory traversal is required.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "Directory traversal is required."
+      },
+      "options": [
+        "Yes",
+        "No",
+        "Only if not Bash"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "permission-denied-triage-q3",
+      "kind": "single_choice",
+      "title": "Choose a minimal repair",
+      "prompt": "What repair style is safest?",
+      "hint": "Apply the permission meaning from the lesson to this specific case.",
+      "help": {
+        "concept": "Narrow changes reduce risk.",
+        "hint_1": "Identify the file type, relevant user class and permission bits.",
+        "hint_2": "Narrow changes reduce risk."
+      },
+      "options": [
+        "chmod -R 777",
+        "One owned named path",
+        "sudo every command"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "permission-denied-triage-practice",
+      "kind": "code_input",
+      "title": "Repair only the blocked parent",
+      "prompt": "**Try it yourself**\n\nA teammate asks for the smallest repair on the owned training directory, not a world-writable fix.\n\n1. Set `team-lab/shared` to `600` to simulate a directory without owner traversal.\n2. Use `ls -ld team-lab/shared` to inspect the directory itself.\n3. Restore only that directory with `chmod 700 team-lab/shared`.\n4. Verify with `stat -c \"%a %n\" team-lab/shared`.\n\n**Check your work:** The final mode is `700` on `team-lab/shared`, and no unrelated path is loosened.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "hint": "A single owned directory needs an owner-search bit; `chmod -R` and `777` are unnecessary.",
+      "help": {
+        "concept": "The final mode is `700` on `team-lab/shared`, and no unrelated path is loosened.",
+        "hint_1": "Set `team-lab/shared` to `600` to simulate a directory without owner traversal.",
+        "hint_2": "A single owned directory needs an owner-search bit; `chmod -R` and `777` are unnecessary."
+      },
+      "starterCode": "# Repair only the blocked parent\n# Follow the numbered instructions in the exercise card.\n",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "chmod 600 team-lab/shared\nls -ld team-lab/shared\nchmod 700 team-lab/shared\nstat -c \"%a %n\" team-lab/shared\n",
+      "instructions": "**Try it yourself**\n\nA teammate asks for the smallest repair on the owned training directory, not a world-writable fix.\n\n1. Set `team-lab/shared` to `600` to simulate a directory without owner traversal.\n2. Use `ls -ld team-lab/shared` to inspect the directory itself.\n3. Restore only that directory with `chmod 700 team-lab/shared`.\n4. Verify with `stat -c \"%a %n\" team-lab/shared`.\n\n**Check your work:** The final mode is `700` on `team-lab/shared`, and no unrelated path is loosened.\n\n*Use only the supplied practice files; avoid sudo, recursive chmod, and system changes.*",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Repair only the blocked parent\n# Follow the numbered instructions in the exercise card.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "team-lab/README.md",
+          "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/report.txt",
+          "content": "Example report; synthetic training content.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/notes.txt",
+          "content": "Team notes for the course.\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "chmod 600 team-lab/shared\nls -ld team-lab/shared\nchmod 700 team-lab/shared\nstat -c \"%a %n\" team-lab/shared\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "team-lab/README.md",
+          "content": "# Team Lab\nPractice directory for diagnosing access.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/report.txt",
+          "content": "Example report; synthetic training content.\n",
+          "language": "bash"
+        },
+        {
+          "path": "team-lab/shared/notes.txt",
+          "content": "Team notes for the course.\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^chmod\\s+600\\s+team\\-lab/shared$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^ls\\s+\\-ld\\s+team\\-lab/shared$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^chmod\\s+700\\s+team\\-lab/shared$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          },
+          {
+            "pattern": "^stat\\s+\\-c\\s+\"%a\\s+%n\"\\s+team\\-lab/shared$",
+            "message": "Run the named command from the guided task in the Linux terminal."
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "No sudo in learner exercises."
+          },
+          {
+            "pattern": "(^|\\s)su(\\s|$)",
+            "message": "Do not switch user identities."
+          },
+          {
+            "pattern": "(^|\\s)(chown|chgrp|useradd|groupadd)(\\s|$)",
+            "message": "Changing users or ownership is outside this course lab."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+(-R|--recursive)(\\s|$)",
+            "message": "Do not recursively change permissions."
+          },
+          {
+            "pattern": "(^|\\s)chmod\\s+777(\\s|$)",
+            "message": "Never make the practice workspace world writable."
+          }
+        ]
+      }
+    }
+  ]
+}

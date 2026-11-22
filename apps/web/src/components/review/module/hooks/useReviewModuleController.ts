@@ -7,7 +7,10 @@ import {
     resolveReviewDestinationTransitionPresentation,
     resolveReviewTransitionLabel,
 } from "../navigation/reviewRouteTransition";
-import { buildDraftQaNavigationSearch } from "../navigation/draftQaNavigationSearch";
+import { buildDraftQaNavigationSearch, DRAFT_QA_REVIEW_ROUTE_CHANGED } from "../navigation/draftQaNavigationSearch";
+import { selectedDraftQaFirstTopicId } from "@/lib/dev/curriculumDrafts/draftPreviewCanonicalRoute";
+import { approvedDraftAdminQaSelection } from "@/lib/dev/curriculumDrafts/adminLabQaClientSelection";
+import { resolveScopedAdminTerminal } from "@/lib/learning/client/resolveScopedAdminTerminal";
 import React, {useCallback, useEffect, useMemo, useRef, useState, useTransition} from "react";
 import {useParams, usePathname, useSearchParams} from "next/navigation";
 import {useRouter} from "@/i18n/navigation";
@@ -488,7 +491,15 @@ export function useReviewModuleController({
     );
 
     const topics = Array.isArray(mod?.topics) ? mod.topics : [];
-    const firstTopicId = topics[0]?.id ?? "";
+    // A Draft preview starts at the editor-selected topic, not the first
+    // authored topic in the module. Otherwise offline/local-only progress
+    // hydration can show owner-group-identity while topicDir identifies sudo.
+    const qaTopicDirs = draftQaMode ? searchParams.getAll("topicDir") : [];
+    const firstTopicId = (
+        draftQaMode && qaTopicDirs.length === 1
+            ? selectedDraftQaFirstTopicId(mod, qaTopicDirs[0])
+            : null
+    ) ?? topics[0]?.id ?? "";
     const moduleTopicIds = useMemo(
         () =>
             (Array.isArray(mod?.topics) ? mod.topics : [])
@@ -1352,6 +1363,9 @@ export function useReviewModuleController({
                             } else {
                                 window.history.pushState(nextHistoryState, "", href);
                             }
+                            if (draftQaMode) {
+                                window.dispatchEvent(new Event(DRAFT_QA_REVIEW_ROUTE_CHANGED));
+                            }
                         }
                     },
                 });
@@ -1372,6 +1386,7 @@ export function useReviewModuleController({
             captureNavigationProgressSnapshot,
             enqueueNavigationProgressSnapshot,
             frontierUnlockedRouteTarget,
+            draftQaMode,
             moduleSlug,
             progressHydrated,
             progressiveUnlock.unlockedTargetKeys,
@@ -3012,6 +3027,30 @@ export function useReviewModuleController({
         toolIdeConfig: tool.toolIdeConfig ?? null,
         runtimeEffectiveIdeConfig: runtime.effectiveIdeConfig ?? null,
     });
+    // Draft navigation uses history.pushState; Next search params may lag behind.
+    const [currentDraftQaSearch, setCurrentDraftQaSearch] = useState<string | null>(null);
+    useEffect(() => {
+        if (!draftQaMode) return;
+        const sync = () => setCurrentDraftQaSearch(window.location.search);
+        sync();
+        window.addEventListener("popstate", sync);
+        window.addEventListener(DRAFT_QA_REVIEW_ROUTE_CHANGED, sync);
+        return () => {
+            window.removeEventListener("popstate", sync);
+            window.removeEventListener(DRAFT_QA_REVIEW_ROUTE_CHANGED, sync);
+        };
+    }, [draftQaMode]);
+
+    const scopedAdminTerminal = useMemo(() => resolveScopedAdminTerminal({
+        subjectSlug,
+        moduleSlug,
+        topicSlug: viewTid,
+        // Topic manifest controls eligibility, never a stale bound exercise IDE.
+        ideConfig: runtime.effectiveIdeConfig,
+        draftQaMode,
+        draftSelection: draftQaMode ? approvedDraftAdminQaSelection(currentDraftQaSearch ?? searchParams.toString()) : null,
+    }), [subjectSlug, moduleSlug, viewTid, runtime.effectiveIdeConfig?.administratorLab, draftQaMode, currentDraftQaSearch, searchParams]);
+
     return {
         toolsProvider,
 
@@ -3246,6 +3285,7 @@ export function useReviewModuleController({
                 toolWorkspace: tool.toolWorkspace,
 
                 ideConfig: rightRailIdeConfig,
+                scopedAdminTerminal,
                 // Review workspaces are persisted only through the runtime store
                 // and ReviewProgress DB. Disable both CodeToolPane local drafts
                 // and FullIDE local draft storage with the same policy prop.
