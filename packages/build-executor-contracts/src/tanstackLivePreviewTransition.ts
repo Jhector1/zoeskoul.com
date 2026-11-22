@@ -19,7 +19,8 @@ export type TanstackPreviewTransitionReason =
   | "dependencies_changed"
   | "protected_files_changed"
   | "immutable_lease"
-  | "eligible_source_change";
+  | "eligible_source_change"
+  | "eligible_public_asset_change";
 export type TanstackPreviewTransition = Readonly<{
   action: "hold" | "unchanged" | "restart" | "reject" | "live_candidate";
   reason: TanstackPreviewTransitionReason;
@@ -74,6 +75,14 @@ export function isTanstackLiveSourcePath(path: string): boolean {
   return /^src\/(?:routes|components|hooks|styles|lib)\/(?:[A-Za-z0-9_.-]+\/)*[A-Za-z0-9_.-]+\.(?:tsx?|jsx?|css|scss)$/.test(path);
 }
 
+/** Images in public/ are inert, cacheable static bytes. This is only a path
+ * classification, never authorization to write a file. The Runner re-verifies
+ * metadata, SHA-256, sandbox identity, and the current DB source version. */
+export function isTanstackLivePublicImagePath(candidate: string): boolean {
+  return validPath(candidate) && candidate.startsWith("public/") &&
+    /^public\/(?:[A-Za-z0-9_-]+\/)*[A-Za-z0-9_-][A-Za-z0-9_.-]*\.(?:png|jpe?g|webp|avif)$/i.test(candidate);
+}
+
 /** Pure classification; never call this instead of trusted request validation. */
 export function classifyTanstackPreviewTransition(input: Readonly<{
   mode: TanstackPreviewLeaseMode;
@@ -102,12 +111,22 @@ export function classifyTanstackPreviewTransition(input: Readonly<{
   if (!oldFiles || !newFiles) return result("reject", "invalid_files");
   const paths = new Set([...oldFiles.keys(), ...newFiles.keys()]);
   const changes = [...paths].filter(path => oldFiles.get(path) !== newFiles.get(path)).sort();
-  // Binary data changes never use the text-only suspended/HMR writer. They
-  // force an immutable restart with a newly checked source fingerprint.
+  // Every binary in the saved executor request was validated by the trusted
+  // protocol parser. Recheck path identity here before proposing a live change.
   const oldBinaries = new Map((previous.binaryFiles ?? []).map(file => [file.path, file]));
   const newBinaries = new Map((next.binaryFiles ?? []).map(file => [file.path, file]));
-  const binaryChanges = [...new Set([...oldBinaries.keys(), ...newBinaries.keys()])]
-    .filter(path => JSON.stringify(oldBinaries.get(path)) !== JSON.stringify(newBinaries.get(path)))
+  const binaryKeys = [...oldBinaries.keys(), ...newBinaries.keys()];
+  const binaryCaseKeys = new Set(binaryKeys.map(p => p.toLowerCase()));
+  if (oldBinaries.size !== (previous.binaryFiles ?? []).length ||
+      newBinaries.size !== (next.binaryFiles ?? []).length ||
+      new Set([...oldBinaries.keys()].map(p => p.toLowerCase())).size !== oldBinaries.size ||
+      new Set([...newBinaries.keys()].map(p => p.toLowerCase())).size !== newBinaries.size ||
+      binaryKeys.some(p => !validPath(p)) ||
+      [...oldBinaries.keys()].some(p => [...newBinaries.keys()].some(q => q !== p && q.toLowerCase() === p.toLowerCase())) ||
+      [...binaryCaseKeys].some(p => [...oldFiles.keys(), ...newFiles.keys()].some(t => t.toLowerCase() === p)))
+    return result("reject", "invalid_files");
+  const binaryChanges = [...new Set(binaryKeys)]
+    .filter(p => JSON.stringify(oldBinaries.get(p)) !== JSON.stringify(newBinaries.get(p)))
     .sort();
   changes.push(...binaryChanges);
   changes.sort();
@@ -116,11 +135,17 @@ export function classifyTanstackPreviewTransition(input: Readonly<{
   }
   if (changes.some(path => INTEGRITY_FILES.has(path)))
     return result("restart", "dependencies_changed", changes);
-  if (binaryChanges.length || changes.some(path => !isTanstackLiveSourcePath(path)))
+  // The suspended writer admits at most 32 atomic changes per transaction.
+  // Larger legitimate revisions use normal replacement rather than risking
+  // partial workspace writes followed by quarantine.
+  if (changes.length > 32) return result("restart", "protected_files_changed", changes);
+  if (changes.some(path => !isTanstackLiveSourcePath(path) &&
+      !(binaryChanges.includes(path) && isTanstackLivePublicImagePath(path))))
     return result("restart", "protected_files_changed", changes);
   if (input.mode !== "development")
     return result("restart", "immutable_lease", changes);
   if (!changes.length)
     return result("restart", "immutable_lease", changes);
-  return result("live_candidate", "eligible_source_change", changes);
+  return result("live_candidate", binaryChanges.length
+    ? "eligible_public_asset_change" : "eligible_source_change", changes);
 }
