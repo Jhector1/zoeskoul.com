@@ -334,4 +334,42 @@ describe("suspended TanStack development workspace writer (not routed)", () => {
     expect(validateDevelopmentSourceChanges(changed,[]))
       .toEqual([{path:"src/routes/index.tsx",content:null}]);
   });
+  it("uploads, replaces, renames and deletes a checksum-verified static PNG without restarting Docker",async()=>{
+    const crypto=await import("node:crypto");
+    const png=(name:string,data:string)=>{
+      const buffer=Buffer.from(data);
+      return {path:`public/images/${name}`,encoding:"base64" as const,
+        mimeType:"image/png" as const,data:buffer.toString("base64"),sizeBytes:buffer.length,
+        checksum:`sha256:${crypto.createHash("sha256").update(buffer).digest("hex")}`};
+    };
+    const red=png("red.png","red test binary");
+    const blue=png("red.png","blue replacement");
+    const images=path.join(workspaceDir,"public/images");
+    await update({changedPaths:[red.path],next:{files:[],binaryFiles:[red]}});
+    expect(await fs.readFile(path.join(images,"red.png"),"utf8")).toBe("red test binary");
+    await update({changedPaths:[red.path],next:{files:[],binaryFiles:[blue]}});
+    expect(await fs.readFile(path.join(images,"red.png"),"utf8")).toBe("blue replacement");
+    const moved={...blue,path:"public/images/hero.png"};
+    await update({changedPaths:[red.path,moved.path],next:{files:[],binaryFiles:[moved]}});
+    await expect(fs.stat(path.join(images,"red.png"))).rejects.toMatchObject({code:"ENOENT"});
+    expect(await fs.readFile(path.join(images,"hero.png"),"utf8")).toBe("blue replacement");
+    await update({changedPaths:[moved.path],next:{files:[],binaryFiles:[]}});
+    await expect(fs.stat(path.join(images,"hero.png"))).rejects.toMatchObject({code:"ENOENT"});
+    expect(container.pause).toHaveBeenCalledTimes(4);
+    expect(container.unpause).toHaveBeenCalledTimes(4);
+    expect(paused).toBe(false);
+  });
+
+  it("rejects manipulated image bytes, traversal, MIME mismatch and protected paths before Docker pause",async()=>{
+    const bytes=Buffer.from("image data");
+    const image={path:"public/images/test.png",encoding:"base64" as const,
+      mimeType:"image/png" as const,data:bytes.toString("base64"),sizeBytes:bytes.length,
+      checksum:`sha256:${"0".repeat(64)}`};
+    const invalid=[image,{...image,path:"public/../secret.png"},
+      {...image,mimeType:"image/jpeg" as const},
+      {...image,path:"src/routes/index.png"}];
+    for (const asset of invalid)
+      await expect(update({changedPaths:[asset.path],next:{files:[],binaryFiles:[asset]}})).rejects.toThrow();
+    expect(container.pause).not.toHaveBeenCalled();
+  });
 });

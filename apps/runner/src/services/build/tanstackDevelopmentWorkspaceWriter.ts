@@ -1,8 +1,8 @@
 import { constants, type BigIntStats } from "node:fs";
 import fs, { type FileHandle } from "node:fs/promises";
 import path from "node:path";
-import { randomUUID } from "node:crypto";
-import { isTanstackLiveSourcePath, type ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contracts";
+import { createHash, randomUUID } from "node:crypto";
+import { BUILD_EXECUTOR_BINARY_LIMITS, isTanstackLivePublicImagePath, isTanstackLiveSourcePath, type BuildExecutorBinaryFile, type ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contracts";
 import { docker } from "../docker/dockerClient.js";
 
 /**
@@ -24,9 +24,9 @@ export async function applySuspendedTanstackDevelopmentSource(input: Readonly<{
   /** Trusted private sandbox handle's workspaceDir, NOT supplied by a client. */
   workspaceDir: string;
   changedPaths: readonly string[];
-  next: Pick<ProductionBuildJobRequestV1, "files">;
+  next: Pick<ProductionBuildJobRequestV1, "files" | "binaryFiles">;
 }>): Promise<void> {
-  const changes = validateChanges(input.changedPaths, input.next.files);
+  const changes = validateChanges(input.changedPaths, input.next.files, input.next.binaryFiles);
   const root = await validateWorkspaceRoot(input.workspaceRoot, input.workspaceDir);
   if (!/^[a-f0-9]{12,64}$/i.test(input.containerId))
     throw new Error("Invalid development preview container identity.");
@@ -108,18 +108,20 @@ export async function applySuspendedTanstackDevelopmentSource(input: Readonly<{
 
 const WORKSPACE_NAME = /^zoeskoul-run-[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i;
 const MAX_FILE_BYTES = 512 * 1024;
-const MAX_CHANGE_BYTES = 2 * 1024 * 1024;
+const MAX_CHANGE_BYTES = BUILD_EXECUTOR_BINARY_LIMITS.totalBytes + 2 * 1024 * 1024;
 const MAX_CHANGED_FILES = 32;
 
-type SourceChange = Readonly<{path: string; content: string | null}>;
+type SourceChange = Readonly<{path: string; content: string | Uint8Array | null}>;
 
 /** Pure, bounded validation before any Docker operation or host filesystem write. */
 export function validateDevelopmentSourceChanges(
   changedPaths: readonly string[], files: readonly {path:string;content:string}[],
-): readonly SourceChange[] { return validateChanges(changedPaths, files); }
+  binaryFiles: readonly BuildExecutorBinaryFile[] = [],
+): readonly SourceChange[] { return validateChanges(changedPaths, files, binaryFiles); }
 
 function validateChanges(
   changedPaths: readonly string[], files: readonly {path:string;content:string}[],
+  binaryFiles: readonly BuildExecutorBinaryFile[] = [],
 ): readonly SourceChange[] {
   if (!Array.isArray(changedPaths) || !changedPaths.length ||
       changedPaths.length > MAX_CHANGED_FILES || !Array.isArray(files) || files.length > 300)
@@ -134,19 +136,54 @@ function validateChanges(
     allKeys.add(entry.path.toLowerCase());
     byPath.set(entry.path,entry.content);
   }
+  // Decode and checksum ALL prospective images before touching Docker.
+  // The saved-source authority/contract parser is the primary admission gate;
+  // this is a second, filesystem-adjacent fail-closed validation boundary.
+  if (!Array.isArray(binaryFiles) || binaryFiles.length > BUILD_EXECUTOR_BINARY_LIMITS.files ||
+      files.length + binaryFiles.length > 300) throw new Error("Invalid development preview binary manifest.");
+  const imageBytes = new Map<string, Uint8Array>();
+  let imageTotal = 0;
+  for (const image of binaryFiles) {
+    if (!image || !isTanstackLivePublicImagePath(image.path) ||
+        allKeys.has(image.path.toLowerCase()) ||
+        imageBytes.has(image.path.toLowerCase()) ||
+        image.encoding !== "base64" || !Number.isSafeInteger(image.sizeBytes) ||
+        image.sizeBytes < 1 || image.sizeBytes > BUILD_EXECUTOR_BINARY_LIMITS.fileBytes ||
+        !/^sha256:[a-f0-9]{64}$/.test(image.checksum) ||
+        typeof image.data !== "string" ||
+        image.data.length !== 4 * Math.ceil(image.sizeBytes / 3) ||
+        !/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(image.data))
+      throw new Error("Invalid development preview image.");
+    const suffix = image.path.toLowerCase().split(".").pop();
+    const mime = suffix === "png" ? "image/png" : suffix === "webp" ? "image/webp" :
+      suffix === "avif" ? "image/avif" : suffix === "jpg" || suffix === "jpeg" ? "image/jpeg" : null;
+    if (mime !== image.mimeType) throw new Error("Invalid development preview image type.");
+    const buffer = Buffer.from(image.data,"base64");
+    if (buffer.byteLength !== image.sizeBytes ||
+        `sha256:${createHash("sha256").update(buffer).digest("hex")}` !== image.checksum)
+      throw new Error("Development preview image checksum mismatch.");
+    imageTotal += buffer.byteLength;
+    if (imageTotal > BUILD_EXECUTOR_BINARY_LIMITS.totalBytes)
+      throw new Error("Development preview images exceed trusted limit.");
+    imageBytes.set(image.path.toLowerCase(),buffer);
+  }
   const selected = new Set<string>();
   const changes: SourceChange[] = [];
   let totalBytes = 0;
   for (const candidate of changedPaths) {
-    if (!safePath(candidate) || !isTanstackLiveSourcePath(candidate) ||
+    const liveSource = isTanstackLiveSourcePath(candidate);
+    const liveImage = isTanstackLivePublicImagePath(candidate);
+    if (!safePath(candidate) || (!liveSource && !liveImage) ||
         selected.has(candidate.toLowerCase()))
       throw new Error("Unsafe development preview source path.");
     selected.add(candidate.toLowerCase());
-    const content = byPath.get(candidate) ?? null; // null is an explicit removal.
+    // The only binary paths admitted are inert public images. A missing image
+    // in the NEXT authoritative manifest is an explicit deletion.
+    const content = liveImage ? imageBytes.get(candidate.toLowerCase()) ?? null : byPath.get(candidate) ?? null;
     if (content !== null) {
-      const bytes = Buffer.byteLength(content,"utf8");
+      const bytes = typeof content === "string" ? Buffer.byteLength(content,"utf8") : content.byteLength;
       totalBytes += bytes;
-      if (bytes > MAX_FILE_BYTES || totalBytes > MAX_CHANGE_BYTES)
+      if ((liveSource && bytes > MAX_FILE_BYTES) || totalBytes > MAX_CHANGE_BYTES)
         throw new Error("Development preview source update too large.");
     }
     changes.push({path:candidate,content});
@@ -207,7 +244,7 @@ async function lstatOptional(p: string) {
   }
 }
 
-async function replaceAtomically(destination: string, content: string) {
+async function replaceAtomically(destination: string, content: string | Uint8Array) {
   const parent = path.dirname(destination);
   const temp = path.join(parent,`.zoebuild-source-${randomUUID()}.tmp`);
   let created = false;
@@ -216,7 +253,7 @@ async function replaceAtomically(destination: string, content: string) {
       constants.O_WRONLY | constants.O_CREAT | constants.O_EXCL | constants.O_NOFOLLOW,0o600);
     created = true;
     try {
-      await file.writeFile(content,"utf8");
+      await file.writeFile(content,typeof content === "string" ? "utf8" : undefined);
       await file.chmod(0o644);
       await file.sync();
     } finally { await file.close(); }
