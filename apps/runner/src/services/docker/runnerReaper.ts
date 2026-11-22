@@ -7,6 +7,8 @@ import { removeRunnerWorkspaceWithRecovery } from "./runnerWorkspaceReclamation.
 import { cleanupOrphanedAdminWorkspaceVolumes } from "../execution/adminWorkspaceVolume.js";
 import { cleanupOrphanedAdminSessionNetworks } from "../execution/adminSessionNetwork.js";
 
+import { assertNoUnifiedStartupResources, assertUnifiedStartupReservations, unifiedVolumeMarker } from "../execution/unifiedLinuxStartupGuard.js";
+
 type ListRunnerContainersOptions = {
   all: boolean;
   filters: {
@@ -55,7 +57,11 @@ function listRunnerContainers(): Promise<RunnerContainerInfo[]> {
  * a workspace the reaper has removed. Fail closed on ANY unverified removal.
  * One dedicated rootless Docker socket per execution pool is mandatory. */
 export async function cleanupOrphanedRunnerContainers() {
+  assertUnifiedStartupReservations();
   const containers = await listRunnerContainers();
+  assertNoUnifiedStartupResources(containers);
+  const volumes = await docker.listVolumes({ filters: { label: [unifiedVolumeMarker] } });
+  assertNoUnifiedStartupResources(volumes.Volumes ?? []);
   const failures: unknown[] = [];
   const isHolder = (info: RunnerContainerInfo) => info.Labels?.["com.zoeskoul.runner.lab-mode"] === "admin-egress-holder";
   async function remove(info: RunnerContainerInfo) {
@@ -75,6 +81,7 @@ export async function cleanupOrphanedRunnerContainers() {
   // enumeration verifies every dependent is absent, not just a 204 response.
   if (holders.length && !failures.length) {
     const beforeHolders = await listRunnerContainers();
+    assertNoUnifiedStartupResources(beforeHolders);
     if (beforeHolders.some(info => !isHolder(info))) {
       throw new Error("RUNNER startup Docker cleanup incomplete (dependent remains before holder cleanup).");
     }
@@ -83,6 +90,7 @@ export async function cleanupOrphanedRunnerContainers() {
   // A failed daemon list is already fatal. Verify the pool-wide label filter
   // is empty even if remove() returned success: 204 is not proof of absence.
   const remaining = await listRunnerContainers();
+  assertNoUnifiedStartupResources(remaining);
   if (failures.length || remaining.length) {
     throw new Error(`RUNNER startup Docker cleanup incomplete (${failures.length} errors, ${remaining.length} remaining).`);
   }

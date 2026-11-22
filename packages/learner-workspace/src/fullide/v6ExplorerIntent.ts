@@ -81,7 +81,7 @@ export function planV6MoveIntent(nodes: FSNode[], id:string, parentId:string|nul
     if (parentId!==null && node(nodes,parentId).kind!=="folder") throw new Error("Invalid destination folder.");
     const src=fullPath(nodes,id);
     const parent=parentId?fullPath(nodes,parentId):"";
-    if (item.kind==="folder" && parent.startsWith(`${src}/`)) throw new Error("Cannot move a folder into itself.");
+    if (item.kind==="folder" && (parent===src || parent.startsWith(`${src}/`))) throw new Error("Cannot move a folder into itself.");
     const destination=parent?`${parent}/${requireName(item.name)}`:requireName(item.name);
     checkDestination(nodes,parentId,item.name,item.id);
     return item.kind==="file"

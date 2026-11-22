@@ -28,8 +28,8 @@ describe("V6B4e4d server-first explorer intent planning", () => {
   it("does not create an intent for unchanged names", () => {
     expect(planV6InlineIntent(nodes, {mode:"rename",parentId:"src",targetId:"main",value:"main.py"})).toBeNull();
   });
-  it("leaves new-file creation to the CAS file writer", () => {
-    expect(planV6InlineIntent(nodes, {mode:"new-file",parentId:"src",value:"new.py"})).toBeNull();
+  it("creates an intent for a new text file without touching the tree", () => {
+    expect(planV6InlineIntent(nodes, {mode:"new-file",parentId:"src",value:"new.py"})).toEqual({kind:"create_file",path:"src/new.py"});
   });
   it("moves a file to an explicitly existing folder", () => {
     expect(planV6MoveIntent(nodes,"main","other"))
@@ -51,6 +51,15 @@ describe("V6B4e4d server-first explorer intent planning", () => {
   it("file deletes use CAS; folder deletes are recoverable", () => {
     expect(planV6DeleteIntent(nodes,"main")).toEqual({kind:"delete_file",path:"src/main.py"});
     expect(planV6DeleteIntent(nodes,"docs")).toEqual({kind:"trash_directory",path:"src/docs"});
+  });
+  it("allows recoverable folder trash even when it contains the entry file", () => {
+    expect(planV6DeleteIntent(nodes,"src")).toEqual({kind:"trash_directory",path:"src"});
+    expect(planV6DeleteIntent(nodes,"docs")).toEqual({kind:"trash_directory",path:"src/docs"});
+  });
+  it("refuses a directory move into itself or its own subtree", () => {
+    expect(()=>planV6MoveIntent(nodes,"src","docs")).toThrow();
+    expect(()=>planV6MoveIntent(nodes,"docs","docs")).toThrow();
+    expect(()=>planV6InlineIntent(nodes,{mode:"rename",parentId:"src",targetId:"docs",value:"main.py"})).toThrow();
   });
   it("unknown nodes must fail closed rather than mutate", () => {
     expect(() => planV6DeleteIntent(nodes,"missing")).toThrow();

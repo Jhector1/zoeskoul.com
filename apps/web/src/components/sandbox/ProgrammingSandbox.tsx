@@ -1,6 +1,7 @@
 "use client";
 
 import { selectDevV6FileSyncMode } from "./v6DevMode";
+import { unifiedSandboxConfig } from "./unifiedSandboxPilot";
 
 import FullIDE from "@/components/ide/fullide/FullIDE";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -143,6 +144,7 @@ export default function ProgrammingIdeSandbox({
                                                   lessonHref,
                                                   lessonLabel = "Lesson",
                                                   access,
+                                                  unifiedLinuxPilot = false,
                                               }: {
     initialLanguage?: WorkspaceLanguage;
     initialSurfaceMode?: SurfaceMode;
@@ -153,7 +155,10 @@ export default function ProgrammingIdeSandbox({
     lessonHref?: string;
     lessonLabel?: string;
     access: ProgrammingSandboxAccess;
+    unifiedLinuxPilot?: boolean;
 }) {
+    // The Shell surface must always retain its original BashTerminal.
+    const useUnified = unifiedLinuxPilot && toolSlug === "python" && initialLanguage === "python" && initialSurfaceMode === "code";
     const router = useRouter();
 
     const [lang, setLang] = useState<WorkspaceLanguage>(initialLanguage);
@@ -185,6 +190,7 @@ export default function ProgrammingIdeSandbox({
     }, [initialSurfaceMode]);
 
     useEffect(() => {
+        if (useUnified) return;
         const hrefs = Object.values(routeLanguageMap ?? {}).filter(
             (v): v is string => typeof v === "string" && !!v,
         );
@@ -196,7 +202,7 @@ export default function ProgrammingIdeSandbox({
         if (shellHref && access.hasUser) {
             router.prefetch(shellHref);
         }
-    }, [router, routeLanguageMap, shellHref, access.hasUser]);
+    }, [router, routeLanguageMap, shellHref, access.hasUser, useUnified]);
 
     useEffect(() => {
         return () => clearReadyTimer();
@@ -211,6 +217,7 @@ export default function ProgrammingIdeSandbox({
     const shellRequiresLogin = !access.hasUser;
 
     const handleLanguageChange = (next: WorkspaceLanguage) => {
+        if (useUnified) { if (next !== lang) window.alert("End the disposable Unified Linux environment and leave the pilot before switching languages."); return; }
         if (next === lang && surfaceMode === "code") return;
 
         const href = routeLanguageMap?.[next];
@@ -274,6 +281,7 @@ export default function ProgrammingIdeSandbox({
     );
 
     const handleSurfaceModeChange = (next: SurfaceMode) => {
+        if (useUnified) return;
         if (next === surfaceMode) return;
 
         if (next === "shell") {
@@ -424,8 +432,9 @@ export default function ProgrammingIdeSandbox({
                                     key={`${toolSlug}:${initialLanguage}`}
                                     className={cn(
                                         "h-full transition-opacity duration-200",
-                                        ideReady ? "opacity-100" : "opacity-0",
+                                        ideReady || useUnified ? "opacity-100" : "opacity-0",
                                     )}
+                                    unifiedLinux={useUnified ? unifiedSandboxConfig : undefined}
                                     servicePreset="workspace"
                                     services={{ explorer: { showStdin: false } }}
                                     title={title}
@@ -442,8 +451,8 @@ export default function ProgrammingIdeSandbox({
                                     access={access}
                                     loginHref={authHref as any}
                                     billingHref="/billing"
-                                    draftStorageMode="local"
-                                    fileSyncMode={selectDevV6FileSyncMode({
+                                    draftStorageMode={useUnified ? "off" : "local"}
+                                    fileSyncMode={useUnified ? "v5" : selectDevV6FileSyncMode({
                                         nodeEnv: process.env.NODE_ENV,
                                         enabled: process.env.NEXT_PUBLIC_ZOELEARNING_V6_DEV_ENABLED,
                                         hasUser: access.hasUser,
@@ -451,7 +460,7 @@ export default function ProgrammingIdeSandbox({
                                     projectTitle={`${title} Project`}
                                 />
 
-                                {!ideReady ? (
+                                {!ideReady && !useUnified ? (
                                     <ProgrammingIdeTransitionCover label={active.label} />
                                 ) : null}
                             </>

@@ -11,7 +11,7 @@ import { classifySequence, heartbeatDeadlineMs, heartbeatIntervalMs, ReattachRej
 /** Each mount owns exactly one disposable, authenticated rootless lab.
  * This terminal deliberately does NOT share the normal Explorer workspace.
  */
-export default function FullPrivilegesTerminal() {
+export default function FullPrivilegesTerminal({ windowId }: { windowId?: string } = {}) {
   const [feed, setFeed] = React.useState<TerminalChunk[]>([]);
   const [status, setStatus] = React.useState<"starting" | "ready" | "reconnecting" | "error" | "closed">("starting");
   const [error, setError] = React.useState<string | null>(null);
@@ -198,7 +198,7 @@ export default function FullPrivilegesTerminal() {
       try {
         const response = await fetch("/api/run/pty/sessions/admin/start", {
           method: "POST", credentials: "same-origin",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", ...(windowId ? { "x-zoelearning-window-id": windowId } : {}) },
           body: JSON.stringify({ moduleSlug: "zoelearning-disposable-root", topicSlug: "full-privileges" }),
         });
         const data = await response.json().catch(() => null);
@@ -224,7 +224,7 @@ export default function FullPrivilegesTerminal() {
         cancel(sessionId);
       }
     };
-  }, [append, attempt]);
+  }, [append, attempt, windowId]);
 
   const send = React.useCallback((message: {type: string; [key: string]: unknown}) => {
     if (inputReady.current && socketRef.current?.readyState === WebSocket.OPEN) {

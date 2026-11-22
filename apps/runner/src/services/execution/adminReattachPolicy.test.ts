@@ -1,5 +1,6 @@
 import { test } from "vitest";
 import assert from "node:assert/strict";
+import { learningWindowOwnership } from "../sessions/learningWindowOwnership.js";
 import type { SessionRecord } from "../sessions/sessionStore.js";
 import { isGlobalAdminShell, mayAttachGlobalAdminShell } from "./adminReattachPolicy.js";
 const actor = "u:" + "a".repeat(64);
@@ -36,4 +37,17 @@ test("exact hard deadline denied despite recent activity", () => {
 test("invalid limits or backwards clock fail closed", () => {
   for (const n of [null,0,-1,NaN,Infinity,1.5]) { assert.equal(allowed({...base,idleTimeoutMs:n}),false); assert.equal(allowed({...base,hardLifetimeMs:n}),false); }
   assert.equal(allowed({...base,lastActivityAt:now+1}),false); assert.equal(allowed({...base,createdAt:now}),false); assert.equal(allowed(base,actor,true,NaN),false);
+});
+
+test("conflicting window leaves existing administrator reattach authority unchanged",()=>{
+  const owner="u:"+"c".repeat(64), first="window-aaaaaaaa", second="window-bbbbbbbb";
+  const shell={...base,ownerKey:owner,adminWindowId:first};
+  learningWindowOwnership.claim(owner,first,[]);
+  assert.equal(mayAttachGlobalAdminShell(shell,owner,true,now),true);
+  assert.throws(()=>learningWindowOwnership.claim(owner,second,[shell]),/user decision/);
+  assert.equal(mayAttachGlobalAdminShell(shell,owner,true,now),true);
+  learningWindowOwnership.claim(owner,second,[]);
+  assert.equal(mayAttachGlobalAdminShell(shell,owner,true,now),false);
+  assert.equal(mayAttachGlobalAdminShell({...shell,adminWindowId:second},owner,true,now),true);
+  assert.equal(mayAttachGlobalAdminShell({...shell,adminWindowId:null},owner,true,now),false);
 });

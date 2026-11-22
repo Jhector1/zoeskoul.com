@@ -1,5 +1,6 @@
 import type Docker from "dockerode";
 import { docker } from "../docker/dockerClient.js";
+import { assertNoUnifiedStartupResources, unifiedVolumeMarker } from "./unifiedLinuxStartupGuard.js";
 
 /** Private, memory-only workspace owned by one admin session. Never a host bind. */
 const PREFIX = "zoeskoul-admin-ws-";
@@ -37,16 +38,19 @@ export function validateAdminVolumeInspect(
   }
 }
 
-export async function createAdminWorkspaceVolume(sessionId: string): Promise<string> {
+export async function createAdminWorkspaceVolume(sessionId: string, unified = false): Promise<string> {
   const name = adminWorkspaceVolumeName(sessionId);
   // No fallback to disk-backed Docker volumes if tmpfs is unsupported.
   await docker.createVolume({
     Name: name,
     Driver: "local",
     DriverOpts: { ...OPTIONS },
-    Labels: adminVolumeLabels(sessionId),
+    Labels: { ...adminVolumeLabels(sessionId), ...(unified ? { [unifiedVolumeMarker]: "v1" } : {}) },
   });
   await verifyAdminWorkspaceVolume(name, sessionId);
+  if (unified && (await docker.getVolume(name).inspect()).Labels?.[unifiedVolumeMarker] !== "v1") {
+    throw new Error("UNIFIED_WORKSPACE_MARKER_UNVERIFIED");
+  }
   return name;
 }
 
@@ -80,6 +84,7 @@ export async function cleanupOrphanedAdminWorkspaceVolumes(client: Docker = dock
   const opts = { filters: { label: [`${LABEL}=${LABEL_VALUE}`] } };
   const result = await client.listVolumes(opts);
   const candidates = result.Volumes ?? [];
+  assertNoUnifiedStartupResources(candidates);
   for (const item of candidates) {
     const name = item.Name;
     if (!name || !NAME_PATTERN.test(name)) {

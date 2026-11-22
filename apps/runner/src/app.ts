@@ -2,6 +2,7 @@ import express from "express";
 import { BUILD_EXECUTOR_HTTP_BODY_LIMIT_BYTES } from "@zoeskoul/build-executor-contracts";
 import { requireServiceAuth } from "./middleware/serviceAuth.js";
 import { executionPoolGuard } from "./middleware/executionPoolGuard.js";
+import { claimLearningIdeWindowRoute } from "./routes/sessions.ide.claim.js";
 import { startSessionRoute } from "./routes/sessions.start.js";
 import { startAdminSessionRoute } from "./routes/sessions.admin.start.js";
 import { verifyAdminFilesystemRoute } from "./routes/sessions.admin.verifyFilesystem.js";
@@ -136,6 +137,7 @@ app.post("/build/previews/:previewId/resolve-capability", resolveBuildPreviewCap
 app.post("/build/previews/:previewId/cancel", cancelBuildPreviewRoute);
 app.post("/build/previews/project/drain", drainBuildProjectPreviewsRoute);
 app.post("/build/previews/project/release", releaseBuildProjectPreviewDrainRoute);
+app.post("/sessions/ide/claim", claimLearningIdeWindowRoute);
 app.post("/sessions/start", startSessionRoute);
 app.post("/sessions/admin/start", startAdminSessionRoute);
 app.post("/sessions/admin/verify-filesystem", verifyAdminFilesystemRoute);

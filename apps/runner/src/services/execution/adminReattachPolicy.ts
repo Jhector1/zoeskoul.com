@@ -1,3 +1,4 @@
+import { learningWindowOwnership } from "../sessions/learningWindowOwnership.js";
 import type { SessionRecord } from "../sessions/sessionStore.js";
 import { FULL_PRIVILEGES_TOPIC_SLUG } from "./learningAdminLessonPolicy.js";
 
@@ -13,7 +14,8 @@ export function mayAttachGlobalAdminShell(
   if (!session || !isGlobalAdminShell(session) || !gateEnabled ||
       !/^u:[0-9a-f]{64}$/.test(actorKey) || session.ownerKey !== actorKey ||
       (session.state !== "waiting_for_input" && session.state !== "running") ||
-      session.finalizedAt != null || !session.attachStream || !session.containerId) return false;
+      session.finalizedAt != null || !session.attachStream || !session.containerId ||
+      !learningWindowOwnership.allowsAdminSession(actorKey, session)) return false;
   const { createdAt, lastActivityAt, idleTimeoutMs, hardLifetimeMs } = session;
   if (!Number.isSafeInteger(now) || !Number.isSafeInteger(createdAt) || !Number.isSafeInteger(lastActivityAt) ||
       typeof idleTimeoutMs !== "number" || typeof hardLifetimeMs !== "number" ||

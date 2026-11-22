@@ -65,6 +65,8 @@ export type RouterPushHref =
     readonly query?: Record<string, string | number | boolean | null | undefined>;
 };
 export type FullIDEProps = {
+    /** Development-only unified Linux FullIDE pilot. */
+    unifiedLinux?: import("../runner/components/unifiedLinuxClient").UnifiedLinuxClientConfig;
     title?: string;
     height?: number;
     className?: string;

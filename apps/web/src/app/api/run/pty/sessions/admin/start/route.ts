@@ -68,6 +68,11 @@ export async function POST(request: NextRequest) {
   catch { return reject("Invalid JSON.", 400); }
   const target = parseStudentAdminLabTarget(parsed);
   if (!target) return reject("Invalid administrative lab target.", 400);
+  // The header is routing metadata only. The body and signed-grant contract
+  // remain strict. Never let a window id replace entitlement or actor checks.
+  const windowId = request.headers.get("x-zoelearning-window-id");
+  if (windowId !== null && (!/^window-[a-zA-Z0-9-]{8,96}$/.test(windowId) ||
+      target.topicSlug !== "full-privileges")) return reject("Invalid IDE window identity.", 400);
 
   try {
     const actor = await getActor();
@@ -83,7 +88,7 @@ export async function POST(request: NextRequest) {
 
     const grant = mintStudentAdminLabGrant({ actorKey, target });
     const started = await runnerPost<StartSessionResult>(
-      "/sessions/admin/start", actorKey, { grant },
+      "/sessions/admin/start", actorKey, { grant, ...(windowId === null ? {} : { windowId }) },
     );
     if (!started.ok) return reject("Administrative lab unavailable.", 503);
 

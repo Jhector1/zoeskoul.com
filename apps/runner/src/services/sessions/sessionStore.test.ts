@@ -5,6 +5,7 @@ import {
   deleteSession,
   pushEvent,
   reserveSessionSlot,
+  setSessionTransportAttached,
 } from "./sessionStore.js";
 import { env } from "../../lib/env.js";
 
@@ -15,6 +16,7 @@ const SESSION_IDS = [
   "store-test-active-4",
   "store-test-closed-1",
   "store-test-closed-2",
+  "store-test-transport",
 ];
 
 afterEach(() => {
@@ -84,5 +86,19 @@ describe("sessionStore active counting", () => {
     expect(() => reserveSessionSlot(ownerKey)).toThrow(
       `Too many active sessions. Limit is ${env.maxConcurrentPerActor} per user.`,
     );
+  });
+});
+
+
+describe("session transport bookkeeping", () => {
+  it("records the final disconnect without resetting idle activity", () => {
+    const session = createSession({ id: "store-test-transport", ownerKey: "actor-a", kind: "shell", containerId: "test-container", workspaceDir: "/tmp/store-test-transport" });
+    const originalActivity = session.lastActivityAt;
+    expect(session.transportDetachedAt).toBe(session.createdAt);
+    setSessionTransportAttached(session.id, true);
+    expect(session.transportDetachedAt).toBe(null);
+    setSessionTransportAttached(session.id, false);
+    expect(typeof session.transportDetachedAt).toBe("number");
+    expect(session.lastActivityAt).toBe(originalActivity);
   });
 });

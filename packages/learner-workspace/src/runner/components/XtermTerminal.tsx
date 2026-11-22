@@ -59,7 +59,10 @@ export function isHostLargeEnoughForTerminalLayout(el: HTMLDivElement | null) {
     if (!el) return false;
 
     const rect = el.getBoundingClientRect();
-    if (rect.width < 80 || rect.height < 120) return false;
+    // A visible terminal should not be disabled by a fixed 120px height.
+    // The number of usable character cells is computed during resize.
+    if (!Number.isFinite(rect.width) || !Number.isFinite(rect.height) ||
+        rect.width <= 0 || rect.height <= 0) return false;
 
     return true;
 }
@@ -159,6 +162,8 @@ export default function XtermTerminal(props: {
     onSendData: (data: string) => void;
     onResize: (cols: number, rows: number) => void;
     optimisticLocalEcho?: boolean;
+    /** Unified PTYs do not use the legacy developer input probe. */
+    disableDevInputProbe?: boolean;
     cwdLabel?: string | null;
     onBeforeSubmitEnter?: () => Promise<void>;
     onAfterSubmitEnter?: () => Promise<void>;
@@ -335,7 +340,7 @@ export default function XtermTerminal(props: {
             __pwSyncTerminalInputThroughApp?: (data: string) => Promise<boolean>;
         };
 
-        if (getLearnerWorkspaceStaticConfig().nodeEnv === "production") return;
+        if (props.disableDevInputProbe || getLearnerWorkspaceStaticConfig().nodeEnv === "production") return;
 
         w.__pwEnableFullIdeTerminalInputHook = true;
         w.__pwDispatchTerminalInputThroughApp = dispatchInputThroughApp;
@@ -368,7 +373,7 @@ export default function XtermTerminal(props: {
             }
             delete w.__pwSyncTerminalInputThroughApp;
         };
-    }, [dispatchInputThroughApp]);
+    }, [dispatchInputThroughApp, props.disableDevInputProbe]);
 
     const statusText = useMemo(
         () =>
@@ -422,8 +427,8 @@ export default function XtermTerminal(props: {
             const horizontalPadding = 16;
             const verticalPadding = 24;
 
-            const cols = Math.max(20, Math.floor((rect.width - horizontalPadding) / cell.width));
-            const rows = Math.max(6, Math.floor((rect.height - verticalPadding) / cell.height) - 2);
+            const cols = Math.max(1, Math.floor((rect.width - horizontalPadding) / cell.width));
+            const rows = Math.max(1, Math.floor((rect.height - verticalPadding) / cell.height) - 2);
 
             const prev = lastSizeRef.current;
             if (prev && prev.cols === cols && prev.rows === rows) return;

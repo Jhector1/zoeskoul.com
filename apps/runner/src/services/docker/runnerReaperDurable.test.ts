@@ -7,6 +7,8 @@ const fixture = vi.hoisted(() => ({
   root: "/tmp/zoeskoul-reaper-durable-fixture",
   containers: [] as string[],
   holder: "",
+  unifiedGuest: "",
+  unifiedVolume: "",
   removed: [] as string[],
   failDelete: false,
   failList: false,
@@ -58,6 +60,7 @@ vi.mock("./dockerClient.js", () => ({ docker: {
     Options: {type:"tmpfs",device:"tmpfs",o:"size=16m,mode=1777"},
     Labels: {
       "com.zoeskoul.learning.admin-workspace":"v1",
+      ...(Name===fixture.unifiedVolume?{"com.zoeskoul.learning.unified-workspace":"v1"}:{}),
       "com.zoeskoul.runner.session":Name.slice("zoeskoul-admin-ws-".length),
       "com.zoeskoul.runner.purpose":"learn",
     },
@@ -68,7 +71,7 @@ vi.mock("./dockerClient.js", () => ({ docker: {
   }}),
   listContainers: (_opts:unknown, cb:(error:Error|null,list?:unknown[])=>void) => {
     if (fixture.failList) cb(new Error("daemon unavailable"));
-    else cb(null,fixture.containers.map(Id=>({Id,State:"running",Labels:Id===fixture.holder?{"com.zoeskoul.runner.lab-mode":"admin-egress-holder"}:{}})));
+    else cb(null,fixture.containers.map(Id=>({Id,State:"running",Labels:Id===fixture.unifiedGuest?{"com.zoeskoul.learning.unified-guest":"u2b2"}:Id===fixture.holder?{"com.zoeskoul.runner.lab-mode":"admin-egress-holder"}:{}})));
   },
   getContainer: (id:string) => ({remove: async () => {
     fixture.removed.push(id);
@@ -85,6 +88,8 @@ beforeEach(async () => {
   fixture.root = root;
   fixture.containers = [];
   fixture.holder = "";
+  fixture.unifiedGuest = "";
+  fixture.unifiedVolume = "";
   fixture.removed = [];
   fixture.failDelete = false;
   fixture.failList = false;
@@ -99,6 +104,21 @@ beforeEach(async () => {
 afterEach(async()=>{await fs.rm(root,{recursive:true,force:true});});
 
 describe("Runner startup cleanup admission gate",()=>{
+  it("preserves every resource before cleanup if a unified guest remains", async()=>{
+    fixture.unifiedGuest="a".repeat(64);
+    fixture.containers=["b".repeat(64),fixture.unifiedGuest];
+    await expect(cleanupRunnerOrphansOnStartup()).rejects.toThrow("UNIFIED_LINUX_STARTUP_RECOVERY_REQUIRED");
+    expect(fixture.removed).toEqual([]);
+    expect(fixture.containers).toHaveLength(2);
+  });
+  it("preserves partial unified workspace even without its guest", async()=>{
+    fixture.unifiedVolume="zoeskoul-admin-ws-sess_11111111-1111-4111-8111-111111111111";
+    fixture.volumes=[fixture.unifiedVolume];
+    fixture.containers=["b".repeat(64)];
+    await expect(cleanupRunnerOrphansOnStartup()).rejects.toThrow("UNIFIED_LINUX_STARTUP_RECOVERY_REQUIRED");
+    expect(fixture.removed).toEqual([]);
+    expect(fixture.volumes).toEqual([fixture.unifiedVolume]);
+  });
   it("keeps journal and workspace if Docker cleanup is unverified", async()=>{
     const workspace = path.join(root,"zoeskoul-run-11111111-1111-4111-8111-111111111111");
     await fs.mkdir(workspace);
