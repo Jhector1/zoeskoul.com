@@ -21,8 +21,10 @@ describe("TanStack Start-only project creation", () => {
     expect(specs).not.toContain('"provider": "zoebuild-native"');
     expect(app).toContain('input.specification.stackId !== "tanstack-start-v1"');
     expect(app).toContain('input.specification.commerce?.storefrontRuntime !== "tanstack-start"');
-    expect(planner).toContain('storefrontRuntime: "tanstack-start"');
-    expect(planner).toContain('stackId:');
-    expect(planner).toContain('profile.stackId');
+    // Planning returns validated specifications; it does not forge or coerce
+    // storefront/runtime fields after the server-side compatibility gate.
+    expect(planner).toContain('planBuildProjectFromPrompt({');
+    expect(planner).toContain('profileFromValidatedSpecification(plan.specification)');
+    expect(planner).not.toContain('storefrontRuntime: "react-vite"');
   });
 });

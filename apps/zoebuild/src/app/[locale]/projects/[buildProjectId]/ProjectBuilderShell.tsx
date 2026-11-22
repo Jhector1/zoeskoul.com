@@ -46,6 +46,7 @@ import { preserveVersionWorkspaceView } from "@/lib/build/preserveVersionWorkspa
 import { needsDependencyRecoveryAssistance } from "@/lib/build/historyDependencyReview";
 import SiteSettingsWorkspacePanel, { type Section as SiteSettingsSection } from "./SiteSettingsWorkspacePanel";
 import { resolveZoeSelectedProvider } from "@/lib/build/zoeAssistantServiceIntent";
+import { extractShopifyCandidateHostname } from "@/lib/commerce/extractShopifyCandidateHostname";
 import type { ZoeSourceEditProposal } from "@/lib/build/zoeTargetedSourceEdit";
 import StripeCheckoutReturnNotice from "./StripeCheckoutReturnNotice";
 import ZoeThinkingPanel, {type ZoeThinkingPhase} from "./ZoeThinkingPanel";
@@ -162,6 +163,7 @@ export default function ProjectBuilderShell(props: {
     return () => window.removeEventListener(ZOE_MEDIA_OPEN,open);
   },[props.project.buildProjectId]);
 
+  const [commerceCandidate, setCommerceCandidate] = useState<string | null>(null);
   const [shopifyConnectedReturn, setShopifyConnectedReturn] = useState(false);
   const [assistantSettingsSection, setAssistantSettingsSection] = useState<SiteSettingsSection | undefined>();
   const [assistantNavigationVersion, setAssistantNavigationVersion] = useState(0);
@@ -808,12 +810,23 @@ export default function ProjectBuilderShell(props: {
         const known = resolveZoeSelectedProvider(semantic.provider);
         if (known?.kind === "provider") {
           setAssistantSettingsSection(known.section);
-          addMessage(describeZoeActionReceipt({kind:"settings-opened",
-            providerName:known.providerName,setupAvailable:known.setup!=="unavailable"}));
+          // Candidate discovery is presentation-only. Provider authorization,
+          // credentials and routing remain exclusively server-owned.
+          const candidate = known.section === "commerce" &&
+            known.providerName.toLowerCase() === "shopify"
+            ? extractShopifyCandidateHostname(submission.prompt)
+            : null;
+          setCommerceCandidate(candidate);
+          addMessage(candidate
+            ? `Shopify store ${candidate} detected. This detected hostname does not create or verify a store connection. Open Shopify in Site Settings to review connection status or authorize it.`
+            : describeZoeActionReceipt({kind:"settings-opened",
+                providerName:known.providerName,setupAvailable:known.setup!=="unavailable"}));
         } else if (known?.kind === "ambiguous") {
+          setCommerceCandidate(null);
           setAssistantSettingsSection(undefined);
           addMessage(`${known.name} appears in multiple settings categories (${known.sections.join(" and ")}). Which capability should I open? No connection was changed.`);
         } else {
+          setCommerceCandidate(null);
           setAssistantSettingsSection(undefined);
           addMessage(semantic.provider.trim()
             ? "Site settings opened. The requested provider isn't registered for setup here. No connection was changed."
@@ -1691,7 +1704,7 @@ export default function ProjectBuilderShell(props: {
             key={`assistant-settings:${assistantNavigationVersion}`}
             initialSection={assistantSettingsSection ?? (shopifyConnectedReturn ? "commerce" : undefined)}
             project={props.project}
-            candidateHostname={null}
+            candidateHostname={commerceCandidate}
             commerceEnabled={commerceEnabled}
           />
         ) : null}

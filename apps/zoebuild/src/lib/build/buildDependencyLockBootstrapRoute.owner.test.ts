@@ -19,7 +19,10 @@ describe("owner-authorized dependency-lock bootstrap HTTP boundary", () => {
     expect(source).toContain("requireRunnerActorKey(userId)");
     expect(source).toContain("bootstrapOwnedBuildProjectDependencyLock({");
     expect(source).toContain("createPrismaBuildProjectReader(prisma)");
-    expect(source).toContain("createPrismaBuildProjectSourceWriter(prisma)");
+    // Automatic CAS-bound preparation must not create saved history entries;
+    // explicit owner-approved resolution remains a separate writer mode.
+    expect(source).toContain('createPrismaBuildProjectSourceWriter(prisma, {createRevision:false}, "automatic")');
+    expect(source).toContain('createPrismaBuildProjectSourceWriter(prisma, {}, "explicit")');
     expect(source).toContain("executeTrustedDependencyLockBootstrapAtRunner");
 
     expect(source).not.toContain("createContainer(");

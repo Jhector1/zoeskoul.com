@@ -23,7 +23,12 @@ describe("V12K12K1 restored preview and compact scrollable history",()=>{
     expect(route).toContain("bootstrapOwnedBuildProjectDependencyLock({");
   });
   it("automatically restores dependency locks and keeps saved files available if preview fails",()=>{
-    expect(hook).toContain("autoRestoreDependencies: restoredDependencyPinnedRef.current");
+    const shared = read("./sharedPreviewDependencyPreparation.ts");
+    const preparationHook = read("../../components/builder/useSharedPreviewDependencyPreparation.ts");
+    expect(hook).toContain("useSharedPreviewDependencyPreparation(input)");
+    expect(preparationHook).toContain("prepareSharedPreviewDependencies({...selection,isCurrent,");
+    expect(shared).toContain("autoRestoreDependencies:input.restoredDependencyPinned");
+    expect(shared).toContain("reconcileExisting:true,baseVersion:input.sourceVersion");
     expect(route).toContain("adoptRestoredReactDependencyLock(prisma");
     expect(shell).toContain('data-testid="zoebuild-dependency-recovery-help"');
     expect(shell).toContain('setMode("code")');

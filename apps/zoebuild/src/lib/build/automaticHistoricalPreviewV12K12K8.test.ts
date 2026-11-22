@@ -17,7 +17,12 @@ describe("V12K12K8 automatic historical preview",()=>{
   it("restored source is automatically recovered without an extra saved history entry",()=>{
     const hook=read("../../components/builder/useReactVitePreview.ts");
     const route=read("../../app/api/build/projects/[buildProjectId]/dependency-lock/bootstrap/route.ts");
-    expect(hook).toContain("autoRestoreDependencies: restoredDependencyPinnedRef.current");
+    const sharedHook=read("../../components/builder/useSharedPreviewDependencyPreparation.ts");
+    const shared=read("./sharedPreviewDependencyPreparation.ts");
+    expect(hook).toContain("useSharedPreviewDependencyPreparation(input)");
+    expect(sharedHook).toContain("prepareSharedPreviewDependencies({...selection,isCurrent,");
+    expect(shared).toContain("autoRestoreDependencies:input.restoredDependencyPinned");
+    expect(shared).toContain("reconcileExisting:true,baseVersion:input.sourceVersion");
     // K20C reports concrete preparation phases instead of the old generic label.
     // The capability to auto-recover and to reconcile a new saved source is the contract.
     expect(hook).toContain('message: "Verifying the saved version dependency lock…"');
@@ -42,7 +47,9 @@ describe("V12K12K8 automatic historical preview",()=>{
     expect(shell).toContain('data-testid="zoebuild-dependency-recovery-help"');
     expect(shell).toContain("Its files are unchanged.");
     expect(hook).toContain("if (!bootstrapAllowedRef.current)");
-    expect(hook).toContain("baseVersion: startingVersion");
+    const shared=read("./sharedPreviewDependencyPreparation.ts");
+    expect(shared).toContain("reconcileExisting:true,baseVersion:input.sourceVersion");
+    expect(hook).toContain("requestSavedPreviewDependencyPreparation({");
     expect(hook).toContain("workspaceRevisionRef.current !== startingWorkspaceRevision");
   });
 });

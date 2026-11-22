@@ -44,7 +44,9 @@ describe("V12K12K13 dependency recovery continuation", () => {
     expect(hook).toContain("if (!bootstrapAllowedRef.current)");
     expect(hook).toContain("BUILD_DEPENDENCY_LOCK_INVALID");
     expect(hook).toContain("if (!bootstrapAllowedRef.current)");
-    expect(hook).toContain("baseVersion: startingVersion");
+    const shared = readFileSync(new URL("./sharedPreviewDependencyPreparation.ts", import.meta.url), "utf8");
+    expect(hook).toContain("requestSavedPreviewDependencyPreparation({");
+    expect(shared).toContain("reconcileExisting:true,baseVersion:input.sourceVersion");
     expect(hook).toContain("workspaceRevisionRef.current !== startingWorkspaceRevision");
     const shell = readFileSync(new URL("../../app/[locale]/projects/[buildProjectId]/ProjectBuilderShell.tsx", import.meta.url),"utf8");
     expect(shell).toContain("current?.sourceVersion === attemptedSourceVersion");

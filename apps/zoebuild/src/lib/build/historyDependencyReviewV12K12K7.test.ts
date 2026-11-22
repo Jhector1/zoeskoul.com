@@ -25,7 +25,10 @@ describe("V12K12K7 version selection, dependency review, and delete policy",()=>
  it("server deletes only owner-scoped unreferenced non-current snapshots",()=>{
   const route=read("../../app/api/build/projects/[buildProjectId]/source-history/route.ts");
   expect(route).toContain("export async function DELETE");
-  expect(route).toContain("enforceSameOriginPost(req)");
+  // The history mutation route uses the build-specific origin
+  // predicate and must fail closed before it performs owner-scoped writes.
+  expect(route).toContain('import { enforceBuildMutationOrigin } from "@/lib/server/enforceBuildMutationOrigin"');
+  expect(route).toContain('if (!enforceBuildMutationOrigin(req)) return reply(requestId,{ok:false,code:"BUILD_FORBIDDEN"},403);');
   expect(route).toContain("activeSavedHistoryVersion(expectedVersion,owned.codeProject.meta)");
   expect(route).toContain("tx.buildDeployment.findFirst");
   expect(route).toContain("tx.buildRun.findFirst");

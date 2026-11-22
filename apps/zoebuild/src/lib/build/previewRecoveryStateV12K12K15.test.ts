@@ -21,7 +21,9 @@ describe("K15 saved preview retry and source conflict", () => {
     expect(claimSavedDependencyFollowUp(storage,key)).toBe("final");
     expect(claimSavedDependencyFollowUp(storage,key)).toBe("exhausted");
     const hook=read("../../components/builder/useReactVitePreview.ts");
-    expect(hook).toContain('baseVersion: startingVersion');
+    const shared=read("./sharedPreviewDependencyPreparation.ts");
+    expect(shared).toContain("reconcileExisting:true,baseVersion:input.sourceVersion");
+    expect(hook).toContain("requestSavedPreviewDependencyPreparation({");
     expect(hook).toContain('BUILD_RESTORE_DEPENDENCIES_UNVERIFIED');
     expect(hook).toContain('!bootstrapAllowedRef.current');
     expect(hook).not.toContain('approveRestoredDependencyRepair: true');

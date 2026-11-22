@@ -22,7 +22,13 @@ describe("V12K12K3 automatic saved-history dependency restoration",()=>{
   });
   it("recovers automatically without dirty drafts and preserves no-silent-reseal boundary",()=>{
     expect(shell).toContain('allowDependencyBootstrap: !codeDirty,');
-    expect(preview).toContain('autoRestoreDependencies: restoredDependencyPinnedRef.current');
+    const preparationHook=read("../../components/builder/useSharedPreviewDependencyPreparation.ts");
+    const request=read("./sharedPreviewDependencyPreparation.ts");
+    expect(preview).toContain("useSharedPreviewDependencyPreparation(input)");
+    expect(preparationHook).toContain("prepareSharedPreviewDependencies({...selection,isCurrent,");
+    expect(request).toContain("autoRestoreDependencies:input.restoredDependencyPinned");
+    expect(request).toContain("autoPrepareProjectDependencies:!input.restoredDependencyPinned");
+    expect(request).toContain("reconcileExisting:true,baseVersion:input.sourceVersion");
     expect(route).toContain('options.reconcileExisting !== true');
     expect(route).toContain('headMeta?.restoredSnapshotVersion === options.baseVersion');
     expect(route).toContain('options.desiredDependencies !== undefined');

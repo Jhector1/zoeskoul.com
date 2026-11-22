@@ -81,7 +81,7 @@ describe(
     );
 
     it(
-      "uses only the Lovable Preview Code Commerce modebar inside a project",
+      "keeps Preview, Code and Site Settings in the project modebar",
       () => {
         const project =
           readFileSync(
@@ -122,8 +122,10 @@ describe(
         expect(
           project,
         ).toContain(
-          "Commerce",
+          "Site Settings",
         );
+        expect(project).toContain('onClick={() => setSettingsOpen(true)}');
+        expect(project).toContain("<SiteSettingsWorkspacePanel");
       },
     );
 

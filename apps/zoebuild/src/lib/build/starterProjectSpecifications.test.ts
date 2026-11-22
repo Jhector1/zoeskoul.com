@@ -10,7 +10,10 @@ describe("one canonical new-project specification", () => {
     expect(specification.projectType).toBe("fullstack-app");
     expect(specification.targets).toEqual(["web"]);
     expect(specification.deployment.preference).toBe("managed-runtime");
-    expect(specification.requirements.backend).toBe(true);
+    // TanStack Start is full-stack capable, but a new blank project must
+    // not silently require a backend or database before the user requests one.
+    expect(specification.requirements.backend).toBe(false);
+    expect(specification.requirements.database).toBe(false);
     expect(specification.requirements.commerce).toBe(false);
   });
   it("produces fresh specifications and rejects blank names", () => {

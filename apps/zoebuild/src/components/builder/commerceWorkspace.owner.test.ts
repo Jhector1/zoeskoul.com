@@ -87,10 +87,14 @@ describe(
           "setCommerceCandidate",
         );
 
+        expect(shell).toContain("extractShopifyCandidateHostname(submission.prompt)");
+        expect(shell).toContain("candidateHostname={commerceCandidate}");
+        expect(shell).not.toContain("candidateHostname={null}");
+
         expect(
           shell,
         ).toContain(
-          "No store connection has been created yet.",
+          "This detected hostname does not create or verify a store connection.",
         );
 
         expect(

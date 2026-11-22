@@ -9,8 +9,19 @@ describe("P3B7E5A automatic TanStack dependency recovery", () => {
       "utf8",
     );
     expect(hook).toContain("mayAutoRecoverReactPreviewDependencies({");
-    expect(hook).toContain("reconcileExisting: true");
-    expect(hook).toContain("baseVersion: startingVersion");
+    const shared = readFileSync(
+      new URL("./sharedPreviewDependencyPreparation.ts", import.meta.url), "utf8",
+    );
+    const sharedHook = readFileSync(
+      new URL("../../components/builder/useSharedPreviewDependencyPreparation.ts", import.meta.url), "utf8",
+    );
+    expect(hook).toContain("useSharedPreviewDependencyPreparation(input)");
+    expect(hook).toContain("requestSavedPreviewDependencyPreparation({");
+    expect(sharedHook).toContain("prepareSharedPreviewDependencies({...selection,isCurrent,");
+    expect(shared).toContain("reconcileExisting:true,baseVersion:input.sourceVersion");
+    expect(shared).toContain('credentials: "same-origin"');
+    expect(shared).toContain("autoRestoreDependencies:input.restoredDependencyPinned");
+    expect(shared).toContain("autoPrepareProjectDependencies:!input.restoredDependencyPinned");
     expect(hook).toContain("if (!bootstrapAllowedRef.current)");
     expect(hook).toContain("workspaceRevisionRef.current !== startingWorkspaceRevision");
     // K20D2A deliberately continues a verified dependency bootstrap in-page.

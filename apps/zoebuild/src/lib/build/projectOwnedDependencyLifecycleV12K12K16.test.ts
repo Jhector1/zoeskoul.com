@@ -7,8 +7,13 @@ const preview = read("../../components/builder/useReactVitePreview.ts");
 
 describe("K16 project-owned dependencies lifecycle",()=>{
   it("automatically requests project-owned preparation without overriding historical restore policy",()=>{
-    expect(preview).toContain("autoPrepareProjectDependencies: !restoredDependencyPinnedRef.current");
-    expect(preview).toContain("autoRestoreDependencies: restoredDependencyPinnedRef.current");
+    const shared = read("./sharedPreviewDependencyPreparation.ts");
+    const sharedHook = read("../../components/builder/useSharedPreviewDependencyPreparation.ts");
+    expect(preview).toContain("useSharedPreviewDependencyPreparation(input)");
+    expect(sharedHook).toContain("prepareSharedPreviewDependencies({...selection,isCurrent,");
+    expect(shared).toContain("autoPrepareProjectDependencies:!input.restoredDependencyPinned");
+    expect(shared).toContain("autoRestoreDependencies:input.restoredDependencyPinned");
+    expect(shared).toContain("reconcileExisting:true,baseVersion:input.sourceVersion");
   });
   it("requires ownership, CAS, registry pins and scriptless runner",()=>{
     expect(api).toContain("getBuildProjectCommand({");

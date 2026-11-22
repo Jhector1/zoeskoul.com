@@ -39,7 +39,10 @@ describe("TanStack immutable preview decision", () => {
   it("enables the TanStack browser preview and keeps legacy history gated off", () => {
     const shell = readFileSync(fileURLToPath(new URL("../../app/[locale]/projects/[buildProjectId]/ProjectBuilderShell.tsx", import.meta.url)),"utf8");
     expect(shell).toContain('const reactPreviewEnabled =\n    props.project.stackId === "tanstack-start-v1"');
-    expect(shell).toContain('props.project.stackId === "react-vite-v1" ? (');
+    // Legacy React/Vite UI gating must not be reintroduced to appease a
+    // source-string test after the TanStack-only cutover.
+    expect(shell).not.toContain('props.project.stackId === "react-vite-v1" ? (');
+    expect(shell).toContain('const fullStackPreview: RemoteWebPreviewDescriptor = reactPreviewEnabled');
     expect(shell).toContain("confirmedSourceVersion !== previewSourceVersion");
   });
 });
