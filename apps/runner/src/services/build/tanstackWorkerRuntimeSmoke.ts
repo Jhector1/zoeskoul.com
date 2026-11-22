@@ -6,6 +6,7 @@ import { fetchTanstackHttpInsideSandbox, probeTanstackListenerInsideSandbox, ret
 import { isTanstackSsrReady, TANSTACK_PREVIEW_OFFLINE_ENV } from "./tanstackPreviewRuntimePolicy.js";
 import { workerSmokeCommand, selectWorkerSmokeAssets } from "./tanstackWorkerRuntimePolicy.js";
 import { readTanstackWorkerArtifact } from "./tanstackWorkerArtifact.js";
+import { serveWorkerBrowserPilot, workerBrowserPilotEnabled, WORKER_BROWSER_PILOT_MAX_MS } from "./tanstackWorkerBrowserPilot.js";
 
 export function workerSmokeContainerOptions(workspaceDir: string, artifact: TanstackWorkerArtifactV1, runId: string) {
   const command = workerSmokeCommand(artifact);
@@ -84,6 +85,17 @@ export async function runTanstackWorkerRuntimeSmoke(input: Readonly<{
         throw new Error("Worker client asset mismatch.");
     }
     result={state:"passed",artifactSha256:input.artifact.sha256,homeStatus:200,healthStatus:200,verifiedClientAssets:2};
+    // Temporary exact-artifact pilot. Never expose a TCP or application route.
+    // A disconnected or absent operator cannot extend the original deadline.
+    if(workerBrowserPilotEnabled(input.artifact.sha256)) {
+      const windowMs=Math.min(WORKER_BROWSER_PILOT_MAX_MS,Math.floor(hardDeadline-performance.now()));
+      if(windowMs>0) {
+        try {
+          await serveWorkerBrowserPilot({artifact:input.artifact,windowMs,get,
+            onReady:()=>console.info("U18G3_BROWSER_WINDOW_READY")});
+        } catch { console.warn("U18G3_BROWSER_WINDOW_FAILED"); }
+      }
+    }
   } catch { result=failed(); }
   finally {
     // Stop the application before the workspace is reclaimed. Journal identity
