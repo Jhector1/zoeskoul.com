@@ -6,6 +6,7 @@ vi.mock("../docker/dockerClient.js",()=>({docker:{
 import { docker } from "../docker/dockerClient.js";
 import {
   fetchTanstackHttpInsideSandbox,
+  fetchTanstackWorkerReferenceRpcInsideSandbox,
   probeTanstackListenerInsideSandbox,
   retireTanstackHttpWorker,
   TanstackPreviewTransportError,
@@ -158,5 +159,63 @@ describe("H10S2 isolated transport deadlines",()=>{
       stream.reply({id:999,status:200});expect(await p).toMatchObject({stage:"worker_protocol"});
       expect(stream.destroyed).toBe(true);expect(stream.writes).toHaveLength(1);
     }finally{await retireTanstackHttpWorker(container);}
+  });
+});
+
+
+describe("U18G8C internal reference RPC transport",()=>{
+  const container="a".repeat(64);
+  const valid={status:200,headers:{"content-type":"application/json","x-tss-serialized":"true"},
+    bodyBase64:Buffer.from('{"public":true}').toString("base64")};
+  function fixture(){
+    const stream=new FakeDockerStream();
+    const exec=vi.fn(async()=>({start:async()=>stream}));
+    vi.mocked(docker.getContainer).mockReturnValue({exec} as never);
+    return {stream,exec};
+  }
+  it("uses the same correlated worker and fixed reference request",async()=>{
+    const {stream,exec}=fixture();
+    try{
+      const probe=probeTanstackListenerInsideSandbox(container,500);
+      await vi.waitFor(()=>expect(stream.writes).toHaveLength(1));
+      stream.reply({id:1,listening:true});expect(await probe).toBe(true);
+      const rpc=fetchTanstackWorkerReferenceRpcInsideSandbox(container);
+      await vi.waitFor(()=>expect(stream.writes).toHaveLength(2));
+      expect(JSON.parse(stream.writes[1])).toEqual({id:2,method:"GET",
+        path:"/_serverFn/d7d1301c09c53b5497b047b58498a2306f5c4674e7c042aed9674da299432ebb",
+        headers:{accept:"*/*"},bodyBase64:"",applicationRpc:"tanstack-worker-reference-get-v1"});
+      stream.reply({id:2,...valid});
+      await expect(rpc).resolves.toMatchObject({status:200,bodyBase64:valid.bodyBase64,
+        headers:{"content-type":"application/json","cache-control":"no-store","x-tss-serialized":"true"}});
+      expect(exec).toHaveBeenCalledTimes(1);
+    }finally{await retireTanstackHttpWorker(container);}
+  });
+  it.each([
+    {status:201},{status:302},{headers:{"content-type":"application/json"}},
+    {headers:{...valid.headers,"set-cookie":"fixture=1"}},
+    {headers:{...valid.headers,"x-tss-raw":"true"}},
+    {headers:{...valid.headers,"content-type":"text/html"}},
+    {bodyBase64:Buffer.from('[]').toString("base64")},
+    {bodyBase64:Buffer.from('not json').toString("base64")},
+    {bodyBase64:Buffer.from(' '.repeat(16385)).toString("base64")},
+  ])("rejects invalid reference response %#",async(change)=>{
+    const {stream}=fixture();
+    try{
+      const rpc=fetchTanstackWorkerReferenceRpcInsideSandbox(container).catch(e=>e);
+      await vi.waitFor(()=>expect(stream.writes).toHaveLength(1));
+      stream.reply({id:1,...valid,...change});
+      expect(await rpc).toMatchObject({stage:"worker_protocol"});
+    }finally{await retireTanstackHttpWorker(container);}
+  });
+  it("rejects the reference protocol at the ordinary transport entry point before Docker I/O",async()=>{
+    vi.mocked(docker.getContainer).mockClear();
+    await expect(fetchTanstackHttpInsideSandbox(container,{method:"GET",path:"/",headers:{accept:"*/*"},
+      bodyBase64:"",applicationRpc:"tanstack-worker-reference-get-v1"} as never)).rejects.toMatchObject({stage:"worker_protocol"});
+    expect(docker.getContainer).not.toHaveBeenCalled();
+  });
+  it("rejects noncanonical container identities before Docker I/O",async()=>{
+    vi.mocked(docker.getContainer).mockClear();
+    await expect(fetchTanstackWorkerReferenceRpcInsideSandbox("container-alias")).rejects.toMatchObject({stage:"worker_protocol"});
+    expect(docker.getContainer).not.toHaveBeenCalled();
   });
 });

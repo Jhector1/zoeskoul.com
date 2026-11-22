@@ -85,7 +85,14 @@ def perform(item):
                 raise ValueError("invalid mutation body")
         elif deadline is not None:
             raise ValueError("unexpected mutation deadline")
-        if rpc is not None:
+        reference = rpc == "tanstack-worker-reference-get-v1"
+        if reference:
+            if set(item) != {"id", "method", "path", "headers", "bodyBase64", "applicationRpc"} or method != "GET" or path != "/_serverFn/d7d1301c09c53b5497b047b58498a2306f5c4674e7c042aed9674da299432ebb" or raw != "" or body or supplied != {"accept": "*/*"}:
+                raise ValueError("invalid reference rpc request")
+            headers["Accept"] = "application/x-tss-framed, application/x-ndjson, application/json"
+            headers["X-TSR-ServerFn"] = "true"
+            headers["Origin"] = "http://127.0.0.1:5173"
+        elif rpc is not None:
             if not mutation and (rpc != "tanstack-json-get-v1" or method != "GET" or body or set(supplied) != {"accept"} or not re.fullmatch(r"/api/build/projects/[A-Za-z0-9_-]+/preview/preview_[a-f0-9-]+/content/[A-Za-z0-9_-]{32}/_serverFn/[A-Za-z0-9_-]{1,2048}(?:\?payload=[^&]*)?", path)):
                 raise ValueError("invalid rpc request")
             headers["Accept"] = "application/x-tss-framed, application/x-ndjson, application/json"
@@ -113,6 +120,17 @@ def perform(item):
             raise WorkerFailure("vite_response")
         header_type = reply.getheader("Content-Type", "")
         safe_headers = {"content-type": header_type} if isinstance(header_type, str) and 0 < len(header_type) <= 180 else {}
+        if reference:
+            flags = [v for k, v in reply.getheaders() if k.lower() == "x-tss-serialized"]
+            raw_flags = [v for k, v in reply.getheaders() if k.lower() == "x-tss-raw"]
+            content_types = [v for k, v in reply.getheaders() if k.lower() == "content-type"]
+            forbidden = any(k.lower() in ("set-cookie", "location") for k, v in reply.getheaders())
+            if reply.status != 200 or len(data) > 16384 or flags != ["true"] or raw_flags or forbidden or len(content_types) != 1 or not re.fullmatch(r"application/json(?:;\s*charset=utf-8)?", content_types[0], re.I):
+                raise WorkerFailure("vite_response")
+            parsed = json.loads(data.decode("utf-8", errors="strict"))
+            if not isinstance(parsed, dict):
+                raise WorkerFailure("vite_response")
+            safe_headers["x-tss-serialized"] = "true"
         if rpc in ("tanstack-json-get-v1", "tanstack-json-post-v1"):
             flags = [v for k, v in reply.getheaders() if k.lower() == "x-tss-serialized"]
             raw_flags = [v for k, v in reply.getheaders() if k.lower() == "x-tss-raw"]

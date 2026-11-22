@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { performance } from "node:perf_hooks";
 
 const PILOT_FLAG = "cmwqiqnly0002eldlcafn1xjx:7:b40575ab3dccf60706a129b2088a6cc57c8facb8d4fe962fb3df817c8be0a9ca";
+export const REFERENCE_BROWSER_RPC_PATH = "/_serverFn/d7d1301c09c53b5497b047b58498a2306f5c4674e7c042aed9674da299432ebb";
 const PILOT_ARTIFACT = "28bd98025eccd22a4126029fbcce7862e2885629a4a9e71b3efd8723ca40eeba";
 export const WORKER_BROWSER_PILOT_MAX_MS = 45_000;
 const MAX_REQUESTS = 48;
@@ -22,6 +23,8 @@ export function workerBrowserPilotEnabled(sha:string, flag=process.env.ZOEBUILD_
 export async function serveWorkerBrowserPilot(input:Readonly<{
   artifact:TanstackWorkerArtifactV1; windowMs:number;
   get:(path:string,accept:string)=>Promise<Reply>;
+  // Only the trusted reference runtime may supply this fixed-operation callback.
+  referenceRpc?:()=>Promise<Reply>;
   onReady?:(socketPath:string)=>void;
 }>):Promise<void> {
   if(!Number.isSafeInteger(input.windowMs)||input.windowMs<1||input.windowMs>WORKER_BROWSER_PILOT_MAX_MS)
@@ -32,7 +35,7 @@ export async function serveWorkerBrowserPilot(input:Readonly<{
   const dir=await mkdtemp("/tmp/zoebuild-u18g3-"); // exclusive private directory (0700)
   const socketPath=join(dir,"relay.sock");
   let active:Socket|undefined;
-  let closed=false, claimed=false, busy=false, count=0,total=0;
+  let closed=false, claimed=false, busy=false, count=0,total=0,rpcCount=0;
   let timer:ReturnType<typeof setTimeout>|undefined;
   let finish!:()=>void;
   const done=new Promise<void>(resolve=>{finish=resolve;});
@@ -57,16 +60,23 @@ export async function serveWorkerBrowserPilot(input:Readonly<{
           if(!raw||typeof raw!=="object"||Array.isArray(raw)||Object.keys(raw).join(",")!=="path"||!("path" in raw)||typeof raw.path!=="string")throw new Error();
           const path=raw.path;
           const asset=assets.get(path);
-          if(!asset&&path!=="/"&&path!=="/about"&&path!=="/api/health")throw new Error();
+          const rpc = path === REFERENCE_BROWSER_RPC_PATH && !!input.referenceRpc;
+          if(!rpc&&!asset&&path!=="/"&&path!=="/about"&&path!=="/api/health")throw new Error();
+          if(rpc&&++rpcCount>1)throw new Error();
           if(++count>MAX_REQUESTS)throw new Error();
-          const reply=await input.get(path,asset?"*/*":path==="/api/health"?"application/json":"text/html");
+          const reply=rpc?await input.referenceRpc!():await input.get(path,asset?"*/*":path==="/api/health"?"application/json":"text/html");
           if(closed)return;
           const mime=reply.headers["content-type"];
           if(reply.status!==200||typeof mime!=="string"||!mime||mime.length>180||/[^\x20-\x7e]/.test(mime)||typeof reply.bodyBase64!=="string"||reply.bodyBase64.length>Math.ceil(MAX_REPLY_BYTES/3)*4)throw new Error();
           const data=Buffer.from(reply.bodyBase64,"base64");
           if(data.length>MAX_REPLY_BYTES||data.toString("base64")!==reply.bodyBase64||(asset&&reply.bodyBase64!==asset.data))throw new Error();
+          if(rpc && (data.length>16384 || !/^application\/json(?:\s*;\s*charset=utf-8)?$/i.test(mime) ||
+            reply.headers["x-tss-serialized"]!=="true" || Object.keys(reply.headers).some(k=>
+              !["content-type","cache-control","x-tss-serialized"].includes(k))))throw new Error();
           total+=data.length;if(total>MAX_TOTAL_BYTES)throw new Error();
-          const encoded=JSON.stringify({status:200,contentType:mime,bodyBase64:reply.bodyBase64})+"\n";
+          const encoded=JSON.stringify({status:200,contentType:mime,bodyBase64:reply.bodyBase64,
+            ...(input.referenceRpc ? {artifactSha256:input.artifact.sha256} : {}),
+            ...(rpc ? {serialized:true} : {})})+"\n";
           // Do not allow another request before the bounded response flushes.
           socket.write(encoded,()=>{busy=false;});
         } catch {stop();}

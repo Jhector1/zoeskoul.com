@@ -13,6 +13,7 @@ import {
 
 import { executeTanstackWorkerBuild } from "../services/build/tanstackWorkerBuild.js";
 import { assertTanstackWorkerBuildRequest } from "../services/build/tanstackWorkerBuildPolicy.js";
+import { referenceOperatorAllowed, shouldRunReferenceWorkerSmoke, WORKER_REFERENCE_PROJECT } from "../services/build/tanstackWorkerRuntimePolicy.js";
 
 import { classifyProductionBuildStepFailure, TrustedProductionBuildStepFailure } from "../services/build/productionBuildStepFailure.js";
 
@@ -52,9 +53,15 @@ export const executeBuildProductionRoute:
         // This service route is authenticated globally in app.ts; the ZoeBuild
         // control plane must independently check the owner and source version.
         assertTanstackWorkerBuildRequest(request);
+        const reference = request.buildProjectId === WORKER_REFERENCE_PROJECT;
+        if (reference && (!referenceOperatorAllowed(req.header("x-actor-key"), req.socket.remoteAddress,
+          Object.keys(req.headers).some(key => key === "forwarded" || key.startsWith("x-forwarded-") || key === "x-real-ip")) ||
+          !shouldRunReferenceWorkerSmoke(request))) {
+          return res.status(403).json({ok:false,error:"Forbidden."});
+        }
         candidatePaths = new Set(request.files.map(file => file.path));
         const result = await withZoeBuildBuildSlot(
-          () => executeTanstackWorkerBuild(request),
+          () => reference ? executeTanstackWorkerBuild(request, true) : executeTanstackWorkerBuild(request),
         );
 
         return res

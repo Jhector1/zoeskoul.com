@@ -8,7 +8,7 @@ import { executeBuildStep } from "./executeProductionBuild.js";
 import { readTanstackWorkerArtifact } from "./tanstackWorkerArtifact.js";
 import { env } from "../../lib/env.js";
 import { createTanstackRecoveryJournal } from "./tanstackPreviewDurableRecovery.js";
-import { shouldRunWorkerSmoke } from "./tanstackWorkerRuntimePolicy.js";
+import { shouldRunWorkerSmoke, shouldRunReferenceWorkerSmoke, WORKER_REFERENCE_PROJECT } from "./tanstackWorkerRuntimePolicy.js";
 import { runTanstackWorkerRuntimeSmoke } from "./tanstackWorkerRuntimeSmoke.js";
 
 /**
@@ -20,9 +20,13 @@ import { runTanstackWorkerRuntimeSmoke } from "./tanstackWorkerRuntimeSmoke.js";
 
 export async function executeTanstackWorkerBuild(
   request: ProductionBuildJobRequestV1,
+  referenceAuthorized = false,
 ) {
   assertTanstackWorkerBuildRequest(request);
-  const pilot = shouldRunWorkerSmoke(request);
+  const reference = referenceAuthorized && shouldRunReferenceWorkerSmoke(request);
+  if (referenceAuthorized !== reference || (request.buildProjectId === WORKER_REFERENCE_PROJECT && !reference))
+    throw new Error("Reference fixture admission refused.");
+  const pilot = shouldRunWorkerSmoke(request) || reference;
   const journal = pilot ? createTanstackRecoveryJournal(env.workspaceRoot) : null;
   if (journal) await journal.write();
   const workspaceDir = await createWorkspace([...request.files, ...(request.binaryFiles ?? [])], {
@@ -50,6 +54,7 @@ export async function executeTanstackWorkerBuild(
     const artifact = await readTanstackWorkerArtifact(workspaceDir);
     const runtimeSmoke = journal ? await runTanstackWorkerRuntimeSmoke({workspaceDir, artifact, runId,
       onContainerCreated: lifecycle.onContainerCreated!, onContainerRemoved: lifecycle.onContainerRemoved!,
+      ...(reference ? {reference: true as const} : {}),
     }) : undefined;
     return { protocolVersion: request.protocolVersion, operation: "production-build" as const,
       buildProjectId: request.buildProjectId, sourceVersion: request.sourceVersion,

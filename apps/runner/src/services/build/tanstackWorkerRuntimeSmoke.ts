@@ -2,14 +2,14 @@ import type { TanstackWorkerArtifactV1, TanstackWorkerRuntimeSmokeV1 } from "@zo
 import { performance } from "node:perf_hooks";
 import { docker } from "../docker/dockerClient.js";
 import { buildProductionBuildContainerOptions } from "./executeProductionBuild.js";
-import { fetchTanstackHttpInsideSandbox, probeTanstackListenerInsideSandbox, retireTanstackHttpWorker } from "./tanstackPreviewDockerTransport.js";
+import { fetchTanstackWorkerReferenceRpcInsideSandbox, fetchTanstackHttpInsideSandbox, probeTanstackListenerInsideSandbox, retireTanstackHttpWorker } from "./tanstackPreviewDockerTransport.js";
 import { isTanstackSsrReady, TANSTACK_PREVIEW_OFFLINE_ENV } from "./tanstackPreviewRuntimePolicy.js";
 import { workerSmokeCommand, selectWorkerSmokeAssets } from "./tanstackWorkerRuntimePolicy.js";
 import { readTanstackWorkerArtifact } from "./tanstackWorkerArtifact.js";
 import { serveWorkerBrowserPilot, workerBrowserPilotEnabled, WORKER_BROWSER_PILOT_MAX_MS } from "./tanstackWorkerBrowserPilot.js";
 
-export function workerSmokeContainerOptions(workspaceDir: string, artifact: TanstackWorkerArtifactV1, runId: string) {
-  const command = workerSmokeCommand(artifact);
+export function workerSmokeContainerOptions(workspaceDir: string, artifact: TanstackWorkerArtifactV1, runId: string, reference = false) {
+  const command = workerSmokeCommand(artifact, reference);
   const base = buildProductionBuildContainerOptions({workspaceDir, command, step:"build"});
   const options = {...base,
     Env:[...base.Env, TANSTACK_PREVIEW_OFFLINE_ENV, "WRANGLER_SEND_METRICS=false", "NODE_ENV=production"],
@@ -32,11 +32,12 @@ export function workerSmokeContainerOptions(workspaceDir: string, artifact: Tans
 export async function runTanstackWorkerRuntimeSmoke(input: Readonly<{
   workspaceDir:string; artifact:TanstackWorkerArtifactV1; runId:string;
   onContainerCreated:(id:string)=>Promise<void>; onContainerRemoved:()=>Promise<void>;
+  reference?: true;
 }>):Promise<TanstackWorkerRuntimeSmokeV1> {
   let stage: Extract<TanstackWorkerRuntimeSmokeV1,{state:"failed"}>["stage"]="configuration";
   const failed=():TanstackWorkerRuntimeSmokeV1=>({state:"failed",stage,artifactSha256:input.artifact.sha256});
   let options:ReturnType<typeof workerSmokeContainerOptions>;
-  try { options=workerSmokeContainerOptions(input.workspaceDir,input.artifact,input.runId); }
+  try { options=workerSmokeContainerOptions(input.workspaceDir,input.artifact,input.runId,input.reference === true); }
   catch { return failed(); }
   stage="startup";
   const container=await docker.createContainer(options);
@@ -87,12 +88,16 @@ export async function runTanstackWorkerRuntimeSmoke(input: Readonly<{
     result={state:"passed",artifactSha256:input.artifact.sha256,homeStatus:200,healthStatus:200,verifiedClientAssets:2};
     // Temporary exact-artifact pilot. Never expose a TCP or application route.
     // A disconnected or absent operator cannot extend the original deadline.
-    if(workerBrowserPilotEnabled(input.artifact.sha256)) {
+    if(input.reference || workerBrowserPilotEnabled(input.artifact.sha256)) {
       const windowMs=Math.min(WORKER_BROWSER_PILOT_MAX_MS,Math.floor(hardDeadline-performance.now()));
       if(windowMs>0) {
         try {
           await serveWorkerBrowserPilot({artifact:input.artifact,windowMs,get,
-            onReady:()=>console.info("U18G3_BROWSER_WINDOW_READY")});
+            ...(input.reference ? {referenceRpc:()=>{
+              if(performance.now()>=hardDeadline)throw new Error("Worker smoke deadline.");
+              return bounded(fetchTanstackWorkerReferenceRpcInsideSandbox(container.id),hardDeadline);
+            }} : {}),
+            onReady:()=>console.info(input.reference ? "U18G8E_REFERENCE_BROWSER_WINDOW_READY" : "U18G3_BROWSER_WINDOW_READY")});
         } catch { console.warn("U18G3_BROWSER_WINDOW_FAILED"); }
       }
     }

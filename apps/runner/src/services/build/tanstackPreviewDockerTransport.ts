@@ -4,6 +4,7 @@ import { docker } from "../docker/dockerClient.js";
 import { TANSTACK_PREVIEW_HTTP_WORKER } from "./tanstackPreviewHttpWorker.js";
 import {
   normalizeTanstackPreviewHttpResponse,
+  TANSTACK_JSON_GET_RPC,
   type TanstackPreviewTransportRequest,
 } from "./tanstackPreviewHttpBoundary.js";
 import { boundedPreviewDuration, previewObservability } from "./previewObservability.js";
@@ -172,8 +173,16 @@ export async function retireTanstackHttpWorker(containerId:string):Promise<void>
 
 type ListenerProbeRequest = Readonly<{operation:"probe-listener";timeoutMs:number}>;
 
+// Separate private operation, not part of the development request grammar.
+const REFERENCE_RPC_PATH = "/_serverFn/d7d1301c09c53b5497b047b58498a2306f5c4674e7c042aed9674da299432ebb";
+const REFERENCE_RPC_PROTOCOL = "tanstack-worker-reference-get-v1";
+type ReferenceRpcRequest = Readonly<{
+  method:"GET"; path:typeof REFERENCE_RPC_PATH; headers:Readonly<{accept:"*/*"}>;
+  bodyBase64:""; applicationRpc:typeof REFERENCE_RPC_PROTOCOL;
+}>;
+
 async function requestWorker(worker:PreviewHttpWorker,
-  request:TanstackPreviewTransportRequest | ListenerProbeRequest,
+  request:TanstackPreviewTransportRequest | ListenerProbeRequest | ReferenceRpcRequest,
   deadlineMs = REQUEST_DEADLINE_MS,
 ) {
   if(worker.closed || worker.pending.size>=MAX_PENDING)
@@ -229,6 +238,11 @@ export async function fetchTanstackHttpInsideSandbox(containerId: string,
   const startedAt = performance.now();
   const endRequest=previewObservability.beginTransportRequest(options.purpose??"application");
   try {
+  // Reject unknown internal protocols before any Docker I/O, even if a caller
+  // bypasses the TypeScript development-request type at runtime.
+  if(request.applicationRpc!==undefined && request.applicationRpc!==TANSTACK_JSON_GET_RPC &&
+    request.applicationRpc!=="tanstack-json-post-v1")
+    throw new TanstackPreviewTransportError("worker_protocol");
   const worker=await acquireWorker(containerId);
   if(request.applicationRpc==="tanstack-json-post-v1" &&
     (typeof request.mutationDeadlineMs!=="number" || Date.now()>=request.mutationDeadlineMs))
@@ -256,4 +270,33 @@ export async function fetchTanstackHttpInsideSandbox(containerId: string,
     endRequest(safe.stage);
     throw safe;
   }
+}
+
+/** Internal reference-fixture primitive. No path, headers, body or protocol
+ * supplied by the caller. Not wired to any route or active runtime pilot.
+ * A future caller must establish the exact trusted fixture and live container
+ * identity before invoking this function; this function is not authorization. */
+export async function fetchTanstackWorkerReferenceRpcInsideSandbox(containerId:string) {
+  if(!/^[a-f0-9]{64}$/.test(containerId))
+    throw new TanstackPreviewTransportError("worker_protocol");
+  const worker=await acquireWorker(containerId);
+  const request:ReferenceRpcRequest={method:"GET",path:REFERENCE_RPC_PATH,
+    headers:{accept:"*/*"},bodyBase64:"",applicationRpc:REFERENCE_RPC_PROTOCOL};
+  const reply=await requestWorker(worker,request);
+  try {
+    const raw=reply as Record<string,unknown>;
+    const headers=raw.headers;
+    if(raw.status!==200 || typeof raw.bodyBase64!=="string" ||
+      raw.bodyBase64.length>Math.ceil(16384/3)*4 ||
+      !headers || typeof headers!=="object" || Array.isArray(headers) ||
+      Object.keys(headers).sort().join(",")!=="content-type,x-tss-serialized")
+      throw new Error();
+    // The serialized JSON format is shared, but the request grammar is not.
+    const normalized=normalizeTanstackPreviewHttpResponse(reply,TANSTACK_JSON_GET_RPC);
+    const bytes=Buffer.from(normalized.bodyBase64,"base64");
+    if(bytes.length>16384)throw new Error();
+    const value:unknown=JSON.parse(bytes.toString("utf8"));
+    if(!value || typeof value!=="object" || Array.isArray(value))throw new Error();
+    return normalized;
+  } catch { throw new TanstackPreviewTransportError("worker_protocol"); }
 }
