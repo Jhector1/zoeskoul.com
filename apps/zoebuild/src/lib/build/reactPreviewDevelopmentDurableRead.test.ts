@@ -93,7 +93,9 @@ describe("Phase 4F5H10P bounded durable resource revision retry",()=>{
    expect(checkDurablePreviewGrant).toHaveBeenCalledTimes(3);
    expect(requireOwnedReactPreviewProject).toHaveBeenCalledTimes(3);
   });
- it.each(["public/images/a.png","_serverFn/images/a.png","images/../a.png","other/hero.png"])(
+ it.each(["public/images/a.png","_serverFn/images/a.png","images/../a.png","images/./a.png",
+  "images/nested/../../a.png","images/%2e%2e/a.png","images/nested\\a.png",
+  "node_modules/../escape.js","src/../other.js","other/hero.png"])(
   "does not replay a revision-transition response outside trusted static roots: %s",async(path)=>{
    vi.mocked(proxyFetchTrustedReactDevelopmentPreviewAtRunner).mockRejectedValueOnce(transition());
    await expect(readOwnedDevelopmentPreviewBrowserContent({...args,path})).rejects.toMatchObject({status:409});
