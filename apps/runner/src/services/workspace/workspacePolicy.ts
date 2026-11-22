@@ -12,6 +12,7 @@ import {
   workspaceBase64DecodedByteLength,
 } from "@zoeskoul/code-contracts";
 import { env } from "../../lib/env.js";
+import { getWorkerDirectoryUsage } from "./workspaceUsageWorker.js";
 import {
   isRunnerManagedDirPath,
   isRunnerManagedFilePath,
@@ -359,7 +360,8 @@ export async function getDirectoryUsage(
   // Preserve the existing Learning/legacy filesystem contract. The dedicated
   // shared-group policy is explicitly opt-in and not enabled in Learning.
   return env.workspaceFilesystemPolicy === "shared-group-v1"
-    ? getStrictDirectoryUsage(dir,limits) : getLegacyDirectoryUsage(dir,limits);
+    ? (process.platform === "linux" ? getWorkerDirectoryUsage(dir,limits) : getStrictDirectoryUsage(dir,limits))
+    : getLegacyDirectoryUsage(dir,limits);
 }
 
 export async function getDirectoryBytes(dir: string): Promise<number> {

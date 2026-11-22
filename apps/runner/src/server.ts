@@ -1,6 +1,7 @@
 import { createServer } from "node:http";
 import { app } from "./app.js";
 import { env } from "./lib/env.js";
+import { configureZoebuildHttpServer } from "./lib/zoebuildHttpPolicy.js";
 import { attachSessionWsServer } from "./ws/sessionWsServer.js";
 import { attachTanstackDevelopmentHmrWsServer } from "./ws/tanstackDevelopmentHmrWsServer.js";
 import { cleanupRunnerOrphansOnStartup } from "./services/docker/runnerReaper.js";
@@ -10,6 +11,7 @@ import { startSessionCleanupLoop } from "./services/sessions/timeoutManager.js";
 
 async function main() {
   const server = createServer(app);
+  configureZoebuildHttpServer(server);
   const handleSessionUpgrade = attachSessionWsServer();
   const handleDevelopmentHmrUpgrade = attachTanstackDevelopmentHmrWsServer();
 

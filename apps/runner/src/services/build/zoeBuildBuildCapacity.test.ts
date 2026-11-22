@@ -1,3 +1,4 @@
+import * as admission from "./zoebuildPreviewAdmission.js";
 import { describe, expect, it, vi } from "vitest";
 import {
   MAX_ZOEBUILD_CONCURRENT_BUILDS,
@@ -110,5 +111,41 @@ describe("trusted bootstrap single-flight and bounded FIFO admission", () => {
       vi.useRealTimers();
     }
     expect(zoeBuildBuildCapacitySnapshot().active).toBe(0);
+  });
+});
+
+
+describe("shared maintenance gate for one-shot ZoeBuild work", () => {
+  it("rejects new production and bootstrap work before allocating capacity",async()=>{
+    vi.stubEnv("RUNNER_EXECUTION_POOL","zoebuild");
+    const gate=vi.spyOn(admission,"assertZoebuildPreviewAdmissionOpen").mockImplementation(()=>{throw new admission.ZoebuildPreviewMaintenanceError();});
+    const run=vi.fn(async()=>"never");
+    try {
+      await expect(withZoeBuildBuildSlot(run)).rejects.toBeInstanceOf(admission.ZoebuildPreviewMaintenanceError);
+      await expect(withZoeBuildQueuedBootstrapSlot("closed",run)).rejects.toBeInstanceOf(admission.ZoebuildPreviewMaintenanceError);
+      expect(run).not.toHaveBeenCalled();
+      expect(zoeBuildBuildCapacitySnapshot().active).toBe(0);
+      expect(zoeBuildBootstrapQueueSnapshot()).toMatchObject({waiting:0,duplicateKeys:0});
+    } finally {gate.mockRestore();vi.unstubAllEnvs();}
+  });
+  it("lets admitted work finish but rejects queued work after closure without leaking its slot",async()=>{
+    vi.stubEnv("RUNNER_EXECUTION_POOL","zoebuild");
+    const gate=vi.spyOn(admission,"assertZoebuildPreviewAdmissionOpen").mockImplementation(()=>{});
+    let release!:()=>void;
+    const hold=new Promise<void>(r=>{release=r;});
+    const first=withZoeBuildBuildSlot(async()=>{await hold;return "done";});
+    const run=vi.fn(async()=>"never");
+    const waiting=withZoeBuildQueuedBootstrapSlot("before-close",run);
+    const rejected=expect(waiting).rejects.toBeInstanceOf(admission.ZoebuildPreviewMaintenanceError);
+    try {
+      expect(zoeBuildBootstrapQueueSnapshot().waiting).toBe(1);
+      gate.mockImplementation(()=>{throw new admission.ZoebuildPreviewMaintenanceError();});
+      release();await expect(first).resolves.toBe("done");await rejected;
+      expect(run).not.toHaveBeenCalled();
+      expect(zoeBuildBuildCapacitySnapshot().active).toBe(0);
+      expect(zoeBuildBootstrapQueueSnapshot()).toMatchObject({waiting:0,duplicateKeys:0});
+      gate.mockImplementation(()=>{});
+      await expect(withZoeBuildBuildSlot(async()=>"reopened")).resolves.toBe("reopened");
+    } finally {release();gate.mockRestore();vi.unstubAllEnvs();}
   });
 });

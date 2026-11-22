@@ -41,7 +41,25 @@ import { previewObservability } from "./services/build/previewObservability.js";
 import { sharedFullStackPreviews } from "./services/build/sharedPreviewRegistry.js";
 import { sharedPreviewStartCoordinator } from "./services/build/sharedPreviewRuntimeState.js";
 import { previewDependencyLayerStore } from "./services/build/previewDependencyLayerStore.js";
-import { zoeBuildBootstrapQueueSnapshot } from "./services/build/zoeBuildBuildCapacity.js";
+import { zoeBuildBootstrapQueueSnapshot, zoeBuildBuildCapacitySnapshot } from "./services/build/zoeBuildBuildCapacity.js";
+import { assertZoebuildPreviewAdmissionOpen } from "./services/build/zoebuildPreviewAdmission.js";
+
+function zoebuildDeploymentSnapshot() {
+  let admissionOpen = false;
+  try { assertZoebuildPreviewAdmissionOpen(); admissionOpen = true; } catch { /* fail closed */ }
+  const lifecycle = previewObservability.snapshot();
+  return {
+    admissionOpen,
+    build: zoeBuildBuildCapacitySnapshot(),
+    bootstrapQueue: zoeBuildBootstrapQueueSnapshot(),
+    previews: sharedFullStackPreviews.snapshot(),
+    previewStartQueue: sharedPreviewStartCoordinator.snapshot(),
+    operationsActive: lifecycle.operations.active,
+    nativeStartupActive: lifecycle.nativeStartup.active,
+    dockerExecActive: lifecycle.dockerExec.active,
+    transportRequestsActive: lifecycle.transportRequests.active,
+  };
+}
 
 export const app = express();
 
@@ -87,7 +105,9 @@ app.use(requireServiceAuth);
 
 // Authenticated healthcheck for Caddy/smoke tests.
 app.get("/health", (_req, res) => {
-  res.status(200).json({ ok: true, stats: getSessionStats() });
+  res.status(200).json({ ok: true, stats: getSessionStats(),
+    ...(process.env.RUNNER_EXECUTION_POOL === "zoebuild" ? {zoebuildDeployment: zoebuildDeploymentSnapshot()} : {}),
+  });
 });
 
 app.get("/metrics", async (_req, res) => {

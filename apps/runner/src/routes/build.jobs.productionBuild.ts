@@ -1,3 +1,4 @@
+import { ZoebuildPreviewMaintenanceError } from "../services/build/zoebuildPreviewAdmission.js";
 import type {
   RequestHandler,
 } from "express";
@@ -68,6 +69,10 @@ export const executeBuildProductionRoute:
           .status(200)
           .json({ ok: true, result });
       } catch (error) {
+        if (error instanceof ZoebuildPreviewMaintenanceError) {
+          res.setHeader("Retry-After", "30");
+          return res.status(503).json({ok:false,code:"PREVIEW_MAINTENANCE"});
+        }
         if (error instanceof ZoeBuildBuildCapacityError) {
           return res.status(429).json({
             ok: false,

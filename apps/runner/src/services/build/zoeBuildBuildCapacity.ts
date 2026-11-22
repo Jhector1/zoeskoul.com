@@ -1,3 +1,5 @@
+import { assertZoebuildPreviewAdmissionOpen } from "./zoebuildPreviewAdmission.js";
+
 /**
  * Single-process admission for trusted ZoeBuild one-shot executor jobs.
  *
@@ -10,6 +12,11 @@
  * This is not a second executor and does not grant generated code a socket.
  */
 export const MAX_ZOEBUILD_CONCURRENT_BUILDS = 1 as const;
+
+// Extend the existing operator-controlled preview gate; no second switch.
+function assertTrustedBuildAdmissionOpen(): void {
+  if (process.env.RUNNER_EXECUTION_POOL === "zoebuild") assertZoebuildPreviewAdmissionOpen();
+}
 
 let activeZoeBuilds = 0;
 let activeStartedAt: number | null = null;
@@ -37,6 +44,7 @@ export function zoeBuildBuildCapacitySnapshot(): Readonly<{
 export async function withZoeBuildBuildSlot<T>(
   execute: () => Promise<T>,
 ): Promise<T> {
+  assertTrustedBuildAdmissionOpen();
   if (activeZoeBuilds >= MAX_ZOEBUILD_CONCURRENT_BUILDS) {
     throw new ZoeBuildBuildCapacityError();
   }
@@ -123,12 +131,15 @@ export function withZoeBuildQueuedBootstrapSlot<T>(
   if (!requestKey || requestKey.length > 128) {
     throw new Error("Invalid trusted bootstrap idempotency key.");
   }
+  try { assertTrustedBuildAdmissionOpen(); } catch (error) { return Promise.reject(error); }
   const existing = bootstrapFlights.get(requestKey);
   if (existing) return existing as Promise<T>;
 
   const flight = (async (): Promise<T> => {
     await acquireBootstrapSlot();
     try {
+      // The shared slot may have been queued before the gate closed.
+      assertTrustedBuildAdmissionOpen();
       return await execute();
     } finally {
       releaseBootstrapSlot();

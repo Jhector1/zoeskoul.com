@@ -154,7 +154,7 @@ export async function createWorkspace(
     await ensureWorkspaceWritableForShellUser(root);
     timings.permissionsMs = Date.now() - checkpoint;
     const totalMs = Date.now() - started;
-    if (totalMs >= 1000) {
+    if (env.workspaceFilesystemPolicy === "shared-group-v1" || totalMs >= 1000) {
       console.info("RUNNER workspace creation timings", {
         ...timings,
         entries: normalized.length,

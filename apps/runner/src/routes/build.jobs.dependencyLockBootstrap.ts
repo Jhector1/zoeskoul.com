@@ -1,3 +1,4 @@
+import { ZoebuildPreviewMaintenanceError } from "../services/build/zoebuildPreviewAdmission.js";
 import { createHash } from "node:crypto";
 import type { RequestHandler } from "express";
 import {
@@ -43,6 +44,10 @@ export const executeBuildDependencyLockBootstrapRoute: RequestHandler = async (
     });
     return res.status(200).json(result);
   } catch (error) {
+    if (error instanceof ZoebuildPreviewMaintenanceError) {
+      res.setHeader("Retry-After", "30");
+      return res.status(503).json({ok:false,code:"PREVIEW_MAINTENANCE"});
+    }
     if (error instanceof ZoeBuildBuildCapacityError) {
       const admission = zoeBuildBootstrapQueueSnapshot();
       console.warn("[build/jobs/dependency-lock-bootstrap] queue capacity reached", {
