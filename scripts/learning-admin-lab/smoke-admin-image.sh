@@ -22,6 +22,10 @@ docker run --rm --network none --cap-drop ALL \
     test "$(wc -c < /workspace/.lab-root-password)" -ge 24
     test "$(su - sandbox -c "id -u")" = 1000
     test "$(su - sandbox -c "test -r /workspace/.lab-root-password && echo ok")" = ok
+    test "$(su - sandbox -c "test -r /workspace/.lab-student-password && echo ok")" = ok
+    # Verify that sudo really authenticates the disposable user password.
+    # Never print or log the credential; stdin is redirected to sudo -S.
+    test "$(su - sandbox -c "sudo -k -S id -u 2>/dev/null" < /workspace/.lab-student-password)" = 0
     test -x /opt/runner/pty-runner.py
     # Test a real PAM su transition. Wait for Password: before typing.
     cat > /tmp/check-su-root.py << "SMOKE_PY"

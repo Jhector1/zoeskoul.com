@@ -47,6 +47,9 @@ type Props = {
     onV6ListTrash?: () => Promise<ReadonlyArray<Readonly<{originalPath:string;trashId:string}>>>;
     onV6RestoreTrash?: (entry: Readonly<{originalPath:string;trashId:string}>) => Promise<boolean>;
     onV6Download?: (selection: import("../workspaceDownloadV6Session").V6DownloadSelection) => Promise<void>;
+    allowRecoverableFolderTrash?: boolean;
+    pendingAction?: string | null;
+    pendingActionPath?: string | null;
     services: FullIDEServices;
     actions: {
         setInlineEdit: (value: any) => void;
@@ -98,9 +101,12 @@ type ImportReadLimits = {
     allowBinaryFiles: boolean;
 };
 
+// Expected local preflight rejections are user feedback, not application exceptions.
+class ExplorerImportValidationError extends Error {}
+
 function assertImportCount(count: number, limits: ImportReadLimits) {
     if (count > limits.maxFiles) {
-        throw new Error(
+        throw new ExplorerImportValidationError(
             `You can import up to ${limits.maxFiles} file${limits.maxFiles === 1 ? "" : "s"} at a time.`,
         );
     }
@@ -113,11 +119,11 @@ async function readBrowserFile(
 ): Promise<ImportedWorkspaceFile> {
     const capability = resolveWorkspaceFileCapability(path);
     if (!capability) {
-        throw new Error(`${path || file.name} is not a supported workspace file type.`);
+        throw new ExplorerImportValidationError(`${path || file.name} is not a supported workspace file type.`);
     }
 
     if (capability.storage === "binary" && !limits.allowBinaryFiles) {
-        throw new Error(
+        throw new ExplorerImportValidationError(
             `${path || file.name} requires a multi-file workspace to preserve binary assets.`,
         );
     }
@@ -127,13 +133,18 @@ async function readBrowserFile(
             ? limits.maxBinaryFileBytes
             : limits.maxTextFileBytes;
     if (file.size > maxBytes) {
-        throw new Error(
-            `${path || file.name} exceeds the ${(maxBytes / 1024 / 1024).toFixed(1)} MB ${capability.storage}-file limit.`,
+        throw new ExplorerImportValidationError(
+            `${path || file.name} exceeds the ${maxBytes < 1024 * 1024 ? `${(maxBytes / 1024).toFixed(maxBytes % 1024 === 0 ? 0 : 1)} KiB` : `${(maxBytes / 1024 / 1024).toFixed(1)} MiB`} ${capability.storage}-file limit.`,
         );
     }
 
     if (capability.storage === "text") {
-        return { path, content: await file.text() };
+        const bytes = new Uint8Array(await file.arrayBuffer());
+        let content: string;
+        try { content = new TextDecoder('utf-8', {fatal: true}).decode(bytes); }
+        catch { throw new ExplorerImportValidationError(`${path || file.name} is not valid UTF-8. No files were imported.`); }
+        if (content.includes('\0') || new TextEncoder().encode(content).length !== bytes.length) throw new ExplorerImportValidationError(`${path || file.name} contains invalid text bytes. No files were imported.`);
+        return {path,content};
     }
 
     const buffer = await file.arrayBuffer();
@@ -213,7 +224,7 @@ async function readDirectoryHandleRecursive(
 }
 
 function formatMb(bytes: number) {
-    return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
+    return bytes < 1024 * 1024 ? `${(bytes / 1024).toFixed(bytes % 1024 === 0 ? 0 : 1)} KiB` : `${(bytes / 1024 / 1024).toFixed(1)} MiB`;
 }
 
 export default function IdeExplorerPane({
@@ -243,6 +254,9 @@ export default function IdeExplorerPane({
                                             onV6ListTrash,
                                             onV6RestoreTrash,
                                             onV6Download,
+                                            allowRecoverableFolderTrash,
+        pendingAction,
+        pendingActionPath,
                                             services,
 }: Props) {
     const t = useTranslations("ide.explorer.pane");
@@ -250,6 +264,7 @@ export default function IdeExplorerPane({
     const folderInputRef = useRef<HTMLInputElement | null>(null);
     const [trashEntries, setTrashEntries] = useState<ReadonlyArray<Readonly<{originalPath:string;trashId:string}>> | null>(null);
     const [trashBusy, setTrashBusy] = useState(false);
+    const [restoringTrashId, setRestoringTrashId] = useState<string | null>(null);
     const [folderImportNote, setFolderImportNote] = useState<string | null>(null);
     const [helpOpen, setHelpOpen] = useState(false);
     const [helpPosition, setHelpPosition] = useState({ top: 44, left: 8 });
@@ -302,12 +317,12 @@ export default function IdeExplorerPane({
     };
     const restoreV6Folder = async (entry: Readonly<{originalPath:string;trashId:string}>) => {
         if (!onV6RestoreTrash || trashBusy) return;
-        setTrashBusy(true);
+        setTrashBusy(true);setRestoringTrashId(entry.trashId);
         try {
             if (await onV6RestoreTrash(entry)) {
                 setTrashEntries((items) => items?.filter((item) => item.trashId !== entry.trashId) ?? null);
             }
-        } finally { setTrashBusy(false); }
+        } finally { setTrashBusy(false);setRestoringTrashId(null); }
     };
     const importReadLimits = useMemo<ImportReadLimits>(
         () => ({
@@ -394,7 +409,7 @@ export default function IdeExplorerPane({
             fileInputRef.current?.click();
         } catch (err: any) {
             if (err?.name === "AbortError") return;
-            console.error("[explorer] open local files failed", err);
+            if (!(err instanceof ExplorerImportValidationError)) console.error("[explorer] open local files failed", err);
             actions.setToast({
                 kind: "error",
                 text: err instanceof Error ? err.message : t("uploadUnavailable"),
@@ -420,7 +435,7 @@ export default function IdeExplorerPane({
                 const imported = await readDirectoryHandleRecursive(
                     handle, handle.name, importReadLimits, [], skipped,
                 );
-                if (!imported.length) throw new Error("No supported files found in this folder.");
+                if (!imported.length) throw new ExplorerImportValidationError("No supported files found in this folder.");
                 setFolderImportNote(skipped.length ? importedFolderSummary(skipped) : null);
                 actions.importExternalFiles(imported);
                 return;
@@ -429,7 +444,7 @@ export default function IdeExplorerPane({
             folderInputRef.current?.click();
         } catch (err: any) {
             if (err?.name === "AbortError") return;
-            console.error("[explorer] open local folder failed", err);
+            if (!(err instanceof ExplorerImportValidationError)) console.error("[explorer] open local folder failed", err);
             actions.setToast({
                 kind: "error",
                 text: err instanceof Error ? err.message : t("folderImportUnavailable"),
@@ -553,7 +568,7 @@ export default function IdeExplorerPane({
                         <summary className="cursor-pointer font-medium">Recovery options</summary>
                         <button type="button" disabled={trashBusy} onClick={() => void loadV6Trash()}
                             className="mt-2 text-xs font-semibold underline disabled:opacity-50">
-                            {trashBusy ? "Checking recoverable folders…" : "Browse previously deleted folders"}
+                            {trashBusy && !restoringTrashId ? <span className="inline-flex items-center gap-1"><span aria-hidden="true" className="h-3 w-3 animate-spin rounded-full border-2 border-current border-t-transparent"/>Checking…</span> : "Browse previously deleted folders"}
                         </button>
                     {trashEntries !== null ? (
                         <div className="mt-2 space-y-1 text-xs" aria-live="polite">
@@ -562,7 +577,10 @@ export default function IdeExplorerPane({
                                     <span className="min-w-0 truncate" title={entry.originalPath}>{entry.originalPath}</span>
                                     <button type="button" disabled={trashBusy}
                                         onClick={() => void restoreV6Folder(entry)}
-                                        className="rounded border px-2 py-1 font-medium disabled:opacity-50">Restore</button>
+                                        aria-busy={restoringTrashId === entry.trashId}
+                                        className="inline-flex items-center gap-1 rounded border px-2 py-1 font-medium disabled:opacity-50">
+                                        {restoringTrashId === entry.trashId ? <><span aria-hidden="true" className="h-3 w-3 animate-spin rounded-full border-2 border-current border-t-transparent"/>Restoring…</> : "Restore"}
+                                    </button>
                                 </div>
                             ))}
                         </div>
@@ -660,7 +678,7 @@ export default function IdeExplorerPane({
                                         false,
                                         importReadLimits,
                                     );
-                                    if (!imported.length) throw new Error("No files selected.");
+                                    if (!imported.length) throw new ExplorerImportValidationError("No files selected.");
                                     setFolderImportNote(null);
                                     actions.importExternalFiles(imported);
                                 } catch (error) {
@@ -692,7 +710,7 @@ export default function IdeExplorerPane({
                                         true,
                                         importReadLimits,
                                     );
-                                    if (!imported.length) throw new Error("No supported files found in this folder.");
+                                    if (!imported.length) throw new ExplorerImportValidationError("No supported files found in this folder.");
                                     const skipped = Array.from(input.files ?? []).filter(file => shouldSkipV6FolderImportPath(file.webkitRelativePath || file.name)).map(file => file.webkitRelativePath || file.name);
                                     setFolderImportNote(skipped.length ? importedFolderSummary(skipped) : null);
                                     actions.importExternalFiles(imported);
@@ -746,6 +764,9 @@ export default function IdeExplorerPane({
                     entryFileId={entryFileId}
                     isSql={language === "sql"}
                     allowSetEntry={services.editor.showEditor}
+                    allowRecoverableFolderTrash={allowRecoverableFolderTrash === true}
+                    pendingAction={pendingAction}
+                    pendingActionPath={pendingActionPath}
                     filter={filter}
                     inlineEdit={inlineEdit}
                     policy={policy}

@@ -188,32 +188,104 @@ export async function POST(
         const nextEntryPath = pathOf(nextWorkspace.nodes, nextWorkspace.entryFileId);
         const nextActivePath = pathOf(nextWorkspace.nodes, nextWorkspace.activeFileId);
 
-        const updated = await prisma.codeProject.update({
-            where: { ...genericCodeProjectWhere, id: existing.id,
-                ownerId: gate.actor.userId, archivedAt: null,
-                currentVersion: existing.currentVersion },
-            data: {
-                workspace: toPrismaJson(nextWorkspace),
-                entryPath: nextEntryPath,
-                activePath: nextActivePath,
-                currentVersion: existing.currentVersion + 1,
-            },
-            select: {
-                id: true,
-                title: true,
-                description: true,
-                language: true,
-                scopeKind: true,
-                visibility: true,
-                currentVersion: true,
-                updatedAt: true,
-                entryPath: true,
-                activePath: true,
-                workspace: true,
-                settings: true,
-                meta: true,
-            },
-        });
+        // The version check before the Runner call is only an early rejection.
+        // Terminal snapshotting is asynchronous: another save can commit while
+        // we await the Runner. Guard the final write atomically as well.
+        let updated;
+        try {
+            updated = await prisma.codeProject.update({
+                where: {
+                    ...genericCodeProjectWhere,
+                    id: existing.id,
+                    ownerId: gate.actor.userId,
+                    archivedAt: null,
+                    currentVersion: existing.currentVersion,
+                },
+                data: {
+                    workspace: toPrismaJson(nextWorkspace),
+                    entryPath: nextEntryPath,
+                    activePath: nextActivePath,
+                    currentVersion: existing.currentVersion + 1,
+                },
+                select: {
+                    id: true,
+                    title: true,
+                    description: true,
+                    language: true,
+                    scopeKind: true,
+                    visibility: true,
+                    currentVersion: true,
+                    updatedAt: true,
+                    entryPath: true,
+                    activePath: true,
+                    workspace: true,
+                    settings: true,
+                    meta: true,
+                },
+            });
+        } catch (error: unknown) {
+            // Prisma P2025 means the row no longer matches the owner/version/
+            // active-project predicate. Never overwrite the intervening save.
+            if ((error as { code?: unknown })?.code === "P2025") {
+                // The initial project version may now be stale, or ownership/
+                // active status may have changed. Re-read under the same actor
+                // scope rather than returning an incomplete conflict body.
+                const latest = await prisma.codeProject.findFirst({
+                    where: {
+                        id: existing.id,
+                        ownerId: gate.actor.userId,
+                        archivedAt: null,
+                    },
+                    select: {
+                        id: true,
+                        title: true,
+                        description: true,
+                        language: true,
+                        visibility: true,
+                        scopeKind: true,
+                        currentVersion: true,
+                        updatedAt: true,
+                        workspace: true,
+                        entryPath: true,
+                        activePath: true,
+                        settings: true,
+                        meta: true,
+                    },
+                });
+                if (!latest) {
+                    return jsonNoStore({ ok: false, error: "Project not found." }, 404);
+                }
+                return jsonNoStore({
+                    ok: false,
+                    code: "PROJECT_CONFLICT",
+                    error: "The cloud project changed while taking the terminal snapshot. Reload and retry.",
+                    conflict: {
+                        projectId: latest.id,
+                        clientBaseVersion: body.baseVersion,
+                        serverVersion: latest.currentVersion,
+                        serverUpdatedAt: latest.updatedAt.toISOString(),
+                        title: latest.title,
+                    },
+                    project: {
+                        id: latest.id,
+                        title: latest.title,
+                        description: latest.description ?? null,
+                        language: latest.language,
+                        scopeKind: latest.scopeKind,
+                        visibility: latest.visibility,
+                        currentVersion: latest.currentVersion,
+                        updatedAt: latest.updatedAt.toISOString(),
+                        entryPath: latest.entryPath,
+                        activePath: latest.activePath,
+                        workspace: latest.workspace,
+                        settings: latest.settings ?? null,
+                        meta: latest.meta ?? null,
+                        role: "owner",
+                    },
+                }, 409);
+            }
+            throw error;
+        }
 
         return jsonNoStore({
             ok: true,

@@ -1,0 +1,9 @@
+*
+!Dockerfile
+!Dockerfile.firewall
+!go.mod
+!gateway.go
+!gateway_test.go
+!firewall-init.sh
+!firewall_renewal_plan.py
+!firewall_renewal_execute.py

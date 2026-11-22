@@ -27,6 +27,8 @@ import { exportWorkspaceEntries } from "@zoeskoul/learner-workspace/ide/fsTree";
 
 type Props = {
     panelRef: React.RefObject<HTMLDivElement | null>;
+    unifiedTerminalOutput?: React.ReactNode;
+    unifiedRun?: import("../../runner/components/unifiedLinuxClient").UnifiedRunControls;
     nodes: import("@zoeskoul/learner-workspace/ide/types").FSNode[];
     tabFiles: FileNode[];
     activeFileId: string | null;
@@ -102,6 +104,8 @@ type Props = {
 
 export default function IdeEditorPane({
     panelRef,
+    unifiedTerminalOutput,
+    unifiedRun,
     nodes,
     tabFiles,
     activeFileId,
@@ -158,7 +162,7 @@ export default function IdeEditorPane({
     const t = useTranslations("ide.editor");
     const terminalT = useTranslations("ide.terminal");
     const isWeb = language === "web";
-    const isMarkdown = !!activeFile && !isBinaryFileNode(activeFile) && /(?:\.md(?:own)?$|^readme$)/i.test(activeFile.name);
+    const isMarkdown = !unifiedTerminalOutput && !!activeFile && !isBinaryFileNode(activeFile) && /(?:\.md(?:own)?$|^readme$)/i.test(activeFile.name);
     const [markdownPreview, setMarkdownPreview] = React.useState(true);
     React.useEffect(() => { setMarkdownPreview(true); }, [activeFile?.id]);
     const terminalWorkspaceOnly =
@@ -282,10 +286,13 @@ export default function IdeEditorPane({
                     />
                 ) : null}
 
-                {activeFile || terminalWorkspaceOnly ? (
+                {activeFile || terminalWorkspaceOnly || unifiedTerminalOutput ? (
                     <div className={cn("relative h-full overflow-hidden pt-2", PANEL_CARD_CLASS)}>
                         <CodeRunner
                             frame="plain"
+                            unifiedTerminalOutput={unifiedTerminalOutput}
+                            unifiedRun={unifiedRun}
+                            initialTerminalSize={unifiedTerminalOutput ? 320 : undefined}
                             title={
                                 isSql ? `SQL · ${title}` : isWeb ? `Web · ${title}` : title
                             }
@@ -307,7 +314,9 @@ export default function IdeEditorPane({
                                         className={`rounded px-2.5 py-1 text-xs font-medium ${!markdownPreview ? "bg-neutral-100 text-neutral-900 dark:bg-neutral-700 dark:text-neutral-50" : "text-neutral-600 hover:bg-neutral-50 dark:text-neutral-300 dark:hover:bg-neutral-800"}`}>Code</button>
                                 </div>
                             ) : undefined}
-                            editorOverlay={isMarkdown && markdownPreview ? (
+                            editorOverlay={unifiedTerminalOutput && !activeFile ? (
+                                <div className="absolute inset-0 flex items-center justify-center bg-white p-4 text-sm dark:bg-neutral-950">Select a file or create one in Explorer. Files are shared with the Linux terminal.</div>
+                            ) : isMarkdown && markdownPreview ? (
                                 <div className="v6-readme-preview h-full min-h-0 overflow-y-auto bg-white px-5 pb-8 pt-14 text-sm text-neutral-800 dark:bg-neutral-950 dark:text-neutral-200 sm:px-7" role="region" aria-label={`Markdown preview of ${activeFile?.name ?? "file"}`}>
 <style>{`
                                     .v6-readme-preview .zoe-lesson-markdown { max-width: 62rem; margin: 0 auto; font-size: 0.875rem; line-height: 1.65; }
@@ -381,7 +390,7 @@ export default function IdeEditorPane({
 
                             showSqlDialectPicker={services.runner.showSqlDialectPicker}
                             allowReset={
-                                !readOnly && isDesktop && !learnerUiFlags.compactLearnerUi
+                                !unifiedTerminalOutput && !readOnly && isDesktop && !learnerUiFlags.compactLearnerUi
                             }
                             allowRun={
                                 services.runner.allowRun &&
@@ -438,7 +447,7 @@ export default function IdeEditorPane({
                             webPreviewCommerceRequest={webPreviewCommerceRequest}
                             webPreviewSessionKey={webPreviewSessionKey}
                             workspaceTerminal={
-                                !isSql && !isWeb
+                                !unifiedTerminalOutput && !isSql && !isWeb
                                     ? {
                                         enabled: services.runner.enableWorkspaceTerminal,
                                         projectId: projectId ?? undefined,

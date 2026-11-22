@@ -60,10 +60,12 @@ function makeRequest(args: {
   body?: string;
   origin?: string | null;
   contentType?: string | null;
+  windowId?: string;
 } = {}) {
   const headers: Record<string, string> = {};
   if (args.origin !== null) headers.origin = args.origin ?? WEB_ORIGIN;
   if (args.contentType !== null) headers["content-type"] = args.contentType ?? "application/json";
+  if (args.windowId !== undefined) headers["x-zoelearning-window-id"] = args.windowId;
   return new Request(`${WEB_ORIGIN}/api/run/pty/sessions/admin/start`, {
     method: "POST",
     headers,
@@ -256,5 +258,28 @@ describe("student administrator lab HTTP start route", () => {
     expect(result.status).toBe(503);
     expect(JSON.stringify(result.body)).not.toContain("SECRET_INTERNAL_EXCEPTION");
     expect(JSON.stringify(result.body)).not.toContain("PRIVATE_SIGNED_GRANT");
+  });
+});
+
+const GLOBAL_TARGET = JSON.stringify({ moduleSlug: "zoelearning-disposable-root", topicSlug: "full-privileges" });
+describe("administrator IDE ownership routing", () => {
+  it("forwards only the validated window and the Web-minted signed grant", async () => {
+    const result = await send({body:GLOBAL_TARGET,windowId:"window-aaaaaaaa"});
+    expect(result.status).toBe(200);
+    expect(mocks.runnerPost).toHaveBeenCalledWith("/sessions/admin/start", ACTOR_KEY,
+      {grant:"PRIVATE_SIGNED_GRANT",windowId:"window-aaaaaaaa"});
+  });
+  it("rejects malformed routing identity before authentication",async()=>{
+    expect((await send({body:GLOBAL_TARGET,windowId:"bad"})).status).toBe(400);
+    assertNoExternalWork();
+  });
+  it("rejects routing identity on graded lessons",async()=>{
+    expect((await send({windowId:"window-aaaaaaaa"})).status).toBe(400);
+    assertNoExternalWork();
+  });
+  it("does not let a window id bypass entitlement",async()=>{
+    mocks.authorizeStudentAdminLab.mockResolvedValue(false);
+    expect((await send({body:GLOBAL_TARGET,windowId:"window-aaaaaaaa"})).status).toBe(403);
+    expect(mocks.runnerPost).not.toHaveBeenCalled();
   });
 });

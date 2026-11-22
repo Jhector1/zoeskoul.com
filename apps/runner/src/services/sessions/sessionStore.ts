@@ -17,8 +17,12 @@ export type SessionRecord = {
   labMode?: LearningLabMode;
   /** Signed lesson identity retained for actor-bound verification. */
   adminTopicSlug?: string | null;
+  /** Authenticated IDE routing identity, only for the global disposable lab. */
+  adminWindowId?: string | null;
   /** Runner-created private tmpfs volume; only admin sessions own one. */
   adminVolumeName?: string | null;
+  adminNetworkName?: string | null;
+  adminEgressProxyName?: string | null;
   workspaceKey?: string | null;
   clientHostKey?: string | null;
   clientOwnerKey?: string | null;
@@ -31,6 +35,8 @@ export type SessionRecord = {
   attachStream?: NodeJSStream | null;
   createdAt: number;
   lastActivityAt: number;
+  /** null while a browser transport is attached; separate from idle activity. */
+  transportDetachedAt?: number | null;
   idleTimeoutMs?: number | null;
   hardLifetimeMs?: number | null;
   finalizedAt?: number | null;
@@ -150,8 +156,12 @@ export function createSession(args: {
   labMode?: LearningLabMode;
   /** Signed lesson identity retained for actor-bound verification. */
   adminTopicSlug?: string | null;
+  /** Authenticated IDE routing identity, only for the global disposable lab. */
+  adminWindowId?: string | null;
   /** Runner-created private tmpfs volume; only admin sessions own one. */
   adminVolumeName?: string | null;
+  adminNetworkName?: string | null;
+  adminEgressProxyName?: string | null;
   workspaceKey?: string | null;
   clientHostKey?: string | null;
   clientOwnerKey?: string | null;
@@ -168,7 +178,10 @@ export function createSession(args: {
     kind: args.kind,
     labMode: args.labMode ?? "standard",
     adminTopicSlug: args.labMode === "admin" ? args.adminTopicSlug ?? null : null,
+    adminWindowId: args.labMode === "admin" && args.adminTopicSlug === "full-privileges" ? args.adminWindowId ?? null : null,
     adminVolumeName: args.labMode === "admin" ? args.adminVolumeName ?? null : null,
+    adminNetworkName: args.labMode === "admin" ? args.adminNetworkName ?? null : null,
+    adminEgressProxyName: args.labMode === "admin" ? args.adminEgressProxyName ?? null : null,
     workspaceKey: args.workspaceKey ?? null,
     clientHostKey: args.clientHostKey ?? null,
     clientOwnerKey: args.clientOwnerKey ?? null,
@@ -181,6 +194,7 @@ export function createSession(args: {
     attachStream: null,
     createdAt: now,
     lastActivityAt: now,
+    transportDetachedAt: now,
     idleTimeoutMs: args.idleTimeoutMs ?? null,
     hardLifetimeMs: args.hardLifetimeMs ?? null,
     finalizedAt: null,
@@ -267,8 +281,16 @@ export function setSessionStream(id: string, stream: NodeJSStream) {
 
   session.attachStream = stream;
   session.lastActivityAt = Date.now();
+  if (session.transportDetachedAt != null) session.transportDetachedAt = session.lastActivityAt;
   sessions.set(id, session);
   return session;
+}
+
+/** Browser transport bookkeeping must not extend session activity or deadlines. */
+export function setSessionTransportAttached(id: string, attached: boolean) {
+  const session = sessions.get(id);
+  if (!session) return;
+  session.transportDetachedAt = attached ? null : Date.now();
 }
 
 export function touchSession(id: string) {

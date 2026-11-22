@@ -95,6 +95,7 @@ function InlineNameRow(props: {
     setInlineEdit: React.Dispatch<React.SetStateAction<InlineEdit>>;
     commitInlineEdit: () => void;
     cancelInlineEdit: () => void;
+    pendingAction?: string | null;
 }) {
     const {
         depth,
@@ -104,6 +105,7 @@ function InlineNameRow(props: {
         setInlineEdit,
         commitInlineEdit,
         cancelInlineEdit,
+        pendingAction,
     } = props;
 
     const inputRef = useRef<HTMLInputElement | null>(null);
@@ -129,6 +131,7 @@ function InlineNameRow(props: {
 
                 <input
                     ref={inputRef}
+                    disabled={Boolean(pendingAction)}
                     value={value}
                     onPointerDown={(e) => e.stopPropagation()}
                     onMouseDown={(e) => e.stopPropagation()}
@@ -141,8 +144,8 @@ function InlineNameRow(props: {
                         )
                     }
                     onKeyDown={(e) => {
-                        if (e.key === "Enter") commitInlineEdit();
-                        if (e.key === "Escape") cancelInlineEdit();
+                        if (e.key === "Enter") { e.preventDefault(); if (!pendingAction) commitInlineEdit(); }
+                        if (e.key === "Escape" && !pendingAction) cancelInlineEdit();
                     }}
                     className="h-8 w-full rounded-md border border-neutral-200 bg-white px-2.5 text-[12px] font-medium text-neutral-900 outline-none transition-colors dark:border-white/10 dark:bg-black/20 dark:text-white/85"
                 />
@@ -151,22 +154,25 @@ function InlineNameRow(props: {
             <div className="mt-2 flex items-center gap-1.5 sm:ml-[24px]">
                 <button
                     type="button"
+                    disabled={Boolean(pendingAction)}
+                    aria-busy={Boolean(pendingAction)}
                     onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        commitInlineEdit();
+                        if (!pendingAction) commitInlineEdit();
                     }}
-                    className="inline-flex h-8 items-center justify-center rounded-md border border-emerald-600/20 bg-emerald-500/10 px-2.5 text-[11px] font-medium text-emerald-900 transition-colors hover:bg-emerald-500/15 dark:border-emerald-300/20 dark:bg-emerald-300/10 dark:text-emerald-100 dark:hover:bg-emerald-300/15"
+                    className="inline-flex h-8 items-center justify-center gap-1.5 rounded-md border border-emerald-600/20 bg-emerald-500/10 px-2.5 text-[11px] font-medium text-emerald-900 transition-colors hover:bg-emerald-500/15 dark:border-emerald-300/20 dark:bg-emerald-300/10 dark:text-emerald-100 dark:hover:bg-emerald-300/15 disabled:opacity-50"
                 >
-                    {t("save")}
+                    {pendingAction ? <><span aria-hidden="true" className="h-3 w-3 animate-spin rounded-full border-2 border-current border-t-transparent" />{pendingAction}</> : t("save")}
                 </button>
 
                 <button
                     type="button"
+                    disabled={Boolean(pendingAction)}
                     onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        cancelInlineEdit();
+                        if (!pendingAction) cancelInlineEdit();
                     }}
                     className="inline-flex h-8 items-center justify-center rounded-md px-2.5 text-[11px] font-medium text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:text-white/65 dark:hover:bg-white/[0.06] dark:hover:text-white/90"
                 >
@@ -228,9 +234,12 @@ type TreeProps = {
     onDownloadNode?: (path:string,kind:"file"|"folder") => void;
     moveNode: (id: NodeId, parentId: NodeId | null) => void;
     allowSetEntry: boolean;
+    allowRecoverableFolderTrash: boolean;
 
     commitInlineEdit: () => void;
     cancelInlineEdit: () => void;
+    pendingAction?: string | null;
+    pendingActionPath?: string | null;
 
     openContextMenu: (e: React.MouseEvent, actions: MenuAction[]) => void;
     policy: IdeWorkspacePolicy;
@@ -278,8 +287,11 @@ function Tree(props: TreeProps) {
         onDownloadNode,
         moveNode,
         allowSetEntry,
+        allowRecoverableFolderTrash,
         commitInlineEdit,
         cancelInlineEdit,
+        pendingAction,
+        pendingActionPath,
         openContextMenu,
         dragState,
         touchState,
@@ -318,6 +330,7 @@ function Tree(props: TreeProps) {
                     value={inlineEdit?.value ?? ""}
                     setInlineEdit={setInlineEdit as React.Dispatch<React.SetStateAction<InlineEdit>>}
                     commitInlineEdit={commitInlineEdit}
+                    pendingAction={pendingAction}
                     cancelInlineEdit={cancelInlineEdit}
                 />
             ) : null}
@@ -334,7 +347,7 @@ function Tree(props: TreeProps) {
                 const disableDelete =
                     !isSql &&
                     ((n.kind === "file" && n.id === entryFileId) ||
-                        (n.kind === "folder" && subtreeIds(nodes, n.id).has(entryFileId)));
+                        (n.kind === "folder" && !allowRecoverableFolderTrash && subtreeIds(nodes, n.id).has(entryFileId)));
 
                 const canDropHere =
                     draggingId != null &&
@@ -489,6 +502,7 @@ function Tree(props: TreeProps) {
                                 value={inlineEdit?.value ?? ""}
                                 setInlineEdit={setInlineEdit as React.Dispatch<React.SetStateAction<InlineEdit>>}
                                 commitInlineEdit={commitInlineEdit}
+                    pendingAction={pendingAction}
                                 cancelInlineEdit={cancelInlineEdit}
                             />
 
@@ -515,11 +529,14 @@ function Tree(props: TreeProps) {
                                         startRename={startRename}
                                         setEntry={setEntry}
                                         allowSetEntry={allowSetEntry}
+                                        allowRecoverableFolderTrash={allowRecoverableFolderTrash}
                                         policy={policy}
                                         requestDelete={requestDelete}
                                         onDownloadNode={onDownloadNode}
                                         moveNode={moveNode}
                                         commitInlineEdit={commitInlineEdit}
+                    pendingAction={pendingAction}
+                    pendingActionPath={pendingActionPath}
                                         cancelInlineEdit={cancelInlineEdit}
                                         openContextMenu={openContextMenu}
                                         dragState={dragState}
@@ -699,6 +716,13 @@ function Tree(props: TreeProps) {
                                 </div>
                             </button>
 
+                            {pendingAction && pendingActionPath === nodePath ? (
+                                <span role="status" aria-live="polite" className="mr-1 inline-flex shrink-0 items-center gap-1 text-[10px] text-neutral-500 dark:text-white/60">
+                                    <span aria-hidden="true" className="h-3 w-3 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                                    {pendingAction}
+                                </span>
+                            ) : null}
+
                             {isEntry ? (
                                 <div
                                     className="mr-1 grid h-6 w-6 shrink-0 place-items-center text-emerald-600 dark:text-emerald-300"
@@ -740,10 +764,13 @@ function Tree(props: TreeProps) {
                                     startRename={startRename}
                                     setEntry={setEntry}
                                     allowSetEntry={allowSetEntry}
+                                        allowRecoverableFolderTrash={allowRecoverableFolderTrash}
                                     requestDelete={requestDelete}
                                     onDownloadNode={onDownloadNode}
                                     moveNode={moveNode}
                                     commitInlineEdit={commitInlineEdit}
+                    pendingAction={pendingAction}
+                    pendingActionPath={pendingActionPath}
                                     cancelInlineEdit={cancelInlineEdit}
                                     openContextMenu={openContextMenu}
                                     dragState={dragState}
@@ -783,9 +810,12 @@ export default function ExplorerTree(props: {
     onDownloadNode?: (path:string,kind:"file"|"folder") => void;
     moveNode: (id: NodeId, parentId: NodeId | null) => void;
     allowSetEntry?: boolean;
+    allowRecoverableFolderTrash?: boolean;
 
     commitInlineEdit: () => void;
     cancelInlineEdit: () => void;
+    pendingAction?: string | null;
+    pendingActionPath?: string | null;
     policy: IdeWorkspacePolicy;
 
 }) {
@@ -810,8 +840,11 @@ export default function ExplorerTree(props: {
         onDownloadNode,
         moveNode,
         allowSetEntry = true,
+        allowRecoverableFolderTrash = false,
         commitInlineEdit,
         cancelInlineEdit,
+        pendingAction,
+        pendingActionPath,
         policy
     } = props;
 
@@ -1077,10 +1110,13 @@ export default function ExplorerTree(props: {
                     startRename={startRename}
                     setEntry={setEntry}
                     allowSetEntry={allowSetEntry}
+                                        allowRecoverableFolderTrash={allowRecoverableFolderTrash}
                     requestDelete={requestDelete}
                     onDownloadNode={onDownloadNode}
                     moveNode={moveNode}
                     commitInlineEdit={commitInlineEdit}
+                    pendingAction={pendingAction}
+                    pendingActionPath={pendingActionPath}
                     cancelInlineEdit={cancelInlineEdit}
                     openContextMenu={openContextMenu}
                     dragState={{

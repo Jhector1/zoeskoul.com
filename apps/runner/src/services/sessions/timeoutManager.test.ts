@@ -50,3 +50,30 @@ describe("runSessionCleanupSweep", () => {
     expect(getSession(SESSION_ID)?.state).toBe("timed_out");
   });
 });
+
+
+describe("extended administrator session lifetime", () => {
+  const idle = 30 * 60_000;
+  const hard = 120 * 60_000;
+  function adminSession(now: number, age: number, inactivity: number) {
+    createSession({id: SESSION_ID, ownerKey: "idle-actor", containerId: "idle-container", workspaceDir: "", labMode: "admin", idleTimeoutMs: idle, hardLifetimeMs: hard});
+    const session = getSession(SESSION_ID)!;
+    session.createdAt = now - age;
+    session.lastActivityAt = now - inactivity;
+  }
+  it("does not close a 90 minute lab with recent activity", async () => {
+    const now = Date.now(); adminSession(now, 90 * 60_000, 60_000);
+    await runSessionCleanupSweep(now);
+    expect(getSession(SESSION_ID)?.state).not.toBe("timed_out");
+  });
+  it("still closes an inactive lab at 30 minutes", async () => {
+    const now = Date.now(); adminSession(now, idle, idle);
+    await runSessionCleanupSweep(now);
+    expect(getSession(SESSION_ID)?.state).toBe("timed_out");
+  });
+  it("cannot extend the two-hour hard limit through activity", async () => {
+    const now = Date.now(); adminSession(now, hard, 0);
+    await runSessionCleanupSweep(now);
+    expect(getSession(SESSION_ID)?.state).toBe("timed_out");
+  });
+});

@@ -23,4 +23,13 @@ printf '%s\n' "$lab_root_password" > /workspace/.lab-root-password
 chown 1000:1000 /workspace/.lab-root-password
 chmod 0600 /workspace/.lab-root-password
 unset lab_root_password
+# A separate random student password is mandatory for interactive sudo.
+lab_student_password="$(python3 -c 'import secrets; print(secrets.token_urlsafe(24))')"
+printf 'sandbox:%s\n' "$lab_student_password" | /usr/sbin/chpasswd
+printf '%s\n' "$lab_student_password" > /workspace/.lab-student-password
+chown 1000:1000 /workspace/.lab-student-password
+chmod 0600 /workspace/.lab-student-password
+unset lab_student_password
+# Sudo validates the sandbox user's password (never passwordless).
+# Credentials exist only on the private, destroyed-on-exit tmpfs lab volume.
 exec "$@"

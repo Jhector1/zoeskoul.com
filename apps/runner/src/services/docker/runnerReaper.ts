@@ -5,6 +5,9 @@ import { docker } from "./dockerClient.js";
 import { clearReconciledTanstackJournals } from "../build/tanstackPreviewDurableRecovery.js";
 import { removeRunnerWorkspaceWithRecovery } from "./runnerWorkspaceReclamation.js";
 import { cleanupOrphanedAdminWorkspaceVolumes } from "../execution/adminWorkspaceVolume.js";
+import { cleanupOrphanedAdminSessionNetworks } from "../execution/adminSessionNetwork.js";
+
+import { assertNoUnifiedStartupResources, assertUnifiedStartupReservations, unifiedVolumeMarker } from "../execution/unifiedLinuxStartupGuard.js";
 
 type ListRunnerContainersOptions = {
   all: boolean;
@@ -16,6 +19,7 @@ type ListRunnerContainersOptions = {
 type RunnerContainerInfo = {
   Id: string;
   State?: string;
+  Labels?: Record<string,string>;
 };
 
 function listRunnerContainers(): Promise<RunnerContainerInfo[]> {
@@ -53,9 +57,14 @@ function listRunnerContainers(): Promise<RunnerContainerInfo[]> {
  * a workspace the reaper has removed. Fail closed on ANY unverified removal.
  * One dedicated rootless Docker socket per execution pool is mandatory. */
 export async function cleanupOrphanedRunnerContainers() {
+  assertUnifiedStartupReservations();
   const containers = await listRunnerContainers();
+  assertNoUnifiedStartupResources(containers);
+  const volumes = await docker.listVolumes({ filters: { label: [unifiedVolumeMarker] } });
+  assertNoUnifiedStartupResources(volumes.Volumes ?? []);
   const failures: unknown[] = [];
-  for (const info of containers) {
+  const isHolder = (info: RunnerContainerInfo) => info.Labels?.["com.zoeskoul.runner.lab-mode"] === "admin-egress-holder";
+  async function remove(info: RunnerContainerInfo) {
     try {
       await docker.getContainer(info.Id).remove({ force: true });
     } catch (error) {
@@ -66,9 +75,22 @@ export async function cleanupOrphanedRunnerContainers() {
       }
     }
   }
+  const holders = containers.filter(isHolder);
+  for (const info of containers.filter(info => !isHolder(info))) await remove(info);
+  // Keep namespace holders (and their firewall) alive until an independent
+  // enumeration verifies every dependent is absent, not just a 204 response.
+  if (holders.length && !failures.length) {
+    const beforeHolders = await listRunnerContainers();
+    assertNoUnifiedStartupResources(beforeHolders);
+    if (beforeHolders.some(info => !isHolder(info))) {
+      throw new Error("RUNNER startup Docker cleanup incomplete (dependent remains before holder cleanup).");
+    }
+    for (const info of holders) await remove(info);
+  }
   // A failed daemon list is already fatal. Verify the pool-wide label filter
   // is empty even if remove() returned success: 204 is not proof of absence.
   const remaining = await listRunnerContainers();
+  assertNoUnifiedStartupResources(remaining);
   if (failures.length || remaining.length) {
     throw new Error(`RUNNER startup Docker cleanup incomplete (${failures.length} errors, ${remaining.length} remaining).`);
   }
@@ -123,6 +145,7 @@ export async function cleanupRunnerOrphansOnStartup() {
   // Complete ALL resource removal before releasing the startup gate. Never
   // ignore Docker failures or discard the durable journal before teardown.
   await cleanupOrphanedRunnerContainers();
+  await cleanupOrphanedAdminSessionNetworks();
   await cleanupOrphanedAdminWorkspaceVolumes();
   await cleanupAllRunnerWorkspaceDirs();
   await clearReconciledTanstackJournals(env.workspaceRoot);

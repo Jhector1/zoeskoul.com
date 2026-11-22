@@ -6,20 +6,61 @@ import {afterEach,beforeEach,describe,expect,it,vi} from "vitest";
 const fixture = vi.hoisted(() => ({
   root: "/tmp/zoeskoul-reaper-durable-fixture",
   containers: [] as string[],
+  holder: "",
+  unifiedGuest: "",
+  unifiedVolume: "",
+  removed: [] as string[],
   failDelete: false,
   failList: false,
   noEffect: false,
   volumes: [] as string[],
   volumeNoEffect: false,
+  networks: [] as string[],
+  networkNoEffect: false,
+  networkBadLabels: false,
+  failNetworkList: false,
 }));
 vi.mock("../../lib/env.js", () => ({ env: { get workspaceRoot() { return fixture.root; } } }));
 vi.mock("./dockerClient.js", () => ({ docker: {
+  listNetworks: async () => {
+    if (fixture.failNetworkList) throw new Error("network daemon unavailable");
+    return fixture.networks.map(Name => ({Name}));
+  },
+  getNetwork: (name: string) => ({
+    inspect: async () => {
+      if (!fixture.networks.includes(name)) {
+        throw Object.assign(new Error("network not found"), {statusCode: 404});
+      }
+      const sessionId = name.slice("zoeskoul-admin-net-".length);
+      return {
+        Name: name,
+        Driver: "bridge",
+        Internal: true,
+        EnableIPv6: false,
+        Attachable: false,
+        Ingress: false,
+        Containers: {},
+        Labels: {
+          "com.zoeskoul.learning.admin-network": "v1",
+          "com.zoeskoul.runner.session": fixture.networkBadLabels ? "foreign" : sessionId,
+          "com.zoeskoul.runner.purpose": "learn",
+        },
+      };
+    },
+    remove: async () => {
+      if (fixture.failDelete) throw new Error("daemon unavailable");
+      if (!fixture.networkNoEffect) {
+        fixture.networks = fixture.networks.filter(item => item !== name);
+      }
+    },
+  }),
   listVolumes: async () => ({Volumes: fixture.volumes.map(Name=>({
     Name,
     Driver: "local",
     Options: {type:"tmpfs",device:"tmpfs",o:"size=16m,mode=1777"},
     Labels: {
       "com.zoeskoul.learning.admin-workspace":"v1",
+      ...(Name===fixture.unifiedVolume?{"com.zoeskoul.learning.unified-workspace":"v1"}:{}),
       "com.zoeskoul.runner.session":Name.slice("zoeskoul-admin-ws-".length),
       "com.zoeskoul.runner.purpose":"learn",
     },
@@ -30,9 +71,10 @@ vi.mock("./dockerClient.js", () => ({ docker: {
   }}),
   listContainers: (_opts:unknown, cb:(error:Error|null,list?:unknown[])=>void) => {
     if (fixture.failList) cb(new Error("daemon unavailable"));
-    else cb(null,fixture.containers.map(Id=>({Id,State:"running"})));
+    else cb(null,fixture.containers.map(Id=>({Id,State:"running",Labels:Id===fixture.unifiedGuest?{"com.zoeskoul.learning.unified-guest":"u2b2"}:Id===fixture.holder?{"com.zoeskoul.runner.lab-mode":"admin-egress-holder"}:{}})));
   },
   getContainer: (id:string) => ({remove: async () => {
+    fixture.removed.push(id);
     if (fixture.failDelete) throw new Error("daemon unavailable");
     if (!fixture.noEffect) fixture.containers = fixture.containers.filter(item=>item!==id);
   }}),
@@ -45,15 +87,38 @@ beforeEach(async () => {
   root = await fs.mkdtemp(path.join(os.tmpdir(),"runner-reaper-gate-"));
   fixture.root = root;
   fixture.containers = [];
+  fixture.holder = "";
+  fixture.unifiedGuest = "";
+  fixture.unifiedVolume = "";
+  fixture.removed = [];
   fixture.failDelete = false;
   fixture.failList = false;
   fixture.noEffect = false;
   fixture.volumes = [];
   fixture.volumeNoEffect = false;
+  fixture.networks = [];
+  fixture.networkNoEffect = false;
+  fixture.networkBadLabels = false;
+  fixture.failNetworkList = false;
 });
 afterEach(async()=>{await fs.rm(root,{recursive:true,force:true});});
 
 describe("Runner startup cleanup admission gate",()=>{
+  it("preserves every resource before cleanup if a unified guest remains", async()=>{
+    fixture.unifiedGuest="a".repeat(64);
+    fixture.containers=["b".repeat(64),fixture.unifiedGuest];
+    await expect(cleanupRunnerOrphansOnStartup()).rejects.toThrow("UNIFIED_LINUX_STARTUP_RECOVERY_REQUIRED");
+    expect(fixture.removed).toEqual([]);
+    expect(fixture.containers).toHaveLength(2);
+  });
+  it("preserves partial unified workspace even without its guest", async()=>{
+    fixture.unifiedVolume="zoeskoul-admin-ws-sess_11111111-1111-4111-8111-111111111111";
+    fixture.volumes=[fixture.unifiedVolume];
+    fixture.containers=["b".repeat(64)];
+    await expect(cleanupRunnerOrphansOnStartup()).rejects.toThrow("UNIFIED_LINUX_STARTUP_RECOVERY_REQUIRED");
+    expect(fixture.removed).toEqual([]);
+    expect(fixture.volumes).toEqual([fixture.unifiedVolume]);
+  });
   it("keeps journal and workspace if Docker cleanup is unverified", async()=>{
     const workspace = path.join(root,"zoeskoul-run-11111111-1111-4111-8111-111111111111");
     await fs.mkdir(workspace);
@@ -82,6 +147,23 @@ describe("Runner startup cleanup admission gate",()=>{
     await expect(cleanupRunnerOrphansOnStartup()).rejects.toThrow("remaining");
   });
 
+  it("reaps shared namespace dependents before their holder",async()=>{
+    fixture.holder="a".repeat(64);
+    const gateway="e".repeat(64);
+    fixture.containers=[fixture.holder,gateway];
+    await cleanupRunnerOrphansOnStartup();
+    expect(fixture.removed).toEqual([gateway,fixture.holder]);
+  });
+  it("preserves the firewall holder when dependent removal is unverified",async()=>{
+    fixture.holder="a".repeat(64);
+    const gateway="e".repeat(64);
+    fixture.containers=[fixture.holder,gateway];
+    fixture.noEffect=true;
+    await expect(cleanupRunnerOrphansOnStartup()).rejects.toThrow("dependent remains");
+    expect(fixture.removed).toEqual([gateway]);
+    expect(fixture.containers).toContain(fixture.holder);
+  });
+
   it("reclaims private admin tmpfs volumes before releasing startup gate", async()=>{
     fixture.volumes = ["zoeskoul-admin-ws-sess_11111111-1111-4111-8111-111111111111"];
     await cleanupRunnerOrphansOnStartup();
@@ -92,6 +174,31 @@ describe("Runner startup cleanup admission gate",()=>{
     fixture.volumes = ["zoeskoul-admin-ws-sess_11111111-1111-4111-8111-111111111111"];
     fixture.volumeNoEffect = true;
     await expect(cleanupRunnerOrphansOnStartup()).rejects.toThrow("admin");
+  });
+
+  it("reclaims orphaned, owner-verified admin networks before startup admission", async () => {
+    fixture.networks = ["zoeskoul-admin-net-sess_11111111-1111-4111-8111-111111111111"];
+    await cleanupRunnerOrphansOnStartup();
+    expect(fixture.networks).toEqual([]);
+  });
+
+  it("fails startup closed if an orphan admin network remains attached to the daemon", async () => {
+    fixture.networks = ["zoeskoul-admin-net-sess_11111111-1111-4111-8111-111111111111"];
+    fixture.networkNoEffect = true;
+    await expect(cleanupRunnerOrphansOnStartup()).rejects.toThrow("administrator network cleanup incomplete");
+    expect(fixture.networks).toHaveLength(1);
+  });
+
+  it("fails startup closed if an orphan admin network has untrusted owner labels", async () => {
+    fixture.networks = ["zoeskoul-admin-net-sess_11111111-1111-4111-8111-111111111111"];
+    fixture.networkBadLabels = true;
+    await expect(cleanupRunnerOrphansOnStartup()).rejects.toThrow("Unverified disposable administrator network");
+    expect(fixture.networks).toHaveLength(1);
+  });
+
+  it("fails startup closed when Docker cannot enumerate admin networks", async () => {
+    fixture.failNetworkList = true;
+    await expect(cleanupRunnerOrphansOnStartup()).rejects.toThrow("network daemon unavailable");
   });
 
   it("never reaps unrelated workspace directories",async()=>{

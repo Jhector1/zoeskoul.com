@@ -1,5 +1,7 @@
 import type { RequestHandler } from "express";
 import { getRequiredActorKey } from "../middleware/serviceAuth.js";
+import { isGlobalAdminShell, mayAttachGlobalAdminShell } from "../services/execution/adminReattachPolicy.js";
+import { adminLabSwitchStatus } from "../services/execution/learningAdminSwitch.js";
 import {
   getSession,
   isTerminalState,
@@ -28,7 +30,12 @@ export const heartbeatSessionRoute: RequestHandler = async (req, res) => {
       });
     }
 
-    touchSession(sessionId);
+    if (isGlobalAdminShell(session)) {
+      if (!mayAttachGlobalAdminShell(session, actorKey,
+          process.env.ZOESKOUL_LEARNING_ADMIN_LABS_ENABLED === "true" && adminLabSwitchStatus().enabled, Date.now())) {
+        return res.status(403).json({ ok: false, error: "Administrative lab unavailable." });
+      }
+    } else touchSession(sessionId);
     return res.status(200).json({ ok: true, state: session.state });
   } catch (error: any) {
     const message = error?.message ?? "Failed to heartbeat session.";

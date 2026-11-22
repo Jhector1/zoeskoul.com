@@ -25,6 +25,20 @@ describe("per-admin-session memory-backed workspace",()=>{
     });
     expect(mocks.createVolume.mock.calls[0][0]).not.toHaveProperty("Binds");
   });
+  it("marks unified volume at creation and verifies the marker", async()=>{
+    const marked={...info(),Labels:{...adminVolumeLabels(id),"com.zoeskoul.learning.unified-workspace":"v1"}};
+    handle.inspect.mockResolvedValue(marked);
+    expect(await createAdminWorkspaceVolume(id,true)).toBe(name);
+    expect(mocks.createVolume.mock.calls[0][0].Labels).toEqual(marked.Labels);
+    handle.inspect.mockResolvedValue(info());
+    await expect(createAdminWorkspaceVolume(id,true)).rejects.toThrow("UNIFIED_WORKSPACE_MARKER_UNVERIFIED");
+  });
+  it("never reaps marked volumes through legacy startup cleanup", async()=>{
+    const marked={...info(),Labels:{...adminVolumeLabels(id),"com.zoeskoul.learning.unified-workspace":"v1"}};
+    mocks.listVolumes.mockResolvedValue({Volumes:[info(),marked]});
+    await expect(cleanupOrphanedAdminWorkspaceVolumes()).rejects.toThrow("UNIFIED_LINUX_STARTUP_RECOVERY_REQUIRED");
+    expect(handle.remove).not.toHaveBeenCalled();
+  });
   it("rejects wrong IDs, disk-backed options and missing session labels",()=>{
     expect(()=>adminWorkspaceVolumeName("../../../other")).toThrow();
     expect(()=>validateAdminVolumeInspect({...info(),Options:{type:"none",device:"disk",o:""}},id)).toThrow();

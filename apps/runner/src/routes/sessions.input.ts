@@ -1,6 +1,8 @@
 import type { RequestHandler } from "express";
 import { getRequiredActorKey } from "../middleware/serviceAuth.js";
 import { getSession, touchSession } from "../services/sessions/sessionStore.js";
+import { isGlobalAdminShell, mayAttachGlobalAdminShell } from "../services/execution/adminReattachPolicy.js";
+import { adminLabSwitchStatus } from "../services/execution/learningAdminSwitch.js";
 
 function visibleInput(s: string) {
     return s.replace(/\r/g, "\\r").replace(/\n/g, "\\n");
@@ -30,6 +32,10 @@ export const inputSessionRoute: RequestHandler = async (req, res) => {
             });
         }
 
+        if (isGlobalAdminShell(session) && !mayAttachGlobalAdminShell(session, actorKey,
+            process.env.ZOESKOUL_LEARNING_ADMIN_LABS_ENABLED === "true" && adminLabSwitchStatus().enabled, Date.now())) {
+            return res.status(403).json({ ok: false, error: "Administrative lab unavailable." });
+        }
         if (!session.attachStream) {
             return res.status(400).json({
                 ok: false,

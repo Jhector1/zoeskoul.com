@@ -35,6 +35,10 @@ import { runViaApi } from "@zoeskoul/learner-workspace/lib/code/runClient";
 import { useCodeRunnerController } from "@zoeskoul/learner-workspace/runner/hooks/controller/useCodeRunnerController";
 import { resolveRuntime } from "@zoeskoul/learner-workspace/runner/hooks/controller/useResolvedRuntime";
 import XtermTerminal from "@zoeskoul/learner-workspace/runner/components/XtermTerminal";
+import FullPrivilegesTerminal from "./components/FullPrivilegesTerminal";
+import UnifiedLinuxTerminalPanel, { type UnifiedLinuxClientConfig } from "./components/UnifiedLinuxTerminalPanel";
+import WorkspaceTerminalToolbar, { WorkspaceTerminalLayoutContext, WORKSPACE_TERMINAL_TABS_PANEL as PANEL_TABS, MOBILE_TAB_ACTIVE, MOBILE_TAB_IDLE } from "./components/WorkspaceTerminalToolbar";
+import { getIdeOwnershipGate, type IdeOwnershipResult } from "./learningIdeOwnership";
 import {
     normalizeRecoverableTerminalError,
     useWorkspaceTerminalController,
@@ -357,6 +361,11 @@ type WorkspaceTerminalAutoOpenArgs = {
 };
 
 type CodeRunnerWithStdinProps = CodeRunnerProps & {
+    /** Trusted host opts into the unified terminal-only surface. No legacy hooks. */
+    unifiedLinux?: UnifiedLinuxClientConfig;
+    /** Explicit FullIDE pilot output; do not start legacy interactive sessions. */
+    unifiedTerminalOutput?: React.ReactNode;
+    unifiedRun?: import("./components/unifiedLinuxClient").UnifiedRunControls;
     stdin?: string;
     initialStdin?: string;
     onChangeStdin?: (value: string) => void;
@@ -403,17 +412,8 @@ const RUNNER_SURFACE_FRAMED =
 
 const PANEL_EDITOR = "bg-white/80 dark:bg-black/10";
 
-const PANEL_TABS =
-    "border-b border-neutral-200 bg-white/88 dark:border-white/10 dark:bg-black/25";
-
 const MOBILE_TAB_BASE =
     "inline-flex h-8 items-center justify-center gap-1.5 rounded-md px-2.5 text-[11px] font-medium transition-colors";
-
-const MOBILE_TAB_IDLE =
-    "text-[rgb(var(--ui-text-muted)/0.9)] hover:bg-[rgb(var(--ui-hover)/0.72)] hover:text-[rgb(var(--ui-text)/1)]";
-
-const MOBILE_TAB_ACTIVE =
-    "border border-[rgb(var(--ui-border-strong)/0.72)] bg-[rgb(var(--ui-surface-3)/0.82)] text-[rgb(var(--ui-text)/1)]";
 
 const MOBILE_TAB_OUTPUT_ACTIVE =
     "border border-sky-300/20 bg-sky-300/10 text-sky-900 dark:border-sky-300/20 dark:bg-sky-300/10 dark:text-sky-100";
@@ -752,6 +752,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         }),
     );
     const [outputPanelCollapsed, setOutputPanelCollapsed] = useState(false);
+    const [unifiedMaximized,setUnifiedMaximized]=useState(false);
     const [editorSplitRatio, setEditorSplitRatio] = useState(
         EDITOR_SPLIT_DEFAULT_RATIO,
     );
@@ -789,7 +790,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         if (!node || typeof window === "undefined") return;
 
         const updateFromWidth = (width: number) => {
-            setIsNarrowScreen(width <= 767);
+            setIsNarrowScreen(width <= (props.unifiedTerminalOutput && window.innerWidth >= 768 ? 480 : 767));
         };
 
         updateFromWidth(node.getBoundingClientRect().width);
@@ -807,7 +808,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         const update = () => updateFromWidth(node.getBoundingClientRect().width);
         window.addEventListener("resize", update);
         return () => window.removeEventListener("resize", update);
-    }, []);
+    }, [Boolean(props.unifiedTerminalOutput)]);
 
     const allowedLangs = useMemo(() => {
         const base = allowedLanguages?.length ? allowedLanguages : DEFAULT_LANGS;
@@ -865,7 +866,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const stdinControlled = typeof controlledStdin === "string";
     const stdin: string = stdinControlled ? String(controlledStdin ?? "") : uStdin;
     const workspaceTerminalEnabled =
-        Boolean(workspaceTerminal?.enabled) &&
+        !props.unifiedTerminalOutput && Boolean(workspaceTerminal?.enabled) &&
         isAuthenticated === true &&
         lang !== "sql" &&
         !isWeb;
@@ -907,6 +908,42 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     }, [workspaceTerminalEnabled, showTerminal]);
 
     const [terminalWindowId, setTerminalWindowId] = useState<string | null>(null);
+    const ownershipEnabled = getLearnerWorkspaceStaticConfig().nodeEnv === "development" &&
+        process.env.NEXT_PUBLIC_ZOESKOUL_LEARNING_IDE_OWNERSHIP === "true";
+    const [ownershipResult, setOwnershipResult] = useState<IdeOwnershipResult | null>(null);
+    const [ownershipRetry, setOwnershipRetry] = useState(0);
+    const ownershipReady = !ownershipEnabled || ownershipResult === "current";
+
+    useEffect(() => {
+        if (!ownershipEnabled || !terminalWindowId || !workspaceTerminalEnabled ||
+            !terminalSurfaceActive || disabled || readOnly || ownershipResult !== null) return;
+        let disposed = false;
+        const gate = getIdeOwnershipGate(terminalWindowId);
+        void gate.claim(ownershipRetry > 0).then(result => {
+            if (!disposed) setOwnershipResult(result);
+        });
+        return () => { disposed = true; };
+    }, [ownershipEnabled, terminalWindowId, workspaceTerminalEnabled, terminalSurfaceActive, disabled, readOnly, ownershipRetry, ownershipResult]);
+
+    useEffect(() => {
+        if (!ownershipEnabled || !terminalWindowId || ownershipResult !== "current") return;
+        let disposed = false;
+        let checking = false;
+        const gate = getIdeOwnershipGate(terminalWindowId);
+        const check = async () => {
+            if (checking || disposed) return;
+            checking = true;
+            try {
+                const result = await gate.check();
+                if (!disposed && result === "superseded") setOwnershipResult(result);
+            } finally { checking = false; }
+        };
+        const timer = window.setInterval(() => { void check(); }, 5_000);
+        window.addEventListener("focus", check);
+        void check();
+        return () => { disposed = true; window.clearInterval(timer); window.removeEventListener("focus", check); };
+    }, [ownershipEnabled, terminalWindowId, ownershipResult]);
+
     const [terminalTabs, setTerminalTabs] = useState<WorkspaceTerminalTab[]>([
         { id: "primary", label: "Terminal 1" },
     ]);
@@ -1026,7 +1063,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     );
 
     useEffect(() => {
-        if (!resolvedTerminalHostKey || !terminalWindowId) return;
+        if (!resolvedTerminalHostKey || !terminalWindowId || !ownershipReady) return;
 
         let disposed = false;
         let activated = false;
@@ -1145,7 +1182,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                 scheduleTerminalHostCleanup(resolvedTerminalHostKey);
             }
         };
-    }, [browserPersistenceEnabled, resolvedTerminalHostKey, terminalWindowId]);
+    }, [browserPersistenceEnabled, resolvedTerminalHostKey, terminalWindowId, ownershipReady]);
 
     useEffect(() => {
         if (!resolvedTerminalHostKey) return;
@@ -1309,6 +1346,9 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     ]);
 
     const terminalOnlyMode = !showEditor && showTerminal && workspaceTerminalEnabled;
+    // Explicitly opt into a different disposable lab; never elevate the
+    // persistent standard workspace, nor copy files between privilege modes.
+    const [fullPrivileges, setFullPrivileges] = useState(false);
     const [outputTab, setOutputTab] = useState<OutputTab>(() =>
         resolveRunnerPaneDefaultTab({
             policy: runnerPaneOptions,
@@ -1745,7 +1785,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     }, []);
 
     const runnerLang = (isWeb ? "javascript" : lang) as any;
-    const effectiveAllowRun = allowRun && !isWeb && !activeBinaryFile;
+    const effectiveAllowRun = !props.unifiedTerminalOutput && allowRun && !isWeb && !activeBinaryFile;
 
     const workspaceFileIdForIdentity =
         workspace && typeof workspace === "object"
@@ -1804,7 +1844,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         allowRun: effectiveAllowRun,
         resetTerminalOnRun,
         isAuthenticated,
-        onRun: onRun ?? defaultOnRun,
+        onRun: props.unifiedTerminalOutput ? async () => { throw new Error("UNIFIED_RUN_REQUIRES_ADAPTER"); } : onRun ?? defaultOnRun,
 
         getWorkspaceFiles: workspaceTerminal?.getWorkspaceFiles,
         onTerminalSnapshotFiles: workspaceTerminal?.onTerminalSnapshotFiles,
@@ -1927,7 +1967,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
     useEffect(() => {
         if (!pendingTerminalStartId) return;
-        if (!workspaceTerminalEnabled || disabled || !pendingWorkspaceTerm.available) {
+        if (!ownershipReady || !workspaceTerminalEnabled || disabled || !pendingWorkspaceTerm.available) {
             return;
         }
 
@@ -1991,6 +2031,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         pendingTerminalStartMode,
         pendingWorkspaceTerm.available,
         pendingWorkspaceTerm.open,
+        ownershipReady,
         refreshTerminalCapacity,
         terminalTabs,
         workspaceTerminalEnabled,
@@ -2230,7 +2271,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     ]);
 
     useEffect(() => {
-        if (!workspaceTerm.available) return;
+        if (!ownershipReady || !workspaceTerm.available) return;
 
         if (
             !shouldAutoOpenWorkspaceTerminal({
@@ -2286,6 +2327,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         };
     }, [
         outputTab,
+        ownershipReady,
         workspaceTerminalEnabled,
         terminalSurfaceActive,
         workspaceTerm.available,
@@ -2454,9 +2496,9 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             ? undefined
             : rootStyle;
 
-    const outputLabel = isWeb ? t("previewTab") : lang === "sql" ? t("resultsTab") : t("outputTab");
+    const outputLabel = props.unifiedTerminalOutput ? "Linux terminal" : isWeb ? t("previewTab") : lang === "sql" ? t("resultsTab") : t("outputTab");
     const canCollapseBottomPanel =
-        !isNarrowScreen &&
+        !props.unifiedTerminalOutput && !isNarrowScreen &&
         showEditor &&
         showTerminal &&
         !terminalOnlyMode &&
@@ -2485,7 +2527,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         showStdinEditor && showEditor && !terminalOnlyMode && lang !== "sql" && !isWeb;
     const showWorkspaceTerminalTab = workspaceTerminalEnabled;
     const effectiveEditorLanguage = editorLanguage ?? (isWeb ? "html" : lang);
-    const shouldCollapseIdleOutput = shouldCollapseIdleOutputPanel({
+    const shouldCollapseIdleOutput = !props.unifiedTerminalOutput && shouldCollapseIdleOutputPanel({
         compactLearnerUi: learnerUiFlags.compactLearnerUi,
         showEditor,
         showTerminal,
@@ -2546,7 +2588,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     );
 
     const addWorkspaceTerminalTab = useCallback(async () => {
-        if (!resolvedTerminalHostKey || disabled || terminalTabAddInFlightRef.current) {
+        if (!ownershipReady || !resolvedTerminalHostKey || disabled || terminalTabAddInFlightRef.current) {
             return;
         }
 
@@ -2612,6 +2654,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         disabled,
         isNarrowScreen,
         refreshTerminalCapacity,
+        ownershipReady,
         resolvedTerminalHostKey,
         showEditor,
         showTerminal,
@@ -2711,7 +2754,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             setMobilePane("output");
         }
 
-        if (!workspaceTerminalEnabled || disabled) {
+        if (!ownershipReady || !workspaceTerminalEnabled || disabled) {
             return;
         }
 
@@ -2726,6 +2769,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         showTerminal,
         terminalAutoOpenKey,
         workspaceTerm,
+        ownershipReady,
         workspaceTerminalEnabled,
     ]);
 
@@ -2788,7 +2832,26 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     ]);
 
     const renderOutputBody = () => {
+        if (props.unifiedTerminalOutput) return <WorkspaceTerminalLayoutContext.Provider value={{
+            collapse: !isNarrowScreen ? ()=>{setUnifiedMaximized(false);setOutputPanelCollapsed(true);} : undefined,
+            maximize: !isNarrowScreen ? ()=>{setOutputPanelCollapsed(false);setUnifiedMaximized(v=>!v);} : undefined,
+            maximized: unifiedMaximized,
+            visible: isNarrowScreen ? mobilePane==="output" : !outputPanelCollapsed,
+        }}>{props.unifiedTerminalOutput}</WorkspaceTerminalLayoutContext.Provider>;
         if (outputTab === "terminal" && showWorkspaceTerminalTab) {
+            if (!ownershipReady) return (
+                <div role="status" className="p-4 text-sm text-neutral-600 dark:text-white/70">
+                    {ownershipResult === "superseded" ? "This IDE was replaced by a newer window. Open a new IDE to take ownership." :
+                        ownershipResult === "conflict" ? "You have another Linux session. Your work is still running. Return to that IDE and end the session only if you want to start fresh here." :
+                        ownershipResult === "unavailable" ? "Could not verify IDE ownership. No new terminal was started." : "Checking IDE ownership…"}
+                    {ownershipResult === "unavailable" || ownershipResult === "conflict" ? (
+                        <button type="button" className="ml-2 rounded border px-2 py-1" onClick={() => {
+                            setOwnershipResult(null); setOwnershipRetry(value => value + 1);
+                        }}>Retry ownership</button>
+                    ) : null}
+                </div>
+            );
+            if (fullPrivileges) return <FullPrivilegesTerminal windowId={ownershipEnabled ? terminalWindowId ?? undefined : undefined} />;
             const activationPending = pendingTerminalStartId === activeTerminalId;
             const presentation = resolveWorkspaceTerminalPresentation({
                 activationPending,
@@ -2872,7 +2935,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                 data-testid={outputTestId}
                 className={cx(
                     "min-h-0 flex flex-col",
-                    terminalOnlyMode ? "h-full flex-1" : "",
+                    terminalOnlyMode || props.unifiedTerminalOutput ? "h-full flex-1" : "",
                 )}
                 style={{
                     ...(typeof panelHeight === "number" ? { height: panelHeight } : {}),
@@ -2880,9 +2943,19 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                 }}
             >
                 {showWorkspaceTerminalTab ? (
-                    <div className={cx("p-2", PANEL_TABS)}>
-                        <div className="flex min-w-0 items-center gap-2">
-                            {!terminalOnlyMode ? (
+                    <WorkspaceTerminalToolbar
+                        tabs={terminalTabStrip.visibleTabs.map(tab=>{
+                            const tabOwnerKey=resolvedTerminalHostKey?buildWorkspaceTerminalOwnerKey({hostKey:resolvedTerminalHostKey,terminalId:tab.id}):null;
+                            return {...tab,live:Boolean(tabOwnerKey&&terminalCapacity.hostActiveOwnerKeys.includes(tabOwnerKey))||(outputTab==="terminal"&&tab.id===activeTerminalId&&activeWorkspaceTerminalReady)};
+                        })}
+                        activeId={outputTab==="terminal"?activeTerminalId:null}
+                        pendingLabel={terminalTabStrip.pendingTab?.label}
+                        onSelect={selectWorkspaceTerminalTab}
+                        onClose={id=>{void closeWorkspaceTerminalTab(id);}}
+                        onAdd={()=>{void addWorkspaceTerminalTab();}}
+                        addDisabled={disabled||!ownershipReady||!terminalCapacityKnown||!canCreateWorkspaceTerminalTab({activeCount:terminalCapacity.activeCount,terminalTabCount:terminalTabs.length,maxActiveSessions:terminalCapacity.maxActiveSessions,activeTerminalReady:activeWorkspaceTerminalReady&&!pendingTerminalStartId})}
+                        addTitle={terminalCapacityKnown?`New terminal (${terminalCapacity.activeCount}/${terminalCapacity.maxActiveSessions} active)`:"Terminal capacity unavailable"}
+                        leading={!terminalOnlyMode ? (
                                 <button
                                     type="button"
                                     onClick={() => {
@@ -2903,116 +2976,24 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                     ) : null}
                                 </button>
                             ) : null}
-
-                            <div className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto">
-                                {terminalTabStrip.visibleTabs.map((tab) => {
-                                    const active =
-                                        outputTab === "terminal" &&
-                                        tab.id === activeTerminalId;
-                                    const tabOwnerKey = resolvedTerminalHostKey
-                                        ? buildWorkspaceTerminalOwnerKey({
-                                              hostKey: resolvedTerminalHostKey,
-                                              terminalId: tab.id,
-                                          })
-                                        : null;
-                                    const tabHasLiveSession = Boolean(
-                                        tabOwnerKey &&
-                                            terminalCapacity.hostActiveOwnerKeys.includes(
-                                                tabOwnerKey,
-                                            ),
-                                    );
-
-                                    return (
-                                        <div
-                                            key={tab.id}
-                                            className={cx(
-                                                "inline-flex shrink-0 items-center rounded-lg",
-                                                active
-                                                    ? MOBILE_TAB_ACTIVE
-                                                    : MOBILE_TAB_IDLE,
-                                            )}
-                                        >
-                                            <button
-                                                type="button"
-                                                onClick={() => selectWorkspaceTerminalTab(tab.id)}
-                                                className="inline-flex items-center gap-1 px-2 py-1.5 text-xs font-semibold"
-                                                aria-pressed={active}
-                                            >
-                                                <span>{tab.label}</span>
-                                                {tabHasLiveSession ||
-                                                (active && activeWorkspaceTerminalReady) ? (
-                                                    <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-                                                ) : null}
-                                            </button>
-
-                                            {terminalTabStrip.visibleTabs.length > 1 ? (
-                                                <button
-                                                    type="button"
-                                                    onClick={() => {
-                                                        void closeWorkspaceTerminalTab(tab.id);
-                                                    }}
-                                                    className="px-1.5 py-1 text-xs opacity-70 hover:opacity-100"
-                                                    aria-label={`Close ${tab.label}`}
-                                                >
-                                                    ×
-                                                </button>
-                                            ) : null}
-                                        </div>
-                                    );
-                                })}
-
-                                {terminalTabStrip.pendingTab ? (
-                                    <div
-                                        role="status"
-                                        aria-live="polite"
-                                        aria-label={`Opening ${terminalTabStrip.pendingTab.label}`}
-                                        className={cx(
-                                            "inline-flex h-8 w-24 shrink-0 items-center justify-center rounded-lg",
-                                            MOBILE_TAB_IDLE,
-                                        )}
-                                    >
-                                        <span
-                                            aria-hidden="true"
-                                            className="inline-flex h-3.5 w-3.5 animate-spin rounded-full border-2 border-current border-r-transparent opacity-60"
-                                        />
-                                        <span className="sr-only">
-                                            Opening {terminalTabStrip.pendingTab.label}
-                                        </span>
-                                    </div>
-                                ) : null}
-                            </div>
-
-                            <button
+                        trailing={<>
+<button
                                 type="button"
+                                aria-pressed={fullPrivileges}
+                                aria-label="Toggle full privileges for a disposable Linux lab"
                                 onClick={() => {
-                                    void addWorkspaceTerminalTab();
+                                    setFullPrivileges(value => !value);
+                                    setOutputTab("terminal");
                                 }}
-                                disabled={
-                                    disabled ||
-                                    !terminalCapacityKnown ||
-                                    !canCreateWorkspaceTerminalTab({
-                                        activeCount: terminalCapacity.activeCount,
-                                        terminalTabCount: terminalTabs.length,
-                                        maxActiveSessions:
-                                            terminalCapacity.maxActiveSessions,
-                                        activeTerminalReady:
-                                            activeWorkspaceTerminalReady &&
-                                            !pendingTerminalStartId,
-                                    })
-                                }
-                                className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-neutral-300 text-base font-bold text-neutral-700 disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/15 dark:text-white/80"
-                                aria-label="New terminal"
-                                title={
-                                    terminalCapacityKnown
-                                        ? `New terminal (${terminalCapacity.activeCount}/${terminalCapacity.maxActiveSessions} active)`
-                                        : "Terminal capacity unavailable"
-                                }
+                                disabled={disabled || readOnly || (!ownershipReady && !fullPrivileges)}
+                                className="shrink-0 rounded-lg border border-neutral-300 px-2 py-1.5 text-xs font-semibold disabled:opacity-40 dark:border-white/15"
+                                title="Root access inside a separate disposable lab only"
                             >
-                                +
+                                Full privileges: {fullPrivileges ? "ON" : "OFF"}
                             </button>
 
                             <span className="shrink-0 text-[10px] font-semibold text-neutral-500 dark:text-white/45">
-                                {terminalCapacityKnown
+                                {ownershipReady && terminalCapacityKnown
                                     ? `${terminalCapacity.activeCount}/${terminalCapacity.maxActiveSessions}`
                                     : "—/—"}
                             </span>
@@ -3028,14 +3009,9 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                     ↓
                                 </button>
                             ) : null}
-                        </div>
-
-                        {terminalTabMessage ? (
-                            <div className="mt-1 text-[11px] font-semibold text-amber-600 dark:text-amber-300">
-                                {terminalTabMessage}
-                            </div>
-                        ) : null}
-                    </div>
+                        </>}
+                        message={terminalTabMessage}
+                    />
                 ) : canCollapseBottomPanel ? (
                     <div className={cx("flex h-11 items-center justify-between px-3", PANEL_TABS)}>
                         <span className="text-[11px] font-medium text-neutral-600 dark:text-white/65">
@@ -3382,6 +3358,64 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         </div>
     );
 
+    const renderMobilePaneTabs=()=> (<div className={cx("p-2", PANEL_TABS)}>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <button
+                                            type="button"
+                                            data-testid={mobileEditorTabTestId}
+                                            onClick={() => setMobilePane("editor")}
+                                            className={cx(
+                                                MOBILE_TAB_BASE,
+                                                mobilePane === "editor" ? MOBILE_TAB_ACTIVE : MOBILE_TAB_IDLE,
+                                            )}
+                                            aria-pressed={mobilePane === "editor"}
+                                        >
+                                            Editor
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            data-testid={mobileOutputTabTestId}
+                                            onClick={() => setMobilePane("output")}
+                                            className={cx(
+                                                MOBILE_TAB_BASE,
+                                                mobilePane === "output"
+                                                    ? MOBILE_TAB_OUTPUT_ACTIVE
+                                                    : MOBILE_TAB_IDLE,
+                                            )}
+                                            aria-pressed={mobilePane === "output"}
+                                        >
+                                            <span>{outputLabel}</span>
+                                            {mobileTabAttention ? (
+                                                <span className="inline-flex h-2 w-2 rounded-full bg-sky-500" />
+                                            ) : null}
+                                        </button>
+                                    </div>
+                                </div>);
+    const renderUnifiedSplit=()=>{
+        const narrow=isNarrowScreen;
+        const collapsed=!narrow&&outputPanelCollapsed;
+        const maximized=!narrow&&!collapsed&&unifiedMaximized;
+        const editorHidden=narrow?mobilePane!=="editor":maximized;
+        const terminalHidden=narrow?mobilePane!=="output":collapsed;
+        const both=!narrow&&!collapsed&&!maximized;
+        const side=effectiveDock==="right"&&!narrow;
+        const editorHeight=narrow?mobileBodyHeight:both?(side?split.rightTotalH:split.bottomEditorH):Math.max(80,surfaceBodyHeight-(collapsed?36:0));
+        return <div className="flex h-full min-h-0 flex-col">
+            {narrow?renderMobilePaneTabs():null}
+            <div className={cx("flex min-h-0 flex-1",side?"flex-row":"flex-col")}>
+                <div className={cx("min-h-0 min-w-0 overflow-hidden",PANEL_EDITOR,editorHidden?"hidden":both&&!side?"shrink-0":"flex-1")} style={!editorHidden&&both&&!side?{height:editorHeight}:undefined}>
+                    {renderEditorPane(editorHeight)}
+                </div>
+                {both?<ResizeSeparator {...split.separatorProps} data-testid={side?"runner-right-split-resizer":"runner-bottom-split-resizer"} orientation={side?"vertical":"horizontal"} onPointerDown={split.onPointerDownSplit} title="Drag or use arrow keys to resize terminal"/>:null}
+                <div className={cx("min-h-0 min-w-0 overflow-hidden",terminalHidden?"hidden":both?"shrink-0":"flex-1")} style={!terminalHidden&&both?side?{width:split.termW}:{height:split.bottomTermH}:undefined}>
+                    {renderOutputPane(!terminalHidden&&both?(side?split.rightTotalH:split.bottomTermH):undefined)}
+                </div>
+            </div>
+            {collapsed?renderCollapsedOutputPanel():null}
+        </div>;
+    };
+
     return (
         <div ref={runnerRootRef} className={outerCls} data-testid={testId} style={rootStyle}>
             {split.isResizing ? (
@@ -3395,6 +3429,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                 />
             ) : null}
             {workspaceTerminalEnabled &&
+            ownershipReady &&
             resolvedTerminalHostKey &&
             hydratedTerminalHostKey === resolvedTerminalHostKey
                 ? terminalTabs.map((tab) => (
@@ -3452,9 +3487,9 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                     <HeaderBar
                         title={title}
                         disabled={disabled}
-                        busy={term.busy && !isWeb}
-                        runState={term.runState}
-                        onCancel={term.cancelRun}
+                        busy={(props.unifiedRun ? props.unifiedRun.state !== "idle" : term.busy) && !isWeb}
+                        runState={props.unifiedRun?.state ?? term.runState}
+                        onCancel={props.unifiedTerminalOutput ? () => props.unifiedRun?.stop() : term.cancelRun}
                         editorTheme={editorTheme}
                         onToggleTheme={() =>
                             setEditorTheme((t) => (t === "vs-dark" ? "vs" : "vs-dark"))
@@ -3486,7 +3521,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                         }}
                         showOpenTerminal={showOpenWorkspaceTerminalUI}
                         onOpenTerminal={openWorkspaceTerminalPane}
-                        showRestartTerminal={showRestartWorkspaceTerminalUI}
+                        showRestartTerminal={showRestartWorkspaceTerminalUI && ownershipReady}
                         onRestartTerminal={() =>
                             restartWorkspaceTerminalSession({
                                 resetAutoOpen: () => {
@@ -3496,9 +3531,22 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                 workspaceTerm,
                             })
                         }
-                        allowRun={effectiveAllowRun && !terminalOnlyMode}
+                        allowRun={props.unifiedTerminalOutput ? !!props.unifiedRun : effectiveAllowRun && !terminalOnlyMode}
+                        runDisabled={props.unifiedRun ? (props.unifiedRun.state === "running" ? !props.unifiedRun.canStop : !props.unifiedRun.enabled || !props.activeWorkspaceFileId || !String(props.workspace?.nodes?.find(n=>n.id===props.activeWorkspaceFileId)?.name ?? "").endsWith(".py")) : undefined}
                         onRun={async () => {
                             if (isWeb) return;
+                            // Unified is an exclusive authority boundary. Even if its
+                            // adapter is absent, never fall through to legacy execution.
+                            if (props.unifiedTerminalOutput) {
+                                const binding=props.unifiedRun;
+                                const id=props.activeWorkspaceFileId;
+                                if (!binding?.enabled || binding.state!=="idle" || !id) return;
+                                setOutputPanelCollapsed(false);
+                                setOutputTab("terminal");
+                                if (isNarrowScreen) setMobilePane("output");
+                                await binding.start(id,readLiveEditorCode());
+                                return;
+                            }
 
                             setOutputTab(terminalOnlyMode ? "terminal" : "output");
 
@@ -3568,42 +3616,9 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                     {!showEditor && showTerminal ? renderOutputPane(surfaceBodyHeight) : null}
 
                     {showEditor && showTerminal ? (
-                        isNarrowScreen ? (
+                        props.unifiedTerminalOutput ? renderUnifiedSplit() : isNarrowScreen ? (
                             <div className="flex h-full min-h-0 flex-col">
-                                <div className={cx("p-2", PANEL_TABS)}>
-                                    <div className="grid grid-cols-2 gap-2">
-                                        <button
-                                            type="button"
-                                            data-testid={mobileEditorTabTestId}
-                                            onClick={() => setMobilePane("editor")}
-                                            className={cx(
-                                                MOBILE_TAB_BASE,
-                                                mobilePane === "editor" ? MOBILE_TAB_ACTIVE : MOBILE_TAB_IDLE,
-                                            )}
-                                            aria-pressed={mobilePane === "editor"}
-                                        >
-                                            Editor
-                                        </button>
-
-                                        <button
-                                            type="button"
-                                            data-testid={mobileOutputTabTestId}
-                                            onClick={() => setMobilePane("output")}
-                                            className={cx(
-                                                MOBILE_TAB_BASE,
-                                                mobilePane === "output"
-                                                    ? MOBILE_TAB_OUTPUT_ACTIVE
-                                                    : MOBILE_TAB_IDLE,
-                                            )}
-                                            aria-pressed={mobilePane === "output"}
-                                        >
-                                            <span>{outputLabel}</span>
-                                            {mobileTabAttention ? (
-                                                <span className="inline-flex h-2 w-2 rounded-full bg-sky-500" />
-                                            ) : null}
-                                        </button>
-                                    </div>
-                                </div>
+                                {renderMobilePaneTabs()}
 
                                 <div className="min-h-0 flex-1 overflow-hidden">
                                     {mobilePane === "editor"
@@ -3707,5 +3722,6 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 }
 
 export default function CodeRunner(props: CodeRunnerWithStdinProps) {
+    if (props.unifiedLinux) return <UnifiedLinuxTerminalPanel config={props.unifiedLinux} disabled={props.disabled || props.readOnly} />;
     return <CodeRunnerContent {...props} />;
 }

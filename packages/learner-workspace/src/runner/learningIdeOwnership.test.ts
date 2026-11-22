@@ -1,0 +1,19 @@
+import { describe, expect, it } from "vitest";
+import { IdeOwnershipGate, requestIdeOwnership } from "./learningIdeOwnership";
+const id="window-12345678";
+function stub(...responses: Response[]) { const bodies: unknown[]=[]; const fetcher: typeof fetch = async (_url, init) => { bodies.push(JSON.parse(String(init?.body))); const response=responses.shift(); if(!response) throw Error("unexpected request");return response; }; return {bodies,fetcher}; }
+const response=(body:unknown,status=200)=>new Response(JSON.stringify(body),{status});
+const enabled=()=>response({ok:true,enabled:true});
+describe("IDE ownership browser gate",()=>{
+ it("uses one claim across concurrent activation and remounts",async()=>{const s=stub(enabled());const gate=new IdeOwnershipGate(id,s.fetcher);expect(await Promise.all([gate.claim(),gate.claim()])).toEqual(["current","current"]);expect(await gate.claim()).toBe("current");expect(s.bodies).toEqual([{windowId:id}]);});
+ it("checks status without claiming",async()=>{const s=stub(enabled(),response({ok:true,enabled:true,status:"current"}));const gate=new IdeOwnershipGate(id,s.fetcher);await gate.claim();expect(await gate.check()).toBe("current");expect(s.bodies).toEqual([{windowId:id},{windowId:id,intent:"status"}]);});
+ it("fences superseded windows permanently in this document",async()=>{const s=stub(enabled(),response({ok:true,enabled:true,status:"superseded"}));const gate=new IdeOwnershipGate(id,s.fetcher);await gate.claim();expect(await gate.check()).toBe("superseded");expect(await gate.claim(true)).toBe("superseded");expect(s.bodies).toHaveLength(2);});
+ it("does not reclaim after Runner state loss",async()=>{const s=stub(enabled(),response({ok:true,enabled:true,status:"unclaimed"}));const gate=new IdeOwnershipGate(id,s.fetcher);await gate.claim();expect(await gate.check()).toBe("superseded");expect(await gate.claim()).toBe("superseded");});
+ it("requires explicit retry for unavailable initial claim",async()=>{const s=stub(response({},503),enabled());const gate=new IdeOwnershipGate(id,s.fetcher);expect(await gate.claim()).toBe("unavailable");expect(await gate.claim()).toBe("unavailable");expect(await gate.claim(true)).toBe("current");expect(s.bodies).toHaveLength(2);});
+ it("does not retry a rejected ownership claim",async()=>{const s=stub(response({},409));const gate=new IdeOwnershipGate(id,s.fetcher);expect(await gate.claim()).toBe("superseded");expect(await gate.claim(true)).toBe("superseded");expect(s.bodies).toHaveLength(1);});
+ it("fails closed when the matching Runner feature is disabled",async()=>{const s=stub(response({ok:true,enabled:false}),response({ok:true}));expect(await requestIdeOwnership(id,"claim",s.fetcher)).toBe("unavailable");expect(await requestIdeOwnership(id,"claim",s.fetcher)).toBe("unavailable");});
+ it("transport failure during status never makes a new claim",async()=>{const s=stub(enabled(),response({},503));const gate=new IdeOwnershipGate(id,s.fetcher);await gate.claim();expect(await gate.check()).toBe("current");expect(s.bodies).toHaveLength(2);});
+ it("late status success cannot revive a fenced window",async()=>{let finish:(value:Response)=>void=()=>{};let calls=0;const fetcher:typeof fetch=async()=>++calls===1?enabled():new Promise<Response>(resolve=>{finish=resolve;});const gate=new IdeOwnershipGate(id,fetcher);await gate.claim();const check=gate.check();gate.supersede();finish(response({ok:true,enabled:true,status:"current"}));expect(await check).toBe("superseded");});
+});
+
+it("conflict is not supersession and does not auto retry; explicit retry can succeed after the older session ends",async()=>{const s=stub(response({},423),enabled());const gate=new IdeOwnershipGate(id,s.fetcher);expect(await gate.claim()).toBe("conflict");expect(await gate.claim()).toBe("conflict");expect(await gate.check()).toBe("conflict");expect(s.bodies).toHaveLength(1);expect(await gate.claim(true)).toBe("current");expect(s.bodies).toHaveLength(2);});

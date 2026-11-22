@@ -12,10 +12,15 @@ const adminTopicModule = Object.freeze({
   "final-capstone-secure-project": "linux-module-4-secure-project-capstone",
 } as const);
 
+export const STUDENT_FULL_PRIVILEGES_TARGET = Object.freeze({
+  moduleSlug: "zoelearning-disposable-root",
+  topicSlug: "full-privileges",
+} as const);
+
 export type StudentAdminLabTarget = Readonly<{
   moduleSlug: (typeof adminTopicModule)[keyof typeof adminTopicModule];
   topicSlug: keyof typeof adminTopicModule;
-}>;
+}> | typeof STUDENT_FULL_PRIVILEGES_TARGET;
 
 function isPlainRecord(value: unknown): value is Record<string, unknown> {
   if (typeof value !== "object" || value === null || Array.isArray(value)) return false;
@@ -30,6 +35,10 @@ export function parseStudentAdminLabTarget(value: unknown): StudentAdminLabTarge
     return null;
   }
   const { moduleSlug, topicSlug } = value;
+  if (moduleSlug === STUDENT_FULL_PRIVILEGES_TARGET.moduleSlug &&
+      topicSlug === STUDENT_FULL_PRIVILEGES_TARGET.topicSlug) {
+    return STUDENT_FULL_PRIVILEGES_TARGET;
+  }
   if (typeof moduleSlug !== "string" || typeof topicSlug !== "string" ||
       !Object.prototype.hasOwnProperty.call(adminTopicModule, topicSlug)) {
     return null;

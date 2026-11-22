@@ -97,6 +97,7 @@ export default function HeaderBar(props: {
     onRestartTerminal?: () => void | Promise<void>;
 
     allowRun: boolean;
+    runDisabled?: boolean;
     onRun: () => void;
 }) {
     const {
@@ -304,7 +305,7 @@ export default function HeaderBar(props: {
                         <button
                             type="button"
                             data-testid="code-runner-run-button"
-                            disabled={disabled || showSpinner}
+                            disabled={disabled || showSpinner || props.runDisabled === true}
                             onClick={showStop ? onCancel : onRun}
                             className={cx(showStop || showSpinner ? "ui-btn-ide-danger" : "ui-btn-ide-success")}
                             aria-label={runLabel}

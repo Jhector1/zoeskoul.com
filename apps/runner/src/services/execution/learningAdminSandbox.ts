@@ -1,6 +1,7 @@
 /** Dedicated rootless, disposable administrative sandbox — never a host bind. */
 import type Docker from "dockerode";
 import { AdminGrantError } from "./learningAdminGrant.js";
+import { adminEgressConfig } from "./adminEgressProxy.js";
 
 export const adminHostConfig = {
   NetworkMode: "none",
@@ -19,6 +20,65 @@ export const adminHostConfig = {
     "/tmp": "rw,nodev,nosuid,size=8m,mode=1777",
   },
 };
+
+/** Production root labs have NO network until a separately enforced egress
+ * boundary exists. The default Docker bridge is NOT a tenant firewall.
+ * A deliberately acknowledged development-only override preserves supervised
+ * apt/curl testing on a dedicated rootless VM, never production readiness. */
+export function adminLabNetworkMode(
+  configuration: NodeJS.ProcessEnv = process.env,
+): "none" | "bridge" {
+  const tier = configuration.ZOESKOUL_LEARNING_ADMIN_LAB_DEPLOYMENT_MODE ?? "production";
+  if (tier !== "production" && tier !== "development") {
+    throw new AdminGrantError(503, "Invalid administrator lab deployment mode.");
+  }
+  const outbound = configuration.ZOESKOUL_LEARNING_ADMIN_LAB_OUTBOUND_NETWORK;
+  if (outbound === undefined || outbound === "false") return "none";
+  if (outbound !== "true") {
+    throw new AdminGrantError(503, "Invalid administrator lab network setting.");
+  }
+  if (tier !== "development" ||
+      configuration.ZOESKOUL_LEARNING_ADMIN_LAB_DEV_BRIDGE_ACK !== "UNFILTERED_DEV_BRIDGE_ONLY") {
+    throw new AdminGrantError(503, "Unfiltered bridge networking is forbidden for production administrator labs.");
+  }
+  return "bridge";
+}
+
+/** Opt-in per-session internal network. No Docker default-bridge escape hatch,
+ * no outbound routing, and no implicit internet permissions. This is an
+ * offline isolation foundation, NOT an approved production egress gateway. */
+export function adminLabSessionIsolationEnabled(
+  configuration: NodeJS.ProcessEnv = process.env,
+): boolean {
+  const policy = configuration.ZOESKOUL_LEARNING_ADMIN_LAB_NETWORK_POLICY;
+  if (policy === undefined || policy === "none") return false;
+  if (policy !== "per-session-internal" && policy !== "per-session-controlled-egress") {
+    throw new AdminGrantError(503, "Unknown administrator lab network policy.");
+  }
+  // The proxy lifecycle cannot be enabled without a pinned, labeled gateway
+  // and an explicit development-only acknowledgement. Production fails closed.
+  if (policy === "per-session-controlled-egress") adminEgressConfig(configuration);
+  if (configuration.ZOESKOUL_LEARNING_ADMIN_LAB_OUTBOUND_NETWORK === "true") {
+    throw new AdminGrantError(503, "Isolated administrator labs cannot use unfiltered bridge egress.");
+  }
+  adminLabNetworkMode(configuration); // Validate deployment and outbound flags.
+  return true;
+}
+
+export function adminHostConfigForLab() {
+  adminLabSessionIsolationEnabled();
+  return { ...adminHostConfig, NetworkMode: adminLabNetworkMode() };
+}
+
+/** A bounded per-file limit for apt package indexes in the disposable admin lab.
+ * Ordinary learner sessions keep their existing workspace-derived hard limit.
+ * This does not increase workspace tmpfs, cgroup memory, or host access. */
+export function adminLabFileWriteLimitBytes(
+  labMode: "standard" | "admin",
+  standardWorkspaceLimitBytes: number,
+): number {
+  return labMode === "admin" ? 64 * 1024 * 1024 : standardWorkspaceLimitBytes;
+}
 
 export async function verifyAdminSandboxImage(client: Docker, image: string) {
   const info = await client.info();

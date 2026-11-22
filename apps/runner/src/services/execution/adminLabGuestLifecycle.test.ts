@@ -1,0 +1,24 @@
+import {describe,it,expect} from "vitest";
+import {detachedGuestSpec, provisionDetachedGuest, inspectDetachedGuest, destroyDetachedGuest,type DetachedGuestInspection,type DetachedGuestOperations} from "./adminLabGuestLifecycle.js";
+const identity={sessionId:"sess_11111111-1111-4111-8111-111111111111",ownerKey:"u:"+"a".repeat(64),image:"sha256:"+"b".repeat(64)};
+const spec=detachedGuestSpec(identity), id="c".repeat(64);
+const valid=():DetachedGuestInspection=>({id,name:"/"+spec.name,image:spec.image,labels:{...spec.labels},running:false,network:"none",privileged:false,volumeNames:[spec.volume],hasBind:false,autoRemove:false,user:"0:0",tty:false,openStdin:false});
+function fixture(){let guest:DetachedGuestInspection|null=null;const calls:string[]=[]; const ops:DetachedGuestOperations={assertAuthorized:()=>{calls.push("auth")},verifyPrerequisites:async()=>{calls.push("verify")},inspect:async()=>guest,create:async()=>{calls.push("create");guest=valid();return id},start:async()=>{calls.push("start");if(guest)guest.running=true},remove:async()=>{calls.push("remove");guest=null}};return {ops,calls,set:(v:DetachedGuestInspection|null)=>{guest=v},get:()=>guest};}
+async function rejects(fn:()=>Promise<unknown>, message:string){let error="";try{await fn()}catch(e){error=(e as Error).message}expect(error).toBe(message)}
+describe("detached guest lifecycle",()=>{
+ it("uses a long-lived process without a terminal",()=>{expect(spec.command).toEqual(["/usr/bin/sleep","infinity"]);expect(spec.volume).toBe("zoeskoul-admin-ws-"+identity.sessionId)});
+ it("rejects malformed identity before Docker calls",async()=>{const f=fixture();await rejects(()=>provisionDetachedGuest({...identity,ownerKey:"other"},f.ops),"INVALID_DETACHED_GUEST_IDENTITY");expect(f.calls).toEqual([])});
+ it("verifies and starts once",async()=>{const f=fixture();expect(await provisionDetachedGuest(identity,f.ops)).toBe(id);expect(await inspectDetachedGuest(identity,f.ops)).toBe("running");expect(f.calls.filter(v=>v==="create"||v==="start")).toEqual(["create","start"])});
+ it("does not create against an occupied name",async()=>{const f=fixture();f.set(valid());await rejects(()=>provisionDetachedGuest(identity,f.ops),"DETACHED_GUEST_NAME_OCCUPIED");expect(f.calls.includes("create")).toBe(false)});
+ it("blocks revoked admission",async()=>{const f=fixture();f.ops.assertAuthorized=()=>{throw Error("revoked")};await rejects(()=>provisionDetachedGuest(identity,f.ops),"revoked");expect(f.calls).toEqual([])});
+ it("blocks start after create-time revocation",async()=>{const f=fixture();f.ops.assertAuthorized=()=>{if(f.get())throw Error("revoked")};await rejects(()=>provisionDetachedGuest(identity,f.ops),"revoked");expect(f.calls.includes("start")).toBe(false)});
+ it("preserves evidence after a lost create acknowledgement",async()=>{const f=fixture();f.ops.create=async()=>{f.set(valid());throw Error("lost")};await rejects(()=>provisionDetachedGuest(identity,f.ops),"lost");expect(await inspectDetachedGuest(identity,f.ops)).toBe("unknown");await destroyDetachedGuest(identity,f.ops);expect(await inspectDetachedGuest(identity,f.ops)).toBe("absent")});
+ it("does not report an unsuccessful start as running",async()=>{const f=fixture();f.ops.start=async()=>{};await rejects(()=>provisionDetachedGuest(identity,f.ops),"DETACHED_GUEST_START_UNVERIFIED")});
+ it("reports daemon failure as unknown",async()=>{const f=fixture();f.ops.inspect=async()=>{throw Error("daemon")};expect(await inspectDetachedGuest(identity,f.ops)).toBe("unknown")});
+ it("removes by verified full ID",async()=>{const f=fixture();await provisionDetachedGuest(identity,f.ops);f.ops.remove=async(value)=>{expect(value).toBe(id);f.set(null)};await destroyDetachedGuest(identity,f.ops);expect(await inspectDetachedGuest(identity,f.ops)).toBe("absent")});
+ it("does not claim success if removal leaves the guest",async()=>{const f=fixture();f.set(valid());f.ops.remove=async()=>{};await rejects(()=>destroyDetachedGuest(identity,f.ops),"DETACHED_GUEST_CLEANUP_UNVERIFIED")});
+ it("cleanup is idempotent after absence",async()=>{const f=fixture();await destroyDetachedGuest(identity,f.ops);expect(f.calls).toEqual([])});
+ for(const [name,drift] of Object.entries({owner:{labels:{...spec.labels,"com.zoeskoul.learning.unified-owner":"foreign"}},network:{network:"bridge"},mount:{hasBind:true},image:{image:"sha256:"+"d".repeat(64)},privileged:{privileged:true},autoRemove:{autoRemove:true},tty:{tty:true},stdin:{openStdin:true},volume:{volumeNames:["other"]},legacy:{labels:{...spec.labels,"com.zoeskoul.learning.unified-guest":""}}})){
+  it("rejects unverified "+name,async()=>{const f=fixture();f.set({...valid(),...drift,running:true});expect(await inspectDetachedGuest(identity,f.ops)).toBe("unknown");await rejects(()=>destroyDetachedGuest(identity,f.ops),"DETACHED_GUEST_OWNER_UNVERIFIED");expect(f.calls.includes("remove")).toBe(false)});
+ }
+});

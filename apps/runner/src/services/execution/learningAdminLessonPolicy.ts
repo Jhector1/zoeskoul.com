@@ -10,7 +10,10 @@ export const ADMIN_LAB_TOPIC_SLUGS = Object.freeze([
   "final-capstone-secure-project",
 ] as const);
 const adminTopics = new Set<string>(ADMIN_LAB_TOPIC_SLUGS);
+/** A separate global operator-enabled student sandbox scope, NOT a Course 2 topic. */
+export const FULL_PRIVILEGES_TOPIC_SLUG = "full-privileges" as const;
 
 export function isEligibleAdminLabLesson(course: unknown, topic: unknown): boolean {
-  return course === ADMIN_COURSE_SLUG && typeof topic === "string" && adminTopics.has(topic);
+  return course === ADMIN_COURSE_SLUG && typeof topic === "string" &&
+    (adminTopics.has(topic) || topic === FULL_PRIVILEGES_TOPIC_SLUG);
 }
