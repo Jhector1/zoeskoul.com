@@ -31,6 +31,22 @@ describe("U18 runtime smoke orchestration",()=>{
   expect(o.HostConfig).toMatchObject({Binds:["/workspaces/fixture:/workspace:ro"],NetworkMode:"none",Privileged:false,ReadonlyRootfs:true,CapDrop:["ALL"]});
   expect(o.HostConfig).not.toHaveProperty("PortBindings");
  });
+ it("disables local log compression for the single-file bounded log configuration",()=>{
+  const o=workerSmokeContainerOptions("/workspaces/fixture",artifact,"run");
+  expect(o.HostConfig.LogConfig).toEqual({Type:"local",Config:{"max-size":"1m","max-file":"1","compress":"false"}});
+ });
+ it("reports Docker start rejection and releases the registered container before attesting",async()=>{
+  m.start.mockRejectedValue(new Error("failed to initialize logging driver"));
+  const {promise,onContainerCreated,onContainerRemoved}=run();
+  await expect(promise).resolves.toEqual({state:"failed",stage:"startup",artifactSha256:artifact.sha256});
+  expect(onContainerCreated).toHaveBeenCalledWith("container");
+  expect(onContainerCreated.mock.invocationCallOrder[0]).toBeLessThan(m.start.mock.invocationCallOrder[0]!);
+  expect(m.probe).not.toHaveBeenCalled();expect(m.fetch).not.toHaveBeenCalled();
+  expect(m.remove).toHaveBeenCalledWith({force:true});
+  expect(m.remove.mock.invocationCallOrder[0]).toBeLessThan(m.retire.mock.invocationCallOrder[0]!);
+  expect(m.retire.mock.invocationCallOrder[0]).toBeLessThan(onContainerRemoved.mock.invocationCallOrder[0]!);
+  expect(onContainerRemoved.mock.invocationCallOrder[0]).toBeLessThan(m.read.mock.invocationCallOrder[0]!);
+ });
  it("checks SSR, health and exact served assets then removes the container before attesting",async()=>{
   const {promise,onContainerCreated,onContainerRemoved}=run();
   await expect(promise).resolves.toEqual({state:"passed",artifactSha256:artifact.sha256,homeStatus:200,healthStatus:200,verifiedClientAssets:2});

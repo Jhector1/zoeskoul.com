@@ -15,7 +15,7 @@ export function workerSmokeContainerOptions(workspaceDir: string, artifact: Tans
     Labels:{...base.Labels,"com.zoeskoul.runner.tanstack-run":runId,
       "com.zoeskoul.runner.build-step":"worker-runtime"},
     HostConfig:{...base.HostConfig, Binds:[`${workspaceDir}:/workspace:ro`],
-      NetworkMode:"none", LogConfig:{Type:"local",Config:{"max-size":"1m","max-file":"1"}}},
+      NetworkMode:"none", LogConfig:{Type:"local",Config:{"max-size":"1m","max-file":"1","compress":"false"}}},
   };
   const h=options.HostConfig;
   if (!/^[1-9]\d*:\d+$/.test(options.User) || h.Privileged !== false || h.ReadonlyRootfs !== true ||
