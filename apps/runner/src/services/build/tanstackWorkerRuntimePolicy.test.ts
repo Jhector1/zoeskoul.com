@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { createHash } from "node:crypto";
 import type { ProductionBuildJobRequestV1, TanstackWorkerArtifactV1 } from "@zoeskoul/build-executor-contracts";
-import { shouldRunWorkerSmoke, workerSmokeConfig, workerSmokeCommand, selectWorkerSmokeAssets } from "./tanstackWorkerRuntimePolicy.js";
+import { shouldRunWorkerSmoke, isObservedU18GeneratedConfig, isDiscardableU18GeneratedMetadata, workerSmokeConfig, workerSmokeCommand, selectWorkerSmokeAssets } from "./tanstackWorkerRuntimePolicy.js";
 const req:ProductionBuildJobRequestV1={protocolVersion:1,operation:"production-build",buildProjectId:"cmwqiqnly0002eldlcafn1xjx",sourceVersion:7,stackId:"tanstack-start-v1",templateId:"tanstack-start-v1",files:[]};
 const config={main:"index.js",compatibility_date:"2026-10-01",compatibility_flags:["nodejs_compat"],assets:{directory:"../client"},no_bundle:true};
 function artifact(meta:unknown):TanstackWorkerArtifactV1 {
@@ -29,5 +29,41 @@ describe("U18 worker smoke policy",()=>{
   it("selects compiled assets actually referenced by SSR HTML",()=>{
     expect(selectWorkerSmokeAssets(artifact(config),'<script src="/assets/app.js"></script><link href="/assets/app.css">').map(f=>f.path)).toEqual(["client/assets/app.js","client/assets/app.css"]);
     expect(()=>selectWorkerSmokeAssets(artifact(config),'<script src="https://example.com/assets/app.js"></script>')).toThrow();
+  });
+});
+
+
+describe("U18F5 observed generated metadata compatibility", () => {
+  it.each([
+    ["jsx_factory", "React.createElement"],
+    ["jsx_fragment", "React.Fragment"],
+    ["durable_objects", {bindings:[]}],
+    ["queues", {producers:[],consumers:[]}],
+    ["logfwdr", {bindings:[]}],
+    ["python_modules", {exclude:[]}],
+    ["dev", {a:1,b:2,c:3,d:4,e:5}],
+  ])("discards only an observed pilot field: %s", (key, value) => {
+    expect(isDiscardableU18GeneratedMetadata(key as string, value, true)).toBe(true);
+    expect(isDiscardableU18GeneratedMetadata(key as string, value, false)).toBe(false);
+    expect(() => workerSmokeConfig(artifact({...config,[key as string]:value}))).toThrow();
+  });
+  it.each([
+    ["durable_objects", {bindings:[{name:"DO",class_name:"Counter"}]}],
+    ["durable_objects", {bindings:[],unexpected:[]}],
+    ["queues", {producers:[{binding:"Q",queue:"q"}],consumers:[]}],
+    ["queues", {producers:[],consumers:[{queue:"q"}]}],
+    ["logfwdr", {bindings:[{name:"LOG",destination:"remote"}]}],
+    ["logfwdr", {bindings:{}}],
+    ["services", [{binding:"REMOTE"}]],
+    ["vars", {SECRET:"x"}],
+    ["jsx_factory", "customFactory"],
+  ])("still rejects nonempty or unsupported metadata: %s", (key,value) => {
+    expect(isDiscardableU18GeneratedMetadata(key as string,value,true)).toBe(false);
+  });
+  it("does not trust a reported artifact SHA without hashing the actual config bytes", () => {
+    const sha="28bd98025eccd22a4126029fbcce7862e2885629a4a9e71b3efd8723ca40eeba";
+    expect(isObservedU18GeneratedConfig(sha,Buffer.alloc(1298))).toBe(false);
+    expect(isObservedU18GeneratedConfig("a".repeat(64),Buffer.alloc(1298))).toBe(false);
+    expect(() => workerSmokeConfig({...artifact({...config,dev:{a:1,b:2,c:3,d:4,e:5}}),sha256:sha})).toThrow();
   });
 });

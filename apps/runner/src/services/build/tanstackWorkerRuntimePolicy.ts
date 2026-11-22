@@ -23,12 +23,49 @@ function assertMetadata(condition: unknown): asserts condition {
   if (!condition) throw new Error("Unsupported Worker smoke configuration.");
 }
 
+// Temporary compatibility exception for the byte-identical U18F4 artifact.
+// The generated config is never passed to Wrangler. Only the named metadata
+// below may be discarded, and binding envelopes must still be empty.
+const U18_F4_ARTIFACT_SHA = "28bd98025eccd22a4126029fbcce7862e2885629a4a9e71b3efd8723ca40eeba";
+const U18_F4_CONFIG_SHA = "e37546e223b2027e31ac1fd7b42170c1851a8f1b172b4f1e3ed5d41433dd669d";
+
+export function isObservedU18GeneratedConfig(artifactSha: string, bytes: Buffer): boolean {
+  return artifactSha === U18_F4_ARTIFACT_SHA && bytes.byteLength === 1298 &&
+    createHash("sha256").update(bytes).digest("hex") === U18_F4_CONFIG_SHA;
+}
+
+/** Validate exact empty binding envelopes, never recursively waive unknown keys. */
+function emptyBindingEnvelope(value: unknown, keys: readonly string[]): boolean {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const v = value as Record<string, unknown>;
+  return Object.keys(v).length === keys.length && keys.every(k =>
+    Object.prototype.hasOwnProperty.call(v, k) && Array.isArray(v[k]) && v[k].length === 0);
+}
+
+export function isDiscardableU18GeneratedMetadata(key: string, value: unknown, observed: boolean): boolean {
+  if (!observed) return false;
+  switch (key) {
+    case "jsx_factory": return value === "React.createElement";
+    case "jsx_fragment": return value === "React.Fragment";
+    case "durable_objects": return emptyBindingEnvelope(value, ["bindings"]);
+    case "queues": return emptyBindingEnvelope(value, ["producers", "consumers"]);
+    case "logfwdr": return emptyBindingEnvelope(value, ["bindings"]);
+    // Python module discovery and dev settings are ignored, not executed or
+    // forwarded. Only permit these objects on the observed exact byte digest.
+    case "python_modules": return !!value && typeof value === "object" && !Array.isArray(value) && Object.keys(value).length === 1;
+    case "dev": return !!value && typeof value === "object" && !Array.isArray(value) && Object.keys(value).length === 5;
+    default: return false;
+  }
+}
+
 /** Only this known, binding-free pilot is supported. Never pass generated config
  * to Wrangler, never forward account metadata, and never guess about bindings. */
 export function workerSmokeConfig(artifact: TanstackWorkerArtifactV1) {
   const file = artifact.files.find(f => f.path === "server/wrangler.json");
   assertMetadata(file);
-  const meta = record(JSON.parse(Buffer.from(file.data, "base64").toString("utf8")));
+  const bytes = Buffer.from(file.data, "base64");
+  const observed = isObservedU18GeneratedConfig(artifact.sha256, bytes);
+  const meta = record(JSON.parse(bytes.toString("utf8")));
   assertMetadata(meta.main === "index.js" || meta.main === "./index.js");
   assertMetadata(meta.compatibility_date === "2026-10-01");
   assertMetadata(JSON.stringify(meta.compatibility_flags) === '["nodejs_compat"]');
@@ -50,6 +87,7 @@ export function workerSmokeConfig(artifact: TanstackWorkerArtifactV1) {
         v.globs.every(g => typeof g === "string" && ["**/*.js", "**/*.mjs", "**/*"].includes(g)) &&
         Object.keys(v).every(k => ["type", "globs", "fallthrough"].includes(k));
     })) continue;
+    if (isDiscardableU18GeneratedMetadata(key, value, observed)) continue;
     assertMetadata(empty(value));
   }
   return {
