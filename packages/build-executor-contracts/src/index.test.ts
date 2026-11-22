@@ -222,3 +222,43 @@ describe(
     );
   },
 );
+
+describe("trusted TanStack managed image transport", () => {
+  const image = {
+    path: "public/pilot-red.png", encoding: "base64" as const,
+    data: "YWJj", mimeType: "image/png" as const,
+    sizeBytes: 3, checksum: `sha256:${"a".repeat(64)}`,
+  };
+  it("accepts bounded image bytes on production operations without touching the text files", () => {
+    const parsed = parseTrustedBuildJobRequest({...productionRequest(), binaryFiles:[image]});
+    expect(parsed.operation).toBe("production-build");
+    if (parsed.operation === "production-build") {
+      expect(parsed.binaryFiles).toEqual([image]);
+      expect(parsed.files.find(file => file.path === "public/pilot-red.png")).toBeUndefined();
+    }
+  });
+  it("rejects image bytes in dependency bootstrap and unsafe binary capabilities", () => {
+    expect(() => parseTrustedBuildJobRequest({...bootstrapRequest(),binaryFiles:[image]})).toThrow(BuildExecutorContractError);
+    for (const bad of [
+      {...image,path:"../escape.png"},
+      {...image,path:"public/readme.ts"},
+      {...image,mimeType:"image/svg+xml"},
+      {...image,sizeBytes:4},
+      {...image,data:"not base64"},
+      {...image,checksum:"sha256:"+"x".repeat(64)},
+      {...image,encoding:"utf8"},
+      {...image,objectKey:"private/secret"},
+    ]) expect(() => parseTrustedBuildJobRequest({...productionRequest(),binaryFiles:[bad]})).toThrow(BuildExecutorContractError);
+    expect(() => parseTrustedBuildJobRequest({...productionRequest(),binaryFiles:[image,{...image,path:"PUBLIC/PILOT-RED.PNG"}]}))
+      .toThrow(BuildExecutorContractError);
+    expect(() => parseTrustedBuildJobRequest({...productionRequest(),files:[...productionRequest().files,{path:image.path,content:""}],binaryFiles:[image]}))
+      .toThrow(BuildExecutorContractError);
+  });
+  it("rejects malformed transport counts and over-limit images without object access", () => {
+    expect(() => parseTrustedBuildJobRequest({...productionRequest(),binaryFiles:"wrong"})).toThrow(BuildExecutorContractError);
+    const tooLarge={...image,data:"AAAA".repeat(1_747_627),sizeBytes:5_242_881};
+    expect(() => parseTrustedBuildJobRequest({...productionRequest(),binaryFiles:[tooLarge]})).toThrow(BuildExecutorContractError);
+    expect(() => parseTrustedBuildJobRequest({...productionRequest(),binaryFiles:[image,...Array.from({length:150},(_,i)=>({...image,path:`public/image-${i}.png`}))]}))
+      .toThrow(BuildExecutorContractError);
+  });
+});

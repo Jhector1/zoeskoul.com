@@ -17,6 +17,8 @@ const composer =
     "utf8",
   );
 
+const compactCss = readFileSync(new URL("./ZoeBuildPromptComposer.module.css",import.meta.url),"utf8");
+
 const shell =
   readFileSync(
     new URL(
@@ -97,7 +99,7 @@ describe(
     );
 
     it(
-      "keeps the composer spacious and clean",
+      "keeps the composer compact and auto-growing",
       () => {
         expect(
           composer,
@@ -111,22 +113,22 @@ describe(
           "ZOEBUILD_ICON_COMPOSER_V301E6R6A",
         );
 
-        expect(
-          css,
-        ).toContain(
-          "min-height: 140px",
-        );
+        expect(compactCss).toContain("min-height: 36px");
+        expect(compactCss).toContain("max-height: 144px");
+        expect(composer).toContain("useLayoutEffect");
+        expect(composer).toContain("rows={1}");
+        expect(compactCss).toContain("min-height: 30px !important");
+        expect(compactCss).toContain("border: 0 !important");
+        expect(compactCss).toContain("height: 30px !important");
+        expect(composer).toContain("shouldSubmitZoePromptOnEnter");
+        expect(composer).toContain("form?.requestSubmit()");
       },
     );
 
     it(
-      "preserves Shopify Build and project prompt ownership",
+      "keeps Build and removes the Shopify composer shortcut",
       () => {
-        expect(
-          composer,
-        ).toContain(
-          "Import Shopify",
-        );
+        expect(composer).not.toContain("Import Shopify");
 
         expect(
           composer,
@@ -137,7 +139,7 @@ describe(
         expect(
           shell,
         ).toContain(
-          "Ask Zoé to build, change, or refine anything…",
+          'placeholder=""',
         );
       },
     );

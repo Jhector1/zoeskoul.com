@@ -1,0 +1,32 @@
+/* Only the canonical project shell is resizable; never change FullIDE chrome. */
+.grip { display: none; }
+@media (min-width: 600px) {
+  .grip {
+    grid-column: 2;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    align-self: stretch;
+    width: 8px;
+    position: relative;
+    cursor: col-resize;
+    touch-action: none;
+    z-index: 20;
+    background: transparent;
+    user-select: none;
+  }
+  .grip::before {
+    content: "";
+    width: 1px;
+    height: 100%;
+    background: rgba(145, 155, 174, .25);
+    transition: background-color .15s, width .15s;
+  }
+  .grip:hover::before,
+  .grip:focus-visible::before,
+  .grip[data-dragging="true"]::before {
+    width: 3px;
+    background: rgba(135, 162, 215, .78);
+  }
+  .grip:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }
+}

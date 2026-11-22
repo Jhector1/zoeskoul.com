@@ -256,7 +256,7 @@ export async function POST(
         reconcileExisting: true, expectedSourceVersion: baseVersion,
         access, buildProjectId, actorKey,
         reader: createPrismaBuildProjectReader(prisma),
-        writer: createPrismaBuildProjectSourceWriter(prisma, {createRevision:false}),
+        writer: createPrismaBuildProjectSourceWriter(prisma, {createRevision:false}, "automatic"),
         execute: executeTrustedDependencyLockBootstrapAtRunner,
         nodeId: crypto.randomUUID(), now: Date.now(),
       });
@@ -320,7 +320,7 @@ export async function POST(
       buildProjectId,
       actorKey,
       reader: createPrismaBuildProjectReader(prisma),
-      writer: createPrismaBuildProjectSourceWriter(prisma),
+      writer: createPrismaBuildProjectSourceWriter(prisma, {}, "explicit"),
       execute: executeTrustedDependencyLockBootstrapAtRunner,
       nodeId: crypto.randomUUID(),
       now: Date.now(),
