@@ -129,7 +129,8 @@ export async function createOwnedReactPreviewBuildRequest(args: Readonly<{
     throw error;
   }
 
-  if (!previewWorkspaceMatchesSavedSource(project.workspace,workspace)) {
+  const savedWorkspace = parseBuildWorkspaceMutation(project.workspace);
+  if (!previewWorkspaceMatchesSavedSource(savedWorkspace,workspace)) {
     throw new ReactPreviewRequestError(
       "BUILD_PREVIEW_SOURCE_CONFLICT",
       `Preview source bytes do not match saved source v${project.sourceVersion}.`,

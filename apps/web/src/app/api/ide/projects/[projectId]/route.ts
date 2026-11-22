@@ -5,6 +5,7 @@ import type {
     ProjectResponse,
 } from "@/lib/projects/projectApiTypes";
 import {
+    genericCodeProjectWhere,
     ProjectVersionConflictError,
     saveCodeProject,
 } from "@/lib/projects/saveCodeProject";
@@ -208,6 +209,7 @@ export async function DELETE(
 
     const updated = await prisma.codeProject.updateMany({
         where: {
+            ...genericCodeProjectWhere,
             id: projectId,
             ownerId: gate.actor.userId,
             archivedAt: null,

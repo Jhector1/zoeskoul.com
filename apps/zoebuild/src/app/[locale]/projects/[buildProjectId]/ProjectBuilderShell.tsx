@@ -11,6 +11,7 @@ import {
   useEffect,
   useRef,
   useState,
+  type CSSProperties,
 } from "react";
 
 import type { ZoeBuildMode } from "@/components/builder/ZoeBuildModeTabs";
@@ -20,9 +21,6 @@ import {
   type ZoeBuildPromptSubmission,
 } from "@/components/builder/ZoeBuildPromptComposer";
 
-import type {
-  ShopifyImportDraft,
-} from "@/lib/import/shopify";
 
 import {
   formatZoeBuildPlan,
@@ -33,6 +31,14 @@ import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/run
 
 import BuildWorkspaceClient from "./BuildWorkspaceClient";
 import ProjectRevisionHistory from "./ProjectRevisionHistory";
+import resizeStyles from "./ProjectBuilderShellResize.module.css";
+import {
+  clampZoeChatWidth,
+  zoeChatWidthLimit,
+  ZOE_CHAT_DEFAULT_WIDTH,
+  ZOE_CHAT_MIN_WIDTH,
+  ZOE_CHAT_DESKTOP_MIN_WIDTH,
+} from "@/lib/build/projectAssistantResize";
 import HistoryPreviewTransition from "./HistoryPreviewTransition";
 import { historySwitchHasSettled } from "@/lib/build/historySwitchReadiness";
 import { mayHydratePreparedDependencySource } from "@/lib/build/preparedDependencyReplayPolicy";
@@ -56,7 +62,7 @@ import { fetchAuthoritativeAppliedProject, fetchAuthoritativeCurrentBuildProject
 import { verifyAppliedZoeSource } from "@/lib/build/verifyAppliedZoeSource";
 import actionStyles from "./ZoeAssistantActions.module.css";
 import ZoeAssistantMessage from "./ZoeAssistantMessage";
-import ProjectMediaLibrary from "@/components/builder/ProjectMediaLibrary";
+import {ZOE_MEDIA_OPEN} from "@/components/builder/useZoeProjectMediaExplorer";
 import { makeZoeChatTurn, type ZoeChatTurn } from "@/lib/build/zoeChatTurns";
 import { serializeZoeConversationHistory } from "@/lib/build/zoeConversationContext";
 import { mergeZoeChatHistory, readZoeChatHistoryPayload } from "@/lib/build/zoeChatHistoryClient";
@@ -89,6 +95,73 @@ export default function ProjectBuilderShell(props: {
 
   const [settingsOpen, setSettingsOpen] =
     useState(false);
+
+  const [chatWidth, setChatWidth] = useState(ZOE_CHAT_DEFAULT_WIDTH);
+  const [viewportWidth, setViewportWidth] = useState(0);
+  const chatDragRef = useRef<{pointerId: number; left: number} | null>(null);
+  const chatFrameRef = useRef<HTMLDivElement | null>(null);
+  const chatWidthRef = useRef(ZOE_CHAT_DEFAULT_WIDTH);
+  const chatStorageKey = "zoebuild:chat-rail-width:v1";
+
+  // Resize against this project frame, not the global window. The chat
+  // can approach either edge while the separator stays reachable.
+  const measuredFrameWidth = () =>
+    chatFrameRef.current?.getBoundingClientRect().width || window.innerWidth;
+
+  useEffect(() => {
+    const applyFrameSize = () => {
+      const available = measuredFrameWidth();
+      setViewportWidth(available);
+      setChatWidth(current => {
+        const next = clampZoeChatWidth(current, available);
+        chatWidthRef.current = next;
+        return next;
+      });
+    };
+    applyFrameSize();
+    try {
+      const saved = window.localStorage.getItem(chatStorageKey);
+      if (saved !== null && saved.trim() !== "") {
+        const parsed = Number(saved);
+        if (Number.isFinite(parsed)) {
+          const width = clampZoeChatWidth(parsed, measuredFrameWidth());
+          chatWidthRef.current = width;
+          setChatWidth(width);
+        }
+      }
+    } catch { /* Private browsing never prevents opening the editor. */ }
+    const observer = typeof ResizeObserver === "undefined" ? null
+      : new ResizeObserver(applyFrameSize);
+    if (chatFrameRef.current) observer?.observe(chatFrameRef.current);
+    window.addEventListener("resize", applyFrameSize);
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener("resize", applyFrameSize);
+    };
+  }, []);
+
+  const effectiveChatWidth = clampZoeChatWidth(chatWidth, viewportWidth);
+  const saveChatWidth = (width: number) => {
+    const next = clampZoeChatWidth(width, measuredFrameWidth());
+    chatWidthRef.current = next;
+    setChatWidth(next);
+    try { window.localStorage.setItem(chatStorageKey, String(next)); }
+    catch { /* Keep the UI usable when storage is unavailable. */ }
+  };
+
+  // The chat's image picker opens the selected image in the *existing* Code
+  // FullIDE tab, never in a second browser-popup image viewer.
+  useEffect(() => {
+    const open = (event:Event) => {
+      if (!(event instanceof CustomEvent) ||
+          event.detail?.buildProjectId !== props.project.buildProjectId) return;
+      setSettingsOpen(false);
+      setMode("code");
+    };
+    window.addEventListener(ZOE_MEDIA_OPEN,open);
+    return () => window.removeEventListener(ZOE_MEDIA_OPEN,open);
+  },[props.project.buildProjectId]);
+
   const [shopifyConnectedReturn, setShopifyConnectedReturn] = useState(false);
   const [assistantSettingsSection, setAssistantSettingsSection] = useState<SiteSettingsSection | undefined>();
   const [assistantNavigationVersion, setAssistantNavigationVersion] = useState(0);
@@ -250,14 +323,6 @@ export default function ProjectBuilderShell(props: {
   // A client wall-clock watchdog cannot prove a restore or Vite render failed.
   // History tracks only the owner-authorized restore acknowledgement; the
   // preview hook and sandboxed iframe own subsequent preparation/render state.
-
-  const [
-    commerceCandidate,
-    setCommerceCandidate,
-  ] =
-    useState<string | null>(
-      null,
-    );
 
   const [messages, setMessages] =
     useState<ZoeChatTurn[]>([]);
@@ -518,6 +583,7 @@ export default function ProjectBuilderShell(props: {
     state: "passed" | "failed" | "not-run";
     reason: string;
     message: string;
+    runtimeState?: "passed" | "failed";
   } | null>(null);
   const [savedBuildError, setSavedBuildError] = useState<string | null>(null);
   const [
@@ -932,7 +998,7 @@ export default function ProjectBuilderShell(props: {
       );
       const result = await response.json().catch(()=>null) as {
         ok?:boolean; code?:string; message?:string;
-        verification?:{state:"passed"|"failed"|"not-run"; reason:string; message:string; sourceVersion:number};
+        verification?:{state:"passed"|"failed"|"not-run"; reason:string; message?:string; sourceVersion:number; runtimeSmoke?:{state:"passed"|"failed"}};
       } | null;
       if (!response.ok || !result?.ok || !result.verification) {
         throw new Error(result?.message ?? result?.code ?? "Saved build verification unavailable.");
@@ -940,7 +1006,8 @@ export default function ProjectBuilderShell(props: {
       if (result.verification.sourceVersion !== sourceVersion)
         throw new Error("The returned verification does not match the requested source version.");
       setSavedBuildResult({version:sourceVersion, state:result.verification.state,
-        reason:result.verification.reason, message:result.verification.message});
+        reason:result.verification.reason, message:result.verification.message ?? "",
+        runtimeState:result.verification.runtimeSmoke?.state});
     } catch (error) {
       setSavedBuildError(error instanceof Error ? error.message : "Saved build verification unavailable.");
     } finally {setVerifyingSavedBuild(false);}
@@ -1083,25 +1150,22 @@ export default function ProjectBuilderShell(props: {
     }
   }
 
-  function importShopify(
-    draft:
-      ShopifyImportDraft,
-  ) {
-    setCommerceCandidate(
-      draft.hostname,
-    );
-
-    recordChatTurn("assistant", `Shopify address validated: ${draft.hostname}. No store connection has been created yet.`);
-
-    if (commerceEnabled) {
-      setSettingsOpen(true);
-    }
-  }
-
   return (
-    <div className="zb-project-frame">
+    <div
+      ref={chatFrameRef}
+      className="zb-project-frame"
+      style={viewportWidth >= ZOE_CHAT_DESKTOP_MIN_WIDTH ? {
+        display: "grid",
+        gridTemplateColumns: `${effectiveChatWidth}px 8px minmax(0, 1fr)`,
+        minWidth: 0,
+      } as CSSProperties : undefined}
+    >
       <aside
         className="zb-project-assistant-rail"
+        id="zoebuild-chat-rail"
+        style={viewportWidth >= ZOE_CHAT_DESKTOP_MIN_WIDTH ? {
+          gridColumn: 1, minWidth: 0, maxWidth: "none", width: "100%", flex: "none",
+        } : undefined}
         aria-label="Zoé project assistant"
       >
         <header className="zb-project-assistant-header">
@@ -1134,7 +1198,6 @@ export default function ProjectBuilderShell(props: {
             Z
           </div>
 
-          <ProjectMediaLibrary buildProjectId={props.project.buildProjectId} context="chat" />
 
           <div>
             <strong>
@@ -1253,9 +1316,10 @@ export default function ProjectBuilderShell(props: {
             </a>
           ) : null}
 
-          {props.project.stackId === "react-vite-v1" ? (
+          {(props.project.stackId === "react-vite-v1" || props.project.stackId === "tanstack-start-v1") ? (
             <ProjectRevisionHistory
               buildProjectId={props.project.buildProjectId}
+              stackId={props.project.stackId}
               currentVersion={previewSourceVersion}
               disabled={historySwitch?.sourceVersion === null || codeDirty || assistantChecking || applyingFileEdit || applyingPlan || Boolean(pendingFileEdit) || Boolean(pendingPlan)}
               onBeforeSwitch={async () => {
@@ -1284,23 +1348,28 @@ export default function ProjectBuilderShell(props: {
                 await refreshAfterSuccessfulApply(savedVersion, undefined, {
                   deferChatForHistoryRestore: true,
                 });
+                // Managed TanStack restores are source-only. The isolated browser
+                // pilot deliberately has no Runner, so a missing preview must
+                // never keep the Code editor behind a history transition.
+                if (props.project.stackId === "tanstack-start-v1") setHistorySwitch(null);
               }}
             />
           ) : null}
-          {props.project.stackId === "react-vite-v1" && !pendingFileEdit ? (
-            <section className="zb-project-assistant-plan" aria-label="Verify saved React build">
-              <span className="zb-project-assistant-plan-status">Saved React source · v{previewSourceVersion}</span>
+          {(props.project.stackId === "react-vite-v1" || props.project.stackId === "tanstack-start-v1") && !pendingFileEdit ? (
+            <section className="zb-project-assistant-plan" aria-label="Verify saved build">
+              <span className="zb-project-assistant-plan-status">Saved source · v{previewSourceVersion}</span>
               <p>Check the currently saved source in the isolated runner without an AI request, source change, publish or Preview restart.</p>
               <button type="button" onClick={() => void verifySavedReactBuild()}
                 disabled={verifyingSavedBuild || assistantChecking || applyingFileEdit || applyingPlan || codeDirty}>
                 {verifyingSavedBuild ? "Verifying saved build…" : "Verify saved build (no AI)"}
               </button>
               {savedBuildError ? <p role="alert">{savedBuildError}</p> : null}
-              {savedBuildResult?.version === previewSourceVersion ? (
+              {savedBuildResult?.version === previewSourceVersion && !codeDirty ? (
                 <p role="status" data-testid="zoe-saved-build-verification">
                   <strong>Saved build: {savedBuildResult.state === "passed" ? "Passed" :
                     savedBuildResult.state === "failed" ? "Failed" : "Not verified"}.</strong>{" "}
                   {savedBuildResult.message} ({savedBuildResult.reason})
+                  {props.project.stackId === "tanstack-start-v1" ? ` Runtime HTTP checks: ${savedBuildResult.runtimeState === "passed" ? "Passed" : savedBuildResult.runtimeState === "failed" ? "Failed" : "Not verified"}. Browser: not verified.` : ""}
                 </p>
               ) : null}
             </section>
@@ -1388,15 +1457,66 @@ export default function ProjectBuilderShell(props: {
           <ZoeBuildPromptComposer
                     initialPromptProjectId={props.project.buildProjectId}
                     onPrompt={planChange}
-                    onShopifyImport={
-                      importShopify
-                    }
-                    placeholder="Ask Zoé to build, change, or refine anything…"
+                    placeholder=""
                   />
         </div>
       </aside>
 
-      <section className="zb-project-stage">
+      <div
+        className={resizeStyles.grip}
+        role="separator"
+        tabIndex={0}
+        aria-label="Resize Zoé chat and workspace"
+        aria-orientation="vertical"
+        aria-controls="zoebuild-chat-rail"
+        aria-valuemin={ZOE_CHAT_MIN_WIDTH}
+        aria-valuemax={zoeChatWidthLimit(viewportWidth)}
+        aria-valuenow={effectiveChatWidth}
+        aria-valuetext={`${effectiveChatWidth} pixels`}
+        data-dragging={chatDragRef.current !== null ? "true" : "false"}
+        onPointerDown={event => {
+          if (event.button !== 0 || measuredFrameWidth() < ZOE_CHAT_DESKTOP_MIN_WIDTH) return;
+          chatDragRef.current = {
+            pointerId: event.pointerId,
+            left: event.currentTarget.parentElement?.getBoundingClientRect().left ?? 0,
+          };
+          event.currentTarget.setPointerCapture(event.pointerId);
+          event.preventDefault();
+        }}
+        onPointerMove={event => {
+          const drag = chatDragRef.current;
+          if (!drag || drag.pointerId !== event.pointerId) return;
+          const next = clampZoeChatWidth(event.clientX - drag.left, measuredFrameWidth());
+          chatWidthRef.current = next;
+          setChatWidth(next);
+        }}
+        onPointerUp={event => {
+          if (chatDragRef.current?.pointerId !== event.pointerId) return;
+          chatDragRef.current = null;
+          saveChatWidth(chatWidthRef.current);
+          if (event.currentTarget.hasPointerCapture(event.pointerId))
+            event.currentTarget.releasePointerCapture(event.pointerId);
+        }}
+        onPointerCancel={() => { chatDragRef.current = null; }}
+        onLostPointerCapture={() => { chatDragRef.current = null; }}
+        onDoubleClick={() => saveChatWidth(ZOE_CHAT_DEFAULT_WIDTH)}
+        onKeyDown={event => {
+          const step = event.shiftKey ? 64 : 24;
+          const next = event.key === "ArrowLeft" ? effectiveChatWidth - step
+            : event.key === "ArrowRight" ? effectiveChatWidth + step
+              : event.key === "Home" ? ZOE_CHAT_MIN_WIDTH
+                : event.key === "End" ? zoeChatWidthLimit(measuredFrameWidth()) : null;
+          if (next === null) return;
+          event.preventDefault();
+          saveChatWidth(next);
+        }}
+      />
+
+      <section className="zb-project-stage"
+        style={viewportWidth >= ZOE_CHAT_DESKTOP_MIN_WIDTH ? {
+          gridColumn: 3, minWidth: 0, width: "100%", flex: "none",
+        } : undefined}
+      >
         <div
           className="zb-project-modebar"
           aria-label="Project workspace"
@@ -1571,7 +1691,7 @@ export default function ProjectBuilderShell(props: {
             key={`assistant-settings:${assistantNavigationVersion}`}
             initialSection={assistantSettingsSection ?? (shopifyConnectedReturn ? "commerce" : undefined)}
             project={props.project}
-            candidateHostname={commerceCandidate}
+            candidateHostname={null}
             commerceEnabled={commerceEnabled}
           />
         ) : null}

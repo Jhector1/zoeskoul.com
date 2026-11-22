@@ -2,20 +2,19 @@
 
 import {
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
   type ChangeEvent,
   type FormEvent,
 } from "react";
 
-import {
-  parseShopifyStoreUrl,
-  type ShopifyImportDraft,
-} from "@/lib/import/shopify";
 import Tooltip from "@zoeskoul/learner-workspace/ui/Tooltip";
+import composerStyles from "./ZoeBuildPromptComposer.module.css";
 import {usePathname} from "next/navigation";
 import {isAiCreditShortage} from "@/lib/billing/creditShortage";
 import {takeInitialBuildPrompt} from "@/lib/build/starterProjectSpecifications";
+import { shouldSubmitZoePromptOnEnter } from "@/lib/build/zoePromptEnterPolicy";
 
 export const ZOEBUILD_COMPOSER_MAX_MEDIA_FILES = 4;
 
@@ -42,9 +41,6 @@ export function ZoeBuildPromptComposer(props: {
   onPrompt: (
     submission: ZoeBuildPromptSubmission,
   ) => void | Promise<void>;
-  onShopifyImport: (
-    draft: ShopifyImportDraft,
-  ) => void;
   placeholder?: string;
   initialPromptProjectId?: string;
 }) {
@@ -94,12 +90,18 @@ export function ZoeBuildPromptComposer(props: {
   const [recording, setRecording] = useState(false);
   const [promptError, setPromptError] =
     useState<string | null>(null);
-  const [shopifyOpen, setShopifyOpen] = useState(false);
-  const [shopifyUrl, setShopifyUrl] = useState("");
-  const [shopifyError, setShopifyError] =
-    useState<string | null>(null);
 
+  const promptInputRef = useRef<HTMLTextAreaElement | null>(null);
   const mediaInputRef = useRef<HTMLInputElement | null>(null);
+  // The prompt starts as one quiet line, then grows only with actual text.
+  // Read scrollHeight after React applies either typed or restored draft text.
+  useLayoutEffect(() => {
+    const input = promptInputRef.current;
+    if (!input) return;
+    input.style.height = "36px";
+    input.style.height = `${Math.min(144, Math.max(36, input.scrollHeight))}px`;
+  }, [value]);
+
   const recorderRef = useRef<MediaRecorder | null>(null);
   const voiceStreamRef = useRef<MediaStream | null>(null);
   const voiceChunksRef = useRef<Blob[]>([]);
@@ -269,78 +271,36 @@ export function ZoeBuildPromptComposer(props: {
     }
   }
 
-  function submitShopify(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const parsed = parseShopifyStoreUrl(shopifyUrl);
-
-    if (!parsed) {
-      setShopifyError("Enter a valid Shopify store URL.");
-      return;
-    }
-
-    setShopifyError(null);
-    props.onShopifyImport(parsed);
-  }
-
   const canSubmit = Boolean(value.trim()) || files.length > 0;
 
   return (
     <div className="zb-composer-wrap">
-      {shopifyOpen ? (
-        <form
-          className="zb-shopify-import"
-          onSubmit={submitShopify}
-        >
-          <input
-            type="text"
-            inputMode="url"
-            value={shopifyUrl}
-            onChange={(event) =>
-              setShopifyUrl(event.target.value)
-            }
-            placeholder="your-store.myshopify.com"
-            aria-label="Shopify store URL"
-          />
-          <button type="submit">Continue</button>
-          <button
-            type="button"
-            className="zb-import-cancel"
-            onClick={() => {
-              setShopifyOpen(false);
-              setShopifyError(null);
-            }}
-          >
-            Cancel
-          </button>
-
-          {shopifyError ? (
-            <div
-              className="zb-composer-error"
-              role="alert"
-            >
-              {shopifyError}
-            </div>
-          ) : null}
-        </form>
-      ) : null}
-
       <form
-        className="zb-prompt-composer"
+        className={`zb-prompt-composer ${composerStyles.compactComposer}`}
         onSubmit={submitPrompt}
       >
         {creditStatus?<p className="px-3 text-xs opacity-60" aria-live="polite">{creditStatus}</p>:null}
-        <textarea className="zb-prompt-textarea"
+        <textarea ref={promptInputRef} className="zb-prompt-textarea"
           value={value}
           onChange={(event) => {
             draftRevisionRef.current += 1;
             setValue(event.target.value);
           }}
-          placeholder={
-            props.placeholder ??
-            "Tell Zoé what you want to build..."
-          }
-          rows={3}
+          onKeyDown={(event) => {
+            if (!shouldSubmitZoePromptOnEnter({
+              key: event.key,
+              shiftKey: event.shiftKey,
+              isComposing: event.nativeEvent.isComposing,
+              keyCode: event.nativeEvent.keyCode,
+            })) return;
+            event.preventDefault();
+            // Reuse the one canonical form submit (billing, attachments and
+            // same-tick duplicate protection); never invoke onPrompt directly.
+            if (!busy && !submitInFlightRef.current && canSubmit)
+              event.currentTarget.form?.requestSubmit();
+          }}
+          placeholder={props.placeholder ?? ""}
+          rows={1}
           aria-label="Tell Zoé what you want to build"
         />
 
@@ -471,17 +431,6 @@ export function ZoeBuildPromptComposer(props: {
 </svg>
   </button>
 </Tooltip>
-
-          <button
-            type="button"
-            className="zb-import-button"
-            onClick={() =>
-              setShopifyOpen((current) => !current)
-            }
-            disabled={busy}
-          >
-            Import Shopify
-          </button>
 
           <button
             type="submit"

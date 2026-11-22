@@ -9,6 +9,9 @@ const {findFirst, updateMany, sameOrigin, actorMock, capabilityMock, transaction
     transactionMock: vi.fn(),
 }));
 
+vi.mock("@zoeskoul/platform-server/projects/saveCodeProject", () => ({
+    genericCodeProjectWhere: {buildProject:{is:null}},
+}));
 vi.mock("next/server", () => ({
     NextResponse: {
         json: (body: unknown, init?: {status?: number; headers?: HeadersInit}) =>
@@ -88,9 +91,17 @@ describe("project rename atomic version guard", () => {
         expect(data.code).toBe("PROJECT_CONFLICT");
         expect(data.conflict.serverVersion).toBe(5);
         expect(updateMany).toHaveBeenCalledWith(expect.objectContaining({
-            where: expect.objectContaining({ownerId: "u1", id: "p1", currentVersion: 4}),
+            where: expect.objectContaining({buildProject:{is:null}, ownerId: "u1", id: "p1", currentVersion: 4}),
             data: expect.objectContaining({currentVersion: {increment: 1}}),
         }));
+    });
+
+    it("does not rename a project excluded by the generic namespace", async()=>{
+        findFirst.mockResolvedValue(null);
+        const response=await PATCH(request(),ctx);
+        expect(response.status).toBe(404);
+        expect(findFirst).toHaveBeenCalledWith(expect.objectContaining({where:expect.objectContaining({buildProject:{is:null},ownerId:"u1",id:"p1"})}));
+        expect(updateMany).not.toHaveBeenCalled();
     });
 
     it("returns success only after an atomic conditional write", async () => {

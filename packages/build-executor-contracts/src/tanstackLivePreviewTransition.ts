@@ -102,12 +102,21 @@ export function classifyTanstackPreviewTransition(input: Readonly<{
   if (!oldFiles || !newFiles) return result("reject", "invalid_files");
   const paths = new Set([...oldFiles.keys(), ...newFiles.keys()]);
   const changes = [...paths].filter(path => oldFiles.get(path) !== newFiles.get(path)).sort();
+  // Binary data changes never use the text-only suspended/HMR writer. They
+  // force an immutable restart with a newly checked source fingerprint.
+  const oldBinaries = new Map((previous.binaryFiles ?? []).map(file => [file.path, file]));
+  const newBinaries = new Map((next.binaryFiles ?? []).map(file => [file.path, file]));
+  const binaryChanges = [...new Set([...oldBinaries.keys(), ...newBinaries.keys()])]
+    .filter(path => JSON.stringify(oldBinaries.get(path)) !== JSON.stringify(newBinaries.get(path)))
+    .sort();
+  changes.push(...binaryChanges);
+  changes.sort();
   if (next.sourceVersion === previous.sourceVersion) {
     return changes.length ? result("reject", "invalid_revision") : result("unchanged", "unchanged");
   }
   if (changes.some(path => INTEGRITY_FILES.has(path)))
     return result("restart", "dependencies_changed", changes);
-  if (changes.some(path => !isTanstackLiveSourcePath(path)))
+  if (binaryChanges.length || changes.some(path => !isTanstackLiveSourcePath(path)))
     return result("restart", "protected_files_changed", changes);
   if (input.mode !== "development")
     return result("restart", "immutable_lease", changes);

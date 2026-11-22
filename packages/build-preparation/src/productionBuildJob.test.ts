@@ -30,3 +30,30 @@ describe("trusted TanStack Start preview build request", () => {
     expect(()=>run(changed)).toThrow(BuildPreparationError);
   });
 });
+
+describe("managed image source is materialized as binary bytes", () => {
+  const image = {
+    encoding:"base64" as const, data:"YWJj",mimeType:"image/png",
+    sizeBytes:3,checksum:`sha256:${"a".repeat(64)}`,
+  };
+  it("keeps verified images separate from text and preserves original path", () => {
+    vi.stubEnv("ZOEBUILD_DEPENDENCY_APPROVAL_SECRET",secret);
+    const workspace=withSignedLock();
+    const withImage={...workspace,nodes:[...workspace.nodes,{
+      id:"png-node",kind:"file" as const,name:"pilot-red.png",parentId:null,
+      content:"",binary:image,createdAt:2,updatedAt:2,
+    }]};
+    const request=run(withImage);
+    expect(request.binaryFiles).toMatchObject([{path:"pilot-red.png",data:"YWJj"}]);
+    expect(request.files.some(file=>file.path==="pilot-red.png")).toBe(false);
+  });
+  it("rejects an unhydrated PNG instead of creating an empty text file", () => {
+    vi.stubEnv("ZOEBUILD_DEPENDENCY_APPROVAL_SECRET",secret);
+    const workspace=withSignedLock();
+    const withImage={...workspace,nodes:[...workspace.nodes,{
+      id:"png-node",kind:"file" as const,name:"pilot-red.png",parentId:null,
+      content:"",createdAt:2,updatedAt:2,
+    }]};
+    expect(()=>run(withImage)).toThrow(BuildPreparationError);
+  });
+});

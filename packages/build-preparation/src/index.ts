@@ -5,6 +5,8 @@ import type {
 } from "@zoeskoul/build-contracts";
 import {
   BUILD_EXECUTOR_PROTOCOL_VERSION,
+  parseTrustedBuildJobRequest,
+  type BuildExecutorBinaryFile,
   type DependencyLockBootstrapJobRequestV1,
   type DependencyLockBootstrapExecutionResponseV1,
   type ProductionBuildJobRequestV1,
@@ -189,9 +191,9 @@ function requireSafeArtifactDefinition(
   return artifact;
 }
 
-function workspaceTextFiles(
+function workspaceBuildFiles(
   workspace: WorkspaceStateV2,
-): ReadonlyMap<string, string> {
+): Readonly<{ text: ReadonlyMap<string, string>; binary: readonly BuildExecutorBinaryFile[] }> {
   const byId = new Map<string, WorkspaceNode>();
 
   for (const node of workspace.nodes) {
@@ -252,6 +254,8 @@ function workspaceTextFiles(
   }
 
   const files = new Map<string, string>();
+  const binary: BuildExecutorBinaryFile[] = [];
+  const allPaths = new Set<string>();
   for (const node of workspace.nodes) {
     if (node.kind !== "file") continue;
 
@@ -263,13 +267,33 @@ function workspaceTextFiles(
       );
     }
 
-    if (files.has(path)) {
-      throw new BuildPreparationError(
-        "BUILD_PREPARATION_INVALID",
-        `Duplicate ZoeBuild workspace file path: ${path}.`,
-      );
+    const folded = path.toLocaleLowerCase("en-US");
+    if (allPaths.has(folded)) {
+      throw new BuildPreparationError("BUILD_PREPARATION_INVALID", "Duplicate ZoeBuild workspace file path.");
     }
+    allPaths.add(folded);
 
+    const binaryValue = (node as WorkspaceNode & {binary?: unknown}).binary;
+    if (binaryValue !== undefined) {
+      const value = binaryValue as Record<string, unknown>;
+      if (!value || typeof value !== "object" || Array.isArray(value) ||
+          (node as WorkspaceNode & {content?:unknown}).content !== "" ||
+          value.encoding !== "base64" || typeof value.data !== "string" ||
+          typeof value.mimeType !== "string" || typeof value.checksum !== "string" ||
+          !/^sha256:[a-f0-9]{64}$/.test(value.checksum) ||
+          !Number.isSafeInteger(value.sizeBytes)) {
+        throw new BuildPreparationError("BUILD_PREPARATION_INVALID", "Invalid verified image source.");
+      }
+      binary.push({path, encoding:"base64", data:value.data,
+        mimeType:value.mimeType as BuildExecutorBinaryFile["mimeType"],
+        sizeBytes:Number(value.sizeBytes), checksum:value.checksum});
+      continue;
+    }
+    // Never materialize image data as an empty text file. Legacy binary data
+    // must be promoted to the verified managed form first.
+    if (/\.(?:png|jpe?g|webp|avif)$/i.test(path)) {
+      throw new BuildPreparationError("BUILD_PREPARATION_INVALID", "Unhydrated image in trusted source.");
+    }
     const content = (node as WorkspaceNode & { content?: unknown }).content;
     if (typeof content !== "string") {
       throw new BuildPreparationError(
@@ -281,7 +305,11 @@ function workspaceTextFiles(
     files.set(path, content);
   }
 
-  return files;
+  return {text: files, binary};
+}
+
+function workspaceTextFiles(workspace: WorkspaceStateV2): ReadonlyMap<string,string> {
+  return workspaceBuildFiles(workspace).text;
 }
 
 type DependencyManifest = Readonly<{
@@ -719,7 +747,7 @@ export function createRegisteredProductionBuildJob(
     );
   }
 
-  const sourceFiles = workspaceTextFiles(input.workspace);
+  const {text: sourceFiles, binary: binaryFiles} = workspaceBuildFiles(input.workspace);
   if (!sourceFiles.has(PROJECT_DEPENDENCY_APPROVAL_PATH)) {
     throw new BuildPreparationError(
       "BUILD_DEPENDENCY_LOCK_INVALID",
@@ -759,20 +787,22 @@ export function createRegisteredProductionBuildJob(
         ),
     );
 
-  return {
-    protocolVersion:
-      BUILD_EXECUTOR_PROTOCOL_VERSION,
-    operation:
-      "production-build",
-    buildProjectId,
-    sourceVersion:
-      plan.sourceVersion,
-    stackId:
-      plan.stackId,
-    templateId:
-      plan.templateId,
-    files,
-  };
+  try {
+    const parsed = parseTrustedBuildJobRequest({
+      protocolVersion: BUILD_EXECUTOR_PROTOCOL_VERSION,
+      operation: "production-build", buildProjectId,
+      sourceVersion: plan.sourceVersion, stackId: plan.stackId,
+      templateId: plan.templateId, files,
+      ...(binaryFiles.length ? {binaryFiles} : {}),
+    });
+    if (parsed.operation !== "production-build") {
+      throw new Error("Invalid operation");
+    }
+    return parsed;
+  } catch {
+    throw new BuildPreparationError("BUILD_PREPARATION_INVALID",
+      "Trusted TanStack source contains unsupported or oversized image bytes.");
+  }
 }
 
 export type ProductionBuildFile = Readonly<{

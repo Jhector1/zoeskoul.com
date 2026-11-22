@@ -41,3 +41,18 @@ describe("Phase 4B exact-source attestation", () => {
     expect(matchesSavedTanstackPreviewRequest({ ...saved, ownerId: "attacker" }, saved)).toBe(false);
   });
 });
+
+describe("exact managed image authority", () => {
+  const image = {path:"public/pilot-red.png",encoding:"base64" as const,
+    mimeType:"image/png" as const,data:"YWJj",sizeBytes:3,
+    checksum:`sha256:${"a".repeat(64)}`};
+  const withImage = {...saved,binaryFiles:[image]};
+  it("compares every canonical binary payload rather than only text files", () => {
+    expect(matchesSavedTanstackPreviewRequest(withImage,withImage)).toBe(true);
+    expect(matchesSavedTanstackPreviewRequest({...withImage,binaryFiles:[{...image,data:"YWJk"}]},withImage)).toBe(false);
+    expect(matchesSavedTanstackPreviewRequest({...withImage,binaryFiles:[]},withImage)).toBe(false);
+    expect(matchesSavedTanstackPreviewRequest(saved,withImage)).toBe(false);
+    expect(matchesSavedTanstackPreviewRequest({...withImage,binaryFiles:[{...image,path:"public/other.png"}]},withImage)).toBe(false);
+    expect(matchesSavedTanstackPreviewRequest({...withImage,binaryFiles:[{...image,checksum:`sha256:${"b".repeat(64)}`}]},withImage)).toBe(false);
+  });
+});

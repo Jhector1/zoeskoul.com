@@ -148,10 +148,18 @@ function buildHeadHash(input: {
     });
 }
 
+/** Generic learning IDE routes never consume ZoeBuild source snapshots. This
+ * relation already exists before the managed R2 migration. Only trusted server
+ * callers select this boundary; never obtain it from a request body. */
+export const genericCodeProjectWhere = {buildProject: {is: null}} as const satisfies Prisma.CodeProjectWhereInput;
+export type SaveCodeProjectOptions = Readonly<{genericOnly?: boolean}>;
+
 async function saveCodeProjectWithClient(
     tx: Prisma.TransactionClient,
     input: SaveCodeProjectInput,
+    options: SaveCodeProjectOptions,
 ) {
+    const namespace = options.genericOnly ? genericCodeProjectWhere : {};
     const normalizedScope = normalizeScope(input.scope);
 
     const workspaceHash = buildWorkspaceHash({
@@ -181,7 +189,7 @@ async function saveCodeProjectWithClient(
         // and the request body must match the original intent byte-for-byte.
         if (!input.projectId && input.creationRequestKey) {
             const prior = await tx.codeProject.findFirst({
-                where: { ownerId: input.ownerId, creationRequestKey: input.creationRequestKey },
+                where: { ...namespace, ownerId: input.ownerId, creationRequestKey: input.creationRequestKey },
             });
             if (prior) {
                 if (prior.creationRequestHash !== incomingHeadHash ||
@@ -196,6 +204,7 @@ async function saveCodeProjectWithClient(
         const existing = input.projectId
             ? await tx.codeProject.findFirst({
                 where: {
+                    ...namespace,
                     id: input.projectId,
                     ownerId: input.ownerId,
                     archivedAt: null,
@@ -310,6 +319,7 @@ async function saveCodeProjectWithClient(
         if (existing) {
             const committed = await tx.codeProject.updateMany({
                 where: {
+                    ...namespace,
                     id: existing.id,
                     ownerId: input.ownerId,
                     archivedAt: null,
@@ -320,6 +330,7 @@ async function saveCodeProjectWithClient(
             if (committed.count !== 1) {
                 const latest = await tx.codeProject.findFirst({
                     where: {
+                        ...namespace,
                         id: existing.id,
                         ownerId: input.ownerId,
                         archivedAt: null,
@@ -340,7 +351,7 @@ async function saveCodeProjectWithClient(
                 });
             }
             const committedProject = await tx.codeProject.findFirst({
-                where: { id: existing.id, ownerId: input.ownerId, archivedAt: null },
+                where: { ...namespace, id: existing.id, ownerId: input.ownerId, archivedAt: null },
             });
             if (!committedProject) throw new Error("Project not found after saving.");
             project = committedProject;
@@ -393,17 +404,20 @@ async function saveCodeProjectWithClient(
 export async function saveCodeProjectInTransaction(
     tx: Prisma.TransactionClient,
     input: SaveCodeProjectInput,
+    options: SaveCodeProjectOptions = {},
 ) {
-    return saveCodeProjectWithClient(tx, input);
+    return saveCodeProjectWithClient(tx, input, options);
 }
 
 export async function saveCodeProject(
     prisma: PrismaClient,
     input: SaveCodeProjectInput,
+    options: SaveCodeProjectOptions = {},
 ) {
+    const namespace = options.genericOnly ? genericCodeProjectWhere : {};
     try {
         return await prisma.$transaction((tx) =>
-            saveCodeProjectInTransaction(tx, input),
+            saveCodeProjectInTransaction(tx, input, options),
         );
     } catch (error) {
         // A second request can race the first and lose on the DB unique index.
@@ -411,7 +425,7 @@ export async function saveCodeProject(
         if (!input.projectId && input.creationRequestKey &&
             (error as {code?: string})?.code === "P2002") {
             const prior = await prisma.codeProject.findFirst({
-                where: {ownerId: input.ownerId, creationRequestKey: input.creationRequestKey},
+                where: {...namespace, ownerId: input.ownerId, creationRequestKey: input.creationRequestKey},
             });
             if (prior) {
                 const incomingHash = buildHeadHash({

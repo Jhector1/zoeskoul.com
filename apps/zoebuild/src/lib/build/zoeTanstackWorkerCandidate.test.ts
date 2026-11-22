@@ -157,3 +157,32 @@ describe("compiler diagnostic boundary",()=>{
     expect(parseRunnerBuildDiagnostic({stage:"build",category:"SECRET"},{operation:"production-build",files:[]})).toBeUndefined();
   });
 });
+
+
+describe("U17 saved Worker verification", () => {
+  it("rejects edits in saved mode without calling the Runner", async () => {
+    const deps = dependencies();
+    await expect(verifyTanstackWorkerEditCandidate({...input(), sourceKind:"saved",
+      dependencies:deps.injected})).rejects.toThrow("Saved build verification must not include source edits.");
+    expect(deps.prepare).not.toHaveBeenCalled();
+    expect(deps.build).not.toHaveBeenCalled();
+  });
+  it("accepts the saved workspace with no edits and binds binary content into its fingerprint", async () => {
+    const deps = dependencies();
+    const data = Buffer.from("pilot").toString("base64");
+    const asset = {path:"pilot.png", encoding:"base64" as const, data,
+      mimeType:"image/png" as const, sizeBytes:5, checksum:`sha256:${sha256("pilot")}`};
+    const prepare = vi.fn(() => ({protocolVersion:1 as const, operation:"production-build" as const,
+      stackId:"tanstack-start-v1", templateId:"tanstack-start-v1", buildProjectId:"project-a",
+      sourceVersion:7, files:[{path:"src/routes/index.tsx", content:original}], binaryFiles:[asset]}));
+    const saved = {...input(), edits:[], sourceKind:"saved" as const};
+    const result = prepareTanstackWorkerEditCandidate(saved, prepare);
+    expect(result.snapshotSha256).toBe(createHash("sha256").update(JSON.stringify({files:result.request.files,
+      binaryFiles:[asset]})).digest("hex"));
+    expect(prepare.mock.calls.length).toBe(1);
+    const value = await verifyTanstackWorkerEditCandidate({...saved, dependencies:{...deps.injected,prepare}});
+    expect(value).toMatchObject({state:"passed",sourceVersion:7,savedArtifactEvidence:{binaryAssets:[{
+      path:"pilot.png",sha256:asset.checksum.slice(7),byteLength:5,clientFileMatch:false,clientInlineMatch:false}]}});
+    expect(deps.build).toHaveBeenCalledOnce();
+  });
+});
