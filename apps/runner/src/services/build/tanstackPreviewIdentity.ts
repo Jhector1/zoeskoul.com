@@ -23,6 +23,13 @@ function canonicalFiles(request: ProductionBuildJobRequestV1) {
     .sort(([left], [right]) => left.localeCompare(right));
 }
 
+function canonicalBinaryFiles(request: ProductionBuildJobRequestV1) {
+  return [...(request.binaryFiles ?? [])]
+    .map(file => [file.path, file.encoding, file.mimeType,
+      file.sizeBytes, file.checksum, file.data] as const)
+    .sort(([left], [right]) => left.localeCompare(right));
+}
+
 /** Exact server-owned preview identity. The browser cannot choose any field.
  * Source and dependency hashes are content based; the runtime is the Docker
  * daemon's immutable image ID rather than a mutable deployment tag.
@@ -42,7 +49,12 @@ export function createTanstackPreviewIdentity(
   if (dependencies.length !== 3) {
     throw new Error("TanStack preview dependency identity is incomplete.");
   }
-  const sourceFingerprint = hash(files);
+  const binaries = canonicalBinaryFiles(request);
+  // Preserve ALL existing text-only preview identities and dependency cache
+  // keys. Images affect source identity but not the pinned dependency layer.
+  const sourceFingerprint = binaries.length
+    ? hash(["tanstack-verified-binary-source-v1", files, binaries])
+    : hash(files);
   const dependencyFingerprint = hash(dependencies);
   return {
     sourceFingerprint,

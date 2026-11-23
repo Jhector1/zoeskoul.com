@@ -113,7 +113,7 @@ describe("Phase 4C disabled-by-default development update HTTP boundary", () => 
   it("does not return changed source paths for a restart-required transition", async () => {
     const h = setup({commit: async () => ({action:"restart_required",sourceVersion:7,
       reason:"dependency changed",changedPaths:["secret/path"]})});
-    expect(await h.call()).toEqual({code:409,payload:{ok:false,code:"RESTART_REQUIRED",sourceVersion:7}});
+    expect(await h.call()).toEqual({code:409,payload:{ok:false,code:"RESTART_REQUIRED",sourceVersion:7,restartReason:"other"}});
   });
 });
 
@@ -126,5 +126,17 @@ describe("H10Q2 private typed update failure response",()=>{
     expect(await post.call()).toEqual({code:503,payload:{ok:false,code:"UPDATE_QUARANTINED"}});
     const unknown=setup({commit:async()=>{throw Error("UPDATE_QUARANTINED secret");}});
     expect(await unknown.call()).toEqual({code:503,payload:{ok:false,code:"UPDATE_UNAVAILABLE"}});
+  });
+});
+
+
+describe("U20H bounded Runner restart reason",()=>{
+  it("reports only allowlisted reasons, never changed paths",async()=>{
+    const h=setup({commit:async()=>({action:"restart_required",sourceVersion:7,
+      reason:"protected_files_changed",changedPaths:["private/secrets.png"]})});
+    const result=await h.call();
+    expect(result).toEqual({code:409,payload:{ok:false,code:"RESTART_REQUIRED",
+      sourceVersion:7,restartReason:"protected_files_changed"}});
+    expect(JSON.stringify(result)).not.toContain("private/secrets.png");
   });
 });

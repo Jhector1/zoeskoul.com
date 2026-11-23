@@ -81,6 +81,12 @@ async function postRevision(fetchClient: FetchClient, path: string, sourceVersio
     body = await response.json().catch(() => null);
   }
   diagnostic("control_response", response.status, response.ok && exactKeys(body, ["ok"]) && body.ok === true);
+  if (operation === "update" && response.status === 409 &&
+      process.env.NODE_ENV === "development" && exactKeys(body, ["code"]) &&
+      ["BUILD_PREVIEW_RESTART_REQUIRED", "BUILD_PREVIEW_SOURCE_CONFLICT"].includes(String(body.code))) {
+    console.info("[ZOE-HMR]", JSON.stringify({event:"update_conflict_classified",
+      operation, sourceVersion, code:body.code}));
+  }
   if (!response.ok || !exactKeys(body, ["ok"]) || body.ok !== true)
     throw new DevelopmentBrowserSessionError(
       response.status === 409 ? "RESTART_REQUIRED" :

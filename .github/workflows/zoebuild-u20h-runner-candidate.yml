@@ -1,0 +1,177 @@
+name: ZoeBuild U20H Runner candidate (build-only)
+
+# Explicit request: commit a change to the dedicated .request file on the
+# isolated HMR feature branch. No build runs for ordinary source pushes.
+on:
+  push:
+    branches:
+      - feat/zoebuild-hmr-phase4f1-rc1
+    paths:
+      - .github/workflows/zoebuild-u20h-runner-build.request
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: zoebuild-u20h-candidate-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  runner-candidate:
+    name: Verify and publish isolated Runner candidate
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      DATABASE_URL: postgresql://zoeskoul:zoeskoul@localhost:5432/zoeskoul?schema=public
+    steps:
+      - name: Check out triggering commit exactly
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Verify source and build scope
+        shell: bash
+        env:
+          EXPECTED_COMMIT: ${{ github.sha }}
+          EXPECTED_REF: refs/heads/feat/zoebuild-hmr-phase4f1-rc1
+          EXPECTED_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_COMMIT"
+          test "$GITHUB_REF" = "$EXPECTED_REF"
+          test "${EXPECTED_REPO%%/*}" = 'Jhector1' || test "${EXPECTED_REPO%%/*}" = 'jhector1'
+          test -z "$(git status --porcelain)"
+          test -f apps/runner/Dockerfile
+          test -f .dockerignore
+          echo '=== U20H EXACT SOURCE HASH GATE ==='
+          while read -r expected path; do
+            test -f "$path" && test ! -L "$path"
+            actual="$(sha256sum "$path" | cut -d ' ' -f 1)"
+            test "$actual" = "$expected" || { echo "SOURCE_DRIFT=$path"; exit 1; }
+          done <<'EXPECTED_U20H'
+            9e955bffef1aaefd20edfa620c474354aa846e11b7448467e18dba84ff0c969f  apps/runner/Dockerfile
+            f16eca9b2ac9bf2415d0c719487149a1a709ce182a6db32cbf5ce6b90e0df14f  apps/runner/src/routes/build.previews.developmentUpdate.test.ts
+            84c0e2f8b3873857726b81e62aa2d163679d5fea71c75422b0381c6117b08022  apps/runner/src/routes/build.previews.developmentUpdate.ts
+            0040483e05e8ac5366603729c9f5da588a5e56e3a72920450754eb6c975ca022  apps/runner/src/services/build/tanstackDevelopmentPreviewAdmission.test.ts
+            9392725d459707cd77d8020a935caf6a6c44ac074e416acdfb37d960b9897c45  apps/runner/src/services/build/tanstackDevelopmentPreviewAdmission.ts
+            ef9f3667740224d9c405275e89693d57385cbea41291e92009190a52e3a858fa  apps/runner/src/services/build/tanstackDevelopmentSourceStore.ts
+            3179de64eb9392162dd19bbf9e6afc1a6916ad4a9079436f2e6de6c9556c4557  apps/runner/src/services/build/tanstackDevelopmentWorkspaceWriter.test.ts
+            aef73442e6118341d4258797c1824c9b73c7e9801d49e186a31ed56972bd8765  apps/runner/src/services/build/tanstackDevelopmentWorkspaceWriter.ts
+            841127fbda1edee984118086ab5f34192c635700395c47394cd7c93f4c5a9276  apps/runner/src/services/build/tanstackPreviewDockerDriver.ts
+            7f8c91b97bd53ae17635a334156d92bf3f2ba0119be6431511a4313f57dfd048  apps/runner/src/services/build/tanstackPreviewIdentity.test.ts
+            04a428ea2b562dd27ff72b2e5ca439dc13cf96e9c35fefba540f6e7f50722332  apps/runner/src/services/build/tanstackPreviewIdentity.ts
+            6493e99cd93beae2524317f94db822d44b528b3a6225cba7e2e99c8b7ec5cb6b  apps/runner/src/services/build/tanstackWorkerBuild.ts
+            28a7913c6c1cb44cb6c3f038c8765a3ad9616608ee2bccfad917660089a307fa  apps/runner/src/services/build/tanstackWorkerRuntimePolicy.test.ts
+            4dcd863bae6bb02e0edfe13c9f830977540413a803fcc3b49d4f36c26e383534  apps/runner/src/services/build/tanstackWorkerRuntimePolicy.ts
+            e6c9b21b096baf4f9fa6e2c4bc909f25f41eb64fbc67f338c954260809ecef06  apps/runner/src/services/build/tanstackWorkerRuntimeSmoke.test.ts
+            0b31bc62c65bb5a3e25435fd4c3792d14e1808f352b9c75b7503427474495060  apps/runner/src/services/build/tanstackWorkerRuntimeSmoke.ts
+            b56a40ebad273951cb5e193487dd1756d127bcea545e92189c7bb56038deb7f0  apps/zoebuild/src/app/api/build/projects/[buildProjectId]/preview/[previewId]/development/update/route.test.ts
+            9d5fd8eca016560ea02eea3d2b44ec86d095fed6b6daa43f0f47736128d9b355  apps/zoebuild/src/lib/build/reactPreviewDevelopmentBrowserBoundary.ts
+            b972213dc7f10a1ac1496ae46fdfd6038c203e50d4c10df745bc2f865fb64952  apps/zoebuild/src/lib/build/reactPreviewDevelopmentBrowserSession.ts
+            ac32479145ab38cfd17088fb2a6054f8bf642b0dc7755e48c3c8286251177764  packages/build-executor-contracts/src/index.test.ts
+            eb531a1992978c1d2e66e1e450e9a41ff419a74e78665f2f73e0d9017443768f  packages/build-executor-contracts/src/index.ts
+            dda130922531ad0aa04de23ce709acbd0541efc670001b091b985a0dcff77600  packages/build-executor-contracts/src/tanstackLivePreviewTransition.binary.test.ts
+            517d2d75bfde8e0de7b98225e50268266c7a0cef63c48f0fedc3fc3761e1d339  packages/build-executor-contracts/src/tanstackLivePreviewTransition.test.ts
+            82dfd0e91f2bb22fab94cda0b665b455c23a85b8060c9a776838af39fffab39a  packages/build-executor-contracts/src/tanstackLivePreviewTransition.ts
+            76e7992da501bd297598738ea33a94cfb7ee012b304d417ef70b2712e441225a  packages/build-preparation/src/index.ts
+            4fe732a59b83a9ae928f4167e3efd5ed9f311fad6c230462c57ff6cca763794a  packages/build-preparation/src/productionBuildJob.test.ts
+          EXPECTED_U20H
+          echo 'U20H_SOURCE_PIN=PASS'
+          echo 'CANDIDATE_ONLY=YES'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+
+      - name: Install lockfile-verified dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build required Runner and ZoeBuild workspace dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm --filter '@zoeskoul/runner^...' build
+          pnpm --filter @zoeskoul/db run build
+          pnpm --filter @zoeskoul/curriculum-contracts run build
+          pnpm --filter @zoeskoul/curriculum-core run build
+          (cd packages/curriculum-registry && node scripts/generate-published-runtime.mjs)
+          pnpm --filter @zoeskoul/curriculum-registry exec tsc -p tsconfig.json
+          pnpm --filter @zoeskoul/curriculum-runtime exec tsc -p tsconfig.json
+          test -f packages/db/dist/index.d.ts
+          test -f packages/curriculum-registry/dist/runtime/index.d.ts
+          test -f packages/curriculum-runtime/dist/index.d.ts
+
+      - name: U20H Runner and browser boundary targeted regression tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm --dir apps/runner exec vitest run \
+            src/services/build/tanstackDevelopmentPreviewAdmission.test.ts \
+            src/services/build/tanstackDevelopmentWorkspaceWriter.test.ts \
+            src/routes/build.previews.developmentUpdate.test.ts
+          pnpm --dir apps/zoebuild exec vitest run \
+            'src/app/api/build/projects/[buildProjectId]/preview/[previewId]/development/update/route.test.ts' \
+            src/lib/build/reactPreviewDevelopmentBrowserSession.test.ts
+          pnpm --dir apps/runner exec tsc --noEmit
+          pnpm --dir apps/zoebuild exec tsc --noEmit
+
+      - name: Lowercase trusted package owner
+        id: owner
+        shell: bash
+        run: |
+          set -euo pipefail
+          owner="${GITHUB_REPOSITORY_OWNER,,}"
+          test "$owner" = 'jhector1'
+          echo "name=$owner" >> "$GITHUB_OUTPUT"
+
+      - name: Authenticate to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and publish U20H immutable Runner candidate ONLY
+        id: publish
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/runner/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ghcr.io/${{ steps.owner.outputs.name }}/zoeskoul-runner:u20h-${{ github.sha }}
+          labels: |
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            zoebuild.release=u20h-binary-hmr-candidate
+          cache-from: type=gha,scope=zoebuild-u20h-runner
+          cache-to: type=gha,mode=max,scope=zoebuild-u20h-runner
+
+      - name: Show candidate digest (never deploy)
+        shell: bash
+        env:
+          DIGEST: ${{ steps.publish.outputs.digest }}
+          OWNER: ${{ steps.owner.outputs.name }}
+          SOURCE: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          [[ "$DIGEST" =~ ^sha256:[0-9a-f]{64}$ ]]
+          {
+            echo '### U20H Runner-only candidate built'
+            printf -- '- Source SHA: `%s`\n' "$SOURCE"
+            printf -- '- Tag: `ghcr.io/%s/zoeskoul-runner:u20h-%s`\n' "$OWNER" "$SOURCE"
+            printf -- '- Immutable digest: `%s`\n' "$DIGEST"
+            echo '- Deploys: **none** (no VM, Compose, runtime or production changes)'
+            echo '- Binary HMR remains operator-disabled on the currently running Runner'
+          } >> "$GITHUB_STEP_SUMMARY"

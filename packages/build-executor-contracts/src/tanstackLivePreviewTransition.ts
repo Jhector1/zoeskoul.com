@@ -74,12 +74,26 @@ export function isTanstackLiveSourcePath(path: string): boolean {
   return /^src\/(?:routes|components|hooks|styles|lib)\/(?:[A-Za-z0-9_.-]+\/)*[A-Za-z0-9_.-]+\.(?:tsx?|jsx?|css|scss)$/.test(path);
 }
 
+/** Only verified, public image assets may use the suspended live-image writer.
+ * Other binaries and all configuration remain restart-only. Private R2 media
+ * library entries never acquire this path: they are not application source. */
+export function isTanstackLiveBinaryPath(candidate: string): boolean {
+  if (!validPath(candidate)) return false;
+  const pieces = candidate.split("/");
+  if (pieces[0] !== "public" || pieces.length < 2 ||
+      pieces.slice(1).some(part => part.startsWith(".") || !/^[A-Za-z0-9_.-]+$/.test(part)))
+    return false;
+  return /\.(?:png|jpe?g|webp|avif)$/i.test(pieces.at(-1)!);
+}
+
 /** Pure classification; never call this instead of trusted request validation. */
 export function classifyTanstackPreviewTransition(input: Readonly<{
   mode: TanstackPreviewLeaseMode;
   previous: ProductionBuildJobRequestV1;
   next: ProductionBuildJobRequestV1;
   hasUnsavedChanges?: boolean;
+  /** Runner-side opt-in only; default false. Not a source authorization. */
+  allowBinaryLive?: boolean;
 }>): TanstackPreviewTransition {
   const result = (
     action: TanstackPreviewTransition["action"],
@@ -102,12 +116,27 @@ export function classifyTanstackPreviewTransition(input: Readonly<{
   if (!oldFiles || !newFiles) return result("reject", "invalid_files");
   const paths = new Set([...oldFiles.keys(), ...newFiles.keys()]);
   const changes = [...paths].filter(path => oldFiles.get(path) !== newFiles.get(path)).sort();
+  // Binary data changes never use the text-only suspended/HMR writer. They
+  // force an immutable restart with a newly checked source fingerprint.
+  const oldBinaries = new Map((previous.binaryFiles ?? []).map(file => [file.path, file]));
+  const newBinaries = new Map((next.binaryFiles ?? []).map(file => [file.path, file]));
+  const binaryChanges = [...new Set([...oldBinaries.keys(), ...newBinaries.keys()])]
+    .filter(path => JSON.stringify(oldBinaries.get(path)) !== JSON.stringify(newBinaries.get(path)))
+    .sort();
+  changes.push(...binaryChanges);
+  changes.sort();
   if (next.sourceVersion === previous.sourceVersion) {
     return changes.length ? result("reject", "invalid_revision") : result("unchanged", "unchanged");
   }
+  if (changes.length > 32)
+    return result("restart", "protected_files_changed", changes);
   if (changes.some(path => INTEGRITY_FILES.has(path)))
     return result("restart", "dependencies_changed", changes);
-  if (changes.some(path => !isTanstackLiveSourcePath(path)))
+  // Binary writes are explicitly opt-in and independently gated by the
+  // privileged paused-container writer. All non-public images restart.
+  if ((binaryChanges.length > 0 && !input.allowBinaryLive) ||
+      binaryChanges.some(path => !isTanstackLiveBinaryPath(path)) ||
+      changes.some(path => !binaryChanges.includes(path) && !isTanstackLiveSourcePath(path)))
     return result("restart", "protected_files_changed", changes);
   if (input.mode !== "development")
     return result("restart", "immutable_lease", changes);

@@ -45,3 +45,22 @@ describe("TanStack preview identity", () => {
       file => file.path !== "zoebuild-dependency-approval.json")),image)).toThrow("incomplete");
   });
 });
+
+describe("verified binary content preview identity", () => {
+  const binary = {path:"public/pilot-red.png",encoding:"base64" as const,
+    data:"YWJj",mimeType:"image/png" as const,sizeBytes:3,
+    checksum:`sha256:${"a".repeat(64)}`};
+  it("changes source but never the dependency cache identity", () => {
+    const plain=request();
+    const withImage={...plain,binaryFiles:[binary]};
+    const updated={...plain,binaryFiles:[{...binary,data:"YWJk"}]};
+    expect(createTanstackPreviewIdentity(plain,image).dependencyFingerprint)
+      .toBe(createTanstackPreviewIdentity(withImage,image).dependencyFingerprint);
+    expect(createTanstackPreviewIdentity(withImage,image).sourceFingerprint)
+      .not.toBe(createTanstackPreviewIdentity(plain,image).sourceFingerprint);
+    expect(createTanstackPreviewIdentity(updated,image).sourceFingerprint)
+      .not.toBe(createTanstackPreviewIdentity(withImage,image).sourceFingerprint);
+    expect(createTanstackPreviewIdentity({...withImage,binaryFiles:[...withImage.binaryFiles]},image))
+      .toEqual(createTanstackPreviewIdentity(withImage,image));
+  });
+});

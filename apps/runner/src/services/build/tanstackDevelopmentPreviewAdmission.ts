@@ -58,6 +58,7 @@ export function assessTanstackDevelopmentPreviewUpdate(input: Readonly<{
   authorizeTanstackPreviewSource(next);
   const transition = classifyTanstackPreviewTransition({
     mode: "development", previous, next,
+    allowBinaryLive: process.env.ZOEBUILD_DEVELOPMENT_PREVIEW_BINARY_HMR_ENABLED === "true",
   });
   if (transition.action === "reject" || transition.action === "hold" ||
       transition.action === "unchanged")

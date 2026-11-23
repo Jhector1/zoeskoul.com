@@ -1,8 +1,9 @@
 import { constants, type BigIntStats } from "node:fs";
 import fs, { type FileHandle } from "node:fs/promises";
 import path from "node:path";
-import { randomUUID } from "node:crypto";
-import { isTanstackLiveSourcePath, type ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contracts";
+import { createHash, randomUUID } from "node:crypto";
+import { isTanstackLiveBinaryPath, isTanstackLiveSourcePath,
+  type BuildExecutorBinaryFile, type ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contracts";
 import { docker } from "../docker/dockerClient.js";
 
 /**
@@ -24,9 +25,11 @@ export async function applySuspendedTanstackDevelopmentSource(input: Readonly<{
   /** Trusted private sandbox handle's workspaceDir, NOT supplied by a client. */
   workspaceDir: string;
   changedPaths: readonly string[];
-  next: Pick<ProductionBuildJobRequestV1, "files">;
+  next: Pick<ProductionBuildJobRequestV1, "files" | "binaryFiles">;
 }>): Promise<void> {
-  const changes = validateChanges(input.changedPaths, input.next.files);
+  const changes = validateChanges(input.changedPaths, input.next.files,
+    input.next.binaryFiles ?? [],
+    process.env.ZOEBUILD_DEVELOPMENT_PREVIEW_BINARY_HMR_ENABLED === "true");
   const root = await validateWorkspaceRoot(input.workspaceRoot, input.workspaceDir);
   if (!/^[a-f0-9]{12,64}$/i.test(input.containerId))
     throw new Error("Invalid development preview container identity.");
@@ -110,21 +113,31 @@ const WORKSPACE_NAME = /^zoeskoul-run-[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12
 const MAX_FILE_BYTES = 512 * 1024;
 const MAX_CHANGE_BYTES = 2 * 1024 * 1024;
 const MAX_CHANGED_FILES = 32;
+const MAX_BINARY_BYTES = 5 * 1024 * 1024;
 
-type SourceChange = Readonly<{path: string; content: string | null}>;
+type SourceChange = Readonly<{path: string; content: string | Uint8Array | null}>;
 
-/** Pure, bounded validation before any Docker operation or host filesystem write. */
+/** Pure, bounded validation before any Docker operation or host filesystem write.
+ * A binary change is never accepted without the same checksum that was bound
+ * to the DB-authoritative trusted build request. */
 export function validateDevelopmentSourceChanges(
   changedPaths: readonly string[], files: readonly {path:string;content:string}[],
-): readonly SourceChange[] { return validateChanges(changedPaths, files); }
+  binaryFiles: readonly BuildExecutorBinaryFile[] = [], allowBinaryLive = false,
+): readonly SourceChange[] {
+  return validateChanges(changedPaths, files, binaryFiles, allowBinaryLive);
+}
 
 function validateChanges(
   changedPaths: readonly string[], files: readonly {path:string;content:string}[],
+  binaryFiles: readonly BuildExecutorBinaryFile[], allowBinaryLive: boolean,
 ): readonly SourceChange[] {
   if (!Array.isArray(changedPaths) || !changedPaths.length ||
-      changedPaths.length > MAX_CHANGED_FILES || !Array.isArray(files) || files.length > 300)
+      changedPaths.length > MAX_CHANGED_FILES || !Array.isArray(files) || files.length > 300 ||
+      !Array.isArray(binaryFiles) || binaryFiles.length > 150 ||
+      files.length + binaryFiles.length > 300)
     throw new Error("Invalid development preview source changes.");
   const byPath = new Map<string,string>();
+  const byBinary = new Map<string,BuildExecutorBinaryFile>();
   const allKeys = new Set<string>();
   for (const entry of files) {
     if (!entry || typeof entry.path !== "string" ||
@@ -134,21 +147,64 @@ function validateChanges(
     allKeys.add(entry.path.toLowerCase());
     byPath.set(entry.path,entry.content);
   }
+  let declaredBinaryBytes = 0;
+  for (const entry of binaryFiles) {
+    const extension = /\.[^./]+$/.exec(entry?.path ?? "")?.[0]?.toLowerCase();
+    const mimeByExtension: Record<string,string> = {".png":"image/png", ".jpg":"image/jpeg",
+      ".jpeg":"image/jpeg", ".webp":"image/webp", ".avif":"image/avif"};
+    const mime = extension ? mimeByExtension[extension] : undefined;
+    if (!entry || !safePath(entry.path) || allKeys.has(entry.path.toLowerCase()) ||
+        entry.encoding !== "base64" || typeof entry.data !== "string" ||
+        entry.data.length !== 4 * Math.ceil(entry.sizeBytes / 3) ||
+        !Number.isSafeInteger(entry.sizeBytes) || entry.sizeBytes < 1 ||
+        entry.sizeBytes > MAX_BINARY_BYTES || entry.mimeType !== mime ||
+        !/^sha256:[0-9a-f]{64}$/.test(entry.checksum))
+      throw new Error("Invalid development preview binary manifest.");
+    declaredBinaryBytes += entry.sizeBytes;
+    if (declaredBinaryBytes > MAX_BINARY_BYTES)
+      throw new Error("Development preview binary manifest too large.");
+    allKeys.add(entry.path.toLowerCase());
+    byBinary.set(entry.path,entry);
+  }
   const selected = new Set<string>();
   const changes: SourceChange[] = [];
-  let totalBytes = 0;
+  let totalTextBytes = 0;
+  let totalBinaryBytes = 0;
   for (const candidate of changedPaths) {
-    if (!safePath(candidate) || !isTanstackLiveSourcePath(candidate) ||
+    const textEligible = isTanstackLiveSourcePath(candidate);
+    const binaryEligible = allowBinaryLive && isTanstackLiveBinaryPath(candidate);
+    if (!safePath(candidate) || (!textEligible && !binaryEligible) ||
         selected.has(candidate.toLowerCase()))
       throw new Error("Unsafe development preview source path.");
     selected.add(candidate.toLowerCase());
-    const content = byPath.get(candidate) ?? null; // null is an explicit removal.
-    if (content !== null) {
-      const bytes = Buffer.byteLength(content,"utf8");
-      totalBytes += bytes;
-      if (bytes > MAX_FILE_BYTES || totalBytes > MAX_CHANGE_BYTES)
-        throw new Error("Development preview source update too large.");
+    const binaryFile = byBinary.get(candidate);
+    if (binaryFile && !binaryEligible || byPath.has(candidate) && !textEligible)
+      throw new Error("Unsafe development preview source content.");
+    let content: string | Uint8Array | null = null;
+    if (binaryFile) {
+      // Buffer decoding is bounded by the declared size and a strict canonical
+      // base64 check. Compare the bytes to the trusted SHA-256 before a write.
+      if (binaryFile.data.length !== 4 * Math.ceil(binaryFile.sizeBytes / 3))
+        throw new Error("Invalid development preview image length.");
+      const bytes = Buffer.from(binaryFile.data,"base64");
+      if (bytes.byteLength !== binaryFile.sizeBytes ||
+          bytes.toString("base64") !== binaryFile.data ||
+          `sha256:${createHash("sha256").update(bytes).digest("hex")}` !== binaryFile.checksum)
+        throw new Error("Development preview image integrity mismatch.");
+      totalBinaryBytes += bytes.byteLength;
+      if (totalBinaryBytes > MAX_BINARY_BYTES)
+        throw new Error("Development preview binary update too large.");
+      content = bytes;
+    } else if (textEligible) {
+      content = byPath.get(candidate) ?? null;
+      if (content !== null) {
+        const bytes = Buffer.byteLength(content,"utf8");
+        totalTextBytes += bytes;
+        if (bytes > MAX_FILE_BYTES || totalTextBytes > MAX_CHANGE_BYTES)
+          throw new Error("Development preview source update too large.");
+      }
     }
+    // null is an explicit deletion, including a renamed/moved old image path.
     changes.push({path:candidate,content});
   }
   return changes;
@@ -207,7 +263,7 @@ async function lstatOptional(p: string) {
   }
 }
 
-async function replaceAtomically(destination: string, content: string) {
+async function replaceAtomically(destination: string, content: string | Uint8Array) {
   const parent = path.dirname(destination);
   const temp = path.join(parent,`.zoebuild-source-${randomUUID()}.tmp`);
   let created = false;
@@ -216,7 +272,7 @@ async function replaceAtomically(destination: string, content: string) {
       constants.O_WRONLY | constants.O_CREAT | constants.O_EXCL | constants.O_NOFOLLOW,0o600);
     created = true;
     try {
-      await file.writeFile(content,"utf8");
+      await file.writeFile(content);
       await file.chmod(0o644);
       await file.sync();
     } finally { await file.close(); }

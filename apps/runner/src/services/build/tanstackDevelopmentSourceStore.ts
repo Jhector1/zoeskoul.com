@@ -29,6 +29,7 @@ function copySource(source: ProductionBuildJobRequestV1): ProductionBuildJobRequ
     stackId: source.stackId,
     templateId: source.templateId,
     files: Object.freeze(source.files.map(file => Object.freeze({path:file.path,content:file.content}))),
+    ...(source.binaryFiles === undefined ? {} : {binaryFiles:Object.freeze(source.binaryFiles.map(file => Object.freeze({...file})))}),
   });
 }
 

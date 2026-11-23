@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 import { watch, type FSWatcher } from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { randomUUID } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import { docker } from "../docker/dockerClient.js";
 import {
   applySuspendedTanstackDevelopmentSource,
@@ -39,6 +39,7 @@ beforeEach(async () => {
   vi.mocked(docker.getContainer).mockReturnValue(container as never);
 });
 afterEach(async () => {
+  vi.unstubAllEnvs();
   await fs.rm(parent,{recursive:true,force:true});
   vi.restoreAllMocks();
   vi.clearAllMocks();
@@ -333,5 +334,72 @@ describe("suspended TanStack development workspace writer (not routed)", () => {
       .toEqual([{path:"src/routes/index.tsx",content:"new content"}]);
     expect(validateDevelopmentSourceChanges(changed,[]))
       .toEqual([{path:"src/routes/index.tsx",content:null}]);
+  });
+});
+
+// Public image changes are admitted only after the coordinator has verified
+// the exact DB-saved revision. The filesystem writer independently checks
+// checksums, path confinement and Docker's paused workspace identity.
+describe("suspended public image HMR writer",()=>{
+  beforeEach(() => vi.stubEnv("ZOEBUILD_DEVELOPMENT_PREVIEW_BINARY_HMR_ENABLED", "true"));
+  const png=Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=","base64");
+  const image=(p:string,bytes:Buffer=png)=>({path:p,encoding:"base64" as const,
+    data:bytes.toString("base64"),sizeBytes:bytes.byteLength,mimeType:"image/png" as const,
+    checksum:`sha256:${createHash("sha256").update(bytes).digest("hex")}`});
+  it("fails closed before Docker pause when operator flag is off",async()=>{
+    vi.stubEnv("ZOEBUILD_DEVELOPMENT_PREVIEW_BINARY_HMR_ENABLED", "false");
+    await expect(update({changedPaths:["public/images/logo.png"],
+      next:{files:[],binaryFiles:[image("public/images/logo.png")]}}))
+      .rejects.toThrow("Unsafe development preview source path.");
+    expect(container.pause).not.toHaveBeenCalled();
+  });
+  it("does not reject ordinary text updates when binary flag is off",async()=>{
+    vi.stubEnv("ZOEBUILD_DEVELOPMENT_PREVIEW_BINARY_HMR_ENABLED", "false");
+    await update({next:{files:next.files,binaryFiles:[image("public/images/logo.png")]}});
+    expect(container.pause).toHaveBeenCalledOnce();
+  });
+  it("writes exact image bytes under public/ without restarting Docker",async()=>{
+    await update({changedPaths:["public/images/logo.png"],
+      next:{files:[],binaryFiles:[image("public/images/logo.png")]}});
+    expect(await fs.readFile(path.join(workspaceDir,"public/images/logo.png"))).toEqual(png);
+    expect(container.pause).toHaveBeenCalledOnce();
+    expect(container.unpause).toHaveBeenCalledOnce();
+    expect(paused).toBe(false);
+  });
+  it("renames and moves an image with removal of the old path",async()=>{
+    await fs.mkdir(path.join(workspaceDir,"public/images"),{recursive:true});
+    await fs.writeFile(path.join(workspaceDir,"public/images/logo.png"),png);
+    await update({changedPaths:["public/assets/logo.png","public/images/logo.png"],
+      next:{files:[],binaryFiles:[image("public/assets/logo.png")]}});
+    expect(await fs.readFile(path.join(workspaceDir,"public/assets/logo.png"))).toEqual(png);
+    await expect(fs.stat(path.join(workspaceDir,"public/images/logo.png"))).rejects.toMatchObject({code:"ENOENT"});
+    expect(paused).toBe(false);
+  });
+  it("rejects tampering, mismatched MIME and unsafe path before Docker",async()=>{
+    const good=image("public/images/logo.png");
+    for(const bad of [
+      {...good,checksum:`sha256:${"0".repeat(64)}`},
+      {...good,mimeType:"image/jpeg" as const},
+      {...good,data:good.data.slice(1)},
+    ]) await expect(update({changedPaths:[good.path],next:{files:[],binaryFiles:[bad]}})).rejects.toThrow();
+    await expect(update({changedPaths:["public/images/.hidden.png"],
+      next:{files:[],binaryFiles:[image("public/images/.hidden.png")]}})).rejects.toThrow();
+    expect(container.pause).not.toHaveBeenCalled();
+  });
+  it("rejects a conflicting text+binary manifest path before Docker pause",async()=>{
+    const pathName="public/images/logo.png";
+    await expect(update({changedPaths:[pathName],next:{files:[file(pathName,"text")],
+      binaryFiles:[image(pathName)]}})).rejects.toThrow("Invalid development preview binary manifest.");
+    expect(container.pause).not.toHaveBeenCalled();
+  });
+  it("rejects a symlink at the public image path",async()=>{
+    const outside=path.join(parent,"outside.png");
+    await fs.writeFile(outside,png);
+    await fs.mkdir(path.join(workspaceDir,"public/images"),{recursive:true});
+    await fs.symlink(outside,path.join(workspaceDir,"public/images/logo.png"));
+    await expect(update({changedPaths:["public/images/logo.png"],
+      next:{files:[],binaryFiles:[image("public/images/logo.png")]}})).rejects.toThrow("workspace update failed");
+    expect(await fs.readFile(outside)).toEqual(png);
+    expect(paused).toBe(false);
   });
 });
