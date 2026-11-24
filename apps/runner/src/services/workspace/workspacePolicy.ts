@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
 import fs from "node:fs/promises";
-import { constants } from "node:fs";
+import { scanStrictWorkspaceUsage } from "./workspaceStrictUsageWorker.js";
 import path from "node:path";
 import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 import {
@@ -302,54 +302,7 @@ export async function getStrictDirectoryUsage(
   dir: string,
   limits?: { maxBytes?: number; maxEntries?: number },
 ): Promise<WorkspaceUsage> {
-  let bytes = 0;
-  let entries = 0;
-  const exceeded = () => (limits?.maxEntries !== undefined && entries > limits.maxEntries) ||
-    (limits?.maxBytes !== undefined && bytes > limits.maxBytes);
-  const same = (a: {dev:number;ino:number}, b: {dev:number;ino:number}) =>
-    a.dev === b.dev && a.ino === b.ino;
-  const linux = process.platform === "linux";
-  async function walk(current: string, depth: number): Promise<void> {
-    if (exceeded()) return;
-    if (depth >= 128) throw new Error("Runner workspace accounting depth exceeded.");
-    const original = await fs.lstat(current);
-    if (!original.isDirectory() || original.isSymbolicLink())
-      throw new Error("Unsafe workspace accounting directory.");
-    const handle = await fs.open(current, constants.O_RDONLY | constants.O_DIRECTORY | constants.O_NOFOLLOW);
-    try {
-      const opened = await handle.stat();
-      if (!same(original, opened)) throw new Error("Workspace accounting directory changed.");
-      const anchored = linux ? `/proc/self/fd/${handle.fd}` : current;
-      const listing = await fs.opendir(anchored, {bufferSize: 64});
-      try {
-        while (!exceeded()) {
-          const batch: string[] = [];
-          for (let i=0; i<16 && !exceeded(); i++) {
-            const child = await listing.read();
-            if (!child) break;
-            entries++;
-            batch.push(path.join(anchored,child.name));
-          }
-          if (!batch.length || exceeded()) break;
-          // All launched metadata work settles before closing the parent fd.
-          const stats = await Promise.allSettled(batch.map(target=>fs.lstat(target)));
-          for (let i=0;i<stats.length&&!exceeded();i++) {
-            const result = stats[i];
-            if (result.status === "rejected") throw result.reason;
-            const stat = result.value;
-            if (stat.isDirectory()) await walk(batch[i],depth+1);
-            else if (stat.isFile()) bytes += stat.size;
-          }
-        }
-      } finally { await listing.close(); }
-      const end = await fs.lstat(current);
-      if (!same(opened,end) || !end.isDirectory() || end.isSymbolicLink())
-        throw new Error("Workspace accounting directory changed.");
-    } finally { await handle.close(); }
-  }
-  try { await walk(path.resolve(dir),0); }
-  catch { throw new Error("Runner workspace accounting incomplete."); }
-  return {bytes,entries};
+  return scanStrictWorkspaceUsage(dir, limits);
 }
 
 export async function getDirectoryUsage(

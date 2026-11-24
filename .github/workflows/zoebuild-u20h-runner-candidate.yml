@@ -29,6 +29,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: false
+          fetch-depth: 3
 
       - name: Verify source and build scope
         shell: bash
@@ -44,40 +45,41 @@ jobs:
           test -z "$(git status --porcelain)"
           test -f apps/runner/Dockerfile
           test -f .dockerignore
-          echo '=== U20H EXACT SOURCE HASH GATE ==='
-          while read -r expected path; do
-            test -f "$path" && test ! -L "$path"
-            actual="$(sha256sum "$path" | cut -d ' ' -f 1)"
-            test "$actual" = "$expected" || { echo "SOURCE_DRIFT=$path"; exit 1; }
-          done <<'EXPECTED_U20H'
-            9e955bffef1aaefd20edfa620c474354aa846e11b7448467e18dba84ff0c969f  apps/runner/Dockerfile
-            f16eca9b2ac9bf2415d0c719487149a1a709ce182a6db32cbf5ce6b90e0df14f  apps/runner/src/routes/build.previews.developmentUpdate.test.ts
-            84c0e2f8b3873857726b81e62aa2d163679d5fea71c75422b0381c6117b08022  apps/runner/src/routes/build.previews.developmentUpdate.ts
-            0040483e05e8ac5366603729c9f5da588a5e56e3a72920450754eb6c975ca022  apps/runner/src/services/build/tanstackDevelopmentPreviewAdmission.test.ts
-            9392725d459707cd77d8020a935caf6a6c44ac074e416acdfb37d960b9897c45  apps/runner/src/services/build/tanstackDevelopmentPreviewAdmission.ts
-            ef9f3667740224d9c405275e89693d57385cbea41291e92009190a52e3a858fa  apps/runner/src/services/build/tanstackDevelopmentSourceStore.ts
-            3179de64eb9392162dd19bbf9e6afc1a6916ad4a9079436f2e6de6c9556c4557  apps/runner/src/services/build/tanstackDevelopmentWorkspaceWriter.test.ts
-            aef73442e6118341d4258797c1824c9b73c7e9801d49e186a31ed56972bd8765  apps/runner/src/services/build/tanstackDevelopmentWorkspaceWriter.ts
-            841127fbda1edee984118086ab5f34192c635700395c47394cd7c93f4c5a9276  apps/runner/src/services/build/tanstackPreviewDockerDriver.ts
-            7f8c91b97bd53ae17635a334156d92bf3f2ba0119be6431511a4313f57dfd048  apps/runner/src/services/build/tanstackPreviewIdentity.test.ts
-            04a428ea2b562dd27ff72b2e5ca439dc13cf96e9c35fefba540f6e7f50722332  apps/runner/src/services/build/tanstackPreviewIdentity.ts
-            6493e99cd93beae2524317f94db822d44b528b3a6225cba7e2e99c8b7ec5cb6b  apps/runner/src/services/build/tanstackWorkerBuild.ts
-            28a7913c6c1cb44cb6c3f038c8765a3ad9616608ee2bccfad917660089a307fa  apps/runner/src/services/build/tanstackWorkerRuntimePolicy.test.ts
-            4dcd863bae6bb02e0edfe13c9f830977540413a803fcc3b49d4f36c26e383534  apps/runner/src/services/build/tanstackWorkerRuntimePolicy.ts
-            e6c9b21b096baf4f9fa6e2c4bc909f25f41eb64fbc67f338c954260809ecef06  apps/runner/src/services/build/tanstackWorkerRuntimeSmoke.test.ts
-            0b31bc62c65bb5a3e25435fd4c3792d14e1808f352b9c75b7503427474495060  apps/runner/src/services/build/tanstackWorkerRuntimeSmoke.ts
-            b56a40ebad273951cb5e193487dd1756d127bcea545e92189c7bb56038deb7f0  apps/zoebuild/src/app/api/build/projects/[buildProjectId]/preview/[previewId]/development/update/route.test.ts
-            9d5fd8eca016560ea02eea3d2b44ec86d095fed6b6daa43f0f47736128d9b355  apps/zoebuild/src/lib/build/reactPreviewDevelopmentBrowserBoundary.ts
-            b972213dc7f10a1ac1496ae46fdfd6038c203e50d4c10df745bc2f865fb64952  apps/zoebuild/src/lib/build/reactPreviewDevelopmentBrowserSession.ts
-            ac32479145ab38cfd17088fb2a6054f8bf642b0dc7755e48c3c8286251177764  packages/build-executor-contracts/src/index.test.ts
-            eb531a1992978c1d2e66e1e450e9a41ff419a74e78665f2f73e0d9017443768f  packages/build-executor-contracts/src/index.ts
-            dda130922531ad0aa04de23ce709acbd0541efc670001b091b985a0dcff77600  packages/build-executor-contracts/src/tanstackLivePreviewTransition.binary.test.ts
-            517d2d75bfde8e0de7b98225e50268266c7a0cef63c48f0fedc3fc3761e1d339  packages/build-executor-contracts/src/tanstackLivePreviewTransition.test.ts
-            82dfd0e91f2bb22fab94cda0b665b455c23a85b8060c9a776838af39fffab39a  packages/build-executor-contracts/src/tanstackLivePreviewTransition.ts
-            76e7992da501bd297598738ea33a94cfb7ee012b304d417ef70b2712e441225a  packages/build-preparation/src/index.ts
-            4fe732a59b83a9ae928f4167e3efd5ed9f311fad6c230462c57ff6cca763794a  packages/build-preparation/src/productionBuildJob.test.ts
-          EXPECTED_U20H
-          echo 'U20H_SOURCE_PIN=PASS'
+          python3 - <<'CANDIDATE_MANIFEST_PY'
+          import hashlib, json, re, subprocess
+          from pathlib import Path, PurePosixPath
+
+          def check(ok, label):
+              if not ok:
+                  raise SystemExit(label)
+
+          def git(*args):
+              return subprocess.check_output(["git", *args]).decode().strip()
+
+          def changed(a, b):
+              return set(filter(None, subprocess.check_output(["git", "diff", "--no-renames", "--name-only", "-z", a, b]).decode().split("\0")))
+
+          request_path = '.github/workflows/zoebuild-u20h-runner-build.request'
+          request = json.loads(Path(request_path).read_text())
+          check(set(request) == {"schema", "source", "sourceTree", "base", "changedPaths", "sha256", "requestedAtUtc"} and request["schema"] == 1, "REQUEST_SCHEMA_INVALID")
+          for name in ("source", "sourceTree", "base"):
+              check(isinstance(request[name], str) and re.fullmatch(r"[0-9a-f]{40}", request[name]), "REQUEST_ID_INVALID")
+          source, base = request["source"], request["base"]
+          check(git("rev-parse", "HEAD^") == source and git("rev-parse", source + "^") == base, "REQUEST_PARENT_MISMATCH")
+          check(git("rev-parse", source + "^{tree}") == request["sourceTree"], "SOURCE_TREE_MISMATCH")
+          check(changed(source, "HEAD") == {request_path}, "REQUEST_COMMIT_SCOPE_INVALID")
+          check(isinstance(request["changedPaths"], list) and changed(base, source) == set(request["changedPaths"]), "SOURCE_SCOPE_MISMATCH")
+          manifest = request["sha256"]
+          check(isinstance(manifest, dict) and set(['.dockerignore', '.github/workflows/zoebuild-u20h-runner-candidate.yml', 'apps/runner/Dockerfile', 'apps/runner/src/routes/build.previews.developmentUpdate.test.ts', 'apps/runner/src/routes/build.previews.developmentUpdate.ts', 'apps/runner/src/services/build/tanstackDevelopmentPreviewAdmission.test.ts', 'apps/runner/src/services/build/tanstackDevelopmentPreviewAdmission.ts', 'apps/runner/src/services/build/tanstackDevelopmentSourceStore.ts', 'apps/runner/src/services/build/tanstackDevelopmentWorkspaceWriter.test.ts', 'apps/runner/src/services/build/tanstackDevelopmentWorkspaceWriter.ts', 'apps/runner/src/services/build/tanstackPreviewDockerDriver.ts', 'apps/runner/src/services/build/tanstackPreviewIdentity.test.ts', 'apps/runner/src/services/build/tanstackPreviewIdentity.ts', 'apps/runner/src/services/build/tanstackWorkerBuild.ts', 'apps/runner/src/services/build/tanstackWorkerRuntimePolicy.test.ts', 'apps/runner/src/services/build/tanstackWorkerRuntimePolicy.ts', 'apps/runner/src/services/build/tanstackWorkerRuntimeSmoke.test.ts', 'apps/runner/src/services/build/tanstackWorkerRuntimeSmoke.ts', 'apps/runner/src/services/workspace/workspacePolicy.disk.test.ts', 'apps/runner/src/services/workspace/workspacePolicy.ts', 'apps/runner/src/services/workspace/workspaceStrictUsageWorker.ts', 'apps/zoebuild/src/app/api/build/projects/[buildProjectId]/preview/[previewId]/development/update/route.test.ts', 'apps/zoebuild/src/lib/build/reactPreviewDevelopmentBrowserBoundary.ts', 'apps/zoebuild/src/lib/build/reactPreviewDevelopmentBrowserSession.ts', 'packages/build-executor-contracts/src/index.test.ts', 'packages/build-executor-contracts/src/index.ts', 'packages/build-executor-contracts/src/tanstackLivePreviewTransition.binary.test.ts', 'packages/build-executor-contracts/src/tanstackLivePreviewTransition.test.ts', 'packages/build-executor-contracts/src/tanstackLivePreviewTransition.ts', 'packages/build-preparation/src/index.ts', 'packages/build-preparation/src/productionBuildJob.test.ts', 'pnpm-lock.yaml']) <= set(manifest), "REQUIRED_PINS_MISSING")
+          for name, digest in manifest.items():
+              path = PurePosixPath(name)
+              check(not path.is_absolute() and str(path) == name and ".." not in path.parts and name != request_path, "PIN_PATH_INVALID")
+              check(isinstance(digest, str) and re.fullmatch(r"[0-9a-f]{64}", digest), "PIN_DIGEST_INVALID")
+              p = Path(name)
+              check(p.is_file() and not p.is_symlink() and not any(x.is_symlink() for x in p.parents), "PIN_FILE_INVALID")
+              check(hashlib.sha256(p.read_bytes()).hexdigest() == digest, "SOURCE_DRIFT=" + name)
+          print(f"CANDIDATE_SOURCE_MANIFEST=PASS ({len(manifest)} files)")
+          CANDIDATE_MANIFEST_PY
           echo 'CANDIDATE_ONLY=YES'
 
       - name: Install pnpm
@@ -120,6 +122,7 @@ jobs:
           pnpm --dir apps/zoebuild exec vitest run \
             'src/app/api/build/projects/[buildProjectId]/preview/[previewId]/development/update/route.test.ts' \
             src/lib/build/reactPreviewDevelopmentBrowserSession.test.ts
+          pnpm --dir apps/runner exec vitest run --config vitest.config.ts src/services/workspace/workspacePolicy.disk.test.ts src/services/workspace/workspacePolicy.test.ts src/services/workspace/createWorkspace.test.ts src/services/workspace/workspaceFilesystemPolicy.test.ts src/services/workspace/workspaceDependencyPermissionsK20D3F1.test.ts src/services/build/previewDependencyLayerStore.test.ts src/services/build/tanstackPreviewDependencyReuse.test.ts src/services/build/tanstackWorkerRuntimePolicy.test.ts src/services/build/tanstackWorkerRuntimeSmoke.test.ts
           pnpm --dir apps/runner exec tsc --noEmit
           pnpm --dir apps/zoebuild exec tsc --noEmit
 
