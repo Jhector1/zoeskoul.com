@@ -5,6 +5,7 @@ import { makeTanstackDevelopmentStartRoute } from "./build.previews.developmentS
 import type { startAdmittedTanstackDevelopmentPreview } from
   "../services/build/tanstackPreviewSharedLifecycle.js";
 
+import { RunnerWorkspaceCapacityError } from "../services/workspace/workspacePolicy.js";
 import { previewObservability } from "../services/build/previewObservability.js";
 
 type DevelopmentStartInput = Parameters<typeof startAdmittedTanstackDevelopmentPreview>[0];
@@ -117,6 +118,16 @@ describe("Phase 4D private development lease startup gate",()=>{
     expect(await h.call()).toEqual({status:503,payload:{ok:false,code:"DEVELOPMENT_START_UNAVAILABLE"}});
     expect(h.start).not.toHaveBeenCalled();
     expect(h.resolve).not.toHaveBeenCalled();
+  });
+  it.each(["RUNNER_DISK_LOW","RUNNER_WORKSPACE_STORAGE_LIMIT"] as const)("preserves only typed capacity code %s",async(code)=>{
+    const h=setup({start:async(input:DevelopmentStartInput)=>{
+      input.onPhase?.("workspace");
+      throw new RunnerWorkspaceCapacityError(code,"private /disk/path 6.23 GiB",
+        code === "RUNNER_DISK_LOW" ? {freeBytes:1,requiredFreeBytes:2,reservationBytes:0} : undefined);
+    }});
+    expect(await h.call()).toEqual({status:503,payload:{ok:false,code}});
+    const spoof=setup({start:async()=>{throw Object.assign(Error("private"),{code});}});
+    expect(await spoof.call()).toEqual({status:503,payload:{ok:false,code:"DEVELOPMENT_START_UNAVAILABLE"}});
   });
   it("does not reveal source, dependency or Docker errors",async()=>{
     const warning=vi.spyOn(console,"warn").mockImplementation(()=>undefined);

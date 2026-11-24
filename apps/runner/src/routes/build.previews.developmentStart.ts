@@ -14,6 +14,7 @@ import { resolveTanstackPreviewIdentity } from
 import { startAdmittedTanstackDevelopmentPreview } from
   "../services/build/tanstackPreviewSharedLifecycle.js";
 
+import { RunnerWorkspaceCapacityError } from "../services/workspace/workspacePolicy.js";
 import { previewObservability } from "../services/build/previewObservability.js";
 
 const ACTOR_KEY = /^u:[0-9a-f]{64}$/;
@@ -129,6 +130,13 @@ export function makeTanstackDevelopmentStartRoute(
     } catch (error) {
       if (error instanceof ZoebuildPreviewMaintenanceError)
         return res.status(503).json({ok:false,code:"PREVIEW_MAINTENANCE"});
+      if (error instanceof RunnerWorkspaceCapacityError) {
+        console.warn("RUNNER development preview capacity rejected", {
+          requestCorrelation: requestId ?? "unavailable", stage, code: error.code, status: 503,
+          ...(error.disk ? {disk:error.disk} : {}),
+        });
+        return res.status(503).json({ok:false,code:error.code});
+      }
       console.warn("RUNNER development preview start failed", {
         requestCorrelation: requestId ?? "unavailable",
         stage,

@@ -1,5 +1,6 @@
 import {describe,expect,it,vi} from "vitest";
 import {createDevelopmentPreviewEditorLifecycle} from "./reactPreviewDevelopmentEditorLifecycle";
+import {DevelopmentBrowserSessionError} from "./reactPreviewDevelopmentBrowserSession";
 import type {createDevelopmentPreviewBrowserSession} from "./reactPreviewDevelopmentBrowserSession";
 
 type Session = ReturnType<typeof createDevelopmentPreviewBrowserSession>;
@@ -27,6 +28,18 @@ function make() {
 const flush=async()=>{await Promise.resolve();await Promise.resolve();await Promise.resolve();};
 
 describe("Phase 4E3B saved-revision editor integration",()=>{
+  it.each(["RUNNER_DISK_LOW","RUNNER_WORKSPACE_STORAGE_LIMIT"] as const)("stops automatic restart for %s",async(code)=>{
+    const f=make();
+    const error=new DevelopmentBrowserSessionError(code,"capacity",503);
+    f.controller.start.mockRejectedValueOnce(error);
+    f.lifecycle.savedRevision(7,true);await flush();
+    expect(f.lifecycle.snapshot().phase).toBe("failed");
+    expect(f.onFailure).toHaveBeenCalledExactlyOnceWith(error);
+    f.lifecycle.savedRevision(8,true);await flush();
+    expect(f.controller.start).toHaveBeenCalledOnce();
+    expect(f.controller.restart).not.toHaveBeenCalled();
+    expect(f.controller.update).not.toHaveBeenCalled();
+  });
   it("starts only saved source and sends one consecutive update",async()=>{
     const f=make();
     f.lifecycle.savedRevision(7,false);await flush();

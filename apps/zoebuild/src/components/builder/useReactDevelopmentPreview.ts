@@ -5,6 +5,7 @@ import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/run
 import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 import { exportWorkspaceEntries } from "@zoeskoul/learner-workspace/ide/fsTree";
 import { registeredTanstackPreviewRoutes } from "@/lib/build/tanstackPreviewPageCatalog";
+import { developmentCapacityFailure, developmentFailureRequestId } from "@/lib/build/reactPreviewDevelopmentFailure";
 import { createDevelopmentPreviewBrowserSession } from "@/lib/build/reactPreviewDevelopmentBrowserSession";
 import { createDevelopmentPreviewEditorLifecycle } from "@/lib/build/reactPreviewDevelopmentEditorLifecycle";
 import { createDevelopmentHmrBrowserSocket } from "@/lib/build/reactPreviewDevelopmentHmrBrowserSocket";
@@ -69,7 +70,8 @@ export function useReactDevelopmentPreview(input: Readonly<{
   const resultForProject = result?.projectId === input.buildProjectId ? result : null;
   const fallback = resultForProject?.fallback ?? false;
   const recovering = recoveryPlan?.projectId === input.buildProjectId;
-  const active = input.enabled && !fallback && !recovering;
+  const blocked = resultForProject?.preview?.state === "error";
+  const active = input.enabled && !fallback && !recovering && !blocked;
 
   useLayoutEffect(() => {
     selectedRef.current = {projectId: input.buildProjectId,
@@ -167,7 +169,21 @@ export function useReactDevelopmentPreview(input: Readonly<{
           fallback: false,
         }));
       },
-      onFailure: () => {
+      onFailure: (error) => {
+        if (!alive || activeRef.current?.lifecycle !== lifecycle) return;
+        const capacity = developmentCapacityFailure(error?.code);
+        if (capacity) {
+          // Persistent server capacity failure: neither automatic cold restarts
+          // nor immutable fallback can restore disk capacity. Keep manual retry.
+          activeRef.current = null;
+          handoff.close();
+          setRecoveryPlan(null);
+          const requestId = developmentFailureRequestId(error?.requestId);
+          setResult({projectId:buildProjectId,previewId:null,confirmed:null,attempted:null,fallback:false,
+            preview:{src:null,state:"error",revision:0,
+              message:`${capacity.message} (${capacity.code}${requestId ? `; request ${requestId}` : ""})`}});
+          return;
+        }
         if(process.env.NODE_ENV==="development") console.info("[ZOE-HMR]",JSON.stringify({event:"lifecycle_failure"}));
         recover();
       },
@@ -393,6 +409,11 @@ export function useReactDevelopmentPreview(input: Readonly<{
       attemptedSourceVersion: resultForProject.attempted,
       routes: registeredTanstackPreviewRoutes(exportWorkspaceEntries(input.workspace.nodes)),
       onRetry: () => {
+        if (blocked) {
+          setResult(current => current?.projectId === input.buildProjectId &&
+            current.preview?.state === "error" ? null : current);
+          return;
+        }
         activeRef.current?.lifecycle.savedRevision(input.sourceVersion, input.savedSourceReady);
       },
     },
