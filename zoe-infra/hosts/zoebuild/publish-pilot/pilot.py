@@ -179,15 +179,27 @@ def fetch(d,name,path,method="GET",accept="*/*"):
     return r["status"],r["contentType"],r["location"],data
 
 
-def smoke(d,name,files):
+def smoke(d,name,files,fixture_diagnostics=False):
     deadline=time.monotonic()+60
+    last_probe="not attempted"
     while time.monotonic()<deadline:
         try:
             status,mime,_,home=fetch(d,name,"/",accept="text/html")
-            if status==200 and mime.lower().startswith("text/html") and re.search(rb"<html(?:\s|>)",home,re.I) and re.search(rb"<body(?:\s|>)",home,re.I): break
-        except Exception: pass
+            has_html=bool(re.search(rb"<html(?:\s|>)",home,re.I))
+            has_body=bool(re.search(rb"<body(?:\s|>)",home,re.I))
+            if status==200 and mime.lower().startswith("text/html") and has_html and has_body: break
+            last_probe=f"HTTP {status}; html={has_html}; body={has_body}; bytes={len(home)}"
+        except Exception as exc:
+            last_probe=type(exc).__name__
+        if fixture_diagnostics:
+            info=inspect(d,name)
+            if not info or not info["State"]["Running"]:
+                print("FIXTURE_LAST_PROBE="+last_probe,flush=True)
+                raise RuntimeError("Fixture runtime exited before SSR readiness")
         time.sleep(1)
-    else: raise RuntimeError("SSR readiness failed")
+    else:
+        if fixture_diagnostics: print("FIXTURE_LAST_PROBE="+last_probe,flush=True)
+        raise RuntimeError("SSR readiness failed")
     checked=[]
     for suffix in (".js",".css"):
         candidates=[p for p in files if p.startswith("client/") and p.endswith(suffix) and (b'"/'+p[7:].encode()+b'"' in home or b"'/"+p[7:].encode()+b"'" in home)]
@@ -325,6 +337,38 @@ def serve(args):
         server.serve_forever()
 
 
+def fixture_failure_diagnostics(d,name):
+    # Only called for image-smoke's built-in synthetic fixture. Never log
+    # arbitrary deployed customer bundles, HTTP bodies or container env.
+    try:
+        info=inspect(d,name)
+        if not info:
+            print("FIXTURE_CONTAINER=NOT_FOUND",flush=True)
+            return
+        state=info["State"]
+        print("FIXTURE_STATE="+json.dumps({k:state.get(k) for k in ("Status","Running","ExitCode","OOMKilled","Error","Restarting")}),flush=True)
+        logs=command(d+["logs","--tail","80",name],timeout=10,check=False)
+        print("FIXTURE_STARTUP_LOG_BEGIN",flush=True)
+        for line in (logs.stdout+logs.stderr)[-16000:].decode("utf-8","replace").splitlines():
+            print("FIXTURE_LOG | "+line,flush=True)
+        print("FIXTURE_STARTUP_LOG_END",flush=True)
+        if state.get("Running"):
+            probe=command(d+["exec",name,"node","-e",HTTP_PROGRAM,"GET","/","text/html"],timeout=15,check=False)
+            print("FIXTURE_HTTP_EXEC_EXIT="+str(probe.returncode),flush=True)
+            if probe.returncode:
+                for line in probe.stderr[-4000:].decode("utf-8","replace").splitlines():
+                    print("FIXTURE_PROBE | "+line,flush=True)
+            else:
+                try:
+                    data=unique_json(probe.stdout)
+                    print("FIXTURE_HTTP_STATUS="+str(data.get("status")),flush=True)
+                    print("FIXTURE_HTTP_CONTENT_TYPE="+str(data.get("contentType"))[:200],flush=True)
+                except Exception:
+                    print("FIXTURE_HTTP_RESPONSE_INVALID",flush=True)
+    except Exception as exc:
+        print("FIXTURE_DIAGNOSTICS_FAILED="+type(exc).__name__,flush=True)
+
+
 def image_smoke(image):
     d=docker();raw,files=fixture();digest=sha(raw);validate_bundle(raw,digest)
     name="zoebuild-publish-smoke-"+uuid.uuid4().hex[:20]
@@ -334,10 +378,13 @@ def image_smoke(image):
         image_id=json.loads(command(d+["image","inspect",image]).stdout)[0]["Id"]
         command(d+container_options(name,image,dist,digest),timeout=60)
         verify_container(inspect(d,name),dist,digest,image_id,False)
-        smoke(d,name,files)
+        smoke(d,name,files,fixture_diagnostics=True)
         status,mime,_,body=fetch(d,name,"/api/health")
         require(status==200 and mime.startswith("application/json") and json.loads(body)=={"ok":True},"Dynamic Worker health failed")
         print("REAL_WORKER_IMAGE_SMOKE=PASS")
+    except Exception:
+        fixture_failure_diagnostics(d,name)
+        raise
     finally:
         info=inspect(d,name)
         if info and info.get("Config",{}).get("Labels",{}).get(LABEL+".object")==digest:command(d+["rm","-f",name])
