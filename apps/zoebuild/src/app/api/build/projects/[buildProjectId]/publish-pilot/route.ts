@@ -45,7 +45,7 @@ export async function POST(req:Request, ctx:{params:Promise<{buildProjectId:stri
   try {
     const access = await loadCurrentBuildAccessSnapshot(req,{requireAuthority:true});
     if (!access.userId) return reply("BUILD_AUTH_REQUIRED",401);
-    if (!allowsTanstackPublishPilot({origin,projectId:buildProjectId,sourceVersion,canPublish:resolveBuildAccess(access).canPublish,env:process.env}))
+    if (!allowsTanstackPublishPilot({origin,projectId:buildProjectId,sourceVersion,canPublish:resolveBuildAccess(access).canPublish,userId:access.userId,env:process.env}))
       return reply("BUILD_PILOT_NOT_ENTITLED_OR_NOT_SELECTED",403);
     stage="admission";
     const limited=await rateLimit(`zoebuild-publish-pilot:${access.userId}:${buildProjectId}`,{bucket:"zoebuild-publish-pilot",limit:4,window:"1 h"});

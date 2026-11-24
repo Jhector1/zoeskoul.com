@@ -19,7 +19,7 @@ const objectSha256=createHash("sha256").update(bytes).digest("hex");
 const ctx={params:Promise.resolve({buildProjectId:"project1"})};
 function req(version="3",url="http://localhost:3004/api/build/projects/project1/publish-pilot",body?:string){return new Request(url,{method:"POST",headers:{"x-zoebuild-pilot-version":version,origin:"http://localhost:3004"},...(body===undefined?{}:{body})});}
 beforeEach(()=>{
-  vi.resetAllMocks();vi.stubEnv("NODE_ENV","development");vi.stubEnv("ZOEBUILD_PUBLISH_ENABLED","0");vi.stubEnv("ZOEBUILD_PRIVATE_PUBLISH_PILOT","project1:3");
+  vi.resetAllMocks();vi.stubEnv("NODE_ENV","development");vi.stubEnv("ZOEBUILD_PUBLISH_ENABLED","0");vi.stubEnv("ZOEBUILD_PRIVATE_PUBLISH_PILOT","project1:3");vi.stubEnv("ZOEBUILD_PRIVATE_PUBLISH_PILOT_OWNER",undefined);
   m.sameOrigin.mockReturnValue(true);m.access.mockResolvedValue({userId:"owner1"});m.decision.mockReturnValue({canPublish:true});m.rate.mockResolvedValue({ok:true});
   m.project.mockResolvedValue({sourceVersion:3,status:"draft",stackId:"tanstack-start-v1",specification:{},workspace:{}});m.prepare.mockReturnValue({files:[]});m.actor.mockResolvedValue("actor");m.execute.mockResolvedValue({ok:true});m.store.mockReturnValue({read:m.read});m.stage.mockResolvedValue({objectKey:"private-key",objectSha256,artifactSha256:"a".repeat(64)});m.read.mockResolvedValue(bytes);m.current.mockResolvedValue({id:"project1"});
 });
@@ -30,6 +30,10 @@ describe("operator-only Worker publishing handoff",()=>{
   it("denies browser supplied source",async()=>{expect((await POST(req("3",undefined,"{}"),ctx)).status).toBe(400);expect(m.execute).not.toHaveBeenCalled();});
   it("denies a different revision",async()=>{expect((await POST(req("4"),ctx)).status).toBe(403);expect(m.project).not.toHaveBeenCalled();});
   it("requires existing publish entitlement",async()=>{m.decision.mockReturnValue({canPublish:false});expect((await POST(req(),ctx)).status).toBe(403);expect(m.execute).not.toHaveBeenCalled();});
+  it("accepts only the explicitly selected local owner without paid publishing",async()=>{vi.stubEnv("ZOEBUILD_PRIVATE_PUBLISH_PILOT_OWNER","owner1");m.decision.mockReturnValue({canPublish:false});expect((await POST(req(),ctx)).status).toBe(200);expect(m.execute).toHaveBeenCalledOnce();});
+  it("rejects a different actor even with paid publishing",async()=>{vi.stubEnv("ZOEBUILD_PRIVATE_PUBLISH_PILOT_OWNER","other1");expect((await POST(req(),ctx)).status).toBe(403);expect(m.project).not.toHaveBeenCalled();expect(m.execute).not.toHaveBeenCalled();});
+  it("still requires ownership for selected operator",async()=>{vi.stubEnv("ZOEBUILD_PRIVATE_PUBLISH_PILOT_OWNER","owner1");m.decision.mockReturnValue({canPublish:false});m.project.mockResolvedValue(null);expect((await POST(req(),ctx)).status).toBe(404);expect(m.execute).not.toHaveBeenCalled();});
+  it("rejects explicit local owner authorization in production",async()=>{vi.stubEnv("ZOEBUILD_PRIVATE_PUBLISH_PILOT_OWNER","owner1");vi.stubEnv("NODE_ENV","production");expect((await POST(req(),ctx)).status).toBe(404);expect(m.access).not.toHaveBeenCalled();});
   it("requires owner scoped project",async()=>{m.project.mockResolvedValue(null);expect((await POST(req(),ctx)).status).toBe(404);expect(m.execute).not.toHaveBeenCalled();});
   it("rejects stale source after staging",async()=>{m.current.mockResolvedValue(null);expect((await POST(req(),ctx)).status).toBe(409);});
   it("rejects mismatched R2 readback",async()=>{m.read.mockResolvedValue(Buffer.from("tampered"));expect((await POST(req(),ctx)).status).toBe(503);expect(m.current).not.toHaveBeenCalled();});
