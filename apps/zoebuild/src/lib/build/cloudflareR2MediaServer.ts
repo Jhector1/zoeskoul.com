@@ -4,6 +4,8 @@ import { homedir } from "node:os";
 import { join } from "node:path";
 import {
   createCloudflareR2PrivateObjectStore,
+  createCloudflareR2PublishBundleStore,
+  type BuildMediaR2Configuration,
   type BuildMediaPrivateObjectStore,
 } from "@zoeskoul/build-application";
 
@@ -11,7 +13,16 @@ const FILE_NAME = "zoebuild-media-r2.json";
 
 /** Trusted media service only: never invoked by generated code or an unauthenticated route. */
 export function createZoeBuildPrivateR2ObjectStore(): BuildMediaPrivateObjectStore {
-  const path = join(homedir(), ".zoeskoul", "secrets", FILE_NAME);
+  return createCloudflareR2PrivateObjectStore(readPrivateR2Configuration(FILE_NAME));
+}
+
+/** A separately provisioned private bucket for executable release bundles. */
+export function createZoeBuildPrivateR2PublishBundleStore(): BuildMediaPrivateObjectStore {
+  return createCloudflareR2PublishBundleStore(readPrivateR2Configuration("zoebuild-publish-r2.json"));
+}
+
+function readPrivateR2Configuration(fileName: string): BuildMediaR2Configuration {
+  const path = join(homedir(), ".zoeskoul", "secrets", fileName);
   // O_NOFOLLOW + fstat eliminate a symlink swap between path and read.
   const fd = openSync(path, constants.O_RDONLY | constants.O_NOFOLLOW);
   let raw: string;
@@ -35,10 +46,10 @@ export function createZoeBuildPrivateR2ObjectStore(): BuildMediaPrivateObjectSto
   if (Object.keys(config).sort().join(",") !== names.sort().join(",")) {
     throw new Error("BUILD_MEDIA_R2_SECRET_FILE_INVALID");
   }
-  return createCloudflareR2PrivateObjectStore({
+  return {
     accountId: String(config.accountId),
     bucket: String(config.bucket),
     accessKeyId: String(config.accessKeyId),
     secretAccessKey: String(config.secretAccessKey),
-  });
+  };
 }

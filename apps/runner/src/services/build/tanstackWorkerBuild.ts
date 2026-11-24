@@ -1,4 +1,4 @@
-import { randomUUID } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import type { ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contracts";
 import { assertTanstackWorkerBuildRequest } from "./tanstackWorkerBuildPolicy.js";
 import { createWorkspace } from "../workspace/createWorkspace.js";
@@ -22,6 +22,7 @@ export async function executeTanstackWorkerBuild(
   request: ProductionBuildJobRequestV1,
 ) {
   assertTanstackWorkerBuildRequest(request);
+  const snapshotSha256 = createHash("sha256").update(JSON.stringify({files: request.files, binaryFiles: request.binaryFiles ?? []}), "utf8").digest("hex");
   const pilot = shouldRunWorkerSmoke(request);
   const journal = pilot ? createTanstackRecoveryJournal(env.workspaceRoot) : null;
   if (journal) await journal.write();
@@ -53,7 +54,7 @@ export async function executeTanstackWorkerBuild(
     }) : undefined;
     return { protocolVersion: request.protocolVersion, operation: "production-build" as const,
       buildProjectId: request.buildProjectId, sourceVersion: request.sourceVersion,
-      artifact, ...(runtimeSmoke ? {runtimeSmoke} : {}) };
+      snapshotSha256, artifact, ...(runtimeSmoke ? {runtimeSmoke} : {}) };
   } finally {
     // A failed workspace removal must propagate: never mark the build verified.
     if (liveContainer || journal?.current.containerId) {
