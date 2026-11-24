@@ -22,9 +22,19 @@ export function matchesSavedTanstackPreviewRequest(
         candidate.stackId !== saved.stackId ||
         candidate.templateId !== "tanstack-start-v1" ||
         candidate.templateId !== saved.templateId ||
-        candidate.files.length !== saved.files.length) return false;
+        candidate.files.length !== saved.files.length ||
+        (candidate.binaryFiles?.length ?? 0) !== (saved.binaryFiles?.length ?? 0)) return false;
     const files = new Map(saved.files.map(f => [f.path, f.content]));
-    return candidate.files.every(f => files.has(f.path) && files.get(f.path) === f.content);
+    if (!candidate.files.every(f => files.has(f.path) && files.get(f.path) === f.content)) return false;
+    // Identity includes the exact image bytes, not only a claimed checksum.
+    // The Runner separately verifies sha256 when materializing the file.
+    const binaries = new Map((saved.binaryFiles ?? []).map(file => [file.path, file]));
+    return (candidate.binaryFiles ?? []).every(file => {
+      const pinned = binaries.get(file.path);
+      return Boolean(pinned && pinned.mimeType === file.mimeType &&
+        pinned.encoding === file.encoding && pinned.sizeBytes === file.sizeBytes &&
+        pinned.checksum === file.checksum && pinned.data === file.data);
+    });
   } catch {
     return false;
   }

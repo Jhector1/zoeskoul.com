@@ -3,7 +3,12 @@
   "private": true,
   "version": "0.0.1",
   "scripts": {
-    "dev": "node ../../scripts/run-with-shared-env.mjs next dev --port 3004",
+    "dev": "node scripts/zoebuild-dev-verified.mjs",
+    "dev:server": "node ../../scripts/run-with-shared-env.mjs next dev --port 3004",
+    "dev:check": "node scripts/zoebuild-dev-verified.mjs --check",
+    "dev:prepare": "node ../../scripts/run-with-shared-env.mjs node scripts/zoebuild-runner-tunnel-ensure.mjs && node scripts/zoebuild-dev-verified.mjs --prepare",
+    "dev:watch": "node scripts/zoebuild-dev-verified.mjs --watch",
+    "dev:test-startup": "node --test scripts/zoebuild-dev-verified.test.mjs",
     "build": "node ../../scripts/run-with-local-shared-build.mjs next build",
     "start": "next start --port 3004",
     "typecheck": "tsc -p tsconfig.json --noEmit",

@@ -74,16 +74,33 @@ export function isTanstackLiveSourcePath(path: string): boolean {
   return /^src\/(?:routes|components|hooks|styles|lib)\/(?:[A-Za-z0-9_.-]+\/)*[A-Za-z0-9_.-]+\.(?:tsx?|jsx?|css|scss)$/.test(path);
 }
 
-/** Only verified, public image assets may use the suspended live-image writer.
- * Other binaries and all configuration remain restart-only. Private R2 media
- * library entries never acquire this path: they are not application source. */
+/** Public image assets may use the suspended live-image writer. Other
+ * binaries and configuration remain restart-only. Private R2 media entries
+ * never acquire this path: they are not application source. */
 export function isTanstackLiveBinaryPath(candidate: string): boolean {
   if (!validPath(candidate)) return false;
   const pieces = candidate.split("/");
   if (pieces[0] !== "public" || pieces.length < 2 ||
-      pieces.slice(1).some(part => part.startsWith(".") || !/^[A-Za-z0-9_.-]+$/.test(part)))
+      pieces.slice(1).some(part => part.startsWith(".") || part.trim() !== part ||
+        !/^[A-Za-z0-9_. \u00a0\u202f-]+$/.test(part)))
     return false;
   return /\.(?:png|jpe?g|webp|avif)$/i.test(pieces.at(-1)!);
+}
+
+/** Root image names use the same bounded extension/character policy. The
+ * suspended writer must verify the exact prior authoritative snapshot before
+ * any image mutation, including delete, move, replacement and creation. */
+export function tanstackLiveRootImageMimeType(candidate: string): string | null {
+  if (!validPath(candidate) || candidate.includes("/") || candidate.startsWith(".") ||
+      candidate.trim() !== candidate || !/^[A-Za-z0-9_. \u00a0\u202f-]+$/.test(candidate)) return null;
+  const extension = /\.[^.]+$/.exec(candidate)?.[0]?.toLowerCase();
+  switch (extension) {
+    case ".png": return "image/png";
+    case ".jpg": case ".jpeg": return "image/jpeg";
+    case ".webp": return "image/webp";
+    case ".avif": return "image/avif";
+    default: return null;
+  }
 }
 
 /** Pure classification; never call this instead of trusted request validation. */
@@ -116,8 +133,8 @@ export function classifyTanstackPreviewTransition(input: Readonly<{
   if (!oldFiles || !newFiles) return result("reject", "invalid_files");
   const paths = new Set([...oldFiles.keys(), ...newFiles.keys()]);
   const changes = [...paths].filter(path => oldFiles.get(path) !== newFiles.get(path)).sort();
-  // Binary data changes never use the text-only suspended/HMR writer. They
-  // force an immutable restart with a newly checked source fingerprint.
+  // Binary changes use only the separately opted-in, suspended binary writer.
+  // Root and public images require prior snapshot verification in the writer.
   const oldBinaries = new Map((previous.binaryFiles ?? []).map(file => [file.path, file]));
   const newBinaries = new Map((next.binaryFiles ?? []).map(file => [file.path, file]));
   const binaryChanges = [...new Set([...oldBinaries.keys(), ...newBinaries.keys()])]
@@ -132,10 +149,20 @@ export function classifyTanstackPreviewTransition(input: Readonly<{
     return result("restart", "protected_files_changed", changes);
   if (changes.some(path => INTEGRITY_FILES.has(path)))
     return result("restart", "dependencies_changed", changes);
-  // Binary writes are explicitly opt-in and independently gated by the
-  // privileged paused-container writer. All non-public images restart.
-  if ((binaryChanges.length > 0 && !input.allowBinaryLive) ||
-      binaryChanges.some(path => !isTanstackLiveBinaryPath(path)) ||
+  // A path must be binary in the saved snapshots, not a text-to-binary
+  // conversion. Protected and non-public nested source paths stay restart-only.
+  const eligibleBinary = (path: string) => {
+    const rootMime = tanstackLiveRootImageMimeType(path);
+    if (!isTanstackLiveBinaryPath(path) && rootMime === null) return false;
+    if (oldFiles.has(path) || newFiles.has(path)) return false;
+    return rootMime === null || [oldBinaries.get(path), newBinaries.get(path)]
+      .every(file => !file || file.mimeType === rootMime);
+  };
+  // The writer rejects case-insensitive collisions across changed paths. Do
+  // not send a binary case-only rename into a transaction that will quarantine.
+  const binaryCaseCollision = binaryChanges.length !== new Set(binaryChanges.map(path => path.toLowerCase())).size;
+  if ((binaryChanges.length > 0 && !input.allowBinaryLive) || binaryCaseCollision ||
+      binaryChanges.some(path => !eligibleBinary(path)) ||
       changes.some(path => !binaryChanges.includes(path) && !isTanstackLiveSourcePath(path)))
     return result("restart", "protected_files_changed", changes);
   if (input.mode !== "development")

@@ -4,15 +4,20 @@ import {
   BuildAccessError, BuildSourceConflictError, getBuildProjectCommand,
 } from "@zoeskoul/build-application";
 import { prisma } from "@zoeskoul/platform-server/prisma";
-import { enforceSameOriginPost } from "@zoeskoul/platform-server/http";
+import { enforceBuildMutationOrigin } from "@/lib/server/enforceBuildMutationOrigin";
 import { rateLimit } from "@zoeskoul/platform-server/security/ratelimit";
 import { loadCurrentBuildAccessSnapshot } from "@/lib/build/currentBuildAccess";
 import { createPrismaBuildProjectReader } from "@/lib/build/readBuildProjects";
 import { BuildWorkspaceMutationError, parseBuildWorkspaceMutation } from "@/lib/build/buildWorkspaceMutation";
+import {readCanonicalOwnedBuildWorkspace,isManagedBinaryReadCutoverEnabled} from "@/lib/build/prismaManagedBinaryRead";
 import { verifyZoeReactCandidateAtRunner } from "@/lib/build/zoeReactIsolatedBuild";
 import { buildRevisionFilePreview, parseRevisionRestoreRequest } from "@/lib/build/sourceRevisionPolicy";
 import { restoreSavedReactVersion, SavedReactRestoreError } from "@/lib/build/restoreSavedReactVersion";
 import { activeSavedHistoryVersion } from "@/lib/build/activeSavedHistoryVersion";
+import { MANAGED_INTERNAL_HISTORY_NOTES } from "@/lib/build/prismaManagedBinaryPort";
+import { restorePilotManagedBinaryHistory } from "@/lib/build/managedBinaryPilotSourceWriter";
+import {managedBinaryWriteLane} from "@/lib/build/managedBinaryPrismaPolicy";
+import { ManagedBinaryRevisionError } from "@/lib/build/managedBinaryRevision";
 import { compareSavedVersionSnapshots } from "@/lib/build/compareSavedVersions";
 import { historicalReactSourceMetadata, historicReactRecoverySpecification,
   restoreHistoricalReactRevision, HistoricalReactRestoreError } from "@/lib/build/restoreHistoricalReactRevision";
@@ -20,6 +25,14 @@ import { historicalReactSourceMetadata, historicReactRecoverySpecification,
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 type Context = {params: Promise<{buildProjectId: string}>};
+
+/** Metadata marker is present on committed R2-managed source revisions.
+ * Protect old write paths even if the feature flag is later switched off.
+ */
+function hasManagedBinaryRevisionMarker(value: unknown): boolean {
+  return Boolean(value && typeof value === "object" && !Array.isArray(value) &&
+    Object.prototype.hasOwnProperty.call(value,"managedBinaryRevisionDigest"));
+}
 
 function reply(requestId: string, payload: Record<string, unknown>, status = 200) {
   const res = NextResponse.json({...payload, requestId}, {status});
@@ -69,15 +82,19 @@ export async function GET(req: Request, ctx: Context) {
         return reply(requestId,{ok:false,code:"BUILD_HISTORY_STALE",message:"The selected source changed. Refresh History."},409);
       const versions=[Number(compareFrom),Number(compareTo)];
       const snapshots=await prisma.codeProjectRevision.findMany({
-        where:{projectId:project.codeProjectId,version:{in:versions}},select:{version:true,snapshot:true},
+        where:{projectId:project.codeProjectId,version:{in:versions}},select:{version:true,snapshot:true,meta:true},
       });
+      if (!isManagedBinaryReadCutoverEnabled() && snapshots.some(x=>hasManagedBinaryRevisionMarker(x.meta))) {
+        return reply(requestId,{ok:false,code:"BUILD_HISTORY_MANAGED_READ_UNAVAILABLE"},503);
+      }
       const byVersion=new Map(snapshots.map(x=>[x.version,x.snapshot]));
       if (!byVersion.has(versions[0])||!byVersion.has(versions[1]))
         return reply(requestId,{ok:false,code:"BUILD_REVISION_NOT_FOUND"},404);
-      const comparison=compareSavedVersionSnapshots(
-        parseBuildWorkspaceMutation(byVersion.get(versions[0])),
-        parseBuildWorkspaceMutation(byVersion.get(versions[1])),
-      );
+      const [fromWorkspace,toWorkspace]=await Promise.all(versions.map(version =>
+        readCanonicalOwnedBuildWorkspace({client:prisma,ownerId:access.userId!,
+          buildProjectId:project.buildProjectId,sourceVersion:version,
+          legacyWorkspace:byVersion.get(version)})));
+      const comparison=compareSavedVersionSnapshots(fromWorkspace,toWorkspace);
       return reply(requestId,{ok:true,fromVersion:versions[0],toVersion:versions[1],
         currentVersion:currentSource.currentVersion,comparison});
     }
@@ -87,10 +104,15 @@ export async function GET(req: Request, ctx: Context) {
       const version = Number(rawVersion);
       const revision = await prisma.codeProjectRevision.findFirst({
         where: {projectId:project.codeProjectId, version},
-        select: {version:true, snapshot:true, createdAt:true, note:true},
+        select: {version:true, snapshot:true, createdAt:true, note:true, meta:true},
       });
       if (!revision) return reply(requestId, {ok:false, code:"BUILD_REVISION_NOT_FOUND"}, 404);
-      const workspace = parseBuildWorkspaceMutation(revision.snapshot);
+      if (!isManagedBinaryReadCutoverEnabled() && hasManagedBinaryRevisionMarker(revision.meta)) {
+        return reply(requestId,{ok:false,code:"BUILD_HISTORY_MANAGED_READ_UNAVAILABLE"},503);
+      }
+      const workspace = await readCanonicalOwnedBuildWorkspace({client:prisma,
+        ownerId:access.userId,buildProjectId:project.buildProjectId,
+        sourceVersion:version,legacyWorkspace:revision.snapshot});
       const preview = buildRevisionFilePreview(workspace);
       return reply(requestId, {ok:true, version:revision.version, createdAt:revision.createdAt.toISOString(),
         note:revision.note, preview, currentVersion:currentSource.currentVersion, activeVersion});
@@ -101,14 +123,43 @@ export async function GET(req: Request, ctx: Context) {
       return reply(requestId,{ok:false,code:"BUILD_HISTORY_INPUT_INVALID"},400);
     const records = await prisma.codeProjectRevision.findMany({
       where: {projectId:project.codeProjectId,
+        OR: [{note:null}, {note:{notIn:MANAGED_INTERNAL_HISTORY_NOTES}}],
         ...(before === null ? {} : {version: {lt: Number(before)}})},
       orderBy:{version:"desc"}, take:51,
-      select:{version:true, note:true, createdAt:true, workspaceHash:true},
+      select:{version:true, note:true, createdAt:true, workspaceHash:true, meta:true},
     });
+    // The history sidebar must not offer a dangerous legacy restore on
+    // TanStack. This flag is only advisory UI metadata: the POST handler and
+    // the isolated pilot database independently enforce ownership, markers,
+    // permissions, complete object hydration and source-version CAS.
+    const lane = managedBinaryWriteLane(project.buildProjectId);
+    const managedRestore = project.stackId === "tanstack-start-v1" && isManagedBinaryReadCutoverEnabled() &&
+      (lane === "general" || (lane === "pilot" && (process.env.NODE_ENV === "test" ||
+        (process.env.NODE_ENV === "development" && process.env.AI4B4E2P_BROWSER_CONFIRM === "LOCAL_BROWSER_ONLY"))));
+    let eligible = new Set<number>();
+    if (managedRestore) {
+      const headRecord = await prisma.codeProjectRevision.findUnique({
+        where:{projectId_version:{projectId:project.codeProjectId,version:currentSource.currentVersion}},
+        select:{meta:true},
+      });
+      if (hasManagedBinaryRevisionMarker(headRecord?.meta)) {
+        const candidateVersions=records.filter(r=>hasManagedBinaryRevisionMarker(r.meta))
+          .map(r=>r.version);
+        const manifests=candidateVersions.length ? await prisma.buildManagedBinaryRevision.findMany({
+          where:{ownerId:access.userId,buildProjectId:project.buildProjectId,
+            sourceVersion:{in:[currentSource.currentVersion,...candidateVersions]}},
+          select:{sourceVersion:true},
+        }) : [];
+        const available=new Set(manifests.map(row=>row.sourceVersion));
+        if (available.has(currentSource.currentVersion)) eligible=available;
+      }
+    }
     return reply(requestId,{ok:true, currentVersion:currentSource.currentVersion, activeVersion,
       hasMore:records.length > 50,
       revisions:records.slice(0,50).map(r => ({version:r.version, note:r.note, createdAt:r.createdAt.toISOString(),
-        workspaceHash:r.workspaceHash?.slice(0,12) ?? null}))});
+        workspaceHash:r.workspaceHash?.slice(0,12) ?? null,
+        restoreAvailable:managedRestore && eligible.has(r.version) && r.version < currentSource.currentVersion &&
+          hasManagedBinaryRevisionMarker(r.meta)}))});
   } catch (error) {
     if (error instanceof BuildAccessError) return reply(requestId, {ok:false,code:error.code},403);
     if (error instanceof BuildWorkspaceMutationError) return reply(requestId,{ok:false,code:"BUILD_REVISION_INVALID"},422);
@@ -120,7 +171,7 @@ export async function GET(req: Request, ctx: Context) {
 /** Switch to an existing saved snapshot without appending a duplicate history row. */
 export async function POST(req: Request, ctx: Context) {
   const requestId = crypto.randomUUID();
-  if (!enforceSameOriginPost(req)) return reply(requestId,{ok:false,code:"BUILD_FORBIDDEN"},403);
+  if (!enforceBuildMutationOrigin(req)) return reply(requestId,{ok:false,code:"BUILD_FORBIDDEN"},403);
   const sizeHeader = Number(req.headers.get("content-length") || "0");
   if (!Number.isFinite(sizeHeader) || sizeHeader > 512) return reply(requestId,{ok:false,code:"BUILD_HISTORY_INPUT_INVALID"},400);
   const raw = await req.text();
@@ -169,6 +220,27 @@ export async function POST(req: Request, ctx: Context) {
       select:{snapshot:true,settings:true,meta:true},
     });
     if (!revision) return reply(requestId,{ok:false,code:"BUILD_REVISION_NOT_FOUND"},404);
+    const head = await prisma.codeProjectRevision.findFirst({
+      where:{projectId:project.codeProjectId,version:project.sourceVersion},
+      select:{meta:true},
+    });
+    const marked = hasManagedBinaryRevisionMarker(revision.meta) || hasManagedBinaryRevisionMarker(head?.meta);
+    const managed = isManagedBinaryReadCutoverEnabled() ? await prisma.buildManagedBinaryRevision.count({where:{
+      ownerId:access.userId,buildProjectId:project.buildProjectId,
+      sourceVersion:{in:[project.sourceVersion,restore.restoreVersion]},
+    }}) : 0;
+    if (marked || managed) {
+      if (project.stackId === "tanstack-start-v1" && managed &&
+          isManagedBinaryReadCutoverEnabled() && managedBinaryWriteLane(project.buildProjectId)) {
+        const saved=await restorePilotManagedBinaryHistory(prisma,{ownerId:access.userId,
+          buildProjectId:project.buildProjectId,expectedVersion:project.sourceVersion,restoreVersion:restore.restoreVersion});
+        if (!saved) return reply(requestId,{ok:false,code:"BUILD_PROJECT_NOT_FOUND"},404);
+        return reply(requestId,{ok:true,sourceVersion:saved.sourceVersion,restoredFromVersion:restore.restoreVersion,
+          activeVersion:restore.restoreVersion,changed:saved.changed,buildVerified:false,specificationRestored:false});
+      }
+      return reply(requestId,{ok:false,code:"BUILD_HISTORY_MANAGED_RESTORE_UNAVAILABLE",
+        message:"Managed binary revisions cannot be restored by the legacy history writer."},409);
+    }
     const workspace = parseBuildWorkspaceMutation(revision.snapshot);
     if (project.stackId !== "react-vite-v1") {
       if (!historicalReactSourceMetadata(revision.settings, revision.meta))
@@ -204,6 +276,8 @@ export async function POST(req: Request, ctx: Context) {
       restoredFromVersion:restore.restoreVersion,activeVersion:restore.restoreVersion,changed:saved.changed,
       buildVerified:false,specificationRestored:saved.specificationRestored});
   } catch (error) {
+    if (error instanceof ManagedBinaryRevisionError) return reply(requestId,{ok:false,code:"BUILD_HISTORY_MANAGED_RESTORE_UNAVAILABLE",
+      message:"This managed revision could not be restored safely. No source was changed."},409);
     if (error instanceof SavedReactRestoreError) {
       const messages = {
         BUILD_HISTORY_STALE: "A newer source version or active operation exists. Reload and retry.",
@@ -231,7 +305,7 @@ export async function POST(req: Request, ctx: Context) {
 /** Delete one non-active, unreferenced snapshot. Never renumber the remaining versions. */
 export async function DELETE(req: Request, ctx: Context) {
   const requestId = crypto.randomUUID();
-  if (!enforceSameOriginPost(req)) return reply(requestId,{ok:false,code:"BUILD_FORBIDDEN"},403);
+  if (!enforceBuildMutationOrigin(req)) return reply(requestId,{ok:false,code:"BUILD_FORBIDDEN"},403);
   const url = new URL(req.url);
   const rawVersion = url.searchParams.get("version");
   if (!rawVersion || !/^[1-9]\d{0,8}$/.test(rawVersion) || url.searchParams.size !== 1)
@@ -277,6 +351,17 @@ export async function DELETE(req: Request, ctx: Context) {
         tx.buildArtifact.findFirst({where:{buildProjectId:project.buildProjectId,sourceVersion:version},select:{id:true}}),
       ]);
       if (run || deployment || artifact) return "protected" as const;
+      const revisionMetadata=await tx.codeProjectRevision.findUnique({
+        where:{projectId_version:{projectId:owned.codeProjectId,version}},select:{meta:true},
+      });
+      if (hasManagedBinaryRevisionMarker(revisionMetadata?.meta)) return "protected" as const;
+      // A managed manifest is an immutable revision binding. Do not delete
+      // only the source row while leaving the R2 manifest dangling.
+      const managed=await tx.buildManagedBinaryRevision.findUnique({
+        where:{buildProjectId_sourceVersion:{buildProjectId:project.buildProjectId,sourceVersion:version}},
+        select:{ownerId:true},
+      });
+      if (managed) return "protected" as const;
       const deleted=await tx.codeProjectRevision.deleteMany({where:{projectId:owned.codeProjectId,version}});
       return deleted.count===1 ? "deleted" as const : "missing" as const;
     },{isolationLevel:Prisma.TransactionIsolationLevel.Serializable});

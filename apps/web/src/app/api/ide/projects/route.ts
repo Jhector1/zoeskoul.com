@@ -1,5 +1,5 @@
 // src/app/api/ide/projects/route.ts
-import { saveCodeProject, ProjectCreationIntentConflictError } from "@/lib/projects/saveCodeProject";
+import { genericCodeProjectWhere, saveCodeProject, ProjectCreationIntentConflictError } from "@/lib/projects/saveCodeProject";
 import { prisma } from "@/lib/prisma";
 import type { ProjectListResponse } from "@/lib/projects/projectApiTypes";
 import {
@@ -33,6 +33,7 @@ export async function GET(req: Request) {
 
     const projects = await prisma.codeProject.findMany({
         where: {
+            ...genericCodeProjectWhere,
             ownerId: gate.actor.userId,
             archivedAt: archived ? { not: null } : null,
         },

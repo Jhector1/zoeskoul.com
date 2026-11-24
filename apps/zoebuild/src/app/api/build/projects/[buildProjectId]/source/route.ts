@@ -15,10 +15,10 @@ import {
 import { createPrismaBuildProjectSourceWriter } from "@/lib/build/saveBuildProjectSource";
 import { prisma } from "@zoeskoul/platform-server/prisma";
 import {
-  enforceSameOriginPost,
   exceedsContentLength,
   readJsonSafe,
 } from "@zoeskoul/platform-server/http";
+import { enforceBuildMutationOrigin } from "@/lib/server/enforceBuildMutationOrigin";
 import { rateLimit } from "@zoeskoul/platform-server/security/ratelimit";
 
 export const runtime = "nodejs";
@@ -49,7 +49,7 @@ export async function PATCH(
 ) {
   const requestId = crypto.randomUUID();
 
-  if (!enforceSameOriginPost(req)) {
+  if (!enforceBuildMutationOrigin(req)) {
     return json(
       requestId,
       { ok: false, code: "BUILD_FORBIDDEN", message: "Forbidden." },
@@ -69,7 +69,9 @@ export async function PATCH(
     );
   }
 
-  const access = await loadCurrentBuildAccessSnapshot();
+  let access: Awaited<ReturnType<typeof loadCurrentBuildAccessSnapshot>>;
+  try { access = await loadCurrentBuildAccessSnapshot(req,{requireAuthority:true}); }
+  catch { return json(requestId,{ok:false,code:"BUILD_SERVICE_UNAVAILABLE",message:"Service unavailable."},503); }
   const userId = access.userId ?? "";
   if (!userId) {
     return json(
@@ -234,7 +236,7 @@ export async function PATCH(
       requestId,
       buildProjectId,
       userId,
-      error,
+      kind:error instanceof Error ? error.name : "unknown",
     });
 
     return json(

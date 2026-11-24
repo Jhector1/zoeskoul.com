@@ -456,5 +456,5 @@ export type TanstackWorkerBuildExecutionResponseV1 = Readonly<{
   }>;
 }>;
 
-export { classifyTanstackPreviewTransition, isTanstackLiveSourcePath, isTanstackLiveBinaryPath } from "./tanstackLivePreviewTransition";
+export { classifyTanstackPreviewTransition, isTanstackLiveSourcePath, isTanstackLiveBinaryPath, tanstackLiveRootImageMimeType } from "./tanstackLivePreviewTransition";
 export type { TanstackPreviewTransition, TanstackPreviewLeaseMode, TanstackPreviewTransitionReason } from "./tanstackLivePreviewTransition";

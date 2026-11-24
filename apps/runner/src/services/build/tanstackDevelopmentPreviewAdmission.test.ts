@@ -126,6 +126,19 @@ describe("U20H opt-in binary admission", () => {
     expect(assess({next:binaryNext})).toMatchObject({action:"live_candidate",
       reason:"eligible_source_change", changedPaths:["public/images/photo.png","src/routes/index.tsx"]});
   });
+  it("admits saved root image changes with the exact prior lease and opt-in",()=>{
+    const prior={...previous,binaryFiles:[{...binary,path:"Screenshot 2026-11-22 at 1.37.32\u202fAM.png"}]};
+    const candidate={...next,binaryFiles:[{...binary,path:"red2.png"}]};
+    const bound={...lease,identity:createTanstackPreviewIdentity(prior,runtimeImageId)};
+    vi.stubEnv("ZOEBUILD_DEVELOPMENT_PREVIEW_BINARY_HMR_ENABLED","false");
+    expect(assess({lease:bound,previous:prior,next:candidate}).action).toBe("restart");
+    vi.stubEnv("ZOEBUILD_DEVELOPMENT_PREVIEW_BINARY_HMR_ENABLED","true");
+    expect(assess({lease:bound,previous:prior,next:candidate})).toMatchObject({action:"live_candidate",
+      changedPaths:[prior.binaryFiles[0].path,"red2.png","src/routes/index.tsx"]});
+    expect(assess({lease:bound,previous:prior,next:{...candidate,binaryFiles:[]}}).action).toBe("live_candidate");
+    expect(assess({lease:bound,previous:prior,next:{...candidate,binaryFiles:[{...binary,path:"public/images/photo.png"}]}}).action).toBe("live_candidate");
+    expect(()=>assess({lease:bound,previous:{...prior,binaryFiles:[]},next:candidate})).toThrow("Preview source identity mismatch.");
+  });
   it("never allows non-public binaries or protected configuration even with opt-in",()=>{
     vi.stubEnv("ZOEBUILD_DEVELOPMENT_PREVIEW_BINARY_HMR_ENABLED","true");
     expect(assess({next:{...next,binaryFiles:[{...binary,path:"src/images/photo.png"}]}}))

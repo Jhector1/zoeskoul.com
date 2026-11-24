@@ -2,7 +2,7 @@ import { constants, type BigIntStats } from "node:fs";
 import fs, { type FileHandle } from "node:fs/promises";
 import path from "node:path";
 import { createHash, randomUUID } from "node:crypto";
-import { isTanstackLiveBinaryPath, isTanstackLiveSourcePath,
+import { isTanstackLiveBinaryPath, isTanstackLiveSourcePath, tanstackLiveRootImageMimeType,
   type BuildExecutorBinaryFile, type ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contracts";
 import { docker } from "../docker/dockerClient.js";
 
@@ -25,11 +25,27 @@ export async function applySuspendedTanstackDevelopmentSource(input: Readonly<{
   /** Trusted private sandbox handle's workspaceDir, NOT supplied by a client. */
   workspaceDir: string;
   changedPaths: readonly string[];
+  /** Runner-owned snapshot resolved under the exclusive lease update lock.
+   * Mandatory for image writes, never provided by the browser. */
+  previous?: Pick<ProductionBuildJobRequestV1, "files" | "binaryFiles">;
   next: Pick<ProductionBuildJobRequestV1, "files" | "binaryFiles">;
 }>): Promise<void> {
   const changes = validateChanges(input.changedPaths, input.next.files,
     input.next.binaryFiles ?? [],
     process.env.ZOEBUILD_DEVELOPMENT_PREVIEW_BINARY_HMR_ENABLED === "true");
+  const imagePaths = input.changedPaths.filter(candidate =>
+    isTanstackLiveBinaryPath(candidate) || tanstackLiveRootImageMimeType(candidate) !== null);
+  if (imagePaths.length && !input.previous)
+    throw new Error("Trusted previous image snapshot required.");
+  const priorImages = imagePaths.length && input.previous
+    ? validateChanges(imagePaths, input.previous.files, input.previous.binaryFiles ?? [], true)
+    : [];
+  // An absent-to-absent image path is not a source transition.
+  const nextImagePaths = new Set((input.next.binaryFiles ?? []).map(file => file.path));
+  for (const prior of priorImages) {
+    if (prior.content === null && !nextImagePaths.has(prior.path))
+      throw new Error("Invalid development preview image transition.");
+  }
   const root = await validateWorkspaceRoot(input.workspaceRoot, input.workspaceDir);
   if (!/^[a-f0-9]{12,64}$/i.test(input.containerId))
     throw new Error("Invalid development preview container identity.");
@@ -60,7 +76,12 @@ export async function applySuspendedTanstackDevelopmentSource(input: Readonly<{
       await validateWorkspaceRoot(input.workspaceRoot, input.workspaceDir);
       // Preflight every candidate before the first mutation. A failure after the
       // first write is treated as partial by Phase 3A and quarantines the lease.
-      for (const change of changes) await inspectTarget(root, change.path, false);
+      for (const change of changes) {
+        const target = await inspectTarget(root, change.path, false);
+        if (change.content === null && !target.exists)
+          throw new Error("Development source deletion target missing.");
+      }
+      await verifyPriorImages(root, priorImages);
       for (const change of changes) {
         const destination = await inspectTarget(root, change.path, true);
         if (change.content === null) {
@@ -172,7 +193,8 @@ function validateChanges(
   let totalBinaryBytes = 0;
   for (const candidate of changedPaths) {
     const textEligible = isTanstackLiveSourcePath(candidate);
-    const binaryEligible = allowBinaryLive && isTanstackLiveBinaryPath(candidate);
+    const binaryEligible = allowBinaryLive && (isTanstackLiveBinaryPath(candidate) ||
+      tanstackLiveRootImageMimeType(candidate) !== null);
     if (!safePath(candidate) || (!textEligible && !binaryEligible) ||
         selected.has(candidate.toLowerCase()))
       throw new Error("Unsafe development preview source path.");
@@ -208,6 +230,39 @@ function validateChanges(
     changes.push({path:candidate,content});
   }
   return changes;
+}
+
+/** Verify every changed image against the admitted prior source, including
+ * absence for new paths. Do this while the sandbox is paused and before ANY
+ * mutation. This guards deletes, replacements, moves and destination collisions. */
+async function verifyPriorImages(root: string, priorImages: readonly SourceChange[]) {
+  for (const prior of priorImages) {
+    const source = await inspectTarget(root, prior.path, false);
+    if (prior.content === null) {
+      if (source.exists) throw new Error("Development preview image destination already exists.");
+      continue;
+    }
+    if (!source.exists || !(prior.content instanceof Uint8Array))
+      throw new Error("Development preview prior image missing.");
+    const expected = Buffer.from(prior.content);
+    const handle = await fs.open(source.path, constants.O_RDONLY | constants.O_NOFOLLOW | constants.O_NONBLOCK);
+    try {
+      const stat = await handle.stat({bigint:true});
+      const named = await fs.lstat(source.path,{bigint:true});
+      if (!stat.isFile() || stat.nlink !== 1n || stat.dev !== named.dev || stat.ino !== named.ino ||
+          stat.size !== BigInt(expected.length))
+        throw new Error("Unsafe development preview prior image.");
+      const actual = Buffer.alloc(expected.length + 1);
+      let offset = 0;
+      while (offset < actual.length) {
+        const {bytesRead} = await handle.read(actual, offset, actual.length - offset, offset);
+        if (!bytesRead) break;
+        offset += bytesRead;
+      }
+      if (offset !== expected.length || !actual.subarray(0, offset).equals(expected))
+        throw new Error("Development preview prior image bytes changed.");
+    } finally { await handle.close(); }
+  }
 }
 
 function safePath(candidate: unknown): candidate is string {

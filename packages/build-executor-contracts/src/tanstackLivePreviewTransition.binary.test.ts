@@ -14,7 +14,7 @@ const old:ProductionBuildJobRequestV1 = {protocolVersion:1,operation:"production
 const next = (binaryFiles:ProductionBuildJobRequestV1["binaryFiles"],version=2):ProductionBuildJobRequestV1 =>
   ({...old,sourceVersion:version,binaryFiles});
 const classify = (candidate:ProductionBuildJobRequestV1, mode:"development"|"immutable"="development") =>
-  classifyTanstackPreviewTransition({mode,previous:old,next:candidate});
+  classifyTanstackPreviewTransition({mode,previous:old,next:candidate,allowBinaryLive:true});
 
 describe("saved public image live-preview transition",()=>{
   it("admits verified public PNG replacement without changing the preview lease",()=>{
@@ -24,6 +24,40 @@ describe("saved public image live-preview transition",()=>{
   it("admits image rename/move as deletion plus addition",()=>{
     expect(classify(next([file("public/assets/renamed.png",digest1)]))).toMatchObject({
       action:"live_candidate",changedPaths:["public/assets/renamed.png","public/images/logo.png"]});
+  });
+  it("keeps binary opt-in disabled by default",()=>{
+    expect(classifyTanstackPreviewTransition({mode:"development",previous:old,
+      next:next([file("public/images/renamed.png",digest1)])})).toMatchObject({action:"restart"});
+  });
+  it("admits root image rename, upload, delete, replacement and root/public moves",()=>{
+    const original = file("Screenshot 2026-11-22 at 1.37.32\u202fAM.png",digest1);
+    const previous = {...old,binaryFiles:[original]};
+    const renamed = {...original,path:"red2.png"};
+    const assess = (binaryFiles:ProductionBuildJobRequestV1["binaryFiles"],allowBinaryLive=true) =>
+      classifyTanstackPreviewTransition({mode:"development",previous,
+        next:{...previous,sourceVersion:2,binaryFiles},allowBinaryLive});
+    expect(assess([renamed])).toMatchObject({action:"live_candidate",
+      changedPaths:[original.path,"red2.png"]});
+    for (const candidate of [[],[original,renamed],[{...original,checksum:digest2}],
+      [{...original,path:"public/images/"+original.path}],
+      [renamed,{...renamed,path:"extra.png"}]])
+      expect(assess(candidate).action).toBe("live_candidate");
+    expect(classify(next([renamed])).action).toBe("live_candidate");
+    expect(assess([renamed],false).action).toBe("restart");
+    for (const candidate of [[{...renamed,path:"red2.jpg"}],
+      [{...renamed,path:".hidden.png"}],[{...renamed,path:"src/red2.png"}],
+      [{...renamed,path:original.path.toLowerCase()}]])
+      expect(assess(candidate).action).toBe("restart");
+    expect(classifyTanstackPreviewTransition({mode:"immutable",previous,
+      next:{...previous,sourceVersion:2,binaryFiles:[renamed]},allowBinaryLive:true}).action).toBe("restart");
+  });
+  it("admits batched public image moves/deletes but not text-to-image conversion",()=>{
+    const second = file("public/images/second.png",digest1);
+    const previous = {...old,binaryFiles:[...old.binaryFiles!,second]};
+    const candidate = {...previous,sourceVersion:2,binaryFiles:[{...second,path:"public/assets/second.png"}]};
+    expect(classifyTanstackPreviewTransition({mode:"development",previous,next:candidate,allowBinaryLive:true}).action).toBe("live_candidate");
+    expect(classifyTanstackPreviewTransition({mode:"development",previous,
+      next:{...candidate,files:[...candidate.files,{path:second.path,content:"text"}]},allowBinaryLive:true}).action).toBe("restart");
   });
   it("requires restart for private/non-public binary, immutable lease and protected text",()=>{
     expect(classify(next([file("src/assets/logo.png",digest2)]))).toMatchObject({action:"restart"});

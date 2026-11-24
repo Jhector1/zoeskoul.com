@@ -46,7 +46,7 @@ describe(
           '{ id: "ai", label: "AI" }',
         );
         expect(composer).toContain("<textarea");
-        expect(composer).toContain(
+        expect(composer).not.toContain(
           "Import Shopify",
         );
         expect(landing).not.toContain(
@@ -109,7 +109,7 @@ describe(
   );
 
     it(
-      "keeps Shopify import as a validated seam without fake success",
+      "retains a validated Shopify parser without restoring the removed UI shortcut",
       () => {
         const importer = source(
           "apps/zoebuild/src/lib/import/shopify.ts",
@@ -127,8 +127,19 @@ describe(
         expect(importer).toContain(
           'from "@zoeskoul/build-imports"',
         );
-        expect(landing).toContain(
+        // The importer remains available for future integrations, but the
+        // requested Shopify shortcut is intentionally absent from the UI.
+        const composer = source(
+          "apps/zoebuild/src/components/builder/ZoeBuildPromptComposer.tsx",
+        );
+        expect(landing).not.toContain(
           "Connect Shopify to continue.",
+        );
+        expect(landing).not.toContain(
+          "Import Shopify",
+        );
+        expect(composer).not.toContain(
+          "Import Shopify",
         );
         expect(landing).not.toContain(
           "Import complete",

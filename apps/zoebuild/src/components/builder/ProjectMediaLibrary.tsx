@@ -3,6 +3,7 @@
 import {useCallback,useEffect,useRef,useState} from "react";
 import {privateMediaPath,readPrivateMediaPage,type PrivateProjectImage} from "./projectMediaClient";
 import styles from "./ProjectMediaLibrary.module.css";
+import {ZOE_MEDIA_IMPORT,ZOE_MEDIA_OPEN,ZOE_MEDIA_UPDATED} from "./useZoeProjectMediaExplorer";
 
 const MAX_UPLOAD_BYTES=20*1024*1024;
 const SMALL_PREVIEW_BYTES=256*1024;
@@ -14,7 +15,6 @@ export default function ProjectMediaLibrary({buildProjectId,context}:{
   const [open,setOpen]=useState(false);
   const [items,setItems]=useState<readonly PrivateProjectImage[]>([]);
   const [nextCursor,setNextCursor]=useState<string|null>(null);
-  const [selected,setSelected]=useState<PrivateProjectImage|null>(null);
   const [busy,setBusy]=useState(false);
   const [uploading,setUploading]=useState(false);
   const [error,setError]=useState<string|null>(null);
@@ -42,7 +42,7 @@ export default function ProjectMediaLibrary({buildProjectId,context}:{
 
   useEffect(()=>{
     if(!open){requestEpoch.current++;return;}
-    setItems([]);setNextCursor(null);setStatus(null);setSelected(null);
+    setItems([]);setNextCursor(null);setStatus(null);
     void load(null,true);
     return ()=>{requestEpoch.current++;};
   },[open,buildProjectId,load]);
@@ -73,6 +73,7 @@ export default function ProjectMediaLibrary({buildProjectId,context}:{
       if(!response.ok || !payload || typeof payload!=="object" || (payload as {ok?:boolean}).ok!==true)
         throw new Error(response.status===429?"Upload limit reached. Try again later.":"Image upload failed. Please retry.");
       setStatus("Image saved privately to this project.");
+      window.dispatchEvent(new CustomEvent(ZOE_MEDIA_UPDATED,{detail:{buildProjectId}}));
       if(open)await load(null,true);
     } catch(e){setError(e instanceof Error?e.message:"Image upload failed.");}
     finally {setUploading(false);if(fileRef.current)fileRef.current.value="";}
@@ -85,19 +86,15 @@ export default function ProjectMediaLibrary({buildProjectId,context}:{
       <span aria-hidden="true">▧</span> {context==="code"?"Assets":"Images"}
     </button>
     <dialog ref={dialogRef} className={styles.dialog} aria-label="Private project media library"
-      onClose={()=>{setOpen(false);setSelected(null);triggerRef.current?.focus();}}>
+      onClose={()=>{setOpen(false);triggerRef.current?.focus();}}>
       <div className={styles.dialogTop}>
-        <strong>{selected?"Image preview":"Project images"}</strong>
+        <strong>Project images</strong>
         <div className={styles.toolbar}>
-          {selected?<button type="button" className={styles.button} onClick={()=>setSelected(null)}>Back to images</button>:null}
           <button type="button" className={styles.button} onClick={()=>{dialogRef.current?.close();}} aria-label="Close project images">Close</button>
         </div>
       </div>
-      {selected?<>
-        <img className={styles.dialogImage} src={selected.previewPath} alt={selected.altText??"Selected project image"}/>
-        <p className={styles.detail}>{selected.mimeType} · {selected.width??"?"} × {selected.height??"?"} · {Math.ceil(selected.byteLength/1024)} KB · {selected.origin}</p>
-      </>:<section className={styles.panel} aria-label="Images saved to this project">
-        <p className={styles.note}>Private project assets · one media library for Code and ZoeAI chat. No copies are added to source files.</p>
+      <section className={styles.panel} aria-label="Images saved to this project">
+        <p className={styles.note}>View private images in Code, or explicitly copy a PNG into the application. Use in app requires Save before preview updates; originals remain private in R2.</p>
         <div className={styles.toolbar}>
           <input type="file" accept="image/png" ref={fileRef} className={styles.input}
             aria-label="Choose PNG image" onChange={event=>{void upload(event.target.files?.[0]);}} />
@@ -111,18 +108,32 @@ export default function ProjectMediaLibrary({buildProjectId,context}:{
         {busy&&items.length===0?<p className={styles.status} role="status">Loading images…</p>:null}
         {!busy&&items.length===0&&!error?<p className={styles.note}>No images saved to this project yet.</p>:null}
         {items.length>0?<div className={styles.grid}>
-          {items.map(asset=><button type="button" key={asset.id} className={styles.card}
-            onClick={()=>setSelected(asset)} aria-label={`Open image ${asset.id.slice(-8)}`}>
-            {asset.byteLength<=SMALL_PREVIEW_BYTES
-              ?<img className={styles.thumbnail} src={asset.previewPath} alt={asset.altText??"Project image"} loading="lazy" />
-              :<span className={styles.placeholder} aria-hidden="true">▧</span>}
-            <span className={styles.cardLabel} title={asset.id}>{asset.altText||asset.id.slice(-12)}</span>
-            <span className={styles.cardMeta}>{asset.origin} · {Math.ceil(asset.byteLength/1024)} KB</span>
-          </button>)}
+          {items.map(asset=><div key={asset.id} className={styles.card}>
+            <button type="button" className={styles.button} onClick={()=>{
+              window.dispatchEvent(new CustomEvent(ZOE_MEDIA_OPEN,{detail:{buildProjectId,assetId:asset.id}}));
+              dialogRef.current?.close();
+            }} aria-label={`Open image ${asset.id.slice(-8)} in Code Editor`}>
+              {asset.byteLength<=SMALL_PREVIEW_BYTES
+                ?<img className={styles.thumbnail} src={asset.previewPath} alt={asset.altText??"Project image"} loading="lazy" />
+                :<span className={styles.placeholder} aria-hidden="true">▧</span>}
+              <span className={styles.cardLabel} title={asset.id}>{asset.altText||asset.id.slice(-12)}</span>
+              <span className={styles.cardMeta}>{asset.origin} · {Math.ceil(asset.byteLength/1024)} KB</span>
+            </button>
+            {asset.mimeType==="image/png" && asset.byteLength<=5*1024*1024 ? <div className={styles.toolbar}>
+              <button type="button" className={styles.button} onClick={()=>{
+                window.dispatchEvent(new CustomEvent(ZOE_MEDIA_IMPORT,{detail:{buildProjectId,assetId:asset.id,replaceSelected:false}}));
+                dialogRef.current?.close();
+              }}>Use in app</button>
+              <button type="button" className={styles.button} onClick={()=>{
+                window.dispatchEvent(new CustomEvent(ZOE_MEDIA_IMPORT,{detail:{buildProjectId,assetId:asset.id,replaceSelected:true}}));
+                dialogRef.current?.close();
+              }}>Replace selected app PNG</button>
+            </div>:null}
+          </div>)}
         </div>:null}
         {nextCursor?<button type="button" className={styles.button} disabled={busy}
           onClick={()=>void load(nextCursor,false)}>{busy?"Loading…":"Load more"}</button>:null}
-      </section>}
+      </section>
     </dialog>
   </div>;
 

@@ -24,24 +24,14 @@ describe(
   "ZoeBuild Shopify import input",
   () => {
     it(
-      "lets the canonical parser own Shopify URL validation",
+      "removes the Shopify entry point from the shared chat composer",
       () => {
-        const composer = source(
-          "apps/zoebuild/src/components/builder/ZoeBuildPromptComposer.tsx",
-        );
-
-        expect(composer).toContain(
-          'type="text"',
-        );
-        expect(composer).toContain(
-          'inputMode="url"',
-        );
-        expect(composer).not.toContain(
-          'type="url"',
-        );
-        expect(composer).toContain(
-          "parseShopifyStoreUrl(shopifyUrl)",
-        );
+        const composer = source("apps/zoebuild/src/components/builder/ZoeBuildPromptComposer.tsx");
+        const landing = source("apps/zoebuild/src/components/builder/ZoeBuildLanding.tsx");
+        expect(composer).not.toContain("Import Shopify");
+        expect(composer).not.toContain("parseShopifyStoreUrl");
+        expect(composer).not.toContain("onShopifyImport");
+        expect(landing).not.toContain("onShopifyImport");
       },
     );
 

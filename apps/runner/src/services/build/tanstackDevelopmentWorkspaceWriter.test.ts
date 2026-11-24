@@ -359,7 +359,7 @@ describe("suspended public image HMR writer",()=>{
     expect(container.pause).toHaveBeenCalledOnce();
   });
   it("writes exact image bytes under public/ without restarting Docker",async()=>{
-    await update({changedPaths:["public/images/logo.png"],
+    await update({changedPaths:["public/images/logo.png"],previous:{files:[],binaryFiles:[]},
       next:{files:[],binaryFiles:[image("public/images/logo.png")]}});
     expect(await fs.readFile(path.join(workspaceDir,"public/images/logo.png"))).toEqual(png);
     expect(container.pause).toHaveBeenCalledOnce();
@@ -370,10 +370,101 @@ describe("suspended public image HMR writer",()=>{
     await fs.mkdir(path.join(workspaceDir,"public/images"),{recursive:true});
     await fs.writeFile(path.join(workspaceDir,"public/images/logo.png"),png);
     await update({changedPaths:["public/assets/logo.png","public/images/logo.png"],
+      previous:{files:[],binaryFiles:[image("public/images/logo.png")]},
       next:{files:[],binaryFiles:[image("public/assets/logo.png")]}});
     expect(await fs.readFile(path.join(workspaceDir,"public/assets/logo.png"))).toEqual(png);
     await expect(fs.stat(path.join(workspaceDir,"public/images/logo.png"))).rejects.toMatchObject({code:"ENOENT"});
     expect(paused).toBe(false);
+  });
+  it("renames a root screenshot in place with identical bytes",async()=>{
+    const oldName="Screenshot 2026-11-22 at 1.37.32\u202fAM.png";
+    await fs.writeFile(path.join(workspaceDir,oldName),png);
+    await update({changedPaths:[oldName,"red2.png"],previous:{files:[],binaryFiles:[image(oldName)]},
+      next:{files:[],binaryFiles:[image("red2.png")]}});
+    expect(await fs.readFile(path.join(workspaceDir,"red2.png"))).toEqual(png);
+    await expect(fs.stat(path.join(workspaceDir,oldName))).rejects.toMatchObject({code:"ENOENT"});
+    expect(container.pause).toHaveBeenCalledOnce();
+    expect(container.unpause).toHaveBeenCalledOnce();
+  });
+  it("rejects image writes without a trusted prior snapshot before pausing",async()=>{
+    for (const binaryFiles of [[],[image("root.png")]]) {
+      await expect(update({changedPaths:["root.png"],next:{files:[],binaryFiles}})).rejects.toThrow();
+    }
+    expect(container.pause).not.toHaveBeenCalled();
+  });
+  it.each(["different_bytes","existing_target","missing_source","symlink_source"])(
+    "rejects root rename without modifying any files: %s",async(kind)=>{
+      const source=path.join(workspaceDir,"old.png");
+      const target=path.join(workspaceDir,"new.png");
+      const outside=path.join(parent,"outside.png");
+      if (kind==="symlink_source") { await fs.writeFile(outside,png); await fs.symlink(outside,source); }
+      else if (kind!=="missing_source") await fs.writeFile(source,kind==="different_bytes"?Buffer.alloc(png.length,1):png);
+      if (kind==="existing_target") await fs.writeFile(target,"sentinel");
+      await expect(update({changedPaths:["old.png","new.png","src/routes/index.tsx"],
+        previous:{files:next.files,binaryFiles:[image("old.png")]},
+        next:{files:next.files,binaryFiles:[image("new.png")]}})).rejects.toThrow();
+      expect(await fs.readFile(path.join(workspaceDir,"src/routes/index.tsx"),"utf8")).toBe("old content");
+      if (kind==="existing_target") expect(await fs.readFile(target,"utf8")).toBe("sentinel");
+      else await expect(fs.stat(target)).rejects.toMatchObject({code:"ENOENT"});
+      if (kind==="symlink_source") expect((await fs.lstat(source)).isSymbolicLink()).toBe(true);
+      else if (kind!=="missing_source") expect(await fs.readFile(source)).toEqual(kind==="different_bytes"?Buffer.alloc(png.length,1):png);
+      expect(paused).toBe(false);
+    });
+  it("moves a root screenshot to public, replaces it, and deletes it using the prior snapshot",async()=>{
+    const oldName="Screenshot 2026-11-22 at 1.37.32\u202fAM.png";
+    const moved="public/images/"+oldName;
+    const replacement=Buffer.from(png); replacement[replacement.length-1]^=1;
+    await fs.writeFile(path.join(workspaceDir,oldName),png);
+    await update({changedPaths:[oldName,moved],previous:{files:[],binaryFiles:[image(oldName)]},
+      next:{files:[],binaryFiles:[image(moved)]}});
+    expect(await fs.readFile(path.join(workspaceDir,moved))).toEqual(png);
+    await expect(fs.stat(path.join(workspaceDir,oldName))).rejects.toMatchObject({code:"ENOENT"});
+    await update({changedPaths:[moved],previous:{files:[],binaryFiles:[image(moved)]},
+      next:{files:[],binaryFiles:[image(moved,replacement)]}});
+    expect(await fs.readFile(path.join(workspaceDir,moved))).toEqual(replacement);
+    await update({changedPaths:[moved],previous:{files:[],binaryFiles:[image(moved,replacement)]},
+      next:{files:[],binaryFiles:[]}});
+    await expect(fs.stat(path.join(workspaceDir,moved))).rejects.toMatchObject({code:"ENOENT"});
+    expect(container.pause).toHaveBeenCalledTimes(3);
+    expect(container.unpause).toHaveBeenCalledTimes(3);
+  });
+  it("creates and deletes a root image against the authoritative prior state",async()=>{
+    const name="root.png";
+    await update({changedPaths:[name],previous:{files:[],binaryFiles:[]},next:{files:[],binaryFiles:[image(name)]}});
+    expect(await fs.readFile(path.join(workspaceDir,name))).toEqual(png);
+    await update({changedPaths:[name],previous:{files:[],binaryFiles:[image(name)]},next:{files:[],binaryFiles:[]}});
+    await expect(fs.stat(path.join(workspaceDir,name))).rejects.toMatchObject({code:"ENOENT"});
+  });
+  it("moves an image-only public folder as a bounded file batch, then deletes the files",async()=>{
+    const oldPaths=["public/images/a.png","public/images/nested/b.png"];
+    const newPaths=["public/assets/a.png","public/assets/nested/b.png"];
+    for (const p of oldPaths) {
+      await fs.mkdir(path.dirname(path.join(workspaceDir,p)),{recursive:true});
+      await fs.writeFile(path.join(workspaceDir,p),png);
+    }
+    await update({changedPaths:[...oldPaths,...newPaths],
+      previous:{files:[],binaryFiles:oldPaths.map(p=>image(p))},next:{files:[],binaryFiles:newPaths.map(p=>image(p))}});
+    for (const p of oldPaths) await expect(fs.stat(path.join(workspaceDir,p))).rejects.toMatchObject({code:"ENOENT"});
+    for (const p of newPaths) expect(await fs.readFile(path.join(workspaceDir,p))).toEqual(png);
+    await update({changedPaths:newPaths,previous:{files:[],binaryFiles:newPaths.map(p=>image(p))},next:{files:[],binaryFiles:[]}});
+    for (const p of newPaths) await expect(fs.stat(path.join(workspaceDir,p))).rejects.toMatchObject({code:"ENOENT"});
+    expect(container.pause).toHaveBeenCalledTimes(2);
+  });
+  it("moves a public image back to the project root",async()=>{
+    const from="public/images/photo.png",to="photo.png";
+    await fs.mkdir(path.dirname(path.join(workspaceDir,from)),{recursive:true});
+    await fs.writeFile(path.join(workspaceDir,from),png);
+    await update({changedPaths:[from,to],previous:{files:[],binaryFiles:[image(from)]},next:{files:[],binaryFiles:[image(to)]}});
+    expect(await fs.readFile(path.join(workspaceDir,to))).toEqual(png);
+    await expect(fs.stat(path.join(workspaceDir,from))).rejects.toMatchObject({code:"ENOENT"});
+  });
+  it("does not delete a modified root image or write unrelated text on preflight failure",async()=>{
+    const name="root.png";const modified=Buffer.alloc(png.length,1);
+    await fs.writeFile(path.join(workspaceDir,name),modified);
+    await expect(update({changedPaths:["src/routes/index.tsx",name],
+      previous:{files:next.files,binaryFiles:[image(name)]},next:{files:next.files,binaryFiles:[]}})).rejects.toThrow();
+    expect(await fs.readFile(path.join(workspaceDir,name))).toEqual(modified);
+    expect(await fs.readFile(path.join(workspaceDir,"src/routes/index.tsx"),"utf8")).toBe("old content");
   });
   it("rejects tampering, mismatched MIME and unsafe path before Docker",async()=>{
     const good=image("public/images/logo.png");
@@ -397,7 +488,7 @@ describe("suspended public image HMR writer",()=>{
     await fs.writeFile(outside,png);
     await fs.mkdir(path.join(workspaceDir,"public/images"),{recursive:true});
     await fs.symlink(outside,path.join(workspaceDir,"public/images/logo.png"));
-    await expect(update({changedPaths:["public/images/logo.png"],
+    await expect(update({changedPaths:["public/images/logo.png"],previous:{files:[],binaryFiles:[image("public/images/logo.png")]},
       next:{files:[],binaryFiles:[image("public/images/logo.png")]}})).rejects.toThrow("workspace update failed");
     expect(await fs.readFile(outside)).toEqual(png);
     expect(paused).toBe(false);

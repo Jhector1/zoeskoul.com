@@ -119,7 +119,7 @@ export function coordinateTanstackDevelopmentWorkspaceUpdate(input: Readonly<{
       bound = snapshot;
       return true;
     },
-    applyApprovedSource: async ({ lease, changedPaths, next }) => {
+    applyApprovedSource: async ({ lease, changedPaths, previous, next }) => {
       // This callback is reached only inside the coordinator's exclusive slot.
       if (!isBoundToLease(bound, lease))
         throw new Error("Development preview workspace binding is stale.");
@@ -128,6 +128,7 @@ export function coordinateTanstackDevelopmentWorkspaceUpdate(input: Readonly<{
         workspaceRoot: bound.workspaceRoot,
         workspaceDir: bound.workspaceDir,
         changedPaths,
+        previous,
         next,
       });
     },
