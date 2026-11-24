@@ -1,3 +1,47 @@
-
-U20H_SOURCE_SHA=0b1fa2fa0e1d38201b3e09168b89ef80a1cf264a
-REQUESTED_AT_UTC=2026-11-23T06:30:57Z
+{
+  "base": "93c5b7588c5da3c7cf291ee9b18e0f2422a2866d",
+  "changedPaths": [
+    ".github/workflows/zoebuild-u20h-runner-candidate.yml",
+    "apps/runner/src/services/workspace/workspacePolicy.disk.test.ts",
+    "apps/runner/src/services/workspace/workspacePolicy.ts",
+    "apps/runner/src/services/workspace/workspaceStrictUsageWorker.ts"
+  ],
+  "requestedAtUtc": "2026-11-24T20:37:07Z",
+  "schema": 1,
+  "sha256": {
+    ".dockerignore": "ba50a74917dfa282c0f9295ccb48b8a6c157d52d62a7f0d8d8d4117ffc283d57",
+    ".github/workflows/zoebuild-u20h-runner-candidate.yml": "e89d5a7c02b8bd85351a98356a153385e875d14154b61f479ba6d1b8c1f10640",
+    "apps/runner/Dockerfile": "9e955bffef1aaefd20edfa620c474354aa846e11b7448467e18dba84ff0c969f",
+    "apps/runner/src/routes/build.previews.developmentUpdate.test.ts": "f16eca9b2ac9bf2415d0c719487149a1a709ce182a6db32cbf5ce6b90e0df14f",
+    "apps/runner/src/routes/build.previews.developmentUpdate.ts": "84c0e2f8b3873857726b81e62aa2d163679d5fea71c75422b0381c6117b08022",
+    "apps/runner/src/services/build/tanstackDevelopmentPreviewAdmission.test.ts": "6b9373f94379588a0b444325f6c673a3211fb6d3d64e3c37fe9268cf8ff33474",
+    "apps/runner/src/services/build/tanstackDevelopmentPreviewAdmission.ts": "9392725d459707cd77d8020a935caf6a6c44ac074e416acdfb37d960b9897c45",
+    "apps/runner/src/services/build/tanstackDevelopmentSourceStore.ts": "ef9f3667740224d9c405275e89693d57385cbea41291e92009190a52e3a858fa",
+    "apps/runner/src/services/build/tanstackDevelopmentWorkspaceWriter.test.ts": "2984672818af63f1a79fbc22f418e2f39cb6545ec401e474c917a8c5f0ee0165",
+    "apps/runner/src/services/build/tanstackDevelopmentWorkspaceWriter.ts": "fbae01d678360a1adc4799331ef41694f487755a55e4b5a65619abadac3b6df2",
+    "apps/runner/src/services/build/tanstackPreviewDockerDriver.ts": "841127fbda1edee984118086ab5f34192c635700395c47394cd7c93f4c5a9276",
+    "apps/runner/src/services/build/tanstackPreviewIdentity.test.ts": "7f8c91b97bd53ae17635a334156d92bf3f2ba0119be6431511a4313f57dfd048",
+    "apps/runner/src/services/build/tanstackPreviewIdentity.ts": "04a428ea2b562dd27ff72b2e5ca439dc13cf96e9c35fefba540f6e7f50722332",
+    "apps/runner/src/services/build/tanstackWorkerBuild.ts": "c1f5ef7cc18956160256778e097583c622f6675bfd209ab06bc0b0d403f6b4d4",
+    "apps/runner/src/services/build/tanstackWorkerRuntimePolicy.test.ts": "c785ebf5032ceb29133b40dd8b02769faa85fbae1f7a79fc442be3be87001c51",
+    "apps/runner/src/services/build/tanstackWorkerRuntimePolicy.ts": "6b5e62c7cb4c30f46413f6bbc977eb18771cd8f47490f37692b2e4e01c8f38d0",
+    "apps/runner/src/services/build/tanstackWorkerRuntimeSmoke.test.ts": "e6c9b21b096baf4f9fa6e2c4bc909f25f41eb64fbc67f338c954260809ecef06",
+    "apps/runner/src/services/build/tanstackWorkerRuntimeSmoke.ts": "0b31bc62c65bb5a3e25435fd4c3792d14e1808f352b9c75b7503427474495060",
+    "apps/runner/src/services/workspace/workspacePolicy.disk.test.ts": "59d46634afbcfa658f4e89ef0f66a59e5029776788d06a99bf459377c0923cfe",
+    "apps/runner/src/services/workspace/workspacePolicy.ts": "fd45931530bb0e9f414aaae508499988f396842f7e57aeed593ee58deb055e8c",
+    "apps/runner/src/services/workspace/workspaceStrictUsageWorker.ts": "6dda5e15eb096bcebf0be03107e8c0f405268b1a634a1b166ba69d83040ff7c1",
+    "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/preview/[previewId]/development/update/route.test.ts": "b56a40ebad273951cb5e193487dd1756d127bcea545e92189c7bb56038deb7f0",
+    "apps/zoebuild/src/lib/build/reactPreviewDevelopmentBrowserBoundary.ts": "295f90a56d6e0be084d2b9bd33bfa7ff67c852fadee37d9eb286e663f585bd0e",
+    "apps/zoebuild/src/lib/build/reactPreviewDevelopmentBrowserSession.ts": "d29fbb7687126302567c13f12b2a4026328737dec8d5338c4bb2f9001b38c2ce",
+    "packages/build-executor-contracts/src/index.test.ts": "ac32479145ab38cfd17088fb2a6054f8bf642b0dc7755e48c3c8286251177764",
+    "packages/build-executor-contracts/src/index.ts": "5098e8800bc71792dac85cb2b17f36d6a4523ee029321fac6b11249b50b0c833",
+    "packages/build-executor-contracts/src/tanstackLivePreviewTransition.binary.test.ts": "1b634e49e43d552cbcbf1af0e7cff7dd9071b7eacfacf3bd7ea363a8dddb133e",
+    "packages/build-executor-contracts/src/tanstackLivePreviewTransition.test.ts": "517d2d75bfde8e0de7b98225e50268266c7a0cef63c48f0fedc3fc3761e1d339",
+    "packages/build-executor-contracts/src/tanstackLivePreviewTransition.ts": "10487658cb3bf3517a3c6aacb9137dae75ad8da69cfbb2f8a8c3fad8ff67ddea",
+    "packages/build-preparation/src/index.ts": "76e7992da501bd297598738ea33a94cfb7ee012b304d417ef70b2712e441225a",
+    "packages/build-preparation/src/productionBuildJob.test.ts": "4fe732a59b83a9ae928f4167e3efd5ed9f311fad6c230462c57ff6cca763794a",
+    "pnpm-lock.yaml": "12b511863e11d3845aaef23525515d2e61adb465f48f5ea9e1a1a3493a24fa23"
+  },
+  "source": "7daf9fca105c49070b58a623debe934167719727",
+  "sourceTree": "80ff4566af342abf9cf0e8ab99acebcd321e6881"
+}
