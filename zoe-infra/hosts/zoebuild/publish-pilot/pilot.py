@@ -92,7 +92,11 @@ def fixture():
     png=base64.b64decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jP8sAAAAASUVORK5CYII=")
     files={"client/assets/app.css":b"body{color:green}","client/assets/app.js":b"console.log('pilot')", "client/images/pilot.png":png,
            "server/index.js":b'''export default {fetch(request){if(new URL(request.url).pathname==='/api/health')return Response.json({ok:true});return new Response('<!doctype html><html><head><link rel="stylesheet" href="/assets/app.css"></head><body><img src="/images/pilot.png"><script src="/assets/app.js"></script>pilot SSR</body></html>',{headers:{'content-type':'text/html; charset=utf-8'}})}}''',
-           "server/wrangler.json":json.dumps({"main":"index.js","compatibility_date":"2026-10-01","compatibility_flags":["nodejs_compat"],"assets":{"directory":"../client"},"no_bundle":True}).encode()}
+           "server/wrangler.json":json.dumps({"main":"index.js","compatibility_date":"2026-10-01","compatibility_flags":["nodejs_compat"],"assets":{"directory":"../client"},"no_bundle":True,
+               "jsx_factory":"React.createElement","jsx_fragment":"React.Fragment",
+               "durable_objects":{"bindings":[]},"queues":{"producers":[],"consumers":[]},
+               "logfwdr":{"bindings":[]},"python_modules":{"exclude":["**/*.pyc"]},
+               "dev":{"ip":"localhost","port":8787,"local_protocol":"http","upstream_protocol":"http","enable_containers":True}}).encode()}
     return encode_fixture(files), files
 
 

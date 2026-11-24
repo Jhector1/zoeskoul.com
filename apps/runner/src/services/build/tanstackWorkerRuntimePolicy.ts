@@ -19,8 +19,30 @@ function empty(value: unknown): boolean {
     (Array.isArray(value) && value.length === 0) ||
     (typeof value === "object" && value !== null && Object.keys(value).length === 0);
 }
-function assertMetadata(condition: unknown): asserts condition {
-  if (!condition) throw new Error("Unsupported Worker smoke configuration.");
+function assertMetadata(condition: unknown, field?: string): asserts condition {
+  // Only caller-owned static field names are used; never disclose metadata values.
+  if (!condition) throw new Error("Unsupported Worker smoke configuration." + (field ? ` Field: ${field}` : ""));
+}
+
+/** Wrangler's normalized binding groups may contain empty arrays rather than
+ * an empty object. No nonempty binding, unknown key or nested value is allowed. */
+function emptyBindingGroup(value: unknown, keys: readonly string[]): boolean {
+  return !!value && typeof value === "object" && !Array.isArray(value) &&
+    Object.entries(value).every(([key, items]) => keys.includes(key) && Array.isArray(items) && items.length === 0);
+}
+
+/** These are compile-time JSX settings, not execution settings. They are discarded. */
+function jsxIdentifier(value: unknown): boolean {
+  return typeof value === "string" && value.length <= 128 && /^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*)*$/.test(value);
+}
+
+/** Normalized Wrangler dev options are inert metadata for an already compiled
+ * artifact. Never forward them: the wrapper fixes the IP, port, persistence,
+ * local-only mode and working directory independently. Reject structured options. */
+function inertDevMetadata(value: unknown): boolean {
+  return !!value && typeof value === "object" && !Array.isArray(value) &&
+    Object.values(value).every(v => v === null || typeof v === "string" || typeof v === "boolean" ||
+      (typeof v === "number" && Number.isFinite(v)));
 }
 
 /** Only this known, binding-free pilot is supported. Never pass generated config
@@ -43,6 +65,38 @@ export function workerSmokeConfig(artifact: TanstackWorkerArtifactV1) {
   for (const [key, value] of Object.entries(meta)) {
     if (["main", "compatibility_date", "compatibility_flags", "assets"].includes(key)) continue;
     if (["$schema", "name", "configPath", "userConfigPath", "topLevelName", "legacy_env", "send_metrics", "upload_source_maps", "workers_dev", "preview_urls", "keep_vars", "preserve_file_names", "find_additional_modules", "no_bundle", "minify", "first_party"].includes(key)) continue;
+    // The Vite plugin emits normalized defaults even for binding-free sites.
+    // Keep the existing reconstructed config; none of these values is forwarded.
+    if (key === "jsx_factory" || key === "jsx_fragment") {
+      assertMetadata(empty(value) || jsxIdentifier(value), key === "jsx_factory" ? "jsx_factory" : "jsx_fragment");
+      continue;
+    }
+    if (key === "durable_objects") {
+      assertMetadata(empty(value) || emptyBindingGroup(value, ["bindings"]), "durable_objects");
+      continue;
+    }
+    if (key === "queues") {
+      assertMetadata(empty(value) || emptyBindingGroup(value, ["producers", "consumers"]), "queues");
+      continue;
+    }
+    if (key === "logfwdr") {
+      assertMetadata(empty(value) || emptyBindingGroup(value, ["bindings"]), "logfwdr");
+      continue;
+    }
+    if (key === "python_modules") {
+      // Wrangler emits this default bundling exclusion even for JavaScript Workers.
+      // It is inert here: the trusted no-bundle configuration never forwards it.
+      const python = value && typeof value === "object" && !Array.isArray(value)
+        ? value as Record<string, unknown> : undefined;
+      const defaultExclusion = python !== undefined && Object.keys(python).length === 1 &&
+        Array.isArray(python.exclude) && python.exclude.length === 1 && python.exclude[0] === "**/*.pyc";
+      assertMetadata(empty(value) || emptyBindingGroup(value, ["exclude"]) || defaultExclusion, "python_modules");
+      continue;
+    }
+    if (key === "dev") {
+      assertMetadata(empty(value) || inertDevMetadata(value), "dev");
+      continue;
+    }
     if (key === "base_dir" && (value === "." || value === "./")) continue;
     if (key === "rules" && Array.isArray(value) && value.every(rule => {
       const v = record(rule);
