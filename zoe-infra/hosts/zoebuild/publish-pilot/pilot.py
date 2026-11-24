@@ -312,7 +312,13 @@ def remove(args):
 
 
 def serve(args):
-    d,name,receipt=load_deployment(args.sha)
+    return serve_gateway(lambda: load_deployment(args.sha))
+
+
+def serve_gateway(resolve):
+    # Each request resolves a verified deployment; a stable gateway can switch
+    # an atomic activation pointer without restarting or changing the port.
+    _,_,receipt=resolve()
     slots=threading.BoundedSemaphore(4)
     class Handler(http.server.BaseHTTPRequestHandler):
         protocol_version="HTTP/1.0"
@@ -326,6 +332,7 @@ def serve(args):
                 self.send_error(400);return
             if not slots.acquire(blocking=False):self.send_error(503);return
             try:
+                d,name,_=resolve()
                 status,mime,location,data=fetch(d,name,self.path,method)
             except Exception:
                 self.send_error(502);return

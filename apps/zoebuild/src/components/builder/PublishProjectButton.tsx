@@ -6,6 +6,8 @@ import {
 
 import {
   useState,
+  useEffect,
+  useRef,
 } from "react";
 
 export type PublishedDeploymentView =
@@ -15,6 +17,7 @@ export type PublishedDeploymentView =
     artifactHash: string;
     deployedAt: string;
     publicUrl: string;
+    privatePilot?: true;
   }>;
 
 type PublishPayload =
@@ -32,6 +35,22 @@ type PublishPayload =
       code?: string;
       message?: string;
     };
+
+function privatePublishMessage(code?: string): string {
+  switch (code) {
+    case "BUILD_PILOT_NOT_ENTITLED_OR_NOT_SELECTED": return "Private publishing is not authorized for this project revision.";
+    case "BUILD_PILOT_SOURCE_OR_STACK_INVALID":
+    case "BUILD_PILOT_SOURCE_CHANGED": return "The saved revision changed during publishing. Save your project and retry.";
+    case "BUILD_RATE_LIMITED": return "Too many publish attempts. Try again later.";
+    case "BUILD_PILOT_STORAGE_CONFIG_FAILED":
+    case "BUILD_PILOT_STAGE_ARTIFACT_FAILED":
+    case "BUILD_PILOT_READBACK_FAILED": return "Publishing storage verification failed. The previous deployment is unchanged.";
+    case "BUILD_PILOT_COMPILE_FAILED": return "The production build failed. The previous deployment is unchanged.";
+    case "BUILD_PILOT_DEPLOYMENT_STATUS_FAILED": return "The private publishing host is unavailable. Check the deployment connection.";
+    case "BUILD_PILOT_ACTIVATE_FAILED": return "The new website did not confirm activation. Check the current private deployment before retrying.";
+    default: return "Project could not be published.";
+  }
+}
 
 export function PublishProjectButton(
   props: {
@@ -71,11 +90,32 @@ export function PublishProjectButton(
         : null,
     );
 
+  const publishAttempt = useRef(0);
+
+  useEffect(() => {
+    const attempt = publishAttempt.current;
+    if (process.env.NODE_ENV !== "development" || window.location.origin !== "http://localhost:3004") return;
+    const controller = new AbortController();
+    let active = true;
+    fetch(`/api/build/projects/${encodeURIComponent(props.buildProjectId)}/publish`, {
+      credentials: "same-origin", cache: "no-store", signal: controller.signal,
+    }).then(async (response) => {
+      if (!response.ok) return;
+      const payload = await response.json();
+      if (active && attempt === publishAttempt.current && payload.ok && payload.deployment?.privatePilot === true && payload.deployment.publicUrl === "http://127.0.0.1:33105/") {
+        setDeployment(payload.deployment);
+        setMessage(`Private deployment v${payload.deployment.sourceVersion}`);
+      }
+    }).catch(() => {});
+    return () => { active = false; controller.abort(); };
+  }, [props.buildProjectId]);
+
   async function publish() {
     if (publishing) {
       return;
     }
 
+    publishAttempt.current++;
     setPublishing(true);
     setMessage(null);
 
@@ -113,7 +153,7 @@ export function PublishProjectButton(
           !payload.ok &&
           payload.message
             ? payload.message
-            : "Project could not be published.",
+            : privatePublishMessage(payload && !payload.ok ? payload.code : undefined),
         );
       }
 
@@ -122,7 +162,9 @@ export function PublishProjectButton(
       );
 
       setMessage(
-        `Published v${payload.deployment.sourceVersion}`,
+        payload.deployment.privatePilot
+          ? `Private deployment v${payload.deployment.sourceVersion}`
+          : `Published v${payload.deployment.sourceVersion}`,
       );
     } catch (error) {
       setMessage(
@@ -156,7 +198,7 @@ export function PublishProjectButton(
           target="_blank"
           rel="noreferrer"
         >
-          View site
+          {deployment.privatePilot ? "View private site" : "View site"}
         </a>
       ) : null}
 
