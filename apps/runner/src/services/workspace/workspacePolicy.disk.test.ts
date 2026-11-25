@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import fsSync from "node:fs";
 import { runInNewContext } from "node:vm";
-import { STRICT_USAGE_WORKER_SOURCE } from "./workspaceStrictUsageWorker.js";
+import { STRICT_USAGE_WORKER_SOURCE, scanStrictWorkspaceUsage } from "./workspaceStrictUsageWorker.js";
 import os from "node:os";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
@@ -122,6 +122,30 @@ describe("workspace disk usage scanner", () => {
     expect(byBytes.bytes).toBeGreaterThan(5);
     expect(byEntries.entries).toBeGreaterThan(1);
     for(const usage of full)expect(usage).toEqual({bytes:12,entries:2});
+  });
+
+  it.skipIf(process.platform !== "linux")("preserves strict accounting on the ZoeBuild Linux provider",async()=>{
+    vi.stubEnv("RUNNER_EXECUTION_POOL", "zoebuild");
+    try {
+      const nested=path.join(root,"nested");
+      await fs.mkdir(nested);
+      await fs.writeFile(path.join(root,"file"),"123456");
+      await fs.link(path.join(root,"file"),path.join(nested,"hardlink"));
+      await fs.symlink("/etc/passwd",path.join(root,"external"));
+      await fs.symlink(nested,path.join(root,"dirlink"));
+      await expect(scanStrictWorkspaceUsage(root)).resolves.toEqual({bytes:12,entries:5});
+      const results=await Promise.all(Array.from({length:6},()=>scanStrictWorkspaceUsage(root)));
+      for(const result of results) expect(result).toEqual({bytes:12,entries:5});
+      expect((await scanStrictWorkspaceUsage(root,{maxBytes:5})).bytes).toBeGreaterThan(5);
+      expect((await scanStrictWorkspaceUsage(root,{maxEntries:1})).entries).toBeGreaterThan(1);
+      await expect(scanStrictWorkspaceUsage(path.join(root,"dirlink"))).rejects.toThrow("accounting incomplete");
+      await expect(scanStrictWorkspaceUsage(path.join(root,"missing"))).rejects.toThrow("accounting incomplete");
+      let deep=nested;
+      for(let i=0;i<128;i++){deep=path.join(deep,"d");await fs.mkdir(deep);}
+      await expect(scanStrictWorkspaceUsage(root)).rejects.toThrow("accounting incomplete");
+      // A ceiling may safely stop before traversing an excessive depth.
+      expect((await scanStrictWorkspaceUsage(root,{maxEntries:0})).entries).toBe(1);
+    } finally { vi.unstubAllEnvs(); }
   });
 
   it("keeps a ledger alive across zero-byte and queued reservations",async()=>{
