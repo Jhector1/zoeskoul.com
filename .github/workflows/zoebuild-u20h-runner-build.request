@@ -1,14 +1,15 @@
 {
-  "base": "625e44141dc003b02780b950f0e76989ea6a0d46",
+  "base": "11467d285340e61bb01766965a5ce57225cc3b00",
   "changedPaths": [
-    "apps/runner/src/services/workspace/workspacePolicy.disk.test.ts",
-    "apps/runner/src/services/workspace/workspaceStrictUsageWorker.ts"
+    ".github/workflows/zoebuild-u20h-runner-candidate.yml",
+    "apps/runner/src/services/build/tanstackPreviewRuntimePolicy.test.ts",
+    "apps/runner/src/services/build/tanstackPreviewRuntimePolicy.ts"
   ],
-  "requestedAtUtc": "2026-11-25T04:42:43Z",
+  "requestedAtUtc": "2026-11-25T06:43:36Z",
   "schema": 1,
   "sha256": {
     ".dockerignore": "ba50a74917dfa282c0f9295ccb48b8a6c157d52d62a7f0d8d8d4117ffc283d57",
-    ".github/workflows/zoebuild-u20h-runner-candidate.yml": "457f086341eb5001cad6764bc15a3bfff08b22d703f6f77f5b2d2291269d4b3e",
+    ".github/workflows/zoebuild-u20h-runner-candidate.yml": "053267512dd65fc105eb816431e1e01939854271c719446aeccdb9b9f38fffee",
     "apps/runner/Dockerfile": "9e955bffef1aaefd20edfa620c474354aa846e11b7448467e18dba84ff0c969f",
     "apps/runner/src/routes/build.previews.developmentUpdate.test.ts": "f16eca9b2ac9bf2415d0c719487149a1a709ce182a6db32cbf5ce6b90e0df14f",
     "apps/runner/src/routes/build.previews.developmentUpdate.ts": "84c0e2f8b3873857726b81e62aa2d163679d5fea71c75422b0381c6117b08022",
@@ -25,6 +26,8 @@
     "apps/runner/src/services/build/tanstackPreviewDockerDriver.ts": "841127fbda1edee984118086ab5f34192c635700395c47394cd7c93f4c5a9276",
     "apps/runner/src/services/build/tanstackPreviewIdentity.test.ts": "7f8c91b97bd53ae17635a334156d92bf3f2ba0119be6431511a4313f57dfd048",
     "apps/runner/src/services/build/tanstackPreviewIdentity.ts": "04a428ea2b562dd27ff72b2e5ca439dc13cf96e9c35fefba540f6e7f50722332",
+    "apps/runner/src/services/build/tanstackPreviewRuntimePolicy.test.ts": "4ca77d35ed4c074cebff603f38d217818c24f897a3bfa85961c887e164c9afc6",
+    "apps/runner/src/services/build/tanstackPreviewRuntimePolicy.ts": "39778ff569355ec44302219abe0d0084cbb0688b373a60c0c73a1c023bea49e0",
     "apps/runner/src/services/build/tanstackWorkerBuild.ts": "c1f5ef7cc18956160256778e097583c622f6675bfd209ab06bc0b0d403f6b4d4",
     "apps/runner/src/services/build/tanstackWorkerRuntimePolicy.test.ts": "c785ebf5032ceb29133b40dd8b02769faa85fbae1f7a79fc442be3be87001c51",
     "apps/runner/src/services/build/tanstackWorkerRuntimePolicy.ts": "6b5e62c7cb4c30f46413f6bbc977eb18771cd8f47490f37692b2e4e01c8f38d0",
@@ -45,6 +48,6 @@
     "packages/build-preparation/src/productionBuildJob.test.ts": "4fe732a59b83a9ae928f4167e3efd5ed9f311fad6c230462c57ff6cca763794a",
     "pnpm-lock.yaml": "12b511863e11d3845aaef23525515d2e61adb465f48f5ea9e1a1a3493a24fa23"
   },
-  "source": "02372a8fc941fe18e3979f4436724782ab8afad5",
-  "sourceTree": "ee65b8c233283d97c0fde64e2c511297bf478a95"
+  "source": "f44924e22307c0677b58531b66259af7b39aff31",
+  "sourceTree": "0446bd268975d43f7b2b00754d54e9c0764da463"
 }
