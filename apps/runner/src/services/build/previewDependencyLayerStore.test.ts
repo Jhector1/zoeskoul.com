@@ -459,3 +459,72 @@ describe("H10S1 full-byte worker attestation", () => {
     expect(await internal.remove(key())).toBe(true);
   });
 });
+
+// Mock only the kernel boundary. These tests exercise real store publication,
+// manifests, leases and verification selection; Linux ioctl tests are separate.
+describe("PS7C4 versioned dependency integrity", () => {
+  const schema = "zoebuild-preview-dependency-layer-verity-v2";
+  const tree = { digest: "a".repeat(64), bytes: 18, files: 8 };
+  async function enabledFixture() {
+    vi.stubEnv("RUNNER_EXECUTION_POOL", "zoebuild");
+    vi.stubEnv("ZOEBUILD_DEPENDENCY_VERITY_PUBLISH_ENABLED", "1");
+    const helper = await import("./previewDependencyVerity.js");
+    const spy = vi.spyOn(helper, "attestVerityTree");
+    return { ...await fixture(), spy };
+  }
+  afterEach(() => vi.unstubAllEnvs());
+
+  it("publishes v2 and verifies it after restart even with publication disabled", async () => {
+    const { root, first, store, spy } = await enabledFixture();
+    spy.mockResolvedValue({ status: "ok", tree });
+    const lease = await store.publish(key(), first);
+    expect(lease).not.toBeNull();
+    lease!.release();
+    const manifest = JSON.parse(await fs.readFile(path.join(path.dirname(lease!.nodeModulesDir), "manifest.json"), "utf8"));
+    expect(manifest).toMatchObject({ schema, key: key(), ...tree });
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining(".pending-"), key(), "seal");
+    vi.stubEnv("ZOEBUILD_DEPENDENCY_VERITY_PUBLISH_ENABLED", "0");
+    const restarted = new PreviewDependencyLayerStore(root);
+    const result = await restarted.lookup(key());
+    expect(result.outcome).toBe("hit");
+    expect(spy).toHaveBeenLastCalledWith(lease!.nodeModulesDir, key(), "verify");
+    result.lease?.release();
+    spy.mockResolvedValue({ status: "unsupported" });
+    expect(await restarted.lookup(key())).toMatchObject({ outcome: "corrupt", lease: null });
+    spy.mockResolvedValue({ status: "invalid" });
+    expect(await restarted.lookup(key())).toMatchObject({ outcome: "corrupt", lease: null });
+    spy.mockResolvedValue({ status: "ok", tree: { ...tree, digest: "b".repeat(64) } });
+    expect(await restarted.lookup(key())).toMatchObject({ outcome: "corrupt", lease: null });
+  });
+
+  it("falls back to v1 only when sealing capability is unsupported", async () => {
+    const { first, store, spy } = await enabledFixture();
+    spy.mockResolvedValue({ status: "unsupported" });
+    const lease = await store.publish(key(), first);
+    expect(lease).not.toBeNull();
+    const manifest = JSON.parse(await fs.readFile(path.join(path.dirname(lease!.nodeModulesDir), "manifest.json"), "utf8"));
+    expect(manifest.schema).toBe("zoebuild-preview-dependency-layer-v1");
+    lease!.release();
+    const result = await store.lookup(key());
+    expect(result.outcome).toBe("hit");
+    result.lease?.release();
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  it("rejects failed sealing without publishing legacy bytes", async () => {
+    const { root, first, store, spy } = await enabledFixture();
+    spy.mockResolvedValue({ status: "invalid" });
+    expect(await store.publish(key(), first)).toBeNull();
+    expect(await fs.readdir(path.join(root, ".zoebuild-preview-dependency-layers-v1"))).toEqual([]);
+  });
+
+  it("does not enable sealing for the Learning pool", async () => {
+    const { root, first, spy } = await enabledFixture();
+    vi.stubEnv("RUNNER_EXECUTION_POOL", "learning");
+    const store = new PreviewDependencyLayerStore(root);
+    const lease = await store.publish(key(), first);
+    expect(lease).not.toBeNull();
+    expect(spy).not.toHaveBeenCalled();
+    lease!.release();
+  });
+});

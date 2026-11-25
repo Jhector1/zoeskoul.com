@@ -7,6 +7,7 @@ import { Worker } from "node:worker_threads";
 import path from "node:path";
 import { performance } from "node:perf_hooks";
 import { env } from "../../lib/env.js";
+import { attestVerityTree, type VerityResult } from "./previewDependencyVerity.js";
 import { reserveWorkspaceRootCapacity } from "../workspace/workspacePolicy.js";
 import {
   previewObservability,
@@ -30,10 +31,11 @@ const MAX_FILES = 60_000;
 const TTL_MS = 24 * 60 * 60_000; // exceeds the preview hard lifetime
 const MIN_EVICTION_AGE_MS = 75 * 60_000; // survives active previews after service restart
 const SCHEMA = "zoebuild-preview-dependency-layer-v1";
+const VERITY_SCHEMA = "zoebuild-preview-dependency-layer-verity-v2";
 const KEY = /^[a-f0-9]{64}$/;
 
 type Manifest = {
-  schema: typeof SCHEMA;
+  schema: typeof SCHEMA | typeof VERITY_SCHEMA;
   key: string;
   createdAt: number;
   digest: string;
@@ -184,7 +186,7 @@ function validateAttestation(value: unknown): TreeAttestation {
   return { ok: false, reason: "read-failure" };
 }
 
-/** A complete byte scan on every acquire. Existing manifests remain valid. */
+/** Legacy complete byte scan; existing v1 manifests remain valid. */
 async function attestTree(root: string, options: Readonly<{
   allowExternalHardlinks?: boolean;
   metadataOnly?: boolean;
@@ -210,6 +212,13 @@ async function attestTree(root: string, options: Readonly<{
       });
     });
   } catch { return { ok: false, reason: "read-failure" }; }
+  finally { release(); }
+}
+
+// Share the existing global filesystem-work limit with the kernel helper.
+async function verityTree(root: string, key: string, mode: "seal" | "verify"): Promise<VerityResult> {
+  const release = await reserveAttestationWorker();
+  try { return await attestVerityTree(root, key, mode); }
   finally { release(); }
 }
 
@@ -251,6 +260,7 @@ export class PreviewDependencyLayerStore {
   private readonly verifying = new Map<string, number>();
   private readonly root: string;
   private readonly workspaceRoot: string;
+  private readonly publishVerity: boolean;
   private readonly now: () => number;
   private readonly reserveCapacity: (root: string, additionalBytes: number) =>
     Promise<void | (()=>void)>;
@@ -274,6 +284,10 @@ export class PreviewDependencyLayerStore {
     }> = {},
   ) {
     this.workspaceRoot = workspaceRoot;
+    // Explicit opt-in, only the ZoeBuild execution pool. Turning publication
+    // off does not allow an existing v2 layer to downgrade its verification.
+    this.publishVerity = process.env.RUNNER_EXECUTION_POOL === "zoebuild" &&
+      process.env.ZOEBUILD_DEPENDENCY_VERITY_PUBLISH_ENABLED === "1";
     this.root = path.join(workspaceRoot, ".zoebuild-preview-dependency-layers-v1");
     this.now = options.now ?? Date.now;
     this.reserveCapacity = options.reserveCapacity ?? reserveWorkspaceRootCapacity;
@@ -308,9 +322,9 @@ export class PreviewDependencyLayerStore {
       const parsed: unknown = JSON.parse(await fs.readFile(path.join(dir, "manifest.json"), "utf8"));
       if (!parsed || typeof parsed !== "object") return null;
       const m = parsed as Manifest;
-      if (m.schema !== SCHEMA || m.key !== key ||
+      if ((m.schema !== SCHEMA && m.schema !== VERITY_SCHEMA) || m.key !== key ||
           !Number.isSafeInteger(m.createdAt) || m.createdAt > this.now() ||
-          !KEY.test(m.digest) || !Number.isSafeInteger(m.bytes) ||
+          typeof m.digest !== "string" || !KEY.test(m.digest) || !Number.isSafeInteger(m.bytes) ||
           m.bytes < 0 || m.bytes > MAX_ITEM_BYTES ||
           !Number.isSafeInteger(m.files) || m.files < 0 || m.files > MAX_FILES) return null;
       return m;
@@ -330,7 +344,13 @@ export class PreviewDependencyLayerStore {
     if (this.now() - m.createdAt > TTL_MS)
       return { outcome: "rejected", manifest: null, verificationMs: null };
     const startedAt = performance.now();
-    const attestation = await attestTree(path.join(this.entry(key), "node_modules"));
+    const root = path.join(this.entry(key), "node_modules");
+    // A sealed manifest is always verified with the sealed algorithm. An
+    // unsupported helper, missing seal or digest mismatch is corruption.
+    const attestation = m.schema === VERITY_SCHEMA
+      ? await verityTree(root, key, "verify").then(r => r.status === "ok"
+        ? { ok: true as const, tree: r.tree } : { ok: false as const })
+      : await attestTree(root);
     const verificationMs = performance.now() - startedAt;
     if (!attestation.ok || attestation.tree.digest !== m.digest ||
         attestation.tree.bytes !== m.bytes || attestation.tree.files !== m.files)
@@ -340,7 +360,7 @@ export class PreviewDependencyLayerStore {
 
   /** Coalesce only overlapping verification of the exact immutable-key path.
    * The completed result is never cached: every later acquire still performs
-   * a full-byte scan, so tampering after the flight is detected. */
+   * an integrity scan, so tampering after the flight is detected. */
   private verifyOncePerFlight(key:string) {
     const active=this.verificationFlights.get(key);
     if(active)return active;
@@ -571,7 +591,12 @@ export class PreviewDependencyLayerStore {
     }
     let releaseCapacity:()=>void=()=>{};
     try {
-      releaseCapacity=(await this.reserveCapacity(this.workspaceRoot,inspected.tree.bytes))??(()=>{});
+      // Conservative extra headroom for verity Merkle blocks and metadata.
+      // Logical layer counts/limits stay unchanged; host free-space checks
+      // account for actual allocation on subsequent reservations.
+      const overhead = this.publishVerity
+        ? inspected.tree.files * 16_384 + Math.ceil(inspected.tree.bytes * 0.04) : 0;
+      releaseCapacity=(await this.reserveCapacity(this.workspaceRoot,inspected.tree.bytes + overhead))??(()=>{});
     } catch {
       return skip("disk-headroom");
     }
@@ -600,11 +625,19 @@ export class PreviewDependencyLayerStore {
       }
       // This scan rejects any hardlink that survived the copy and symlinks
       // that now escape the copied tree. A digest covers *actual* bytes.
-      const tree = await previewObservability.measureStartupDetail("detached_attestation", () => attestTree(cloned));
-      if (!tree.ok) return skip(`detached-tree-${tree.reason}`);
-      const manifest: Manifest = {
-        schema: SCHEMA, key, createdAt: this.now(), ...tree.tree,
-      };
+      const sealed = this.publishVerity
+        ? await previewObservability.measureStartupDetail("detached_attestation", () => verityTree(cloned, key, "seal"))
+        : { status: "unsupported" as const };
+      if (sealed.status === "invalid") return skip("detached-verity-invalid");
+      let manifest: Manifest;
+      if (sealed.status === "ok") {
+        manifest = { schema: VERITY_SCHEMA, key, createdAt: this.now(), ...sealed.tree };
+      } else {
+        // Only the pre-seal capability probe may select the legacy path.
+        const tree = await previewObservability.measureStartupDetail("detached_attestation", () => attestTree(cloned));
+        if (!tree.ok) return skip(`detached-tree-${tree.reason}`);
+        manifest = { schema: SCHEMA, key, createdAt: this.now(), ...tree.tree };
+      }
       await fs.writeFile(path.join(staged, "manifest.json"), JSON.stringify(manifest), {
         mode: 0o644, flag: "wx",
       });
