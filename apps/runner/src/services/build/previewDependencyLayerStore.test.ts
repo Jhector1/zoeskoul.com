@@ -513,9 +513,15 @@ describe("PS7C4 versioned dependency integrity", () => {
 
   it("rejects failed sealing without publishing legacy bytes", async () => {
     const { root, first, store, spy } = await enabledFixture();
-    spy.mockResolvedValue({ status: "invalid" });
-    expect(await store.publish(key(), first)).toBeNull();
-    expect(await fs.readdir(path.join(root, ".zoebuild-preview-dependency-layers-v1"))).toEqual([]);
+    spy.mockResolvedValue({ status: "invalid", code: "KERNEL_EACCES" });
+    const log = vi.spyOn(console, "info");
+    try {
+      expect(await store.publish(key(), first)).toBeNull();
+      expect(log).toHaveBeenCalledWith("RUNNER React preview dependency layer publication", {
+        result: "skipped", reason: "detached-verity-invalid", code: "KERNEL_EACCES",
+      });
+      expect(await fs.readdir(path.join(root, ".zoebuild-preview-dependency-layers-v1"))).toEqual([]);
+    } finally { log.mockRestore(); }
   });
 
   it("does not enable sealing for the Learning pool", async () => {

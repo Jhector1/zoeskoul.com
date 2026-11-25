@@ -4,6 +4,8 @@ Kernel behavior is tested separately on a real verity-enabled filesystem.
 import errno
 import hashlib
 import os
+import fcntl
+import stat
 from pathlib import Path
 import tempfile
 import unittest
@@ -76,5 +78,69 @@ class VerityTests(unittest.TestCase):
     def test_failure_mid_seal_is_not_unsupported(self):
         with patch.object(v, 'enable', side_effect=OSError(errno.EOPNOTSUPP, 'failed')):
             with self.assertRaises(OSError): v.scan(self.root, self.key, seal=True)
+
+    def test_readonly_modes_seal_and_restore(self):
+        for mode in (0o444, 0o555, 0o644, 0o755):
+            with self.subTest(mode=oct(mode)):
+                self.file.chmod(mode)
+                original = self.file.stat()
+                def fake_enable(fd):
+                    self.assertEqual(fcntl.fcntl(fd, fcntl.F_GETFL) & os.O_ACCMODE, os.O_RDONLY)
+                    self.assertTrue(os.fstat(fd).st_mode & stat.S_IWUSR)
+                with patch.object(v, 'enable', side_effect=fake_enable) as enabled:
+                    sealed = v.scan(self.root, self.key, seal=True)
+                    enabled.assert_called_once()
+                self.assertEqual(stat.S_IMODE(self.file.stat().st_mode), mode)
+                self.assertEqual(v.signature(original)[:-1], v.signature(self.file.stat())[:-1])
+                self.assertEqual(sealed, self.scan())
+
+    def test_readonly_mode_restored_after_kernel_failure(self):
+        self.file.chmod(0o555)
+        with patch.object(v, 'enable', side_effect=OSError(errno.EIO, 'failed')):
+            with self.assertRaises(OSError): v.scan(self.root, self.key, seal=True)
+        self.assertEqual(stat.S_IMODE(self.file.stat().st_mode), 0o555)
+
+    def test_seal_rejects_changed_content_metadata(self):
+        self.file.chmod(0o444)
+        def mutate(fd):
+            self.file.write_bytes(b'changed')
+        with patch.object(v, 'enable', side_effect=mutate):
+            with self.assertRaises(v.Invalid): v.scan(self.root, self.key, seal=True)
+        self.assertEqual(stat.S_IMODE(self.file.stat().st_mode), 0o444)
+
+    def test_kernel_mtime_change_is_accepted_only_when_bytes_match(self):
+        for mode in (0o444, 0o555, 0o644, 0o755):
+            with self.subTest(mode=oct(mode)):
+                self.file.chmod(mode)
+                original = self.file.stat()
+                def fake_enable(fd):
+                    os.utime(fd, ns=(original.st_atime_ns, original.st_mtime_ns + 1000000000))
+                with patch.object(v, 'enable', side_effect=fake_enable):
+                    sealed = v.scan(self.root, self.key, seal=True)
+                after = self.file.stat()
+                self.assertEqual(stat.S_IMODE(after.st_mode), mode)
+                self.assertNotEqual(after.st_mtime_ns, original.st_mtime_ns)
+                self.assertEqual(v.signature(after)[:7], v.signature(original)[:7])
+                self.assertEqual(sealed, self.scan())
+
+    def test_reject_same_size_mutation_even_with_restored_mtime(self):
+        self.file.chmod(0o444)
+        before = self.file.stat()
+        def fake_enable(fd):
+            self.file.write_bytes(b'xyz')
+            os.utime(fd, ns=(before.st_atime_ns, before.st_mtime_ns))
+        with patch.object(v, 'enable', side_effect=fake_enable):
+            with self.assertRaises(v.Invalid):
+                v.scan(self.root, self.key, seal=True)
+        self.assertEqual(stat.S_IMODE(self.file.stat().st_mode), 0o444)
+
+    def test_reject_kernel_interval_mode_change(self):
+        self.file.chmod(0o444)
+        def fake_enable(fd):
+            os.fchmod(fd, 0o755)
+        with patch.object(v, 'enable', side_effect=fake_enable):
+            with self.assertRaises(v.Invalid):
+                v.scan(self.root, self.key, seal=True)
+        self.assertEqual(stat.S_IMODE(self.file.stat().st_mode), 0o444)
 
 if __name__ == '__main__': unittest.main()

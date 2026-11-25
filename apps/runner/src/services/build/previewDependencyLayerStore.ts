@@ -551,12 +551,12 @@ export class PreviewDependencyLayerStore {
   ): Promise<DependencyLayerLease | null> {
     const startedAt = performance.now();
     this.publishAttempts += 1;
-    const skip = (reason: string) => {
+    const skip = (reason: string, code?: string) => {
       this.publishSkipped += 1;
       previewObservability.recordDependencyLayerPublication(
         "skipped", performance.now() - startedAt,
       );
-      console.info("RUNNER React preview dependency layer publication", { result: "skipped", reason });
+      console.info("RUNNER React preview dependency layer publication", { result: "skipped", reason, ...(code ? { code } : {}) });
       return null;
     };
     if (!KEY.test(key)) return skip("invalid-key");
@@ -628,7 +628,7 @@ export class PreviewDependencyLayerStore {
       const sealed = this.publishVerity
         ? await previewObservability.measureStartupDetail("detached_attestation", () => verityTree(cloned, key, "seal"))
         : { status: "unsupported" as const };
-      if (sealed.status === "invalid") return skip("detached-verity-invalid");
+      if (sealed.status === "invalid") return skip("detached-verity-invalid", sealed.code);
       let manifest: Manifest;
       if (sealed.status === "ok") {
         manifest = { schema: VERITY_SCHEMA, key, createdAt: this.now(), ...sealed.tree };

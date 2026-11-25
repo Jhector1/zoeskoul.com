@@ -52,6 +52,55 @@ def measure(fd):
 def enable(fd):
     fcntl.ioctl(fd, ENABLE, ARGS)
 
+def content_digest(fd, before):
+    # Publication only. Keep an independent byte digest across the ioctl,
+    # since ext4 can legitimately update mtime while preparing verity metadata.
+    require(0 <= before.st_size <= MAX_BYTES)
+    require(signature(os.fstat(fd)) == signature(before))
+    h = hashlib.sha256()
+    offset = 0
+    while offset < before.st_size:
+        data = os.pread(fd, min(1024 * 1024, before.st_size - offset), offset)
+        require(bool(data))
+        h.update(data)
+        offset += len(data)
+    require(signature(os.fstat(fd)) == signature(before))
+    return h.digest()
+
+
+def seal_file(fd, before):
+    # The detached copy preserves pnpm modes, including 0444/0555.
+    # FS_IOC_ENABLE_VERITY requires inode write permission, but its fd
+    # must remain read-only. Change only the pinned, private staging inode.
+    original = stat.S_IMODE(before.st_mode)
+    needs_write = not (original & stat.S_IWUSR)
+    original_bytes = content_digest(fd, before)
+    if needs_write:
+        os.fchmod(fd, original | stat.S_IWUSR)
+    try:
+        ready = os.fstat(fd)
+        expected = list(signature(before)[:-1])
+        if needs_write:
+            expected[2] |= stat.S_IWUSR
+        require(signature(ready)[:-1] == tuple(expected))
+        enable(fd)
+        sealed = os.fstat(fd)
+        # ext4_begin_enable_verity calls ext4_truncate, which updates mtime
+        # and ctime even though the visible file content/size is unchanged.
+        # Only these timestamps may change during the successful ioctl.
+        require(signature(sealed)[:7] == signature(ready)[:7])
+        require(content_digest(fd, sealed) == original_bytes)
+    finally:
+        if needs_write:
+            os.fchmod(fd, original)
+    after = os.fstat(fd)
+    expected = list(signature(sealed)[:-1])
+    expected[2] = before.st_mode
+    require(signature(after)[:-1] == tuple(expected))
+    if not needs_write:
+        require(signature(after) == signature(sealed))
+    return after
+
 def supported(parent):
     # Only the disposable capability probe may report unsupported. Once
     # sealing starts, every failure rejects publication, including ENOTSUP.
@@ -119,11 +168,7 @@ def scan(root, key, seal=False):
                     try:
                         require(signature(os.fstat(fd)) == signature(s))
                         if seal:
-                            enable(fd)
-                            after = os.fstat(fd)
-                            # Verity activation changes ctime, not file identity/content.
-                            require(signature(s)[:-1] == signature(after)[:-1])
-                            s = after
+                            s = seal_file(fd, s)
                         frame(digest, measure(fd))
                         require(signature(os.fstat(fd)) == signature(s))
                     finally:
@@ -161,7 +206,9 @@ def main():
 if __name__ == '__main__':
     try:
         print(json.dumps(main(), separators=(',', ':')))
-    except (OSError, Invalid, ValueError, RuntimeError, OverflowError):
-        # Never emit private paths, filenames or dependency contents.
-        print('{"status":"invalid"}')
+    except (OSError, Invalid, ValueError, RuntimeError, OverflowError) as exc:
+        # Emit a bounded error code only, never paths, filenames or contents.
+        code = ('KERNEL_' + errno.errorcode.get(exc.errno, 'UNKNOWN')
+                if isinstance(exc, OSError) else 'INTEGRITY_CHECK_FAILED')
+        print(json.dumps({'status': 'invalid', 'code': code}, separators=(',', ':')))
         sys.exit(1)
