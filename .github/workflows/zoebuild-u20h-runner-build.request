@@ -1,19 +1,26 @@
 {
-  "base": "93c5b7588c5da3c7cf291ee9b18e0f2422a2866d",
+  "base": "6e800d2f4231bdafa806534fe0c9ad29f3d0fb05",
   "changedPaths": [
     ".github/workflows/zoebuild-u20h-runner-candidate.yml",
-    "apps/runner/src/services/workspace/workspacePolicy.disk.test.ts",
-    "apps/runner/src/services/workspace/workspacePolicy.ts",
-    "apps/runner/src/services/workspace/workspaceStrictUsageWorker.ts"
+    "apps/runner/src/services/build/previewDependencyLayerStore.test.ts",
+    "apps/runner/src/services/build/previewDependencyLayerStore.ts",
+    "apps/runner/src/services/build/previewDependencyVerity.py",
+    "apps/runner/src/services/build/previewDependencyVerity.ts",
+    "apps/runner/src/services/build/previewDependencyVerity_test.py"
   ],
-  "requestedAtUtc": "2026-11-24T20:37:07Z",
+  "requestedAtUtc": "2026-11-25T00:14:50Z",
   "schema": 1,
   "sha256": {
     ".dockerignore": "ba50a74917dfa282c0f9295ccb48b8a6c157d52d62a7f0d8d8d4117ffc283d57",
-    ".github/workflows/zoebuild-u20h-runner-candidate.yml": "e89d5a7c02b8bd85351a98356a153385e875d14154b61f479ba6d1b8c1f10640",
+    ".github/workflows/zoebuild-u20h-runner-candidate.yml": "457f086341eb5001cad6764bc15a3bfff08b22d703f6f77f5b2d2291269d4b3e",
     "apps/runner/Dockerfile": "9e955bffef1aaefd20edfa620c474354aa846e11b7448467e18dba84ff0c969f",
     "apps/runner/src/routes/build.previews.developmentUpdate.test.ts": "f16eca9b2ac9bf2415d0c719487149a1a709ce182a6db32cbf5ce6b90e0df14f",
     "apps/runner/src/routes/build.previews.developmentUpdate.ts": "84c0e2f8b3873857726b81e62aa2d163679d5fea71c75422b0381c6117b08022",
+    "apps/runner/src/services/build/previewDependencyLayerStore.test.ts": "49a489fd37d89f0aa104b950796ae8a2c579724fc5d5141c844cb2fc7eda71c5",
+    "apps/runner/src/services/build/previewDependencyLayerStore.ts": "c8ea2cbbe21f67c135d9bdc85d9c4089bedb4e5dccd12220a8e7d9f6ebb025be",
+    "apps/runner/src/services/build/previewDependencyVerity.py": "77d6d7c2ada938cbd708d9bcba5e46d6220a83ef79da1979681afc16c65a774c",
+    "apps/runner/src/services/build/previewDependencyVerity.ts": "b5326789b8404ef69ac0bea222ab19c415058034e8eecc76b9f0f8d84625caa5",
+    "apps/runner/src/services/build/previewDependencyVerity_test.py": "ab3b31141ac2988f78dd6e295515fc74eac1bd506c100c099f686b4f56cc0e15",
     "apps/runner/src/services/build/tanstackDevelopmentPreviewAdmission.test.ts": "6b9373f94379588a0b444325f6c673a3211fb6d3d64e3c37fe9268cf8ff33474",
     "apps/runner/src/services/build/tanstackDevelopmentPreviewAdmission.ts": "9392725d459707cd77d8020a935caf6a6c44ac074e416acdfb37d960b9897c45",
     "apps/runner/src/services/build/tanstackDevelopmentSourceStore.ts": "ef9f3667740224d9c405275e89693d57385cbea41291e92009190a52e3a858fa",
@@ -42,6 +49,6 @@
     "packages/build-preparation/src/productionBuildJob.test.ts": "4fe732a59b83a9ae928f4167e3efd5ed9f311fad6c230462c57ff6cca763794a",
     "pnpm-lock.yaml": "12b511863e11d3845aaef23525515d2e61adb465f48f5ea9e1a1a3493a24fa23"
   },
-  "source": "7daf9fca105c49070b58a623debe934167719727",
-  "sourceTree": "80ff4566af342abf9cf0e8ab99acebcd321e6881"
+  "source": "90f5d95bb2f820d4c295b0a77722ac25d16d7379",
+  "sourceTree": "c4b0d03226ac794743a1d4c63148f4b72efe1ef0"
 }
