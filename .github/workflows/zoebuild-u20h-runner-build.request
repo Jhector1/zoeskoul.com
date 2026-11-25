@@ -1,13 +1,10 @@
 {
-  "base": "c97c14a04c79ded407623ea8785c98c39947aebd",
+  "base": "625e44141dc003b02780b950f0e76989ea6a0d46",
   "changedPaths": [
-    "apps/runner/src/services/build/previewDependencyLayerStore.test.ts",
-    "apps/runner/src/services/build/previewDependencyLayerStore.ts",
-    "apps/runner/src/services/build/previewDependencyVerity.py",
-    "apps/runner/src/services/build/previewDependencyVerity.ts",
-    "apps/runner/src/services/build/previewDependencyVerity_test.py"
+    "apps/runner/src/services/workspace/workspacePolicy.disk.test.ts",
+    "apps/runner/src/services/workspace/workspaceStrictUsageWorker.ts"
   ],
-  "requestedAtUtc": "2026-11-25T02:32:30Z",
+  "requestedAtUtc": "2026-11-25T04:42:43Z",
   "schema": 1,
   "sha256": {
     ".dockerignore": "ba50a74917dfa282c0f9295ccb48b8a6c157d52d62a7f0d8d8d4117ffc283d57",
@@ -33,9 +30,9 @@
     "apps/runner/src/services/build/tanstackWorkerRuntimePolicy.ts": "6b5e62c7cb4c30f46413f6bbc977eb18771cd8f47490f37692b2e4e01c8f38d0",
     "apps/runner/src/services/build/tanstackWorkerRuntimeSmoke.test.ts": "e6c9b21b096baf4f9fa6e2c4bc909f25f41eb64fbc67f338c954260809ecef06",
     "apps/runner/src/services/build/tanstackWorkerRuntimeSmoke.ts": "0b31bc62c65bb5a3e25435fd4c3792d14e1808f352b9c75b7503427474495060",
-    "apps/runner/src/services/workspace/workspacePolicy.disk.test.ts": "59d46634afbcfa658f4e89ef0f66a59e5029776788d06a99bf459377c0923cfe",
+    "apps/runner/src/services/workspace/workspacePolicy.disk.test.ts": "c00244732a6758015dc4025fb0b36c02766ce89387426d10388e674d0fd2c803",
     "apps/runner/src/services/workspace/workspacePolicy.ts": "fd45931530bb0e9f414aaae508499988f396842f7e57aeed593ee58deb055e8c",
-    "apps/runner/src/services/workspace/workspaceStrictUsageWorker.ts": "6dda5e15eb096bcebf0be03107e8c0f405268b1a634a1b166ba69d83040ff7c1",
+    "apps/runner/src/services/workspace/workspaceStrictUsageWorker.ts": "cd4aa1082d39dcbf472dc7f6b521ebecf4eb2b0deffacffab6c865f57ac0fcfb",
     "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/preview/[previewId]/development/update/route.test.ts": "b56a40ebad273951cb5e193487dd1756d127bcea545e92189c7bb56038deb7f0",
     "apps/zoebuild/src/lib/build/reactPreviewDevelopmentBrowserBoundary.ts": "295f90a56d6e0be084d2b9bd33bfa7ff67c852fadee37d9eb286e663f585bd0e",
     "apps/zoebuild/src/lib/build/reactPreviewDevelopmentBrowserSession.ts": "d29fbb7687126302567c13f12b2a4026328737dec8d5338c4bb2f9001b38c2ce",
@@ -48,6 +45,6 @@
     "packages/build-preparation/src/productionBuildJob.test.ts": "4fe732a59b83a9ae928f4167e3efd5ed9f311fad6c230462c57ff6cca763794a",
     "pnpm-lock.yaml": "12b511863e11d3845aaef23525515d2e61adb465f48f5ea9e1a1a3493a24fa23"
   },
-  "source": "abb09ba9ab5d21bfc49886450f8f3bd962c1956d",
-  "sourceTree": "0926cf8f8700bf64081056a34e97a800e79995b1"
+  "source": "02372a8fc941fe18e3979f4436724782ab8afad5",
+  "sourceTree": "ee65b8c233283d97c0fde64e2c511297bf478a95"
 }
