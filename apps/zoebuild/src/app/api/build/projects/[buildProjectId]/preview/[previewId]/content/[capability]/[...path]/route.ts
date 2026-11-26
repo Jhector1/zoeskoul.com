@@ -1,3 +1,4 @@
+import { restoreViteCssUrlFlags } from "@/lib/build/reactPreviewViteQuery";
 import { RunnerHttpError } from "@zoeskoul/platform-server/server/runnerClient";
 import { parseReactPreviewDocumentRequest, previewAssetAccept } from "@/lib/build/reactPreviewDocumentGateway";
 import { previewDocumentProxyTarget, resolvePreviewDocumentProxyPath } from "@/lib/build/reactPreviewDocumentProxyTarget";
@@ -272,7 +273,7 @@ async function proxy(
     const upstreamStartedAt = performance.now();
     const result = await proxyFetchTrustedReactPreviewAtRunner({
       previewId,
-      path: documentGateway ? basePath : `${normalizedPathname}${url.search}`,
+      path: documentGateway ? basePath : `${normalizedPathname}${restoreViteCssUrlFlags(relativePath, url.search)}`,
       method,
       // HTML <link rel="stylesheet"> sends Accept: text/css; a Vite CSS
       // module import sends */*. Preserve this distinction across the

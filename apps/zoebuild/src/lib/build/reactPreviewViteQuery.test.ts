@@ -1,0 +1,74 @@
+import {describe, expect, it} from "vitest";
+import {restoreViteCssUrlFlags} from "./reactPreviewViteQuery";
+
+describe("Vite CSS URL flags across both preview transports", () => {
+  it.each([
+  [
+    "src/styles.css",
+    "?url=",
+    "?url"
+  ],
+  [
+    "src/styles.css",
+    "?url=&import=",
+    "?url&import"
+  ],
+  [
+    "src/styles.css",
+    "?import=&url=&t=123",
+    "?import&url&t=123"
+  ],
+  [
+    "src/styles.css",
+    "?url&other=a%26b%3D&empty=",
+    "?url&other=a%26b%3D&empty="
+  ],
+  [
+    "src/styles.css",
+    "?url=custom&import=",
+    "?url=custom&import="
+  ],
+  [
+    "src/styles.css",
+    "?%75rl=&import=",
+    "?%75rl=&import="
+  ],
+  [
+    "src/styles.css",
+    "?direct=",
+    "?direct="
+  ],
+  [
+    "src/App.tsx",
+    "?url=&import=",
+    "?url=&import="
+  ],
+  [
+    "about",
+    "?url=",
+    "?url="
+  ],
+  [
+    "src/styles.css",
+    "",
+    ""
+  ],
+  [
+    "src/styles.css",
+    "?url",
+    "?url"
+  ],
+  [
+    "node_modules/pkg/theme.css",
+    "?url=",
+    "?url"
+  ],
+  [
+    "src/styles.css",
+    "?url=&x=&url=",
+    "?url&x=&url"
+  ]
+])("%s %s -> %s", (path, query, expected) => {
+    expect(restoreViteCssUrlFlags(path, query)).toBe(expected);
+  });
+});

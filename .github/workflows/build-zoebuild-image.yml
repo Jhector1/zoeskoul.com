@@ -2,6 +2,12 @@ name: Build ZoeBuild main images (manual only)
 
 on:
   workflow_dispatch:
+    inputs:
+      native_hmr:
+        description: "Build the opt-in ZoeBuild native HMR editor (runtime gates separate)"
+        type: boolean
+        default: false
+        required: true
 
 permissions:
   contents: read
@@ -33,9 +39,11 @@ jobs:
         with:
           context: .
           file: apps/zoebuild/Dockerfile
+          build-args: |
+            ZOEBUILD_BUILD_NATIVE_HMR=${{ inputs.native_hmr }}
           platforms: linux/amd64
           push: true
-          tags: ghcr.io/${{ steps.owner.outputs.name }}/zoeskoul-zoebuild:${{ github.sha }}
+          tags: ghcr.io/${{ steps.owner.outputs.name }}/zoeskoul-zoebuild:${{ github.sha }}${{ inputs.native_hmr && '-native-hmr' || '' }}
           labels: |
             org.opencontainers.image.revision=${{ github.sha }}
       - name: Build signer (immutable SHA tag only)
