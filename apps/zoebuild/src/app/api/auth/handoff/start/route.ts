@@ -15,8 +15,21 @@ export async function GET(request: NextRequest) {
     // canonical origin to which Web sends the callback. Starting a handoff on
     // localhost and completing it on dev-build (or vice versa) loses the cookie.
     // Normalize BEFORE minting the verifier cookie, with a fixed trusted target.
-    const canonicalBuilderOrigin = new URL(zoebuildOrigin).origin;
-    if (request.nextUrl.origin !== canonicalBuilderOrigin) {
+    const canonicalBuilder = new URL(zoebuildOrigin);
+    const canonicalBuilderOrigin = canonicalBuilder.origin;
+    // The production signer preserves Host and overwrites forwarded protocol.
+    // Next's standalone server can construct nextUrl with its internal origin.
+    // Neither incoming header is used to construct a redirect destination.
+    if (process.env.NODE_ENV === "production") {
+      if (canonicalBuilder.protocol !== "https:" ||
+          request.headers.get("host") !== canonicalBuilder.host ||
+          request.headers.get("x-forwarded-proto") !== "https") {
+        return new Response("Invalid handoff origin", {
+          status: 400,
+          headers: { "Cache-Control": "no-store", "Referrer-Policy": "no-referrer" },
+        });
+      }
+    } else if (request.nextUrl.origin !== canonicalBuilderOrigin) {
       const canonicalStart = new URL("/api/auth/handoff/start", canonicalBuilderOrigin);
       canonicalStart.searchParams.set("returnTo", returnTo);
       canonicalStart.searchParams.set("locale", lang);
