@@ -13,10 +13,14 @@ services:
       ZOEBUILD_SHOPIFY_OAUTH_ROUTES_ENABLED: "false"
       ZOEBUILD_SHOPIFY_ACCEPTANCE_RUNTIME_GATE: ""
       ZOEBUILD_PUBLISH_ENABLED: "false"
+      # Hosted publishing is independently gated; first deployment stays dark.
+      ZOEBUILD_HOSTED_FENCED_PRODUCTION: ${ZOEBUILD_HOSTED_FENCED_PRODUCTION:-0}
+      ZOEBUILD_HOSTED_PRODUCTION_HTTPS_READY: ${ZOEBUILD_HOSTED_PRODUCTION_HTTPS_READY:-0}
     expose:
       - "3004"
     networks:
       - webnet
+      - database_private
       - zoebuild_private
       - zoebuild_outbound
     security_opt:
