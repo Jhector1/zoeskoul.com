@@ -1094,6 +1094,9 @@ export function useReactVitePreview(
     sourceVersion: input.sourceVersion,
     savedSourceReady: input.allowDependencyBootstrap,
     workspace: input.workspace,
+    restoredDependencyPinned: input.restoredDependencyPinned,
+    onSourceConflict: input.onSourceConflict,
+    onDependencyPrepared: input.onDependencyPrepared,
   });
   // Hooks are unconditional. The existing immutable engine runs only when the
   // experiment is off or a development lease fails and has been retired.
@@ -1105,5 +1108,5 @@ export function useReactVitePreview(
     revision:0,confirmedSourceVersion:null,attemptedSourceVersion:input.sourceVersion,
     routes:registeredTanstackPreviewRoutes(exportWorkspaceEntries(input.workspace.nodes)),onRetry:preparation.retry};
   if (experiment && !development.fallback) return development.preview;
-  return immutable;
+  return immutable ? {...immutable,runtimeMode:"fallback"} : null;
 }

@@ -2,8 +2,10 @@ import "server-only";
 
 import { cache } from "react";
 
+import type { AppOnboardingState } from "@zoeskoul/api-contracts";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { appOnboardingProfileSelect, projectAppOnboarding } from "@/lib/access/appOnboardingProjection";
 import {
   resolveRoleCapabilities,
   type RoleCapabilities,
@@ -18,6 +20,7 @@ export type CurrentUserAccess = {
     image: string | null;
   } | null;
   capabilities: RoleCapabilities;
+  onboarding: AppOnboardingState | null;
 };
 
 const EMPTY_CAPABILITIES = resolveRoleCapabilities([]);
@@ -40,6 +43,7 @@ export const getCurrentUserAccess = cache(
         authenticated: false,
         user: null,
         capabilities: EMPTY_CAPABILITIES,
+        onboarding: null,
       };
     }
 
@@ -53,6 +57,7 @@ export const getCurrentUserAccess = cache(
         name: true,
         image: true,
         roles: true,
+        onboardingProfile: { select: appOnboardingProfileSelect },
       },
     });
 
@@ -61,6 +66,7 @@ export const getCurrentUserAccess = cache(
         authenticated: false,
         user: null,
         capabilities: EMPTY_CAPABILITIES,
+        onboarding: null,
       };
     }
 
@@ -73,6 +79,7 @@ export const getCurrentUserAccess = cache(
         image: user.image,
       },
       capabilities: resolveRoleCapabilities(user.roles),
+      onboarding: projectAppOnboarding(user.onboardingProfile),
     };
   },
 );

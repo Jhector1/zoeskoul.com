@@ -10,9 +10,11 @@ import {
   it,
 } from "vitest";
 
+const webRootUrl = new URL("../../../../", import.meta.url);
+
 function read(relativePath: string) {
   return readFileSync(
-    resolve(process.cwd(), relativePath),
+    new URL(relativePath, webRootUrl),
     "utf8",
   );
 }

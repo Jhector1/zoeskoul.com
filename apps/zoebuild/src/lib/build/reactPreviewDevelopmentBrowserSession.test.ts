@@ -36,6 +36,22 @@ describe("Phase 4E3A saved revision browser control plane", () => {
       fetchClient:async()=>json({ok:false,code:"RUNNER_DISK_LOW",requestId:"SECRET"},503)});
     await expect(session.start(7)).rejects.toMatchObject({code:"RUNNER_DISK_LOW",requestId:undefined});
   });
+  it.each([
+    ["BUILD_DEPENDENCY_LOCK_INVALID", "TanStack preview requires one-time trusted dependency preparation.", "DEPENDENCY_PREPARATION_REQUIRED"],
+    ["BUILD_DEPENDENCY_LOCK_INVALID", "Invalid signature", "START_CONFLICT"],
+    ["BUILD_PREVIEW_SOURCE_CONFLICT", "Stale", "START_CONFLICT"],
+  ])("classifies start 409 without exposing server text: %s", async(code,message,expected)=>{
+    const fetchClient=vi.fn(async()=>json({ok:false,code,message},409));
+    const session=createDevelopmentPreviewBrowserSession({buildProjectId:project,fetchClient});
+    await expect(session.start(7)).rejects.toMatchObject({code:expected,httpStatus:409});
+    expect(fetchClient).toHaveBeenCalledOnce();
+    expect(session.snapshot()).toBeNull();
+  });
+  it("treats an empty start 409 as a conflict, not permission to prepare dependencies",async()=>{
+    const session=createDevelopmentPreviewBrowserSession({buildProjectId:project,
+      fetchClient:async()=>new Response(null,{status:409})});
+    await expect(session.start(7)).rejects.toMatchObject({code:"START_CONFLICT"});
+  });
   it("starts only a saved revision, mints a scoped browser URL and updates exactly N+1", async () => {
     const {session,fetchClient} = driver();
     expect((await session.start(7)).documentUrl).toBe(READ);

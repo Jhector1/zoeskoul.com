@@ -47,3 +47,23 @@ it("clears retained backdrop on disable, project change or terminal preview erro
  expect(host).toContain('lastReadyPreviewRef.current=null;');
  expect(host).toContain('inert={!shown}');
 });
+
+ it("uses one shared route input and a connection-derived native status",()=>{
+  const native=read("src/components/builder/DevelopmentRemoteWebPreview.tsx");
+  const hook=read("src/components/builder/useReactDevelopmentPreview.ts");
+  const selector=read("src/components/builder/useReactVitePreview.ts");
+  expect(native).toContain("<PreviewAddressBar");
+  expect(native).not.toContain("<select");
+  expect(native).not.toContain('"Document loaded"');
+  expect(native).toContain('preview.hmrConnection === "live" && delivery === "delivered"');
+  expect(hook).toContain("onConnectionState:state=>");
+  expect(selector).toContain('runtimeMode:"fallback"');
+ });
+
+it("keeps the development iframe source independent from client-side navigation",()=>{
+  const native=read("src/components/builder/DevelopmentRemoteWebPreview.tsx");
+  expect(native).toContain("developmentPreviewDocumentUrl(root, documentRoute)");
+  expect(native).toContain('sendDevelopmentNavigation(root,{action:"navigate",route})');
+  expect(native).toContain("subscribeDevelopmentNavigation(root,state=>");
+  expect(native).not.toContain("developmentPreviewDocumentUrl(root, page)");
+});

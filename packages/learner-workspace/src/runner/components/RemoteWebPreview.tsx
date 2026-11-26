@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useId, useMemo, useRef, useState } from "react";
 
 import type {
     RemoteWebPreviewDescriptor,
     RemoteWebPreviewTimingKind,
+    RemoteWebPreviewRoute,
 } from "@zoeskoul/learner-workspace/runner/remotePreview";
 import { withPreviewDocumentRevision } from "../previewDocumentUrl";
 
@@ -38,6 +39,56 @@ function otherFrame(index: FrameIndex): FrameIndex {
     return index === 0 ? 1 : 0;
 }
 
+/** Shared route-only browser chrome. The opaque transport URL never enters it. */
+export function PreviewAddressBar({routes,path,visibleUrl=path,disabled=false,onNavigate}: Readonly<{
+    routes:readonly RemoteWebPreviewRoute[]; path:string; visibleUrl?:string;
+    disabled?:boolean; onNavigate:(route:string)=>void;
+}>) {
+    const id=useId();
+    const [pickerOpen,setPickerOpen]=useState(false);
+    const [pageSearch,setPageSearch]=useState("");
+    const [highlight,setHighlight]=useState(-1);
+    const query=pageSearch.trim().toLowerCase();
+    const availableRoutes=routes.filter(item=>!query || item.path.toLowerCase().includes(query) || item.label.toLowerCase().includes(query));
+    const index=highlight>=0 && highlight<availableRoutes.length ? highlight : -1;
+    function select(route:string) {
+        if(disabled || !routes.some(item=>item.path===route))return;
+        setPickerOpen(false);setPageSearch("");setHighlight(-1);onNavigate(route);
+    }
+    function open() {if(!pickerOpen){setPageSearch("");setHighlight(-1);setPickerOpen(true);}}
+    return <div className="relative min-w-0 flex-1" onBlur={event=>{
+        if(!event.currentTarget.contains(event.relatedTarget as Node|null))setPickerOpen(false);
+    }}>
+        <input aria-label="Preview URL" role="combobox" aria-expanded={pickerOpen&&!disabled}
+            aria-controls={id} aria-autocomplete="list" aria-activedescendant={pickerOpen&&index>=0?`${id}-${index}`:undefined}
+            disabled={disabled} value={pickerOpen ? pageSearch : visibleUrl}
+            placeholder="Search pages or enter route" onFocus={open} onClick={open}
+            onChange={event=>{setPickerOpen(true);setPageSearch(event.target.value.slice(0,512));setHighlight(-1);}}
+            onKeyDown={event=>{
+                if(event.key==="Escape"){event.preventDefault();setPickerOpen(false);return;}
+                if(event.key==="ArrowDown"||event.key==="ArrowUp"){
+                    event.preventDefault();open();
+                    if(availableRoutes.length)setHighlight(event.key==="ArrowDown"?(index+1)%availableRoutes.length:(index<0?availableRoutes.length-1:(index+availableRoutes.length-1)%availableRoutes.length));
+                }
+                if(event.key==="Enter"&&pickerOpen){
+                    event.preventDefault();
+                    const selected=availableRoutes[index]??availableRoutes.find(item=>item.path===pageSearch.trim() || item.label.toLowerCase()===query)??(availableRoutes.length===1?availableRoutes[0]:undefined);
+                    if(selected)select(selected.path);
+                }
+            }} data-testid="remote-web-preview-url"
+            className="w-full truncate rounded-md border border-neutral-200 bg-white px-2 py-1 font-mono text-[11px] text-neutral-600 outline-none focus:ring-1 focus:ring-neutral-400 disabled:opacity-60 dark:border-white/10 dark:bg-neutral-900 dark:text-white/70"/>
+        {pickerOpen&&!disabled?<div id={id} role="listbox" aria-label="Available project pages"
+            className="absolute left-0 right-0 top-full z-50 mt-1 max-h-56 overflow-y-auto rounded-lg border border-neutral-200 bg-white p-1 shadow-lg dark:border-white/20 dark:bg-neutral-900">
+            {availableRoutes.length===0?<div className="px-3 py-2 text-xs text-neutral-500">No matching pages</div>:null}
+            {availableRoutes.map((item,i)=><button key={item.path} id={`${id}-${i}`} type="button" role="option"
+                aria-selected={index>=0?i===index:path===item.path} onMouseDown={event=>event.preventDefault()}
+                onClick={()=>select(item.path)} className={`flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-left text-xs text-neutral-700 hover:bg-neutral-100 dark:text-white/80 dark:hover:bg-neutral-800 ${i===index?"bg-neutral-100 dark:bg-neutral-800":""}`}>
+                <span className="truncate">{path===item.path?"✓ ":""}{item.path}</span><span className="truncate text-neutral-400">{item.label}</span>
+            </button>)}
+        </div>:null}
+    </div>;
+}
+
 export default function RemoteWebPreview(props: {
     preview: RemoteWebPreviewDescriptor;
 }) {
@@ -56,8 +107,6 @@ export default function RemoteWebPreview(props: {
     const routeSyncedRef = useRef(false);
     const [canGoBack, setCanGoBack] = useState(false);
     const [canGoForward, setCanGoForward] = useState(false);
-    const [pickerOpen, setPickerOpen] = useState(false);
-    const [pageSearch, setPageSearch] = useState("");
     const currentRouteRef = useRef("/");
     // Parent-owned route history is usable even if an injected bridge is absent.
     const routeHistoryRef = useRef<{routes: string[]; index: number}>({routes:["/"],index:0});
@@ -321,15 +370,9 @@ export default function RemoteWebPreview(props: {
 
     const projectRoutes = (preview.routes?.length ? preview.routes : [{path:"/",label:"Home"}])
         .filter(item => safePreviewRoute(item.path) === item.path);
-    const availableRoutes = projectRoutes.filter(item =>
-        !pageSearch.trim() || item.path.toLowerCase().includes(pageSearch.trim().toLowerCase()) ||
-        item.label.toLowerCase().includes(pageSearch.trim().toLowerCase()));
-
     function openRoute(route: string) {
         if (!projectRoutes.some(item => item.path === route) || !preview.src || preview.state !== "ready") return;
         if (route !== currentRouteRef.current || activeFrame === null) navigateDocument(route);
-        setPickerOpen(false);
-        setPageSearch("");
     }
 
     useEffect(() => {
@@ -489,42 +532,12 @@ export default function RemoteWebPreview(props: {
                     className={buttonClass}>
                     {refreshPending ? "×" : "↻"}
                 </button>
-                <div className="relative min-w-0 flex-1" onBlur={(event) => {
-                    if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setPickerOpen(false);
-                }}>
-                    <input aria-label="Preview URL" role="combobox" aria-expanded={pickerOpen}
-                        aria-controls="zoebuild-preview-pages" aria-autocomplete="list"
-                        value={pickerOpen ? pageSearch : visibleUrl}
-                        placeholder={pickerOpen ? "Find a page…" : undefined}
-                        onFocus={() => {setPageSearch("");setPickerOpen(true);}}
-                        onClick={() => {setPageSearch("");setPickerOpen(true);}}
-                        onChange={event => setPageSearch(event.target.value.slice(0,120))}
-                        onKeyDown={event => {
-                            if (event.key === "Escape") {event.preventDefault();setPickerOpen(false);}
-                            if (event.key === "Enter" && availableRoutes.length) {
-                                event.preventDefault();openRoute(availableRoutes[0]!.path);
-                            }
-                        }}
-                        data-testid="remote-web-preview-url"
-                        className="w-full truncate rounded-md border border-neutral-200 bg-white px-2 py-1 font-mono text-[11px] text-neutral-600 outline-none dark:border-white/10 dark:bg-neutral-900 dark:text-white/70" />
-                    {pickerOpen && <div id="zoebuild-preview-pages" role="listbox"
-                        aria-label="Available project pages"
-                        className="absolute left-0 right-0 top-full z-50 mt-1 max-h-56 overflow-y-auto rounded-lg border border-neutral-200 bg-white p-1 shadow-lg dark:border-white/20 dark:bg-neutral-900">
-                        {availableRoutes.length === 0 && <div className="px-3 py-2 text-xs text-neutral-500">No matching pages</div>}
-                        {availableRoutes.map(item => <button key={item.path} type="button" role="option"
-                            aria-selected={displayPath === item.path} disabled={preview.state !== "ready" || activeFrame === null}
-                            onMouseDown={event => event.preventDefault()}
-                            onClick={() => openRoute(item.path)}
-                            className="flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-xs text-neutral-700 hover:bg-neutral-100 disabled:opacity-50 dark:text-white/80 dark:hover:bg-neutral-800">
-                            <span><span className="mr-2 inline-block w-4">{displayPath === item.path ? "✓" : ""}</span>{item.path}</span>
-                            <span className="truncate text-neutral-400">{item.label}</span>
-                        </button>)}
-                        {(preview.state !== "ready" || activeFrame === null) &&
-                            <div className="px-3 py-2 text-[11px] text-neutral-500">Start Preview to open a page.</div>}
-                    </div>}
-                </div>
-                <span className="shrink-0 text-[11px] font-semibold text-neutral-500 dark:text-white/55"
-                    aria-live="polite">{statusLabel}</span>
+                <PreviewAddressBar routes={projectRoutes} path={displayPath} visibleUrl={visibleUrl}
+                    disabled={preview.state !== "ready" || activeFrame === null} onNavigate={openRoute}/>
+                <span className={`flex shrink-0 items-center gap-1 text-[11px] font-semibold ${preview.state === "error" ? "text-red-600 dark:text-red-400" : preview.runtimeMode === "fallback" ? "text-amber-700 dark:text-amber-400" : "text-neutral-500 dark:text-white/55"}`}
+                    aria-live="polite" title={preview.runtimeMode === "fallback" ? `Immutable snapshot (no HMR). ${statusLabel}` : statusLabel}>
+                    {preview.runtimeMode ? <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-current"/> : null}
+                    {preview.runtimeMode === "fallback" ? (preview.state === "error" ? "Fallback error" : "Fallback") : preview.runtimeMode === "native" ? (preview.state === "error" ? "Preview error" : "Connecting") : statusLabel}</span>
             </div>
             <div className="relative min-h-0 flex-1 overflow-hidden bg-white">
                 {frameSources.map((src, rawIndex) => {

@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 const mocks = vi.hoisted(() => ({ allowed: vi.fn(), renew: vi.fn() }));
 vi.mock("@/lib/auth/buildHandoffProtocol", () => ({ isServiceAuthorized: mocks.allowed }));
 vi.mock("@/lib/auth/buildHandoffStore", () => ({
-  EMPTY_BUILD_SESSION: { authenticated: false, user: null, roles: [], capabilities: [] },
+  EMPTY_BUILD_SESSION: { authenticated: false, user: null, roles: [], capabilities: [], onboarding: null },
   renewBuildHandoffSession: mocks.renew,
 }));
 vi.mock("@/lib/auth/buildHandoffBody", () => ({
@@ -13,7 +13,7 @@ const request = (value: unknown) => new Request("https://zoeskoul.com/api/auth/b
   method: "POST", headers: { authorization: "Bearer secure-service-only" },
   body: JSON.stringify(value),
 });
-const empty = { authenticated: false, user: null, roles: [], capabilities: [] };
+const empty = { authenticated: false, user: null, roles: [], capabilities: [], onboarding: null };
 describe("V12J.12B Web-owned session renewal", () => {
   beforeEach(() => { mocks.allowed.mockReset(); mocks.renew.mockReset(); mocks.allowed.mockReturnValue(true); });
   it("rejects unauthenticated service callers without Redis access", async () => {
@@ -23,7 +23,7 @@ describe("V12J.12B Web-owned session renewal", () => {
     expect(mocks.renew).not.toHaveBeenCalled();
   });
   it("returns an authenticated Web session only after Redis renewal", async () => {
-    const user = {authenticated: true, user: {id: "u1", email: null, name: null, image: null}, roles: [], capabilities: []};
+    const user = {authenticated: true, user: {id: "u1", email: null, name: null, image: null}, roles: [], capabilities: [], onboarding: {status: "not_started", version: 1, learnerDepartments: [], teacherDepartments: []}};
     mocks.renew.mockResolvedValue(user);
     const response = await POST(request({sessionHash: "b".repeat(64)}));
     expect(response.status).toBe(200);

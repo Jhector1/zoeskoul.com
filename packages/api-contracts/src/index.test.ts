@@ -65,6 +65,12 @@ describe("isAppSessionResponse", () => {
         "student:access",
         "teacher:access",
       ],
+      onboarding: {
+        status: "completed",
+        version: 2,
+        learnerDepartments: ["languages"],
+        teacherDepartments: [],
+      },
     };
 
     expect(
@@ -85,6 +91,7 @@ describe("isAppSessionResponse", () => {
         user: null,
         roles: [],
         capabilities: [],
+        onboarding: null,
       }),
     ).toBe(true);
   });
@@ -101,6 +108,7 @@ describe("isAppSessionResponse", () => {
         },
         roles: ["super-admin"],
         capabilities: ["student:access"],
+        onboarding: { status: "completed", version: 2, learnerDepartments: [], teacherDepartments: [] },
       }),
     ).toBe(false);
   });
@@ -117,6 +125,7 @@ describe("isAppSessionResponse", () => {
         },
         roles: ["student"],
         capabilities: ["billing:access"],
+        onboarding: { status: "completed", version: 2, learnerDepartments: [], teacherDepartments: [] },
       }),
     ).toBe(false);
   });
@@ -134,6 +143,7 @@ describe("isAppSessionResponse", () => {
         },
         roles: ["student"],
         capabilities: ["student:access"],
+        onboarding: { status: "completed", version: 2, learnerDepartments: [], teacherDepartments: [] },
       }),
     ).toBe(false);
   });
@@ -150,6 +160,7 @@ describe("isAppSessionResponse", () => {
         },
         roles: ["student"],
         capabilities: ["student:access"],
+        onboarding: { status: "completed", version: 2, learnerDepartments: [], teacherDepartments: [] },
       }),
     ).toBe(false);
   });
@@ -161,6 +172,7 @@ describe("isAppSessionResponse", () => {
         user: null,
         roles: [],
         capabilities: [],
+        onboarding: null,
         expires: "tomorrow",
       }),
     ).toBe(false);
@@ -179,6 +191,7 @@ describe("isAppSessionResponse", () => {
         },
         roles: ["student"],
         capabilities: ["student:access"],
+        onboarding: { status: "completed", version: 2, learnerDepartments: [], teacherDepartments: [] },
       }),
     ).toBe(false);
   });
@@ -205,6 +218,7 @@ describe("isAppSessionResponse", () => {
         },
         roles: ["student"],
         capabilities,
+        onboarding: { status: "completed", version: 2, learnerDepartments: [], teacherDepartments: [] },
       }),
     ).toBe(false);
   });

@@ -6,6 +6,7 @@ import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 import { exportWorkspaceEntries } from "@zoeskoul/learner-workspace/ide/fsTree";
 import { registeredTanstackPreviewRoutes } from "@/lib/build/tanstackPreviewPageCatalog";
 import { developmentCapacityFailure, developmentFailureRequestId } from "@/lib/build/reactPreviewDevelopmentFailure";
+import { requestSavedPreviewDependencyPreparation } from "@/lib/build/sharedPreviewDependencyPreparation";
 import { createDevelopmentPreviewBrowserSession } from "@/lib/build/reactPreviewDevelopmentBrowserSession";
 import { createDevelopmentPreviewEditorLifecycle } from "@/lib/build/reactPreviewDevelopmentEditorLifecycle";
 import { createDevelopmentHmrBrowserSocket } from "@/lib/build/reactPreviewDevelopmentHmrBrowserSocket";
@@ -40,6 +41,9 @@ export function useReactDevelopmentPreview(input: Readonly<{
   sourceVersion: number;
   savedSourceReady: boolean;
   workspace: WorkspaceStateV2;
+  restoredDependencyPinned?: boolean;
+  onSourceConflict?: (version:number)=>Promise<boolean>;
+  onDependencyPrepared?: (version:number)=>Promise<boolean>;
 }>): Readonly<{ preview: Preview | null; fallback: boolean }> {
   const activeRef = useRef<{ projectId: string; lifecycle: Active; recover: () => void } | null>(null);
   // The committed editor inputs fence the old lease before passive effects
@@ -48,6 +52,8 @@ export function useReactDevelopmentPreview(input: Readonly<{
     projectId: input.buildProjectId, sourceVersion: input.sourceVersion,
     savedSourceReady: input.savedSourceReady, active: false,
   });
+  const admissionCallbacksRef=useRef(input);
+  admissionCallbacksRef.current=input;
   const bridgeWakeRef = useRef<(() => void) | null>(null);
   const recoveryCircuitRef = useRef<ReturnType<typeof createDevelopmentRecoveryCircuit> | null>(null);
   const [recoveryPlan, setRecoveryPlan] = useState<{projectId:string;delayMs:number} | null>(null);
@@ -56,6 +62,7 @@ export function useReactDevelopmentPreview(input: Readonly<{
   });
   recoveryCircuitRef.current.bindProject(input.buildProjectId);
   const nativeHmrEnabled=process.env.NEXT_PUBLIC_ZOEBUILD_NATIVE_IFRAME_HMR_ENABLED === "true";
+  const [hmrStatus,setHmrStatus]=useState<{projectId:string;url:string;state:"connecting"|"live"|"reconnecting"}|null>(null);
   const [result, setResult] = useState<{
     projectId: string;
     preview: RemoteWebPreviewDescriptor | null;
@@ -169,9 +176,43 @@ export function useReactDevelopmentPreview(input: Readonly<{
           fallback: false,
         }));
       },
+      recoverAdmission: async (version,error) => {
+        const current=()=>alive && activeRef.current?.lifecycle===lifecycle &&
+          selectedRef.current.projectId===buildProjectId && selectedRef.current.active &&
+          selectedRef.current.savedSourceReady && selectedRef.current.sourceVersion===version &&
+          admissionCallbacksRef.current.buildProjectId===buildProjectId &&
+          admissionCallbacksRef.current.sourceVersion===version && admissionCallbacksRef.current.savedSourceReady;
+        if(!current()) return "failed";
+        // Reuse the editor's authoritative refresh and unsaved-edit fences.
+        if(await admissionCallbacksRef.current.onSourceConflict?.(version)) return "advanced";
+        if(error.code!=="DEPENDENCY_PREPARATION_REQUIRED" || !current()) return "failed";
+        const prepared=await requestSavedPreviewDependencyPreparation({buildProjectId,sourceVersion:version,
+          restoredDependencyPinned:admissionCallbacksRef.current.restoredDependencyPinned===true});
+        const body=await prepared.json().catch(()=>null);
+        if(!current()) return "failed";
+        if(prepared.status===409 && (body?.code==="BUILD_SOURCE_CONFLICT" || body?.code==="BUILD_HISTORY_STALE"))
+          return await admissionCallbacksRef.current.onSourceConflict?.(version) ? "advanced" : "failed";
+        if(!(prepared.ok && body?.ok===true) &&
+           !(prepared.status===409 && body?.code==="BUILD_DEPENDENCY_ALREADY_APPROVED")) return "failed";
+        // A successful preparation can advance the saved head; reconcile that
+        // first. Same-version adoption uses the separate verified callback.
+        if(await admissionCallbacksRef.current.onSourceConflict?.(version)) return "advanced";
+        if(!current()) return "failed";
+        return await admissionCallbacksRef.current.onDependencyPrepared?.(version) ? "prepared" : "failed";
+      },
       onFailure: (error) => {
         if (!alive || activeRef.current?.lifecycle !== lifecycle) return;
         const capacity = developmentCapacityFailure(error?.code);
+        if (error?.code === "START_CONFLICT" || error?.code === "DEPENDENCY_PREPARATION_REQUIRED") {
+          activeRef.current=null;
+          handoff.close();
+          setRecoveryPlan(null);
+          const requestId=developmentFailureRequestId(error.requestId);
+          setResult({projectId:buildProjectId,previewId:null,confirmed:null,attempted:null,fallback:false,
+            preview:{src:null,state:"error",revision:0,
+              message:`${error.code === "START_CONFLICT" ? "The saved preview could not be reconciled. Save or reload your project before retrying." : "The saved dependencies could not be prepared safely. Retry preview after checking your saved source."}${requestId ? ` (request ${requestId})` : ""}`}});
+          return;
+        }
         if (capacity) {
           // Persistent server capacity failure: neither automatic cold restarts
           // nor immutable fallback can restore disk capacity. Keep manual retry.
@@ -252,6 +293,7 @@ export function useReactDevelopmentPreview(input: Readonly<{
     const diagnostic=(event:string)=>{
       if(process.env.NODE_ENV==="development") console.info("[ZOE-HMR]",JSON.stringify({event,bound,elapsedMs:Math.round(performance.now()-started)}));
     };
+    setHmrStatus({projectId:input.buildProjectId,url:currentDocumentUrl,state:"connecting"});
     diagnostic("bridge_start");
     const requestDevelopmentRecovery=(reason:string)=>{
       if (disposed || fallbackIssued || activeRef.current!==recoveryOwner) return;
@@ -287,6 +329,7 @@ export function useReactDevelopmentPreview(input: Readonly<{
     };
     const bridge=createDevelopmentHmrIframeBridge({
       documentUrl:currentDocumentUrl,
+      onConnectionState:state=>{if(!disposed&&activeRef.current===recoveryOwner)setHmrStatus({projectId:input.buildProjectId,url:currentDocumentUrl,state});},
       canDeliverFrames:()=>readyVersion()!==null,
       getReadySourceVersion:readyVersion,
       ...(process.env.NEXT_PUBLIC_ZOEBUILD_DEVELOPMENT_APPLICATION_RPC_ENABLED === "true" ?
@@ -377,8 +420,9 @@ export function useReactDevelopmentPreview(input: Readonly<{
       } finally {connecting=false;}
     };
     const wake=()=>{
-      if(disposed || readyVersion()===null)return;
+      if(disposed)return;
       bridge.flushReady();
+      if(readyVersion()===null)return;
       // A recovery timer may have fired while the revision was fenced.
       // Resume the connection when the exact grant is usable again.
       if(!socket && !connecting && retryTimer===null)void connect();
@@ -405,6 +449,8 @@ export function useReactDevelopmentPreview(input: Readonly<{
     fallback:false,
     preview: {
       ...preview,
+      runtimeMode:"native",
+      hmrConnection:!nativeHmrEnabled?"disabled":active && ready && hmrStatus?.projectId===input.buildProjectId && hmrStatus.url===preview.src ? hmrStatus.state : recovering?"reconnecting":"connecting",
       confirmedSourceVersion: ready ? resultForProject.confirmed : null,
       attemptedSourceVersion: resultForProject.attempted,
       routes: registeredTanstackPreviewRoutes(exportWorkspaceEntries(input.workspace.nodes)),

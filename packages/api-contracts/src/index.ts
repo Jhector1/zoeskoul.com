@@ -19,18 +19,32 @@ export type AppSessionUser = {
   image: string | null;
 };
 
+export type AppOnboardingStatus =
+  | "not_started"
+  | "in_progress"
+  | "completed";
+
+export type AppOnboardingState = {
+  status: AppOnboardingStatus;
+  version: number;
+  learnerDepartments: string[];
+  teacherDepartments: string[];
+};
+
 export type AppSessionResponse =
   | {
       authenticated: true;
       user: AppSessionUser;
       roles: AppRole[];
       capabilities: AppCapability[];
+      onboarding: AppOnboardingState;
     }
   | {
       authenticated: false;
       user: null;
       roles: [];
       capabilities: [];
+      onboarding: null;
     };
 
 export type ApiErrorResponse = {
@@ -77,6 +91,16 @@ function isAppRoleArray(
   );
 }
 
+function isStringArray(
+  value: unknown,
+): value is string[] {
+  return (
+    Array.isArray(value) &&
+    hasOnlyArrayIndexKeys(value) &&
+    value.every((item) => typeof item === "string")
+  );
+}
+
 function isAppCapabilityArray(
   value: unknown,
 ): value is AppCapability[] {
@@ -107,11 +131,13 @@ export function isAppSessionResponse(
         value.capabilities,
       ) &&
       value.capabilities.length === 0 &&
+      value.onboarding === null &&
       hasOnlyKeys(value, [
         "authenticated",
         "user",
         "roles",
         "capabilities",
+        "onboarding",
       ])
     );
   }
@@ -123,6 +149,7 @@ export function isAppSessionResponse(
       "user",
       "roles",
       "capabilities",
+      "onboarding",
     ])
   ) {
     return false;
@@ -140,7 +167,22 @@ export function isAppSessionResponse(
     isNullableString(value.user.email) &&
     isNullableString(value.user.image) &&
     isAppRoleArray(value.roles) &&
-    isAppCapabilityArray(value.capabilities)
+    isAppCapabilityArray(value.capabilities) &&
+    isRecord(value.onboarding) &&
+    hasOnlyKeys(value.onboarding, [
+      "status",
+      "version",
+      "learnerDepartments",
+      "teacherDepartments",
+    ]) &&
+    (value.onboarding.status === "not_started" ||
+      value.onboarding.status === "in_progress" ||
+      value.onboarding.status === "completed") &&
+    typeof value.onboarding.version === "number" &&
+    Number.isInteger(value.onboarding.version) &&
+    value.onboarding.version >= 1 &&
+    isStringArray(value.onboarding.learnerDepartments) &&
+    isStringArray(value.onboarding.teacherDepartments)
   );
 }
 

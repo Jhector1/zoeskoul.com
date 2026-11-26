@@ -63,6 +63,7 @@ export type ResolvedSubjectCatalogMap = Record<string, ResolvedCatalogSubjectIte
 
 export type ResolvedCatalogItem = {
     slug: string;
+    family: string;
     title: string;
     description: string;
     imagePublicId: string | null;
@@ -303,9 +304,14 @@ export async function getResolvedCatalogMap(): Promise<ResolvedCatalogMap> {
                 ),
             )
         ).filter((value): value is ResolvedCatalogSubjectItem => Boolean(value));
+        const catalogFamily =
+            typeof catalog.meta?.family === "string"
+                ? catalog.meta.family.trim()
+                : "";
 
         out[catalog.slug] = {
             slug: catalog.slug,
+            family: catalogFamily || catalog.slug,
             title: catalog.title,
             description: catalog.description ?? "",
             imagePublicId: catalog.imagePublicId ?? null,

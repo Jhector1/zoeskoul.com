@@ -50,6 +50,7 @@ describe("TeacherAccessGate", () => {
           "student:access",
           "teacher:access",
         ],
+        onboarding: { status: "completed", version: 2, learnerDepartments: [], teacherDepartments: [] },
       },
       error: null,
     });
@@ -73,6 +74,36 @@ describe("TeacherAccessGate", () => {
     );
   });
 
+  it("holds teacher routes while account onboarding is incomplete", () => {
+    mocks.useAppSession.mockReturnValue({
+      status: "authenticated",
+      session: {
+        authenticated: true,
+        user: {
+          id: "teacher-1",
+          name: "Teacher",
+          email: "teacher@example.com",
+          image: null,
+        },
+        roles: ["teacher"],
+        capabilities: ["student:access", "teacher:access"],
+        onboarding: { status: "not_started", version: 1, learnerDepartments: [], teacherDepartments: [] },
+      },
+      error: null,
+    });
+
+    const markup = renderToStaticMarkup(
+      <TeacherAccessGate
+        apiOrigin="https://zoeskoul.com"
+        websiteOrigin="https://zoeskoul.com"
+      >
+        {() => <div>never rendered</div>}
+      </TeacherAccessGate>,
+    );
+
+    expect(markup).toContain("Opening ZoeSkoul onboarding");
+  });
+
   it("denies a session without teacher access", () => {
     mocks.useAppSession.mockReturnValue({
       status: "authenticated",
@@ -86,6 +117,7 @@ describe("TeacherAccessGate", () => {
         },
         roles: ["student"],
         capabilities: ["student:access"],
+        onboarding: { status: "completed", version: 2, learnerDepartments: [], teacherDepartments: [] },
       },
       error: null,
     });

@@ -2,15 +2,10 @@ import {afterEach,beforeEach,describe,expect,it,vi} from "vitest";
 vi.mock("@/lib/appOrigins",()=>({resolveZoeBuildOrigins:()=>({
   websiteOrigin:"https://web.example.test",zoebuildOrigin:"https://build.example.test",
 })}));
-vi.mock("@zoeskoul/api-contracts",()=>({
-  isAppSessionResponse:(v:unknown)=>Boolean(v && typeof v==="object" &&
-    "authenticated" in v && typeof v.authenticated==="boolean" &&
-    "user" in v && "roles" in v && "capabilities" in v),
-}));
 import {readBuilderSessionStatus,readBuilderSession,renewBuilderSession} from "./buildHandoff";
 const token="A".repeat(43);
-const anonymous={authenticated:false,user:null,roles:[],capabilities:[]};
-const logged={authenticated:true,user:{id:"user-self"},roles:[],capabilities:[]};
+const anonymous={authenticated:false,user:null,roles:[],capabilities:[],onboarding:null};
+const logged={authenticated:true,user:{id:"user-self",email:null,name:null,image:null},roles:[],capabilities:[],onboarding:{status:"not_started",version:1,learnerDepartments:[],teacherDepartments:[]}};
 let originalSecret:string|undefined;
 beforeEach(()=>{
   originalSecret=process.env.ZOESKOUL_BUILD_HANDOFF_SECRET;
@@ -43,6 +38,8 @@ describe("V12J.14D shared session authority status",()=>{
     }
   });
   it("fails closed on malformed upstream response or transport failure",async()=>{
+    mockResponse(200,{...logged,onboarding:undefined});
+    expect(await readBuilderSessionStatus(token)).toEqual({kind:"unavailable"});
     mockResponse(200,{nonsense:true});
     expect(await readBuilderSessionStatus(token)).toEqual({kind:"unavailable"});
     vi.stubGlobal("fetch",vi.fn(async()=>{throw new Error("offline");}));

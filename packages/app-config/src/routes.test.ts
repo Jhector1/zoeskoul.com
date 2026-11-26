@@ -189,6 +189,7 @@ describe("shared route constructors", () => {
     expect(ROUTES.dailyPractice).toBe("/practice/daily");
     expect(ROUTES.signIn).toBe("/auth/signin");
     expect(ROUTES.pricing).toBe("/billing");
+    expect(ROUTES.onboarding).toBe("/onboarding");
 
     expect(ROUTES.teachingCourseAssignments).toBe(
       "/admin/course-assignments",

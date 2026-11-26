@@ -2,6 +2,7 @@ import "server-only";
 
 import { prisma } from "@/lib/prisma";
 import { resolveRoleCapabilities } from "@/lib/access/roleCapabilities";
+import { appOnboardingProfileSelect, projectAppOnboarding } from "@/lib/access/appOnboardingProjection";
 import { getBuildHandoffRedisReady } from "./buildHandoffRedis";
 import type { AppSessionResponse } from "@zoeskoul/api-contracts";
 import {
@@ -15,7 +16,7 @@ const USER_PREFIX = "zoeskoul:build-handoff:v1:user:";
 const EPOCH_PREFIX = "zoeskoul:build-handoff:v1:epoch:";
 
 export const EMPTY_BUILD_SESSION: AppSessionResponse = {
-  authenticated: false, user: null, roles: [], capabilities: [],
+  authenticated: false, user: null, roles: [], capabilities: [], onboarding: null,
 };
 
 export async function issueBuildHandoff(args: {
@@ -81,7 +82,10 @@ export async function readBuildHandoffSession(sessionHash: string): Promise<AppS
     return EMPTY_BUILD_SESSION;
   }
   const user = await prisma.user.findUnique({
-    where: { id: record.userId }, select: { id: true, email: true, name: true, image: true, roles: true },
+    where: { id: record.userId },
+    select: { id: true, email: true, name: true, image: true, roles: true,
+      onboardingProfile: { select: appOnboardingProfileSelect },
+    },
   });
   if (!user) {
     await redis.del(SESSION_PREFIX + sessionHash);
@@ -93,6 +97,7 @@ export async function readBuildHandoffSession(sessionHash: string): Promise<AppS
     user: { id: user.id, email: user.email, name: user.name, image: user.image },
     roles: access.appRoles,
     capabilities: access.capabilities,
+    onboarding: projectAppOnboarding(user.onboardingProfile),
   };
 }
 

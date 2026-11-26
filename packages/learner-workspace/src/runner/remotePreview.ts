@@ -23,6 +23,9 @@ export type RemoteWebPreviewDescriptor = Readonly<{
     state: RemoteWebPreviewState;
     message?: string | null;
     revision: number;
+    /** Optional ZoeBuild mode; generic remote preview consumers are unchanged. */
+    runtimeMode?: "native" | "fallback";
+    hmrConnection?: "connecting" | "live" | "reconnecting" | "disabled";
     onRetry?: (() => void) | null;
     /** Numeric-only browser diagnostics. No project, capability, URL, or user
      * identity may be attached to this callback. */

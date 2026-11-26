@@ -32,7 +32,7 @@ export function useBuilderSessionContinuity(): AppSessionResponse | null {
         if (!mounted) return;
         if (response.status === 401) {
           expiredConfirmed = true;
-          setVerifiedSession({ authenticated: false, user: null, roles: [], capabilities: [] });
+          setVerifiedSession({ authenticated: false, user: null, roles: [], capabilities: [], onboarding: null });
           window.dispatchEvent(new Event(ZOEBUILD_SESSION_EXPIRED_EVENT));
         } else if (response.ok) {
           nextRetryAt = 0;

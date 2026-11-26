@@ -1,7 +1,7 @@
 import { describe, it } from "vitest";
 import assert from "node:assert/strict";
 import { runInNewContext } from "node:vm";
-import { createDevelopmentHmrIframeBridge, registerDevelopmentHmrDocument } from "./reactPreviewDevelopmentHmrIframeBridge";
+import { createDevelopmentHmrIframeBridge, registerDevelopmentHmrDocument, subscribeDevelopmentNavigation, sendDevelopmentNavigation, type DevelopmentNavigationState } from "./reactPreviewDevelopmentHmrIframeBridge";
 import { createDevelopmentPreviewBrowserSession } from "./reactPreviewDevelopmentBrowserSession";
 import { createDevelopmentPreviewEditorLifecycle } from "./reactPreviewDevelopmentEditorLifecycle";
 import { injectNativeIframeHmrBootstrap, ZOEBUILD_IFRAME_HMR_SCRIPT } from "./reactPreviewDevelopmentNativeIframeHmr";
@@ -9,7 +9,7 @@ import { injectNativeIframeHmrBootstrap, ZOEBUILD_IFRAME_HMR_SCRIPT } from "./re
 const doc="/api/build/projects/project_a/preview/preview_123e4567-e89b-42d3-a456-426614174000/development/content/dpg1."+"a".repeat(43)+"/";
 const connected=JSON.stringify({type:"connected"});
 const update=JSON.stringify({type:"update",updates:[]});
-type WireMessage={kind:string;text?:string;nonce?:string;generation?:number};
+type WireMessage={kind:string;text?:string;nonce?:string;generation?:number;route?:string;canGoBack?:boolean;canGoForward?:boolean;failed?:boolean};
 type WireEvent={data:WireMessage;source?:unknown;origin?:string;ports?:FakePort[]};
 class FakePort {
   peer:FakePort|null=null;
@@ -23,25 +23,28 @@ class FakePort {
     if(!this.closed && peer) this.tasks.push(()=>{if(!peer.closed)peer.onmessage?.({data});});
   }
 }
-function harness(run:(f:ReturnType<typeof setup>)=>void,versioned=false) {
+function harness(run:(f:ReturnType<typeof setup>)=>void,versioned=false,navigation=false,canonicalRoot=false) {
   const keys=["window","document","MessageChannel"] as const;
   const old=keys.map(key=>Object.getOwnPropertyDescriptor(globalThis,key));
-  const f=setup(versioned);
+  const f=setup(versioned,navigation,canonicalRoot);
   try {run(f);} finally {
     f.bridge.close();f.unregister();
     keys.forEach((key,i)=>{const value=old[i];if(value)Object.defineProperty(globalThis,key,value);else Reflect.deleteProperty(globalThis,key);});
   }
 }
-function setup(versioned=false) {
+function setup(versioned=false,navigation=false,canonicalRoot=false) {
   const tasks:(()=>void)[]=[];
   const flush=()=>{let n=0;while(tasks.length){assert.ok(++n<1000);tasks.shift()!();}};
   let parentListener:((event:WireEvent)=>void)|null=null;
   let childListener:((event:WireEvent)=>void)|null=null;
   let nonce=0, bound=0, ready=0, failures=0, reloads=0;
+  const connectionStates:string[]=[];
   let revisionReady=true;
   let revision=9;
   let childLoad:(()=>void)|undefined;
   let childPort:FakePort|null=null;
+  let websiteNavigate:(route:string)=>void=()=>undefined;
+  let routerNotifications=0;
   const parent={postMessage(data:WireMessage){tasks.push(()=>parentListener?.({data,source:child,origin:"null"}));}};
   const child={postMessage(data:WireMessage,_origin:string,ports:FakePort[]){tasks.push(()=>childListener?.({data,source:parent,ports}));}};
   const parentWindow={location:{href:"http://localhost:3004/editor"},addEventListener(_kind:string,fn:(event:WireEvent)=>void){parentListener=fn;},removeEventListener(){parentListener=null;}};
@@ -51,12 +54,29 @@ function setup(versioned=false) {
   class FakeChannel {port1=new FakePort(tasks);port2=new FakePort(tasks);constructor(){this.port1.peer=this.port2;this.port2.peer=this.port1;childPort=this.port2;}}
   for(const [key,value] of Object.entries({window:parentWindow,document:parentDocument,MessageChannel:FakeChannel}))Object.defineProperty(globalThis,key,{value,writable:true,configurable:true});
   let unregister=registerDevelopmentHmrDocument(doc,documentPath,frame as unknown as HTMLIFrameElement);
-  const bridge=createDevelopmentHmrIframeBridge({documentUrl:doc,onBound:()=>bound++,onClientReady:()=>ready++,onDeliveryFailure:()=>failures++,canDeliverFrames:()=>revisionReady,...(versioned?{getReadySourceVersion:()=>revisionReady?revision:null}:{})});
+  const bridge=createDevelopmentHmrIframeBridge({documentUrl:doc,onConnectionState:state=>connectionStates.push(state),onBound:()=>bound++,onClientReady:()=>ready++,onDeliveryFailure:()=>failures++,canDeliverFrames:()=>revisionReady,...(versioned?{getReadySourceVersion:()=>revisionReady?revision:null}:{})});
   function newDocument(sourceVersion=revision){
     childLoad=undefined;
-    const win={parent,WebSocket:class Native extends EventTarget {},addEventListener(type:string,fn:(event:WireEvent)=>void){if(type==="load")childLoad=()=>fn({data:{kind:"load"}});else childListener=fn;}};
+    const listeners=new Map<string,(()=>void)[]>();
+    const location=new URL("http://localhost:3004"+(canonicalRoot&&documentPath===doc?doc.slice(0,-1):documentPath));
+    let cursor=0;
+    const entries=[{url:location.href,state:{__TSR_index:0}}];
+    function event(name:string){for(const fn of listeners.get(name)??[])fn();}
+    const history={get state(){return entries[cursor]!.state;},pushState(state:{__TSR_index:number},_unused:string,url:string){
+      location.href=new URL(url,location.href).href;entries.splice(cursor+1);entries.push({url:location.href,state});cursor++;
+    },replaceState(state:{__TSR_index:number},_unused:string,url:string){location.href=new URL(url,location.href).href;entries[cursor]={url:location.href,state};},
+    back(){if(cursor>0){cursor--;location.href=entries[cursor]!.url;event("popstate");}},forward(){if(cursor<entries.length-1){cursor++;location.href=entries[cursor]!.url;event("popstate");}}};
+    const win={parent,WebSocket:class Native extends EventTarget {},...(navigation?{location,history,dispatchEvent(e:Event){event(e.type);return true;}}:{}),addEventListener(type:string,fn:(event:WireEvent)=>void){if(type==="load")childLoad=()=>fn({data:{kind:"load"}});else if(type==="message")childListener=fn;else {const list=listeners.get(type)??[];list.push(()=>fn({data:{kind:type}}));listeners.set(type,list);}}};
     const script=versioned?injectNativeIframeHmrBootstrap("<head></head>",undefined,sourceVersion).split("<script>")[1]!.split("</script>")[0]!:ZOEBUILD_IFRAME_HMR_SCRIPT;
-    runInNewContext(script,{window:win,EventTarget,Event,MessageEvent,DOMException,CloseEvent:class extends Event {},crypto:{getRandomValues(bytes:Uint8Array){bytes.fill(++nonce);return bytes;}},setTimeout(fn:()=>void){tasks.push(fn);return 1;},setInterval(){return 1;},clearInterval(){}});
+    runInNewContext(script,{window:win,EventTarget,Event,MessageEvent,PopStateEvent:class extends Event {},DOMException,CloseEvent:class extends Event {},crypto:{getRandomValues(bytes:Uint8Array){bytes.fill(++nonce);return bytes;}},setTimeout(fn:()=>void){tasks.push(fn);return 1;},setInterval(){return 1;},clearInterval(){}});
+    if(navigation){
+      // Model TanStack's external-history notification: it wraps pushState
+      // after the trusted bootstrap and notifies subscribers exactly once.
+      const push=history.pushState;
+      history.pushState=function(...args){push.apply(this,args);routerNotifications++;};
+      listeners.set("popstate",[...(listeners.get("popstate")??[]),()=>routerNotifications++]);
+      websiteNavigate=route=>history.pushState({__TSR_index:cursor+1},"",canonicalRoot&&route==="/"?doc.slice(0,-1):doc+route.slice(1));
+    }
     return ()=>{
       const socket=Reflect.construct(win.WebSocket,["ws://example.test/","vite-hmr"]) as EventTarget & {readyState:number;close():void};
       const events:string[]=[];
@@ -66,10 +86,73 @@ function setup(versioned=false) {
       return {socket,events};
     };
   }
-  return {bridge,flush,newDocument,unregister:()=>unregister(),navigate:(path:string)=>{unregister();documentPath=path;unregister=registerDevelopmentHmrDocument(doc,path,frame as unknown as HTMLIFrameElement);},announce:(nonce:string)=>parent.postMessage({kind:"zoebuild-hmr-iframe-ready",nonce}),setRevisionReady:(value:boolean)=>{revisionReady=value;},setRevision:(value:number)=>{revision=value;},load:()=>childLoad?.(),sendFromIframe:(data:WireMessage)=>childPort?.postMessage(data),counts:()=>({bound,ready,failures,reloads})};
+  return {bridge,flush,newDocument,connectionStates,websiteNavigate:(route:string)=>websiteNavigate(route),routerNotifications:()=>routerNotifications,unregister:()=>unregister(),navigate:(path:string)=>{unregister();documentPath=path;unregister=registerDevelopmentHmrDocument(doc,path,frame as unknown as HTMLIFrameElement);},announce:(nonce:string)=>parent.postMessage({kind:"zoebuild-hmr-iframe-ready",nonce}),setRevisionReady:(value:boolean)=>{revisionReady=value;},setRevision:(value:number)=>{revision=value;},load:()=>childLoad?.(),sendFromIframe:(data:WireMessage)=>childPort?.postMessage(data),counts:()=>({bound,ready,failures,reloads})};
 }
 
 describe("Phase 4F5H10F virtual Vite socket handshake",()=>{
+  it("reports live only after the exact versioned document and Vite handshake, then clears on navigation and disconnect",()=>harness(f=>{
+    f.bridge.setConnected(true);f.bridge.push(connected);f.newDocument()();f.flush();
+    assert.notEqual(f.connectionStates.at(-1),"live");
+    f.load();f.flush();assert.equal(f.connectionStates.at(-1),"live");
+    f.navigate(doc+"about");assert.equal(f.connectionStates.at(-1),"reconnecting");
+    f.newDocument()();f.flush();assert.notEqual(f.connectionStates.at(-1),"live");
+    f.load();f.flush();assert.equal(f.connectionStates.at(-1),"live");
+    f.bridge.setConnected(false);assert.equal(f.connectionStates.at(-1),"reconnecting");
+  },true));
+  it("navigates on the existing document port, syncs website links and goes back and forward without reload",()=>harness(f=>{
+    const states:(DevelopmentNavigationState|null)[]=[];
+    const off=subscribeDevelopmentNavigation(doc,state=>states.push(state));
+    try{
+      f.bridge.setConnected(true);f.bridge.push(connected);const client=f.newDocument()();f.flush();
+      assert.equal(sendDevelopmentNavigation(doc,{action:"navigate",route:"/about"}),false);
+      f.load();f.flush();assert.equal(states.at(-1)?.route,"/");
+      assert.equal(sendDevelopmentNavigation(doc,{action:"navigate",route:"/about"}),true);f.flush();
+      assert.equal(states.at(-1)?.route,"/about");assert.equal(states.at(-1)?.canGoBack,true);
+      assert.equal(f.routerNotifications(),1);
+      f.websiteNavigate("/");f.flush();assert.equal(states.at(-1)?.route,"/");
+      assert.equal(sendDevelopmentNavigation(doc,{action:"back"}),true);f.flush();
+      assert.equal(states.at(-1)?.route,"/about");assert.equal(states.at(-1)?.canGoForward,true);
+      assert.equal(sendDevelopmentNavigation(doc,{action:"forward"}),true);f.flush();assert.equal(states.at(-1)?.route,"/");
+      f.bridge.push(update);f.flush();assert.deepEqual(client.events,["open","connected","update"]);
+      assert.equal(f.counts().bound,1);assert.equal(f.counts().reloads,0);assert.equal(f.connectionStates.at(-1),"live");
+    }finally{off();}
+  },true,true));
+  it("initializes navigation after the registered root redirects to its slashless canonical URL",()=>harness(f=>{
+    const states:(DevelopmentNavigationState|null)[]=[];
+    const off=subscribeDevelopmentNavigation(doc,state=>states.push(state));
+    try{
+      f.bridge.setConnected(true);f.bridge.push(connected);f.newDocument()();f.flush();f.load();f.flush();
+      assert.equal(f.connectionStates.at(-1),"live");assert.equal(states.at(-1)?.route,"/");
+      assert.equal(sendDevelopmentNavigation(doc,{action:"navigate",route:"/about"}),true);f.flush();
+      assert.equal(states.at(-1)?.route,"/about");
+      f.websiteNavigate("/");f.flush();assert.equal(states.at(-1)?.route,"/");
+      assert.equal(sendDevelopmentNavigation(doc,{action:"back"}),true);f.flush();assert.equal(states.at(-1)?.route,"/about");
+      assert.equal(sendDevelopmentNavigation(doc,{action:"forward"}),true);f.flush();assert.equal(states.at(-1)?.route,"/");
+      assert.equal(f.counts().reloads,0);assert.equal(f.counts().bound,1);
+    }finally{off();}
+  },true,true,true));
+  it("rejects unsafe navigation and fences commands on revision transition or retired port",()=>harness(f=>{
+    const states:(DevelopmentNavigationState|null)[]=[];
+    const off=subscribeDevelopmentNavigation(doc,state=>states.push(state));
+    try{
+      f.bridge.setConnected(true);f.bridge.push(connected);f.newDocument()();f.flush();f.load();f.flush();
+      for(const route of ["//external.test","/../x","/a%2fb","https://external.test/","/a?token=x","/a\\b"])
+        assert.equal(sendDevelopmentNavigation(doc,{action:"navigate",route}),false);
+      f.sendFromIframe({kind:"navigation-state",route:"//external.test",canGoBack:true,canGoForward:true,failed:false});f.flush();assert.equal(states.at(-1)?.route,"/");
+      f.setRevisionReady(false);f.bridge.flushReady();assert.equal(states.at(-1),null);
+      assert.equal(sendDevelopmentNavigation(doc,{action:"navigate",route:"/about"}),false);
+      f.setRevisionReady(true);f.bridge.flushReady();f.bridge.setConnected(false);
+      assert.equal(sendDevelopmentNavigation(doc,{action:"navigate",route:"/about"}),false);
+      f.bridge.close();assert.equal(states.at(-1),null);assert.equal(f.counts().reloads,0);
+    }finally{off();}
+  },true,true));
+  it("does not report live without a real connected frame or a current revision grant",()=>harness(f=>{
+    f.bridge.setConnected(true);f.newDocument()();f.flush();f.load();f.flush();
+    assert.notEqual(f.connectionStates.at(-1),"live");
+    f.bridge.push(connected);f.flush();assert.equal(f.connectionStates.at(-1),"live");
+    f.setRevisionReady(false);f.bridge.flushReady();assert.equal(f.connectionStates.at(-1),"reconnecting");
+    f.setRevisionReady(true);f.bridge.flushReady();assert.equal(f.connectionStates.at(-1),"live");
+  },true));
   it("does not lose early frames when the port opens before Vite constructs its socket",()=>harness(f=>{
     f.bridge.setConnected(true);f.bridge.push(connected);f.bridge.push(update);
     const create=f.newDocument();f.flush();

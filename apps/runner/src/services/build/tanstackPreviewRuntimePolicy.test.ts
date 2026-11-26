@@ -42,6 +42,11 @@ describe("TanStack isolated SSR preview policy", () => {
     const mintBase = `/api/build/projects/project1/preview/preview_11111111-1111-1111-1111-111111111111/content/${"x".repeat(32)}/`;
     const command = tanstackPreviewDevCommand(mintBase);
     expect(command).toEqual([...TANSTACK_PREVIEW_DEV_COMMAND, "--base", mintBase]);
+    expect(command).toEqual([
+      "node", "/workspace/node_modules/vite/bin/vite.js", "dev",
+      "--host", "127.0.0.1", "--port", "5173", "--strictPort",
+      "--logLevel", "warn", "--base", mintBase,
+    ]);
     expect(command).toContain("--logLevel");
     expect(command).toContain("warn");
     const options = { Cmd:command, Env:[
@@ -51,6 +56,16 @@ describe("TanStack isolated SSR preview policy", () => {
       HostConfig:{ NetworkMode:"none",Privileged:false,ReadonlyRootfs:true,CpuPeriod:100000,CpuQuota:80000,CapDrop:["ALL"],Memory:1024*1024*1024,MemorySwap:1024*1024*1024,
         PidsLimit:128,Binds:["/isolated/workspace:/workspace:rw"],SecurityOpt:["no-new-privileges:true"] }};
     expect(() => assertTanstackSandboxOptions(options)).not.toThrow();
+    // Only the canonical Runner-owned argv is accepted; no alternate script,
+    // launcher, injected Node flag, or extra argument may cross the boundary.
+    for (const Cmd of [
+      ["pnpm", "exec", "vite", ...command.slice(2)],
+      ["node", "/workspace/other.js", ...command.slice(2)],
+      ["node", "--require", "/workspace/other.js", ...command.slice(1)],
+      [...command, "--force"],
+    ]) {
+      expect(() => assertTanstackSandboxOptions({...options, Cmd})).toThrow();
+    }
     expect(() => tanstackPreviewDevCommand("/evil/")).toThrow();
     expect(() => assertTanstackSandboxOptions({...options, Cmd:[...command.slice(0,-1), "/evil/"]})).toThrow();
     expect(() => assertTanstackSandboxOptions({...options, Env:[]})).toThrow();

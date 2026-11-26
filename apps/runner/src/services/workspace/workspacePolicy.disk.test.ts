@@ -1,4 +1,7 @@
 import fs from "node:fs/promises";
+import fsSync from "node:fs";
+import { runInNewContext } from "node:vm";
+import { STRICT_USAGE_WORKER_SOURCE, scanStrictWorkspaceUsage } from "./workspaceStrictUsageWorker.js";
 import os from "node:os";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
@@ -67,8 +70,29 @@ describe("workspace disk usage scanner", () => {
     await fs.writeFile(path.join(root,"one"),"1234");
     await fs.link(path.join(root,"one"),path.join(root,"two"));
     await expect(getStrictDirectoryUsage(root)).resolves.toEqual({bytes:8,entries:2});
-    vi.spyOn(fs,"opendir").mockRejectedValueOnce(Object.assign(Error("private path"),{code:"EACCES"}));
-    await expect(getStrictDirectoryUsage(root)).rejects.toThrow("Runner workspace accounting incomplete.");
+    await expect(getStrictDirectoryUsage(path.join(root,"missing"))).rejects.toThrow("Runner workspace accounting incomplete.");
+  });
+
+  // Execute the exact worker program with controlled filesystem faults. Mocks
+  // in the parent process cannot intercept syscalls in a Worker thread.
+  function runFaultedWorker(dir:string, overrides:Partial<typeof fsSync>) {
+    let result:unknown;
+    runInNewContext(STRICT_USAGE_WORKER_SOURCE, {
+      process:{platform:process.platform},
+      require:(id:string)=> {
+        if(id==="node:fs")return {...fsSync,...overrides};
+        if(id==="node:path")return path;
+        if(id==="node:worker_threads")return {
+          workerData:{root:dir,limits:{}},parentPort:{postMessage:(value:unknown)=>{result=value;}},
+        };
+        throw Error("unexpected module");
+      },
+    });
+    return result;
+  }
+
+  it("fails closed when enumeration fails",()=>{
+    expect(runFaultedWorker(root,{opendirSync:()=>{throw Object.assign(Error("private path"),{code:"EACCES"});}})).toEqual({ok:false});
   });
 
   it("refuses a symlink root and a directory replaced during enumeration",async()=>{
@@ -76,17 +100,52 @@ describe("workspace disk usage scanner", () => {
     const moved=path.join(root,"moved");
     await fs.mkdir(nested);
     await fs.writeFile(path.join(nested,"file"),"1234");
-    const original=fs.opendir.bind(fs);
-    const spy=vi.spyOn(fs,"opendir").mockImplementationOnce(async(target,options)=>{
-      const opened=await original(target,options);
-      await fs.rename(nested,moved);
-      await fs.symlink(moved,nested);
+    const original=fsSync.opendirSync.bind(fsSync);
+    expect(runFaultedWorker(nested,{opendirSync:(target,options)=>{
+      const opened=original(target,options);
+      fsSync.renameSync(nested,moved);
+      fsSync.symlinkSync(moved,nested);
       return opened;
-    });
-    try { await expect(getStrictDirectoryUsage(nested)).rejects.toThrow("accounting incomplete"); }
-    finally {spy.mockRestore();}
+    }})).toEqual({ok:false});
     await expect(getStrictDirectoryUsage(nested)).rejects.toThrow("accounting incomplete");
     await expect(getStrictDirectoryUsage(root)).resolves.toEqual({bytes:4,entries:3});
+  });
+
+  it("keeps strict byte and entry ceilings and handles concurrent worker calls",async()=>{
+    await fs.writeFile(path.join(root,"one"),"123456");
+    await fs.writeFile(path.join(root,"two"),"abcdef");
+    const [byBytes,byEntries,...full]=await Promise.all([
+      getStrictDirectoryUsage(root,{maxBytes:5}),
+      getStrictDirectoryUsage(root,{maxEntries:1}),
+      ...Array.from({length:5},()=>getStrictDirectoryUsage(root)),
+    ]);
+    expect(byBytes.bytes).toBeGreaterThan(5);
+    expect(byEntries.entries).toBeGreaterThan(1);
+    for(const usage of full)expect(usage).toEqual({bytes:12,entries:2});
+  });
+
+  it.skipIf(process.platform !== "linux")("preserves strict accounting on the ZoeBuild Linux provider",async()=>{
+    vi.stubEnv("RUNNER_EXECUTION_POOL", "zoebuild");
+    try {
+      const nested=path.join(root,"nested");
+      await fs.mkdir(nested);
+      await fs.writeFile(path.join(root,"file"),"123456");
+      await fs.link(path.join(root,"file"),path.join(nested,"hardlink"));
+      await fs.symlink("/etc/passwd",path.join(root,"external"));
+      await fs.symlink(nested,path.join(root,"dirlink"));
+      await expect(scanStrictWorkspaceUsage(root)).resolves.toEqual({bytes:12,entries:5});
+      const results=await Promise.all(Array.from({length:6},()=>scanStrictWorkspaceUsage(root)));
+      for(const result of results) expect(result).toEqual({bytes:12,entries:5});
+      expect((await scanStrictWorkspaceUsage(root,{maxBytes:5})).bytes).toBeGreaterThan(5);
+      expect((await scanStrictWorkspaceUsage(root,{maxEntries:1})).entries).toBeGreaterThan(1);
+      await expect(scanStrictWorkspaceUsage(path.join(root,"dirlink"))).rejects.toThrow("accounting incomplete");
+      await expect(scanStrictWorkspaceUsage(path.join(root,"missing"))).rejects.toThrow("accounting incomplete");
+      let deep=nested;
+      for(let i=0;i<128;i++){deep=path.join(deep,"d");await fs.mkdir(deep);}
+      await expect(scanStrictWorkspaceUsage(root)).rejects.toThrow("accounting incomplete");
+      // A ceiling may safely stop before traversing an excessive depth.
+      expect((await scanStrictWorkspaceUsage(root,{maxEntries:0})).entries).toBe(1);
+    } finally { vi.unstubAllEnvs(); }
   });
 
   it("keeps a ledger alive across zero-byte and queued reservations",async()=>{

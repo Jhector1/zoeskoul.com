@@ -42,6 +42,7 @@ describe("StudentAccessGate", () => {
         },
         roles: ["student"],
         capabilities,
+        onboarding: { status: "completed", version: 2, learnerDepartments: [], teacherDepartments: [] },
       },
       error: null,
     });
@@ -65,12 +66,46 @@ describe("StudentAccessGate", () => {
     ]);
   });
 
+  it("holds protected student routes while account onboarding is incomplete", () => {
+    const child = vi.fn(() => <div>never rendered</div>);
+
+    mocks.useAppSession.mockReturnValue({
+      status: "authenticated",
+      session: {
+        authenticated: true,
+        user: {
+          id: "student-1",
+          name: "Student",
+          email: "student@example.com",
+          image: null,
+        },
+        roles: ["student"],
+        capabilities: ["student:access"],
+        onboarding: { status: "in_progress", version: 2, learnerDepartments: [], teacherDepartments: [] },
+      },
+      error: null,
+    });
+
+    const markup = renderToStaticMarkup(
+      <StudentAccessGate
+        apiOrigin="https://zoeskoul.com"
+        websiteOrigin="https://zoeskoul.com"
+      >
+        {child}
+      </StudentAccessGate>,
+    );
+
+    expect(child).not.toHaveBeenCalled();
+    expect(markup).toContain("Opening ZoeSkoul onboarding");
+  });
+
   it("allows an anonymous session through only for a public route", () => {
     const session = {
       authenticated: false,
       user: null,
       roles: [],
       capabilities: [],
+      onboarding: null,
     } as const;
     const child = vi.fn(
       () => <div>public catalog</div>,
@@ -108,6 +143,7 @@ describe("StudentAccessGate", () => {
         user: null,
         roles: [],
         capabilities: [],
+        onboarding: null,
       },
       error: null,
     });
@@ -142,6 +178,7 @@ describe("StudentAccessGate", () => {
         },
         roles: ["teacher"],
         capabilities: ["teacher:access"],
+        onboarding: { status: "completed", version: 2, learnerDepartments: [], teacherDepartments: [] },
       },
       error: null,
     });
@@ -173,6 +210,7 @@ describe("StudentAccessGate", () => {
         },
         roles: ["teacher"],
         capabilities: ["teacher:access"],
+        onboarding: { status: "completed", version: 2, learnerDepartments: [], teacherDepartments: [] },
       },
       error: null,
     });

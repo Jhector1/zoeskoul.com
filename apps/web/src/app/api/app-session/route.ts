@@ -29,12 +29,19 @@ export async function GET(request: Request) {
           roles: access.capabilities.appRoles,
           capabilities:
             access.capabilities.capabilities,
+          onboarding: access.onboarding ?? {
+            status: "not_started",
+            version: 1,
+            learnerDepartments: [],
+            teacherDepartments: [],
+          },
         }
       : {
           authenticated: false,
           user: null,
           roles: [],
           capabilities: [],
+          onboarding: null,
         };
 
   return appCorsJson(request, body);

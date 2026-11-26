@@ -1,13 +1,10 @@
 import { NextResponse } from "next/server";
 
-import {
-    getActor,
-    ensureGuestId,
-    attachGuestCookie,
-} from "@/lib/practice/actor";
+import { getActor } from "@/lib/practice/actor";
 import { SaveOnboardingSchema } from "@/lib/onboarding/schema";
 import {
     getOnboardingProfile,
+    onboardingStatusFromProfile,
     upsertOnboardingProfile,
 } from "@/lib/onboarding/service";
 
@@ -16,14 +13,31 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
     const actor = await getActor();
-    const { actor: ensuredActor, setGuestId } = ensureGuestId(actor);
 
-    const profile = await getOnboardingProfile(ensuredActor);
+    if (!actor.userId) {
+        return NextResponse.json(
+            { ok: false, error: "Authentication required." },
+            { status: 401 },
+        );
+    }
 
-    const res = NextResponse.json({
+    const profile = await getOnboardingProfile(actor);
+
+    return NextResponse.json({
         ok: true,
+        status: onboardingStatusFromProfile(profile),
         profile: profile
             ? {
+                version: profile.version,
+                useMode: profile.useMode ?? "",
+                learnerAffiliation: profile.learnerAffiliation ?? "",
+                teacherAffiliation: profile.teacherAffiliation ?? "",
+                learnerDepartments: profile.departments
+                    .filter((item) => item.context === "learner")
+                    .map((item) => item.departmentKey),
+                teacherDepartments: profile.departments
+                    .filter((item) => item.context === "teacher")
+                    .map((item) => item.departmentKey),
                 preferredLanguage: profile.preferredLanguage ?? "",
                 level: profile.level ?? "",
                 studyTime: profile.studyTime ?? "",
@@ -35,31 +49,32 @@ export async function GET() {
             }
             : null,
     });
-
-    return attachGuestCookie(res, setGuestId);
 }
 
 export async function POST(req: Request) {
     const actor = await getActor();
-    const { actor: ensuredActor, setGuestId } = ensureGuestId(actor);
+
+    if (!actor.userId) {
+        return NextResponse.json(
+            { ok: false, error: "Authentication required." },
+            { status: 401 },
+        );
+    }
 
     const json = await req.json().catch(() => null);
     const parsed = SaveOnboardingSchema.safeParse(json);
 
     if (!parsed.success) {
-        const res = NextResponse.json(
+        return NextResponse.json(
             { ok: false, error: "Invalid onboarding payload." },
             { status: 400 },
         );
-        return attachGuestCookie(res, setGuestId);
     }
 
-    const profile = await upsertOnboardingProfile(ensuredActor, parsed.data);
+    const profile = await upsertOnboardingProfile(actor, parsed.data);
 
-    const res = NextResponse.json({
+    return NextResponse.json({
         ok: true,
         profileId: profile.id,
     });
-
-    return attachGuestCookie(res, setGuestId);
 }

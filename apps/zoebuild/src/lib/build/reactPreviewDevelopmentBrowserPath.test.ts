@@ -84,3 +84,8 @@ describe("Phase 4F5H10I CSS URL-import flag restoration",()=>{
   expect(()=>normalizeDevelopmentPreviewBrowserPath(new URL(base+"/src/styles.css?url="),"project_other",preview,token)).toThrow();
  });
 });
+
+ it("preserves pnpm peer-suffixed TanStack dependency module URLs",()=>{
+  const path="node_modules/.pnpm/@tanstack+react-router@1.170.46_@types+react@19.2.14_react-dom@19.2.3_react@19.2.3__react@19.2.3/node_modules/@tanstack/react-router/dist/esm/useRouter.js?v=bdca4816";
+  expect(check("/"+path)).toBe(path);
+ });

@@ -1,10 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { describe, expect, it } from "vitest";
 
 describe("HTML Module 2 one-click file selection hydration", () => {
-  const repoRoot = path.resolve(process.cwd(), "../..");
+  const repoRoot = fileURLToPath(new URL("../../../../../../", import.meta.url));
 
   const fullIde = fs.readFileSync(
     path.join(repoRoot, "packages/learner-workspace/src/fullide/FullIDE.tsx"),

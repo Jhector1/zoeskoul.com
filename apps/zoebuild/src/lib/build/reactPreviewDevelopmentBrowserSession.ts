@@ -13,6 +13,7 @@
  */
 
 import { developmentCapacityFailure, developmentFailureRequestId } from "./reactPreviewDevelopmentFailure";
+import { mayAutoRecoverReactPreviewDependencies } from "./reactPreviewDependencyRecovery";
 
 const PROJECT_ID = /^[A-Za-z0-9_-]{1,128}$/;
 const PREVIEW_ID = /^preview_[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -32,6 +33,7 @@ export type DevelopmentBrowserSession = Readonly<{
 export class DevelopmentBrowserSessionError extends Error {
   constructor(readonly code: "INVALID_REVISION" | "RESTART_REQUIRED" |
     "RETRYABLE_UPDATE" | "BUSY" | "UNAVAILABLE" | "CLOSED" |
+    "START_CONFLICT" | "DEPENDENCY_PREPARATION_REQUIRED" |
     "RUNNER_DISK_LOW" | "RUNNER_WORKSPACE_STORAGE_LIMIT", message: string,
     readonly httpStatus?: number, readonly requestId?: string) {
     super(message);
@@ -94,6 +96,18 @@ async function postRevision(fetchClient: FetchClient, path: string, sourceVersio
     const failure = developmentCapacityFailure(body.code);
     if (failure) throw new DevelopmentBrowserSessionError(failure.code, failure.message,
       503, developmentFailureRequestId(body.requestId) ?? undefined);
+  }
+  // An admission conflict is not a running-container restart. Unknown/empty
+  // 409 responses may reconcile source, but never authorize dependency work.
+  if (operation === "start" && response.status === 409) {
+    const record = exactKeys(body, ["ok", "code"]) && body.ok === false ? body : null;
+    const prepare = mayAutoRecoverReactPreviewDependencies({status:409,
+      code: typeof record?.code === "string" ? record.code : undefined,
+      message: typeof record?.message === "string" ? record.message : undefined});
+    throw new DevelopmentBrowserSessionError(
+      prepare ? "DEPENDENCY_PREPARATION_REQUIRED" : "START_CONFLICT",
+      prepare ? "Preparing saved project dependencies." : "Saved preview admission conflict.",
+      409, developmentFailureRequestId(record?.requestId ?? response.headers.get("X-Request-Id")) ?? undefined);
   }
   if (!response.ok || !exactKeys(body, ["ok"]) || body.ok !== true)
     throw new DevelopmentBrowserSessionError(

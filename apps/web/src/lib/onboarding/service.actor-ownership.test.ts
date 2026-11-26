@@ -4,29 +4,23 @@ import { describe, expect, it } from "vitest";
 const source = readFileSync(new URL("./service.ts", import.meta.url), "utf8");
 
 describe("onboarding save actor ownership", () => {
-    it("claims an existing guest profile before authenticated saves", () => {
-        expect(source).toContain(
-            "const saveActor = await prepareOnboardingSaveActor(actor);",
-        );
-        expect(source).toContain("if (actor.guestId)");
-        expect(source).toContain("await claimGuestOnboardingForUser({");
-        expect(source).toContain("guestId: actor.guestId");
-        expect(source).toContain("userId: actor.userId");
+    it("requires an authenticated user for all new onboarding saves", () => {
+        expect(source).toContain("function requireAuthenticatedActor(actor: Actor)");
+        expect(source).toContain('throw new Error("Onboarding requires an authenticated user.")');
+        expect(source).toContain("return { userId: actor.userId, guestId: null } satisfies Actor;");
+        expect(source).toContain("const saveActor = requireAuthenticatedActor(actor);");
     });
 
-    it("never persists a guest id on an authenticated onboarding profile", () => {
-        expect(source).toContain(
-            "return { userId: actor.userId, guestId: null };",
-        );
-
+    it("keeps guest claiming as rollout compatibility only", () => {
         const upsert = source.slice(
             source.indexOf("export async function upsertOnboardingProfile("),
             source.indexOf("export async function claimGuestOnboardingForUser("),
         );
 
-        expect(upsert).toContain("const where = actorWhere(saveActor);");
         expect(upsert).toContain("userId: saveActor.userId");
-        expect(upsert).toContain("guestId: saveActor.guestId");
+        expect(upsert).toContain("guestId: null");
         expect(upsert).not.toContain("guestId: actor.guestId");
+        expect(source).toContain("Compatibility bridge for onboarding answers collected before the");
+        expect(source).toContain("export async function claimGuestOnboardingForUser(");
     });
 });

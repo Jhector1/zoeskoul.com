@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { isAppSessionResponse } from "@zoeskoul/api-contracts";
 
 const mocks = vi.hoisted(() => {
   const keys = new Map<string, string>();
@@ -48,7 +49,7 @@ describe("one-use website handoff and revocable builder session", () => {
   beforeEach(() => {
     mocks.keys.clear(); mocks.userSets.clear(); mocks.expiries.clear(); mocks.findUnique.mockReset();
     mocks.findUnique.mockImplementation(async (args: { select: { roles?: boolean } }) =>
-      args.select.roles ? { id: "user-1", email: null, name: "User", image: null, roles: ["student"] } : { id: "user-1" });
+      args.select.roles ? { id: "user-1", email: null, name: "User", image: null, roles: ["student"], onboardingProfile: null } : { id: "user-1" });
   });
   it("consumes a ticket atomically, rejects replay, and returns live account permissions", async () => {
     const state = sha256(randomOpaque());
@@ -59,7 +60,31 @@ describe("one-use website handoff and revocable builder session", () => {
     expect(await exchangeBuildHandoff({ ticket, state, sessionHash: sha256(randomOpaque()) })).toBe(false);
     const session = await readBuildHandoffSession(sessionHash);
     expect(session.authenticated).toBe(true);
-    if (session.authenticated) expect(session.user.id).toBe("user-1");
+    expect(isAppSessionResponse(session)).toBe(true);
+    if (session.authenticated) {
+      expect(session.user.id).toBe("user-1");
+      expect(session.onboarding).toEqual({ status: "not_started", version: 1, learnerDepartments: [], teacherDepartments: [] });
+    }
+  });
+  it("projects live onboarding for the Redis-authorized identity on read and renewal", async () => {
+    const state = sha256(randomOpaque());
+    const ticket = await issueBuildHandoff({ userId: "user-1", state });
+    const hash = sha256(randomOpaque());
+    expect(await exchangeBuildHandoff({ ticket, state, sessionHash: hash })).toBe(true);
+    const profile = { version: 2, completedAt: null, skippedAt: null, departments: [
+      { departmentKey: "z", context: "learner" },
+      { departmentKey: "a", context: "learner" },
+      { departmentKey: "t", context: "teacher" },
+    ] };
+    mocks.findUnique.mockResolvedValue({ id: "user-1", email: null, name: "User", image: null, roles: ["student"], onboardingProfile: profile });
+    const session = await readBuildHandoffSession(hash);
+    expect(isAppSessionResponse(session)).toBe(true);
+    expect(session.onboarding).toEqual({ status: "in_progress", version: 2, learnerDepartments: ["a", "z"], teacherDepartments: ["t"] });
+    expect(mocks.findUnique).toHaveBeenLastCalledWith(expect.objectContaining({ where: { id: "user-1" } }));
+    mocks.findUnique.mockResolvedValue({ id: "user-1", email: null, name: "User", image: null, roles: ["student"], onboardingProfile: { ...profile, skippedAt: new Date() } });
+    const renewed = await renewBuildHandoffSession(hash);
+    expect(isAppSessionResponse(renewed)).toBe(true);
+    expect(renewed.onboarding).toEqual({ status: "completed", version: 2, learnerDepartments: ["a", "z"], teacherDepartments: ["t"] });
   });
   it("rejects a mismatched state and burns the ticket", async () => {
     const state = sha256(randomOpaque());
@@ -70,7 +95,10 @@ describe("one-use website handoff and revocable builder session", () => {
   });
   it("rejects malformed tokens without reaching Redis", async () => {
     expect(await exchangeBuildHandoff({ ticket: "a", state: "b", sessionHash: "c" })).toBe(false);
-    expect((await readBuildHandoffSession("bad")).authenticated).toBe(false);
+    const empty = await readBuildHandoffSession("bad");
+    expect(empty.authenticated).toBe(false);
+    expect(empty.onboarding).toBeNull();
+    expect(isAppSessionResponse(empty)).toBe(true);
   });
   it("supports immediate single-session and whole-account revocation", async () => {
     const state = sha256(randomOpaque());

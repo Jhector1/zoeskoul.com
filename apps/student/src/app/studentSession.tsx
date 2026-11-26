@@ -1,3 +1,4 @@
+import type { AppOnboardingState } from "@zoeskoul/auth-client";
 import {
   createContext,
   useContext,
@@ -15,6 +16,7 @@ export type StudentSessionUser = {
 
 export type StudentSession = {
   user?: StudentSessionUser;
+  onboarding?: AppOnboardingState;
 };
 
 export type StudentSessionStatus =

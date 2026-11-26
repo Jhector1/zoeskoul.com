@@ -8,6 +8,7 @@ import {
 import {
   AuthClientError,
   buildAuthenticateUrl,
+  buildOnboardingUrl,
   buildLogoutUrl,
   createAuthClient,
 } from "./index";
@@ -36,6 +37,7 @@ describe("createAuthClient", () => {
         user: null,
         roles: [],
         capabilities: [],
+        onboarding: null,
       }),
     );
 
@@ -72,6 +74,7 @@ describe("createAuthClient", () => {
             "student:access",
             "teacher:access",
           ],
+          onboarding: { status: "completed", version: 2, learnerDepartments: [], teacherDepartments: [] },
         }),
     }).fetchSession();
 
@@ -122,6 +125,7 @@ describe("createAuthClient", () => {
             user: null,
             roles: [],
             capabilities: [],
+            onboarding: null,
           }),
       }).fetchSession(),
     ).resolves.toMatchObject({
@@ -238,6 +242,7 @@ describe("createAuthClient", () => {
             capabilities: [
               "student:access",
             ],
+            onboarding: { status: "completed", version: 2, learnerDepartments: [], teacherDepartments: [] },
           }),
       }).fetchSession(),
     ).rejects.toMatchObject({
@@ -271,6 +276,7 @@ describe("createAuthClient", () => {
             user: null,
             roles: [],
             capabilities: [],
+            onboarding: null,
           }),
       }).fetchSession(),
     ).resolves.toMatchObject({
@@ -289,6 +295,24 @@ describe("createAuthClient", () => {
 
     expect(error.kind).toBe("http");
     expect(error.status).toBe(403);
+  });
+});
+
+describe("buildOnboardingUrl", () => {
+  it("keeps the destination as an explicit returnTo parameter", () => {
+    const target =
+      "https://student.zoeskoul.com/en/subjects?tab=python#resume";
+    const url = new URL(
+      buildOnboardingUrl({
+        websiteOrigin: "https://zoeskoul.com",
+        callbackUrl: target,
+        locale: "en",
+      }),
+    );
+
+    expect(url.origin).toBe("https://zoeskoul.com");
+    expect(url.pathname).toBe("/en/onboarding");
+    expect(url.searchParams.get("returnTo")).toBe(target);
   });
 });
 

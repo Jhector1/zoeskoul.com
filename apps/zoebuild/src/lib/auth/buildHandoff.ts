@@ -17,6 +17,7 @@ export function isDevelopmentLoopbackOrigin(origin: URL): boolean {
 
 export const EMPTY_SESSION: AppSessionResponse = {
   authenticated: false, user: null, roles: [], capabilities: [],
+  onboarding: null,
 };
 
 export function randomOpaque(): string { return randomBytes(32).toString("base64url"); }

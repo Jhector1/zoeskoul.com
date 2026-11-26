@@ -22,6 +22,13 @@ export type LearnerHeaderSessionStatus =
   | "authenticated"
   | "unauthenticated";
 
+export type LearnerHeaderOnboarding = {
+  status: "not_started" | "in_progress" | "completed";
+  version: number;
+  learnerDepartments: string[];
+  teacherDepartments: string[];
+};
+
 export type LearnerHeaderUser = {
   id?: string;
   name?: string | null;
@@ -119,6 +126,7 @@ export type LearnerHeaderRuntime = {
   useSession: () => {
     data?: {
       user?: LearnerHeaderUser;
+      onboarding?: LearnerHeaderOnboarding;
     } | null;
     status: LearnerHeaderSessionStatus;
   };
@@ -473,6 +481,7 @@ function HeaderSlick({
                                       websiteOrigin = runtime.defaultWebsiteOrigin,
                                       slot,
                                       SlotComponent,
+                                      learnerDepartmentIds,
                                     }: {
   brand?: string;
   badge?: string;
@@ -483,6 +492,7 @@ function HeaderSlick({
   isSetting?: boolean;
   slot?: React.ReactNode;
   SlotComponent?: React.ComponentType<HeaderSlotCtx>;
+  learnerDepartmentIds?: readonly string[];
 }) {
   const t = useTranslations("Header");
   const billingT = useTranslations("billing");
@@ -492,6 +502,24 @@ function HeaderSlick({
 
   const user = session?.user;
   const isAuthed = !!user;
+  const sessionOnboarding = session?.onboarding;
+  const effectiveLearnerDepartmentIds =
+    learnerDepartmentIds ?? sessionOnboarding?.learnerDepartments ?? [];
+  const hasExplicitDepartmentProfile =
+    learnerDepartmentIds !== undefined ||
+    Boolean(
+      sessionOnboarding &&
+      sessionOnboarding.version >= 2 &&
+      sessionOnboarding.status === "completed",
+    );
+  const showSandboxNav =
+    !isAuthed ||
+    !hasExplicitDepartmentProfile ||
+    effectiveLearnerDepartmentIds.some(
+      (departmentId) =>
+        departmentId === "computer-science" ||
+        departmentId === "mathematics",
+    );
 
   const slotCtx = useMemo<HeaderSlotCtx>(
       () => ({ locale, pathname, isAuthed, status, user }),
@@ -538,12 +566,16 @@ function HeaderSlick({
           href: ROUTES.pricing,
           label: t("billing"),
         },
-        {
-          href: START_SESSION_HREF,
-          label: t("startSession"),
-        },
+        ...(showSandboxNav
+          ? [
+              {
+                href: START_SESSION_HREF,
+                label: t("startSession"),
+              },
+            ]
+          : []),
       ],
-      [isAuthed, locale, studentHomeHref, t],
+      [isAuthed, locale, showSandboxNav, studentHomeHref, t],
   );
 
   const NAV: NavItem[] =

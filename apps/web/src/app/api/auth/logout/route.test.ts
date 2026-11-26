@@ -401,6 +401,7 @@ describe("GET /api/auth/logout", () => {
       user: null,
       roles: [],
       capabilities: [],
+      onboarding: null,
     });
   }, 30_000);
 });

@@ -933,8 +933,11 @@ a {
   z-index: 3;
 
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  gap: 6px 12px;
+  min-width: 0;
 
   min-height: 48px;
 
@@ -1081,13 +1084,6 @@ a {
     top: 0;
   }
 
-  .zb-project-mode-tabs {
-    width: 100%;
-  }
-
-  .zb-project-mode-tab {
-    flex: 1;
-  }
 }
 
 /* ZOEBUILD_PROJECT_LIVE_PREVIEW_V301D2C2E6E1_5C1B */
@@ -1534,24 +1530,19 @@ a {
   }
 }
 
-/* ZOEBUILD_COMPACT_PROJECT_TOPBAR_V301E8 */
-
+/* ZOEBUILD_COMPACT_PROJECT_TOPBAR_V301E8
+ * PUB2B2E: flow against the actual workspace width, not the window width.
+ * The chat splitter and docked DevTools can shrink this stage independently.
+ */
 .zb-project-modebar {
-  display: grid;
-  grid-template-columns:
-    minmax(0, 1fr)
-    auto
-    minmax(0, 1fr);
-  align-items: center;
   min-height: 46px;
   padding-inline: 12px;
 }
 
 .zb-project-modebar-title {
-  grid-column: 1;
+  flex: 1 1 96px;
   min-width: 0;
-  max-width: min(32vw, 340px);
-  justify-self: start;
+  max-width: 340px;
   overflow: hidden;
   color: rgb(var(--ui-text) / 0.82);
   font-size: 12px;
@@ -1562,26 +1553,19 @@ a {
 }
 
 .zb-project-modebar .zb-project-mode-tabs {
-  grid-column: 2;
-  justify-self: center;
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+  min-width: 0;
+  max-width: 100%;
+  justify-content: center;
 }
 
-@media (max-width: 760px) {
-  .zb-project-modebar {
-    grid-template-columns:
-      minmax(0, 1fr)
-      auto;
-    gap: 8px;
-  }
-
-  .zb-project-modebar-title {
-    grid-column: 1;
-    max-width: 42vw;
-  }
-
-  .zb-project-modebar .zb-project-mode-tabs {
-    grid-column: 2;
-  }
+/* The optional commerce notice is not a fourth toolbar column. */
+.zb-project-modebar > :not(.zb-project-modebar-title, .zb-project-mode-tabs, .zb-project-modebar-actions) {
+  flex: 0 1 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 /* ZOEBUILD_CREATE_PROJECT_V302B */
@@ -1885,12 +1869,15 @@ a {
 
 /* ZoeBuild V302C1 — compact project publish control */
 .zb-project-modebar-actions {
+  flex: 0 1 auto;
   min-width: 0;
+  max-width: 100%;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
-  justify-self: end;
-  gap: 8px;
+  margin-inline-start: auto;
+  gap: 6px 8px;
 }
 
 .zb-project-publish-button {
@@ -1947,18 +1934,6 @@ a {
   font-size: 11px;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-@media (max-width: 780px) {
-  .zb-project-modebar-actions {
-    grid-column: 1 / -1;
-    width: 100%;
-  }
-
-  .zb-project-publish-status {
-    flex: 1;
-    max-width: none;
-  }
 }
 
 /* ZOEBUILD_COMPACT_PROJECT_TOPBAR_V2 */

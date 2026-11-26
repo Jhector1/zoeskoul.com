@@ -8,7 +8,7 @@ const id = "preview_11111111-1111-4111-8111-111111111111";
 const document = (version:number) => ({
   previewId:id,sourceVersion:version,documentUrl:`/development/scope/${version}/`,grantIssuedAt:0,
 });
-function make() {
+function make(recoverAdmission?: Parameters<typeof createDevelopmentPreviewEditorLifecycle>[0]["recoverAdmission"]) {
   let snapshot:ReturnType<Session["snapshot"]>=null;
   let due=false;
   const controller={
@@ -22,7 +22,7 @@ function make() {
   } satisfies Session;
   const onDocument=vi.fn(),onFailure=vi.fn(),onWaiting=vi.fn();
   const lifecycle=createDevelopmentPreviewEditorLifecycle({controller,onDocument,onFailure,onWaiting,
-    recoveryDelay:async()=>undefined});
+    recoveryDelay:async()=>undefined,recoverAdmission});
   return {controller,lifecycle,onDocument,onFailure,onWaiting,setDue:(v:boolean)=>{due=v;},setSnapshot:(v:ReturnType<typeof document>)=>{snapshot=v;}};
 }
 const flush=async()=>{await Promise.resolve();await Promise.resolve();await Promise.resolve();};
@@ -39,6 +39,33 @@ describe("Phase 4E3B saved-revision editor integration",()=>{
     expect(f.controller.start).toHaveBeenCalledOnce();
     expect(f.controller.restart).not.toHaveBeenCalled();
     expect(f.controller.update).not.toHaveBeenCalled();
+  });
+  it("reconciles the authoritative head without retrying an obsolete admission",async()=>{
+    const refresh=vi.fn(async()=>"advanced" as const),f=make(refresh);
+    f.controller.start.mockRejectedValueOnce(new DevelopmentBrowserSessionError("START_CONFLICT","conflict",409));
+    f.lifecycle.savedRevision(7,true);await flush();await flush();
+    expect(refresh).toHaveBeenCalledOnce();expect(f.controller.start).toHaveBeenCalledOnce();
+    expect(f.controller.restart).not.toHaveBeenCalled();
+    f.lifecycle.savedRevision(8,true);await flush();await flush();
+    expect(f.controller.start.mock.calls).toEqual([[7],[8]]);
+    expect(f.lifecycle.readyDocument()?.sourceVersion).toBe(8);
+  });
+  it("allows one verified same-version preparation, not an admission retry loop",async()=>{
+    const refresh=vi.fn(async()=>"prepared" as const),f=make(refresh);
+    const error=new DevelopmentBrowserSessionError("DEPENDENCY_PREPARATION_REQUIRED","prepare",409);
+    f.controller.start.mockRejectedValueOnce(error).mockRejectedValueOnce(error);
+    f.lifecycle.savedRevision(7,true);await flush();await flush();await flush();
+    expect(refresh).toHaveBeenCalledOnce();expect(f.controller.start.mock.calls).toEqual([[7],[7]]);
+    expect(f.controller.restart).not.toHaveBeenCalled();
+    expect(f.onFailure).toHaveBeenCalledExactlyOnceWith(error);
+  });
+  it("stops a rejected or dirty-source reconciliation without fallback retries",async()=>{
+    const f=make(async()=>"failed");
+    const error=new DevelopmentBrowserSessionError("START_CONFLICT","conflict",409);
+    f.controller.start.mockRejectedValueOnce(error);
+    f.lifecycle.savedRevision(7,true);await flush();await flush();
+    expect(f.onFailure).toHaveBeenCalledExactlyOnceWith(error);
+    expect(f.controller.start).toHaveBeenCalledOnce();expect(f.controller.restart).not.toHaveBeenCalled();
   });
   it("starts only saved source and sends one consecutive update",async()=>{
     const f=make();

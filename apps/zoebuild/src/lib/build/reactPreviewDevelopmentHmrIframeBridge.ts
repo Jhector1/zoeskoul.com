@@ -6,6 +6,33 @@
 import { applicationRpcIdentity, applicationRpcPath, applicationRpcStatus, APPLICATION_RPC_MAX_BODY_BYTES, applicationMutationBody, applicationMutationPath } from "./reactPreviewDevelopmentApplicationProtocol";
 
 const FRAME_LIMIT = 65_536;
+const NAV_ROUTE = /^\/(?:[A-Za-z0-9_-]+(?:\/[A-Za-z0-9_-]+)*)?$/;
+function validNavigationRoute(route:unknown):route is string {
+  return typeof route==="string" && route.length<=512 && NAV_ROUTE.test(route);
+}
+export type DevelopmentNavigationState=Readonly<{route:string;canGoBack:boolean;canGoForward:boolean;failed:boolean}>;
+export type DevelopmentNavigationCommand=Readonly<{action:"navigate";route:string}|{action:"back"|"forward"}>;
+type NavigationBinding={state:()=>DevelopmentNavigationState|null;send:(command:DevelopmentNavigationCommand)=>boolean};
+const navigationBindings=new Map<string,Set<NavigationBinding>>();
+const navigationObservers=new Map<string,Set<(state:DevelopmentNavigationState|null)=>void>>();
+function navigationBinding(root:string):NavigationBinding|undefined {
+  const bindings=navigationBindings.get(root);
+  return bindings?.size===1?bindings.values().next().value:undefined;
+}
+function notifyNavigation(root:string) {
+  const state=navigationBinding(root)?.state()??null;
+  for(const observer of navigationObservers.get(root)??[])observer(state);
+}
+export function subscribeDevelopmentNavigation(root:string,observer:(state:DevelopmentNavigationState|null)=>void):()=>void {
+  const observers=navigationObservers.get(root)??new Set();
+  observers.add(observer);navigationObservers.set(root,observers);
+  observer(navigationBinding(root)?.state()??null);
+  return ()=>{observers.delete(observer);if(!observers.size)navigationObservers.delete(root);};
+}
+export function sendDevelopmentNavigation(root:string,command:DevelopmentNavigationCommand):boolean {
+  if(command.action==="navigate"?!validNavigationRoute(command.route):command.action!=="back"&&command.action!=="forward")return false;
+  return navigationBinding(root)?.send(command)??false;
+}
 const NONCE = /^[0-9a-f]{32}$/;
 const PUBLIC_DOC = /^\/api\/build\/projects\/[A-Za-z0-9_-]{1,128}\/preview\/preview_[a-f0-9-]{36}\/development\/content\/dpg1\.[A-Za-z0-9_-]{43}\/$/i;
 const VITE_KINDS = new Set(["connected", "update", "full-reload", "prune", "error", "custom"]);
@@ -27,6 +54,8 @@ export function safeViteIframeFrame(raw: unknown, publicBase: string): string | 
 type RegisteredDocument = Readonly<{frame:HTMLIFrameElement; url:string}>;
 const documents=new Map<string, Map<RegisteredDocument,symbol>>();
 const documentIdentity=new WeakMap<HTMLIFrameElement,RegisteredDocument>();
+const documentObservers=new Map<string,Set<()=>void>>();
+function notifyDocuments(root:string) {for(const notify of documentObservers.get(root)??[])notify();}
 export function registerDevelopmentHmrDocument(root:string, documentUrl:string, frame:HTMLIFrameElement):()=>void {
   if (!PUBLIC_DOC.test(root)) return ()=>undefined;
   const base=new URL(root,window.location.href);
@@ -38,10 +67,10 @@ export function registerDevelopmentHmrDocument(root:string, documentUrl:string, 
   const entry=previous?.url===url.href?previous:{frame,url:url.href};
   documentIdentity.set(frame,entry);
   const entries=documents.get(root)??new Map<RegisteredDocument,symbol>();
-  const generation=Symbol();entries.set(entry,generation);documents.set(root,entries);
+  const generation=Symbol();entries.set(entry,generation);documents.set(root,entries);notifyDocuments(root);
   return ()=>{
     if(entries.get(entry)!==generation)return;
-    entries.delete(entry);if(!entries.size && documents.get(root)===entries)documents.delete(root);
+    entries.delete(entry);if(!entries.size && documents.get(root)===entries)documents.delete(root);notifyDocuments(root);
   };
 }
 function uniqueDocument(root:string):RegisteredDocument|null {
@@ -56,6 +85,7 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
   documentUrl:string;
   onBound?:()=>void;
   onClientReady?:()=>void;
+  onConnectionState?:(state:"connecting"|"live"|"reconnecting")=>void;
   onDeliveryFailure?:()=>void;
   onResync?:(reason:"transport_gap"|"document_boot_revision")=>void;
   getReadySourceVersion?:()=>number|null;
@@ -136,17 +166,46 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
       reply({status:response.status,body});
     }catch{reply({error:true});}finally{window.clearTimeout(timer);rpcInflight.delete(abort);}
   }
+  let lastConnectionState:"connecting"|"live"|"reconnecting"|undefined;
+  let everLive=false;
+  let navigationState:DevelopmentNavigationState|null=null;
+  function liveConnection() {
+    return !closed && connected && clientReady && connectedDelivered && !needsResync &&
+      !!boundDocument && uniqueDocument(input.documentUrl)===boundDocument &&
+      (!input.getReadySourceVersion || bootSettled) && input.canDeliverFrames?.()!==false;
+  }
+  const navigation:NavigationBinding={state:()=>liveConnection()?navigationState:null,send:command=>{
+    if(!liveConnection()||!port||!navigationState)return false;
+    if(command.action==="back"&&!navigationState.canGoBack||command.action==="forward"&&!navigationState.canGoForward)return false;
+    try{port.postMessage({kind:"navigation-command",...command});return true;}catch{return false;}
+  }};
+  const bindings=navigationBindings.get(input.documentUrl)??new Set<NavigationBinding>();
+  bindings.add(navigation);navigationBindings.set(input.documentUrl,bindings);
+  notifyNavigation(input.documentUrl);
+  function reportConnectionState() {
+    const live=liveConnection();
+    if(live)everLive=true;
+    const state=live?"live":everLive?"reconnecting":"connecting";
+    if(lastConnectionState!==state){lastConnectionState=state;input.onConnectionState?.(state);notifyNavigation(input.documentUrl);}
+  }
+  const observers=documentObservers.get(input.documentUrl)??new Set<()=>void>();
+  observers.add(reportConnectionState);documentObservers.set(input.documentUrl,observers);
   function discard() {
     // Settle old iframe promises explicitly; never replay a sent operation.
     try {port?.postMessage({kind:"retired"});port?.close();} catch { /* iframe may have navigated */ }
-    port=null;boundDocument=null;boundNonce=null;
+    port=null;boundDocument=null;boundNonce=null;navigationState=null;
+    notifyNavigation(input.documentUrl);
     for(const controller of rpcInflight)controller.abort();
     rpcInflight.clear();lastRpcId=0;
     clientReady=false;
     connectedDelivered=false;
     bootRevision=null;bootLoadSeen=false;bootSettled=false;bootRevisionChanged=false;
+    reportConnectionState();
   }
   function flush() {
+    try {flushFrames();} finally {reportConnectionState();}
+  }
+  function flushFrames() {
     if (closed || !connected || !port || !connectedFrame ||
         uniqueDocument(input.documentUrl)!==boundDocument ||
         input.canDeliverFrames?.() === false) return;
@@ -236,6 +295,11 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
       } else if(message.data?.kind==="document-loaded" && bootRevision!==null) {
         bootLoadSeen=true;
         flush();
+      } else if(message.data?.kind==="navigation-state") {
+        const value=message.data;
+        if(!validNavigationRoute(value.route)||typeof value.canGoBack!=="boolean"||typeof value.canGoForward!=="boolean"||typeof value.failed!=="boolean")return;
+        navigationState={route:value.route,canGoBack:value.canGoBack,canGoForward:value.canGoForward,failed:value.failed};
+        notifyNavigation(input.documentUrl);
       } else if (message.data?.kind==="application-rpc" && input.getApplicationRpcVersion) {
         void relayApplicationRpc(current,message.data,document);
       }
@@ -261,6 +325,7 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
       connectedDelivered=false;
       clientReady=false;
       port?.postMessage({kind:"disconnect"});
+      reportConnectionState();
     } else {
       if (changed) port?.postMessage({kind:"open",generation:connectionGeneration});
       flush();
@@ -287,6 +352,11 @@ export function createDevelopmentHmrIframeBridge(input: Readonly<{
   function close() {
     if (closed) return;
     closed=true;
+    bindings.delete(navigation);
+    if(!bindings.size && navigationBindings.get(input.documentUrl)===bindings)navigationBindings.delete(input.documentUrl);
+    notifyNavigation(input.documentUrl);
+    observers.delete(reportConnectionState);
+    if(!observers.size && documentObservers.get(input.documentUrl)===observers)documentObservers.delete(input.documentUrl);
     if(resyncTimer!==null){clearTimeout(resyncTimer);resyncTimer=null;}
     buffered.length=0;
     connectedFrame=null;

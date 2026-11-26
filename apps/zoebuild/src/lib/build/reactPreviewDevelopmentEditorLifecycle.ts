@@ -25,6 +25,8 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
   onDocument: (session: DevelopmentEditorDocument) => void;
   onWaiting: () => void;
   onFailure: (failure?: DevelopmentBrowserSessionError) => void;
+  recoverAdmission?: (version:number, failure:DevelopmentBrowserSessionError) =>
+    Promise<"advanced" | "prepared" | "failed">;
   maxRecoveryAttempts?: number;
   recoveryDelay?: (attempt:number) => Promise<void>;
 }>) {
@@ -35,6 +37,7 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
   let selectedVersion: number | null = null;
   let selectedReady = false;
   let recoveryAttempts=0;
+  const admissionRecovered = new Set<number>();
   let recovering=false;
   let retryVersion:number|null=null;
   let phase:DevelopmentEditorLifecyclePhase="idle";
@@ -114,6 +117,38 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
         return;
       }
       const version=selectedVersion;
+      if (error instanceof DevelopmentBrowserSessionError &&
+          (error.code === "START_CONFLICT" || error.code === "DEPENDENCY_PREPARATION_REQUIRED")) {
+        // No blind restart/fallback on a deterministic admission rejection.
+        if (disposed || failed) return;
+        if (selectedReady && version !== null && attemptedVersion !== null && version > attemptedVersion) {
+          pending=version;
+          return;
+        }
+        if (!selectedReady || attemptedVersion === null || version !== attemptedVersion ||
+            admissionRecovered.has(attemptedVersion) || !input.recoverAdmission) {
+          fail(error); return;
+        }
+        admissionRecovered.add(attemptedVersion);
+        phase="reconciling";
+        input.onWaiting();
+        const outcome=await input.recoverAdmission(attemptedVersion,error).catch(()=>"failed" as const);
+        if (disposed || failed) return;
+        if (selectedReady && selectedVersion !== null && selectedVersion > attemptedVersion) {
+          pending=selectedVersion; return;
+        }
+        if (outcome === "failed") {fail(error); return;}
+        if (outcome === "prepared" && selectedReady && selectedVersion === attemptedVersion) {
+          // The existing authoritative callback verified the same-version
+          // lock adoption. One new admission is allowed, not an endless loop.
+          pending=attemptedVersion;
+        } else if (pending === attemptedVersion) {
+          pending=null;
+        }
+        // An advanced head is supplied by the parent's savedRevision effect.
+        // Do not retry the old version while React commits that rehydration.
+        return;
+      }
       // A saved image rename/upload/remove is intentionally classified by the
       // trusted Runner as RESTART_REQUIRED (HTTP 409). One source-fenced
       // replacement is normal, not a failed recovery or a reason to burn the

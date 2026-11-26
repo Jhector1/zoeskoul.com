@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const mocks = vi.hoisted(() => ({
   visibleCatalogs: vi.fn(),
+  onboardingProfile: vi.fn(),
   chooserOptions: vi.fn(),
   accessModel: vi.fn(),
   buildChooser: vi.fn(),
@@ -10,7 +11,7 @@ const mocks = vi.hoisted(() => ({
 vi.mock("server-only", () => ({}));
 
 vi.mock("@/lib/prisma", () => ({
-  prisma: {},
+  prisma: { userOnboardingProfile: { findUnique: mocks.onboardingProfile } },
 }));
 
 vi.mock("@/lib/subjects/server/catalogVisibility", () => ({
@@ -42,6 +43,8 @@ import { loadPracticeChooser } from "./practiceChooser.server";
 describe("Practice chooser catalog parity", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    mocks.onboardingProfile.mockReset();
+    mocks.onboardingProfile.mockResolvedValue(null);
 
     mocks.visibleCatalogs.mockResolvedValue([
       {
@@ -197,5 +200,76 @@ describe("Practice chooser catalog parity", () => {
       availability: "unavailable",
       billingHref: null,
     });
+  });
+
+  it("uses a completed learner selection for discovery and retains enrolled courses from other departments", async () => {
+    mocks.onboardingProfile.mockResolvedValue({
+      version: 2,
+      useMode: "learner",
+      completedAt: new Date("2026-01-01T00:00:00Z"),
+      skippedAt: null,
+      departments: [{ departmentKey: "computer-science" }],
+    });
+    mocks.visibleCatalogs.mockResolvedValue([
+      {
+        slug: "sql",
+        family: "data",
+        subjects: [{ slug: "sql-v2", enrolled: false }],
+      },
+      {
+        slug: "languages",
+        family: "languages",
+        subjects: [
+          { slug: "language-enrolled", enrolled: true },
+          { slug: "language-other", enrolled: false },
+        ],
+      },
+      {
+        slug: "science",
+        family: "science",
+        subjects: [{ slug: "science-other", enrolled: false }],
+      },
+    ]);
+
+    await loadPracticeChooser({
+      actor: { userId: "learner-1", guestId: null },
+      locale: "en",
+      mode: "subscriber",
+    });
+
+    expect(mocks.onboardingProfile).toHaveBeenCalledWith(
+      expect.objectContaining({
+        where: { userId: "learner-1" },
+        select: expect.objectContaining({
+          departments: {
+            where: { context: "learner" },
+            select: { departmentKey: true },
+          },
+        }),
+      }),
+    );
+    expect(mocks.chooserOptions).toHaveBeenCalledWith(
+      new Set(["sql-v2", "language-enrolled"]),
+    );
+  });
+
+  it("keeps discovery unfiltered for a skipped onboarding profile", async () => {
+    mocks.onboardingProfile.mockResolvedValue({
+      version: 2,
+      useMode: "learner",
+      completedAt: new Date("2026-01-01T00:00:00Z"),
+      skippedAt: new Date("2026-01-01T00:00:00Z"),
+      departments: [{ departmentKey: "languages" }],
+    });
+
+    await loadPracticeChooser({
+      actor: { userId: "learner-1", guestId: null },
+      locale: "en",
+      mode: "subscriber",
+    });
+
+    expect(mocks.chooserOptions).toHaveBeenCalledWith(
+      new Set(["sql-v2", "sql-analysis-reporting", "multi-table-sql", "sql-data-management"]),
+    );
   });
 });

@@ -218,7 +218,7 @@ model BuildManagedBinaryRevision {
   buildProject BuildProject @relation(fields: [buildProjectId], references: [id], onDelete: Cascade)
 
   @@id([buildProjectId, sourceVersion])
-  @@index([ownerId, buildProjectId, sourceVersion])
+  @@index([ownerId, buildProjectId, sourceVersion], map: "BuildManagedBinaryRevision_ownerId_buildProjectId_sourceVersion")
 }
 
 /** Durable intent exists BEFORE the first private R2 PUT; not an exposed media catalog. */
@@ -236,8 +236,8 @@ model BuildManagedBinaryUploadIntent {
   updatedAt DateTime @updatedAt
   buildProject BuildProject @relation(fields: [buildProjectId], references: [id], onDelete: Cascade)
 
-  @@index([ownerId, buildProjectId, state, createdAt])
-  @@index([buildProjectId, plannedBaseVersion])
+  @@index([ownerId, buildProjectId, state, createdAt], map: "BuildManagedBinaryUploadIntent_ownerId_buildProjectId_state_cre")
+  @@index([buildProjectId, plannedBaseVersion], map: "BuildManagedBinaryUploadIntent_buildProjectId_plannedBaseVersio")
 }
 
 model CommerceStore {
@@ -395,7 +395,7 @@ model CommerceOrder {
   @@index([storeId, paymentStatus, createdAt])
   @@index([customerId, createdAt])
   @@index([paymentProvider, paymentProviderRef])
-  @@index([paymentProvider, paymentEnvironment, paymentStatus, checkoutExpiresAt])
+  @@index([paymentProvider, paymentEnvironment, paymentStatus, checkoutExpiresAt], map: "CommerceOrder_paymentProvider_paymentEnvironment_paymentStatus_")
 }
 
 model CommerceInventoryReservation {
@@ -411,7 +411,7 @@ model CommerceInventoryReservation {
   inventoryItem   CommerceInventoryItem              @relation(fields: [inventoryItemId], references: [id], onDelete: Restrict)
 
   @@unique([orderId, inventoryItemId])
-  @@index([inventoryItemId, status, expiresAt])
+  @@index([inventoryItemId, status, expiresAt], map: "CommerceInventoryReservation_inventoryItemId_status_expiresAt_i")
   @@index([status, expiresAt])
 }
 
@@ -451,7 +451,7 @@ model CommerceProviderConnection {
 
   @@unique([storeId, provider, environment])
   @@index([storeId, environment, status])
-  @@index([provider, environment, externalAccountRef])
+  @@index([provider, environment, externalAccountRef], map: "CommerceProviderConnection_provider_environment_externalAccount")
 }
 
 model CommerceProviderRoute {
@@ -748,25 +748,43 @@ model PracticeAttempt {
 }
 
 model UserOnboardingProfile {
-  id                String                     @id @default(cuid())
-  userId            String?                    @unique
-  guestId           String?                    @unique
-  preferredLanguage String?
-  level             String?
-  studyTime         String?
-  completedAt       DateTime?
-  skippedAt         DateTime?
-  claimedAt         DateTime?
-  expiresAt         DateTime?
-  createdAt         DateTime                   @default(now())
-  updatedAt         DateTime                   @updatedAt
-  analyticsEvents   OnboardingAnalyticsEvent[]
-  interests         UserOnboardingInterest[]
-  user              User?                      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                 String                     @id @default(cuid())
+  userId             String?                    @unique
+  guestId            String?                    @unique
+  version            Int                        @default(1)
+  useMode            OnboardingUseMode?
+  learnerAffiliation OnboardingAffiliation?
+  teacherAffiliation OnboardingAffiliation?
+  preferredLanguage  String?
+  level              String?
+  studyTime          String?
+  completedAt        DateTime?
+  skippedAt          DateTime?
+  claimedAt          DateTime?
+  expiresAt          DateTime?
+  createdAt          DateTime                   @default(now())
+  updatedAt          DateTime                   @updatedAt
+  analyticsEvents    OnboardingAnalyticsEvent[]
+  departments        UserOnboardingDepartment[]
+  interests          UserOnboardingInterest[]
+  user               User?                      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([guestId])
   @@index([userId])
   @@index([expiresAt])
+}
+
+model UserOnboardingDepartment {
+  id            String                      @id @default(cuid())
+  profileId     String
+  departmentKey String
+  context       OnboardingDepartmentContext
+  createdAt     DateTime                    @default(now())
+  profile       UserOnboardingProfile       @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@unique([profileId, departmentKey, context])
+  @@index([profileId, context])
+  @@index([departmentKey])
 }
 
 model UserOnboardingInterest {
@@ -1396,7 +1414,7 @@ model LearningOrganizationInvite {
   acceptedBy       User?                          @relation("LearningOrganizationInviteAcceptedBy", fields: [acceptedByUserId], references: [id], onDelete: SetNull)
 
   @@unique([organizationId, email])
-  @@index([organizationId, revokedAt, expiresAt])
+  @@index([organizationId, revokedAt, expiresAt], map: "LearningOrganizationInvite_organizationId_revokedAt_expiresAt_i")
   @@index([email, revokedAt])
   @@index([acceptedByUserId])
 }
@@ -1989,6 +2007,22 @@ enum TutoringParticipantRole {
   observer
 }
 
+enum OnboardingUseMode {
+  learner
+  teacher
+  both
+}
+
+enum OnboardingAffiliation {
+  independent
+  institution
+}
+
+enum OnboardingDepartmentContext {
+  learner
+  teacher
+}
+
 enum LearningOrganizationMemberRole {
   admin
   instructor
@@ -2549,7 +2583,7 @@ model AiCreditPaymentReversalSnapshot {
   observedAt             DateTime @default(now())
   lot                    AiCreditLot @relation(fields: [lotId], references: [id], onDelete: Restrict)
 
-  @@unique([lotId, refundedAmountUsdMinor])
+  @@unique([lotId, refundedAmountUsdMinor], map: "AiCreditPaymentReversalSnapshot_lotId_refundedAmountUsdMinor_ke")
   @@index([lotId, observedAt])
 }
 
@@ -2658,7 +2692,7 @@ model ZoeBuildChatMessage {
   buildProject  BuildProject @relation(fields: [buildProjectId], references: [id], onDelete: Cascade)
 
   @@unique([buildProjectId, clientTurnId])
-  @@index([buildProjectId, savedVersion, createdAt, id])
+  @@index([buildProjectId, savedVersion, createdAt, id], map: "ZoeBuildChatMessage_buildProjectId_savedVersion_createdAt_id_id")
 }
 
 // Explicit desired hosted selection; no row or a null deployment means unpublished.
@@ -2697,4 +2731,18 @@ model BuildHostedPublicationOperation {
 
   @@unique([buildProjectId, expectedGeneration], map: "HostedPublicationOperation_project_generation_key")
   @@index([buildProjectId, targetDeploymentId], map: "HostedPublicationOperation_project_target_idx")
+}
+
+// Historical physical table retained; not exposed by Prisma Client.
+model PublicChallengeSocialCredential {
+  provider               String    @id @db.VarChar(24)
+  accessTokenCiphertext  String?
+  refreshTokenCiphertext String?
+  accessTokenExpiresAt   DateTime?
+  scope                  String?
+  connectedAt            DateTime?
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime
+
+  @@ignore
 }

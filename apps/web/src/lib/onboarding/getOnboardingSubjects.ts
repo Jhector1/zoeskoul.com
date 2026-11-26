@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import {
     CATALOG_MANIFESTS,
     SUBJECT_CATALOG_SLUGS,
+    resolveDepartmentPresentation,
 } from "@zoeskoul/curriculum-registry/runtime";
 import {
     getResolvedCatalogMap,
@@ -29,6 +30,8 @@ export type OnboardingSubjectOption = {
     catalogSlug: string;
     catalogTitle: string;
     catalogOrder: number;
+    departmentId: string;
+    departmentTitle: string;
 };
 
 function badgeFromSubject(input: {
@@ -87,6 +90,10 @@ export async function getOnboardingSubjects(): Promise<OnboardingSubjectOption[]
         const imagePublicId = resolved?.imagePublicId ?? s.imagePublicId;
         const catalogSlug = SUBJECT_CATALOG_SLUGS[s.slug] ?? "other";
         const catalog = CATALOG_MANIFESTS[catalogSlug]?.catalog;
+        const department = resolveDepartmentPresentation({
+            catalogFamily: catalog?.meta?.family ?? null,
+            catalogSlug,
+        });
 
         return {
             id: s.id,
@@ -110,6 +117,8 @@ export async function getOnboardingSubjects(): Promise<OnboardingSubjectOption[]
             catalogSlug,
             catalogTitle: catalog?.title ?? "Other courses",
             catalogOrder: catalog?.order ?? Number.MAX_SAFE_INTEGER,
+            departmentId: department.id,
+            departmentTitle: department.title,
         };
     });
 }
@@ -130,9 +139,13 @@ export async function getPublicOnboardingSubjects(): Promise<
     return Object.values(catalogMap)
         .filter((catalog) => catalog.status === "active" && !hidden.catalogs.has(catalog.slug))
         .flatMap((catalog) => {
+            const manifestCatalog = CATALOG_MANIFESTS[catalog.slug]?.catalog;
             const catalogOrder =
-                CATALOG_MANIFESTS[catalog.slug]?.catalog?.order ??
-                Number.MAX_SAFE_INTEGER;
+                manifestCatalog?.order ?? Number.MAX_SAFE_INTEGER;
+            const department = resolveDepartmentPresentation({
+                catalogFamily: manifestCatalog?.meta?.family ?? null,
+                catalogSlug: catalog.slug,
+            });
 
             return catalog.subjects
                 .filter((subject) => {
@@ -166,6 +179,8 @@ export async function getPublicOnboardingSubjects(): Promise<
                         catalogSlug: catalog.slug,
                         catalogTitle: catalog.title,
                         catalogOrder,
+                        departmentId: department.id,
+                        departmentTitle: department.title,
                     } satisfies OnboardingSubjectOption;
                 });
         });

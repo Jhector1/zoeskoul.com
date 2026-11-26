@@ -31,6 +31,77 @@ export const ZOEBUILD_IFRAME_HMR_SCRIPT = String.raw`(function () {
   }
   if(documentSourceVersion!==null)
     window.addEventListener("load",reportDocumentLoaded,{once:true});
+  // Navigation shares the nonce-confirmed document port. The route state is
+  // presentation data only; it never grants authority or changes the lease.
+  // The editor registers the slash-terminated root, but Next can canonicalize
+  // its document URL to the same grant without the final slash (HTTP 308).
+  // Match the exact grant boundary in either form, never a token prefix.
+  const navRoot = typeof window.location?.pathname === "string" ?
+    /^\/api\/build\/projects\/[A-Za-z0-9_-]{1,128}\/preview\/preview_[a-f0-9-]{36}\/development\/content\/dpg1\.[A-Za-z0-9_-]{43}(?=\/|$)/i.exec(window.location.pathname)?.[0] : null;
+  const navBase = navRoot === null || navRoot === undefined ? null : navRoot+"/";
+  const validRoute = route => typeof route==="string" && route.length<=512 && /^\/(?:[A-Za-z0-9_-]+(?:\/[A-Za-z0-9_-]+)*)?$/.test(route);
+  const navHistory = window.history;
+  function currentRoute() {
+    if(!navBase)return null;
+    if(window.location.pathname===navRoot)return "/";
+    if(!window.location.pathname.startsWith(navBase))return null;
+    const route="/"+window.location.pathname.slice(navBase.length);
+    return validRoute(route)?route:null;
+  }
+  let navRoutes=[currentRoute()],navIndex=0,navPending=null,navFingerprint=null;
+  function reportNavigation(failed=false,force=false) {
+    const route=currentRoute();
+    if(!channel||retired||route===null)return;
+    const state={kind:"navigation-state",route,canGoBack:navIndex>0,canGoForward:navIndex<navRoutes.length-1,failed};
+    const fingerprint=JSON.stringify(state);
+    if(!force&&fingerprint===navFingerprint)return;
+    navFingerprint=fingerprint;channel.postMessage(state);
+  }
+  let bridgePush=null;
+  if(navBase && navHistory) {
+    const push=navHistory.pushState,replace=navHistory.replaceState;
+    bridgePush=navHistory.pushState=function(...args){
+      const previous=window.location.href;
+      const result=push.apply(this,args);
+      const route=currentRoute();
+      if(route!==null&&previous!==window.location.href){navRoutes=navRoutes.slice(0,navIndex+1);navRoutes.push(route);if(navRoutes.length>100)navRoutes.shift();navIndex=navRoutes.length-1;}
+      reportNavigation();return result;
+    };
+    navHistory.replaceState=function(...args){
+      const result=replace.apply(this,args);const route=currentRoute();
+      if(route!==null)navRoutes[navIndex]=route;
+      reportNavigation();return result;
+    };
+    window.addEventListener("popstate",()=>{
+      const route=currentRoute();if(route===null)return;
+      const candidate=navPending==="back"?navIndex-1:navPending==="forward"?navIndex+1:navIndex;
+      if(candidate>=0&&candidate<navRoutes.length&&navRoutes[candidate]===route)navIndex=candidate;
+      else if(navRoutes[navIndex]!==route){
+        const found=navRoutes.lastIndexOf(route);if(found>=0)navIndex=found;else{navRoutes=[route];navIndex=0;}
+      }
+      navPending=null;reportNavigation(false,true);
+    });
+  }
+  function navigateDocument(value) {
+    if(!navBase||!navHistory||retired||!channelOpen||navPending!==null)return;
+    try {
+      if(value.action==="navigate"&&validRoute(value.route)){
+        if(currentRoute()!==value.route){
+          // Use the same History API / popstate contract as the immutable
+          // preview bridge. No window.location assignment or iframe reload.
+          const state=navHistory.state;
+          const nextState=Number.isSafeInteger(state?.__TSR_index)?{__TSR_index:state.__TSR_index+1}:{};
+          navHistory.pushState(nextState,"",navBase+value.route.slice(1));
+          // TanStack browser history wraps pushState and notifies its own
+          // subscribers. Only synthesize popstate for an unwrapped History API
+          // (the same contract used by the existing immutable bridge).
+          if(navHistory.pushState===bridgePush)window.dispatchEvent(new PopStateEvent("popstate",{state:navHistory.state}));
+        }
+        reportNavigation(false,true);
+      }else if(value.action==="back"&&navIndex>0){navPending="back";navHistory.back();}
+      else if(value.action==="forward"&&navIndex<navRoutes.length-1){navPending="forward";navHistory.forward();}
+    }catch{navPending=null;reportNavigation(true,true);}
+  }
   const rpcPending = new Map();
   let rpcSequence = 0;
   const rpcLimit = 4;
@@ -176,6 +247,8 @@ export const ZOEBUILD_IFRAME_HMR_SCRIPT = String.raw`(function () {
         for (const socket of sockets) socket.scheduleOpen();
       } else if (value.kind==="frame" && channelOpen && typeof value.text==="string" && value.text.length <= MAX) {
         for (const socket of sockets) socket.receive(value.text);
+      } else if (value.kind==="navigation-command") {
+        navigateDocument(value);
       } else if (rpcBase!==null && value.kind==="application-rpc-result" && Number.isSafeInteger(value.id)) {
         if(!rpcPending.has(value.id))return;
         if(value.error===true || !Number.isInteger(value.status) ||
@@ -204,6 +277,7 @@ export const ZOEBUILD_IFRAME_HMR_SCRIPT = String.raw`(function () {
     channel.start();
     channel.postMessage({kind:"bound",...(documentSourceVersion===null?{}:{sourceVersion:documentSourceVersion})});
     if(documentLoaded)channel.postMessage({kind:"document-loaded"});
+    reportNavigation(false,true);
     if(rpcBase!==null)for(const [id,entry] of rpcPending)sendRpc(id,entry);
   });
   let attempts=0;

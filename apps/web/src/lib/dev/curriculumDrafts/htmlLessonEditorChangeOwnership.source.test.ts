@@ -1,9 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { describe, expect, it } from "vitest";
 
-const repoRoot = path.resolve(process.cwd(), "../..");
+const repoRoot = fileURLToPath(new URL("../../../../../../", import.meta.url));
 
 function read(relativePath: string) {
   return fs.readFileSync(path.join(repoRoot, relativePath), "utf8");

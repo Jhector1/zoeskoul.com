@@ -6,6 +6,19 @@ import {
   vi,
 } from "vitest";
 
+const onboardingMocks = vi.hoisted(() => ({
+  currentUserAccess: vi.fn(),
+  departmentFilter: vi.fn(),
+}));
+
+vi.mock("@/lib/access/currentUserAccess", () => ({
+  getCurrentUserAccess: onboardingMocks.currentUserAccess,
+}));
+
+vi.mock("@/lib/onboarding/departmentSelection", () => ({
+  getLearnerCatalogDepartmentFilter: onboardingMocks.departmentFilter,
+}));
+
 vi.mock(
   "@/lib/subjects/server/catalogVisibility",
   () => ({
@@ -69,7 +82,14 @@ function preflight(
 }
 
 afterEach(() => {
-  vi.unstubAllEnvs();
+  try {
+    // OPTIONS must remain independent of authentication and personalization.
+    expect(onboardingMocks.currentUserAccess).not.toHaveBeenCalled();
+    expect(onboardingMocks.departmentFilter).not.toHaveBeenCalled();
+  } finally {
+    vi.clearAllMocks();
+    vi.unstubAllEnvs();
+  }
 });
 
 describe.each(routes)(

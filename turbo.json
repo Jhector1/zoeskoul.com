@@ -32,7 +32,8 @@
     },
     "typecheck": {
       "dependsOn": [
-        "^typecheck"
+        "^typecheck",
+        "^build"
       ],
       "outputs": []
     },

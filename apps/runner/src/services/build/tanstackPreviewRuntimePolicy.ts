@@ -3,7 +3,9 @@ import type { ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contr
 
 /** Canonical runtime argv. No user-supplied commands, ports or environment. */
 export const TANSTACK_PREVIEW_DEV_COMMAND = [
-  "pnpm", "exec", "vite", "dev", "--host", "127.0.0.1", "--port", "5173", "--strictPort",
+  // Resolve Vite from the authorized workspace dependency tree directly.
+  // Avoid the pnpm exec launcher on the preview-only startup path.
+  "node", "/workspace/node_modules/vite/bin/vite.js", "dev", "--host", "127.0.0.1", "--port", "5173", "--strictPort",
   // Vite's info banner includes its public base, which is a bearer capability.
   // Readiness is measured over the private HTTP worker, never by parsing logs.
   "--logLevel", "warn",

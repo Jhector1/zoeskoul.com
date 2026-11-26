@@ -1,5 +1,6 @@
 import {
   buildAuthenticateUrl,
+  buildOnboardingUrl,
   type AppCapability,
   type AppSessionResponse,
 } from "@zoeskoul/auth-client";
@@ -59,6 +60,23 @@ export function TeacherAccessGate(props: {
     props.websiteOrigin,
     state,
   ]);
+
+  useEffect(() => {
+    if (
+      state.status !== "authenticated" ||
+      !state.session.capabilities.includes(TEACHER_ACCESS_CAPABILITY) ||
+      state.session.onboarding.status === "completed"
+    ) {
+      return;
+    }
+
+    window.location.replace(
+      buildOnboardingUrl({
+        websiteOrigin: props.websiteOrigin,
+        callbackUrl: window.location.href,
+      }),
+    );
+  }, [props.websiteOrigin, state]);
 
   if (state.status === "loading") {
     return (
@@ -140,6 +158,18 @@ export function TeacherAccessGate(props: {
           >
             {t("return")}
           </a>
+        </section>
+      </main>
+    );
+  }
+
+  if (session.onboarding.status !== "completed") {
+    return (
+      <main className="app-shell" aria-busy="true">
+        <section className="foundation-card">
+          <div className="eyebrow">{t("brand")}</div>
+          <h1>Opening ZoeSkoul onboarding</h1>
+          <p>Your role, institution context, and departments are set up once for your account.</p>
         </section>
       </main>
     );

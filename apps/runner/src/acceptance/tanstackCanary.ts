@@ -127,9 +127,9 @@ async function main():Promise<void> {
     ownedWorkspaceDir=`${env.workspaceRoot}/${additions[0]}`;
     const home=await fetchOwnedTanstackPreview({ownerKey,previewId,buildProjectId:projectId,sourceVersion:1,
       path:preview.basePath,method:"GET"});
-    expect(home.status===200 && textBody(home).includes("Make something people love"),"SSR server-function loader failed");
+    expect(home.status === 200 && textBody(home).includes('<h1 id="headline">Welcome to My Website</h1>') && textBody(home).includes('<p>Explore what this site has to offer.</p>') && textBody(home).includes('tagline:"Welcome to My Website",description:"Explore what this site has to offer."') && textBody(home).includes('ssr:!0'), "SSR server-function loader failed");
     const about=await fetchAdmittedTanstackPreview({previewId,path:preview.basePath+"about",method:"GET"});
-    expect(about.response.status===200 && textBody(about.response).includes("Thoughtfully built"),"SSR about failed");
+    expect(about.response.status === 200 && textBody(about.response).replace(/<!--(?:\s*|\$|\/\$|\$\?)-->/g, "").includes('<h1>About My Website</h1>') && textBody(about.response).replace(/<!--(?:\s*|\$|\/\$|\$\?)-->/g, "").includes('<p>Explore what this site has to offer.</p>'), "SSR about failed");
     console.log("P3B3_SSR_AND_SERVER_LOADER_PASS");
     const health=await fetchOwnedTanstackPreview({ownerKey,previewId,buildProjectId:projectId,sourceVersion:1,
       path:preview.basePath+"api/health",method:"GET",headers:{accept:"application/json"}});
