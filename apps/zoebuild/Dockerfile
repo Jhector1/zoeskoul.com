@@ -14,6 +14,7 @@ COPY . .
 RUN export DATABASE_URL="postgresql://placeholder:placeholder@127.0.0.1:5432/placeholder?schema=public" \
     && NODE_ENV=development pnpm install --frozen-lockfile --prod=false \
     && pnpm --filter @zoeskoul/db exec prisma generate \
+    && NODE_ENV=development pnpm --filter '@zoeskoul/zoebuild^...' --filter '@zoeskoul/db...' --filter '@zoeskoul/curriculum-registry...' --filter '@zoeskoul/curriculum-runtime...' --fail-if-no-match run --if-present build \
     && NODE_ENV=production pnpm --filter @zoeskoul/zoebuild build \
     && mkdir -p /app/apps/zoebuild/.next/cache \
     && chown -R node:node /app/apps/zoebuild/.next
