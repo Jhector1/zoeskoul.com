@@ -127,6 +127,8 @@ describe("versioned static images use the trusted binary writer, not text HMR", 
       next:{...previous,sourceVersion:6,binaryFiles:[{...asset,path:"public/../secret.png"}]}}))
       .toMatchObject({action:"reject",reason:"invalid_files"});
     expect(classifyTanstackPreviewTransition({mode:"immutable",previous,
+      next:{...withImage,sourceVersion:6}})).toMatchObject({action:"restart",reason:"protected_files_changed"});
+    expect(classifyTanstackPreviewTransition({mode:"immutable",allowBinaryLive:true,previous,
       next:{...withImage,sourceVersion:6}})).toMatchObject({action:"restart",reason:"immutable_lease"});
   });
   it("rejects same-version mutations and case alias collisions", () => {

@@ -1,4 +1,4 @@
-import { randomUUID } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import type { ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contracts";
 import { assertTanstackWorkerBuildRequest } from "./tanstackWorkerBuildPolicy.js";
 import { createWorkspace } from "../workspace/createWorkspace.js";
@@ -8,7 +8,7 @@ import { executeBuildStep } from "./executeProductionBuild.js";
 import { readTanstackWorkerArtifact } from "./tanstackWorkerArtifact.js";
 import { env } from "../../lib/env.js";
 import { createTanstackRecoveryJournal } from "./tanstackPreviewDurableRecovery.js";
-import { shouldRunWorkerSmoke, shouldRunReferenceWorkerSmoke, WORKER_REFERENCE_PROJECT, generalWorkerVerificationEnabled, workerVerificationSnapshot } from "./tanstackWorkerRuntimePolicy.js";
+import { shouldRunWorkerSmoke, shouldRunReferenceWorkerSmoke, WORKER_REFERENCE_PROJECT, generalWorkerVerificationEnabled } from "./tanstackWorkerRuntimePolicy.js";
 import { runTanstackWorkerRuntimeSmoke } from "./tanstackWorkerRuntimeSmoke.js";
 
 /**
@@ -24,6 +24,7 @@ export async function executeTanstackWorkerBuild(
   generalAuthorized = false,
 ) {
   assertTanstackWorkerBuildRequest(request);
+  const snapshotSha256 = createHash("sha256").update(JSON.stringify({files: request.files, binaryFiles: request.binaryFiles ?? []}), "utf8").digest("hex");
   const reference = referenceAuthorized && shouldRunReferenceWorkerSmoke(request);
   if (referenceAuthorized !== reference || (request.buildProjectId === WORKER_REFERENCE_PROJECT && !reference))
     throw new Error("Reference fixture admission refused.");
@@ -62,7 +63,7 @@ export async function executeTanstackWorkerBuild(
     }) : undefined;
     return { protocolVersion: request.protocolVersion, operation: "production-build" as const,
       buildProjectId: request.buildProjectId, sourceVersion: request.sourceVersion,
-      artifact, snapshotSha256:workerVerificationSnapshot(request), ...(runtimeSmoke ? {runtimeSmoke} : {}) };
+      snapshotSha256, artifact, ...(runtimeSmoke ? {runtimeSmoke} : {}) };
   } finally {
     // A failed workspace removal must propagate: never mark the build verified.
     if (liveContainer || journal?.current.containerId) {

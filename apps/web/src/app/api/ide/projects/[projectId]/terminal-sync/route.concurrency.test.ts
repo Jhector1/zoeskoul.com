@@ -99,7 +99,7 @@ describe("terminal-sync atomic project version and ownership", () => {
         expect(response.status).toBe(200);
         expect(mocks.update).toHaveBeenCalledTimes(1);
         expect(mocks.update).toHaveBeenCalledWith(expect.objectContaining({
-            where: {
+            where: { buildProject: { is: null },
                 id: "project-one",
                 ownerId: "learner-one",
                 archivedAt: null,
@@ -139,7 +139,7 @@ describe("terminal-sync atomic project version and ownership", () => {
         }));
         expect(mocks.findFirst).toHaveBeenCalledTimes(2);
         expect(mocks.findFirst).toHaveBeenNthCalledWith(2, expect.objectContaining({
-            where: { id: "project-one", ownerId: "learner-one", archivedAt: null },
+            where: { buildProject: { is: null }, id: "project-one", ownerId: "learner-one", archivedAt: null },
         }));
         expect(mocks.runnerPost).toHaveBeenCalledTimes(1);
         expect(mocks.update).toHaveBeenCalledTimes(1);
@@ -153,7 +153,7 @@ describe("terminal-sync atomic project version and ownership", () => {
         expect(await response.json()).toEqual({ ok: false, error: "Project not found." });
         expect(mocks.findFirst).toHaveBeenCalledTimes(2);
         expect(mocks.findFirst).toHaveBeenNthCalledWith(2, expect.objectContaining({
-            where: { id: "project-one", ownerId: "learner-one", archivedAt: null },
+            where: { buildProject: { is: null }, id: "project-one", ownerId: "learner-one", archivedAt: null },
         }));
         expect(mocks.update).toHaveBeenCalledTimes(1);
     });
@@ -176,7 +176,7 @@ describe("terminal-sync atomic project version and ownership", () => {
         const response = await call(7);
         expect(response.status).toBe(404);
         expect(mocks.findFirst).toHaveBeenCalledWith(expect.objectContaining({
-            where: { id: "project-one", ownerId: "learner-one", archivedAt: null },
+            where: { buildProject: { is: null }, id: "project-one", ownerId: "learner-one", archivedAt: null },
         }));
         expect(mocks.runnerPost).not.toHaveBeenCalled();
         expect(mocks.update).not.toHaveBeenCalled();

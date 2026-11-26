@@ -336,6 +336,7 @@ describe("suspended TanStack development workspace writer (not routed)", () => {
       .toEqual([{path:"src/routes/index.tsx",content:null}]);
   });
   it("uploads, replaces, renames and deletes a checksum-verified static PNG without restarting Docker",async()=>{
+    vi.stubEnv("ZOEBUILD_DEVELOPMENT_PREVIEW_BINARY_HMR_ENABLED", "true");
     const crypto=await import("node:crypto");
     const png=(name:string,data:string)=>{
       const buffer=Buffer.from(data);
@@ -346,15 +347,15 @@ describe("suspended TanStack development workspace writer (not routed)", () => {
     const red=png("red.png","red test binary");
     const blue=png("red.png","blue replacement");
     const images=path.join(workspaceDir,"public/images");
-    await update({changedPaths:[red.path],next:{files:[],binaryFiles:[red]}});
+    await update({changedPaths:[red.path],previous:{files:[],binaryFiles:[]},next:{files:[],binaryFiles:[red]}});
     expect(await fs.readFile(path.join(images,"red.png"),"utf8")).toBe("red test binary");
-    await update({changedPaths:[red.path],next:{files:[],binaryFiles:[blue]}});
+    await update({changedPaths:[red.path],previous:{files:[],binaryFiles:[red]},next:{files:[],binaryFiles:[blue]}});
     expect(await fs.readFile(path.join(images,"red.png"),"utf8")).toBe("blue replacement");
     const moved={...blue,path:"public/images/hero.png"};
-    await update({changedPaths:[red.path,moved.path],next:{files:[],binaryFiles:[moved]}});
+    await update({changedPaths:[red.path,moved.path],previous:{files:[],binaryFiles:[blue]},next:{files:[],binaryFiles:[moved]}});
     await expect(fs.stat(path.join(images,"red.png"))).rejects.toMatchObject({code:"ENOENT"});
     expect(await fs.readFile(path.join(images,"hero.png"),"utf8")).toBe("blue replacement");
-    await update({changedPaths:[moved.path],next:{files:[],binaryFiles:[]}});
+    await update({changedPaths:[moved.path],previous:{files:[],binaryFiles:[moved]},next:{files:[],binaryFiles:[]}});
     await expect(fs.stat(path.join(images,"hero.png"))).rejects.toMatchObject({code:"ENOENT"});
     expect(container.pause).toHaveBeenCalledTimes(4);
     expect(container.unpause).toHaveBeenCalledTimes(4);
