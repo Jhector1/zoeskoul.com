@@ -1,0 +1,16 @@
+[Unit]
+Description=ZoeBuild fenced-only development authority (explicit cutover required)
+After=network.target
+ConditionPathExists=%h/.zoeskoul/hosted-server-authority-dev/config.json
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 -B %h/.zoeskoul/publish-pilot-tools/hosted_server_authority.py --serve --config-root %h/.zoeskoul/hosted-server-authority-dev
+Restart=on-failure
+RestartSec=3
+UMask=0077
+NoNewPrivileges=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+TimeoutStopSec=10
+
+# Deliberately no [Install] section: no automatic enablement before cutover.

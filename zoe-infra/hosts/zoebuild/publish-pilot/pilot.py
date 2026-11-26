@@ -315,10 +315,11 @@ def serve(args):
     return serve_gateway(lambda: load_deployment(args.sha))
 
 
-def serve_gateway(resolve):
+def serve_gateway(resolve,allow_unpublished=False):
     # Each request resolves a verified deployment; a stable gateway can switch
     # an atomic activation pointer without restarting or changing the port.
-    _,_,receipt=resolve()
+    # A managed gateway must restart even when deliberately unpublished.
+    receipt=None if allow_unpublished else resolve()[2]
     slots=threading.BoundedSemaphore(4)
     class Handler(http.server.BaseHTTPRequestHandler):
         protocol_version="HTTP/1.0"
@@ -332,7 +333,10 @@ def serve_gateway(resolve):
                 self.send_error(400);return
             if not slots.acquire(blocking=False):self.send_error(503);return
             try:
-                d,name,_=resolve()
+                selected=resolve()
+                if selected is None and allow_unpublished:
+                    self.send_error(404,"Private site unpublished");return
+                d,name,_=selected
                 status,mime,location,data=fetch(d,name,self.path,method)
             except Exception:
                 self.send_error(502);return
@@ -344,7 +348,7 @@ def serve_gateway(resolve):
             self.send_header("Content-Length",str(len(data)));self.end_headers()
             if method=="GET":self.wfile.write(data)
     with http.server.ThreadingHTTPServer(("127.0.0.1",PORT),Handler) as server:
-        print(f"PRIVATE_GATEWAY_READY=http://127.0.0.1:{PORT}/; OBJECT_SHA256={receipt['objectSha256']}",flush=True)
+        print(f"PRIVATE_GATEWAY_READY=http://127.0.0.1:{PORT}/; OBJECT_SHA256={receipt['objectSha256'] if receipt else 'managed'}",flush=True)
         server.serve_forever()
 
 

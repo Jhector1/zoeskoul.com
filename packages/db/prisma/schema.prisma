@@ -143,6 +143,9 @@ model BuildProject {
   resources     BuildResource[]
   secrets       BuildSecret[]
   deployments   BuildDeployment[]
+  hostedHostname BuildHostedHostname?
+  hostedActivation BuildHostedActivation?
+  hostedPublicationOperations BuildHostedPublicationOperation[]
   artifacts     BuildArtifact[]
   commerceStore CommerceStore?
   chatMessages  ZoeBuildChatMessage[]
@@ -525,6 +528,15 @@ model BuildSecret {
   @@index([keyVersion, createdAt])
 }
 
+// Stable address reservation, independent of the active release. Keep the
+// hostname row on project deletion so a previously issued address is not reused.
+model BuildHostedHostname {
+  hostname       String        @id @db.VarChar(253)
+  buildProjectId String?       @unique
+  createdAt      DateTime      @default(now())
+  buildProject   BuildProject? @relation(fields: [buildProjectId], references: [id], onDelete: SetNull)
+}
+
 model BuildDeployment {
   id              String                @id @default(cuid())
   buildProjectId  String
@@ -543,12 +555,15 @@ model BuildDeployment {
   updatedAt       DateTime              @updatedAt
   buildProject    BuildProject          @relation(fields: [buildProjectId], references: [id], onDelete: Cascade)
   buildArtifact   BuildArtifact?        @relation(fields: [buildArtifactId], references: [id], onDelete: SetNull)
+  hostedActivations BuildHostedActivation[]
+  hostedPublicationOperations BuildHostedPublicationOperation[]
 
   @@index([buildProjectId, createdAt])
   @@index([buildArtifactId])
   @@index([buildProjectId, environment, status])
   @@index([provider, providerRef])
   @@index([hostname])
+  @@unique([buildProjectId, id])
 }
 
 model BuildArtifact {
@@ -2644,4 +2659,42 @@ model ZoeBuildChatMessage {
 
   @@unique([buildProjectId, clientTurnId])
   @@index([buildProjectId, savedVersion, createdAt, id])
+}
+
+// Explicit desired hosted selection; no row or a null deployment means unpublished.
+// Keep the exact runtime token, not a JS Date truncated to milliseconds.
+// Database checks and the same-project composite FK are in the migration.
+model BuildHostedActivation {
+  buildProjectId String @id
+  deploymentId String?
+  activationToken String? @db.VarChar(64)
+  generation BigInt @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  buildProject BuildProject @relation(fields: [buildProjectId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  deployment BuildDeployment? @relation(fields: [buildProjectId, deploymentId], references: [buildProjectId, id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([buildProjectId, deploymentId])
+}
+
+// Durable publication intent and completion evidence; no runtime acknowledgement is inferred.
+// The single-pending-operation partial unique index and checks are in migration SQL.
+model BuildHostedPublicationOperation {
+  id String @id @db.VarChar(128)
+  buildProjectId String
+  requestedByOwnerId String @db.VarChar(128)
+  expectedGeneration BigInt
+  action String @db.VarChar(16)
+  targetDeploymentId String?
+  targetSourceVersion Int?
+  targetArtifactHash String? @db.VarChar(64)
+  targetObjectSha256 String? @db.VarChar(64)
+  activationToken String? @db.VarChar(64)
+  completedAt DateTime?
+  createdAt DateTime @default(now())
+  buildProject BuildProject @relation(fields: [buildProjectId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  targetDeployment BuildDeployment? @relation(fields: [buildProjectId, targetDeploymentId], references: [buildProjectId, id], onDelete: NoAction, onUpdate: NoAction, map: "BuildHostedPublicationOperation_target_fkey")
+
+  @@unique([buildProjectId, expectedGeneration], map: "HostedPublicationOperation_project_generation_key")
+  @@index([buildProjectId, targetDeploymentId], map: "HostedPublicationOperation_project_target_idx")
 }

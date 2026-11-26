@@ -22,6 +22,7 @@ import {
 } from "@zoeskoul/platform-server/prisma";
 
 import ProjectBuilderShell from "./ProjectBuilderShell";
+import { canHydratePrivatePublishing } from "@/lib/build/privatePublishHydration";
 import { hasReactCommerceCapability } from "@/lib/build/reactCommerceCapability";
 
 export const runtime = "nodejs";
@@ -98,6 +99,7 @@ export default async function ZoeBuildWorkspacePage({
         workspace: project.workspace,
       }}
       commerceEnabled={hasReactCommerceCapability(project)}
+      privateHydrationAllowed={canHydratePrivatePublishing(project,access.userId) || (process.env.NODE_ENV === "development" && process.env.VERCEL_ENV !== "production" && process.env.ZOEBUILD_PUBLISH_ENABLED === "0" && process.env.ZOEBUILD_HOSTED_PUBLISH_DEV === "1" && process.env.ZOEBUILD_HOSTED_FENCED_DEV === "1" && project.buildProjectId === "cmwvhcusk0002u0dlwhxh9uh2" && process.env.ZOEBUILD_HOSTED_FENCED_DEV_PROJECT === project.buildProjectId && !!access.userId && access.userId === process.env.ZOEBUILD_HOSTED_PUBLISH_DEV_OWNER) || (await import("@/lib/build/hostedProductionPolicy")).productionHostedUiAllowed(project.buildProjectId,access.userId,project.stackId,process.env)}
       initialDeployment={initialDeployment}
     />
   );

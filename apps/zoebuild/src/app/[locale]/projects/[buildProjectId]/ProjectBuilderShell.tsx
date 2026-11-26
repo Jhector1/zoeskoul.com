@@ -55,7 +55,7 @@ import { ZOE_AI_OPERATION_HEADER } from "@/lib/build/aiBillingOperationIdentity"
 import { getOrCreateAiBrowserAttempt, completeAiBrowserAttempt } from "@/lib/build/aiBrowserAttemptRecovery";
 import { ZOEBUILD_SESSION_EXPIRED_EVENT, ZOEBUILD_SESSION_RENEWED_EVENT } from "@/lib/auth/useBuilderSessionContinuity";
 import type { ZoeSemanticIntent } from "@/lib/build/zoeSemanticIntent";
-import { PublishProjectButton } from "@/components/builder/PublishProjectButton";
+import { PublishProjectButton, ProjectPublishingProvider, type PublishedDeploymentView } from "@/components/builder/PublishProjectButton";
 import { useReactVitePreview } from "@/components/builder/useReactVitePreview";
 import { PersistentReactPreviewSlot } from "@/components/builder/PersistentReactPreviewHost";
 import { fetchAuthoritativeAppliedProject, fetchAuthoritativeCurrentBuildProject } from "@/lib/build/fetchAuthoritativeAppliedProject";
@@ -85,10 +85,8 @@ export default function ProjectBuilderShell(props: {
   project:
     BuildWorkspaceProps["project"];
 
-  initialDeployment?:
-    Parameters<
-      typeof PublishProjectButton
-    >[0]["initialDeployment"];
+  initialDeployment?: PublishedDeploymentView | null;
+  privateHydrationAllowed?: boolean;
 }) {
   const [mode, setMode] =
     useState<ZoeBuildMode>("preview");
@@ -1155,6 +1153,7 @@ export default function ProjectBuilderShell(props: {
   }
 
   return (
+    <ProjectPublishingProvider key={props.project.buildProjectId} buildProjectId={props.project.buildProjectId} initialDeployment={props.initialDeployment} privateHydrationAllowed={props.privateHydrationAllowed}>
     <div
       ref={chatFrameRef}
       className="zb-project-frame"
@@ -1591,10 +1590,7 @@ export default function ProjectBuilderShell(props: {
             </button>
           </div>
 
-          <PublishProjectButton
-            buildProjectId={props.project.buildProjectId}
-            initialDeployment={props.initialDeployment}
-          />
+          <PublishProjectButton />
           {commerceEnabled && !settingsOpen && mode === "preview" ? (
             <StripeCheckoutReturnNotice buildProjectId={props.project.buildProjectId} />
           ) : null}
@@ -1706,5 +1702,6 @@ export default function ProjectBuilderShell(props: {
         </div>
       </section>
     </div>
+    </ProjectPublishingProvider>
   );
 }

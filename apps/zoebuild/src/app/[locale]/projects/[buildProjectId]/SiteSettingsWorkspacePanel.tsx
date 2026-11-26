@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import CommerceWorkspacePanel from "./CommerceWorkspacePanel";
 import ProviderDirectory, { type ProviderDirectoryEntry } from "@/components/builder/ProviderDirectory";
 import { PROVIDER_PRESENTATIONS, type ProviderDirectoryCategory } from "@/lib/integrations/providerDirectoryCatalog";
+import { PrivateDeploymentHistory, useProjectPublishing } from "@/components/builder/PublishProjectButton";
 import styles from "./SiteSettingsWorkspacePanel.module.css";
 
 export type Section =
@@ -135,6 +136,8 @@ export default function SiteSettingsWorkspacePanel(props: {
               onOpen={() => { /* Disabled until a backend-owned connection flow exists. */ }}
             />
           </section>
+        ) : section === "domains" ? (
+          <DomainsPublishingSettings />
         ) : (
           <section className={styles.page}>
             <span className="zb-commerce-kicker">{selected.title}</span>
@@ -146,4 +149,36 @@ export default function SiteSettingsWorkspacePanel(props: {
       </div>
     </div>
   );
+}
+
+function DomainsPublishingSettings() {
+  const {deployment, message, history, privateManagementAvailable, checking, publishing, managing, publish} = useProjectPublishing();
+  const busy = publishing || managing;
+  return <section className={styles.page} aria-label="Domains and publishing">
+    <span className="zb-commerce-kicker">Domains &amp; publishing</span>
+    <h2>Domains &amp; publishing</h2>
+    <p>Manage your published website and retained releases.</p>
+    <div className={styles.publishCards}>
+      <section className={styles.publishCard} aria-label="Website status">
+        <h3>Website status</h3>
+        <p role="status">{publishing ? "Publishing…" : checking ? "Checking deployment status…" : deployment ? `${deployment.privatePilot && !history ? "Last confirmed deployment" : "Published"} · Version ${deployment.sourceVersion}${deployment.privatePilot ? " · Private pilot" : ""}` : privateManagementAvailable ? "Private site unpublished" : "No confirmed deployment"}</p>
+        {message ? <p role="status">{message}</p> : null}
+        <div className={styles.publishActions}>
+          {deployment ? <a className="zb-project-published-link" href={deployment.publicUrl} target="_blank" rel="noreferrer">{deployment.privatePilot ? "View private site" : "View site"}</a> : null}
+          {privateManagementAvailable ? <button type="button" className="zb-project-publish-button" disabled={busy || checking} onClick={()=>void publish()}>{publishing ? "Publishing…" : "Publish"}</button> : null}
+        </div>
+      </section>
+      <section className={styles.publishCard} aria-label="Domains">
+        <h3>Domains</h3>
+        <p>Custom domains are not configured yet. No domain registration or DNS changes are available here.</p>
+      </section>
+      <section className={styles.publishCard} aria-label="Deployment history">
+        <h3>Deployment history</h3>
+        {privateManagementAvailable ? <>
+          <p>Restore or republish a retained release without recompiling. Unpublishing keeps retained releases and project files.</p>
+          <PrivateDeploymentHistory />
+        </> : <p>{checking ? "Checking release management availability…" : "Private release management is not confirmed for this project. If you expect private publishing access, refresh the editor and try again."}</p>}
+      </section>
+    </div>
+  </section>;
 }

@@ -1,0 +1,15 @@
+import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
+import { test } from "vitest";
+import { encodeFencedOperation, parseFencedAcknowledgement, parseFencedStatus } from "./hostedFencedProtocol";
+import type { PendingHostedPublication } from "./hostedPublicationRecovery";
+const bytes=Buffer.from("immutable fixture\nwith newline");
+const target={deploymentId:"release-one",sourceVersion:7,artifactHash:"a".repeat(64),objectSha256:createHash("sha256").update(bytes).digest("hex")};
+const o:PendingHostedPublication={operationId:"operation-one",projectId:"project-one",expectedGeneration:9007199254740993n,action:"publish",target};
+const a={operationId:o.operationId,projectId:o.projectId,fence:"9007199254740994",state:"applied-active",activation:{projectId:o.projectId,sourceVersion:7,artifactHash:target.artifactHash,objectSha256:target.objectSha256,activatedAt:"2026-11-25T18:00:00.123456+00:00"}};
+test("frame preserves exact fence and binary payload",()=>{const frame=Buffer.from(encodeFencedOperation(o,bytes));const i=frame.indexOf(10);assert.deepEqual(JSON.parse(frame.subarray(0,i).toString()),{...o,expectedGeneration:o.expectedGeneration.toString()});assert.deepEqual(frame.subarray(i+1),bytes);});
+test("wrong digest, missing or unexpected bundle denied",()=>{assert.throws(()=>encodeFencedOperation(o));assert.throws(()=>encodeFencedOperation(o,Buffer.from("bad")));assert.throws(()=>encodeFencedOperation({...o,action:"rollback"},bytes));assert.throws(()=>encodeFencedOperation({...o,action:"unpublish",target:null},bytes));});
+test("rollback and unpublish have no binary body",()=>{for(const v of [{...o,action:"rollback" as const},{...o,action:"unpublish" as const,target:null}]){const f=Buffer.from(encodeFencedOperation(v));assert.equal(f.indexOf(10),f.length-1);}});
+test("parse exact acknowledgement with microseconds and bigint",()=>{assert.deepEqual(parseFencedAcknowledgement(a,o.projectId),{...a,fence:9007199254740994n});});
+test("deny malformed, cross-project and ambiguous acknowledgements",()=>{for(const v of [{...a,fence:42},{...a,fence:"01"},{...a,fence:"9223372036854775808"},{...a,projectId:"project-two"},{...a,extra:true},{...a,activation:{...a.activation,activatedAt:"2026-11-25T18:00:00Z"}},{...a,state:"applied-inactive"}])assert.throws(()=>parseFencedAcknowledgement(v,o.projectId));});
+test("status requires acknowledgement for nonzero fence",()=>{assert.deepEqual(parseFencedStatus('{"fence":"0","acknowledgement":null}',o.projectId),{fence:0n,acknowledgement:null});assert.throws(()=>parseFencedStatus('{"fence":"1","acknowledgement":null}',o.projectId));assert.throws(()=>parseFencedStatus(JSON.stringify({fence:"1",acknowledgement:a}),o.projectId));assert.equal(parseFencedStatus(JSON.stringify({fence:a.fence,acknowledgement:a}),o.projectId).fence,9007199254740994n);});

@@ -8,7 +8,7 @@ ENV PNPM_HOME=/pnpm \
 WORKDIR /app
 RUN corepack enable \
     && apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates openssl \
+    && apt-get install -y --no-install-recommends ca-certificates openssl openssh-client \
     && rm -rf /var/lib/apt/lists/*
 COPY . .
 RUN export DATABASE_URL="postgresql://placeholder:placeholder@127.0.0.1:5432/placeholder?schema=public" \
