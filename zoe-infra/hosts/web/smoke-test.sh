@@ -15,6 +15,7 @@ set +a
 
 EDGE_CADDY_CONTAINER="${EDGE_CADDY_CONTAINER:-edge-caddy}"
 
+./db17-guard.sh
 echo "Checking ZoeSkoul services..."
 docker compose ps
 

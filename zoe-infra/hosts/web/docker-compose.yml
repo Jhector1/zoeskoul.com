@@ -14,14 +14,13 @@ services:
       - "3000"
 
     depends_on:
-      postgres:
-        condition: service_healthy
       redis:
         condition: service_healthy
 
     networks:
       - webnet
       - public
+      - database_private
 
     logging: &default_logging
       driver: json-file
@@ -89,6 +88,7 @@ services:
 
     networks:
       - webnet
+      - database_private
 
     logging: *default_logging
 
@@ -98,37 +98,6 @@ services:
     pids_limit: 64
     mem_limit: 128m
     cpus: 0.15
-
-  postgres:
-    image: ${POSTGRES_IMAGE:-postgres:16-alpine}
-    restart: unless-stopped
-
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB:?required}
-      POSTGRES_USER: ${POSTGRES_USER:?required}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?required}
-
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-    healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""
-        ]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 15s
-
-    networks:
-      - webnet
-
-    logging: *default_logging
-
-    security_opt:
-      - no-new-privileges:true
 
   redis:
     image: ${REDIS_IMAGE:-redis:7-alpine}
@@ -170,6 +139,9 @@ services:
       - no-new-privileges:true
 
 networks:
+  database_private:
+    external: true
+    name: zoeskoul_db_private
   webnet:
     driver: bridge
 
@@ -178,5 +150,4 @@ networks:
     name: public
 
 volumes:
-  postgres_data:
   redis_data:
