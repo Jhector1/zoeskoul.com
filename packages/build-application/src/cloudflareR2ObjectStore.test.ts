@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { createHmac, createHash } from "node:crypto";
 import { describe, expect, it } from "vitest";
 import { createCloudflareR2PrivateObjectStore, createCloudflareR2PublishBundleStore } from "./cloudflareR2ObjectStore";
