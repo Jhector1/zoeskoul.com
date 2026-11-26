@@ -23,7 +23,8 @@ out/
 dist/
 **/dist
 build/
-**/build
+apps/*/build/
+packages/*/build/
 coverage/
 **/coverage
 *.tsbuildinfo

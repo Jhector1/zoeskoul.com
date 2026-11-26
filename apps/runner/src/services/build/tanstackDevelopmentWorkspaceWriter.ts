@@ -2,7 +2,8 @@ import { constants, type BigIntStats } from "node:fs";
 import fs, { type FileHandle } from "node:fs/promises";
 import path from "node:path";
 import { createHash, randomUUID } from "node:crypto";
-import { BUILD_EXECUTOR_BINARY_LIMITS, isTanstackLivePublicImagePath, isTanstackLiveSourcePath, type BuildExecutorBinaryFile, type ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contracts";
+import { isTanstackLiveBinaryPath, isTanstackLiveSourcePath, tanstackLiveRootImageMimeType,
+  type BuildExecutorBinaryFile, type ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contracts";
 import { docker } from "../docker/dockerClient.js";
 
 /**
@@ -24,9 +25,27 @@ export async function applySuspendedTanstackDevelopmentSource(input: Readonly<{
   /** Trusted private sandbox handle's workspaceDir, NOT supplied by a client. */
   workspaceDir: string;
   changedPaths: readonly string[];
+  /** Runner-owned snapshot resolved under the exclusive lease update lock.
+   * Mandatory for image writes, never provided by the browser. */
+  previous?: Pick<ProductionBuildJobRequestV1, "files" | "binaryFiles">;
   next: Pick<ProductionBuildJobRequestV1, "files" | "binaryFiles">;
 }>): Promise<void> {
-  const changes = validateChanges(input.changedPaths, input.next.files, input.next.binaryFiles);
+  const changes = validateChanges(input.changedPaths, input.next.files,
+    input.next.binaryFiles ?? [],
+    process.env.ZOEBUILD_DEVELOPMENT_PREVIEW_BINARY_HMR_ENABLED === "true");
+  const imagePaths = input.changedPaths.filter(candidate =>
+    isTanstackLiveBinaryPath(candidate) || tanstackLiveRootImageMimeType(candidate) !== null);
+  if (imagePaths.length && !input.previous)
+    throw new Error("Trusted previous image snapshot required.");
+  const priorImages = imagePaths.length && input.previous
+    ? validateChanges(imagePaths, input.previous.files, input.previous.binaryFiles ?? [], true)
+    : [];
+  // An absent-to-absent image path is not a source transition.
+  const nextImagePaths = new Set((input.next.binaryFiles ?? []).map(file => file.path));
+  for (const prior of priorImages) {
+    if (prior.content === null && !nextImagePaths.has(prior.path))
+      throw new Error("Invalid development preview image transition.");
+  }
   const root = await validateWorkspaceRoot(input.workspaceRoot, input.workspaceDir);
   if (!/^[a-f0-9]{12,64}$/i.test(input.containerId))
     throw new Error("Invalid development preview container identity.");
@@ -57,7 +76,12 @@ export async function applySuspendedTanstackDevelopmentSource(input: Readonly<{
       await validateWorkspaceRoot(input.workspaceRoot, input.workspaceDir);
       // Preflight every candidate before the first mutation. A failure after the
       // first write is treated as partial by Phase 3A and quarantines the lease.
-      for (const change of changes) await inspectTarget(root, change.path, false);
+      for (const change of changes) {
+        const target = await inspectTarget(root, change.path, false);
+        if (change.content === null && !target.exists)
+          throw new Error("Development source deletion target missing.");
+      }
+      await verifyPriorImages(root, priorImages);
       for (const change of changes) {
         const destination = await inspectTarget(root, change.path, true);
         if (change.content === null) {
@@ -108,25 +132,33 @@ export async function applySuspendedTanstackDevelopmentSource(input: Readonly<{
 
 const WORKSPACE_NAME = /^zoeskoul-run-[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i;
 const MAX_FILE_BYTES = 512 * 1024;
-const MAX_CHANGE_BYTES = BUILD_EXECUTOR_BINARY_LIMITS.totalBytes + 2 * 1024 * 1024;
+const MAX_CHANGE_BYTES = 2 * 1024 * 1024;
 const MAX_CHANGED_FILES = 32;
+const MAX_BINARY_BYTES = 5 * 1024 * 1024;
 
 type SourceChange = Readonly<{path: string; content: string | Uint8Array | null}>;
 
-/** Pure, bounded validation before any Docker operation or host filesystem write. */
+/** Pure, bounded validation before any Docker operation or host filesystem write.
+ * A binary change is never accepted without the same checksum that was bound
+ * to the DB-authoritative trusted build request. */
 export function validateDevelopmentSourceChanges(
   changedPaths: readonly string[], files: readonly {path:string;content:string}[],
-  binaryFiles: readonly BuildExecutorBinaryFile[] = [],
-): readonly SourceChange[] { return validateChanges(changedPaths, files, binaryFiles); }
+  binaryFiles: readonly BuildExecutorBinaryFile[] = [], allowBinaryLive = false,
+): readonly SourceChange[] {
+  return validateChanges(changedPaths, files, binaryFiles, allowBinaryLive);
+}
 
 function validateChanges(
   changedPaths: readonly string[], files: readonly {path:string;content:string}[],
-  binaryFiles: readonly BuildExecutorBinaryFile[] = [],
+  binaryFiles: readonly BuildExecutorBinaryFile[], allowBinaryLive: boolean,
 ): readonly SourceChange[] {
   if (!Array.isArray(changedPaths) || !changedPaths.length ||
-      changedPaths.length > MAX_CHANGED_FILES || !Array.isArray(files) || files.length > 300)
+      changedPaths.length > MAX_CHANGED_FILES || !Array.isArray(files) || files.length > 300 ||
+      !Array.isArray(binaryFiles) || binaryFiles.length > 150 ||
+      files.length + binaryFiles.length > 300)
     throw new Error("Invalid development preview source changes.");
   const byPath = new Map<string,string>();
+  const byBinary = new Map<string,BuildExecutorBinaryFile>();
   const allKeys = new Set<string>();
   for (const entry of files) {
     if (!entry || typeof entry.path !== "string" ||
@@ -136,59 +168,101 @@ function validateChanges(
     allKeys.add(entry.path.toLowerCase());
     byPath.set(entry.path,entry.content);
   }
-  // Decode and checksum ALL prospective images before touching Docker.
-  // The saved-source authority/contract parser is the primary admission gate;
-  // this is a second, filesystem-adjacent fail-closed validation boundary.
-  if (!Array.isArray(binaryFiles) || binaryFiles.length > BUILD_EXECUTOR_BINARY_LIMITS.files ||
-      files.length + binaryFiles.length > 300) throw new Error("Invalid development preview binary manifest.");
-  const imageBytes = new Map<string, Uint8Array>();
-  let imageTotal = 0;
-  for (const image of binaryFiles) {
-    if (!image || !isTanstackLivePublicImagePath(image.path) ||
-        allKeys.has(image.path.toLowerCase()) ||
-        imageBytes.has(image.path.toLowerCase()) ||
-        image.encoding !== "base64" || !Number.isSafeInteger(image.sizeBytes) ||
-        image.sizeBytes < 1 || image.sizeBytes > BUILD_EXECUTOR_BINARY_LIMITS.fileBytes ||
-        !/^sha256:[a-f0-9]{64}$/.test(image.checksum) ||
-        typeof image.data !== "string" ||
-        image.data.length !== 4 * Math.ceil(image.sizeBytes / 3) ||
-        !/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(image.data))
-      throw new Error("Invalid development preview image.");
-    const suffix = image.path.toLowerCase().split(".").pop();
-    const mime = suffix === "png" ? "image/png" : suffix === "webp" ? "image/webp" :
-      suffix === "avif" ? "image/avif" : suffix === "jpg" || suffix === "jpeg" ? "image/jpeg" : null;
-    if (mime !== image.mimeType) throw new Error("Invalid development preview image type.");
-    const buffer = Buffer.from(image.data,"base64");
-    if (buffer.byteLength !== image.sizeBytes ||
-        `sha256:${createHash("sha256").update(buffer).digest("hex")}` !== image.checksum)
-      throw new Error("Development preview image checksum mismatch.");
-    imageTotal += buffer.byteLength;
-    if (imageTotal > BUILD_EXECUTOR_BINARY_LIMITS.totalBytes)
-      throw new Error("Development preview images exceed trusted limit.");
-    imageBytes.set(image.path.toLowerCase(),buffer);
+  let declaredBinaryBytes = 0;
+  for (const entry of binaryFiles) {
+    const extension = /\.[^./]+$/.exec(entry?.path ?? "")?.[0]?.toLowerCase();
+    const mimeByExtension: Record<string,string> = {".png":"image/png", ".jpg":"image/jpeg",
+      ".jpeg":"image/jpeg", ".webp":"image/webp", ".avif":"image/avif"};
+    const mime = extension ? mimeByExtension[extension] : undefined;
+    if (!entry || !safePath(entry.path) || allKeys.has(entry.path.toLowerCase()) ||
+        entry.encoding !== "base64" || typeof entry.data !== "string" ||
+        entry.data.length !== 4 * Math.ceil(entry.sizeBytes / 3) ||
+        !Number.isSafeInteger(entry.sizeBytes) || entry.sizeBytes < 1 ||
+        entry.sizeBytes > MAX_BINARY_BYTES || entry.mimeType !== mime ||
+        !/^sha256:[0-9a-f]{64}$/.test(entry.checksum))
+      throw new Error("Invalid development preview binary manifest.");
+    declaredBinaryBytes += entry.sizeBytes;
+    if (declaredBinaryBytes > MAX_BINARY_BYTES)
+      throw new Error("Development preview binary manifest too large.");
+    allKeys.add(entry.path.toLowerCase());
+    byBinary.set(entry.path,entry);
   }
   const selected = new Set<string>();
   const changes: SourceChange[] = [];
-  let totalBytes = 0;
+  let totalTextBytes = 0;
+  let totalBinaryBytes = 0;
   for (const candidate of changedPaths) {
-    const liveSource = isTanstackLiveSourcePath(candidate);
-    const liveImage = isTanstackLivePublicImagePath(candidate);
-    if (!safePath(candidate) || (!liveSource && !liveImage) ||
+    const textEligible = isTanstackLiveSourcePath(candidate);
+    const binaryEligible = allowBinaryLive && (isTanstackLiveBinaryPath(candidate) ||
+      tanstackLiveRootImageMimeType(candidate) !== null);
+    if (!safePath(candidate) || (!textEligible && !binaryEligible) ||
         selected.has(candidate.toLowerCase()))
       throw new Error("Unsafe development preview source path.");
     selected.add(candidate.toLowerCase());
-    // The only binary paths admitted are inert public images. A missing image
-    // in the NEXT authoritative manifest is an explicit deletion.
-    const content = liveImage ? imageBytes.get(candidate.toLowerCase()) ?? null : byPath.get(candidate) ?? null;
-    if (content !== null) {
-      const bytes = typeof content === "string" ? Buffer.byteLength(content,"utf8") : content.byteLength;
-      totalBytes += bytes;
-      if ((liveSource && bytes > MAX_FILE_BYTES) || totalBytes > MAX_CHANGE_BYTES)
-        throw new Error("Development preview source update too large.");
+    const binaryFile = byBinary.get(candidate);
+    if (binaryFile && !binaryEligible || byPath.has(candidate) && !textEligible)
+      throw new Error("Unsafe development preview source content.");
+    let content: string | Uint8Array | null = null;
+    if (binaryFile) {
+      // Buffer decoding is bounded by the declared size and a strict canonical
+      // base64 check. Compare the bytes to the trusted SHA-256 before a write.
+      if (binaryFile.data.length !== 4 * Math.ceil(binaryFile.sizeBytes / 3))
+        throw new Error("Invalid development preview image length.");
+      const bytes = Buffer.from(binaryFile.data,"base64");
+      if (bytes.byteLength !== binaryFile.sizeBytes ||
+          bytes.toString("base64") !== binaryFile.data ||
+          `sha256:${createHash("sha256").update(bytes).digest("hex")}` !== binaryFile.checksum)
+        throw new Error("Development preview image integrity mismatch.");
+      totalBinaryBytes += bytes.byteLength;
+      if (totalBinaryBytes > MAX_BINARY_BYTES)
+        throw new Error("Development preview binary update too large.");
+      content = bytes;
+    } else if (textEligible) {
+      content = byPath.get(candidate) ?? null;
+      if (content !== null) {
+        const bytes = Buffer.byteLength(content,"utf8");
+        totalTextBytes += bytes;
+        if (bytes > MAX_FILE_BYTES || totalTextBytes > MAX_CHANGE_BYTES)
+          throw new Error("Development preview source update too large.");
+      }
     }
+    // null is an explicit deletion, including a renamed/moved old image path.
     changes.push({path:candidate,content});
   }
   return changes;
+}
+
+/** Verify every changed image against the admitted prior source, including
+ * absence for new paths. Do this while the sandbox is paused and before ANY
+ * mutation. This guards deletes, replacements, moves and destination collisions. */
+async function verifyPriorImages(root: string, priorImages: readonly SourceChange[]) {
+  for (const prior of priorImages) {
+    const source = await inspectTarget(root, prior.path, false);
+    if (prior.content === null) {
+      if (source.exists) throw new Error("Development preview image destination already exists.");
+      continue;
+    }
+    if (!source.exists || !(prior.content instanceof Uint8Array))
+      throw new Error("Development preview prior image missing.");
+    const expected = Buffer.from(prior.content);
+    const handle = await fs.open(source.path, constants.O_RDONLY | constants.O_NOFOLLOW | constants.O_NONBLOCK);
+    try {
+      const stat = await handle.stat({bigint:true});
+      const named = await fs.lstat(source.path,{bigint:true});
+      if (!stat.isFile() || stat.nlink !== 1n || stat.dev !== named.dev || stat.ino !== named.ino ||
+          stat.size !== BigInt(expected.length))
+        throw new Error("Unsafe development preview prior image.");
+      const actual = Buffer.alloc(expected.length + 1);
+      let offset = 0;
+      while (offset < actual.length) {
+        const {bytesRead} = await handle.read(actual, offset, actual.length - offset, offset);
+        if (!bytesRead) break;
+        offset += bytesRead;
+      }
+      if (offset !== expected.length || !actual.subarray(0, offset).equals(expected))
+        throw new Error("Development preview prior image bytes changed.");
+    } finally { await handle.close(); }
+  }
 }
 
 function safePath(candidate: unknown): candidate is string {
@@ -253,7 +327,7 @@ async function replaceAtomically(destination: string, content: string | Uint8Arr
       constants.O_WRONLY | constants.O_CREAT | constants.O_EXCL | constants.O_NOFOLLOW,0o600);
     created = true;
     try {
-      await file.writeFile(content,typeof content === "string" ? "utf8" : undefined);
+      await file.writeFile(content);
       await file.chmod(0o644);
       await file.sync();
     } finally { await file.close(); }

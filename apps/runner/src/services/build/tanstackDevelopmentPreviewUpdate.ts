@@ -53,6 +53,7 @@ export async function coordinateTanstackDevelopmentPreviewUpdate(input: Readonly
   applyApprovedSource: (input: Readonly<{
     lease: FullStackPreviewLease;
     changedPaths: readonly string[];
+    previous: ProductionBuildJobRequestV1;
     next: ProductionBuildJobRequestV1;
   }>) => Promise<void>;
 }>): Promise<Readonly<{
@@ -128,7 +129,7 @@ export async function coordinateTanstackDevelopmentPreviewUpdate(input: Readonly
         // mutation. Quarantine before releasing the exclusive update slot.
         advance("workspace_write");
         await input.applyApprovedSource({
-          lease, changedPaths: admission.changedPaths, next: input.next,
+          lease, changedPaths: admission.changedPaths, previous, next: input.next,
         });
         // A newer saved version may have appeared while source was written.
         // Never publish a superseded revision even when Docker accepted it.

@@ -4,11 +4,12 @@ import { loadCurrentBuildAccessSnapshot } from "@/lib/build/currentBuildAccess";
 import { startOwnedReactDevelopmentPreviewFromSavedSource } from
   "@/lib/build/reactPreviewDevelopmentStart";
 import { POST } from "./route";
+import { RunnerHttpError } from "@zoeskoul/platform-server/server/runnerClient";
 
 vi.mock("@zoeskoul/platform-server/http",()=>({enforceSameOriginPost:vi.fn()}));
 vi.mock("@/lib/build/currentBuildAccess",()=>({loadCurrentBuildAccessSnapshot:vi.fn()}));
 vi.mock("@/lib/build/reactPreviewDevelopmentStart",()=>({startOwnedReactDevelopmentPreviewFromSavedSource:vi.fn()}));
-vi.mock("@zoeskoul/platform-server/server/runnerClient",()=>({RunnerHttpError:class RunnerHttpError extends Error {status=503;}}));
+vi.mock("@zoeskoul/platform-server/server/runnerClient",()=>({RunnerHttpError:class RunnerHttpError extends Error {constructor(public status:number,message:string,public code?:string){super(message);}}}));
 vi.mock("@/lib/build/reactPreviewServer",()=>({
   ReactPreviewRequestError:class ReactPreviewRequestError extends Error {
     constructor(public code:string,message:string,public status:number){super(message);}
@@ -63,6 +64,15 @@ describe("Phase 4E1 owner-authenticated development-start HTTP",()=>{
     expect(startOwnedReactDevelopmentPreviewFromSavedSource).toHaveBeenCalledWith({
       access,buildProjectId:"project-1",sourceVersion:9,
     });
+  });
+  it("returns only safe typed capacity details to an authenticated owner",async()=>{
+    vi.mocked(startOwnedReactDevelopmentPreviewFromSavedSource).mockRejectedValueOnce(new RunnerHttpError(503,"private path /secrets","RUNNER_DISK_LOW"));
+    const result=await POST(req(),ctx);
+    expect(result.status).toBe(503);
+    const payload=await result.json();
+    expect(payload).toMatchObject({ok:false,code:"RUNNER_DISK_LOW"});
+    expect(payload.message).toContain("low on disk space");
+    expect(JSON.stringify(payload)).not.toContain("/secrets");
   });
   it("fails closed on unexpected upstream preview identity",async()=>{
     vi.mocked(startOwnedReactDevelopmentPreviewFromSavedSource).mockResolvedValueOnce({

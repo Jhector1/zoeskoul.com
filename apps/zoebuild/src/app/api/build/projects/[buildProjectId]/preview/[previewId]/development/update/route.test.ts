@@ -111,3 +111,22 @@ describe("H10W2F7 combined update and grant",()=>{
     expect(renewOwnedDevelopmentPreviewGrant).not.toHaveBeenCalled();
   });
 });
+
+
+describe("U20H browser-visible 409 classification",()=>{
+  it("distinguishes Runner restart-required from stale without revealing private details",async()=>{
+    const {RunnerHttpError}=await import("@zoeskoul/platform-server/server/runnerClient");
+    vi.mocked(updateOwnedReactDevelopmentPreviewFromSavedSource).mockRejectedValueOnce(
+      new RunnerHttpError(409,"private changed path", "RESTART_REQUIRED"));
+    const restart=await POST(req(),ctx);
+    expect(restart.status).toBe(409);
+    expect(await restart.json()).toMatchObject({ok:false,code:"BUILD_PREVIEW_RESTART_REQUIRED"});
+    vi.mocked(updateOwnedReactDevelopmentPreviewFromSavedSource).mockRejectedValueOnce(
+      new RunnerHttpError(409,"private changed path", "STALE_REVISION"));
+    const stale=await POST(req(),ctx);
+    expect(stale.status).toBe(409);
+    const result=await stale.json();
+    expect(result).toMatchObject({ok:false,code:"BUILD_PREVIEW_SOURCE_CONFLICT"});
+    expect(JSON.stringify(result)).not.toContain("private changed path");
+  });
+});

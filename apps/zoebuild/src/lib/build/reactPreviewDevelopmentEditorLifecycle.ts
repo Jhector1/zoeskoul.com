@@ -7,6 +7,7 @@ import type {
   DevelopmentBrowserSession,
   createDevelopmentPreviewBrowserSession,
 } from "./reactPreviewDevelopmentBrowserSession";
+import { developmentCapacityFailure } from "./reactPreviewDevelopmentFailure";
 import { DevelopmentBrowserSessionError } from "./reactPreviewDevelopmentBrowserSession";
 
 type SessionController = ReturnType<typeof createDevelopmentPreviewBrowserSession>;
@@ -23,7 +24,7 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
   controller: SessionController;
   onDocument: (session: DevelopmentEditorDocument) => void;
   onWaiting: () => void;
-  onFailure: () => void;
+  onFailure: (failure?: DevelopmentBrowserSessionError) => void;
   maxRecoveryAttempts?: number;
   recoveryDelay?: (attempt:number) => Promise<void>;
 }>) {
@@ -44,13 +45,14 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
     throw new Error("Invalid preview recovery policy.");
 
   const valid = (v: number): boolean => Number.isSafeInteger(v) && v >= 1;
-  function fail() {
+  function fail(failure?: DevelopmentBrowserSessionError) {
     if (disposed || failed) return;
     failed = true;
     phase="failed";
     pending = null;
     input.controller.close();
-    input.onFailure();
+    if (failure) input.onFailure(failure);
+    else input.onFailure();
   }
   function publish(session: DevelopmentBrowserSession) {
     if (disposed || failed) return;
@@ -107,6 +109,10 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
         if (pending === null) publish(session);
       }
     } catch(error) {
+      if (error instanceof DevelopmentBrowserSessionError && developmentCapacityFailure(error.code)) {
+        fail(error);
+        return;
+      }
       const version=selectedVersion;
       // A saved image rename/upload/remove is intentionally classified by the
       // trusted Runner as RESTART_REQUIRED (HTTP 409). One source-fenced
@@ -173,6 +179,10 @@ export function createDevelopmentPreviewEditorLifecycle(input: Readonly<{
       if (!disposed && !failed) publish(renewed);
     } catch(error) {
       if (disposed || failed) return;
+      if (error instanceof DevelopmentBrowserSessionError && developmentCapacityFailure(error.code)) {
+        fail(error);
+        return;
+      }
       if(error instanceof DevelopmentBrowserSessionError &&
           error.code==="RESTART_REQUIRED" && selectedVersion!==null) {
         recovering=true;

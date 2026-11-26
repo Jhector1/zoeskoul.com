@@ -410,14 +410,25 @@ export async function getRunnerFilesystemCapacity(
   };
 }
 
+/** Only trusted capacity checks construct this error. Public routes expose
+ * the allowlisted code, never the private message or filesystem metrics. */
+export class RunnerWorkspaceCapacityError extends Error {
+  constructor(readonly code: "RUNNER_DISK_LOW" | "RUNNER_WORKSPACE_STORAGE_LIMIT", message: string,
+    readonly disk?: Readonly<{freeBytes:number;requiredFreeBytes:number;reservationBytes:number}>) {
+    super(message);
+    this.name = "RunnerWorkspaceCapacityError";
+  }
+}
+
 export async function assertRunnerFilesystemHasCapacity(root: string) {
   const capacity = await getRunnerFilesystemCapacity(root);
   if (!capacity) return;
 
   if (capacity.freeBytes < capacity.requiredFreeBytes) {
-    throw new Error(
+    throw new RunnerWorkspaceCapacityError("RUNNER_DISK_LOW",
       `Runner host disk is low: ${(capacity.freeBytes / 1024 / 1024).toFixed(0)} MB free; ` +
         `requires at least ${(capacity.requiredFreeBytes / 1024 / 1024).toFixed(0)} MB (${env.minFreePercent}% floor).`,
+      {freeBytes:capacity.freeBytes,requiredFreeBytes:capacity.requiredFreeBytes,reservationBytes:0},
     );
   }
 }
@@ -454,13 +465,14 @@ export async function reserveWorkspaceRootCapacity(
     await fs.mkdir(key,{recursive:true});
     const requested=held.reservedBytes+additionalBytes;
     const remaining=env.maxWorkspaceRootBytes-requested;
-    if (remaining<0) throw new Error("Runner workspace root cannot reserve additional storage.");
+    if (remaining<0) throw new RunnerWorkspaceCapacityError("RUNNER_WORKSPACE_STORAGE_LIMIT", "Runner workspace root cannot reserve additional storage.");
     const usage=await getDirectoryUsage(key,{maxBytes:remaining});
     if (usage.bytes>remaining)
-      throw new Error("Runner workspace root cannot reserve additional storage.");
+      throw new RunnerWorkspaceCapacityError("RUNNER_WORKSPACE_STORAGE_LIMIT", "Runner workspace root cannot reserve additional storage.");
     const capacity=await getRunnerFilesystemCapacity(key);
     if (capacity&&capacity.freeBytes-requested<capacity.requiredFreeBytes)
-      throw new Error("Runner host disk cannot reserve additional storage.");
+      throw new RunnerWorkspaceCapacityError("RUNNER_DISK_LOW", "Runner host disk cannot reserve additional storage.",
+        {freeBytes:capacity.freeBytes,requiredFreeBytes:capacity.requiredFreeBytes,reservationBytes:requested});
     held.reservedBytes+=additionalBytes;
   } catch(error) { done(); throw error; }
   finally { unlock(); }
@@ -493,11 +505,12 @@ export async function assertWorkspaceRootCanGrowBy(
   const remaining = env.maxWorkspaceRootBytes - additionalBytes;
   const usage = await getDirectoryUsage(root, { maxBytes: remaining });
   if (usage.bytes > remaining) {
-    throw new Error("Runner workspace root cannot reserve additional storage.");
+    throw new RunnerWorkspaceCapacityError("RUNNER_WORKSPACE_STORAGE_LIMIT", "Runner workspace root cannot reserve additional storage.");
   }
   const capacity = await getRunnerFilesystemCapacity(root);
   if (capacity && capacity.freeBytes - additionalBytes < capacity.requiredFreeBytes) {
-    throw new Error("Runner host disk cannot reserve additional storage.");
+    throw new RunnerWorkspaceCapacityError("RUNNER_DISK_LOW", "Runner host disk cannot reserve additional storage.",
+      {freeBytes:capacity.freeBytes,requiredFreeBytes:capacity.requiredFreeBytes,reservationBytes:additionalBytes});
   }
 }
 
@@ -512,7 +525,7 @@ export async function assertWorkspaceRootHasCapacity(root: string) {
     maxBytes: env.maxWorkspaceRootBytes,
   });
   if (usage.bytes > env.maxWorkspaceRootBytes) {
-    throw new Error(
+    throw new RunnerWorkspaceCapacityError("RUNNER_WORKSPACE_STORAGE_LIMIT",
       `Runner workspace root is over quota: ${(usage.bytes / 1024 / 1024).toFixed(1)} MB used.`,
     );
   }

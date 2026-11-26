@@ -232,6 +232,7 @@ export async function POST(
                 // scope rather than returning an incomplete conflict body.
                 const latest = await prisma.codeProject.findFirst({
                     where: {
+                        ...genericCodeProjectWhere,
                         id: existing.id,
                         ownerId: gate.actor.userId,
                         archivedAt: null,

@@ -1,7 +1,7 @@
 /// <reference types="node" />
 import { createHmac, createHash } from "node:crypto";
 import { describe, expect, it } from "vitest";
-import { createCloudflareR2PrivateObjectStore } from "./cloudflareR2ObjectStore";
+import { createCloudflareR2PrivateObjectStore, createCloudflareR2PublishBundleStore } from "./cloudflareR2ObjectStore";
 
 const accountId = "a".repeat(32);
 const config = {accountId, bucket: "zoebuild-media-dev", accessKeyId: "B".repeat(32), secretAccessKey: "C".repeat(64)};
@@ -103,5 +103,22 @@ describe("AI4B2 private Cloudflare R2 object-store adapter",()=>{
   it("fails closed on networking errors with no credential-bearing exception",async()=>{
     const h=fake(()=>{throw Error("SECRETKEY_IN_NETWORK_ERROR");});
     await expect(h.store.read(key)).rejects.toMatchObject({code:"BUILD_MEDIA_R2_NETWORK_UNAVAILABLE"});
+  });
+});
+
+
+describe("private publish bundle namespace",()=>{
+  it("keeps media and publish keys strictly separate and signs immutable JSON",async()=>{
+    const data=new TextEncoder().encode('{"bundle":true}');const digest=sha(data);
+    const publishKey=`published-artifacts/user_test1/build_test1/1/${"a".repeat(64)}/${digest}`;
+    const seen:string[]=[];
+    const fetchImpl=(async(url,init)=>{seen.push(String(url));const headers=new Headers(init?.headers);expect(headers.get("authorization")).toBe(independentSignature("PUT",new URL(String(url)).pathname,headers));expect(headers.get("if-none-match")).toBe("*");return new Response(null,{status:200});}) as typeof fetch;
+    const publisher=createCloudflareR2PublishBundleStore(config,{fetchImpl,now:()=>date});
+    const media=createCloudflareR2PrivateObjectStore(config,{fetchImpl,now:()=>date});
+    await expect(publisher.read(key)).rejects.toThrow("BUILD_MEDIA_R2_KEY_INVALID");
+    await expect(media.read(publishKey)).rejects.toThrow("BUILD_MEDIA_R2_KEY_INVALID");
+    await expect(publisher.putIfAbsent({key:publishKey,bytes:data,mimeType:"image/png",sha256:digest})).rejects.toThrow("BUILD_MEDIA_R2_UPLOAD_INVALID");
+    await expect(publisher.putIfAbsent({key:publishKey,bytes:data,mimeType:"application/json",sha256:digest})).resolves.toBe("created");
+    expect(seen).toHaveLength(1);
   });
 });

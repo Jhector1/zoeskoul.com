@@ -141,6 +141,14 @@ async function enforceProductionBuildRateLimit(
   return limited;
 }
 
+// Explicit local-only lane. The existing public publish path is unchanged.
+export async function GET(req:Request,ctx:{params:Promise<{buildProjectId:string}>}) {
+  if (process.env.NODE_ENV!=="development" || process.env.ZOEBUILD_PUBLISH_ENABLED!=="0" || process.env.ZOEBUILD_PRIVATE_PUBLISH_AUTOMATION!=="1")
+    return new Response(null,{status:404,headers:{"Cache-Control":"no-store"}});
+  const {readPrivatePublish}=await import("@/lib/build/tanstackPublishPilotServer");
+  return readPrivatePublish(req,ctx);
+}
+
 export async function POST(
   req: Request,
 
@@ -152,6 +160,27 @@ export async function POST(
       }>;
   },
 ) {
+  if (process.env.NODE_ENV==="production" && process.env.ZOEBUILD_HOSTED_FENCED_PRODUCTION==="1") {
+    const {buildProjectId}=await ctx.params;
+    const {productionHostedSelection}=await import("@/lib/build/hostedProductionPolicy");
+    if(productionHostedSelection(buildProjectId,process.env)) {
+      const {runPrivatePublish}=await import("@/lib/build/tanstackPublishPilotServer");
+      return runPrivatePublish(req,ctx,true,true);
+    }
+  }
+  if (process.env.NODE_ENV==="development" && process.env.ZOEBUILD_PUBLISH_ENABLED==="0" && process.env.ZOEBUILD_HOSTED_FENCED_DEV==="1") {
+    const {buildProjectId: requestedProjectId}=await ctx.params;
+    const {dedicatedFencedUiSelected}=await import("@/lib/build/hostedFencedManagement");
+    if (dedicatedFencedUiSelected(requestedProjectId)) {
+      const {runPrivatePublish}=await import("@/lib/build/tanstackPublishPilotServer");
+      return runPrivatePublish(req,ctx,true,true);
+    }
+  }
+  if (process.env.NODE_ENV==="development" && process.env.ZOEBUILD_PUBLISH_ENABLED==="0" && process.env.ZOEBUILD_PRIVATE_PUBLISH_AUTOMATION==="1") {
+    const {runPrivatePublish}=await import("@/lib/build/tanstackPublishPilotServer");
+    return runPrivatePublish(req,ctx,true);
+  }
+
   const requestId =
     crypto.randomUUID();
 

@@ -74,6 +74,28 @@ describe("V1 isolated TanStack live-preview admission policy", () => {
   });
 });
 
+describe("versioned binary edits never enter the text HMR writer", () => {
+  const asset={path:"public/image.png",encoding:"base64" as const,
+    mimeType:"image/png" as const,data:"YWJj",sizeBytes:3,
+    checksum:`sha256:${"a".repeat(64)}`};
+  it("forces restart on image creation, replacement, deletion, or text+image changes", () => {
+    const withImage={...previous,binaryFiles:[asset]};
+    expect(classifyTanstackPreviewTransition({mode:"development",previous,
+      next:{...withImage,sourceVersion:6}})).toMatchObject({action:"restart",reason:"protected_files_changed"});
+    expect(classifyTanstackPreviewTransition({mode:"development",previous:withImage,
+      next:{...withImage,sourceVersion:6,binaryFiles:[{...asset,data:"YWJk"}]}}))
+      .toMatchObject({action:"restart",reason:"protected_files_changed"});
+    expect(classifyTanstackPreviewTransition({mode:"development",previous:withImage,
+      next:{...previous,sourceVersion:6}})).toMatchObject({action:"restart",reason:"protected_files_changed"});
+    expect(classifyTanstackPreviewTransition({mode:"development",previous:withImage,
+      next:{...edit("src/routes/index.tsx","new"),binaryFiles:[{...asset,data:"YWJk"}]}}))
+      .toMatchObject({action:"restart",reason:"protected_files_changed"});
+    expect(classifyTanstackPreviewTransition({mode:"development",previous:withImage,
+      next:{...withImage,binaryFiles:[{...asset,data:"YWJk"}]}}))
+      .toMatchObject({action:"reject",reason:"invalid_revision"});
+  });
+});
+
 describe("versioned static images use the trusted binary writer, not text HMR", () => {
   const asset={path:"public/images/image.png",encoding:"base64" as const,
     mimeType:"image/png" as const,data:"YWJj",sizeBytes:3,
@@ -89,29 +111,29 @@ describe("versioned static images use the trusted binary writer, not text HMR", 
     ]) {
       const previousRequest = updated.binaryFiles?.length &&
         updated.binaryFiles[0].data === asset.data ? previous : withImage;
-      const result=classifyTanstackPreviewTransition({mode:"development",previous:previousRequest,next:updated});
-      expect(result).toMatchObject({action:"live_candidate",reason:"eligible_public_asset_change"});
+      const result=classifyTanstackPreviewTransition({mode:"development",allowBinaryLive:true,previous:previousRequest,next:updated});
+      expect(result).toMatchObject({action:"live_candidate",reason:"eligible_source_change"});
     }
   });
   it("requires controlled restart for protected asset locations and immutable previews", () => {
     for (const path of ["src/secret.png","public/docs/note.pdf","public/.hidden.png"]) {
       const changed={...asset,path};
-      expect(classifyTanstackPreviewTransition({mode:"development",previous,
+      expect(classifyTanstackPreviewTransition({mode:"development",allowBinaryLive:true,previous,
         next:{...previous,sourceVersion:6,binaryFiles:[changed]}}))
         .toMatchObject({action:"restart",reason:"protected_files_changed"});
     }
     // Traversal is structurally invalid and must be rejected before any restart.
-    expect(classifyTanstackPreviewTransition({mode:"development",previous,
+    expect(classifyTanstackPreviewTransition({mode:"development",allowBinaryLive:true,previous,
       next:{...previous,sourceVersion:6,binaryFiles:[{...asset,path:"public/../secret.png"}]}}))
       .toMatchObject({action:"reject",reason:"invalid_files"});
     expect(classifyTanstackPreviewTransition({mode:"immutable",previous,
       next:{...withImage,sourceVersion:6}})).toMatchObject({action:"restart",reason:"immutable_lease"});
   });
   it("rejects same-version mutations and case alias collisions", () => {
-    expect(classifyTanstackPreviewTransition({mode:"development",previous:withImage,
+    expect(classifyTanstackPreviewTransition({mode:"development",allowBinaryLive:true,previous:withImage,
       next:{...withImage,binaryFiles:[{...asset,data:"YWJk"}]}}))
       .toMatchObject({action:"reject",reason:"invalid_revision"});
-    expect(classifyTanstackPreviewTransition({mode:"development",previous:withImage,
+    expect(classifyTanstackPreviewTransition({mode:"development",allowBinaryLive:true,previous:withImage,
       next:{...withImage,sourceVersion:6,binaryFiles:[{...asset,path:"PUBLIC/IMAGES/IMAGE.PNG"}]}}))
       .toMatchObject({action:"reject",reason:"invalid_files"});
   });

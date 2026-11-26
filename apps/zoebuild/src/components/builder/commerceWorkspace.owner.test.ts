@@ -106,6 +106,33 @@ describe(
     );
 
     it(
+      "opens provider settings without creating a connection or claiming success",
+      () => {
+        const shell = source(
+          "apps/zoebuild/src/app/[locale]/projects/[buildProjectId]/ProjectBuilderShell.tsx",
+        );
+        const start = shell.indexOf('if (semantic.action === "provider_settings")');
+        const end = shell.indexOf('if (semantic.action === "edit")', start + 1);
+        expect(start).toBeGreaterThanOrEqual(0);
+        expect(end).toBeGreaterThan(start);
+        const navigation = shell.slice(start, end);
+        expect(navigation).toContain("resolveZoeSelectedProvider(semantic.provider)");
+        expect(navigation).toContain("setAssistantSettingsSection(known.section)");
+        expect(navigation).toContain('kind:"settings-opened"');
+        expect(navigation).toContain("No connection was changed.");
+        expect(navigation).toContain("setSettingsOpen(true)");
+        expect(navigation).not.toMatch(/\bfetch\s*\(|method\s*:/);
+        expect(shell).not.toContain("Import complete");
+
+        const commerce = source(
+          "apps/zoebuild/src/app/[locale]/projects/[buildProjectId]/CommerceWorkspacePanel.tsx",
+        );
+        expect(commerce).toContain('item.provider === "shopify" && item.status === "active"');
+        expect(commerce).toContain("shopifyOAuthConfigured === true");
+      },
+    );
+
+    it(
       "keeps merchant status honest and exposes no secret or payment-card form",
       () => {
         const panel =

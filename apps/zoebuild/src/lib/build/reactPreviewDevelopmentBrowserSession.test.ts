@@ -22,6 +22,20 @@ function driver(now = () => 0) {
 }
 
 describe("Phase 4E3A saved revision browser control plane", () => {
+  it("preserves typed capacity failures but never remote message or unsafe request IDs", async()=>{
+    const requestId="6a1e63d6-a7ce-44e7-bb69-4fcb3f7a681f";
+    for(const code of ["RUNNER_DISK_LOW","RUNNER_WORKSPACE_STORAGE_LIMIT"] as const) {
+      const fetchClient=vi.fn(async()=>json({ok:false,code,requestId,message:"PRIVATE_SECRET"},503));
+      const session=createDevelopmentPreviewBrowserSession({buildProjectId:project,fetchClient});
+      const error=await session.start(7).catch(e=>e);
+      expect(error).toMatchObject({code,requestId,httpStatus:503});
+      expect(error.message).not.toContain("PRIVATE_SECRET");
+      expect(fetchClient).toHaveBeenCalledOnce();
+    }
+    const session=createDevelopmentPreviewBrowserSession({buildProjectId:project,
+      fetchClient:async()=>json({ok:false,code:"RUNNER_DISK_LOW",requestId:"SECRET"},503)});
+    await expect(session.start(7)).rejects.toMatchObject({code:"RUNNER_DISK_LOW",requestId:undefined});
+  });
   it("starts only a saved revision, mints a scoped browser URL and updates exactly N+1", async () => {
     const {session,fetchClient} = driver();
     expect((await session.start(7)).documentUrl).toBe(READ);

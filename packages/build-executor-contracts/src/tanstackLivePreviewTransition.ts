@@ -75,6 +75,35 @@ export function isTanstackLiveSourcePath(path: string): boolean {
   return /^src\/(?:routes|components|hooks|styles|lib)\/(?:[A-Za-z0-9_.-]+\/)*[A-Za-z0-9_.-]+\.(?:tsx?|jsx?|css|scss)$/.test(path);
 }
 
+/** Public image assets may use the suspended live-image writer. Other
+ * binaries and configuration remain restart-only. Private R2 media entries
+ * never acquire this path: they are not application source. */
+export function isTanstackLiveBinaryPath(candidate: string): boolean {
+  if (!validPath(candidate)) return false;
+  const pieces = candidate.split("/");
+  if (pieces[0] !== "public" || pieces.length < 2 ||
+      pieces.slice(1).some(part => part.startsWith(".") || part.trim() !== part ||
+        !/^[A-Za-z0-9_. \u00a0\u202f-]+$/.test(part)))
+    return false;
+  return /\.(?:png|jpe?g|webp|avif)$/i.test(pieces.at(-1)!);
+}
+
+/** Root image names use the same bounded extension/character policy. The
+ * suspended writer must verify the exact prior authoritative snapshot before
+ * any image mutation, including delete, move, replacement and creation. */
+export function tanstackLiveRootImageMimeType(candidate: string): string | null {
+  if (!validPath(candidate) || candidate.includes("/") || candidate.startsWith(".") ||
+      candidate.trim() !== candidate || !/^[A-Za-z0-9_. \u00a0\u202f-]+$/.test(candidate)) return null;
+  const extension = /\.[^.]+$/.exec(candidate)?.[0]?.toLowerCase();
+  switch (extension) {
+    case ".png": return "image/png";
+    case ".jpg": case ".jpeg": return "image/jpeg";
+    case ".webp": return "image/webp";
+    case ".avif": return "image/avif";
+    default: return null;
+  }
+}
+
 /** Images in public/ are inert, cacheable static bytes. This is only a path
  * classification, never authorization to write a file. The Runner re-verifies
  * metadata, SHA-256, sandbox identity, and the current DB source version. */
@@ -89,6 +118,8 @@ export function classifyTanstackPreviewTransition(input: Readonly<{
   previous: ProductionBuildJobRequestV1;
   next: ProductionBuildJobRequestV1;
   hasUnsavedChanges?: boolean;
+  /** Runner-side opt-in only; default false. Not a source authorization. */
+  allowBinaryLive?: boolean;
 }>): TanstackPreviewTransition {
   const result = (
     action: TanstackPreviewTransition["action"],
@@ -111,8 +142,8 @@ export function classifyTanstackPreviewTransition(input: Readonly<{
   if (!oldFiles || !newFiles) return result("reject", "invalid_files");
   const paths = new Set([...oldFiles.keys(), ...newFiles.keys()]);
   const changes = [...paths].filter(path => oldFiles.get(path) !== newFiles.get(path)).sort();
-  // Every binary in the saved executor request was validated by the trusted
-  // protocol parser. Recheck path identity here before proposing a live change.
+  // Binary changes use only the separately opted-in, suspended binary writer.
+  // Root and public images require prior snapshot verification in the writer.
   const oldBinaries = new Map((previous.binaryFiles ?? []).map(file => [file.path, file]));
   const newBinaries = new Map((next.binaryFiles ?? []).map(file => [file.path, file]));
   const binaryKeys = [...oldBinaries.keys(), ...newBinaries.keys()];
@@ -125,27 +156,37 @@ export function classifyTanstackPreviewTransition(input: Readonly<{
       [...oldBinaries.keys()].some(p => [...newBinaries.keys()].some(q => q !== p && q.toLowerCase() === p.toLowerCase())) ||
       [...binaryCaseKeys].some(p => [...oldFiles.keys(), ...newFiles.keys()].some(t => t.toLowerCase() === p)))
     return result("reject", "invalid_files");
-  const binaryChanges = [...new Set(binaryKeys)]
-    .filter(p => JSON.stringify(oldBinaries.get(p)) !== JSON.stringify(newBinaries.get(p)))
+  const binaryChanges = [...new Set([...oldBinaries.keys(), ...newBinaries.keys()])]
+    .filter(path => JSON.stringify(oldBinaries.get(path)) !== JSON.stringify(newBinaries.get(path)))
     .sort();
   changes.push(...binaryChanges);
   changes.sort();
   if (next.sourceVersion === previous.sourceVersion) {
     return changes.length ? result("reject", "invalid_revision") : result("unchanged", "unchanged");
   }
+  if (changes.length > 32)
+    return result("restart", "protected_files_changed", changes);
   if (changes.some(path => INTEGRITY_FILES.has(path)))
     return result("restart", "dependencies_changed", changes);
-  // The suspended writer admits at most 32 atomic changes per transaction.
-  // Larger legitimate revisions use normal replacement rather than risking
-  // partial workspace writes followed by quarantine.
-  if (changes.length > 32) return result("restart", "protected_files_changed", changes);
-  if (changes.some(path => !isTanstackLiveSourcePath(path) &&
-      !(binaryChanges.includes(path) && isTanstackLivePublicImagePath(path))))
+  // A path must be binary in the saved snapshots, not a text-to-binary
+  // conversion. Protected and non-public nested source paths stay restart-only.
+  const eligibleBinary = (path: string) => {
+    const rootMime = tanstackLiveRootImageMimeType(path);
+    if (!isTanstackLiveBinaryPath(path) && rootMime === null) return false;
+    if (oldFiles.has(path) || newFiles.has(path)) return false;
+    return rootMime === null || [oldBinaries.get(path), newBinaries.get(path)]
+      .every(file => !file || file.mimeType === rootMime);
+  };
+  // The writer rejects case-insensitive collisions across changed paths. Do
+  // not send a binary case-only rename into a transaction that will quarantine.
+  const binaryCaseCollision = binaryChanges.length !== new Set(binaryChanges.map(path => path.toLowerCase())).size;
+  if ((binaryChanges.length > 0 && !input.allowBinaryLive) || binaryCaseCollision ||
+      binaryChanges.some(path => !eligibleBinary(path)) ||
+      changes.some(path => !binaryChanges.includes(path) && !isTanstackLiveSourcePath(path)))
     return result("restart", "protected_files_changed", changes);
   if (input.mode !== "development")
     return result("restart", "immutable_lease", changes);
   if (!changes.length)
     return result("restart", "immutable_lease", changes);
-  return result("live_candidate", binaryChanges.length
-    ? "eligible_public_asset_change" : "eligible_source_change", changes);
+  return result("live_candidate", "eligible_source_change", changes);
 }

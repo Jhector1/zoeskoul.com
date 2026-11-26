@@ -4,7 +4,7 @@
  * AWS Signature V4 over native fetch, with no SDK / workspace dependency added.
  * All inputs remain server-owned. This intentionally exposes NO public URLs,
  * upload presigning, deletion, listing or arbitrary S3 commands.
- * Only the AI4A private, immutable project-media key grammar is permitted.
+ * Media and publish artifacts use separate fixed private key policies.
  */
 import type { BuildMediaPrivateObjectStore } from "./projectMediaStorage";
 
@@ -28,6 +28,8 @@ export class BuildMediaR2Error extends Error {
 
 const IMAGE_BYTES_LIMIT = 20 * 1024 * 1024; // Must not exceed BUILD_MEDIA_LIMITS.imageBytes.
 const KEY = /^project-media\/[A-Za-z0-9_-]{4,128}\/[A-Za-z0-9_-]{4,128}\/[A-Za-z0-9_-]{10,128}\/[0-9a-f]{64}$/;
+const PUBLISH_KEY = /^published-artifacts\/[A-Za-z0-9_-]{4,128}\/[A-Za-z0-9_-]{4,128}\/[1-9][0-9]{0,15}\/[0-9a-f]{64}\/[0-9a-f]{64}$/;
+export const PUBLISH_BUNDLE_BYTES_LIMIT = 56 * 1024 * 1024;
 const BUCKET = /^[a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])$/;
 const HEX_ACCOUNT = /^[0-9a-f]{32}$/;
 const ACCESS_KEY = /^[A-Za-z0-9]{16,128}$/;
@@ -53,16 +55,25 @@ function safeConfig(input: BuildMediaR2Configuration): BuildMediaR2Configuration
   }
   return {...input};
 }
-function safeKey(key: string): string {
-  if (typeof key !== "string" || !KEY.test(key)) refuse("BUILD_MEDIA_R2_KEY_INVALID");
+function safeKey(key: string, pattern: RegExp): string {
+  if (typeof key !== "string" || !pattern.test(key)) refuse("BUILD_MEDIA_R2_KEY_INVALID");
   return key;
 }
 
 /** Keeps the signer unit-testable without permitting arbitrary HTTP origins. */
-export function createCloudflareR2PrivateObjectStore(
-  rawConfig: BuildMediaR2Configuration,
-  options: Readonly<{fetchImpl?: typeof fetch; now?: () => Date; timeoutMs?: number}> = {},
-): BuildMediaPrivateObjectStore {
+type R2Options = Readonly<{fetchImpl?: typeof fetch; now?: () => Date; timeoutMs?: number}>;
+
+export function createCloudflareR2PrivateObjectStore(rawConfig: BuildMediaR2Configuration, options: R2Options = {}): BuildMediaPrivateObjectStore {
+  return createPrivateStore(rawConfig, options, KEY, IMAGE_BYTES_LIMIT, IMAGE_MIME);
+}
+
+/** Separate trusted publisher credentials/bucket; never widens the media store. */
+export function createCloudflareR2PublishBundleStore(rawConfig: BuildMediaR2Configuration, options: R2Options = {}): BuildMediaPrivateObjectStore {
+  return createPrivateStore(rawConfig, options, PUBLISH_KEY, PUBLISH_BUNDLE_BYTES_LIMIT, new Set(["application/json"]));
+}
+
+function createPrivateStore(rawConfig: BuildMediaR2Configuration, options: R2Options,
+  keyPattern: RegExp, maxBytes: number, mimeTypes: ReadonlySet<string>): BuildMediaPrivateObjectStore {
   const config = safeConfig(rawConfig);
   const fetchImpl = options.fetchImpl ?? fetch;
   const now = options.now ?? (() => new Date());
@@ -78,7 +89,7 @@ export function createCloudflareR2PrivateObjectStore(
     bytes?: Uint8Array;
     mimeType?: string;
   }>): Promise<Response> {
-    const key = safeKey(input.key);
+    const key = safeKey(input.key, keyPattern);
     const path = `/${config.bucket}/${key}`; // Strict ASCII key grammar; no dot segments or escaping.
     const instant = now();
     if (!(instant instanceof Date) || !Number.isFinite(instant.valueOf())) {
@@ -130,9 +141,9 @@ export function createCloudflareR2PrivateObjectStore(
 
   return {
     async putIfAbsent({key, bytes, mimeType, sha256: expectedDigest}) {
-      safeKey(key);
-      if (!(bytes instanceof Uint8Array) || bytes.length === 0 || bytes.length > IMAGE_BYTES_LIMIT ||
-          !IMAGE_MIME.has(mimeType) || !/^[0-9a-f]{64}$/.test(expectedDigest)) {
+      safeKey(key, keyPattern);
+      if (!(bytes instanceof Uint8Array) || bytes.length === 0 || bytes.length > maxBytes ||
+          !mimeTypes.has(mimeType) || !/^[0-9a-f]{64}$/.test(expectedDigest)) {
         refuse("BUILD_MEDIA_R2_UPLOAD_INVALID");
       }
       const snapshot = Uint8Array.from(bytes);
@@ -147,7 +158,7 @@ export function createCloudflareR2PrivateObjectStore(
       } finally { await response.body?.cancel().catch(() => {}); }
     },
     async read(key) {
-      safeKey(key);
+      safeKey(key, keyPattern);
       const response = await signedRequest({method: "GET", key});
       if (response.status === 404) { await response.body?.cancel().catch(() => {}); return null; }
       if (response.status !== 200) {
@@ -155,7 +166,7 @@ export function createCloudflareR2PrivateObjectStore(
         throw new BuildMediaR2Error("BUILD_MEDIA_R2_READ_FAILED", response.status);
       }
       const sizeHeader = response.headers.get("content-length");
-      if (sizeHeader !== null && (!/^\d+$/.test(sizeHeader) || Number(sizeHeader) > IMAGE_BYTES_LIMIT)) {
+      if (sizeHeader !== null && (!/^\d+$/.test(sizeHeader) || Number(sizeHeader) > maxBytes)) {
         await response.body?.cancel().catch(() => {});
         refuse("BUILD_MEDIA_R2_READ_TOO_LARGE");
       }
@@ -168,7 +179,7 @@ export function createCloudflareR2PrivateObjectStore(
           const {done, value} = await reader.read();
           if (done) break;
           total += value.byteLength;
-          if (total > IMAGE_BYTES_LIMIT) {
+          if (total > maxBytes) {
             await reader.cancel().catch(() => {});
             refuse("BUILD_MEDIA_R2_READ_TOO_LARGE");
           }

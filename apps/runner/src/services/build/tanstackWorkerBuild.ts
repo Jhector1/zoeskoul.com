@@ -62,7 +62,7 @@ export async function executeTanstackWorkerBuild(
     }) : undefined;
     return { protocolVersion: request.protocolVersion, operation: "production-build" as const,
       buildProjectId: request.buildProjectId, sourceVersion: request.sourceVersion,
-      artifact, ...(general ? {snapshotSha256:workerVerificationSnapshot(request)} : {}), ...(runtimeSmoke ? {runtimeSmoke} : {}) };
+      artifact, snapshotSha256:workerVerificationSnapshot(request), ...(runtimeSmoke ? {runtimeSmoke} : {}) };
   } finally {
     // A failed workspace removal must propagate: never mark the build verified.
     if (liveContainer || journal?.current.containerId) {

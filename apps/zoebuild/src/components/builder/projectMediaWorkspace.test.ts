@@ -89,6 +89,20 @@ describe("private R2 assets in native FullIDE, without FullIDE modification",()=
     const edited=clean.nodes.find(n=>n.id==="index");
     expect(edited?.kind==="file" ? edited.content : undefined).toBe("changed");
   });
+  it("preserves a renamed canonical binary node and its bytes while keeping virtual media read-only",()=>{
+    const binary={encoding:"base64" as const,data:"AQID",sizeBytes:3,mimeType:"image/png"};
+    const photo={id:"photo",kind:"file" as const,name:"old.png",parentId:null,content:"",binary,
+      createdAt:1,updatedAt:1};
+    const before={...source,nodes:[...source.nodes,photo],activeFileId:"photo",openTabs:["photo"]};
+    const p=projectPrivateMediaIntoFullIDE({source:before,images:[asset],loaded:new Map()});
+    const displayed={...p.workspace,nodes:p.workspace.nodes.map(node=>node.id==="photo"?{...node,name:"new.png",updatedAt:2}:node)};
+    expect(privateMediaProjectionIsIntact(displayed,p)).toBe(true);
+    const clean=removePrivateMediaProjection(displayed,p,before);
+    expect(clean.nodes.find(node=>node.id==="photo")).toEqual({...photo,name:"new.png",updatedAt:2});
+    expect(clean.openTabs).toEqual(["photo"]);
+    expect(clean.activeFileId).toBe("photo");
+    expect(clean.nodes.some(node=>node.id===projectMediaNodeId(id))).toBe(false);
+  });
   it("refuses a user source node inside a synthetic media folder",()=>{
     const p=project();
     const mediaFolder=p.workspace.nodes.find(n=>n.kind==="folder"&&n.name==="images");

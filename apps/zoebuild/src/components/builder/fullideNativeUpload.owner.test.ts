@@ -3,6 +3,7 @@ import {describe, expect, it} from "vitest";
 
 const shell = readFileSync(new URL("../../app/[locale]/projects/[buildProjectId]/ProjectBuilderShell.tsx", import.meta.url), "utf8");
 const workspace = readFileSync(new URL("../../app/[locale]/projects/[buildProjectId]/BuildWorkspaceClient.tsx", import.meta.url), "utf8");
+const mediaHook = readFileSync(new URL("./useZoeProjectMediaExplorer.ts", import.meta.url), "utf8");
 const fullIde = readFileSync(new URL("../../../../../packages/learner-workspace/src/fullide/FullIDE.tsx", import.meta.url), "utf8");
 const explorer = readFileSync(new URL("../../../../../packages/learner-workspace/src/fullide/panes/IdeExplorerPane.tsx", import.meta.url), "utf8");
 
@@ -20,6 +21,13 @@ describe("ZoeBuild canonical FullIDE file and image uploads", () => {
     expect(workspace).toContain("onWorkspaceChange={mediaExplorer.onWorkspaceChange}");
   });
 
+  it("does not restart media refresh on parent callback changes or hydrate empty media", () => {
+    expect(mediaHook).toContain("canonicalChangeRef.current = onCanonicalWorkspaceChange");
+    expect(mediaHook).toContain("[buildProjectId,emitCanonicalChange,publishProjection,sourceWorkspaceRef]");
+    expect(mediaHook).not.toContain("[buildProjectId,onCanonicalWorkspaceChange,publishProjection,sourceWorkspaceRef]");
+    expect(mediaHook).toContain("images.length === 0 && (!projectionRef.current ||");
+    expect(mediaHook).toContain("projectionRef.current.virtualNodeIds.size === 0)) return;");
+  });
   it("uses the real FullIDE import controls for files including supported images", () => {
     expect(workspace).toContain("<FullIDE");
     expect(workspace).toContain('servicePreset="workspace"');

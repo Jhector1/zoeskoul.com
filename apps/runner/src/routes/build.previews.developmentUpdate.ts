@@ -127,9 +127,13 @@ export function makeTanstackDevelopmentUpdateRoute(
           await deps.assertSavedSource(candidateActor, candidate);
         },
       });
-      if (result.action === "restart_required")
+      if (result.action === "restart_required") {
+        // A bounded reason only: never expose changed paths or source bytes.
+        const restartReason = ["dependencies_changed", "protected_files_changed",
+          "immutable_lease"].includes(result.reason) ? result.reason : "other";
         return res.status(409).json({ ok: false, code: "RESTART_REQUIRED",
-          sourceVersion: result.sourceVersion });
+          sourceVersion: result.sourceVersion, restartReason });
+      }
       return res.status(200).json({ ok: true, action: "updated",
         sourceVersion: result.sourceVersion });
     } catch (error) {

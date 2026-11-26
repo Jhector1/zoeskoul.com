@@ -14,6 +14,7 @@ RUN corepack enable
 
 COPY . .
 
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential && rm -rf /var/lib/apt/lists/*
 RUN DATABASE_URL="postgresql://zoeskoul:zoeskoul@localhost:5432/zoeskoul?schema=public" pnpm install --frozen-lockfile
 RUN DATABASE_URL="postgresql://zoeskoul:zoeskoul@localhost:5432/zoeskoul?schema=public" pnpm --filter @zoeskoul/runner... build
 

@@ -75,7 +75,7 @@ describe("internal TanStack development workspace binding (not routed)", () => {
     expect(f.resolveTrustedWorkspace).toHaveBeenCalledTimes(1);
     expect(applySuspendedTanstackDevelopmentSource).toHaveBeenCalledExactlyOnceWith({
       containerId: CID, workspaceRoot: ROOT, workspaceDir: DIR,
-      changedPaths: ["src/routes/index.tsx"], next,
+      changedPaths: ["src/routes/index.tsx"], previous, next,
     });
     expect(f.registry.get("preview_a")?.sourceVersion).toBe(8);
   });

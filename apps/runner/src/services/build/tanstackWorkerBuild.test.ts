@@ -56,3 +56,13 @@ describe("isolated Worker compiler ownership", () => {
     expect(sandbox).toContain('false,');
   });
 });
+
+
+describe("publish source fingerprint",()=>{
+  it("binds the exact canonical text and binary snapshot before compilation",()=>{
+    const source=readFileSync(resolve(process.cwd(),"src/services/build/tanstackWorkerBuild.ts"),"utf8");
+    expect(source).toContain('JSON.stringify({files: request.files, binaryFiles: request.binaryFiles ?? []})');
+    expect(source.indexOf("const snapshotSha256 =")).toBeLessThan(source.indexOf("await createWorkspace("));
+    expect(source).toContain("snapshotSha256, artifact,");
+  });
+});

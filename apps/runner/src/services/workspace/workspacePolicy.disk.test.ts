@@ -3,7 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { env } from "../../lib/env.js";
-import { getDirectoryUsage, getStrictDirectoryUsage, reserveWorkspaceRootCapacity } from "./workspacePolicy.js";
+import { getDirectoryUsage, getStrictDirectoryUsage, reserveWorkspaceRootCapacity, assertRunnerFilesystemHasCapacity } from "./workspacePolicy.js";
 
 describe("workspace disk usage scanner", () => {
   let root: string;
@@ -15,6 +15,12 @@ describe("workspace disk usage scanner", () => {
   afterEach(async () => {
     vi.restoreAllMocks();
     await fs.rm(root, { recursive: true, force: true });
+  });
+
+  it("reports a typed disk-headroom failure for both capacity checks", async () => {
+    vi.spyOn(fs,"statfs").mockResolvedValue({type:0,bsize:4096,blocks:1e9,bfree:0,bavail:0,files:1e9,ffree:1e9} as never);
+    await expect(assertRunnerFilesystemHasCapacity(root)).rejects.toMatchObject({code:"RUNNER_DISK_LOW"});
+    await expect(reserveWorkspaceRootCapacity(root,0)).rejects.toMatchObject({code:"RUNNER_DISK_LOW"});
   });
 
   it("counts nested bytes and entries", async () => {

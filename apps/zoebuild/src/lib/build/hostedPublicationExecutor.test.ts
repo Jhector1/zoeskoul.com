@@ -1,0 +1,45 @@
+import assert from "node:assert/strict";
+import {test,vi} from "vitest";
+import type {PrismaClient} from "@zoeskoul/db";
+vi.mock("server-only",()=>({}));
+import {beginHostedPublication as begin,completeHostedPublication as complete,HostedPublicationError} from "./hostedPublicationExecutor";
+import {HOSTED_RUNTIME_KIND,HOSTED_RUNTIME_PROVIDER} from "./hostedActivationEvidence";
+import type {PendingHostedPublication} from "./hostedPublicationRecovery";
+const scope={ownerId:"owner-one",projectId:"project-one"};
+const activation={projectId:scope.projectId,sourceVersion:7,artifactHash:"a".repeat(64),objectSha256:"b".repeat(64),activatedAt:"2026-11-25T17:40:00.123456+00:00"};
+const target={deploymentId:"release-one",sourceVersion:7,artifactHash:activation.artifactHash,objectSha256:activation.objectSha256};
+const input={...scope,operationId:"operation-one",expectedGeneration:0n,action:"publish" as const,target};
+const ack={operationId:input.operationId,projectId:scope.projectId,fence:1n,state:"applied-active" as const,activation};
+const finish={...scope,operationId:input.operationId,acknowledgement:ack};
+const deployment={id:target.deploymentId,buildProjectId:scope.projectId,sourceVersion:7,environment:"production",provider:HOSTED_RUNTIME_PROVIDER,kind:HOSTED_RUNTIME_KIND,status:"ready",artifactHash:target.artifactHash,providerRef:target.objectSha256};
+type Selection={generation:bigint;deploymentId:string|null;activationToken:string|null};
+type Row={id:string;buildProjectId:string;requestedByOwnerId:string;expectedGeneration:bigint;action:string;targetDeploymentId:string|null;targetSourceVersion:number|null;targetArtifactHash:string|null;targetObjectSha256:string|null;activationToken:string|null;completedAt:Date|null};
+function fixture(){
+  let selection:Selection|null=null;let rows:Row[]=[];
+  const f={eligible:true,deployment:{...deployment},loseJournal:false,loseSelection:false,conflict:"",isolation:[] as string[],get selection(){return selection;},get rows(){return rows;},advance(g:bigint){selection={generation:g,deploymentId:null,activationToken:null};}};
+  const matches=(r:Row,w:Partial<Row>)=>Object.entries(w).every(([k,v])=>r[k as keyof Row]===v);
+  const tx={buildProject:{findFirst:async({where}:{where:{id:string;codeProject:{ownerId:string}}})=>f.eligible&&where.id===scope.projectId&&where.codeProject.ownerId===scope.ownerId?{id:scope.projectId,status:"ready",stackId:"tanstack-start-v1",codeProject:{archivedAt:null},hostedActivation:selection}:null},
+    buildDeployment:{findFirst:async()=>f.deployment},
+    buildHostedPublicationOperation:{findFirst:async({where}:{where:Partial<Row>})=>rows.find(r=>matches(r,where))??null,
+      create:async({data}:{data:Row})=>{const r={...data,completedAt:null,activationToken:null};rows.push(r);return r;},
+      updateMany:async({where,data}:{where:Partial<Row>;data:Partial<Row>})=>{if(f.loseJournal)return {count:0};let count=0;rows=rows.map(r=>matches(r,where)?(count++,{...r,...data}):r);return {count};}},
+    buildHostedActivation:{create:async({data}:{data:Selection})=>{selection={generation:data.generation,deploymentId:data.deploymentId,activationToken:data.activationToken};return selection;},
+      updateMany:async({where,data}:{where:{generation:bigint};data:Selection})=>{if(f.loseSelection||selection?.generation!==where.generation)return {count:0};selection={...data};return {count:1};}}};
+  const client={$transaction:async(fn:(t:typeof tx)=>unknown,opts:{isolationLevel:string})=>{f.isolation.push(opts.isolationLevel);if(f.conflict)throw {code:f.conflict};const before=selection;const old=rows.map(r=>({...r}));try{return await fn(tx);}catch(e){selection=before;rows=old;throw e;}}} as unknown as PrismaClient;
+  return {f,client};
+}
+async function rejects(p:Promise<unknown>,code:string){await assert.rejects(p,(e:unknown)=>e instanceof HostedPublicationError&&e.code===code);}
+test("durable intent recorded without activation; same operation replay is read-only",async()=>{const {f,client}=fixture();const r=await begin(client,input);assert.equal(r.state,"pending");assert.deepEqual(await begin(client,input),r);assert.equal(f.rows.length,1);assert.equal(f.selection,null);assert.deepEqual(f.isolation,["Serializable","Serializable"]);});
+test("operation ID cannot be reused with a different target or action",async()=>{const {client}=fixture();await begin(client,input);await rejects(begin(client,{...input,action:"rollback"}),"OPERATION_ID_REUSED");});
+test("second pending operation cannot begin",async()=>{const {client}=fixture();await begin(client,input);await rejects(begin(client,{...input,operationId:"operation-two"}),"OPERATION_PENDING");});
+test("wrong owner, archived project and malformed IDs fail closed",async()=>{const {f,client}=fixture();await rejects(begin(client,{...input,ownerId:"owner-two"}),"PROJECT_INELIGIBLE");await rejects(begin(client,{...input,ownerId:""}),"INVALID_INPUT");f.eligible=false;await rejects(begin(client,input),"PROJECT_INELIGIBLE");assert.equal(f.rows.length,0);});
+test("wrong deployment owner, provider or changed immutable identity rejected before intent",async()=>{const {f,client}=fixture();for(const change of [{buildProjectId:"project-two"},{provider:"legacy"},{artifactHash:"c".repeat(64)}]){f.deployment={...deployment,...change};await rejects(begin(client,input),"TARGET_MISMATCH");}assert.equal(f.rows.length,0);});
+test("stale and exhausted generation rejected",async()=>{const {f,client}=fixture();f.advance(1n);await rejects(begin(client,input),"STALE_GENERATION");await rejects(begin(client,{...input,expectedGeneration:9223372036854775807n}),"INVALID_INTENT");});
+test("unknown provider outcome remains pending without mutation",async()=>{const {f,client}=fixture();await begin(client,input);assert.deepEqual(await complete(client,{...finish,acknowledgement:null}),{state:"await-provider"});assert.equal(f.rows[0].completedAt,null);assert.equal(f.selection,null);});
+test("exact acknowledgement completes journal and activation together with microseconds",async()=>{const {f,client}=fixture();await begin(client,input);const r=await complete(client,finish);assert.equal(r.state,"completed");assert.deepEqual(f.selection,{generation:1n,deploymentId:target.deploymentId,activationToken:activation.activatedAt});assert.ok(f.rows[0].completedAt instanceof Date);assert.equal(f.rows[0].activationToken,activation.activatedAt);assert.deepEqual(await complete(client,finish),r);assert.deepEqual(await begin(client,input),r);});
+test("wrong operation or fence and changed deployment cannot complete",async()=>{const {f,client}=fixture();await begin(client,input);for(const a of [{...ack,operationId:"operation-two"},{...ack,fence:2n}])await rejects(complete(client,{...finish,acknowledgement:a}),"ACKNOWLEDGEMENT_MISMATCH");f.deployment.providerRef="c".repeat(64);await rejects(complete(client,finish),"TARGET_MISMATCH");assert.equal(f.selection,null);assert.equal(f.rows[0].completedAt,null);});
+test("completion rechecks owner and generation",async()=>{const {f,client}=fixture();await begin(client,input);await rejects(complete(client,{...finish,ownerId:"owner-two"}),"PROJECT_INELIGIBLE");f.advance(1n);await rejects(complete(client,finish),"STALE_GENERATION");assert.equal(f.rows[0].completedAt,null);});
+test("journal CAS failure rolls back selection write",async()=>{const {f,client}=fixture();await begin(client,input);f.loseJournal=true;await rejects(complete(client,finish),"WRITE_CONFLICT");assert.equal(f.selection,null);assert.equal(f.rows[0].completedAt,null);});
+test("unpublish preserves generation and historical receipt; lost selection CAS rolls back",async()=>{const {f,client}=fixture();await begin(client,input);const historical=await complete(client,finish);const unpublish={...scope,operationId:"operation-two",expectedGeneration:1n,action:"unpublish",target:null} as const;await begin(client,unpublish);const stop={...scope,operationId:unpublish.operationId,acknowledgement:{operationId:unpublish.operationId,projectId:scope.projectId,fence:2n,state:"applied-inactive" as const}};f.loseSelection=true;await rejects(complete(client,stop),"STALE_GENERATION");assert.equal(f.rows[1].completedAt,null);f.loseSelection=false;await complete(client,stop);assert.deepEqual(f.selection,{generation:2n,deploymentId:null,activationToken:null});assert.deepEqual(await begin(client,input),historical);assert.equal(f.selection.generation,2n);});
+test("explicit rollback targets older verified release",async()=>{const {f,client}=fixture();f.advance(4n);const t={...target,sourceVersion:3};f.deployment.sourceVersion=3;const o:PendingHostedPublication={...input,action:"rollback",target:t,expectedGeneration:4n};await begin(client,{...o,ownerId:scope.ownerId});await complete(client,{...finish,acknowledgement:{...ack,fence:5n,activation:{...activation,sourceVersion:3}}});assert.equal(f.selection?.generation,5n);});
+test("unique and serialization conflicts do not retry",async()=>{for(const code of ["P2002","P2034"]){const {f,client}=fixture();f.conflict=code;await rejects(begin(client,input),"WRITE_CONFLICT");assert.equal(f.isolation.length,1);}});

@@ -12,6 +12,8 @@
  * HMR is NOT handled by this module.
  */
 
+import { developmentCapacityFailure, developmentFailureRequestId } from "./reactPreviewDevelopmentFailure";
+
 const PROJECT_ID = /^[A-Za-z0-9_-]{1,128}$/;
 const PREVIEW_ID = /^preview_[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const READ_TOKEN = /^(?:dpv1\.[A-Za-z0-9_-]{32,1000}|dpg1\.[A-Za-z0-9_-]{43})$/;
@@ -29,8 +31,9 @@ export type DevelopmentBrowserSession = Readonly<{
 
 export class DevelopmentBrowserSessionError extends Error {
   constructor(readonly code: "INVALID_REVISION" | "RESTART_REQUIRED" |
-    "RETRYABLE_UPDATE" | "BUSY" | "UNAVAILABLE" | "CLOSED", message: string,
-    readonly httpStatus?: number) {
+    "RETRYABLE_UPDATE" | "BUSY" | "UNAVAILABLE" | "CLOSED" |
+    "RUNNER_DISK_LOW" | "RUNNER_WORKSPACE_STORAGE_LIMIT", message: string,
+    readonly httpStatus?: number, readonly requestId?: string) {
     super(message);
     this.name = "DevelopmentBrowserSessionError";
   }
@@ -81,6 +84,17 @@ async function postRevision(fetchClient: FetchClient, path: string, sourceVersio
     body = await response.json().catch(() => null);
   }
   diagnostic("control_response", response.status, response.ok && exactKeys(body, ["ok"]) && body.ok === true);
+  if (operation === "update" && response.status === 409 &&
+      process.env.NODE_ENV === "development" && exactKeys(body, ["code"]) &&
+      ["BUILD_PREVIEW_RESTART_REQUIRED", "BUILD_PREVIEW_SOURCE_CONFLICT"].includes(String(body.code))) {
+    console.info("[ZOE-HMR]", JSON.stringify({event:"update_conflict_classified",
+      operation, sourceVersion, code:body.code}));
+  }
+  if (response.status === 503 && exactKeys(body,["ok","code"]) && body.ok === false) {
+    const failure = developmentCapacityFailure(body.code);
+    if (failure) throw new DevelopmentBrowserSessionError(failure.code, failure.message,
+      503, developmentFailureRequestId(body.requestId) ?? undefined);
+  }
   if (!response.ok || !exactKeys(body, ["ok"]) || body.ok !== true)
     throw new DevelopmentBrowserSessionError(
       response.status === 409 ? "RESTART_REQUIRED" :

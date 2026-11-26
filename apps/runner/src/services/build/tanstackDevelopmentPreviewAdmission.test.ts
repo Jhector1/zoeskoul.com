@@ -1,5 +1,6 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contracts";
+import { createHash } from "node:crypto";
 import { createTanstackPreviewIdentity } from "./tanstackPreviewIdentity.js";
 import { authorizeTanstackPreviewSource } from "./tanstackPreviewSourceAuthorization.js";
 import { assessTanstackDevelopmentPreviewUpdate } from "./tanstackDevelopmentPreviewAdmission.js";
@@ -36,6 +37,7 @@ function assess(overrides: Record<string,unknown> = {}) {
 }
 
 beforeEach(() => vi.clearAllMocks());
+afterEach(() => vi.unstubAllEnvs());
 
 describe("Runner development preview source admission (no mutations)", () => {
   it("admits a bounded source-only candidate on exact authenticated state", () => {
@@ -105,5 +107,49 @@ describe("Runner development preview source admission (no mutations)", () => {
       {path:"SRC/routes/index.tsx",content:"collision"}]};
     expect(() => assess({next:duplicate})).toThrow("Invalid development preview transition.");
     expect(lease.sourceVersion).toBe(8);
+  });
+});
+
+
+describe("U20H opt-in binary admission", () => {
+  const png = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=", "base64");
+  // Exact binary request identity is bound to the live lease by the existing
+  // admission checks; the *next* snapshot is still signed by the Runner.
+  const binary = {path:"public/images/photo.png", encoding:"base64" as const,
+    mimeType:"image/png" as const, sizeBytes:png.length, data:png.toString("base64"),
+    checksum:`sha256:${createHash("sha256").update(png).digest("hex")}`};
+  const binaryNext = {...next,binaryFiles:[binary]};
+  it("requires explicit operator opt-in for public image changes",()=>{
+    vi.stubEnv("ZOEBUILD_DEVELOPMENT_PREVIEW_BINARY_HMR_ENABLED","false");
+    expect(assess({next:binaryNext})).toMatchObject({action:"restart",reason:"protected_files_changed"});
+    vi.stubEnv("ZOEBUILD_DEVELOPMENT_PREVIEW_BINARY_HMR_ENABLED","true");
+    expect(assess({next:binaryNext})).toMatchObject({action:"live_candidate",
+      reason:"eligible_source_change", changedPaths:["public/images/photo.png","src/routes/index.tsx"]});
+  });
+  it("admits saved root image changes with the exact prior lease and opt-in",()=>{
+    const prior={...previous,binaryFiles:[{...binary,path:"Screenshot 2026-11-22 at 1.37.32\u202fAM.png"}]};
+    const candidate={...next,binaryFiles:[{...binary,path:"red2.png"}]};
+    const bound={...lease,identity:createTanstackPreviewIdentity(prior,runtimeImageId)};
+    vi.stubEnv("ZOEBUILD_DEVELOPMENT_PREVIEW_BINARY_HMR_ENABLED","false");
+    expect(assess({lease:bound,previous:prior,next:candidate}).action).toBe("restart");
+    vi.stubEnv("ZOEBUILD_DEVELOPMENT_PREVIEW_BINARY_HMR_ENABLED","true");
+    expect(assess({lease:bound,previous:prior,next:candidate})).toMatchObject({action:"live_candidate",
+      changedPaths:[prior.binaryFiles[0].path,"red2.png","src/routes/index.tsx"]});
+    expect(assess({lease:bound,previous:prior,next:{...candidate,binaryFiles:[]}}).action).toBe("live_candidate");
+    expect(assess({lease:bound,previous:prior,next:{...candidate,binaryFiles:[{...binary,path:"public/images/photo.png"}]}}).action).toBe("live_candidate");
+    expect(()=>assess({lease:bound,previous:{...prior,binaryFiles:[]},next:candidate})).toThrow("Preview source identity mismatch.");
+  });
+  it("never allows non-public binaries or protected configuration even with opt-in",()=>{
+    vi.stubEnv("ZOEBUILD_DEVELOPMENT_PREVIEW_BINARY_HMR_ENABLED","true");
+    expect(assess({next:{...next,binaryFiles:[{...binary,path:"src/images/photo.png"}]}}))
+      .toMatchObject({action:"restart",reason:"protected_files_changed"});
+    expect(assess({next:{...next,files:[...next.files,{path:"vite.config.ts",content:"bad"}],binaryFiles:[binary]}}))
+      .toMatchObject({action:"restart",reason:"protected_files_changed"});
+  });
+  it("routes more than 32 changed files to restart before writer",()=>{
+    vi.stubEnv("ZOEBUILD_DEVELOPMENT_PREVIEW_BINARY_HMR_ENABLED","true");
+    const many=Array.from({length:33},(_,i)=>({...binary,path:`public/images/item${i}.png`}));
+    expect(assess({next:{...next,binaryFiles:many}}))
+      .toMatchObject({action:"restart",reason:"protected_files_changed"});
   });
 });

@@ -77,7 +77,7 @@ describe("canonical development preview source CAS (not routed)",()=>{
     expect(f.authorizeCurrentSavedSource).toHaveBeenCalledTimes(2);
     expect(applySuspendedTanstackDevelopmentSource).toHaveBeenCalledExactlyOnceWith({
       containerId:CID,workspaceRoot:ROOT,workspaceDir:DIR,
-      changedPaths:["src/routes/index.tsx"],next,
+      changedPaths:["src/routes/index.tsx"],previous:f.previous,next,
     });
     const lease=f.registry.get(f.previewId)!;
     expect(lease.sourceVersion).toBe(8);
@@ -89,7 +89,7 @@ describe("canonical development preview source CAS (not routed)",()=>{
     expect(await f.update(next)).toMatchObject({action:"updated",sourceVersion:12});
     expect(f.authorizeCurrentSavedSource).toHaveBeenCalledTimes(2);
     expect(applySuspendedTanstackDevelopmentSource).toHaveBeenCalledExactlyOnceWith({
-      containerId:CID,workspaceRoot:ROOT,workspaceDir:DIR,changedPaths:["src/routes/index.tsx"],next,
+      containerId:CID,workspaceRoot:ROOT,workspaceDir:DIR,changedPaths:["src/routes/index.tsx"],previous:f.previous,next,
     });
     const lease=f.registry.get(f.previewId)!;
     expect(lease.containerId).toBe(CID);expect(f.sources.resolve(lease)).toEqual(next);
@@ -112,6 +112,8 @@ describe("canonical development preview source CAS (not routed)",()=>{
     const lease=f.registry.get(f.previewId)!;
     expect(f.sources.resolve(lease)).toEqual(later);
     expect(vi.mocked(applySuspendedTanstackDevelopmentSource)).toHaveBeenCalledTimes(2);
+    expect(vi.mocked(applySuspendedTanstackDevelopmentSource).mock.calls[0][0].previous).toEqual(f.previous);
+    expect(vi.mocked(applySuspendedTanstackDevelopmentSource).mock.calls[1][0].previous).toEqual(next);
   });
 
   it("rejects stale duplicate updates without a second write",async()=>{
