@@ -122,3 +122,45 @@ describe("private publish bundle namespace",()=>{
     expect(seen).toHaveLength(1);
   });
 });
+
+describe("private versioned homepage thumbnails",()=>{
+  it("uses only its own namespace, verifies bytes and never overwrites a saved revision",async()=>{
+    const {createCloudflareR2ThumbnailStore}=await import("./cloudflareR2ObjectStore");
+    const jpeg=Uint8Array.from([255,216,255,217]);
+    const thumbKey=`project-thumbnails/${"a".repeat(64)}/build_test1/3/homepage-v1`;
+    const seen:string[]=[];
+    const fetchImpl=(async(url,init)=>{
+      seen.push(String(url));
+      expect(new Headers(init?.headers).get("if-none-match")).toBe("*");
+      return new Response(null,{status:412});
+    }) as typeof fetch;
+    const store=createCloudflareR2ThumbnailStore(config,{fetchImpl,now:()=>date});
+    await expect(store.read(key)).rejects.toThrow("BUILD_MEDIA_R2_KEY_INVALID");
+    await expect(createCloudflareR2PrivateObjectStore(config,{fetchImpl}).read(thumbKey)).rejects.toThrow("BUILD_MEDIA_R2_KEY_INVALID");
+    await expect(store.putIfAbsent({key:thumbKey,bytes:jpeg,mimeType:"image/jpeg",sha256:"0".repeat(64)})).rejects.toThrow("BUILD_MEDIA_R2_UPLOAD_DIGEST_MISMATCH");
+    await expect(store.putIfAbsent({key:thumbKey,bytes:jpeg,mimeType:"image/jpeg",sha256:sha(jpeg)})).resolves.toBe("already-exists");
+    expect(seen).toHaveLength(1);
+  });
+});
+
+
+describe("explicit thumbnail refresh",()=>{
+  it("signs replacement only in the thumbnail namespace and leaves media and publish immutable",async()=>{
+    const {createCloudflareR2ThumbnailStore}=await import("./cloudflareR2ObjectStore");
+    const jpeg=Uint8Array.from([255,216,255,217]);
+    const thumbKey=`project-thumbnails/${"a".repeat(64)}/build_test1/3/homepage-v1`;
+    const fetchImpl=(async(url,init)=>{
+      const headers=new Headers(init?.headers);
+      expect(headers.has("if-none-match")).toBe(false);
+      expect(headers.get("authorization")).toBe(independentSignature("PUT",new URL(String(url)).pathname,headers));
+      return new Response(null,{status:200});
+    }) as typeof fetch;
+    const store=createCloudflareR2ThumbnailStore(config,{fetchImpl,now:()=>date});
+    expect("replace" in createCloudflareR2PrivateObjectStore(config)).toBe(false);
+    expect("replace" in createCloudflareR2PublishBundleStore(config)).toBe(false);
+    await expect(store.replace({key,bytes:jpeg,mimeType:"image/jpeg",sha256:sha(jpeg)})).rejects.toThrow("BUILD_MEDIA_R2_KEY_INVALID");
+    await expect(store.replace({key:thumbKey,bytes:jpeg,mimeType:"image/png",sha256:sha(jpeg)})).rejects.toThrow("BUILD_MEDIA_R2_UPLOAD_INVALID");
+    await expect(store.replace({key:thumbKey,bytes:jpeg,mimeType:"image/jpeg",sha256:"0".repeat(64)})).rejects.toThrow("BUILD_MEDIA_R2_UPLOAD_DIGEST_MISMATCH");
+    await expect(store.replace({key:thumbKey,bytes:jpeg,mimeType:"image/jpeg",sha256:sha(jpeg)})).resolves.toBeUndefined();
+  });
+});

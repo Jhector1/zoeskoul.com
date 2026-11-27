@@ -4,9 +4,11 @@ import { homedir } from "node:os";
 import { join } from "node:path";
 import {
   createCloudflareR2PrivateObjectStore,
+  createCloudflareR2ThumbnailStore,
   createCloudflareR2PublishBundleStore,
   type BuildMediaR2Configuration,
   type BuildMediaPrivateObjectStore,
+  type BuildThumbnailObjectStore,
 } from "@zoeskoul/build-application";
 
 const FILE_NAME = "zoebuild-media-r2.json";
@@ -14,6 +16,11 @@ const FILE_NAME = "zoebuild-media-r2.json";
 /** Trusted media service only: never invoked by generated code or an unauthenticated route. */
 export function createZoeBuildPrivateR2ObjectStore(): BuildMediaPrivateObjectStore {
   return createCloudflareR2PrivateObjectStore(readPrivateR2Configuration(FILE_NAME));
+}
+
+/** Private project-thumbnail namespace; never part of generated project media. */
+export function createZoeBuildPrivateR2ThumbnailStore(): BuildThumbnailObjectStore {
+  return createCloudflareR2ThumbnailStore(readPrivateR2Configuration(FILE_NAME));
 }
 
 /** A separately provisioned private bucket for executable release bundles. */

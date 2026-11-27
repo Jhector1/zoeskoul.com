@@ -458,3 +458,5 @@ export type TanstackWorkerBuildExecutionResponseV1 = Readonly<{
 
 export { classifyTanstackPreviewTransition, isTanstackLiveSourcePath, isTanstackLivePublicImagePath, isTanstackLiveBinaryPath, tanstackLiveRootImageMimeType } from "./tanstackLivePreviewTransition";
 export type { TanstackPreviewTransition, TanstackPreviewLeaseMode, TanstackPreviewTransitionReason } from "./tanstackLivePreviewTransition";
+
+export { PROJECT_THUMBNAIL_MAX_BYTES, assertProjectThumbnailJpeg } from "./projectThumbnail";

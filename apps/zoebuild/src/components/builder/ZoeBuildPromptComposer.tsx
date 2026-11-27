@@ -43,6 +43,7 @@ export function ZoeBuildPromptComposer(props: {
   ) => void | Promise<void>;
   placeholder?: string;
   initialPromptProjectId?: string;
+  variant?: "home";
 }) {
   const [value, setValue] = useState("");
   const [files, setFiles] = useState<File[]>([]);
@@ -98,9 +99,26 @@ export function ZoeBuildPromptComposer(props: {
   useLayoutEffect(() => {
     const input = promptInputRef.current;
     if (!input) return;
-    input.style.height = "36px";
-    input.style.height = `${Math.min(144, Math.max(36, input.scrollHeight))}px`;
-  }, [value]);
+    const minimum = props.variant === "home" ? 40 : 36;
+    const maximum = props.variant === "home" ? 200 : 144;
+    const resize = () => {
+      input.style.height = `${minimum}px`;
+      // A wrapped placeholder is not user content. Keep the empty home pill compact.
+      if (props.variant === "home" && input.value.length === 0) return;
+      input.style.height = `${Math.min(maximum, Math.max(minimum, input.scrollHeight))}px`;
+    };
+    resize();
+    // Reflow wrapped home text when the viewport or action width changes.
+    if (props.variant !== "home" || typeof ResizeObserver === "undefined") return;
+    let width = input.clientWidth;
+    const observer = new ResizeObserver(() => {
+      if (input.clientWidth === width) return;
+      width = input.clientWidth;
+      resize();
+    });
+    observer.observe(input);
+    return () => observer.disconnect();
+  }, [value, props.variant]);
 
   const recorderRef = useRef<MediaRecorder | null>(null);
   const voiceStreamRef = useRef<MediaStream | null>(null);
@@ -273,173 +291,145 @@ export function ZoeBuildPromptComposer(props: {
 
   const canSubmit = Boolean(value.trim()) || files.length > 0;
 
+  const isHome = props.variant === "home";
+  const promptInput = (
+    <textarea
+      ref={promptInputRef}
+      className="zb-prompt-textarea"
+      value={value}
+      onChange={(event) => {
+        draftRevisionRef.current += 1;
+        setValue(event.target.value);
+      }}
+      onKeyDown={(event) => {
+        if (!shouldSubmitZoePromptOnEnter({
+          key: event.key,
+          shiftKey: event.shiftKey,
+          isComposing: event.nativeEvent.isComposing,
+          keyCode: event.nativeEvent.keyCode,
+        })) return;
+        event.preventDefault();
+        // Reuse the canonical form submit and its duplicate protection.
+        if (!busy && !submitInFlightRef.current && canSubmit)
+          event.currentTarget.form?.requestSubmit();
+      }}
+      placeholder={props.placeholder ?? ""}
+      rows={1}
+      aria-label="Tell Zoé what you want to build"
+    />
+  );
+  const attachedMedia = files.length > 0 ? (
+    <div className="zb-composer-media" aria-label="Attached media">
+      {files.map((file, index) => (
+        <span className="zb-media-chip" key={`${file.name}-${file.size}-${index}`}>
+          <span className="zb-media-chip-name" title={file.name}>
+            {file.type.startsWith("image/")
+              ? "Image"
+              : file.type.startsWith("video/") ? "Video" : "Audio"}
+            : {file.name}
+          </span>
+          <button type="button" aria-label={`Remove ${file.name}`} onClick={() => removeFile(index)}>
+            ×
+          </button>
+        </span>
+      ))}
+    </div>
+  ) : null;
+  const feedback = (
+    <>
+      {outOfCredits ? (
+        <aside role="alert" className="rounded-2xl border border-amber-500/40 bg-amber-500/10 p-4 text-sm space-y-3">
+          <div className="font-semibold">Zoé needs more AI credits for this request</div>
+          <p>Nothing was changed or charged by this attempt. Your prompt and attachments remain in the composer; the editor and preview are still available.</p>
+          <p>Billing and available credits can be reviewed in a separate tab. Return here to submit again when the server confirms enough credits.</p>
+          <a href={`/${billingLocale}/billing`} target="_blank" rel="noopener noreferrer" className="inline-flex rounded-lg border border-current/20 px-3 py-2 font-semibold">Review billing and credits ↗</a>
+        </aside>
+      ) : null}
+      {promptError ? <div className="zb-composer-error" role="alert">{promptError}</div> : null}
+    </>
+  );
+  const mediaInput = (
+    <input
+      ref={mediaInputRef}
+      className="zb-media-input"
+      type="file"
+      accept="image/*,video/*,audio/*"
+      multiple
+      onChange={chooseMedia}
+      aria-label="Upload image, video, or audio"
+    />
+  );
+  const addMedia = (
+    <Tooltip tip="Add media" side="top">
+      <button
+        type="button"
+        className="zb-media-button"
+        onClick={() => mediaInputRef.current?.click()}
+        disabled={busy}
+        aria-label="Add media"
+      >
+        <svg className="zb-composer-action-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" />
+        </svg>
+      </button>
+    </Tooltip>
+  );
+  const recordVoice = (
+    <Tooltip tip="Record voice" side="top">
+      <button
+        type="button"
+        className="zb-media-button"
+        onClick={toggleVoiceRecording}
+        disabled={busy}
+        aria-label="Record voice"
+      >
+        <svg className="zb-composer-action-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <rect x="9" y="3" width="6" height="11" rx="3" stroke="currentColor" strokeWidth="1.8" />
+          <path d="M6.5 11.5v.5a5.5 5.5 0 0 0 11 0v-.5M12 17.5V21M9 21h6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        </svg>
+      </button>
+    </Tooltip>
+  );
+  const buildButton = (
+    <button type="submit" className="zb-build-button" disabled={busy || !canSubmit}>
+      {busy ? "Planning..." : "Build"}
+    </button>
+  );
   return (
     <div className="zb-composer-wrap">
       <form
-        className={`zb-prompt-composer ${composerStyles.compactComposer}`}
+        className={`zb-prompt-composer ${composerStyles.compactComposer}${isHome ? ` ${composerStyles.homeComposer}` : ""}`}
         onSubmit={submitPrompt}
       >
-        {creditStatus?<p className="px-3 text-xs opacity-60" aria-live="polite">{creditStatus}</p>:null}
-        <textarea ref={promptInputRef} className="zb-prompt-textarea"
-          value={value}
-          onChange={(event) => {
-            draftRevisionRef.current += 1;
-            setValue(event.target.value);
-          }}
-          onKeyDown={(event) => {
-            if (!shouldSubmitZoePromptOnEnter({
-              key: event.key,
-              shiftKey: event.shiftKey,
-              isComposing: event.nativeEvent.isComposing,
-              keyCode: event.nativeEvent.keyCode,
-            })) return;
-            event.preventDefault();
-            // Reuse the one canonical form submit (billing, attachments and
-            // same-tick duplicate protection); never invoke onPrompt directly.
-            if (!busy && !submitInFlightRef.current && canSubmit)
-              event.currentTarget.form?.requestSubmit();
-          }}
-          placeholder={props.placeholder ?? ""}
-          rows={1}
-          aria-label="Tell Zoé what you want to build"
-        />
-
-        {files.length > 0 ? (
-          <div
-            className="zb-composer-media"
-            aria-label="Attached media"
-          >
-            {files.map((file, index) => (
-              <span
-                className="zb-media-chip"
-                key={`${file.name}-${file.size}-${index}`}
-              >
-                <span
-                  className="zb-media-chip-name"
-                  title={file.name}
-                >
-                  {file.type.startsWith("image/")
-                    ? "Image"
-                    : file.type.startsWith("video/")
-                      ? "Video"
-                      : "Audio"}
-                  : {file.name}
-                </span>
-                <button
-                  type="button"
-                  aria-label={`Remove ${file.name}`}
-                  onClick={() => removeFile(index)}
-                >
-                  ×
-                </button>
-              </span>
-            ))}
-          </div>
-        ) : null}
-
-        {outOfCredits ? (
-          <aside role="alert" className="rounded-2xl border border-amber-500/40 bg-amber-500/10 p-4 text-sm space-y-3">
-            <div className="font-semibold">Zoé needs more AI credits for this request</div>
-            <p>Nothing was changed or charged by this attempt. Your prompt and attachments remain in the composer; the editor and preview are still available.</p>
-            <p>Billing and available credits can be reviewed in a separate tab. Return here to submit again when the server confirms enough credits.</p>
-            <a href={`/${billingLocale}/billing`} target="_blank" rel="noopener noreferrer" className="inline-flex rounded-lg border border-current/20 px-3 py-2 font-semibold">Review billing and credits ↗</a>
-          </aside>
-        ) : null}
-        {promptError ? (
-          <div
-            className="zb-composer-error"
-            role="alert"
-          >
-            {promptError}
-          </div>
-        ) : null}
-
-        <div className="zb-composer-actions zb-prompt-actions">
-          <input
-            ref={mediaInputRef}
-            className="zb-media-input"
-            type="file"
-            accept="image/*,video/*,audio/*"
-            multiple
-            onChange={chooseMedia}
-            aria-label="Upload image, video, or audio"
-          />
-
-
-<Tooltip
-  tip="Add media"
-  side="top"
->
-  <button
-            type="button"
-            className="zb-media-button"
-            onClick={() => mediaInputRef.current?.click()}
-            disabled={busy}
-           aria-label="Add media">
-
-<svg
-  className="zb-composer-action-icon"
-  viewBox="0 0 24 24"
-  fill="none"
-  aria-hidden="true"
-  focusable="false"
->
-  <path
-    d="M12 5v14M5 12h14"
-    stroke="currentColor"
-    strokeWidth="1.9"
-    strokeLinecap="round"
-  />
-</svg>
-  </button>
-</Tooltip>
-
-
-<Tooltip
-  tip="Record voice"
-  side="top"
->
-  <button
-            type="button"
-            className="zb-media-button"
-            onClick={toggleVoiceRecording}
-            disabled={busy}
-           aria-label="Record voice">
-
-<svg
-  className="zb-composer-action-icon"
-  viewBox="0 0 24 24"
-  fill="none"
-  aria-hidden="true"
-  focusable="false"
->
-  <rect
-    x="9"
-    y="3"
-    width="6"
-    height="11"
-    rx="3"
-    stroke="currentColor"
-    strokeWidth="1.8"
-  />
-  <path
-    d="M6.5 11.5v.5a5.5 5.5 0 0 0 11 0v-.5M12 17.5V21M9 21h6"
-    stroke="currentColor"
-    strokeWidth="1.8"
-    strokeLinecap="round"
-  />
-</svg>
-  </button>
-</Tooltip>
-
-          <button
-            type="submit"
-            className="zb-build-button"
-            disabled={busy || !canSubmit}
-          >
-            {busy ? "Planning..." : "Build"}
-          </button>
-        </div>
+        {isHome ? (
+          <>
+            {attachedMedia}
+            {feedback}
+            <div className={composerStyles.homeRow}>
+              {mediaInput}
+              <div className={composerStyles.homeLeadingAction}>{addMedia}</div>
+              {promptInput}
+              <div className={`zb-composer-actions zb-prompt-actions ${composerStyles.homeTrailingActions}`}>
+                {recordVoice}
+                {buildButton}
+              </div>
+            </div>
+            {creditStatus ? <p className={composerStyles.homeCreditStatus} aria-live="polite">{creditStatus}</p> : null}
+          </>
+        ) : (
+          <>
+            {creditStatus?<p className="px-3 text-xs opacity-60" aria-live="polite">{creditStatus}</p>:null}
+            {promptInput}
+            {attachedMedia}
+            {feedback}
+            <div className="zb-composer-actions zb-prompt-actions">
+              {mediaInput}
+              {addMedia}
+              {recordVoice}
+              {buildButton}
+            </div>
+          </>
+        )}
       </form>
     </div>
   );

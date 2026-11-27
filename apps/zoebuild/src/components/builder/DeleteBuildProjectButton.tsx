@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export function DeleteBuildProjectButton(props: {
   buildProjectId: string; title: string;
+  variant?: "menu";
 }) {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
@@ -41,12 +42,12 @@ export function DeleteBuildProjectButton(props: {
   }
 
   return (
-    <div className="mt-3 flex items-center justify-between gap-2">
+    <div className={props.variant === "menu" ? "zb-project-delete-menu" : "mt-3 flex items-center justify-between gap-2"}>
       <button type="button" disabled={busy} onClick={() => void remove()}
-        className="rounded-md border border-red-400/50 px-3 py-1.5 text-xs text-red-700 hover:bg-red-50 disabled:opacity-50">
+        className={props.variant === "menu" ? "zb-project-delete-menu-button" : "rounded-md border border-red-400/50 px-3 py-1.5 text-xs text-red-700 hover:bg-red-50 disabled:opacity-50"}>
         {busy ? "Deleting…" : "Delete project"}
       </button>
-      {error ? <span role="alert" className="text-xs text-red-700">{error}</span> : null}
+      {error ? <span role="alert" className="block px-2 py-1 text-xs text-red-700 dark:text-red-300">{error}</span> : null}
     </div>
   );
 }

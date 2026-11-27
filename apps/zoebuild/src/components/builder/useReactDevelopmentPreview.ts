@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { THUMBNAIL_INITIAL_DELAY_MS, THUMBNAIL_MAX_ATTEMPTS, thumbnailRetryDelay, type ThumbnailStatus } from "@/lib/build/projectThumbnailRetry";
 import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
 import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 import { exportWorkspaceEntries } from "@zoeskoul/learner-workspace/ide/fsTree";
@@ -20,6 +21,7 @@ import {
 type Preview = RemoteWebPreviewDescriptor & {
   confirmedSourceVersion: number | null;
   attemptedSourceVersion: number | null;
+  thumbnailStatus?: ThumbnailStatus;
 };
 const RENEW_CHECK_MS = 10_000;
 const HMR_ROTATE_MS = 80_000;
@@ -442,6 +444,63 @@ export function useReactDevelopmentPreview(input: Readonly<{
     };
   }, [active,input.buildProjectId,currentDocumentUrl,currentPreviewId,nativeHmrEnabled]);
 
+  // Thumbnail work never participates in preview admission, save or HMR renewal.
+  // Debounce edits, retry only transient errors, and stop on a changed revision.
+  const thumbnailReady = active && input.savedSourceReady && resultForProject?.confirmed === input.sourceVersion &&
+    hmrStatus?.projectId === input.buildProjectId && hmrStatus.url === currentDocumentUrl && hmrStatus.state === "live";
+  const thumbnailKey = `${input.buildProjectId}:${input.sourceVersion}`;
+  const thumbnailAttempt = useRef<{key:string;attempts:number;finished:boolean;refresh:boolean}|null>(null);
+  const [thumbnailState,setThumbnailState] = useState<{key:string;status:ThumbnailStatus}|null>(null);
+  useEffect(() => {
+    if (process.env.NEXT_PUBLIC_ZOEBUILD_PROJECT_THUMBNAILS_ENABLED !== "true" || !thumbnailReady || !currentPreviewId) return;
+    const url=new URL(window.location.href);
+    const refresh=url.searchParams.get("refreshThumbnail")===String(input.sourceVersion);
+    if (refresh || thumbnailAttempt.current?.key!==thumbnailKey) {
+      thumbnailAttempt.current={key:thumbnailKey,attempts:0,finished:false,refresh};
+      if(refresh){url.searchParams.delete("refreshThumbnail");window.history.replaceState(window.history.state,"",url);}
+    }
+    const attempt=thumbnailAttempt.current!;
+    if(attempt.finished)return;
+    if(attempt.attempts>=THUMBNAIL_MAX_ATTEMPTS){attempt.finished=true;setThumbnailState({key:thumbnailKey,status:"failed"});return;}
+    const abort=new AbortController();
+    let timer:number|undefined;
+    let running=false;
+    let dueAt=Date.now()+THUMBNAIL_INITIAL_DELAY_MS;
+    const isCurrent=()=>!abort.signal.aborted && thumbnailAttempt.current===attempt &&
+      selectedRef.current.projectId===input.buildProjectId && selectedRef.current.sourceVersion===input.sourceVersion &&
+      selectedRef.current.savedSourceReady && selectedRef.current.active;
+    const report=(status:ThumbnailStatus)=>{if(isCurrent())setThumbnailState({key:thumbnailKey,status});};
+    const schedule=(delay:number)=>{
+      if(timer!==undefined)window.clearTimeout(timer);
+      dueAt=Date.now()+delay;
+      timer=window.setTimeout(()=>{timer=undefined;void capture();},delay);
+    };
+    async function capture(){
+      if(!isCurrent()||running||attempt.finished||document.visibilityState!=="visible")return;
+      running=true;
+      attempt.attempts++;
+      report("capturing");
+      const path=`/api/build/projects/${encodeURIComponent(input.buildProjectId)}/preview/${encodeURIComponent(currentPreviewId!)}/development/thumbnail${attempt.refresh?"?refresh=1":""}`;
+      let status:number|null=null;
+      try{
+        const response=await fetch(path,{method:"POST",credentials:"same-origin",cache:"no-store",headers:{"Content-Type":"application/json"},body:JSON.stringify({sourceVersion:input.sourceVersion}),signal:abort.signal});
+        status=response.status;
+        if(process.env.NODE_ENV==="development")console.info("[ZOE-THUMBNAIL]",JSON.stringify({sourceVersion:input.sourceVersion,status,attempt:attempt.attempts}));
+      }catch{/* A failed network attempt is retryable only while this saved preview is still live. */}
+      finally{running=false;}
+      if(!isCurrent())return;
+      if(status===200){attempt.finished=true;report("saved");return;}
+      const delay=thumbnailRetryDelay(attempt.attempts,status);
+      if(delay===null){attempt.finished=true;report("failed");return;}
+      report("retrying");schedule(delay);
+    }
+    const onVisible=()=>{if(document.visibilityState==="visible"&&!running&&timer===undefined&&!attempt.finished)schedule(Math.max(0,dueAt-Date.now()));};
+    report(attempt.attempts===0?"waiting":"retrying");
+    schedule(THUMBNAIL_INITIAL_DELAY_MS);
+    document.addEventListener("visibilitychange",onVisible);
+    return ()=>{abort.abort();if(timer!==undefined)window.clearTimeout(timer);document.removeEventListener("visibilitychange",onVisible);};
+  }, [thumbnailReady,currentPreviewId,input.buildProjectId,input.sourceVersion,thumbnailKey]);
+
   const preview = resultForProject?.preview;
   if (!input.enabled || fallback || !preview || !resultForProject) return {preview:null,fallback};
   const ready = resultForProject.confirmed === input.sourceVersion && input.savedSourceReady;
@@ -450,6 +509,7 @@ export function useReactDevelopmentPreview(input: Readonly<{
     preview: {
       ...preview,
       runtimeMode:"native",
+      thumbnailStatus:thumbnailReady && thumbnailState?.key===thumbnailKey ? thumbnailState.status : undefined,
       hmrConnection:!nativeHmrEnabled?"disabled":active && ready && hmrStatus?.projectId===input.buildProjectId && hmrStatus.url===preview.src ? hmrStatus.state : recovering?"reconnecting":"connecting",
       confirmedSourceVersion: ready ? resultForProject.confirmed : null,
       attemptedSourceVersion: resultForProject.attempted,

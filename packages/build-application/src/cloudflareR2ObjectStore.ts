@@ -28,6 +28,7 @@ export class BuildMediaR2Error extends Error {
 
 const IMAGE_BYTES_LIMIT = 20 * 1024 * 1024; // Must not exceed BUILD_MEDIA_LIMITS.imageBytes.
 const KEY = /^project-media\/[A-Za-z0-9_-]{4,128}\/[A-Za-z0-9_-]{4,128}\/[A-Za-z0-9_-]{10,128}\/[0-9a-f]{64}$/;
+const THUMBNAIL_KEY = /^project-thumbnails\/[0-9a-f]{64}\/[A-Za-z0-9_-]{4,128}\/[1-9][0-9]{0,15}\/homepage-v1$/;
 const PUBLISH_KEY = /^published-artifacts\/[A-Za-z0-9_-]{4,128}\/[A-Za-z0-9_-]{4,128}\/[1-9][0-9]{0,15}\/[0-9a-f]{64}\/[0-9a-f]{64}$/;
 export const PUBLISH_BUNDLE_BYTES_LIMIT = 56 * 1024 * 1024;
 const BUCKET = /^[a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])$/;
@@ -64,16 +65,25 @@ function safeKey(key: string, pattern: RegExp): string {
 type R2Options = Readonly<{fetchImpl?: typeof fetch; now?: () => Date; timeoutMs?: number}>;
 
 export function createCloudflareR2PrivateObjectStore(rawConfig: BuildMediaR2Configuration, options: R2Options = {}): BuildMediaPrivateObjectStore {
-  return createPrivateStore(rawConfig, options, KEY, IMAGE_BYTES_LIMIT, IMAGE_MIME);
+  return createPrivateStore(rawConfig, options, KEY, IMAGE_BYTES_LIMIT, IMAGE_MIME).store;
 }
 
 /** Separate trusted publisher credentials/bucket; never widens the media store. */
 export function createCloudflareR2PublishBundleStore(rawConfig: BuildMediaR2Configuration, options: R2Options = {}): BuildMediaPrivateObjectStore {
-  return createPrivateStore(rawConfig, options, PUBLISH_KEY, PUBLISH_BUNDLE_BYTES_LIMIT, new Set(["application/json"]));
+  return createPrivateStore(rawConfig, options, PUBLISH_KEY, PUBLISH_BUNDLE_BYTES_LIMIT, new Set(["application/json"])).store;
+}
+
+/** Only the thumbnail adapter can replace an object, for an explicit refresh. */
+export interface BuildThumbnailObjectStore extends BuildMediaPrivateObjectStore {
+  replace(input: Parameters<BuildMediaPrivateObjectStore["putIfAbsent"]>[0]): Promise<void>;
+}
+export function createCloudflareR2ThumbnailStore(rawConfig: BuildMediaR2Configuration, options: R2Options = {}): BuildThumbnailObjectStore {
+  const {store, replace} = createPrivateStore(rawConfig, options, THUMBNAIL_KEY, 512 * 1024, new Set(["image/jpeg"]), false);
+  return {...store, replace};
 }
 
 function createPrivateStore(rawConfig: BuildMediaR2Configuration, options: R2Options,
-  keyPattern: RegExp, maxBytes: number, mimeTypes: ReadonlySet<string>): BuildMediaPrivateObjectStore {
+  keyPattern: RegExp, maxBytes: number, mimeTypes: ReadonlySet<string>, digestInKey = true) {
   const config = safeConfig(rawConfig);
   const fetchImpl = options.fetchImpl ?? fetch;
   const now = options.now ?? (() => new Date());
@@ -88,6 +98,7 @@ function createPrivateStore(rawConfig: BuildMediaR2Configuration, options: R2Opt
     key: string;
     bytes?: Uint8Array;
     mimeType?: string;
+    replace?: boolean;
   }>): Promise<Response> {
     const key = safeKey(input.key, keyPattern);
     const path = `/${config.bucket}/${key}`; // Strict ASCII key grammar; no dot segments or escaping.
@@ -105,7 +116,7 @@ function createPrivateStore(rawConfig: BuildMediaR2Configuration, options: R2Opt
     };
     if (input.method === "PUT") {
       headers["content-type"] = input.mimeType!;
-      headers["if-none-match"] = "*";
+      if (!input.replace) headers["if-none-match"] = "*";
     }
     const headerNames = Object.keys(headers).sort();
     const signedHeaders = headerNames.join(";");
@@ -139,24 +150,26 @@ function createPrivateStore(rawConfig: BuildMediaR2Configuration, options: R2Opt
     }
   }
 
-  return {
-    async putIfAbsent({key, bytes, mimeType, sha256: expectedDigest}) {
+  async function put({key, bytes, mimeType, sha256: expectedDigest}: Parameters<BuildMediaPrivateObjectStore["putIfAbsent"]>[0], replace: boolean): Promise<"created" | "already-exists"> {
+      if (replace && keyPattern !== THUMBNAIL_KEY) refuse("BUILD_MEDIA_R2_UPLOAD_INVALID");
       safeKey(key, keyPattern);
       if (!(bytes instanceof Uint8Array) || bytes.length === 0 || bytes.length > maxBytes ||
           !mimeTypes.has(mimeType) || !/^[0-9a-f]{64}$/.test(expectedDigest)) {
         refuse("BUILD_MEDIA_R2_UPLOAD_INVALID");
       }
       const snapshot = Uint8Array.from(bytes);
-      if (await sha256(snapshot) !== expectedDigest || key.split("/").at(-1) !== expectedDigest) {
+      if (await sha256(snapshot) !== expectedDigest || (digestInKey && key.split("/").at(-1) !== expectedDigest)) {
         refuse("BUILD_MEDIA_R2_UPLOAD_DIGEST_MISMATCH");
       }
-      const response = await signedRequest({method: "PUT", key, bytes: snapshot, mimeType});
+      const response = await signedRequest({method: "PUT", key, bytes: snapshot, mimeType, replace});
       try {
         if (response.status === 200 || response.status === 201 || response.status === 204) return "created";
-        if (response.status === 412) return "already-exists";
+        if (!replace && response.status === 412) return "already-exists";
         throw new BuildMediaR2Error("BUILD_MEDIA_R2_WRITE_FAILED", response.status);
       } finally { await response.body?.cancel().catch(() => {}); }
-    },
+  }
+  const store: BuildMediaPrivateObjectStore = {
+    putIfAbsent: input => put(input, false),
     async read(key) {
       safeKey(key, keyPattern);
       const response = await signedRequest({method: "GET", key});
@@ -192,4 +205,5 @@ function createPrivateStore(rawConfig: BuildMediaR2Configuration, options: R2Opt
       return result;
     },
   };
+  return {store, async replace(input: Parameters<BuildMediaPrivateObjectStore["putIfAbsent"]>[0]) { await put(input, true); }};
 }

@@ -28,57 +28,19 @@ const landingPath =
     ),
   );
 
-const tabsPath =
-  fileURLToPath(
-    new URL(
-      "./ZoeBuildModeTabs.tsx",
-      import.meta.url,
-    ),
-  );
-
 describe(
   "ZoeBuild project mode ownership",
   () => {
-    it(
-      "keeps Preview Code AI on the landing builder",
-      () => {
-        const landing =
-          readFileSync(
-            landingPath,
-            "utf8",
-          );
-
-        const tabs =
-          readFileSync(
-            tabsPath,
-            "utf8",
-          );
-
-        expect(
-          landing,
-        ).toContain(
-          "<ZoeBuildModeTabs",
-        );
-
-        expect(
-          tabs,
-        ).toContain(
-          '{ id: "preview", label: "Preview" }',
-        );
-
-        expect(
-          tabs,
-        ).toContain(
-          '{ id: "code", label: "Code" }',
-        );
-
-        expect(
-          tabs,
-        ).toContain(
-          '{ id: "ai", label: "AI" }',
-        );
-      },
-    );
+    it("uses a centered prompt instead of placeholder landing tabs", () => {
+      const landing = readFileSync(landingPath, "utf8");
+      expect(landing).not.toContain("<ZoeBuildModeTabs");
+      expect(landing).not.toContain("zb-stage-quiet");
+      expect(landing).toContain('variant="home"');
+      expect(landing).toContain("onPrompt={prompt}");
+      expect(landing).toContain("requestZoeBuildPlan(submission)");
+      expect(landing).toContain('aria-label="What will you build today?"');
+      expect(landing).toContain('const HOME_ACTION_WORDS = ["build", "design", "launch"]');
+    }),
 
     it(
       "keeps Preview, Code and Site Settings in the project modebar",

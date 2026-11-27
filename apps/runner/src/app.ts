@@ -26,6 +26,7 @@ import { startBuildPreviewOperationRoute, statusBuildPreviewOperationRoute, canc
 import { syncBuildPreviewRoute } from "./routes/build.previews.sync.js";
 import { updateTanstackDevelopmentPreviewRoute } from "./routes/build.previews.developmentUpdate.js";
 import { startTanstackDevelopmentPreviewRoute } from "./routes/build.previews.developmentStart.js";
+import { capturePreviewThumbnailRoute } from "./routes/build.previews.thumbnail.js";
 import { fetchTanstackDevelopmentPreviewRoute } from "./routes/build.previews.developmentFetch.js";
 import { issueTanstackDevelopmentHmrTicketRoute } from "./routes/build.previews.developmentHmrTicket.js";
 import { fetchBuildPreviewRoute } from "./routes/build.previews.fetch.js";
@@ -163,6 +164,7 @@ app.post("/build/previews/:previewId/sync", syncBuildPreviewRoute);
 app.post("/build/previews/:previewId/development-update", updateTanstackDevelopmentPreviewRoute);
 // Phase 4E2: owner-only, read-only development fetch. Never a bearer capability.
 app.post("/build/previews/:previewId/development-fetch", fetchTanstackDevelopmentPreviewRoute);
+app.post("/build/previews/:previewId/thumbnail", capturePreviewThumbnailRoute);
 // Service-only, one-use HMR ticket issuance. The browser has no Runner secret.
 app.post("/build/previews/:previewId/development-hmr-ticket", issueTanstackDevelopmentHmrTicketRoute);
 app.post("/build/previews/:previewId/fetch", fetchBuildPreviewRoute);

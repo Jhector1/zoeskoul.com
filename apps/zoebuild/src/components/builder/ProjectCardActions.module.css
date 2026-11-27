@@ -1,0 +1,26 @@
+.actions { position: absolute; top: 12px; right: 12px; z-index: 1; }
+.actions[open] { z-index: 3; }
+.trigger {
+  display: grid; place-items: center; list-style: none; cursor: pointer;
+  width: 34px; height: 34px; border-radius: 8px;
+  border: 1px solid var(--zb-border); background: rgb(var(--ui-surface)); color: var(--zb-text);
+}
+.trigger::-webkit-details-marker { display: none; }
+.trigger:hover { background: var(--zb-bg); }
+.panel {
+  position: absolute; right: 0; top: 42px; width: min(208px, calc(100vw - 48px));
+  padding: 5px; border: 1px solid var(--zb-border); border-radius: 10px;
+  background: rgb(var(--ui-surface)); box-shadow: 0 8px 24px rgb(0 0 0 / .10);
+}
+.item, .panel :global(.zb-project-delete-menu-button) {
+  display: block; width: 100%; border: 0; background: transparent; color: inherit;
+  font: inherit; font-size: 13px; text-align: left; padding: 9px 10px; border-radius: 6px;
+  text-decoration: none; cursor: pointer;
+}
+.item:hover, .panel :global(.zb-project-delete-menu-button:hover) { background: var(--zb-bg); }
+.panel :global(.zb-project-delete-menu-button) { color: #b91c1c; }
+:global(.dark) .panel :global(.zb-project-delete-menu-button) { color: #fca5a5; }
+.panel :global(.zb-project-delete-menu-button:disabled) { opacity: .5; cursor: default; }
+.status { margin: 4px 10px; font-size: 12px; color: var(--zb-muted); }
+.divider { height: 1px; margin: 4px 3px; background: var(--zb-border); }
+.trigger:focus-visible, .item:focus-visible, .panel :global(button:focus-visible) { outline: 2px solid #16a34a; outline-offset: 2px; }

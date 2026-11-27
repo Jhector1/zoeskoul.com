@@ -1,0 +1,4 @@
+.frame { position: relative; aspect-ratio: 16 / 9; width: 100%; overflow: hidden; border-radius: 12px 12px 0 0; border-bottom: 1px solid var(--zb-border); background: var(--zb-bg); }
+.placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 16px; color: var(--zb-muted); font-size: 12px; text-align: center; }
+.image { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.badge { position: absolute; bottom: 10px; left: 10px; max-width: calc(100% - 20px); padding: 4px 8px; border-radius: 6px; background: rgb(20 24 32 / .82); color: white; font-size: 11px; line-height: 1.3; }

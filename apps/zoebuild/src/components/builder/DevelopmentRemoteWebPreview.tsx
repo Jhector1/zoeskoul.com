@@ -1,6 +1,7 @@
 "use client";
 
 import {useCallback, useEffect, useRef, useState} from "react";
+import type {ThumbnailStatus} from "@/lib/build/projectThumbnailRetry";
 import { registerDevelopmentHmrDocument, subscribeDevelopmentNavigation, sendDevelopmentNavigation, type DevelopmentNavigationState } from "@/lib/build/reactPreviewDevelopmentHmrIframeBridge";
 import {PreviewAddressBar} from "@zoeskoul/learner-workspace/runner/components/RemoteWebPreview";
 import type {RemoteWebPreviewDescriptor} from "@zoeskoul/learner-workspace/runner/remotePreview";
@@ -29,6 +30,8 @@ export default function DevelopmentRemoteWebPreview({preview}: Readonly<{preview
 function DevelopmentPreviewDocument({preview}: Readonly<{
   preview: RemoteWebPreviewDescriptor;
 }>) {
+  const thumbnailStatus=(preview as RemoteWebPreviewDescriptor & {thumbnailStatus?:ThumbnailStatus}).thumbnailStatus;
+  const thumbnailMessage=thumbnailStatus==="waiting"?"Homepage capture scheduled":thumbnailStatus==="capturing"?"Capturing homepage…":thumbnailStatus==="retrying"?"Homepage capture will retry":thumbnailStatus==="failed"?"Thumbnail unavailable · retry from projects":null;
   const root = isTrustedDevelopmentPreviewRoot(preview.src) ? preview.src : null;
   const [documentRoute,setDocumentRoute]=useState(ROOT_ROUTE);
   const [page,setPage]=useState(ROOT_ROUTE);
@@ -148,6 +151,7 @@ function DevelopmentPreviewDocument({preview}: Readonly<{
           className="mt-3 rounded-lg border border-neutral-300 px-3 py-1.5"
           onClick={() => preview.onRetry?.()}>Retry preview</button> : null}</div>
       </div> : null}
+      {thumbnailMessage && delivery === "delivered" ? <div role="status" className="pointer-events-none absolute bottom-2 right-2 rounded-md bg-neutral-950/80 px-2 py-1 text-xs text-white">{thumbnailMessage}</div> : null}
       {navigationError && delivery === "delivered" ? <div role="status" className="absolute bottom-2 left-2 rounded-md bg-amber-50 px-2 py-1 text-xs text-amber-900">Navigation unavailable. Retry or refresh.</div> : null}
       {documentUrl && delivery === "loading" ? <div role="status"
         className="pointer-events-none absolute bottom-2 left-2 rounded-md bg-neutral-950/85 px-2 py-1 text-xs text-white">

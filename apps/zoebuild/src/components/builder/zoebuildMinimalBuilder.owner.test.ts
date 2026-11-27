@@ -24,27 +24,17 @@ describe(
   "ZoeBuild minimal builder experience",
   () => {
     it(
-      "keeps home to prompt plus Preview Code AI",
+      "keeps home focused on the shared prompt",
       () => {
         const landing = source(
           "apps/zoebuild/src/components/builder/ZoeBuildLanding.tsx",
-        );
-        const tabs = source(
-          "apps/zoebuild/src/components/builder/ZoeBuildModeTabs.tsx",
         );
         const composer = source(
           "apps/zoebuild/src/components/builder/ZoeBuildPromptComposer.tsx",
         );
 
-        expect(tabs).toContain(
-          '{ id: "preview", label: "Preview" }',
-        );
-        expect(tabs).toContain(
-          '{ id: "code", label: "Code" }',
-        );
-        expect(tabs).toContain(
-          '{ id: "ai", label: "AI" }',
-        );
+        expect(landing).not.toContain("<ZoeBuildModeTabs");
+        expect(landing).toContain('variant="home"');
         expect(composer).toContain("<textarea");
         expect(composer).not.toContain(
           "Import Shopify",
@@ -62,7 +52,7 @@ describe(
     );
 
       it(
-    "keeps landing mode tabs while project owns the Lovable workspace modebar",
+    "removes landing mode tabs while retaining the project workspace modebar",
     () => {
       const landing =
         readFileSync(
@@ -84,7 +74,7 @@ describe(
 
       expect(
         landing,
-      ).toContain(
+      ).not.toContain(
         "<ZoeBuildModeTabs",
       );
 

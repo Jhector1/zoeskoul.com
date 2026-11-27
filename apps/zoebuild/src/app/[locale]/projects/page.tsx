@@ -6,6 +6,10 @@ import { redirect } from "next/navigation";
 
 import CreateBuildProjectClient from "@/components/builder/CreateBuildProjectClient";
 import { DeleteBuildProjectButton } from "@/components/builder/DeleteBuildProjectButton";
+import { ProjectCardActions } from "@/components/builder/ProjectCardActions";
+import styles from "./ProjectsPage.module.css";
+import { ProjectHomepageThumbnail } from "@/components/builder/ProjectHomepageThumbnail";
+import { projectThumbnailEnabled } from "@/lib/build/projectThumbnail";
 
 import { listBuildProjectsCommand } from "@zoeskoul/build-application";
 
@@ -49,20 +53,15 @@ export default async function ZoeBuildProjectsPage({
   });
 
   return (
-    <main className="ui-container py-8">
-      <div className="mb-7 flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+    <main className={styles.page}>
+      <div className={styles.heading}>
         <div className="min-w-0">
-          <div className="ui-section-kicker">
-            Zoé Build
-          </div>
-
-          <h1 className="ui-section-title">
+          <h1 className={styles.title}>
             Your projects
           </h1>
 
-          <p className="ui-section-subtitle">
-            Create a project, then open it anytime to build with Zoé,
-            preview the result, or edit the source.
+          <p className={styles.subtitle}>
+            Create, refine and publish your ideas with Zoé.
           </p>
         </div>
 
@@ -89,35 +88,37 @@ export default async function ZoeBuildProjectsPage({
           </div>
         </section>
       ) : (
-        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {projects.map((project) => (
-            <article key={project.buildProjectId} className="ui-page-surface p-5">
-            <Link
-              href={`/${locale}/projects/${encodeURIComponent(project.buildProjectId)}`}
-              className="block transition hover:-translate-y-0.5"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <h2 className="truncate text-lg font-semibold">
-                    {project.title}
-                  </h2>
-                  <p className="mt-1 text-xs text-[rgb(var(--ui-text-muted)/0.85)]">
-                    {project.stackId ?? "Stack pending"}
-                  </p>
-                </div>
-                <span className="rounded-full border border-[rgb(var(--ui-border)/0.8)] px-2.5 py-1 text-[11px] font-semibold capitalize">
-                  {statusLabel(project.status)}
-                </span>
-              </div>
-
-              <div className="mt-5 flex items-center justify-between text-xs text-[rgb(var(--ui-text-muted)/0.85)]">
-                <span>Source v{project.sourceVersion}</span>
-                <span>{new Date(project.updatedAt).toLocaleDateString()}</span>
-              </div>
-            </Link>
-            <DeleteBuildProjectButton buildProjectId={project.buildProjectId} title={project.title} />
-            </article>
-          ))}
+        <section className={styles.grid} aria-label="Projects">
+          {projects.map((project) => {
+            const href = `/${locale}/projects/${encodeURIComponent(project.buildProjectId)}`;
+            return (
+              <article key={project.buildProjectId} className={styles.card}>
+                <Link href={href} className={styles.cardLink}>
+                  <ProjectHomepageThumbnail
+                    key={`${project.buildProjectId}:${project.sourceVersion}`}
+                    title={project.title}
+                    sourceVersion={project.sourceVersion}
+                    enabled={projectThumbnailEnabled() && project.stackId === "tanstack-start-v1"}
+                    src={`/api/build/projects/${encodeURIComponent(project.buildProjectId)}/thumbnail/${project.sourceVersion}`}
+                  />
+                  <div className={styles.metadata}>
+                    <div className={styles.cardHeading}>
+                      <h2 title={project.title}>{project.title}</h2>
+                      <span className={styles.status}>{statusLabel(project.status)}</span>
+                    </div>
+                    <p className={styles.stack}>{project.stackId ?? "Stack pending"}</p>
+                    <div className={styles.details}>
+                      <span>Source v{project.sourceVersion}</span>
+                      <time dateTime={project.updatedAt}>{new Date(project.updatedAt).toLocaleDateString(locale === "fr" ? "fr-FR" : locale === "ht" ? "ht-HT" : "en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })}</time>
+                    </div>
+                  </div>
+                </Link>
+                <ProjectCardActions href={href} title={project.title} refreshThumbnailHref={projectThumbnailEnabled() && process.env.NEXT_PUBLIC_ZOEBUILD_PROJECT_THUMBNAILS_ENABLED === "true" && project.stackId === "tanstack-start-v1" ? `${href}?refreshThumbnail=${project.sourceVersion}` : undefined}>
+                  <DeleteBuildProjectButton variant="menu" buildProjectId={project.buildProjectId} title={project.title} />
+                </ProjectCardActions>
+              </article>
+            );
+          })}
         </section>
       )}
     </main>

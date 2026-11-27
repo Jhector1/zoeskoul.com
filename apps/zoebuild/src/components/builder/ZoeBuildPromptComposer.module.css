@@ -52,3 +52,88 @@
   font-size: 12px;
   border-radius: 9px;
 }
+
+/* Home only: a single compact row, with room to grow for multiline prompts. */
+.homeComposer.compactComposer {
+  padding: 0 !important;
+  gap: 8px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.homeRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  min-width: 0;
+  min-height: 60px;
+  padding: 9px 10px;
+  box-sizing: border-box;
+  border: 1px solid var(--zb-border);
+  border-radius: 30px;
+  background: rgb(var(--ui-surface));
+  box-shadow: 0 4px 20px rgb(0 0 0 / .045);
+}
+.homeRow:focus-within {
+  border-color: var(--zb-home-accent, #15803d);
+  box-shadow: 0 0 0 2px rgb(21 128 61 / .09);
+}
+.homeComposer :global(.zb-prompt-textarea) {
+  flex: 1 1 0;
+  width: 0;
+  min-width: 0;
+  height: 40px;
+  min-height: 40px !important;
+  max-height: 200px !important;
+  padding: 9px 2px;
+  font-size: 16px;
+  line-height: 22px;
+  overflow-wrap: anywhere;
+}
+.homeLeadingAction, .homeTrailingActions {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+}
+.homeComposer .homeTrailingActions { gap: 6px; justify-content: flex-end; }
+.homeComposer :global(.zb-media-button) {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 36px !important;
+  min-width: 36px;
+  height: 36px !important;
+  min-height: 36px;
+  border-radius: 50% !important;
+}
+.homeComposer :global(.zb-composer-action-icon) { width: 22px; height: 22px; }
+.homeComposer :global(.zb-build-button) {
+  flex: 0 0 auto;
+  background: #166534;
+  color: white;
+  min-height: 40px !important;
+  height: 40px !important;
+  padding: 0 17px !important;
+  font-size: 13px;
+  border-radius: 999px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+.homeCreditStatus {
+  margin: 0 12px;
+  color: var(--zb-muted);
+  font-size: 11px;
+  line-height: 16px;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+:global(.dark) .homeComposer :global(.zb-build-button) { background: #86efac; color: #052e16; }
+.homeComposer :global(.zb-build-button:focus-visible) { outline: 2px solid currentColor; outline-offset: 3px; }
+@media (max-width: 480px) {
+  .homeRow { padding: 7px; gap: 4px; }
+  .homeComposer .homeTrailingActions { gap: 2px; }
+  .homeComposer :global(.zb-build-button) { padding: 0 12px !important; }
+  .homeComposer :global(.zb-prompt-textarea) { font-size: 16px; }
+  .homeCreditStatus { text-align: center; }
+}
