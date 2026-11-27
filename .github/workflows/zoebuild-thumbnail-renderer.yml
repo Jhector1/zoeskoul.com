@@ -1,0 +1,126 @@
+name: Build ZoeBuild thumbnail renderer candidate (manual only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_digest:
+        description: Reviewed official Python 3.12 slim Bookworm base digest
+        required: true
+        type: string
+        default: 'sha256:44cf1793efa7c7a476bb0f2cff81443f4a072c90c1cb127e2924933daa3e8c64'
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  candidate:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: docker/setup-buildx-action@v3
+      - name: Validate source and candidate identity
+        id: identity
+        env:
+          BASE_DIGEST: ${{ inputs.base_digest }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          [[ "$BASE_DIGEST" =~ ^sha256:[a-f0-9]{64}$ ]]
+          [[ "$GITHUB_SHA" =~ ^[a-f0-9]{40}$ ]]
+          [[ "$GITHUB_RUN_ID" =~ ^[0-9]+$ && "$GITHUB_RUN_ATTEMPT" =~ ^[0-9]+$ ]]
+          owner="${GITHUB_REPOSITORY_OWNER,,}"
+          [[ "$owner" =~ ^[a-z0-9-]+$ ]]
+          base="docker.io/library/python:3.12-slim-bookworm@$BASE_DIGEST"
+          image="ghcr.io/$owner/zoeskoul-zoebuild-thumbnail-renderer:sha-$GITHUB_SHA-run-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          printf 'base=%s\nimage=%s\n' "$base" "$image" >> "$GITHUB_OUTPUT"
+          mkdir -p renderer-evidence
+          printf 'source=%s\nbase=%s\ncandidate=%s\n' "$GITHUB_SHA" "$base" "$image" > renderer-evidence/identity.txt
+          sha256sum apps/runner/thumbnail-renderer/{Dockerfile,render.py,test_render.py} > renderer-evidence/source.sha256
+      - name: Build isolated renderer candidate locally on CI
+        env:
+          BASE_IMAGE: ${{ steps.identity.outputs.base }}
+          IMAGE: ${{ steps.identity.outputs.image }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker buildx build --platform linux/amd64 --load --provenance=false \
+            --build-arg "BASE_IMAGE=$BASE_IMAGE" \
+            --label "org.opencontainers.image.revision=$GITHUB_SHA" \
+            --label "org.opencontainers.image.source=https://github.com/$GITHUB_REPOSITORY" \
+            --tag "$IMAGE" apps/runner/thumbnail-renderer
+      - name: Verify image contract and record exact dependencies
+        env:
+          IMAGE: ${{ steps.identity.outputs.image }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker image inspect "$IMAGE" > renderer-evidence/image-inspect.json
+          python3 - <<'PY'
+          import json, os, re
+          with open('renderer-evidence/image-inspect.json') as f:
+              image, = json.load(f)
+          config = image['Config']
+          assert image['Os'] == 'linux' and image['Architecture'] == 'amd64'
+          assert re.fullmatch(r'sha256:[a-f0-9]{64}', image['Id'])
+          assert config['User'] == '1000:1000'
+          assert config['Entrypoint'] == ['python', '-I', '-u', '/opt/zoe-thumbnail/render.py']
+          assert config['Labels']['com.zoeskoul.thumbnail-renderer.version'] == '3'
+          assert config['Labels']['org.opencontainers.image.revision'] == os.environ['GITHUB_SHA']
+          assert not config.get('Volumes')
+          assert not config.get('ExposedPorts')
+          with open('renderer-evidence/identity.txt', 'a') as f:
+              f.write('local_image_id=' + image['Id'] + '\n')
+          PY
+          isolated=(--rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges --user 1000:1000 --pids-limit 128 --memory 768m --memory-swap 768m --cpus 0.75 --tmpfs /tmp:rw,nosuid,nodev,size=192m,mode=1777)
+          docker run "${isolated[@]}" --entrypoint sha256sum "$IMAGE" /opt/zoe-thumbnail/render.py > renderer-evidence/packaged-source.sha256
+          test "$(cut -d' ' -f1 renderer-evidence/packaged-source.sha256)" = "$(sha256sum apps/runner/thumbnail-renderer/render.py | cut -d' ' -f1)"
+          docker run "${isolated[@]}" --entrypoint python "$IMAGE" -I -c 'import importlib.metadata as m,runpy,os; assert os.getuid()==1000; assert m.version("playwright")=="1.57.0"; r=runpy.run_path("/opt/zoe-thumbnail/render.py"); assert r["relay_accept"]("stylesheet")=="text/css"; assert r["relay_accept"]("script")=="*/*"; assert r["stylesheet_mime_ok"]("stylesheet","text/css; charset=utf-8"); assert not r["stylesheet_mime_ok"]("stylesheet","application/javascript"); print("PACKAGED_PROTOCOL_V3=PASS")'
+          docker run "${isolated[@]}" --entrypoint dpkg-query "$IMAGE" -W -f='${Package}\t${Version}\n' | LC_ALL=C sort > renderer-evidence/debian-packages.tsv
+          docker run "${isolated[@]}" --entrypoint python "$IMAGE" -I -m pip freeze | LC_ALL=C sort > renderer-evidence/python-packages.txt
+          grep -E '^chromium[[:space:]]' renderer-evidence/debian-packages.tsv
+          grep -Fx 'playwright==1.57.0' renderer-evidence/python-packages.txt
+          echo 'CANDIDATE_PACKAGE_CHECK=PASS'
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish unique candidate tag and verify registry digest
+        env:
+          IMAGE: ${{ steps.identity.outputs.image }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if docker buildx imagetools inspect "$IMAGE" >/dev/null 2>&1; then
+            echo 'Candidate tag already exists; refusing overwrite' >&2
+            exit 1
+          fi
+          docker push "$IMAGE" | tee renderer-evidence/push.log
+          digest="$(sed -nE 's/^.*digest: (sha256:[a-f0-9]{64}) size: [0-9]+.*$/\1/p' renderer-evidence/push.log | tail -n 1)"
+          [[ "$digest" =~ ^sha256:[a-f0-9]{64}$ ]]
+          repo="${IMAGE%:*}"
+          registry_digest="$(docker buildx imagetools inspect "$IMAGE" | sed -nE 's/^Digest:[[:space:]]*(sha256:[a-f0-9]{64}).*/\1/p' | head -n 1)"
+          test "$registry_digest" = "$digest"
+          docker buildx imagetools inspect "$repo@$digest" >/dev/null
+          printf 'registry_digest=%s\nreference=%s@%s\n' "$digest" "$repo" "$digest" >> renderer-evidence/identity.txt
+          {
+            echo '### Renderer candidate published (not activated)'
+            printf '\nSource: `%s`\n\nCandidate: `%s@%s`\n' "$GITHUB_SHA" "$repo" "$digest"
+            echo 'Package checks only. Exact rootless Docker/Chromium sandbox and pixel fixtures are required on the target execution host before enablement.'
+            echo 'No production tags, deployment, or feature flag changes.'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Retain candidate provenance and package inventory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: thumbnail-renderer-evidence
+          path: renderer-evidence/
+          if-no-files-found: error
+          retention-days: 30
